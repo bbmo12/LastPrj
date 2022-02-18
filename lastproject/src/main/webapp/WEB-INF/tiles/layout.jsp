@@ -17,9 +17,36 @@
 <body>
 
 	<!-- header -->
-	<tiles:insertAttribute name="header"></tiles:insertAttribute>
-	<!-- End of header -->
+	<tiles:insertAttribute name="header"/>
+	
+	<!-- section -->
+	<tiles:insertAttribute name="section"/>
+	
+	<!-- section2 -->
+	<tiles:insertAttribute name="section2"/>
+	
+	<!-- section3 -->
+	<tiles:insertAttribute name="section3"/>
+	
+	<!-- section4 -->
+	<tiles:insertAttribute name="section4"/>
+	
+	<!-- section5 -->
+	<tiles:insertAttribute name="section5"/>
+	
+	<!-- section6 -->
+	<tiles:insertAttribute name="section6"/>	
+	
+	<!-- section7 -->
+	<tiles:insertAttribute name="section7"/>
+	
+	<!-- section8 -->
+	<tiles:insertAttribute name="section8"/>
+	
+	<!-- 몸통 -->
 	<tiles:insertAttribute name="body" />
-
+	
+	<!-- 발 -->
+	<tiles:insertAttribute name="footer"/>
 
 </body>
