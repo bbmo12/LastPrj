@@ -1,8 +1,11 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	 <!-- Required Meta Tags -->
@@ -74,7 +77,7 @@
                                 <li><a href="blog-details.html">blog details</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>			          				          
+                        <li><a href="#">Contact</a></li>			          				          
                     </ul>
                 </nav><!-- #nav-menu-container -->		    		
                 </div>
@@ -93,5 +96,7 @@
     <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="resources/assets/js/vendor/superfish.min.js"></script>
     <script src="resources/assets/js/main.js"></script>
+    
 </body>
+
 </html>
