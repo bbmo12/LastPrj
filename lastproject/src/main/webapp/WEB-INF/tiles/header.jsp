@@ -71,13 +71,22 @@
                                 <li><a href="elements.html">elements</a></li>
                             </ul>
                         </li>
+
                         <li class="menu-has-children"><a href="">blog</a>
                             <ul>
-                                <li><a href="blog-home.html">blog home</a></li>
+                                <li><a href="qnaMain">blog home</a></li>
                                 <li><a href="blog-details.html">blog details</a></li>
                                 <li><a href="memberMypage">memberMypage</a></li>
                             </ul>
+
+                        
+                    <c:if test= "${mId eq null}"> 
+                        
+                        <li class="menu-has-children"><a href="loginForm">로그인</a>
+                           <!--   -->
+
                         </li>
+
                         <li><a href="#">Contact</a></li>
                         <li class="nav-item dropdown"><a class="nav-link count-indicator dropdown-toggle"
 							id="notificationDropdown" href="#" data-toggle="dropdown"> <i class="mdi mdi-bell-outline"></i>
@@ -131,6 +140,24 @@
 							<div class="dropdown-divider"></div>
 							<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 						</div></li>		          				          
+
+                        <li><a href="joinForm">회원가입</a></li>	
+                    </c:if> 
+                    
+                   <c:if test = "${mId ne null}">
+                   		<li class="menu-has-children"><a href ="#">마이페이지</a>
+                   		<ul>
+                                <li><a href="#">내 프로필</a></li>
+                                <li><a href="#">반려동물 프로필</a></li>
+                                <li><a href="#">예약 내역</a></li>
+                                <li><a href="#">결제 내역</a></li>
+                                <li><a href="#">상담 내역</a></li>
+                                <li><a href="#">신고 내역</a></li>
+                                <li><a href="logout">로그아웃</a></li>
+                            </ul>
+                            </li>
+                   </c:if>
+
                     </ul>
                 </nav><!-- #nav-menu-container -->		    		
                 </div>
