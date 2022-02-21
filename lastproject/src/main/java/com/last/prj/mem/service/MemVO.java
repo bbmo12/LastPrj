@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class MemVO {
 
-	private String mId;			//회원아이디
+	private String m_id;			//회원아이디
 	private String password;	//비밀번호
 	private String name;		//이름
 	private String tel;			//회원전화번호
