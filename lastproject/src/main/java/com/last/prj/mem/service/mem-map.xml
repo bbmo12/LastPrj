@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.mem.service.MemMapper">
-	<select id="">
 	
+	
+	<!-- 일반회원 로그인 -->
+	<select id="memberSelect" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+		select * from member
+		where m_id = #{m_id} 
+		<if test="password != null">
+			and password = #{password}
+		</if>
 	</select>
-
-
-
-
 </mapper>
