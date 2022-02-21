@@ -25,10 +25,10 @@
     <link rel="stylesheet" href="resources/assets/css/linearicons.css">
     <link rel="stylesheet" href="resources/assets/css/style.css">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<br><br><br><br><br>
-    
-    
-    <h1>순서가 왜 이상하져</h1>
+	
+    <h1>db연결된당</h1>
     
     <!-- Javascript -->
     <script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
