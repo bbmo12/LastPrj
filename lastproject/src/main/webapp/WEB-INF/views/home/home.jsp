@@ -13,17 +13,7 @@
     <!-- Page Title -->
     <title>Medino</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="resources/assets/images/logo/favicon.png" type="image/x-icon">
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="resources/assets/css/animate-3.7.0.css">
-    <link rel="stylesheet" href="resources/assets/css/font-awesome-4.7.0.min.css">
-    <link rel="stylesheet" href="resources/assets/css/bootstrap-4.1.3.min.css">
-    <link rel="stylesheet" href="resources/assets/css/owl-carousel.min.css">
-    <link rel="stylesheet" href="resources/assets/css/jquery.datetimepicker.min.css">
-    <link rel="stylesheet" href="resources/assets/css/linearicons.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css">
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<br><br><br><br><br>
