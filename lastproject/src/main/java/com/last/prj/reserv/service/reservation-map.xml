@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.reserv.service.ReservationMapper">
+	<select id="reservationSelect" 
+	 resultType="com.last.prj.reserv.service.ReservationVO" 
+	 parameterType="com.last.prj.reserv.service.ReservationVO">
+		SELECT * 
+		FROM RESERVATION
+		WHERE pId = #{p_id}
+	</select>
+	
+	<select id="reservationSelectList" resultType="com.last.prj.reserv.service.ReservationVO">
+		SELECT * FROM RESERVATION
+	</select>
+
+</mapper>
