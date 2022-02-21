@@ -71,11 +71,19 @@
                                 <li><a href="elements.html">elements</a></li>
                             </ul>
                         </li>
+
+                        <li class="menu-has-children"><a href="">blog</a>
+                            <ul>
+                                <li><a href="qnaMain">blog home</a></li>
+                                <li><a href="blog-details.html">blog details</a></li>
+                            </ul>
+
                         
                     <c:if test= "${mId eq null}"> 
                         
                         <li class="menu-has-children"><a href="loginForm">로그인</a>
                            <!--   -->
+
                         </li>
                         <li><a href="joinForm">회원가입</a></li>	
                     </c:if> 

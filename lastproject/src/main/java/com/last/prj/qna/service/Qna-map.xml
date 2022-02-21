@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.qna.service.QnaMapper">
+
+	<resultMap type="com.last.prj.qna.service.QnaVO" id="QnaVO">
+		<result property="q_no" column="q_no" />
+		<result property="w_date" column="w_date" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="writer" column="writer" />
+		<result property="p_no" column="p_no" />
+		<result property="f_part" column="f_part" />
+		<result property="pet_no" column="pet_no" />
+		<result property="r_check" column="r_check" />
+
+		<association property="qnatagvo"
+			javaType="com.last.prj.qna.service.QnaTagVO">
+			<id property="q_no" column="q_no" />
+			<result property="t_name" column="t_name" />
+		</association>
+	</resultMap>
+
+
+	<!-- 질문글 전체 조회 -->
+	<select id="qnaList" resultType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no = 0
+		ORDER BY w_date DESC
+	</select>
+
+	<!-- 질문글 개별 조회 -->
+	<select id="qnaDetail"
+		resultType="com.last.prj.qna.service.QnaVO">
+		SELECT * FROM qna
+		WHERE q_no = #{q_no}
+	</select>
+
+	<!-- 답변글 조회 -->
+	<select id="ansDetail"
+		resultType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no = #{p_no}
+	</select>
+
+	<!-- 포스트별 해시태그 -->
+	<select id="hashtag"
+		parameterType="com.last.prj.qna.service.QnaTagVO" resultMap="QnaVO">
+		SELECT *
+		FROM qna q, qnatag t
+		WHERE q.q_no = t.q_no
+		AND q.q_no = 1;
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="postCnt">
+		UPDATE qna
+		SET hit = hit+1
+		WHERE q_no = #{q_no}
+	</update>
+
+	<!-- 검색 -->
+	<select id="AllSearch"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no=0 AND title LIKE
+		'%{searchValue}%' OR p_no=0 AND content LIKE
+		'%{searchValue}%'
+	</select>
+
+	<!-- 질문글 작성 -->
+	<insert id="newQna"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		INSERT INTO qna (q_no, title, content, hit, writer,
+		p_no, f_part, pet_no, r_check)
+		VALUES (q_seq.nextval, #{title},
+		#{content}, 0, #{writer}, 0, 707, #{pet_no}, #{r_check})
+	</insert>
+
+	<!-- 답변글 작성 -->
+	<insert id="newAns"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		INSERT INTO qna (q_no, title, content, hit, writer,
+		p_no, f_part, r_check)
+		VALUES (q_seq.nextval, #{title}, #{content}, 0,
+		#{writer}, #{p_no}, 707, 0)
+	</insert>
+
+	<!-- 답변글 갯수 -->
+	<select id="replyCnt" resultType="int" parameterType="int">
+		SELECT
+		COUNT(*)
+		FROM qna
+		WHERE p_no = {q_no}
+	</select>
+
+	<!-- 질문글 수정 -->
+
+
+	<!-- 답변글 수정 -->
+
+	<!-- 태그를 통한 글 찾기 -->
+
+</mapper>
