@@ -43,7 +43,7 @@
 			class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-				<a class="navbar-brand brand-logo" href="index.html"><img
+				<a class="navbar-brand brand-logo" href="main.do"><img
 					src="resources/assets123/images/logo.svg" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
 					src="resources/assets123/images/logo-mini.svg" alt="logo" /></a>
@@ -67,7 +67,7 @@
 				<ul class="navbar-nav navbar-nav-right">
 					<li class="nav-item  dropdown d-none d-md-block"><a
 						class="nav-link dropdown-toggle" id="reportDropdown" href="#"
-						data-toggle="dropdown" aria-expanded="false"> Reports </a>
+						data-toggle="dropdown" aria-expanded="false"> 파일변환 </a>
 						<div class="dropdown-menu navbar-dropdown"
 							aria-labelledby="reportDropdown">
 							<a class="dropdown-item" href="#"> <i
@@ -95,7 +95,7 @@
 								class="mdi mdi-pencil-outline mr-2"></i>Edit Project
 							</a>
 						</div></li>
-					<li class="nav-item nav-language dropdown d-none d-md-block">
+					<!-- <li class="nav-item nav-language dropdown d-none d-md-block">
 						<a class="nav-link dropdown-toggle" id="languageDropdown" href="#"
 						data-toggle="dropdown" aria-expanded="false">
 							<div class="nav-language-icon">
@@ -125,7 +125,7 @@
 								</div>
 							</a>
 						</div>
-					</li>
+					</li> -->
 					<li class="nav-item nav-profile dropdown"><a
 						class="nav-link dropdown-toggle" id="profileDropdown" href="#"
 						data-toggle="dropdown" aria-expanded="false">
