@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.qna.service.QnaMapper">
+
+	<!-- 질문글 전체 조회 -->
+	<select id="qnaList" parameterType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no = 0
+		ORDER BY w_date DESC;
+	</select>
+
+	<!-- 질문글 개별 조회 -->
+	<select id="qnaDetail"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		SELECT * FROM qna
+		WHERE q_no = #{q_no};
+	</select>
+
+	<!-- 답변글 조회 -->
+	<select id="ansDetail"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no = #{p_no} ;
+	</select>
+	
+	<!-- 포스트별 해시태그 -->
+	<select id="hashtag" parameterType="com.last.prj.qna.service.QnaTagVO">
+		SELECT t_name 
+		FROM qnatag 
+		WHERE q_no=#{q_no};
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="postCnt">
+		UPDATE qna
+		SET hit = hit+1
+		WHERE q_no = #{q_no};
+	</update>
+
+	<!-- 인기 태그 목록 -->
+	<select id="tagList" parameterType="com.last.prj.qna.service.QtagVO">
+		SELECT *
+		FROM q_tag
+		<![CDATA[WHERE ROWNUM <= 10]]>
+	</select>
+
+	<!-- 검색 -->
+	<select id="AllSearch"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no=0 AND title LIKE '%{searchValue}%' OR p_no=0 AND content LIKE
+		'%{searchValue}%';
+	</select>
+
+	<!-- 질문글 작성 -->
+	<insert id="newQna" parameterType="com.last.prj.qna.service.QnaVO">
+		INSERT INTO qna (q_no, title, content, hit, writer, p_no, f_part, pet_no, r_check)
+		VALUES (q_seq.nextval, #{title}, #{content}, 0, #{writer}, 0, 707, #{pet_no}, #{r_check})
+	</insert>
+
+	<!-- 답변글 작성 -->
+	<insert id="newAns" parameterType="com.last.prj.qna.service.QnaVO">
+		INSERT INTO qna (q_no, title, content, hit, writer, p_no, f_part, r_check)
+		VALUES (q_seq.nextval, #{title}, #{content}, 0, #{writer}, #{p_no}, 707, 0)
+	</insert>
+
+	<!-- 질문글 수정 -->
+
+	
+	<!-- 답변글 수정 -->
+	
+	<!-- 태그를 통한 글 찾기 -->	
+
+</mapper>

@@ -73,7 +73,7 @@
                         </li>
                         <li class="menu-has-children"><a href="">blog</a>
                             <ul>
-                                <li><a href="blog-home.html">blog home</a></li>
+                                <li><a href="qnaMain">blog home</a></li>
                                 <li><a href="blog-details.html">blog details</a></li>
                             </ul>
                         </li>
