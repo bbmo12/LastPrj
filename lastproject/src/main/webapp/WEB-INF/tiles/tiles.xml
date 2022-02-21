@@ -26,14 +26,6 @@
 	<definition name="my.app"
 		template="/WEB-INF/tiles/layout.jsp">
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
-		<put-attribute name="section" value="/WEB-INF/tiles/section.jsp" />
-		<put-attribute name="section2" value="/WEB-INF/tiles/section2.jsp" />
-		<put-attribute name="section3" value="/WEB-INF/tiles/section3.jsp" />
-		<put-attribute name="section4" value="/WEB-INF/tiles/section4.jsp" />
-		<put-attribute name="section5" value="/WEB-INF/tiles/section5.jsp" />
-		<put-attribute name="section6" value="/WEB-INF/tiles/section6.jsp" />
-		<put-attribute name="section7" value="/WEB-INF/tiles/section7.jsp" />
-		<put-attribute name="section8" value="/WEB-INF/tiles/section8.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 	</definition>
