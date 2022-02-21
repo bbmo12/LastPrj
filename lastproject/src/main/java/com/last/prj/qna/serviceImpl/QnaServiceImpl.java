@@ -18,9 +18,9 @@ public class QnaServiceImpl implements QnaService {
 	private QnaMapper map;
 
 	@Override
-	public List<QnaVO> qnaList(QnaVO qna) {
+	public List<QnaVO> qnaList() {
 		// TODO Auto-generated method stub
-		return map.qnaList(qna);
+		return map.qnaList();
 	}
 
 	@Override
@@ -36,9 +36,9 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaTagVO> hashtag(QnaTagVO qna) {
+	public List<QnaTagVO> hashtag(int q_no) {
 		// TODO Auto-generated method stub
-		return map.hashtag(qna);
+		return map.hashtag(q_no);
 	}
 
 	@Override
@@ -47,11 +47,6 @@ public class QnaServiceImpl implements QnaService {
 		return map.postCnt(q_no);
 	}
 
-	@Override
-	public List<QtagVO> tagList(QtagVO qtag) {
-		// TODO Auto-generated method stub
-		return map.tagList(qtag);
-	}
 
 	@Override
 	public int newQna(QnaVO qna) {
@@ -63,6 +58,12 @@ public class QnaServiceImpl implements QnaService {
 	public int newAns(QnaVO qna) {
 		// TODO Auto-generated method stub
 		return map.newAns(qna);
+	}
+
+	@Override
+	public int replyCnt(int q_no) {
+		// TODO Auto-generated method stub
+		return map.replyCnt(q_no);
 	}
 
 }

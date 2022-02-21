@@ -1,5 +1,9 @@
 package com.last.prj.qna.service;
 
+import java.sql.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +13,8 @@ import lombok.Setter;
 @Data
 public class QnaVO {
 	private int q_no;
-	private String w_date;
+	@DateTimeFormat(pattern = "YY-MM-dd")
+	private Date w_date;
 	private String title;
 	private String content;
 	private int hit;
@@ -22,5 +27,7 @@ public class QnaVO {
 	//DB에 없음
 	private String searchType; //카테고리
 	private String searchValue; //검색값
+	
+	private QnaTagVO qnatagvo;
 	
 }
