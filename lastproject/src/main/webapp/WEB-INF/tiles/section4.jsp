@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- Department Area Starts -->
+	<!-- Department Area Starts -->
     <section class="department-area section-padding4">
         <div class="container">
             <div class="row">
