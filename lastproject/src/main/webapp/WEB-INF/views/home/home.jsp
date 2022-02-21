@@ -28,7 +28,7 @@
 	<br><br><br><br><br>
     
     
-    <h1> 순서가 이상해</h1>
+    <h1>순서가 왜 이상하져</h1>
     
     <!-- Javascript -->
     <script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
