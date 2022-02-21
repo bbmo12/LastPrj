@@ -15,6 +15,12 @@ public class MemController {
 	@Autowired
 	private MemService memDao;
 	
+
+	@RequestMapping("/memberMypage")
+	public String memMypage() {
+		return "mypage/memberMypage";
+	}
+
 	@RequestMapping("joinForm") //회원가입
 	public String joinForm() {
 		
