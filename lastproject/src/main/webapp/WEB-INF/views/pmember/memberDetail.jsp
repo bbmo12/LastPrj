@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,69 +33,73 @@
 							<img class="author_img rounded-circle"
 								src="resources/assets/images/blog/author.png" alt="">
 							<div class="br"></div>
-							<h4>홍길동</h4>
-							<p>Senior blog writer</p>
+							<h2>${pmemdetail.name}</h2>
+							<h3>${pmemdetail.w_name}</h3>
 							<div class="br"></div>
 						</aside>
 
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">상담하기</h4>
-							<h4 class="widget_title">예  약</h4>
+							<h4 class="widget_title">예 약</h4>
 						</aside>
 					</div>
 				</div>
 
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
-						<div class="col-lg-9 col-md-9 blog_details">
-							<h5>Astronomy Binoculars A Great Alternative</h5>
-							<p class="excert">MCSE boot camps have its supporters and its
-								detractors. Some people do not understand why you should have to
-								spend money on boot camp when you can get the MCSE study
-								materials yourself at a fraction.</p>
-							<p>Boot camps have its supporters and its detractors. Some
-								people do not understand why you should have to spend money on
-								boot camp when you can get the MCSE study materials yourself at
-								a fraction of the camp price. However, who has the willpower to
-								actually sit through a self-imposed MCSE training. who has the
-								willpower to actually sit through a self-imposed</p>
-							<p>Boot camps have its supporters and its detractors. Some
-								people do not understand why you should have to spend money on
-								boot camp when you can get the MCSE study materials yourself at
-								a fraction of the camp price. However, who has the willpower to
-								actually sit through a self-imposed MCSE training. who has the
-								willpower to actually sit through a self-imposed</p>
-						</div>
 						<div class="col-lg-12">
-							<div class="quotes">MCSE boot camps have its supporters and
-								its detractors. Some people do not understand why you should
-								have to spend money on boot camp when you can get the MCSE study
-								materials yourself at a fraction of the camp price. However, who
-								has the willpower to actually sit through a self-imposed MCSE
-								training.</div>
+							<div class="quotes">
+								<h3>자기소개</h3>
+								${pmemdetail.p_info}
+							</div>
 							<div class="row">
-								<div class="col-6">
-									<img class="img-fluid"
-										src="resources/assets/images/blog-details/post-img1.jpg"
-										alt="">
-								</div>
-								<div class="col-6">
-									<img class="img-fluid"
-										src="resources/assets/images/blog-details/post-img2.jpg"
-										alt="">
-								</div>
-								<div class="col-lg-12 my-4">
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower.</p>
-									<p>MCSE boot camps have its supporters and its detractors.
-										Some people do not understand why you should have to spend
-										money on boot camp when you can get the MCSE study materials
-										yourself at a fraction of the camp price. However, who has the
-										willpower.</p>
-								</div>
+								<section>
+									<div class="container">
+										<div class="row">
+											<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+												<div class="categories_post">
+													<img
+														src="resources/assets/images/blog/cat-post/cat-post-3.jpg"
+														alt="post">
+												</div>
+											</div>
+											<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+												<div class="categories_post">
+													<img
+														src="resources/assets/images/blog/cat-post/cat-post-2.jpg"
+														alt="post">
+												</div>
+											</div>
+											<div class="col-lg-4 col-md-6">
+												<div class="categories_post">
+													<img
+														src="resources/assets/images/blog/cat-post/cat-post-1.jpg"
+														alt="post">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-9 col-md-9 blog_details">								
+										<h3 font-weight: bold;>${pmemdetail.w_address }&nbsp;${pmemdetail.w_d_address }</h3>
+										<c:forEach items="${pmemdetail.timeList }" var="time">
+											<h3 style="font-weight:normal" >${time.w_day }&nbsp;${time.starttime }&nbsp;-&nbsp;${time.endtime }
+											</h3>
+										</c:forEach>
+										<h3 style="font-weight:normal">${pmemdetail.n_content}</h3>
+									</div>
+									<div class="col-lg-12 my-4">
+										<p>MCSE boot camps have its supporters and its detractors.
+											Some people do not understand why you should have to spend
+											money on boot camp when you can get the MCSE study materials
+											yourself at a fraction of the camp price. However, who has
+											the willpower.</p>
+										<p>MCSE boot camps have its supporters and its detractors.
+											Some people do not understand why you should have to spend
+											money on boot camp when you can get the MCSE study materials
+											yourself at a fraction of the camp price. However, who has
+											the willpower.</p>
+									</div>
+								</section>
 							</div>
 						</div>
 					</div>
