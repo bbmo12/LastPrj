@@ -11,4 +11,15 @@
 			and password = #{password}
 		</if>
 	</select>
+	<!-- 일반회원 아이디 찾기 -->
+	<select id="memberIdSearch" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+		select * from member
+		where name = #{name}
+		<if test="tel != null">
+			and tel = #{tel}
+		</if>
+	
+	
+	</select>
+	
 </mapper>
