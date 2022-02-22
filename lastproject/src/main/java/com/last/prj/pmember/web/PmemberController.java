@@ -19,6 +19,7 @@ public class PmemberController {
 	public String pmemberList(@RequestParam("code") int code, Model model) {
 		System.out.println(code);
 		model.addAttribute("pmember", pMemberDao.memberList(code));
+		
 		System.out.println(pMemberDao.memberList(code));
 		return "pmember/memberList";
 	}
@@ -26,6 +27,7 @@ public class PmemberController {
 	@RequestMapping("/pmemberDetail")
 	public String pmemberDetail(@RequestParam("name") String name, Model model) {
 		System.out.println(name);
+		
 	return "pmember/memberDetail";
 	}
 
