@@ -64,9 +64,9 @@ public class PagingVO {
 
 	private int total; // 총 게시글 수
 	private int pageNum; // 조회하는 페이지 번호
-	private int amount; // 보여질 데이터 개수
 
 	private Criteria cri;
+	private int amount;
 
 	public PagingVO(Criteria cri, int total) {
 		this.pageNum = cri.getPageNum();
