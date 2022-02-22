@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import lombok.Getter;
-import lombok.Setter;
-
 
 
 public interface BoardMapper {
@@ -19,4 +16,6 @@ public interface BoardMapper {
 	
 	int boardIdUpdate(int b_no);
 	List<BoardVO> boardSearch(@Param("key")String key, @Param("val")String val);
+	
+	//int boardHitUpdate(int b_hit);
 }

@@ -51,13 +51,13 @@
 					class="mdi mdi-file-document-box menu-icon"></i>
 			</span> <span class="menu-title">Documentation</span>
 		</a></li>
-		<li class="nav-item sidebar-user-actions">
+		<!-- <li class="nav-item sidebar-user-actions">
 			<div class="user-details">
 				<div class="d-flex justify-content-between align-items-center">
 					<div>
 						<div class="d-flex align-items-center">
 							<div class="sidebar-profile-img">
-								<img src="assets/images/faces/face28.png" alt="image">
+								<img src="resources/assets123/images/faces/face28.png" alt="image">
 							</div>
 							<div class="sidebar-profile-text">
 								<p class="mb-1">Henry Klein</p>
@@ -67,7 +67,7 @@
 					<div class="badge badge-danger">3</div>
 				</div>
 			</div>
-		</li>
+		</li> -->
 		<li class="nav-item sidebar-user-actions">
 			<div class="sidebar-user-menu">
 				<a href="#" class="nav-link"><i
