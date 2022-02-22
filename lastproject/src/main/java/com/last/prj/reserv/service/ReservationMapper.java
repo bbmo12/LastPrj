@@ -5,6 +5,6 @@ import java.util.List;
 public interface ReservationMapper {
 	List<ReservationVO> reservationSelectList();
 	
-	ReservationVO reservationSelect (ReservationVO res);
+	List<ReservationVO> reservationSelect ();
 	
 }
