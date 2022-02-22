@@ -80,13 +80,31 @@
                             </ul>
 
                         
-                    <c:if test= "${mId eq null}"> 
+                    <c:if test= "${mId eq null and pId eq null}"> 
                         
                         <li class="menu-has-children"><a href="loginForm">로그인</a>
                            <!--   -->
 
                         </li>
+	          				          
 
+                        <li><a href="joinForm">회원가입</a></li>	
+                    </c:if> 
+                    
+                   <c:if test = "${mId ne null or pId ne null}">
+                   		<li class="menu-has-children"><a href ="#">마이페이지</a>
+                   		<ul>
+                                <li><a href="#">내 프로필</a></li>
+                                <li><a href="#">반려동물 프로필</a></li>
+                                <li><a href="#">예약 내역</a></li>
+                                <li><a href="#">결제 내역</a></li>
+                                <li><a href="#">상담 내역</a></li>
+                                <li><a href="#">신고 내역</a></li>
+                                <li><a href="logout">로그아웃</a></li>
+
+                            </ul>
+                            </li>
+                                                            
                         <li><a href="#">Contact</a></li>
                         <li class="nav-item dropdown"><a class="nav-link count-indicator dropdown-toggle"
 							id="notificationDropdown" href="#" data-toggle="dropdown"> <i class="mdi mdi-bell-outline"></i>
@@ -139,23 +157,7 @@
 							</a>
 							<div class="dropdown-divider"></div>
 							<h6 class="p-3 mb-0 text-center">See all notifications</h6>
-						</div></li>		          				          
-
-                        <li><a href="joinForm">회원가입</a></li>	
-                    </c:if> 
-                    
-                   <c:if test = "${mId ne null}">
-                   		<li class="menu-has-children"><a href ="#">마이페이지</a>
-                   		<ul>
-                                <li><a href="#">내 프로필</a></li>
-                                <li><a href="#">반려동물 프로필</a></li>
-                                <li><a href="#">예약 내역</a></li>
-                                <li><a href="#">결제 내역</a></li>
-                                <li><a href="#">상담 내역</a></li>
-                                <li><a href="#">신고 내역</a></li>
-                                <li><a href="logout">로그아웃</a></li>
-                            </ul>
-                            </li>
+						</div></li>	
                    </c:if>
 
                     </ul>
