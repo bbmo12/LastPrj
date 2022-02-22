@@ -249,7 +249,7 @@
                             <img src="resources/assets/images/doctor2.jpg" alt="" class="img-fluid">
                         </div>
                         <div class="content-area">
-                            <div class="doctor-name text-center">
+                            <div align="center">
                                 <h3>dand mories</h3>
                                 <h6>sr. faculty plastic surgery</h6>
                             </div>
