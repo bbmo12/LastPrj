@@ -19,6 +19,7 @@ public class PmemberController {
 	public String pmemberList(@RequestParam("code") int code, Model model) {
 		System.out.println(code);
 		model.addAttribute("pmember", pMemberDao.memberList(code));
+
 		System.out.println("아이디"+pMemberDao.memberList(code));
 		return "pmember/memberList";
 	}

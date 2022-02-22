@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -30,7 +30,7 @@
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
-							<h5 class="card-title">회원 리스트</h5>
+							<h5 class="card-title">공지사항 관리</h5>
 							<div class="table-responsive">
 								<table id="zero_config"
 									class="table table-striped table-bordered">
@@ -41,102 +41,38 @@
 											<th>내용</th>
 											<th>작성자</th>
 											<th>날짜</th>
-									
+											<th></th>
+
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${boardList }" var="boards">
+										<c:if test="${boardList[0].b_no eq null}">
 											<tr>
-												<td align="center">${boards.b_no }</td>
-												<td align="center">${boards.title }</td>
-												<td align="center">${boards.content }</td>
-												<td align="center">${boards.writer }</td>
-												<td align="center">${boards.w_date }</td>
+												<td colspan="6" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
-										</c:forEach> 
-										<!-- <tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr> -->
-										<tr>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-											<td>asdf</td>
-											<td>asdf</td>
-											<td>123</td>
-										</tr>
+										</c:if>
+										<c:if test="${boardList ne null }">
+											<c:forEach items="${boardList }" var="boards">
+												<tr>
+													<td align="center">${boards.b_no }</td>
+													<td align="center"><a href="boardSelect.do?b_no=${boards.b_no }">${boards.title }</a></td>
+													<td align="center">${boards.content }</td>
+													<td align="center">${boards.writer }</td>
+													<td align="center">${boards.w_date }</td>
+													<td></td>
+												</tr>
+											</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
+								<a href="boardInsertForm.do" style="color:white;" ><role="button" class="btn btn-outline-info"><h2>글쓰기</h2></a>
 							</div>
 
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
-	</div>
 	</div>
 
 	<script src="resources/table/js/jquery.min.js"></script>
@@ -157,9 +93,6 @@
 	<script src="resources/table/js/jquery.multicheck.js"></script>
 	<script src="resources/table/js/datatables.min.js"></script>
 	<script>
-		/****************************************
-		 *       Basic Table                   *
-		 ****************************************/
 		$('#zero_config').DataTable();
 	</script>
 
