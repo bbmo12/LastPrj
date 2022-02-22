@@ -6,10 +6,10 @@ import org.apache.ibatis.annotations.Param;
 
 public interface QnaMapper {
 
-	int count();
+	int getTotal();
 	
 	//질문글 전체 조회
-	List<QnaVO> qnaList();
+	List<QnaVO> qnaList(Criteria cri);
 	
 	//질문글 개별 조회
 	QnaVO qnaDetail(QnaVO qna);
@@ -33,6 +33,8 @@ public interface QnaMapper {
 
 	//답글 갯수
 	int replyCnt(int q_no);
+
+	
 
 
 	

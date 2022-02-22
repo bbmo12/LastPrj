@@ -20,15 +20,15 @@ public class QnaServiceImpl implements QnaService {
 	private QnaMapper map;
 
 	@Override
-	public int count() {
+	public int getTotal() {
 		// TODO Auto-generated method stub
-		return map.count();
+		return map.getTotal();
 	}
 	
 	@Override
-	public List<QnaVO> qnaList() {
+	public List<QnaVO> qnaList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return map.qnaList();
+		return map.qnaList(cri);
 	}
 
 	@Override

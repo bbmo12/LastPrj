@@ -1,8 +1,8 @@
 package com.last.prj.qna.service;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class PagingVO {
 	
 //	@Getter

@@ -45,7 +45,12 @@ public class QnaController {
 
 	@RequestMapping("/qnaMain")
 	public String QnaMain(Model model){	
-		model.addAttribute("qnaList", mapper.qnaList());
+		
+		Criteria cri = new Criteria();
+		PagingVO page = new PagingVO(cri, mapper.getTotal());
+		
+		model.addAttribute("page", page);
+		model.addAttribute("qnaList", mapper.qnaList(cri));
 		model.addAttribute("tagList", qtagDAO.tagList());
 		
 		return "qna/qnaMain";
