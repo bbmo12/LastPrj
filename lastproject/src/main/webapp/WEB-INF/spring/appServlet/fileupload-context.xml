@@ -9,8 +9,8 @@
    </bean>
    
    <!-- 나중에 배포할때 빼야되는 부분 -->
-   <bean class="java.lang.String">
+   <!-- <bean class="java.lang.String">
       <constructor-arg value=" C:/Users/admin/git/LastPrj/src/main/webapp/resources/img/"/>
 
-   </bean>
+   </bean> -->
 </beans>
