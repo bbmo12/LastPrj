@@ -49,12 +49,19 @@ public class QnaController {
 		
 		model.addAttribute("page", new PagingVO(cri, mapper.getTotal(cri)));
 		model.addAttribute("qnaList", mapper.qnaList(cri));
+		model.addAttribute("hashtag", mapper.hashtag());
 		model.addAttribute("tagList", qtagDAO.tagList());
 		
 		return "qna/qnaMain";
 		
 	}
 
+	@RequestMapping("/tagSearch")
+	public String tagSearch(Model model) {
+		
+		return null;
+	}
+	
 	@GetMapping("/replyCnt")
 	public String replyCnt(Model model) {
 		model.addAttribute("cnt", mapper.replyCnt(0));

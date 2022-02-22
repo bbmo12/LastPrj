@@ -48,10 +48,17 @@
 		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1 AND (#{pageNum})*#{amount}
 	</select>
 
+	<!-- 게시글별 태그 목록 -->
+	<select id="hashtag" resultMap="qnaResult">
+		SELECT *
+		FROM qna q LEFT OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE p_no = 0	
+	</select>
+
 	<!-- 태그를 이용한 검색 -->
 	<select id="tagSearch" resultMap="qnaResult">
-		SELECT q.q_no, w_date, title,
-		content, hit, writer, p_no, f_part, pet_no, r_check, t.t_name
+		SELECT *
 		FROM qna
 		q LEFT OUTER JOIN qnatag t
 		ON q.q_no = t.q_no
@@ -60,7 +67,7 @@
 		ORDER BY w_date DESC
 	</select>
 
-	<!-- 검색 -->
+	<!-- 검색 
 	<select id="AllSearch" resultMap="qnaResult">
 		SELECT *
 		FROM qna
@@ -68,7 +75,7 @@
 		AND title LIKE
 		'%{searchValue}%' OR p_no=0 AND content LIKE
 		'%{searchValue}%'
-	</select>
+	</select>-->
 
 	<!-- 질문글 개별 조회 -->
 	<select id="qnaDetail" resultMap="qnaResult">

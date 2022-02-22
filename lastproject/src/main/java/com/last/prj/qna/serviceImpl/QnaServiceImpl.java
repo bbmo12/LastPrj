@@ -44,9 +44,9 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaTagVO> hashtag(int q_no) {
+	public List<QnaTagVO> hashtag() {
 		// TODO Auto-generated method stub
-		return map.hashtag(q_no);
+		return map.hashtag();
 	}
 
 	@Override
@@ -72,6 +72,12 @@ public class QnaServiceImpl implements QnaService {
 	public int replyCnt(int q_no) {
 		// TODO Auto-generated method stub
 		return map.replyCnt(q_no);
+	}
+
+	@Override
+	public List<QnaTagVO> tagSearch() {
+		// TODO Auto-generated method stub
+		return map.tagSearch();
 	}
 
 

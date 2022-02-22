@@ -19,12 +19,13 @@ public interface QnaService {
 	QnaVO ansDetail(QnaVO qna);
 
 	// 포스트별 해시태그
-	List<QnaTagVO> hashtag(int q_no);
+	List<QnaTagVO> hashtag();
 
 	// 조회수 증가
 	int postCnt(int q_no);
 
-	// 검색
+	// 태그를 통한 검색
+	List<QnaTagVO> tagSearch();
 
 	// 질문글 작성
 	int newQna(QnaVO qna);
@@ -42,5 +43,4 @@ public interface QnaService {
 
 	// 답변글 수정
 
-	// 태그 클릭 시 관련글
 }

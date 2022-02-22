@@ -84,9 +84,9 @@
 												<tr>
 												<tr>
 													<td>${qnaList.content }<c:forEach
-															items="${qnaList.tagList }" var="taglist">
+															items="${hashtag }" var="hashtag">
 															<ul class="tagList">
-																<li class="tagli"><a href="#">${taglist.t_name}</a></li>
+																<li class="tagli"><a href="#">${hashtag.t_name}</a></li>
 															</ul>
 														</c:forEach>
 													</td>
