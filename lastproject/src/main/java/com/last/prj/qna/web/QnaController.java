@@ -43,13 +43,11 @@ public class QnaController {
 	@Autowired
 	private QnaTagService qtDAO;
 
-	@RequestMapping("/qnaMain")
-	public String QnaMain(Model model){	
+	//질문글 리스트, 페이징
+	@GetMapping("/qnaMain")
+	public String QnaMain(Criteria cri, Model model){	
 		
-		Criteria cri = new Criteria();
-		PagingVO page = new PagingVO(cri, mapper.getTotal());
-		
-		model.addAttribute("page", page);
+		model.addAttribute("page", new PagingVO(cri, mapper.getTotal(cri)));
 		model.addAttribute("qnaList", mapper.qnaList(cri));
 		model.addAttribute("tagList", qtagDAO.tagList());
 		
@@ -63,14 +61,6 @@ public class QnaController {
 
 		return "qna/qnaMain";
 	}
-	
-//	@ResponseBody
-//	@RequestMapping("/getMoreContents_ajax.do")
-//	public void getMoreContents(QnaVO paramVO, HttpServletRequest req, HttpServletResponse res, HttpSession session) throws ParseException, IOException{
-//		
-//		
-//		
-//	}
 	
 
 	@RequestMapping("/qnaDetail")

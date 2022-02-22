@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 public interface QnaService {
 	
 	//질문글 전체 갯수
-	int getTotal();
+	int getTotal(Criteria cri);
 	
 	// 질문글 전체 조회
 	List<QnaVO> qnaList(Criteria cri);
