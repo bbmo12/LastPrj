@@ -5,9 +5,8 @@ import lombok.Data;
 @Data
 public class Criteria {
 	
-	private int pageNum;
-	private int amount;
-	//페이지 숫자와 글 수를 가지고 있을 클래스
+	private int pageNum; //페이지 번호
+	private int amount; //1페이지당 개수
 	
 	
 	public Criteria() {

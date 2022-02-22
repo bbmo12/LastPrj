@@ -41,9 +41,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Blog Home</h1>
-					<a href="index.html">Home</a> <span>|</span> <a
-						href="blog-home.html">Blog Home</a>
+					<h1>Open Q&A</h1>
 				</div>
 			</div>
 		</div>
@@ -82,7 +80,7 @@
 												<tr>
 													<th>${qnaList.title }</th>
 												<tr>
-												 <tr>
+												<tr>
 													<td>${qnaList.content }<c:forEach
 															items="${qnaList.tagList }" var="taglist">
 															<ul class="tagList">
@@ -132,15 +130,22 @@
 						<aside class="single_sidebar_widget search_widget">
 							<a href="qnaForm"><button type="button" class="q-btn">질문글
 									남기기</button></a>
+							<form action="searchQna" method="post">
+								<div class="input-group">
 
-							<div class="input-group">
-								<input type="text" class="form-control" name="searchValue">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">
-										<i class="fa fa-search"></i>
-									</button>
-								</span>
-							</div>
+									<input type="text" class="form-control" name="searchValue">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+									</span> <select class="searchSelect">
+										<option selected>제목</option>
+										<option>내용</option>
+										<option>작성자</option>
+									</select>
+								</div>
+							</form>
+
 							<!-- /input-group -->
 							<div class="br"></div>
 						</aside>
