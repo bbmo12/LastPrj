@@ -6,8 +6,8 @@ import lombok.Data;
 
 			//파트너회원
 @Data
-public class PmemberVO {
-	private String pId;				//파트너회원아이디
+public class PmemVO {
+	private String p_id;				//파트너회원아이디
 	private String name;			//이름
 	private String tel;				//전화번호
 	private Date startdate;			//가입일
@@ -25,8 +25,8 @@ public class PmemberVO {
 	private String speciality;			//전문분야
 	private int rcom;				//추천
 	private int code;				//서비스 구분코드
-	private int pProfile;			
-	private int pLicense; 				
-	private int pImage	;			
+	private int pProfile;			//프로필사진
+	private int pLicense; 				//자격증사진
+	private int pImage	;			//서비스 이미지
 	
 }
