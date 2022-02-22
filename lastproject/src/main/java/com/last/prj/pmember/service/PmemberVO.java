@@ -1,6 +1,7 @@
 package com.last.prj.pmember.service;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -21,7 +22,7 @@ public class PmemberVO {
 	private String w_d_address;		//사업장상세주소
 	private String businessnumber;	//사업자번호?
 	private String career;			//대표경력
-	private int speciality;			//전문분야
+	private String speciality;			//전문분야
 	private int rcom;				//추천
 	private int code;				//서비스 구분코드
 	private int p_profile;			//프로필사진
@@ -29,5 +30,6 @@ public class PmemberVO {
 	private int p_image;			
 	
 	private FfileVO FfileVO;
-
+	private List<TimeVO> timeList;
+	
 }

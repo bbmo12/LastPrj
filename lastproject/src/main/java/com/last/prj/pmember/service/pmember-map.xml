@@ -8,22 +8,24 @@
 		<result property="p_profile" column="p_profile" />
 		<result property="code" column="code" />
 		<result property="p_id" column="p_id" />
-	
+
 		<association property="FfileVO"
 			javaType="com.last.prj.pmember.service.FfileVO">
 			<id property="f_part" column="f_part" />
 			<result property="picture" column="picture" />
 			<result property="w_write" column="w_write" />
 		</association>
-
 	</resultMap>
+
 	<!-- 전체리스트 -->
 	<select id="memberList"
 		parameterType="com.last.prj.pmember.service.PmemberVO"
 		resultMap="PmemberVO">
-		SELECT *
+		SELECT P.P_ID, P.NAME,F.PICTURE
 		FROM P_MEMBER P, F_FILE F
-		WHERE F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE = #{code}
+		WHERE
+		F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE =
+		#{code}
 	</select>
 
 
@@ -49,4 +51,49 @@
 		P.P_PROFILE = F.F_PART AND W_ADDRESS LIKE '%'||#{val}||'%'
 	</select>
 
+
+	<resultMap type="com.last.prj.pmember.service.PmemberVO"
+		id="pmembervo">
+		<result column="p_id" property="p_id" />
+		<result column="name" property="name" />
+		<result column="n_content" property="n_content" />
+		<result column="w_name" property="w_name" />
+		<result column="w_address" property="w_address" />
+		<result column="w_tel" property="w_tel" />
+		<result column="p_info" property="p_info" />
+		<result column="w_d_address" property="w_d_address" />
+		<result column="career" property="career" />
+		<collection property="timeList" resultMap="TimeVO" />
+	</resultMap>
+
+	<resultMap type="com.last.prj.pmember.service.TimeVO"
+		id="TimeVO">
+		<result column="w_day" property="w_day" />
+		<result column="starttime" property="starttime" />
+		<result column="endtime" property="endtime" />
+		<result column="n_content" property="n_content" />
+	</resultMap>
+	<!-- 상세페이지 -->
+	<select id="getMember" parameterType="String"
+		resultMap="pmembervo"
+		resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM P_MEMBER P, O_TIME T
+		WHERE P.P_ID = T.P_ID AND
+		P.P_ID = #{p_id}
+	</select>
+	<!-- 파트너 프로필사진 -->
+	<select id="getPicture" parameterType="String"
+		resultType="com.last.prj.pmember.service.FfileVO">
+		SELECT F.PICTURE
+		FROM P_MEMBER P , F_FILE F
+		WHERE P.P_ID =
+		F.W_WRITE AND P_ID = #{p_id}
+	</select>
+
+	<select id="getCounselReview" parameterType="String"  resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT RE.CONTENT, RE.RATING, M.M_ID
+		FROM REVIEW RE, COUNSEL C , PET P, MEMBER M
+		WHERE RE.C_NO =C.C_NO AND C.PET_NO = P.PET_NO AND P.M_ID = M.M_ID AND C.P_ID =#{p_id};
+	</select>
 </mapper>
