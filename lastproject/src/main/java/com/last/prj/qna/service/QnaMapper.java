@@ -2,8 +2,12 @@ package com.last.prj.qna.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface QnaMapper {
 
+	int count();
+	
 	//질문글 전체 조회
 	List<QnaVO> qnaList();
 	
@@ -29,6 +33,7 @@ public interface QnaMapper {
 
 	//답글 갯수
 	int replyCnt(int q_no);
+
 
 	
 	

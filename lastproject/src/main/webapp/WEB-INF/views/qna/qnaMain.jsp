@@ -27,6 +27,14 @@
 	background-color: white-gray
 }
 </style>
+<script>
+	function selChange() {
+		var sel = document.getElementById('cntPerPage').value;
+		location.href = "qnaMain?nowPage=${paging.nowPage}&cntPerPage=" + sel;
+	}
+</script>
+
+
 </head>
 <body>
 	<section class="banner-area other-page">
@@ -42,14 +50,11 @@
 	</section>
 
 	<!--================Blog Categorie Area =================-->
-	<section class="blog_categorie_area">
-		<a href="qnaForm"><button type="button" class="q-btn">질문글
-				남기기</button></a>
-
-	</section>
+	<section class="blog_categorie_area"></section>
 	<!--================Blog Categorie Area =================-->
 
 	<!--================Blog Area =================-->
+
 	<section class="blog_area">
 		<div class="container">
 			<div class="row">
@@ -57,8 +62,10 @@
 					<div class="blog_left_sidebar">
 						<article class="row blog_item">
 							<c:forEach items="${qnaList }" var="qnaList">
+
 								<div class="col-md-3">
 									<div class="blog_info text-right">
+
 
 										<ul class="blog_meta list">
 											<li>${qnaList.writer }<i class="fa fa-user-o"></i></li>
@@ -71,14 +78,20 @@
 								<div class="col-md-9">
 									<div class="blog_post">
 										<div class="blog_details">
-											<h4>${qnaList.title }</h4>
-
-											<p>${qnaList.content }</p>
-											<c:forEach items="${qtList }" var="qtList">
-												<div class="post_tag">
-													<a href="#" class="p_tag">${qtList.t_name}</a>
-												</div>
-											</c:forEach>
+											<table id="more_list">
+												<tr>
+													<th>${qnaList.title }</th>
+												<tr>
+												 <tr>
+													<td>${qnaList.content }<c:forEach
+															items="${qnaList.tagList }" var="taglist">
+															<ul class="tagList">
+																<li class="tagli"><a href="#">${taglist.t_name}</a></li>
+															</ul>
+														</c:forEach>
+													</td>
+												<tr>
+											</table>
 											<a class="template-btn"
 												href="qnaDetail?q_no=${qnaList.q_no }">View More</a>
 										</div>
@@ -89,15 +102,37 @@
 						</article>
 
 
-						<nav class="blog-pagination justify-content-center d-flex">
-							<a id="more_btn_a" href="javascript:moreContent('more_list', 5);">Load
-								More</a>
-						</nav>
+						<!-- Pagination
+						<div style="display: block; text-align: center;">
+							<c:if test="${paging.startPage != 1 }">
+								<a
+									href="/boardList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+							</c:if>
+							<c:forEach begin="${paging.startPage }" end="${paging.endPage }"
+								var="p">
+								<c:choose>
+									<c:when test="${p == paging.nowPage }">
+										<b>${p }</b>
+									</c:when>
+									<c:when test="${p != paging.nowPage }">
+										<a
+											href="/boardList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+							<c:if test="${paging.endPage != paging.lastPage}">
+								<a
+									href="/boardList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+							</c:if>
+						</div>-->
 					</div>
 				</div>
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget search_widget">
+							<a href="qnaForm"><button type="button" class="q-btn">질문글
+									남기기</button></a>
+
 							<div class="input-group">
 								<input type="text" class="form-control" name="searchValue">
 								<span class="input-group-btn">
@@ -130,8 +165,7 @@
 		</div>
 	</section>
 	<!--================Blog Area =================-->
-	<script>
-		
-	</script>
+
 </body>
+
 </html>

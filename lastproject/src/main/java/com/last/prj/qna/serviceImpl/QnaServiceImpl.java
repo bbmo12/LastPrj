@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.qna.service.Criteria;
+import com.last.prj.qna.service.PagingVO;
 import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaTagVO;
@@ -17,6 +19,12 @@ public class QnaServiceImpl implements QnaService {
 	@Autowired
 	private QnaMapper map;
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return map.count();
+	}
+	
 	@Override
 	public List<QnaVO> qnaList() {
 		// TODO Auto-generated method stub
@@ -65,5 +73,7 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		return map.replyCnt(q_no);
 	}
+
+
 
 }

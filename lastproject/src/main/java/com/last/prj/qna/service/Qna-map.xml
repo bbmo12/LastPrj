@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.qna.service.QnaMapper">
 
-	<resultMap type="com.last.prj.qna.service.QnaVO" id="QnaVO">
-		<result property="q_no" column="q_no" />
+	<resultMap type="com.last.prj.qna.service.QnaVO"
+		id="qnaResult">
+		<id property="q_no" column="q_no" />
 		<result property="w_date" column="w_date" />
 		<result property="title" column="title" />
 		<result property="content" column="content" />
@@ -13,29 +14,59 @@
 		<result property="f_part" column="f_part" />
 		<result property="pet_no" column="pet_no" />
 		<result property="r_check" column="r_check" />
-
-		<association property="qnatagvo"
-			javaType="com.last.prj.qna.service.QnaTagVO">
-			<id property="q_no" column="q_no" />
-			<result property="t_name" column="t_name" />
-		</association>
+		<collection property="tagList" resultMap="tagMap"></collection>
 	</resultMap>
 
+	<resultMap type="com.last.prj.qna.service.QnaTagVO"
+		id="tagMap">
+		<result property="q_no" column="q_no" />
+		<result property="t_name" column="t_name" />
+	</resultMap>
 
-	<!-- 질문글 전체 조회 -->
-	<select id="qnaList" resultType="com.last.prj.qna.service.QnaVO">
+	<!-- 총 개시글 갯수 출력 -->
+	<select id="count" resultType="int">
+		SELECT COUNT(*) AS total FROM qna
+		WHERE p_no = 0
+	</select>
+
+	<!-- 질문글 전체 조회 /tag /페이징 -->
+	<select id="qnaList" resultMap="qnaResult">
 		SELECT *
-		FROM qna
+		FROM qna q LEFT OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
 		WHERE p_no = 0
 		ORDER BY w_date DESC
 	</select>
 
-	<!-- 질문글 개별 조회 -->
-	<select id="qnaDetail"
-		resultType="com.last.prj.qna.service.QnaVO">
-		SELECT * FROM qna
-		WHERE q_no = #{q_no}
+	<!-- 태그를 이용한 검색 -->
+	<select id="tagSearch" resultMap="qnaResult">
+		SELECT q.q_no, w_date, title,
+		content, hit, writer, p_no, f_part, pet_no, r_check, t.t_name
+		FROM qna
+		q LEFT OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE p_no = 0 AND
+		t.t_name = #{t_name}
+		ORDER BY w_date DESC
 	</select>
+
+	<!-- 검색 -->
+	<select id="AllSearch" resultMap="qnaResult">
+		SELECT *
+		FROM qna
+		WHERE p_no=0
+		AND title LIKE
+		'%{searchValue}%' OR p_no=0 AND content LIKE
+		'%{searchValue}%'
+	</select>
+
+	<!-- 질문글 개별 조회 -->
+	<select id="qnaDetail" resultMap="qnaResult">
+		SELECT * FROM qna
+		WHERE q_no =
+		#{q_no}
+	</select>
+
 
 	<!-- 답변글 조회 -->
 	<select id="ansDetail"
@@ -45,14 +76,6 @@
 		WHERE p_no = #{p_no}
 	</select>
 
-	<!-- 포스트별 해시태그 -->
-	<select id="hashtag"
-		parameterType="com.last.prj.qna.service.QnaTagVO" resultMap="QnaVO">
-		SELECT *
-		FROM qna q, qnatag t
-		WHERE q.q_no = t.q_no
-		AND q.q_no = 1;
-	</select>
 
 	<!-- 조회수 증가 -->
 	<update id="postCnt">
@@ -61,15 +84,6 @@
 		WHERE q_no = #{q_no}
 	</update>
 
-	<!-- 검색 -->
-	<select id="AllSearch"
-		parameterType="com.last.prj.qna.service.QnaVO">
-		SELECT *
-		FROM qna
-		WHERE p_no=0 AND title LIKE
-		'%{searchValue}%' OR p_no=0 AND content LIKE
-		'%{searchValue}%'
-	</select>
 
 	<!-- 질문글 작성 -->
 	<insert id="newQna"
@@ -102,6 +116,5 @@
 
 	<!-- 답변글 수정 -->
 
-	<!-- 태그를 통한 글 찾기 -->
 
 </mapper>
