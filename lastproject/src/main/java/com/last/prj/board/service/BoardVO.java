@@ -1,14 +1,12 @@
 package com.last.prj.board.service;
 
-import java.util.Date;
 
-import lombok.Getter;
-import lombok.Setter;
+import java.sql.Date;
+
+import lombok.Data;
 
 
-
-@Getter
-@Setter
+@Data
 public class BoardVO {
 
 	private int b_no;
@@ -16,5 +14,9 @@ public class BoardVO {
 	private String content;
 	private String writer;
 	private Date w_date;
+	
+	
+	//private int notice_hit
+	
 
 }

@@ -30,7 +30,7 @@
 							</div>
 							<div class="content-area">
 								<div class="doctor-name text-center">
-									<a href="pmemberDetail?name=${pmember.name}"><h3>${pmember.name }</h3></a>
+									<a href="pmemberDetail?id=${pmember.p_id}"><h3>${pmember.name }</h3></a>
 								</div>
 							</div>
 						</div>
@@ -38,6 +38,15 @@
 				</c:forEach>
 			</div>
 		</div>
+		<div class="input-group">
+			<input type="text" class="form-control"> 
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button">
+					<i class="fa fa-search"></i>
+				</button>
+			</span>
+		</div>
+		<!-- /input-group -->
 	</section>
 </body>
 </html>

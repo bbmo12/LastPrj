@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.pmember.service.FfileVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.pmember.service.ReviewVO;
 
 @Repository("pMemberDao")
 public class PmemberServiceImpl implements PmemberService{
@@ -25,8 +27,19 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
-	public PmemberVO getMember(String name) {
-		return map.getMember(name);
+	public PmemberVO getMember(String p_id) {
+		return map.getMember(p_id);
 	}
+
+	@Override
+	public List<FfileVO> getPicture(String p_id) {
+		return map.getPicture(p_id);
+	}
+
+	@Override
+	public ReviewVO getCounselReview(String p_id) {	
+		return map.getCounselReview(p_id);
+	}
+
 
 }

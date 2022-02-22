@@ -16,17 +16,6 @@
     <!-- Page Title -->
     <title>Medino</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/images/logo/favicon.png" type="image/x-icon">
-
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="resources/assets/css/animate-3.7.0.css">
-    <link rel="stylesheet" href="resources/assets/css/font-awesome-4.7.0.min.css">
-    <link rel="stylesheet" href="resources/assets/css/bootstrap-4.1.3.min.css">
-    <link rel="stylesheet" href="resources/assets/css/owl-carousel.min.css">
-    <link rel="stylesheet" href="resources/assets/css/jquery.datetimepicker.min.css">
-    <link rel="stylesheet" href="resources/assets/css/linearicons.css">
-    <link rel="stylesheet" href="resources/assets/css/style.css">
 </head>
 
 
@@ -78,10 +67,17 @@
                                 <li><a href="blog-details.html">blog details</a></li>
                                 <li><a href="memberMypage">memberMypage</a></li>
                             </ul>
+                           <li class="menu-has-children"><a href="">파트너회원</a>
+							<ul>
+								<li><a href="pmemberList?code=100">수의사</a></li>
+								<li><a href="pmemberList?code=101">훈련사</a></li>
+								<li><a href="pmemberList?code=102">펫시터</a></li>
+								<li><a href="pmemberList?code=103">미 용</a></li>
+							</ul></li>
 
                         
                     <c:if test= "${mId eq null and pId eq null}"> 
-                        
+                  
                         <li class="menu-has-children"><a href="loginForm">로그인</a>
                            <!--   -->
 
@@ -168,17 +164,7 @@
     </header>
     <!-- Header Area End -->
     
-    
-    <!-- Javascript -->
-    <script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
-    <script src="resources/assets/js/vendor/wow.min.js"></script>
-    <script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
-    <script src="resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
-    <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
-    <script src="resources/assets/js/vendor/superfish.min.js"></script>
-    <script src="resources/assets/js/main.js"></script>
-    
+ 
 </body>
 
 </html>
