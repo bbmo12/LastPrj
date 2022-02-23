@@ -3,7 +3,7 @@
 <mapper namespace="com.last.prj.ffile.service.FfileMapper">
 
 	<insert id="ffileInsert">
-		insert into ffile (f_no, picture, pfile, f_part, w_write)
+		insert into f_file (f_no, picture, pfile, f_part, w_write)
 		values(ffile_seq.nextval, #{picture}, #{pfile}, #{f_part}, #{w_write})
 	</insert>
 	
