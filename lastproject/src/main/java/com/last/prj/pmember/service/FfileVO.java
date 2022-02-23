@@ -9,5 +9,7 @@ public class FfileVO {
 	private String pfile;	 //파일저장이미지
 	private int f_part;
 	private String w_write;	 //p_id
+	
+	private String m_id;
 
 }
