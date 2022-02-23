@@ -55,7 +55,7 @@
 											href="#" class="auth-link text-black">비밀번호 찾기</a>
 									</div>
 									<div class="text-center mt-4 font-weight-light">
-										계정이 없으신가요? <a href="singup" class="text-primary">회원가입</a>
+										계정이 없으신가요? <a href="joinForm" class="text-primary">회원가입</a>
 									</div>
 								</form> 
 
@@ -107,7 +107,7 @@
 					href="#" class="auth-link text-black">비밀번호 찾기</a>
 			</div>
 			<div class="text-center mt-4 font-weight-light">
-				계정이 없으신가요? <a href="singup" class="text-primary">회원가입</a>
+				계정이 없으신가요? <a href="joinForm" class="text-primary">회원가입</a>
 			</div>
 		</form>`
       
@@ -153,7 +153,7 @@ function plogin(){
 				href="#" class="auth-link text-black">비밀번호 찾기</a>
 		</div>
 		<div class="text-center mt-4 font-weight-light">
-			계정이 없으신가요? <a href="singup" class="text-primary">회원가입</a>
+			계정이 없으신가요? <a href="pjoinForm" class="text-primary">회원가입</a>
 		</div>
 	</form>`
   
