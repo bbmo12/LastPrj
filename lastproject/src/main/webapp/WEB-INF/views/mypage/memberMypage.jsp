@@ -11,6 +11,7 @@
 	padding : 50px;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <body>
 
 <section class="banner-area other-page">
@@ -149,12 +150,16 @@
                                     <img class="img-fluid" src="resources/assets/images/blog-details/post-img2.jpg" alt="">
                                 </div>	
                                 <div class="col-lg-12 my-4">
-                                    <p>
-                                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-                                    </p>
-                                    <p>
-                                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-                                    </p>											
+                                    <h1 align="center">파일 업로드 하기</h1>
+									<h3>multi file 업로드</h3>
+									<form action="multiFile" method="post"  enctype="multipart/form-data">
+									<div id="ffile">
+										파일 : <input type="file" name="multiFile" multiple><button type="button" onclick="addFile()">+</button><br>
+									</div>
+										파일 분류 : <input type="text" name="f_part"><br>
+										파일 소유자 : <input type="text" name="w_write"><br>
+										<input type="submit" value="제출">
+									</form>
                                 </div>									
                             </div>
                         </div>
@@ -164,6 +169,15 @@
             </div>
         </div>
     </section>
-
+<script>
+function addFile(){
+	var input = $('<input>').attr({
+		'name' : 'multiFile',
+		'type' : 'file'
+	});
+	
+	$('#ffile').append(input);
+}
+</script>
 </body>
 </html>

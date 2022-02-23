@@ -46,6 +46,7 @@
 				</c:forEach>
 			</div>
 		</div>
+
 		<div class="blog_right_sidebar" style="width: 500px; float: none; margin: 0 auto; ">
 			<aside class="single_sidebar_widget search_widget">
 				<div class="input-group">
