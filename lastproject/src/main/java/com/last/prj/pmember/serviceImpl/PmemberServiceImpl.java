@@ -37,9 +37,18 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
-	public ReviewVO getCounselReview(String p_id) {	
+	public List<ReviewVO> getCounselReview(String p_id) {
 		return map.getCounselReview(p_id);
 	}
 
+	@Override
+	public List<ReviewVO> getServiceReview(String p_id) {
+		return map.getServiceReview(p_id);
+	}
+
+	@Override
+	public List<FfileVO> getProfile(String m_id) {
+		return map.getProfile(m_id);
+	}
 
 }
