@@ -22,5 +22,9 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<ReservationVO> reservationSelectList() {
 		return map.reservationSelectList();
 	}
+	@Override
+	public int okUpdate(ReservationVO res) {
+		return map.okUpdate(res);
+	}
 
 }

@@ -6,4 +6,6 @@ public interface ReservationService {
 	List<ReservationVO> reservationSelectList();
 	
 	List<ReservationVO> reservationSelect ();
+	
+	int okUpdate(ReservationVO res);
 }

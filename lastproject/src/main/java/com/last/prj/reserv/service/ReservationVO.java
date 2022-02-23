@@ -11,12 +11,14 @@ import lombok.Data;
 @Data
 public class ReservationVO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	private int r_no;
 	private String name;
 	private Date startdate;
 	private String time;
 	private String content;
 	private String code;
 	private Date r_date;
+	private String pcontent;
 	
 	
 	
