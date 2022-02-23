@@ -29,7 +29,9 @@ public class PmemberVO {
 	private int p_license;			//경력사진
 	private int p_image;			
 	
-	private FfileVO FfileVO;
+	private String picture;
+	private String w_write;
+	private int f_part;
 	private List<TimeVO> timeList;
 	
 }

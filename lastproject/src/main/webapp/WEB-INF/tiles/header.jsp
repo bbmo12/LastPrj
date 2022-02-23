@@ -18,9 +18,6 @@
 
 </head>
 
-
-<!-- Header Area Starts -->
-
 <header class="header-area">
 	<div class="header-top">
 		<div class="container">
@@ -57,7 +54,7 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="index.html"><img
+					<a href="home"><img
 						src="resources/assets/images/logo/logo.png" alt="" title="" /></a>
 				</div>
 				<nav id="nav-menu-container">
@@ -66,24 +63,14 @@
 						<li><a href="departments.html">departments</a></li>
 						<li><a href="doctors.html">doctors</a></li>
 						<li class="menu-has-children"><a href="">Pages</a>
+               <li><a href="bTables.do">공지사항</a></li>
 							<ul>
 								<li><a href="about.html">about us</a></li>
 								<li><a href="elements.html">elements</a></li>
 							</ul></li>
-
-						<li class="menu-has-children"><a href="">blog</a>
-							<ul>
-								<li><a href="qnaMain">blog home</a></li>
-								<li><a href="blog-details.html">blog details</a></li>
-								<li><a href="memberMypage">memberMypage</a></li>
-							</ul>
-						<li class="menu-has-children"><a href="">blog</a>
-							<ul>
-								<li><a href="qnaMain">blog home</a></li>
-								<li><a href="blog-details.html">blog details</a></li>
-								<li><a href="memberMypage">memberMypage</a></li>
-							</ul>
+            <li><a href="qnaMain">Open Q&A</a></li>
 						<li class="menu-has-children"><a href="">파트너회원</a>
+
 							<ul>
 								<li><a href="pmemberList?code=100">수의사</a></li>
 								<li><a href="pmemberList?code=101">훈련사</a></li>

@@ -6,6 +6,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+	integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+	crossorigin="anonymous" />
+<style>
+.tagList {
+	list-style: none;
+}
+
+.tagli {
+	float: left;
+	margin-right: 5px;
+}
+
+.blog_meta list {
+	float: right;
+}
+
+.social {
+	float: right;
+	margin-left: 630px;
+}
+
+.ans-body {
+	text-align : left;
+}
+
+.right-align {
+	float: right;
+}
+
+.q-btn {
+	margin-left: 600px;
+}
+
+.btn btn-primary {
+	float: left;
+}
+</style>
+<script src="https://kit.fontawesome.com/397860a4e3.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<!-- Banner Area Starts -->
@@ -13,9 +54,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Blog Details</h1>
-					<a href="index.html">Home</a> <span>|</span> <a
-						href="blog-details.html">Blog Details</a>
+					<h1>Open Q&A</h1>
 				</div>
 			</div>
 		</div>
@@ -28,47 +67,106 @@
 			<div class="row">
 				<div class="col-lg-8 posts-list">
 					<div class="single-post row">
+						<!-- 제목 위치 -->
 						<div class="col-lg-12">
-							<div class="feature-img">
-								<img class="img-fluid"
-									src="assets/images/blog-details/feature-img1.jpg" alt="">
+							<h2>${qnaDetail.title }</h2>
+						</div>
+
+						<!-- 본문 공간 -->
+						<div class="col-lg-9 col-md-9">
+							<!-- 작성자 정보 -->
+							<div>${qnaDetail.writer }</div>
+
+							<h4>${qnaDetail.content }</h4>
+
+							<!-- 태그 공간 -->
+							<div class="tags">
+								<c:forEach items="${qnaDetail.tagList }" var="hash">
+									<ul class="tagList">
+										<li class="tagli"><a
+											href="tagSearch?t_name=${hash.t_name }">${hash.t_name}</a></li>
+									</ul>
+								</c:forEach>
 							</div>
 						</div>
+
+						<!-- 글 정보 -->
 						<div class="col-lg-3  col-md-3">
 							<div class="blog_info text-right">
-								<div class="post_tag">
-									<a href="#">Food,</a> <a class="active" href="#">Technology,</a>
-									<a href="#">Politics,</a> <a href="#">Lifestyle</a>
-								</div>
 								<ul class="blog_meta list">
-									<li><a href="#">Mark wiens<i class="fa fa-user-o"></i></a></li>
-									<li><a href="#">12 Dec, 2017<i
-											class="fa fa-calendar-o"></i></a></li>
-									<li><a href="#">1.2M Views<i class="fa fa-eye"></i></a></li>
-									<li><a href="#">06 Comments<i class="fa fa-comment-o"></i></a></li>
-								</ul>
-								<ul class="social-links">
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-github"></i></a></li>
-									<li><a href="#"><i class="fa fa-behance"></i></a></li>
+									<li>${qnaDetail.w_date }&nbsp;&nbsp;<i
+										class="fa fa-calendar-o"></i></li>
+									<li>${qnaDetail.hit }&nbsp;&nbsp;<i class="fa fa-eye"></i></li>
+									<li>06 Comments&nbsp;&nbsp;<i class="fa fa-comment-o"></i></li>
 								</ul>
 							</div>
 						</div>
-						<div class="col-lg-9 col-md-9 blog_details">
-							<h5>Astronomy Binoculars A Great Alternative</h5>
+
+
+						<!-- 소셜 공유 -->
+						<div class="social">
+							<a id="btnTwitter" class="link-icon twitter"
+								href="javascript:shareTwitter();"><img
+								src="resources/qna/icon-twitter.png"></a> <span><a
+								id="btnFacebook" class="link-icon facebook"
+								href="javascript:shareFacebook();"><img
+									src="resources/qna/icon-facebook.png"></a></span> <span><a
+								id="btnKakao" class="link-icon kakao"
+								href="javascript:shareKakao();"><img
+									src="resources/qna/icon-kakao.png"></a></span>
+
+						</div>
+
+						<div>
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModal">신고</button>
+						</div>
+						<div>
+							<a href="ansForm"><button type="button" class="q-btn">이
+									질문에 답변하기</button></a>
 						</div>
 					</div>
-					<div class="comments-area"></div>
 
+					<!-- 답변  -->
+					<c:forEach items="${ansDetail }" var="ans">
+						<div class="comments-area">
+							<div class="col-lg-12">
+
+								<h2>${ans.title }</h2>
+
+
+							</div>
+
+							<!-- 작성자 정보 -->
+							<div>${ans.writer }
+								<span class="right-align">${qnaDetail.w_date }&nbsp;&nbsp;<i
+									class="fa fa-calendar-o"></i></span>
+
+							</div>
+
+							<!-- 본문 공간 -->
+							<div class="ans-body">
+								<h4>${ans.content }</h4>
+							</div>
+							
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary" data-toggle="modal"
+								data-target="#exampleModal">신고</button>
+							<i class="fas fa-bell"></i> <i
+								class="fa-light fa-hexagon-exclamation"></i>
+						</div>
+					</c:forEach>
 				</div>
+			</div>
+		</div>
 
-			</div>
-			<div class="col-lg-4">
-				<div class="blog_right_sidebar"></div>
-			</div>
+		<div class="col-lg-4">
+			<div class="blog_right_sidebar"></div>
 		</div>
 	</section>
 	<!--================Blog Area =================-->
+
+
+
 </body>
 </html>

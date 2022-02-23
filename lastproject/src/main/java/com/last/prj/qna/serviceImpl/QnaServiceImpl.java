@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.qna.service.Criteria;
+import com.last.prj.qna.service.PagingVO;
 import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaTagVO;
@@ -18,28 +20,29 @@ public class QnaServiceImpl implements QnaService {
 	private QnaMapper map;
 
 	@Override
-	public List<QnaVO> qnaList() {
+	public int getTotal(Criteria cri) {
 		// TODO Auto-generated method stub
-		return map.qnaList();
+		return map.getTotal(cri);
+	}
+	
+	@Override
+	public List<QnaVO> qnaList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return map.qnaList(cri);
 	}
 
 	@Override
-	public QnaVO qnaDetail(QnaVO qna) {
+	public QnaVO qnaDetail(int q_no) {
 		// TODO Auto-generated method stub
-		return map.qnaDetail(qna);
+		return map.qnaDetail(q_no);
 	}
 
 	@Override
-	public QnaVO ansDetail(QnaVO qna) {
+	public List<QnaVO> ansDetail(int q_no) {
 		// TODO Auto-generated method stub
-		return map.ansDetail(qna);
+		return map.ansDetail(q_no);
 	}
 
-	@Override
-	public List<QnaTagVO> hashtag(int q_no) {
-		// TODO Auto-generated method stub
-		return map.hashtag(q_no);
-	}
 
 	@Override
 	public int postCnt(int q_no) {
@@ -65,5 +68,14 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		return map.replyCnt(q_no);
 	}
+
+	@Override
+	public List<QnaTagVO> tagSearch(String t_name) {
+		// TODO Auto-generated method stub
+		return map.tagSearch(t_name);
+	}
+
+	
+
 
 }

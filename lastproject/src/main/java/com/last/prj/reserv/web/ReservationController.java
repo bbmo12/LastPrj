@@ -9,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistService;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
-import com.last.prj.reserv.service.preservationlistVO;
+import com.last.prj.reserv.service.PreservationlistVO;
 
 
 @Controller
@@ -52,11 +53,13 @@ public class ReservationController {
 		@RequestMapping("/preservationSelect")
 		public String pReservationSelect(Model model) {
 			System.out.println(PreservationlistDao.preservationlist());
-			List<preservationlistVO> list = PreservationlistDao.preservationlist();
-			
+			List<PreservationlistVO> list = PreservationlistDao.preservationlist();
+			List<PreservationCodeListVO> code = PreservationlistDao.preservationCodeList();
 			
 			model.addAttribute("preservation",list);
+			model.addAttribute("preservationCode",code);
 			System.out.println(list);
+			System.out.println(code);
 			return "reservation/preservation";
 		}
 }

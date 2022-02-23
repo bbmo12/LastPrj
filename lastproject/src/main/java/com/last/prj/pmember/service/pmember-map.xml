@@ -1,57 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.pmember.service.PmemberMapper">
-
-	<resultMap type="com.last.prj.pmember.service.PmemberVO"
-		id="PmemberVO">
-		<result property="name" column="name" />
-		<result property="p_profile" column="p_profile" />
-		<result property="code" column="code" />
-		<result property="p_id" column="p_id" />
-
-		<association property="FfileVO"
-			javaType="com.last.prj.pmember.service.FfileVO">
-			<id property="f_part" column="f_part" />
-			<result property="picture" column="picture" />
-			<result property="w_write" column="w_write" />
-		</association>
-	</resultMap>
-
-	<!-- 전체리스트 -->
-	<select id="memberList"
-		parameterType="com.last.prj.pmember.service.PmemberVO"
-		resultMap="PmemberVO">
-		SELECT P.P_ID, P.NAME,F.PICTURE
+	<!-- 파트너 리스트출력 -->
+	<select id="memberList" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT P.P_ID, P.NAME, F.PICTURE
 		FROM P_MEMBER P, F_FILE F
-		WHERE
-		F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE =
-		#{code}
+		WHERE F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE = #{code}
 	</select>
-
-
-	<resultMap type="com.last.prj.pmember.service.PmemberVO"
-		id="PmemVO">
-		<result property="name" column="name" />
-		<result property="p_profile" column="p_profile" />
-		<result property="w_address" column="w_address" />
-
-		<association property="FfileVO"
-			javaType="com.last.prj.pmember.service.FfileVO">
-			<id property="f_part" column="f_part" />
-			<result property="picture" column="picture" />
-		</association>
-	</resultMap>
 	<!-- 지역검색 -->
-	<select id="memberSelect"
-		parameterType="com.last.prj.pmember.service.PmemberVO"
-		resultMap="PmemVO">
+	<select id="memberSelect" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT P.NAME,F.PICTURE
 		FROM P_MEMBER P, F_FILE F
-		WHERE
-		P.P_PROFILE = F.F_PART AND W_ADDRESS LIKE '%'||#{val}||'%'
+		WHERE F.W_WRITE = P.P_ID AND P.P_PROFILE = F.F_PART AND W_ADDRESS LIKE '%'||#{val}||'%'
 	</select>
-
-
+	
 	<resultMap type="com.last.prj.pmember.service.PmemberVO"
 		id="pmembervo">
 		<result column="p_id" property="p_id" />
@@ -79,21 +41,31 @@
 		resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
 		FROM P_MEMBER P, O_TIME T
-		WHERE P.P_ID = T.P_ID AND
-		P.P_ID = #{p_id}
+		WHERE P.P_ID = T.P_ID AND P.P_ID = #{p_id}
 	</select>
 	<!-- 파트너 프로필사진 -->
-	<select id="getPicture" parameterType="String"
-		resultType="com.last.prj.pmember.service.FfileVO">
+	<select id="getPicture" parameterType="String" resultType="com.last.prj.pmember.service.FfileVO">
 		SELECT F.PICTURE
 		FROM P_MEMBER P , F_FILE F
-		WHERE P.P_ID =
-		F.W_WRITE AND P_ID = #{p_id}
+		WHERE P.P_ID = F.W_WRITE AND P_ID = #{p_id}
 	</select>
-
+	<!-- 상담리뷰 -->
 	<select id="getCounselReview" parameterType="String"  resultType="com.last.prj.pmember.service.ReviewVO">
 		SELECT RE.CONTENT, RE.RATING, M.M_ID
 		FROM REVIEW RE, COUNSEL C , PET P, MEMBER M
-		WHERE RE.C_NO =C.C_NO AND C.PET_NO = P.PET_NO AND P.M_ID = M.M_ID AND C.P_ID =#{p_id};
+		WHERE RE.C_NO =C.C_NO AND C.PET_NO = P.PET_NO AND P.M_ID = M.M_ID AND C.P_ID = #{p_id}
 	</select>
+	<!-- 서비스리뷰 -->
+	<select id="getServiceReview" parameterType="String"  resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT RE.CONTENT, RE.RATING, M.M_ID
+		FROM RESERVATION R, REVIEW RE, PET P, MEMBER M
+		WHERE RE.R_NO = R.R_NO AND R.PET_NO = P.PET_NO AND P.M_ID = M.M_ID AND R.P_ID = #{p_id}
+	</select>
+	<!-- 리뷰회원 프로필사진 -->
+	<select id="getProfile" parameterType="String" resultType="com.last.prj.pmember.service.FfileVO">	
+		SELECT F.PICTURE, F.F_PART
+		FROM MEMBER M , F_FILE F
+		WHERE M.M_ID = F.W_WRITE AND M_ID =#{m_id}
+	</select>
+	
 </mapper>

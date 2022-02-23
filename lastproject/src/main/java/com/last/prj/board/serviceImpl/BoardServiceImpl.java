@@ -31,13 +31,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardDelete(BoardVO board) {
-		return bo.boardDelete(board);
+	public int boardDelete(int b_no) {
+		return bo.boardDelete(b_no);
 	}
 
 	@Override
-	public int boardUpdate(BoardVO board) {
-		return bo.boardUpdate(board);
+	public int boardUpdate(int b_no) {
+		return bo.boardUpdate(b_no);
 	}
 
 	@Override

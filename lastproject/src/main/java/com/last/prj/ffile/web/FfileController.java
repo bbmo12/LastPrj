@@ -27,6 +27,7 @@ public class FfileController {
 	@Autowired
 	ServletContext sc;
 	
+
 	@PostMapping("/multiFile")
 	public String multiFileUpload(@RequestParam("multiFile") List<MultipartFile> multiFileList,@RequestParam int f_part,@RequestParam String w_write, FfileVO ffile, HttpServletRequest request) {
 		
@@ -86,3 +87,4 @@ public class FfileController {
 			return "mypage/memberMypage";		
 		}
 	}
+

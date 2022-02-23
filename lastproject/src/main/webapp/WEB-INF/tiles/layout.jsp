@@ -29,8 +29,8 @@
     <link rel="stylesheet" href="resources/assets123/css/style.css">
     <link rel="stylesheet" href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="resources/assets123/vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="resources/assets123/assets/vendors/css/vendor.bundle.base.css">
-    <link rel="shortcut icon" href="resources/assets123/assets/images/favicon.png" />
+    <link rel="stylesheet" href="resources/assets123/vendors/css/vendor.bundle.base.css">
+    <link rel="shortcut icon" href="resources/assets123/images/favicon.png" />
 </head>
 
 <body>
