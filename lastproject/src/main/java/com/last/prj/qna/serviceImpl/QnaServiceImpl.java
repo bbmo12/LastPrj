@@ -32,22 +32,17 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public QnaVO qnaDetail(QnaVO qna) {
+	public QnaVO qnaDetail(int q_no) {
 		// TODO Auto-generated method stub
-		return map.qnaDetail(qna);
+		return map.qnaDetail(q_no);
 	}
 
 	@Override
-	public QnaVO ansDetail(QnaVO qna) {
+	public List<QnaVO> ansDetail(int q_no) {
 		// TODO Auto-generated method stub
-		return map.ansDetail(qna);
+		return map.ansDetail(q_no);
 	}
 
-	@Override
-	public List<QnaTagVO> hashtag() {
-		// TODO Auto-generated method stub
-		return map.hashtag();
-	}
 
 	@Override
 	public int postCnt(int q_no) {
@@ -75,11 +70,12 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaTagVO> tagSearch() {
+	public List<QnaTagVO> tagSearch(String t_name) {
 		// TODO Auto-generated method stub
-		return map.tagSearch();
+		return map.tagSearch(t_name);
 	}
 
+	
 
 
 }

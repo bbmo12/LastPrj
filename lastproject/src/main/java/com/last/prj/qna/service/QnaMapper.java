@@ -6,25 +6,24 @@ import org.apache.ibatis.annotations.Param;
 
 public interface QnaMapper {
 
+	//질문글 수
 	int getTotal(Criteria cri);
 	
 	//질문글 전체 조회
 	List<QnaVO> qnaList(Criteria cri);
 	
 	//질문글 개별 조회
-	QnaVO qnaDetail(QnaVO qna);
-	
-	//답변글 조회
-	QnaVO ansDetail(QnaVO qna);
-	
-	//포스트별 해시태그
-	List<QnaTagVO> hashtag();
-	
-	//태그 클릭 시 검색
-	List<QnaTagVO> tagSearch();
+	QnaVO qnaDetail(int q_no);
 	
 	//조회수 증가
 	int postCnt(int q_no);
+	
+	//답변글 조회
+	List<QnaVO> ansDetail(int q_no);
+	
+	//태그 클릭 시 검색
+	List<QnaTagVO> tagSearch(String t_name);
+	
 	
 	//질문글 작성
 	int newQna(QnaVO qna);

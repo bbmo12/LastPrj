@@ -7,7 +7,7 @@
 		resultType="com.last.prj.qtag.service.QtagVO">
 		SELECT *
 		FROM q_tag
-		<![CDATA[WHERE ROWNUM <= 12]]>
+		<![CDATA[WHERE ROWNUM <= 16]]>
 	</select>
 
 </mapper>

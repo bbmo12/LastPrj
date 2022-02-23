@@ -44,22 +44,29 @@ public class QnaController {
 	private QnaTagService qtDAO;
 
 	//질문글 리스트, 페이징
-	@GetMapping("/qnaMain")
+	@RequestMapping("/qnaMain")
 	public String QnaMain(Criteria cri, Model model){	
 		
 		model.addAttribute("page", new PagingVO(cri, mapper.getTotal(cri)));
 		model.addAttribute("qnaList", mapper.qnaList(cri));
-		model.addAttribute("hashtag", mapper.hashtag());
 		model.addAttribute("tagList", qtagDAO.tagList());
+		
+		System.out.println(cri);
 		
 		return "qna/qnaMain";
 		
 	}
 
-	@RequestMapping("/tagSearch")
-	public String tagSearch(Model model) {
+	//태그 클릭 시 동일 태그 글 검색
+	@GetMapping(value = "/tagSearch")
+	public String tagSearch(@RequestParam("t_name") String t_name, Criteria cri, Model model) {
+		System.out.println(t_name);
 		
-		return null;
+		model.addAttribute("page", new PagingVO(cri, mapper.getTotal(cri)));
+		model.addAttribute("tagSearch", mapper.tagSearch(t_name));
+		model.addAttribute("tagList", qtagDAO.tagList());
+		
+		return "qna/tagSearch";
 	}
 	
 	@GetMapping("/replyCnt")
@@ -69,13 +76,18 @@ public class QnaController {
 		return "qna/qnaMain";
 	}
 	
-
-	@RequestMapping("/qnaDetail")
-	public String qnaDetail(QnaVO qna, Model model) {
-		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(qna));
+	//질문글 상세 조회 + 조회수 증가
+	@GetMapping(value = "/qnaDetail")
+	public String qnaDetail(@RequestParam("q_no") int q_no, Model model) {
+		
+		qnaDAO.postCnt(q_no);
+		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
+		model.addAttribute("ansDetail", qnaDAO.ansDetail(q_no));
 		
 		return "qna/qnaDetail";
 	}
+	
+	
 	
 
 }

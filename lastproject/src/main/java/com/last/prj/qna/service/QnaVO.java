@@ -29,6 +29,7 @@ public class QnaVO {
 	//DB에 없음
 	private String searchType; //카테고리
 	private String searchValue; //검색값
+	private int recnt; //질문에 달린 답변 수
 	
 	private QnaTagVO QnaTagVO;
 	

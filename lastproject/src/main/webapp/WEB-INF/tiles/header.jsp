@@ -71,12 +71,7 @@
                                 <li><a href="elements.html">elements</a></li>
                             </ul>
                         </li>
-                        <li class="menu-has-children"><a href="">blog</a>
-                            <ul>
-                                <li><a href="qnaMain">blog home</a></li>
-                                <li><a href="blog-details.html">blog details</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="qnaMain">Open Q&A</a></li>
                         <li><a href="#">Contact</a></li>			          				          
                     </ul>
                 </nav><!-- #nav-menu-container -->		    		

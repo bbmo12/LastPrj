@@ -35,55 +35,49 @@
 	</select>
 
 	<!-- 질문글 전체 조회 /페이징 -->
-	<select id="qnaList" resultType="com.last.prj.qna.service.QnaVO">
+	<select id="qnaList" resultMap="qnaResult">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-		FROM (SELECT * FROM qna
+		FROM (SELECT *
+		FROM qna q LEFT
+		OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
 		WHERE p_no = 0
 		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
 		ORDER BY w_date DESC) A)
-		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1 AND (#{pageNum})*#{amount}
-	</select>
-
-	<!-- 게시글별 태그 목록 -->
-	<select id="hashtag" resultMap="qnaResult">
-		SELECT *
-		FROM qna q LEFT OUTER JOIN qnatag t
-		ON q.q_no = t.q_no
-		WHERE p_no = 0	
+		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
 	</select>
 
 	<!-- 태그를 이용한 검색 -->
 	<select id="tagSearch" resultMap="qnaResult">
 		SELECT *
-		FROM qna
-		q LEFT OUTER JOIN qnatag t
+		FROM qna q LEFT OUTER
+		JOIN qnatag t
 		ON q.q_no = t.q_no
-		WHERE p_no = 0 AND
-		t.t_name = #{t_name}
+		WHERE p_no = 0 AND t.t_name = #{t_name}
 		ORDER BY w_date DESC
 	</select>
 
-	<!-- 검색 
-	<select id="AllSearch" resultMap="qnaResult">
-		SELECT *
-		FROM qna
-		WHERE p_no=0
-		AND title LIKE
-		'%{searchValue}%' OR p_no=0 AND content LIKE
-		'%{searchValue}%'
-	</select>-->
-
 	<!-- 질문글 개별 조회 -->
 	<select id="qnaDetail" resultMap="qnaResult">
-		SELECT * FROM qna
-		WHERE q_no =
+		SELECT *
+		FROM qna q LEFT OUTER
+		JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE q.q_no =
 		#{q_no}
 	</select>
 
+	<!-- 조회수 증가 -->
+	<update id="postCnt">
+		UPDATE qna
+		SET hit = hit+1
+		WHERE q_no = #{q_no}
+	</update>
 
 	<!-- 답변글 조회 -->
 	<select id="ansDetail"
@@ -92,14 +86,6 @@
 		FROM qna
 		WHERE p_no = #{p_no}
 	</select>
-
-
-	<!-- 조회수 증가 -->
-	<update id="postCnt">
-		UPDATE qna
-		SET hit = hit+1
-		WHERE q_no = #{q_no}
-	</update>
 
 
 	<!-- 질문글 작성 -->
