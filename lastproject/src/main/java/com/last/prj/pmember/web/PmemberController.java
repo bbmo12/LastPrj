@@ -27,12 +27,14 @@ public class PmemberController {
 		System.out.println(code);
 		return "pmember/memberList";
 	}
-	@RequestMapping("/pmemberLocal")
-	public PmemberVO pmemberLocal(@RequestParam("local")String w_address,PmemberVO pmember) {
-	
-		System.out.println("지역"+w_address);
-		pmember.setW_address(w_address);
-		return pMemberDao.memberSelect(pmember);
+	@ResponseBody
+	@PostMapping("/pmemberLocal")
+	public List<PmemberVO> pmemberLocal(@RequestParam("coded") int code, @RequestParam("local")String w_address, PmemberVO pmember) {
+	    pmember.setCode(code);
+	    pmember.setW_address(w_address);
+	    pMemberDao.memberSelect(w_address, code);
+		System.out.println("지역"+code);
+		return pMemberDao.memberList(code);
 	}
 	@RequestMapping("/pmemberDetail")
 	public String pmemberDetail(@RequestParam("id") String p_id, Model model) {		

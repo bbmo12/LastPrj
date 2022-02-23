@@ -8,10 +8,10 @@
 		WHERE F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE = #{code}
 	</select>
 	<!-- 지역검색 -->
-	<select id="memberSelect" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+	<select id="memberSelect" parameterType="map" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT P.NAME,F.PICTURE
 		FROM P_MEMBER P, F_FILE F
-		WHERE F.W_WRITE = P.P_ID AND P.P_PROFILE = F.F_PART AND W_ADDRESS LIKE '%'||#{val}||'%'
+		WHERE F.W_WRITE = P.P_ID AND P.P_PROFILE = F.F_PART AND W_ADDRESS LIKE '%'||#{param}||'%' AND P.CODE = #{code} 
 	</select>
 	
 	<resultMap type="com.last.prj.pmember.service.PmemberVO"

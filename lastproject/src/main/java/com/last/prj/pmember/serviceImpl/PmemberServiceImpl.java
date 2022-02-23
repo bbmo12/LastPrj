@@ -22,8 +22,8 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
-	public PmemberVO memberSelect(PmemberVO pmember) {
-		return map.memberSelect(pmember);
+	public List<PmemberVO> memberSelect(String w_address, int code) {
+		return map.memberSelect(w_address, code);
 	}
 
 	@Override
