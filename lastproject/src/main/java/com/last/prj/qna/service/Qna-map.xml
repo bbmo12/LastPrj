@@ -51,6 +51,15 @@
 		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
+	
+	<!-- 베스트 게시글 -->
+	<select id="qnaBest" resultType="com.last.prj.qna.service.QnaVO">
+		SELECT * 
+		FROM qna
+		WHERE p_no = 0
+		<![CDATA[AND ROWNUM <= 7]]>
+		ORDER BY hit DESC
+	</select>
 
 	<!-- 태그를 이용한 검색 -->
 	<select id="tagSearch" resultMap="qnaResult">
@@ -86,7 +95,6 @@
 		FROM qna
 		WHERE p_no = #{p_no}
 	</select>
-
 
 	<!-- 질문글 작성 -->
 	<insert id="newQna"

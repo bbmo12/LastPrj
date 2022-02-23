@@ -47,7 +47,10 @@
 	</section>
 
 	<!--================Blog Categorie Area =================-->
-	<section class="blog_categorie_area"></section>
+	<section class="blog_categorie_area">
+		<a href="qnaForm"><button type="button" class="q-btn">질문글
+				작성</button></a>
+	</section>
 	<!--================Blog Categorie Area =================-->
 
 	<!--================Blog Area =================-->
@@ -65,10 +68,13 @@
 
 
 										<ul class="blog_meta list">
-											<li>${qnaList.writer }&nbsp;&nbsp;<i class="fa fa-user-o"></i></li>
-											<li>${qnaList.w_date }&nbsp;&nbsp;<i class="fa fa-calendar-o"></i></li>
+											<li>${qnaList.writer }&nbsp;&nbsp;<i
+												class="fa fa-user-o"></i></li>
+											<li>${qnaList.w_date }&nbsp;&nbsp;<i
+												class="fa fa-calendar-o"></i></li>
 											<li>${qnaList.hit }Views&nbsp;&nbsp;<i class="fa fa-eye"></i></li>
-											<li>${qnaList.recnt }Comments&nbsp;&nbsp;<i class="fa fa-comment-o"></i></li>
+											<li>${qnaList.recnt }Comments&nbsp;&nbsp;<i
+												class="fa fa-comment-o"></i></li>
 										</ul>
 									</div>
 								</div>
@@ -80,11 +86,11 @@
 													<th>${qnaList.title }</th>
 												<tr>
 												<tr>
-													<td>${qnaList.content }
-													<c:forEach
+													<td>${qnaList.content }<c:forEach
 															items="${qnaList.tagList }" var="hash">
 															<ul class="tagList">
-																<li class="tagli"><a href="tagSearch?t_name=${hash.t_name }">${hash.t_name}</a></li>
+																<li class="tagli"><a
+																	href="tagSearch?t_name=${hash.t_name }">${hash.t_name}</a></li>
 															</ul>
 														</c:forEach>
 													</td>
@@ -138,8 +144,7 @@
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget search_widget">
-							<a href="qnaForm"><button type="button" class="q-btn">질문글
-									작성</button></a>
+
 							<form action="qnaMain" method="post">
 								<div class="input-group">
 
@@ -178,19 +183,55 @@
 							<!-- /input-group -->
 							<div class="br"></div>
 						</aside>
+
+						<aside class="single_sidebar_widget post_category_widget">
+							<h4 class="widget_title">베스트 Q&A</h4>
+							<ul class="list cat-list">
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Technology</p>
+										<p>37</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Lifestyle</p>
+										<p>24</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Fashion</p>
+										<p>59</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Art</p>
+										<p>29</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Food</p>
+										<p>15</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Architecture</p>
+										<p>09</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>Adventure</p>
+										<p>44</p>
+								</a></li>
+							</ul>
+							<div class="br"></div>
+						</aside>
+
 						<aside class="single-sidebar-widget tag_cloud_widget">
 							<h4 class="widget_title">인기 태그</h4>
 							<c:forEach items="${tagList }" var="tagList">
 								<ul class="tagList">
-									<li class="tagli"><a href="tagSearch?t_name=${tagList.t_name }">${tagList.t_name }</a></li>
+									<li class="tagli"><a
+										href="tagSearch?t_name=${tagList.t_name }">${tagList.t_name }</a></li>
 								</ul>
 							</c:forEach>
 						</aside>
 
-
 						<aside class="single_sidebar_widget ads_widget">
-							<a href="#"><img class="img-fluid"
-								src="assets/images/blog/add.jpg" alt=""></a>
+							<img class="img-fluid" src="resources/qna/배너1.png" alt="">
+							<img class="img-fluid" src="resources/qna/배너4.png" alt="">
 						</aside>
 
 					</div>

@@ -84,6 +84,8 @@ public class QnaController {
 		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
 		model.addAttribute("ansDetail", qnaDAO.ansDetail(q_no));
 		
+		System.out.println(qnaDAO.ansDetail(q_no));
+		
 		return "qna/qnaDetail";
 	}
 	

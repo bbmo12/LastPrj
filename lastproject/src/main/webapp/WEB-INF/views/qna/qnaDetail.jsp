@@ -30,7 +30,7 @@
 }
 
 .ans-body {
-	text-align : left;
+	text-align: left;
 }
 
 .right-align {
@@ -43,6 +43,11 @@
 
 .btn btn-primary {
 	float: left;
+}
+
+#banner {
+	margin-left: 780px;
+	/*top : -1000px;*/
 }
 </style>
 <script src="https://kit.fontawesome.com/397860a4e3.js"
@@ -127,8 +132,14 @@
 						</div>
 					</div>
 
+					<c:if test="${empty ansDetail}">
+						<img src="resources/qna/답변유도.png" alt="">
+					</c:if>
+
 					<!-- 답변  -->
 					<c:forEach items="${ansDetail }" var="ans">
+
+
 						<div class="comments-area">
 							<div class="col-lg-12">
 
@@ -141,14 +152,13 @@
 							<div>${ans.writer }
 								<span class="right-align">${qnaDetail.w_date }&nbsp;&nbsp;<i
 									class="fa fa-calendar-o"></i></span>
-
 							</div>
 
 							<!-- 본문 공간 -->
 							<div class="ans-body">
 								<h4>${ans.content }</h4>
 							</div>
-							
+
 							<!-- Button trigger modal -->
 							<button type="button" class="btn btn-primary" data-toggle="modal"
 								data-target="#exampleModal">신고</button>
@@ -158,15 +168,22 @@
 					</c:forEach>
 				</div>
 			</div>
-		</div>
+			<div id="banner" class="col-lg-4" align="right">
+				<div class="blog_right_sidebar">
+					<aside class="single_sidebar_widget ads_widget">
+						<img class="img-fluid" src="resources/qna/배너1.png" alt=""> <img
+							class="img-fluid" src="resources/qna/배너4.png" alt=""> <img
+							class="img-fluid" src="resources/qna/배너2.png" alt=""> <img
+							class="img-fluid" src="resources/qna/배너3.png" alt=""> <img
+							class="img-fluid" src="resources/qna/배너5.png" alt="">
+					</aside>
 
-		<div class="col-lg-4">
-			<div class="blog_right_sidebar"></div>
+				</div>
+			</div>
+
 		</div>
 	</section>
 	<!--================Blog Area =================-->
-
-
 
 </body>
 </html>
