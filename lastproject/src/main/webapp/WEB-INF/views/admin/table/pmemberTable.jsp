@@ -40,7 +40,7 @@
                             <td class="py-1"><a href="#"><img src="resources/assets123/images/faces-clipart/pic-1.png"
                                         alt="image" /></a></td>
                             <td>Herman Beck</td>
-                            <td><meter value="75" min="0" max="100" low="20" high="65" optimum="15"
+                            <td><meter value="30" min="0" max="100" low="20" high="65" optimum="15"
                                     style="width: 100%"></meter></td>
                             <td>$ 77.99</td>
                             <td>May 15, 2015</td>

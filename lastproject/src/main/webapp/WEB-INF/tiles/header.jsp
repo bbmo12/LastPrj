@@ -58,6 +58,7 @@
                             <ul>
                                 <li><a href="about.html">about us</a></li>
                                 <li><a href="elements.html">elements</a></li>
+                                 <li><a href="bTables.do">공지사항</a></li>
                             </ul>
                         </li>
 
