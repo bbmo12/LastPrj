@@ -17,10 +17,6 @@
 <title>Medino</title>
 
 </head>
-
-
-<!-- Header Area Starts -->
-
 <header class="header-area">
 	<div class="header-top">
 		<div class="container">
@@ -70,19 +66,7 @@
 								<li><a href="about.html">about us</a></li>
 								<li><a href="elements.html">elements</a></li>
 							</ul></li>
-
-						<li class="menu-has-children"><a href="">blog</a>
-							<ul>
-								<li><a href="qnaMain">blog home</a></li>
-								<li><a href="blog-details.html">blog details</a></li>
-								<li><a href="memberMypage">memberMypage</a></li>
-							</ul>
-						<li class="menu-has-children"><a href="">blog</a>
-							<ul>
-								<li><a href="qnaMain">blog home</a></li>
-								<li><a href="blog-details.html">blog details</a></li>
-								<li><a href="memberMypage">memberMypage</a></li>
-							</ul>
+            <li><a href="qnaMain">Open Q&A</a></li>
 						<li class="menu-has-children"><a href="">파트너회원</a>
 							<ul>
 								<li><a href="pmemberList?code=100">수의사</a></li>

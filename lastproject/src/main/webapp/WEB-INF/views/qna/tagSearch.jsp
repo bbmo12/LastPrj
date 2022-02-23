@@ -58,17 +58,17 @@
 				<div class="col-lg-8">
 					<div class="blog_left_sidebar">
 						<article class="row blog_item">
-							<c:forEach items="${qnaList }" var="qnaList">
+							<c:forEach items="${tagSearch }" var="tSearch">
 
 								<div class="col-md-3">
 									<div class="blog_info text-right">
 
 
 										<ul class="blog_meta list">
-											<li>${qnaList.writer }&nbsp;&nbsp;<i class="fa fa-user-o"></i></li>
-											<li>${qnaList.w_date }&nbsp;&nbsp;<i class="fa fa-calendar-o"></i></li>
-											<li>${qnaList.hit }Views&nbsp;&nbsp;<i class="fa fa-eye"></i></li>
-											<li>${qnaList.recnt }Comments&nbsp;&nbsp;<i class="fa fa-comment-o"></i></li>
+											<li>${tSearch.writer }<i class="fa fa-user-o"></i></li>
+											<li>${tSearch.w_date }<i class="fa fa-calendar-o"></i></li>
+											<li>${tSearch.hit }Views<i class="fa fa-eye"></i></li>
+											<li>Comments <i class="fa fa-comment-o"></i></li>
 										</ul>
 									</div>
 								</div>
@@ -77,12 +77,11 @@
 										<div class="blog_details">
 											<table id="more_list">
 												<tr>
-													<th>${qnaList.title }</th>
+													<th>${tSearch.title }</th>
 												<tr>
 												<tr>
-													<td>${qnaList.content }
-													<c:forEach
-															items="${qnaList.tagList }" var="hash">
+													<td>${tSearch.content }<c:forEach
+															items="${tSearch.tagList }" var="hash">
 															<ul class="tagList">
 																<li class="tagli"><a href="tagSearch?t_name=${hash.t_name }">${hash.t_name}</a></li>
 															</ul>
@@ -91,7 +90,7 @@
 												<tr>
 											</table>
 											<a class="template-btn"
-												href="qnaDetail?q_no=${qnaList.q_no }">View More</a>
+												href="qnaDetail?q_no=${tSearch.q_no }">View More</a>
 										</div>
 									</div>
 								</div>
@@ -101,26 +100,26 @@
 
 
 						<!-- Pagination-->
-						<form action="qnaMain" name="pageForm" method="post">
+						<form action="tagSearch" name="pageForm" method="post">
 							<div style="display: block; text-align: center;">
 								<nav class="blog-pagination justify-content-center d-flex">
 									<div class="paginationDiv">
 										<ul class="pagination">
 											<c:if test="${page.prev }">
 												<li><a
-													href="qnaMain?pageNum=${page.startPage -1 }&amount=${page.amount}">prev</a></li>
+													href="tagSearch?pageNum=${page.startPage -1 }&amount=${page.amount}">prev</a></li>
 											</c:if>
 
 											<c:forEach var="num" begin="${page.startPage }"
 												end="${page.endPage }">
 												<li class="${page.pageNum eq num ? 'active' : '' }"><a
-													href="qnaMain?pageNum=${num }&amount=${page.amount}">${num }</a>
+													href="tagSearch?pageNum=${num }&amount=${page.amount}">${num }</a>
 												</li>
 											</c:forEach>
 
 											<c:if test="${page.next }">
 												<li class="page-item"><a
-													href="qnaMain?pageNum=${page.endPage + 1 }&amount=${page.amount}">next</a></li>
+													href="tagSearch?pageNum=${page.endPage + 1 }&amount=${page.amount}">next</a></li>
 											</c:if>
 										</ul>
 									</div>

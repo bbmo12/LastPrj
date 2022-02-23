@@ -1,6 +1,7 @@
 package com.last.prj.qna.service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,11 +24,13 @@ public class QnaVO {
 	private int f_part;
 	private int pet_no;
 	private int r_check;
+	private List<QnaTagVO> tagList;
 	
 	//DB에 없음
 	private String searchType; //카테고리
 	private String searchValue; //검색값
+	private int recnt; //질문에 달린 답변 수
 	
-	private QnaTagVO qnatagvo;
+	private QnaTagVO QnaTagVO;
 	
 }
