@@ -26,6 +26,9 @@
                     <h1>Leading the way in medical excellence</h1>
                     <p>Earth greater grass for good. Place for divide evening yielding them that. Creeping beginning over gathered brought.</p>
                     <a href="" class="template-btn mt-3">take appointment</a>
+                    <a href="reservationSelect" class="template-btn mt-3">일반회원예약조회</a>
+                    <a href="preservationSelect" class="template-btn mt-3">파트너회원예약조회</a>
+                    
                 </div>
             </div>
         </div>
@@ -246,7 +249,7 @@
                             <img src="resources/assets/images/doctor2.jpg" alt="" class="img-fluid">
                         </div>
                         <div class="content-area">
-                            <div class="doctor-name text-center">
+                            <div align="center">
                                 <h3>dand mories</h3>
                                 <h6>sr. faculty plastic surgery</h6>
                             </div>

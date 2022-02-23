@@ -24,6 +24,13 @@
     <link rel="stylesheet" href="resources/assets/css/jquery.datetimepicker.min.css">
     <link rel="stylesheet" href="resources/assets/css/linearicons.css">
     <link rel="stylesheet" href="resources/assets/css/style.css">
+    
+    <!-- admin css -->
+    <link rel="stylesheet" href="resources/assets123/css/style.css">
+    <link rel="stylesheet" href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="resources/assets123/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="resources/assets123/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="shortcut icon" href="resources/assets123/assets/images/favicon.png" />
 </head>
 
 <body>
@@ -45,4 +52,9 @@
     <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
     <script src="resources/assets/js/vendor/superfish.min.js"></script>
     <script src="resources/assets/js/main.js"></script>
+    <!-- admin css -->
+    <script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
+    <script src="resources/assets123/js/off-canvas.js"></script>
+    <script src="resources/assets123/js/hoverable-collapse.js"></script>
+    <script src="resources/assets123/js/misc.js"></script>
 </body>
