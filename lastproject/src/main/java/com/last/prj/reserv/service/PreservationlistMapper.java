@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface PreservationlistMapper {
 
-	public List<preservationlistVO> preservationlist();
+	public List<PreservationlistVO> preservationlist();
+	
+	public List<PreservationCodeListVO> preservationCodeList();
 }
