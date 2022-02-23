@@ -12,7 +12,7 @@
 		</if>
 	</select>
 	<!-- 일반회원 아이디 찾기 -->
-	<select id="memberIdSearch" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+	<select id="memberIdSearch" parameterType="String" resultType="String">
 		select * from member
 		where name = #{name}
 		<if test="tel != null">

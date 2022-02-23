@@ -23,7 +23,7 @@ public class MemServiceImpl implements MemService {
 	
 	//일반회원 아이디 찾기
 	@Override
-	public MemVO memberIdSearch(String name, String tel) {
+	public String memberIdSearch(String name, String tel) {
 		return map.memberIdSearch(name, tel);
 	}
 
