@@ -71,7 +71,7 @@
                         
                     <c:if test= "${mId eq null and pId eq null}"> 
                   
-                        <li class="menu-has-children"><a href="loginForm">로그인</a>
+                        <li class="menu-has-children"><a href="loginForm">로 그인</a>
                            <!--   -->
 
                         </li>
