@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class preservationlistVO {
+public class PreservationlistVO {
 	//뷰
 	private Date startdate;
 	private Date r_date;
@@ -13,4 +13,5 @@ public class preservationlistVO {
 	private String m_id;
 	private String content;
 	private String d_name;
+	private String p_id;
 }
