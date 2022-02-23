@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.prj.board.service.BoardMapper;
+import com.last.prj.board.service.BoardService;
 import com.last.prj.board.service.BoardVO;
 
-
 @Repository("boardDao")
-public class BoardServiceImpl implements BoardMapper {
+public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardMapper bo;

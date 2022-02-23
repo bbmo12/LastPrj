@@ -5,5 +5,5 @@ import java.util.List;
 public interface ReservationService {
 	List<ReservationVO> reservationSelectList();
 	
-	ReservationVO reservationSelect (ReservationVO res);
+	List<ReservationVO> reservationSelect ();
 }
