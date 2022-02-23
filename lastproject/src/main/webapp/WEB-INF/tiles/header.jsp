@@ -17,6 +17,7 @@
 <title>Medino</title>
 
 </head>
+
 <header class="header-area">
 	<div class="header-top">
 		<div class="container">
@@ -62,12 +63,14 @@
 						<li><a href="departments.html">departments</a></li>
 						<li><a href="doctors.html">doctors</a></li>
 						<li class="menu-has-children"><a href="">Pages</a>
+               <li><a href="bTables.do">공지사항</a></li>
 							<ul>
 								<li><a href="about.html">about us</a></li>
 								<li><a href="elements.html">elements</a></li>
 							</ul></li>
             <li><a href="qnaMain">Open Q&A</a></li>
 						<li class="menu-has-children"><a href="">파트너회원</a>
+
 							<ul>
 								<li><a href="pmemberList?code=100">수의사</a></li>
 								<li><a href="pmemberList?code=101">훈련사</a></li>

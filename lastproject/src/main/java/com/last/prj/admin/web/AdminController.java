@@ -22,11 +22,11 @@ public class AdminController {
 	// 파트너회원관련
 
 	@RequestMapping("/pmemberTables.do")
-	public String pmemberList(Model model) {
-		/*
-		 * model.addAttribute("pmember", pMemberDao.memberList());
-		 */
-		return "admin/table/pmemberTable";
+	public String pmemberList(@RequestParam("code") int code, Model model) {
+		System.out.println(code);
+		model.addAttribute("pmember", pMemberDao.memberList(code));
+		System.out.println("아이디" + pMemberDao.memberList(code));
+		return "admin/table/pmemberTables";
 	}
 
 	/*

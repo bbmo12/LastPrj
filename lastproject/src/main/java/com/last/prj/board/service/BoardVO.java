@@ -6,6 +6,8 @@ import java.sql.Date;
 import lombok.Data;
 
 
+
+
 @Data
 public class BoardVO {
 
@@ -16,7 +18,7 @@ public class BoardVO {
 	private Date w_date;
 	
 	
-	//private int notice_hit
+	//private int hit
 	
 
 }
