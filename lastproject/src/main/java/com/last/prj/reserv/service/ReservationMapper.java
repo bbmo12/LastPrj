@@ -7,4 +7,6 @@ public interface ReservationMapper {
 	
 	List<ReservationVO> reservationSelect ();
 	
+	int okUpdate(ReservationVO res);
+	
 }

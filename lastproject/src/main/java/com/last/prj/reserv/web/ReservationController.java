@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistService;
@@ -30,14 +31,14 @@ public class ReservationController {
 	 */
 	
 	//예약 전체조회
-	@RequestMapping("/reservationSelectList")
-	public String reservationSelectList(Model model,HttpSession session) {
-		
-		List<ReservationVO> list = reservationDao.reservationSelectList();
-		model.addAttribute("reservation", list);
-		System.out.println(list);
-		return "reservation/reservation";
-	}
+	/*
+	 * @RequestMapping("/reservationSelectList") public String
+	 * reservationSelectList(Model model,HttpSession session) {
+	 * 
+	 * List<ReservationVO> list = reservationDao.reservationSelectList();
+	 * model.addAttribute("reservation", list); System.out.println(list); return
+	 * "reservation/reservation"; }
+	 */
 	
 	//일반 예약조회
 	@RequestMapping("/reservationSelect")
@@ -62,4 +63,11 @@ public class ReservationController {
 			System.out.println(code);
 			return "reservation/preservation";
 		}
+		//파트너회원 예약승인 후 절차(ajax)
+		/*
+		 * @RequestMapping("/okupdate")
+		 * 
+		 * @ResponseBody public String okUpdate() { reservationDao.okUpdate(null) return
+		 * }
+		 */
 }
