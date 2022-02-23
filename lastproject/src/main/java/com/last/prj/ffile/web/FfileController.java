@@ -26,36 +26,31 @@ public class FfileController {
 	@Autowired
 	ServletContext sc;
 	
-	@PostMapping("/multiFile")
-	public int multiFileUpload(@RequestParam("multiFile") List<MultipartFile> multiFileList, FfileVO ffile, HttpServletRequest request) {
-		System.out.println("multiFileList : " + multiFileList);
-		
-		String originalFileName = file.getOriginalFilename();
-
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
-		System.out.printf("realPath: %s\n", realPath);
-
-		File savePath = new File(realPath);
-		if (!savePath.exists())
-			savePath.mkdirs();
-
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
-
-		if (!originalFileName.isEmpty()) {
-			String uuid = UUID.randomUUID().toString();
-			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
-
-			try {
-				file.transferTo(saveFile);
-				ffile.setPicture(originalFileName);
-				ffile.setPfile(saveFileName);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return ffileDao.ffileInsert(ffile);
-	}
+	/*
+	 * @PostMapping("/multiFile") public int
+	 * multiFileUpload(@RequestParam("multiFile") List<MultipartFile> multiFileList,
+	 * FfileVO ffile, HttpServletRequest request) {
+	 * System.out.println("multiFileList : " + multiFileList);
+	 * 
+	 * String originalFileName = file.getOriginalFilename();
+	 * 
+	 * String webPath = "/resources/upload"; String realPath =
+	 * sc.getRealPath(webPath); System.out.printf("realPath: %s\n", realPath);
+	 * 
+	 * File savePath = new File(realPath); if (!savePath.exists())
+	 * savePath.mkdirs();
+	 * 
+	 * realPath += File.separator + originalFileName; File saveFile = new
+	 * File(realPath);
+	 * 
+	 * if (!originalFileName.isEmpty()) { String uuid =
+	 * UUID.randomUUID().toString(); String saveFileName = uuid +
+	 * originalFileName.substring(originalFileName.lastIndexOf("."));
+	 * 
+	 * try { file.transferTo(saveFile); ffile.setPicture(originalFileName);
+	 * ffile.setPfile(saveFileName); } catch (Exception e) { e.printStackTrace(); }
+	 * }
+	 * 
+	 * return ffileDao.ffileInsert(ffile); }
+	 */
 }
