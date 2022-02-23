@@ -36,6 +36,7 @@
 							</div>
 							<div class="content-area">
 								<div class="doctor-name text-center">
+								<input id="pmemberCode" type="hidden" value="${pmember.code }">
 									<a href="pmemberDetail?id=${pmember.p_id}">
 										<h3>${pmember.name }</h3>
 									</a>
@@ -60,12 +61,14 @@
 	</section>
 	<script type="text/javascript">
 	function getLocal() {
+		    var code = document.getElementById('pmemberCode').value;
 			var local = document.getElementById('local').value;
-			console.log(local);
 		$.ajax({
 			url: 'pmemberLocal',
+			method: 'post',
 			data: {
-				local: local
+				coded : code,
+				local : local
 			}
 		}).done(function (data) {
 			console.log(data);
