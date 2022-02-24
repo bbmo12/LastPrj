@@ -41,10 +41,14 @@ public class MemController {
 
 	@RequestMapping("joinForm") // 일반회원회원가입
 	public String joinForm() {
-
 		return "member/joinForm";
 	}
 
+	@RequestMapping("pjoinForm") // 파트너회원회원가입폼 이동
+	public String pjoinForm() {
+		return "member/pjoinForm";
+	}
+	
 	@RequestMapping("loginForm") // 일반회원로그인화면
 	public String loginForm() {
 
@@ -98,38 +102,76 @@ public class MemController {
 	@RequestMapping("/pmemberIdSearch") //파티너회원 아이디 찾기
 	@ResponseBody
 	public String pmemberIdSearch(@Param("name") String name, @Param("tel") String tel) {
-		System.out.println(pmemDao.pmemberIdSearch(name, tel));
 		return pmemDao.pmemberIdSearch(name, tel);
 	}
 	
 	@RequestMapping("/memberIdSearch") //일반회원 아이디 찾기
 	@ResponseBody
 	public String memberIdSearch(@Param("name") String name, @Param("tel") String tel) {
-		System.out.println(memDao.memberIdSearch(name, tel));
 		return memDao.memberIdSearch(name, tel);
 	}
 	
-	/*
-	 * @RequestMapping("/mjoin") //일반회원 회원가입 public String
-	 * mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
-	 * 
-	 * String originalFileName = file.getOriginalFilename();
-	 * if(!originalFileName.isEmpty()) { String uuid = UUID.randomUUID().toString();
-	 * String saveFileName = uuid +
-	 * originalFileName.substring(originalFileName.lastIndexOf("."));
-	 * 
-	 * try { file.transferTo(new File(saveDir, saveFileName)); //member.set
-	 * //member.set
-	 * 
-	 * } catch(Exception e) { e.printStackTrace(); } }
-	 * 
-	 * int n = memDao.memberInsert(member); if( n!= 0) {
-	 * model.addAttribute("message","성공"); } else {
-	 * model.addAttribute("message","실패"); }
-	 * 
-	 * 
-	 * return "redirect:home"; }
-	 */
+	
+	  @RequestMapping("/mjoin") //일반회원 회원가입
+	  public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
+	  String originalFileName = file.getOriginalFilename();
+	  
+	  
+	  if(!originalFileName.isEmpty()) {
+		  String uuid = UUID.randomUUID().toString();
+		  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+	  
+	  try { file.transferTo(new File(saveDir, saveFileName));
+	  member.setPicture(originalFileName);
+	  member.setPfile(saveFileName);
+	  
+	  } catch(Exception e) {
+		  e.printStackTrace();
+	  	}
+	  }
+	  
+	  int n = memDao.memberInsert(member);
+	  if( n!= 0) {
+		  model.addAttribute("message","성공");
+		  } else {
+			  model.addAttribute("message","실패"); }
+	  
+	  
+	  return "home/home";
+	  }
+	  
+	  @RequestMapping("/pjoin_1") //파트너회원 회원가입 1차
+	  public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
+		  String originalFileName = file.getOriginalFilename();
+		  
+		  if(!originalFileName.isEmpty()) {
+			  String uuid = UUID.randomUUID().toString();
+			  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+		  
+			  try { file.transferTo(new File(saveDir, saveFileName));
+			  pmember.setPicture(originalFileName);
+			  pmember.setPfile(saveFileName);
+			  
+			  } catch(Exception e) {
+				  e.printStackTrace();
+			  }
+	  }
+		  int n = pmemDao.pmemberInsert1(pmember);
+		  if(n!= 0) {
+			  model.addAttribute("message","성공");
+		  } else {
+			  model.addAttribute("message","실패");
+		  }
+		  return "member/pjoinForm2";
+	  }
+	  
+	  
+	  
+	 
+	  @RequestMapping("/join") // 회원가입폼 이동
+		public String login() {
+			return "member/join";
+		}
 	
 	
 }

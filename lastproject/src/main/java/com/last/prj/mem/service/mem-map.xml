@@ -18,8 +18,11 @@
 		<if test="tel != null">
 			and tel = #{tel}
 		</if>
-	
-	
 	</select>
+	
+	<insert id="memberInsert" parameterType="com.last.prj.mem.service.MemVO">
+	INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE)
+	VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture})
+	</insert>
 	
 </mapper>

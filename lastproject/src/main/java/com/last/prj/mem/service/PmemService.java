@@ -8,4 +8,7 @@ public interface PmemService {
 
 	//파티너회원 id 찾기
 	String pmemberIdSearch(@Param("name") String name, @Param("tel") String tel);
+	
+	//파티너회원 1차회원가입
+	int pmemberInsert1(PmemVO pmember);
 }

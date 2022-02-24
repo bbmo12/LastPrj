@@ -19,5 +19,11 @@
 		and tel = #{tel}
 		</if>
 	</select>
+	
+	<!-- 파트너회원 회원가입 1차 -->
+	<insert id="pmemberInsert1" parameterType="com.last.prj.mem.service.PmemVO">
+	INSERT INTO P_MEMBER(P_ID, NAME, TEL, PASSWORD, CODE, PICTURE)
+	 VALUES(#{p_id},#{name},#{tel},#{password}, #{code}, #{picture})
+	</insert>
 
 </mapper>
