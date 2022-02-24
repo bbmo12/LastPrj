@@ -3,10 +3,11 @@
 		document.querySelector('#proBanner').classList.add('d-none');
 	});
 	'use strict';
+	//이부분 value 값 변경하면 차트 변경됨
 	$(function() {
 		if ($(".dashboard-progress-1").length) {
 			$('.dashboard-progress-1').circleProgress({
-				value: 0.70,
+				value: 0.7,
 				size: 125,
 				thickness: 7,
 				startAngle: 80,

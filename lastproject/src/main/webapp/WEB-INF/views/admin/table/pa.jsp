@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 
@@ -36,13 +34,13 @@
 							<!-- <th>사진</th> -->
 							<th>이름</th>
 							<th>아이디</th>
-							<th>신고건수</th>
+							<!-- <th>신고건수</th> -->
 							<th>가입날짜</th>
 							<th>파트너쉽</th>
 						</tr>
 					</thead>
 					<tbody id="myTable">
-						<!-- <tr>
+						<tr>
 							<td class="py-1"><a href="#"><img
 									src="resources/assets123/images/faces-clipart/pic-1.png"
 									alt="image" /></a></td>
@@ -54,16 +52,17 @@
 							<td><button onclick="permit()">승인</button>
 								<button onclick="cancel()">거절</button></td>
 						</tr>
- -->
-						<c:forEach items="${pList }" var="pmember">
+
+						<c:forEach items="${pmembers }" var="pmember">
 							<tr>
-								<%-- <td class="py-1"><a href="#"><img src="resources/upload/${pmember.picture }" alt="image" /></a></td> --%>
+								<%-- <td class="py-1"><a href="#"><img
+										src="resources/upload/${pmember.picture }" alt="image" /></a></td> --%>
+								<td><a href="pmemberDetail?id=${pmember.p_id}"></td>
 								<td>${pmember.name }</td>
-								<td><a href="pmemberDetail?id=${pmember.p_id}">${pmember.p_id}</td>
-								<td><meter value="${pmember.c_report}" min="0" max="100"
-										low="20" high="65" optimum="15" style="width: 100%"></meter></td>
+								<%-- <td><meter value="${c_report}" min="0" max="100" low="20"
+										high="65" optimum="15" style="width: 100%"></meter></td> --%>
 								<td>${pmember.startdate}</td>
-								<td><a href="admPlistCode?content=${pmember.f_content}">${pmember.f_content}</a></td>
+								<td>${pmember.code}</td>
 								<!-- modal로 보여주기 -->
 							</tr>
 						</c:forEach>

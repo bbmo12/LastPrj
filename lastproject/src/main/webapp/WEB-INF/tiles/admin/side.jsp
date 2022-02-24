@@ -20,8 +20,14 @@
 					<li class="nav-item"><a class="nav-link" href="boardTables.do">boardTable</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="pmemberTables.do">pmemberTable</a></li>
+					
+					<li><a href="admPlistCode?code=100">수의사</a></li>
+					<li><a href="admPlistCode?code=101">훈련사</a></li>
+					<li><a href="admPlistCode?code=102">펫시터</a></li>
+					<li><a href="admPlistCode?code=103">미 용</a></li>
+					
 					<li class="nav-item"><a class="nav-link"
-						href="reportTables.do">reportTable</a></li>
+						href="reportTables">reportTable</a></li>
 				</ul>
 			</div></li>
 

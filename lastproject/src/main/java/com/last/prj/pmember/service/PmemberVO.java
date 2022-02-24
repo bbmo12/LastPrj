@@ -5,6 +5,9 @@ import java.util.List;
 
 import lombok.Data;
 
+
+
+
 @Data
 public class PmemberVO {
 	private String p_id;				//파트너회원아이디
@@ -33,5 +36,7 @@ public class PmemberVO {
 	private String w_write;
 	private int f_part;
 	private List<TimeVO> timeList;
-	
+
+	//관리자
+	private String f_content; //서비스 구분 코드 내용
 }

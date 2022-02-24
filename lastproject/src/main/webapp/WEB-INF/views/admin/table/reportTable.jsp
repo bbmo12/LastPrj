@@ -36,30 +36,29 @@
 									class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th>순번</th>
-											<th>제목</th>
-											<th>내용</th>
-											<th>작성자</th>
-											<th>날짜</th>
-											<th></th>
-
+											
+											<th>신고한 사람</th><!-- 코드 f_content -->
+											<th>신고당한 사람</th>
+											<th>신고한 내용</th>
+											<th>신고한 날짜</th>
+											<th>신고 유형</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:if test="${boardList[0].b_no eq null}">
+										<c:if test="${reportList[0].rep_no eq null}">
 											<tr>
 												<td colspan="6" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
 										</c:if>
-										<c:if test="${boardList ne null }">
+										<c:if test="${reportList ne null }">
 											<c:forEach items="${reportList }" var="reports">
 												<tr>
-													<td align="center">${boards.b_no }</td>
-													<td align="center"><a href="boardSelect.do?b_no=${boards.b_no }">${boards.title }</a></td>
-													<td align="center">${boards.content }</td>
-													<td align="center">${boards.writer }</td>
-													<td align="center">${boards.w_date }</td>
-													<td></td>
+													<td style="display:none" value="${reports.rep_no }" />
+													<td align="center">${reports.reporter }</td>
+													<td align="center">${reports.reported }</td>
+													<td align="center">${reports.content }</td>
+													<td align="center">${reports.w_date }</td>
+													<td align="center">${reports.f_content }</td>
 												</tr>
 											</c:forEach>
 										</c:if>

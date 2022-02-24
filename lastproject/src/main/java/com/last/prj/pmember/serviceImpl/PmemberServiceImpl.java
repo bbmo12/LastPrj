@@ -51,4 +51,20 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.getProfile(m_id);
 	}
 
+	
+	
+	//관리자
+	@Override
+	public List<PmemberVO> admPlistCode(int code) {
+		return map.admPlistCode(code);
+	}
+	//관리자
+	@Override
+	public List<PmemberVO> admPlist() {
+		return map.admPlist();
+	}
+	
+	
+	
+
 }
