@@ -16,14 +16,14 @@ public class ReportController {
 	
 	
 	@Autowired
-	private ReportService reportDao;
+	private ReportService reportService;
 	
 	//<!-- 신고 유형 리스트 -->
 
 	@RequestMapping("/reportTables")
 	public String reportList(Model model) {
 		
-		List<ReportVO> list = reportDao.reportList();
+		List<ReportVO> list = reportService.reportList();
 		System.out.println(list);
 		model.addAttribute("reportList", list);
 		return "admin/table/reportTable";
