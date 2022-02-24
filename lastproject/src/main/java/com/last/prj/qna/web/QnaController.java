@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -133,14 +134,28 @@ public class QnaController {
 	
 	//답변글 폼 이동
 	@RequestMapping("/ansForm")
-	public String ansForm() {
+	public String ansForm(@RequestParam("q_no") int q_no, @RequestParam("writer") String writer, @RequestParam("pet_no") int pet_no, Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("m_id");
+		String p_id = (String) session.getAttribute("p_id");
+		
+		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
+		model.addAttribute("writerInfo", memDao.memberOne(writer));
+		model.addAttribute("petInfo", petDAO.petOne(pet_no));
+		
 		return "qna/ansForm";
 	}
 	
-	
-	
-
-	
-	
-
+	@PostMapping("/newAns")
+	public String newAns(QnaVO qna, HttpSession session) {
+		
+		String m_id = (String) session.getAttribute("m_id");
+		String p_id = (String) session.getAttribute("p_id");
+		
+		qnaDAO.newAns(qna);
+		
+		return "redirect:qnaDetail";
+		
+	}
 }

@@ -131,15 +131,20 @@
 							<div>
 								<h3>${qnaDetail.content }</h3>
 							</div>
-							
+
 							<!-- 펫 정보 공간 -->
 							<div>
 								<table>
-									<tr><td rowspan="5"><c:out value="${petInfo.picture }"></c:out></td>
+									<tr>
+										<td rowspan="5"><c:out value="${petInfo.picture }"></c:out></td>
 										<td><c:out value="${petInfo.name }"></c:out></td>
 									</tr>
-									<tr><td><c:out value="${petInfo.gender }"></c:out></td></tr>
-									<tr><td><c:out value="${petInfo.weight }"></c:out></td></tr>
+									<tr>
+										<td><c:out value="${petInfo.gender }"></c:out></td>
+									</tr>
+									<tr>
+										<td><c:out value="${petInfo.weight }"></c:out></td>
+									</tr>
 								</table>
 							</div>
 
@@ -238,12 +243,19 @@
 						</div>
 						<!-- 신고 모달 끝 -->
 
+						<!-- 이 질문에 답변하기 -->
+
+
 						<div>
-							<a href="ansForm"><button type="button" id="a-btn"
-									class="btn btn-primary btn-lg">이 질문에 답변하기</button></a>
+
+
+							<a href="ansForm?q_no=${qnaDetail.q_no }&writer=${qnaDetail.writer}&pet_no=${qnaDetail.pet_no}"><button
+									type="button" id="a-btn" class="btn btn-primary btn-lg">이
+									질문에 답변하기</button></a>
 						</div>
 					</div>
 
+					<!-- 답변이 없을 경우 -->
 					<c:if test="${empty ansDetail}">
 						<img id="noAns" src="resources/qna/답변유도.png" alt="">
 					</c:if>
@@ -271,7 +283,7 @@
 								<h4>${ans.content }</h4>
 							</div>
 
-							
+
 							<!-- Button trigger modal -->
 							<!-- 질문글 신고 모달-->
 							<!-- button trigger modal -->
@@ -303,8 +315,8 @@
 												value="${m_id }"> <input type="hidden" id="q_no"
 												name="q_no" value="${ans.q_no }"> <input
 												type="hidden" id="reported" name="reported"
-												value="${ans.writer }"> <select
-												class="reportModal" name="code" id="code">
+												value="${ans.writer }"> <select class="reportModal"
+												name="code" id="code">
 												<option value="601">불법 홍보/광고</option>
 												<option value="602">음란물/선정성 콘텐츠</option>
 												<option value="603">욕설/명예훼손</option>
