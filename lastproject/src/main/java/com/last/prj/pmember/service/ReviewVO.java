@@ -1,5 +1,7 @@
 package com.last.prj.pmember.service;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,9 +14,11 @@ public class ReviewVO {
 	private int f_part;			//첨부파일
 	private int r_no;			//예약순번
 	private int r_check; 		//후기작성 완료여부
-
+	
+	private String picture; //프로필사진
 	private int pet_no; //펫 순번
 	private String m_id; //회원 id
 	private String p_id; //파트너id
+	private List<FfileVO> fileList; //리뷰뽑기
 	
 }

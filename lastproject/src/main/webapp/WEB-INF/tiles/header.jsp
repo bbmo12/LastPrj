@@ -86,7 +86,7 @@
 						</li>
 
 
-						<li><a href="joinForm">회원가입</a></li>
+						<li><a href="join">회원가입</a></li>
 					</c:if>
 
 					<c:if test="${mId ne null or pId ne null}">

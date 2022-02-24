@@ -19,8 +19,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="index.html">Home</a> <span>|</span> <a href="blog-details.html">MyPage</a>
+					<h1>Our Partner</h1>
+					<a href="home">Home</a> <span>|</span> <a href="blog-details.html">MyPage</a>
 				</div>
 			</div>
 		</div>
@@ -31,7 +31,8 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/assets/images/blog/author.png" alt="">
+							<img class="author_img rounded-circle" src="resources/upload/${pmemdetail.picture }"
+								alt="바보야야야야야">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
 							<h3>${pmemdetail.w_name}</h3>
@@ -77,10 +78,11 @@
 										</div>
 									</div>
 									<div class="col-lg-9 col-md-9 blog_details">
-										<h3 style="font-weight:bold">${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</h3>
+										<h3 style="font-weight: bold">
+											${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</h3>
 										<c:forEach items="${pmemdetail.timeList }" var="time">
 											<h3 style="font-weight: normal">${time.w_day }&nbsp;${time.starttime}
-											&nbsp;-&nbsp;${time.endtime }</h3>
+												&nbsp;-&nbsp;${time.endtime }</h3>
 										</c:forEach>
 										<h3 style="font-weight: normal">${pmemdetail.n_content}</h3>
 									</div>
@@ -107,7 +109,7 @@
 								<div class="single-comment justify-content-between d-flex">
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
-											<img src="resources/assets/images/blog-details/c1.jpg" alt="등록된사진이 없습니다.">
+											<img src="resources/upload/${counsel.picture }" alt="회원사진은어디로로로로로로">
 										</div>
 										<div class="desc">
 											<h5>${counsel.m_id }&nbsp;&nbsp;평점:${counsel.rating }점</h5>
@@ -117,44 +119,36 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-md-3" style="margin-top: 20px;">
-										<img src="resources/assets/images/elements/d.jpg" alt="" class="img-fluid">
-									</div>
-									<div class="col-md-3" style="margin-top: 20px;">
-										<img src="resources/assets/images/elements/d.jpg" alt="" class="img-fluid">
-									</div>
-									<div class="col-md-3" style="margin-top: 20px;">
-										<img src="resources/assets/images/elements/d.jpg" alt="" class="img-fluid">
-									</div>
+								<div class="row" id="servicePhoto">
+									<c:forEach items="${counsel.fileList }" var="photo">
+										<div class="col-md-3" style="margin-top: 20px;">
+											<img src="resources/upload/${photo.photo }" alt="">
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</c:forEach>
 						<c:forEach items="${service }" var="service">
-							<div class="comment-list">
+							<div class="comment-list" id="comment">
 								<div class="single-comment justify-content-between d-flex">
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
-											<img src="resources/assets/images/blog-details/c1.jpg" alt="">
+											<img src="resources/upload/${service.picture }" alt="사진줍쇼오오">
 										</div>
 										<div class="desc">
 											<h5>${service.m_id }&nbsp;&nbsp;평점:${service.rating }점</h5>
-											<input id="serviceProfile" type="hidden" value=${service.m_id }>
+											<input id="serviceProfile" type="hidden" value="${service.m_id }">
 											<p></p>
 											<h5 class="comment">${service.content }</h5>
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-md-3" style="margin-top: 20px;">
-										<img src="resources/assets/images/elements/d.jpg" alt="" class="img-fluid">
-									</div>
-									<div class="col-md-3" style="margin-top: 20px;">
-										<img src="resources/assets/images/elements/d.jpg" alt="" class="img-fluid">
-									</div>
-									<div class="col-md-3" style="margin-top: 20px;">
-										<img src="resources/assets/images/elements/d.jpg" alt="" class="img-fluid">
-									</div>
+								<div class="row" id="servicePhoto">
+									<c:forEach items="${service.fileList }" var="photo">
+										<div class="col-md-3" style="margin-top: 20px;">
+											<img src="resources/upload/${photo.photo }" alt="">
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</c:forEach>
@@ -163,38 +157,6 @@
 			</div>
 		</div>
 	</section>
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			counFile();
-			servicefile();
-		});
-
-		function counFile() {
-			var counsel = document.getElementById('counselProfile').value;
-			$.ajax({
-				url: 'counProfile',
-				method: 'post',
-				data: {
-					coun: counsel
-				}
-			}).done(function (data) {
-				console.log("상담" + data);
-			});
-		}
-
-		function servicefile() {
-			var service = document.getElementById('serviceProfile').value;
-			$.ajax({
-				url: 'serviceProfile',
-				method: 'post',
-				data: {
-					mid: service
-				}
-			}).done(function (data) {
-				console.log(data);
-			});
-		}
-	</script>
 </body>
 
 </html>

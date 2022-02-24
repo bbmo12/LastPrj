@@ -30,12 +30,7 @@ public class PmemberServiceImpl implements PmemberService{
 	public PmemberVO getMember(String p_id) {
 		return map.getMember(p_id);
 	}
-
-	@Override
-	public List<FfileVO> getPicture(String p_id) {
-		return map.getPicture(p_id);
-	}
-
+	
 	@Override
 	public List<ReviewVO> getCounselReview(String p_id) {
 		return map.getCounselReview(p_id);
@@ -46,9 +41,29 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.getServiceReview(p_id);
 	}
 
+
 	@Override
 	public List<FfileVO> getProfile(String m_id) {
 		return map.getProfile(m_id);
 	}
+
+	
+	
+	//관리자
+	@Override
+	public List<PmemberVO> admPlistCode(int code) {
+		return map.admPlistCode(code);
+	}
+	//관리자
+	@Override
+	public List<PmemberVO> admPlist() {
+		return map.admPlist();
+	}
+	
+	
+	
+
+
+	
 
 }

@@ -5,7 +5,7 @@
 
 	<!-- 게시글 상세조회 -->
 	<select id="boardSelect"
-		parameterType="com.last.prj.board.service.BoardVO"
+		parameterType="int"
 		resultType="com.last.prj.board.service.BoardVO">
 		SELECT * FROM BOARD WHERE B_NO = #{b_no}
 	</select>
@@ -37,7 +37,7 @@
 
 	<!-- 게시글 수정 -->
 	<update id="boardUpdate"
-		parameterType="int">
+		parameterType="com.last.prj.board.service.BoardVO">
 		<!-- UPDATE BOARD <set> <if test="title != null">TITLE = #{title}, </if> 
 			<if test="content != null"> CONTENT = #{content},</if> <if test="writer != 
 			null"> WRITER = #{writer}, </if> <if test="w_date != null">W_DATE = sysdate,</if> 
@@ -45,8 +45,8 @@
 		UPDATE BOARD
 		SET
 		TITLE = #{title},
-		CONTENT = #{CONTENT}
-		WHERE B_NO = #{B_NO}
+		CONTENT = #{content}
+		WHERE B_NO = #{b_no}
 	</update>
 
 	<!-- 게시글 번호 업데이트 -->
@@ -60,7 +60,7 @@
 	<!-- 게시글 조회수 업데이트 -->
 	<update id="boardeHitUpdate" parameterType="int">
 		UPDATE BOARD SET HIT
-		= HIT + 1 WHERE B_NO = #{B_NO}
+		= HIT + 1 WHERE B_NO = #{b_no}
 	</update>
 
 

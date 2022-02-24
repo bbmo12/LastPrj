@@ -15,10 +15,11 @@ public class ReservationVO {
 	private String name;
 	private Date startdate;
 	private String time;
-	private String content;
-	private String code;
+	private String rcontent; //예약내용
+	private String rccontent; //예약승인코드
 	private Date r_date;
-	private String pcontent;
+	private String pcontent; //품종코드
+	private String refuse;
 	
 	
 	

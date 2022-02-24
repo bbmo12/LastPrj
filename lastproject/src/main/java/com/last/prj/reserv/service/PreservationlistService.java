@@ -4,8 +4,10 @@ import java.util.List;
 
 public interface PreservationlistService {
 
-	public List<PreservationlistVO> preservationlist();
+	public List<PreservationVO> preservationlist();
 	
 	public List<PreservationCodeListVO> preservationCodeList();
+	
+	
 	
 }
