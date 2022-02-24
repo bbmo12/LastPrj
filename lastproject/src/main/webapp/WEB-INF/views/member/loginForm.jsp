@@ -103,7 +103,7 @@
 				</button>
 			</div>
 			<div align="center">
-				<a href="#" class="auth-link text-black">아이디 찾기</a> / <a
+				<a href="memberIdSearchForm" class="auth-link text-black">아이디 찾기</a> / <a
 					href="#" class="auth-link text-black">비밀번호 찾기</a>
 			</div>
 			<div class="text-center mt-4 font-weight-light">
@@ -149,7 +149,7 @@ function plogin(){
 			</button>
 		</div>
 		<div align="center">
-			<a href="#" class="auth-link text-black">아이디 찾기</a> / <a
+			<a href="memberIdSearchForm" class="auth-link text-black">아이디 찾기</a> / <a
 				href="#" class="auth-link text-black">비밀번호 찾기</a>
 		</div>
 		<div class="text-center mt-4 font-weight-light">

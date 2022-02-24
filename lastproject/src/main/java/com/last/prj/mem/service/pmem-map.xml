@@ -10,5 +10,14 @@
 			and password = #{password}
 		</if>
 	</select>
+	
+	<!-- 파트너회원 아이디 찾기 -->
+	<select id="pmemberIdSearch" parameterType="String" resultType="String">
+		select * from p_member
+		where name= #{name}
+		<if test="tel != null">
+		and tel = #{tel}
+		</if>
+	</select>
 
 </mapper>

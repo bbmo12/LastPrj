@@ -1,5 +1,9 @@
 package com.last.prj.mem.web;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -7,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
@@ -22,7 +28,12 @@ public class MemController {
 
 	@Autowired
 	private PmemService pmemDao;
-
+	
+	@Autowired
+	ServletContext sc;
+	
+	private String saveDir;
+	
 	@RequestMapping("/memberMypage")
 	public String memMypage() {
 		return "mypage/memberMypage";
@@ -56,6 +67,8 @@ public class MemController {
 		return "redirect:home";
 	}
 
+	
+	
 	@RequestMapping("/logout") // 로그아웃
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -82,6 +95,12 @@ public class MemController {
 		return "member/memIdSearchForm";
 	}
 	
+	@RequestMapping("/pmemberIdSearch") //파티너회원 아이디 찾기
+	@ResponseBody
+	public String pmemberIdSearch(@Param("name") String name, @Param("tel") String tel) {
+		System.out.println(pmemDao.pmemberIdSearch(name, tel));
+		return pmemDao.pmemberIdSearch(name, tel);
+	}
 	
 	@RequestMapping("/memberIdSearch") //일반회원 아이디 찾기
 	@ResponseBody
@@ -89,4 +108,28 @@ public class MemController {
 		System.out.println(memDao.memberIdSearch(name, tel));
 		return memDao.memberIdSearch(name, tel);
 	}
+	
+	/*
+	 * @RequestMapping("/mjoin") //일반회원 회원가입 public String
+	 * mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
+	 * 
+	 * String originalFileName = file.getOriginalFilename();
+	 * if(!originalFileName.isEmpty()) { String uuid = UUID.randomUUID().toString();
+	 * String saveFileName = uuid +
+	 * originalFileName.substring(originalFileName.lastIndexOf("."));
+	 * 
+	 * try { file.transferTo(new File(saveDir, saveFileName)); //member.set
+	 * //member.set
+	 * 
+	 * } catch(Exception e) { e.printStackTrace(); } }
+	 * 
+	 * int n = memDao.memberInsert(member); if( n!= 0) {
+	 * model.addAttribute("message","성공"); } else {
+	 * model.addAttribute("message","실패"); }
+	 * 
+	 * 
+	 * return "redirect:home"; }
+	 */
+	
+	
 }

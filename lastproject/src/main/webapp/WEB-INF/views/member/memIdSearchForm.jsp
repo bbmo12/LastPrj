@@ -66,7 +66,7 @@
 									</div>
 									<div cl ass="form-group">
 										<div class="auth-link text-black">전화번호</div>
-										<input type="password" class="form-control form-control-lg"
+										<input type="text" class="form-control form-control-lg"
 											id="tel" name="tel" placeholder="ex)01011112222">
 									</div>
 									<div class="mt-3">
@@ -102,8 +102,9 @@
 		<!-- 모달 띄운후 내용입력부분 바디.  -->
 		<div class="modal_body"></div>
 	</div>
-
-
+</body>
+</html>
+	<!-- 일반회원 아이디찾기 모달창 ajax -->
 	<script type="text/javascript">
      function mIdsearch(){
     	var tel = $("#tel").val() 
@@ -130,14 +131,72 @@
     		}
     	}) 
     } 
-</script>
+     </script>
 
+	<!-- 파트너회원 아이디찾기 모달창 ajax -->
+	<script type="text/javascript">
+      function pIdsearch(){
+     	var tel = $("#tel").val() 
+         var name =$("#name").val();
+     	 $.ajax({
+     		url : "pmemberIdSearch",
+     		type: "post",
+     		data: {"tel":tel, "name":name},
+     		success : function(result){
+     			/* console.log(result) */
+     				$(".modal_body>p").remove();
+     			if(result == ""){
+     			
+     				$(".modal_body").append(`<p>아이디가 없습니다</p>`)
+     			} else
+     				{
+     			
+     				$(".modal_body").append(`<p> 아이디는 :`  + result +`<p>`)
+     				}
+     			console.log(result)
+     		},
+     		error : function(){
+     		
+     		}
+     	}) 
+     }
+      </script>
 
+	<script>
+      const body = document.querySelector('body');
+      const modal = document.querySelector('.modal');
+      const pbtnOpenPopup = document.querySelector('#pmemIdsearch_btn');
+
+      
+      pbtnOpenPopup.addEventListener('click', () => {
+          modal.classList.toggle('show');
+          if (modal.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+            pIdsearch();
+          }
+        }); 
+      
+     
+
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.classList.toggle('show');
+          
+          if (!modal.classList.contains('show')) {
+            body.style.overflow = 'auto';
+            
+          }
+        }
+      });
+    </script>
+ 
 	<script>
       const body = document.querySelector('body');
       const modal = document.querySelector('.modal');
       const btnOpenPopup = document.querySelector('#memIdsearch_btn');
 
+      
+      
       
       btnOpenPopup.addEventListener('click', () => {
         modal.classList.toggle('show');
@@ -160,7 +219,7 @@
     </script>
 
 
-
+	<!-- 일반회원아이디찾기 폼  -->
 	<script type="text/javascript">
     function mIdSearch(){
     	
@@ -170,7 +229,7 @@
     		<div align="center" class="auth-link text-black">일반회원 아이디
 			찾기</div>
 		<div>이름, 전화번호로 아이디를 찾습니다.</div>
-		<form class="pt-3" action="login" method="post">
+		<form class="pt-3" action="#" method="post">
 			<div class="form-group">
 				<div class="auth-link text-black">이름</div>
 				<input type="text" class="form-control form-control-lg"
@@ -178,12 +237,12 @@
 			</div>
 			<div class="form-group">
 				<div class="auth-link text-black">전화번호</div>
-				<input type="password" class="form-control form-control-lg"
-					id="password" name="password" placeholder="ex)01011112222">
+				<input type="text" class="form-control form-control-lg"
+					id="tel" name="tel" placeholder="ex)01011112222">
 			</div>
 			<div class="mt-3">
 				<button type="submit"
-					class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">아이디찾기</button>
+					class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="memIdSearch_btn">아이디찾기</button>
 			</div>
 			<div
 				class="my-2 d-flex justify-content-between align-items-center">
@@ -204,31 +263,31 @@
       $("#test").append(mIdSearchForm);
     	
     }
-    
-    
-    
-function plogin(){
+    </script>
+	<script>
+/*  파트너회원 아이디찾기 창    */
+function pIdSearch(){
     	
 	$("#test").empty();
 	
 	var pIdSearch =`
-		<div align="center" class="auth-link text-black">일반회원 아이디
+		<div align="center" class="auth-link text-black">파트너회원 아이디
 		찾기</div>
 	<div>이름, 전화번호로 아이디를 찾습니다.</div>
-	<form class="pt-3" action="login" method="post">
+	<form class="pt-3" action="#" method="post">
 		<div class="form-group">
 			<div class="auth-link text-black">이름</div>
 			<input type="text" class="form-control form-control-lg"
-				id="name" name="m_id" placeholder="이름을 입력하세요">
+				id="name" name="name" placeholder="이름을 입력하세요">
 		</div>
 		<div class="form-group">
 			<div class="auth-link text-black">전화번호</div>
-			<input type="password" class="form-control form-control-lg"
-				id="password" name="password" placeholder="ex)01011112222">
+			<input type="text" class="form-control form-control-lg"
+				id="tel" name="tel" placeholder="ex)01011112222">
 		</div>
 		<div class="mt-3">
 			<button type="submit"
-				class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">아이디찾기</button>
+				class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="pmemIdsearch_btn">아이디찾기</button>
 		</div>
 		<div
 			class="my-2 d-flex justify-content-between align-items-center">
@@ -248,3 +307,4 @@ function plogin(){
   
   $("#test").append(pIdSearch);
 }
+</script>

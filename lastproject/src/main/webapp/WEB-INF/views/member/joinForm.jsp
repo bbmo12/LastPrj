@@ -12,7 +12,7 @@
 					<div class="card-body">
 						<h4 class="card-title">Basic form elements</h4>
 						<p class="card-description">Basic form elements</p>
-						<form class="forms-sample">
+						<form class="forms-sample" action="mjoin" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<h5> <strong>이름*</strong></h5> <input type="text"
 									class="form-control" id="name" name="name" placeholder="이름을 입력하세요">
@@ -38,18 +38,16 @@
 									type="password" class="form-control" id="tel" name="tel"
 									placeholder="tel">
 							</div>
-							<!-- <div class="form-group">
-								<label>File upload</label> <input type="file" name="img[]"
+							 <div class="form-group">
+								<label>프로필 사진</label> <input type="file" name="img[]"
 									class="file-upload-default">
 								<div class="input-group col-xs-12">
-									<input type="text" class="form-control file-upload-info"
-										disabled placeholder="Upload Image"> <span
-										class="input-group-append">
-										<button class="file-upload-browse btn btn-primary"
-											type="button">Upload</button>
-									</span>
+									
+										<input  class="file-upload-browse btn btn-primary"
+											type="file" id="pfile" name ="pfile">
+								
 								</div>
-							</div> -->
+							</div>
 							<button type="submit" class="btn btn-primary mr-2">회원가입</button>
 							<button class="btn btn-light">취소</button>
 						</form>
