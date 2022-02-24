@@ -10,5 +10,20 @@
 			and password = #{password}
 		</if>
 	</select>
+	
+	<!-- 파트너회원 아이디 찾기 -->
+	<select id="pmemberIdSearch" parameterType="String" resultType="String">
+		select * from p_member
+		where name= #{name}
+		<if test="tel != null">
+		and tel = #{tel}
+		</if>
+	</select>
+	
+	<!-- 파트너회원 회원가입 1차 -->
+	<insert id="pmemberInsert1" parameterType="com.last.prj.mem.service.PmemVO">
+	INSERT INTO P_MEMBER(P_ID, NAME, TEL, PASSWORD, CODE, PICTURE)
+	 VALUES(#{p_id},#{name},#{tel},#{password}, #{code}, #{picture})
+	</insert>
 
 </mapper>

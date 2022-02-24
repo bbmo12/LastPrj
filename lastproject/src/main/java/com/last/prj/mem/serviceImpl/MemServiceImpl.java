@@ -26,6 +26,11 @@ public class MemServiceImpl implements MemService {
 	public String memberIdSearch(String name, String tel) {
 		return map.memberIdSearch(name, tel);
 	}
+		//일반회원 회원가입
+	@Override
+	public int memberInsert(MemVO member) {
+		return map.memberInsert(member);
+	}
 
 	//아이디로 일반회원 조회
 	@Override
