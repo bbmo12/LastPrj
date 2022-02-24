@@ -55,10 +55,13 @@
 	<!-- 베스트 게시글 -->
 	<select id="qnaBest" resultType="com.last.prj.qna.service.QnaVO">
 		SELECT * 
+		FROM 
+		(SELECT * 
 		FROM qna
 		WHERE p_no = 0
-		<![CDATA[AND ROWNUM <= 7]]>
 		ORDER BY hit DESC
+		)
+		<![CDATA[WHERE ROWNUM <= 7]]>
 	</select>
 
 	<!-- 태그를 이용한 검색 -->

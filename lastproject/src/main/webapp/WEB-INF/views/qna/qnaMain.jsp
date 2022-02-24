@@ -28,6 +28,14 @@
 	border: none;
 	background-color: white-gray
 }
+
+.blog_area {
+	padding-top : 100px;
+}
+
+.qnaForm, .img-fluid {
+	padding-top : 30px;
+}
 </style>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -41,16 +49,19 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1>Open Q&A</h1>
+					<h3>반려동물 전문가와 베테랑 집사들이 반려동물에 관한 모든 궁금증을 해결해드립니다!</h3>
+				</div>
+				<div class="qnaForm">
+					<a href="qnaForm"><button type="button" class="btn btn-primary btn-lg">질문글 작성하기</button></a>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<!--================Blog Categorie Area =================-->
-	<section class="blog_categorie_area">
-		<a href="qnaForm"><button type="button" class="q-btn">질문글
-				작성</button></a>
-	</section>
+	<!--<section class="blog_categorie_area">
+	
+	</section>  -->
 	<!--================Blog Categorie Area =================-->
 
 	<!--================Blog Area =================-->
@@ -86,7 +97,10 @@
 													<th>${qnaList.title }</th>
 												<tr>
 												<tr>
-													<td>${qnaList.content }<c:forEach
+													<td>${qnaList.content }
+													
+													<!-- 태그 목록 -->
+													<c:forEach
 															items="${qnaList.tagList }" var="hash">
 															<ul class="tagList">
 																<li class="tagli"><a
@@ -96,8 +110,9 @@
 													</td>
 												<tr>
 											</table>
+											<!-- 상세조회 -->
 											<a class="template-btn"
-												href="qnaDetail?q_no=${qnaList.q_no }">View More</a>
+												href="qnaDetail?q_no=${qnaList.q_no }&writer=${qnaList.writer}&pet_no=${qnaList.pet_no}">View More</a>
 										</div>
 									</div>
 								</div>
@@ -137,12 +152,14 @@
 							<input type="hidden" name="searchType"
 								value="${page.cri.searchType }"> <input type="hidden"
 								name="searchValue" value="${page.cri.searchValue }">
-
 						</form>
 					</div>
 				</div>
+				
+				<!-- side 부분 -->
 				<div class="col-lg-4">
 					<div class="blog_right_sidebar">
+						<!-- 검색 -->
 						<aside class="single_sidebar_widget search_widget">
 
 							<form action="qnaMain" method="post">
@@ -183,42 +200,21 @@
 							<!-- /input-group -->
 							<div class="br"></div>
 						</aside>
-
+						
+						<!-- 베스트 QNA -->
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">베스트 Q&A</h4>
+							<c:forEach items="${best }" var="best">
 							<ul class="list cat-list">
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Technology</p>
-										<p>37</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Lifestyle</p>
-										<p>24</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Fashion</p>
-										<p>59</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Art</p>
-										<p>29</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Food</p>
-										<p>15</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Architecture</p>
-										<p>09</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>Adventure</p>
-										<p>44</p>
+								<li><a href="qnaDetail?q_no=${best.q_no }" class="d-flex justify-content-between">
+										<p>${best.title}</p>
 								</a></li>
 							</ul>
+							</c:forEach>
 							<div class="br"></div>
 						</aside>
-
+						
+						<!-- 인기 태그 -->
 						<aside class="single-sidebar-widget tag_cloud_widget">
 							<h4 class="widget_title">인기 태그</h4>
 							<c:forEach items="${tagList }" var="tagList">
@@ -228,7 +224,8 @@
 								</ul>
 							</c:forEach>
 						</aside>
-
+						
+						<!-- 배너 광고 -->
 						<aside class="single_sidebar_widget ads_widget">
 							<img class="img-fluid" src="resources/qna/배너1.png" alt="">
 							<img class="img-fluid" src="resources/qna/배너4.png" alt="">
@@ -269,12 +266,12 @@
                 // console.log(history.state);
             }
         }
-    </script> -->
+    </script>
 	<script>
 		$(document).ready(function() {
 			$(".dropdown-toggle").dropdown();
 		});
-	</script>
+	</script> -->
 </body>
 
 </html>

@@ -30,6 +30,13 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		return map.qnaList(cri);
 	}
+	
+	@Override
+	public List<QnaVO> qnaBest() {
+		// TODO Auto-generated method stub
+		return map.qnaBest();
+	}
+
 
 	@Override
 	public QnaVO qnaDetail(int q_no) {
@@ -74,6 +81,7 @@ public class QnaServiceImpl implements QnaService {
 		// TODO Auto-generated method stub
 		return map.tagSearch(t_name);
 	}
+
 
 	
 
