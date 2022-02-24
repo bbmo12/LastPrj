@@ -45,15 +45,6 @@ public class BoardController {
 
 	}
 
-	// 게시글 상세조회
-
-	@RequestMapping("/boardSelect.do")
-	public String noticeSelect(BoardVO board, Model model) { // boardDao.boardHitUpdate(board.getB_no()); //
-		System.out.println(board.getB_no());
-		model.addAttribute("boards", boardDao.boardSelect(board));
-		return "admin/board/boardUpdateForm";
-	}
-
 	// 게시글 입력창
 	@RequestMapping("/boardInsertForm.do")
 	public String boardInsert() {
@@ -70,30 +61,26 @@ public class BoardController {
 		model.addAttribute("boardList", list);
 		return "admin/table/boardTable";
 	}
+	
+	// 게시글 상세조회 및 수정 화면
 
+	@RequestMapping("/boardUpdateForm.do")
+	public String noticeSelect(@RequestParam(value = "b_no") int b_no, Model model) { 
+		
+		model.addAttribute("boards", boardDao.boardSelect(b_no));
+		return "admin/board/boardUpdateForm";
+	}
+	
 	// 게시글 수정 :
 	@RequestMapping("/boardUpdate.do")
-	public String boardUpdate(@RequestParam("b_no") int b_no, BoardVO board, Model model) {
-		System.out.println(b_no);
-		boardDao.boardUpdate(b_no);
+	public String boardUpdate(BoardVO board, Model model) {
+		boardDao.boardUpdate(board);
 		List<BoardVO> list = boardDao.boardSelectList();
 		System.out.println(list);
 		model.addAttribute("boardList", list);
 		return "admin/table/boardTable";
 	}
-
-	// 게시글 삭제
-	/*
-	 * @RequestMapping(value = "/deleteBoard", method = RequestMethod.GET)
-	 * 
-	 * @ResponseBody public String deleteBoard(RedirectAttributes
-	 * rttr, @RequestParam("b_no") int b_no) throws Exception {
-	 * boardDao.boardDelete(b_no); return "redirect:admin/table/boardTable"; }
-	 */
-	/*
-	 * @DeleteMapping("/board/{b_no}") public void delete(@PathVariable("b_no") int
-	 * b_no){ //logger.info("DELETE bno : " + bno); boardDao.boardDelete(b_no); }
-	 */
+	
 
 	@RequestMapping("/boardDelete.do")
 	public String boardDelete(@RequestParam("b_no") int b_no, BoardVO board, Model model) {

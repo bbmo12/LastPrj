@@ -43,7 +43,7 @@
 </style>
 <body>
 	<div class="container">
-		<h2>게시판 수정</h2>
+		<h2>게시판 내용 확인 및 수정</h2>
 		<form id="frm" action="boardUpdate.do" method="post">
 			<div class="form-group">
 				<label for="b_no"></label> <input type="hidden" class="form-control"

@@ -25,6 +25,8 @@ public class PmemberController {
 		model.addAttribute("pmember", pMemberDao.memberList(code));
 		return "pmember/memberList";
 	}
+
+	
 	@ResponseBody
 	@PostMapping("/pmemberLocal")
 	public List<PmemberVO> pmemberLocal(@RequestParam("coded") int code, @RequestParam("local")String w_address, PmemberVO pmember) {

@@ -57,7 +57,7 @@
 												<tr>
 													<td align="center">${boards.b_no }</td>
 													<td align="center"><a
-														href="boardSelect.do?b_no=${boards.b_no }">${boards.title }</a></td>
+														href="boardUpdateForm.do?b_no=${boards.b_no }">${boards.title }</a></td>
 													<td align="center">${boards.content }</td>
 													<td align="center">${boards.writer }</td>
 													<td align="center">${boards.w_date }</td>

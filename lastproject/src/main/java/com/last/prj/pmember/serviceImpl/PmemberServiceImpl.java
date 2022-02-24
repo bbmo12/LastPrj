@@ -40,5 +40,30 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<ReviewVO> getServiceReview(String p_id) {
 		return map.getServiceReview(p_id);
 	}
+
+
+	@Override
+	public List<FfileVO> getProfile(String m_id) {
+		return map.getProfile(m_id);
+	}
+
 	
+	
+	//관리자
+	@Override
+	public List<PmemberVO> admPlistCode(int code) {
+		return map.admPlistCode(code);
+	}
+	//관리자
+	@Override
+	public List<PmemberVO> admPlist() {
+		return map.admPlist();
+	}
+	
+	
+	
+
+
+	
+
 }

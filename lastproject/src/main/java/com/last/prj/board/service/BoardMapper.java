@@ -9,10 +9,10 @@ import org.apache.ibatis.annotations.Param;
 public interface BoardMapper {
 
 	List<BoardVO> boardSelectList();
-	BoardVO boardSelect(BoardVO board);
+	BoardVO boardSelect(int b_no);
 	int boardInsert(BoardVO board);
 	int boardDelete(int b_no);
-	int boardUpdate(int b_no);
+	int boardUpdate(BoardVO board);
 	
 	int boardIdUpdate(int b_no);
 	List<BoardVO> boardSearch(@Param("key")String key, @Param("val")String val);

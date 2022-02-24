@@ -21,8 +21,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO boardSelect(BoardVO board) {
-		return bo.boardSelect(board);
+	public BoardVO boardSelect(int b_no) {
+		return bo.boardSelect(b_no);
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardUpdate(int b_no) {
-		return bo.boardUpdate(b_no);
+	public int boardUpdate(BoardVO board) {
+		return bo.boardUpdate(board);
 	}
 
 	@Override

@@ -7,6 +7,7 @@
 		FROM P_MEMBER 
 		WHERE CODE = #{code}
 	</select>
+	
 	<!-- 지역검색 -->
 	<select id="memberSelect" parameterType="map" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT P_ID, NAME, PICTURE, CODE
@@ -101,5 +102,24 @@
 			  ON F.F_PART = RE.F_PART
              WHERE R.P_ID = #{p_id}
 	</select>
+
+	
+	
+	
+	<!-- 관리자 -->
+	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM P_MEMBER P, F_FILE F
+		WHERE F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE = #{code}
+	</select>
+	
+	<select id="admPlist" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
+		FROM P_MEMBER P , F_CODE F 
+		WHERE F.CODE=P.CODE
+	</select>	
+	
+
+
 
 </mapper>
