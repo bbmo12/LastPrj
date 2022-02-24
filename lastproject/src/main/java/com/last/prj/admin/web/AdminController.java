@@ -12,7 +12,6 @@ import com.last.prj.board.service.BoardVO;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.reserv.service.PreservationCodeListVO;
-import com.last.prj.reserv.service.PreservationlistVO;
 
 @Controller
 public class AdminController {
