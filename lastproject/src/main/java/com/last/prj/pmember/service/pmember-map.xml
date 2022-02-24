@@ -3,16 +3,16 @@
 <mapper namespace="com.last.prj.pmember.service.PmemberMapper">
 	<!-- 파트너 리스트출력 -->
 	<select id="memberList" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT P.P_ID, P.NAME, F.PICTURE
-		FROM P_MEMBER P, F_FILE F
-		WHERE F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE = #{code}
+		SELECT P_ID, NAME, PICTURE, CODE
+		FROM P_MEMBER 
+		WHERE CODE = #{code}
 	</select>
 	
 	<!-- 지역검색 -->
 	<select id="memberSelect" parameterType="map" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT P.NAME,F.PICTURE
-		FROM P_MEMBER P, F_FILE F
-		WHERE F.W_WRITE = P.P_ID AND P.P_PROFILE = F.F_PART AND W_ADDRESS LIKE '%'||#{param}||'%' AND P.CODE = #{code} 
+		SELECT P_ID, NAME, PICTURE, CODE
+		FROM P_MEMBER 
+		WHERE W_ADDRESS LIKE '%'||#{param}||'%' AND CODE = #{code} 
 	</select>
 	
 	<resultMap type="com.last.prj.pmember.service.PmemberVO"
@@ -26,6 +26,7 @@
 		<result column="p_info" property="p_info" />
 		<result column="w_d_address" property="w_d_address" />
 		<result column="career" property="career" />
+		<result column="picture" property="picture" />
 		<collection property="timeList" resultMap="TimeVO" />
 	</resultMap>
 
@@ -44,30 +45,64 @@
 		FROM P_MEMBER P, O_TIME T
 		WHERE P.P_ID = T.P_ID AND P.P_ID = #{p_id}
 	</select>
-	<!-- 파트너 프로필사진 -->
-	<select id="getPicture" parameterType="String" resultType="com.last.prj.pmember.service.FfileVO">
-		SELECT F.PICTURE
-		FROM P_MEMBER P , F_FILE F
-		WHERE P.P_ID = F.W_WRITE AND P_ID = #{p_id}
-	</select>
 	<!-- 상담리뷰 -->
-	<select id="getCounselReview" parameterType="String"  resultType="com.last.prj.pmember.service.ReviewVO">
-		SELECT RE.CONTENT, RE.RATING, M.M_ID
-		FROM REVIEW RE, COUNSEL C , PET P, MEMBER M
-		WHERE RE.C_NO =C.C_NO AND C.PET_NO = P.PET_NO AND P.M_ID = M.M_ID AND C.P_ID = #{p_id}
+	
+	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="counselReview">
+		<result column="content" property="content"/>
+		<result column="rating" property="rating"/>
+		<result column="m_id" property="m_id"/>
+		<result column="picture" property="picture"/>
+		<collection property="fileList" resultMap="FfileVO" />	
+	</resultMap>
+	<resultMap type="com.last.prj.pmember.service.FfileVO" id="FfileVO">
+		<result column="photo" property="photo"/>	
+	</resultMap>
+	<select id="getCounselReview" parameterType="String" resultMap="counselReview"
+	resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT RE.CONTENT, 
+		       RE.RATING, 
+               M.M_ID, 
+               M.PICTURE,
+               F.PICTURE AS PHOTO
+        FROM REVIEW RE LEFT JOIN COUNSEL C  
+                ON RE.C_NO = C.C_NO
+               LEFT JOIN PET P
+                ON C.PET_NO = P.PET_NO 
+               LEFT JOIN MEMBER M
+                ON P.M_ID = M.M_ID 
+               LEFT JOIN F_FILE F
+                ON F.F_PART = RE.F_PART 
+               WHERE C.P_ID = #{p_id}
 	</select>
+	
+	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="servieceReview">
+		<result column="content" property="content"/>
+		<result column="rating" property="rating"/>
+		<result column="m_id" property="m_id"/>
+		<result column="picture" property="picture"/>
+		<collection property="fileList" resultMap="ffileVO" />
+	</resultMap>
+	<resultMap type="com.last.prj.pmember.service.FfileVO" id="ffileVO">
+		<result column="photo" property="photo"/>	
+	</resultMap>		
 	<!-- 서비스리뷰 -->
-	<select id="getServiceReview" parameterType="String"  resultType="com.last.prj.pmember.service.ReviewVO">
-		SELECT RE.CONTENT, RE.RATING, M.M_ID
-		FROM RESERVATION R, REVIEW RE, PET P, MEMBER M
-		WHERE RE.R_NO = R.R_NO AND R.PET_NO = P.PET_NO AND P.M_ID = M.M_ID AND R.P_ID = #{p_id}
+	<select id="getServiceReview" parameterType="String" resultMap="servieceReview" resultType="com.last.prj.pmember.service.ReviewVO">
+        SELECT RE.CONTENT, 
+			   RE.RATING, 
+			   M.M_ID, 
+			   M.PICTURE,
+               F.PICTURE AS PHOTO
+        FROM REVIEW RE LEFT JOIN RESERVATION R
+			  ON RE.R_NO = R.R_NO
+             LEFT JOIN PET P
+              ON R.PET_NO = P.PET_NO
+			 LEFT JOIN MEMBER  M
+              ON P.M_ID = M.M_ID
+			 LEFT JOIN F_FILE F
+			  ON F.F_PART = RE.F_PART
+             WHERE R.P_ID = #{p_id}
 	</select>
-	<!-- 리뷰회원 프로필사진 -->
-	<select id="getProfile" parameterType="String" resultType="com.last.prj.pmember.service.FfileVO">	
-		SELECT F.PICTURE, F.F_PART
-		FROM MEMBER M , F_FILE F
-		WHERE M.M_ID = F.W_WRITE AND M_ID =#{m_id}
-	</select>
+
 	
 	
 	
@@ -84,4 +119,7 @@
 		WHERE F.CODE=P.CODE
 	</select>	
 	
+
+
+
 </mapper>

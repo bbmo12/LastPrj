@@ -11,6 +11,7 @@
 			and password = #{password}
 		</if>
 	</select>
+	
 	<!-- 일반회원 아이디 찾기 -->
 	<select id="memberIdSearch" parameterType="String" resultType="String">
 		select * from member
@@ -18,8 +19,18 @@
 		<if test="tel != null">
 			and tel = #{tel}
 		</if>
-	
-	
+
 	</select>
+	
+	<!-- 아이디로 일반회원 정보 조회 -->
+	<select id="memberOne" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
+		select * from member
+		where m_id = #{m_id}
+	</select>
+	
+	<insert id="memberInsert" parameterType="com.last.prj.mem.service.MemVO">
+	INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE)
+	VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture})
+	</insert>
 	
 </mapper>

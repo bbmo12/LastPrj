@@ -17,6 +17,16 @@ public class PmemserviceImpl implements PmemService {
 	public PmemVO pmemberSelect(PmemVO pmember) {
 		return pmap.pmemberSelect(pmember);
 	}
+
+	@Override
+	public String pmemberIdSearch(String name, String tel) {
+		return pmap.pmemberIdSearch(name, tel);
+	}
+
+	@Override
+	public int pmemberInsert1(PmemVO pmember) {
+		return pmap.pmemberInsert1(pmember);
+	}
 	
 	
 

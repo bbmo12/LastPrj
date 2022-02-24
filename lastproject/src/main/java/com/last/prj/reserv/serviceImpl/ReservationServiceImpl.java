@@ -23,8 +23,17 @@ public class ReservationServiceImpl implements ReservationService{
 		return map.reservationSelectList();
 	}
 	@Override
-	public int okUpdate(ReservationVO res) {
+	public int okUpdate(int res) {
 		return map.okUpdate(res);
+	}
+	@Override
+	public int noUpdate(int rno, String refuse) {
+		return map.noUpdate(rno, refuse);
+	}
+	@Override
+	public int payUpdate(int res) {
+		
+		return map.payUpdate(res);
 	}
 
 }

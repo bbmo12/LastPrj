@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.qna.service.QnaMapper">
+
+	<resultMap type="com.last.prj.qna.service.QnaVO"
+		id="qnaResult">
+		<id property="q_no" column="q_no" />
+		<result property="w_date" column="w_date" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="writer" column="writer" />
+		<result property="p_no" column="p_no" />
+		<result property="f_part" column="f_part" />
+		<result property="pet_no" column="pet_no" />
+		<result property="r_check" column="r_check" />
+		<collection property="tagList" resultMap="tagMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.last.prj.qna.service.QnaTagVO"
+		id="tagMap">
+		<result property="q_no" column="q_no" />
+		<result property="t_name" column="t_name" />
+	</resultMap>
+
+
+	<!-- 총 개시글 수 출력 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS total FROM qna
+		WHERE p_no = 0
+		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
+	</select>
+
+	<!-- 질문글 전체 조회 /페이징 -->
+	<select id="qnaList" resultMap="qnaResult">
+		SELECT *
+		FROM ( SELECT ROWNUM RN, A.*
+		FROM (SELECT *
+		FROM qna q LEFT
+		OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE p_no = 0
+		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
+		ORDER BY w_date DESC) A)
+		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
+	</select>
+	
+	<!-- 베스트 게시글 -->
+	<select id="qnaBest" resultType="com.last.prj.qna.service.QnaVO">
+		SELECT * 
+		FROM qna
+		WHERE p_no = 0
+		<![CDATA[AND ROWNUM <= 7]]>
+		ORDER BY hit DESC
+	</select>
+
+	<!-- 태그를 이용한 검색 -->
+	<select id="tagSearch" resultMap="qnaResult">
+		SELECT *
+		FROM qna q LEFT OUTER
+		JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE p_no = 0 AND t.t_name = #{t_name}
+		ORDER BY w_date DESC
+	</select>
+
+	<!-- 질문글 개별 조회 -->
+	<select id="qnaDetail" resultMap="qnaResult">
+		SELECT *
+		FROM qna q LEFT OUTER
+		JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE q.q_no =
+		#{q_no}
+	</select>
+
+	<!-- 조회수 증가 -->
+	<update id="postCnt">
+		UPDATE qna
+		SET hit = hit+1
+		WHERE q_no = #{q_no}
+	</update>
+
+	<!-- 답변글 조회 -->
+	<select id="ansDetail"
+		resultType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM qna
+		WHERE p_no = #{p_no}
+	</select>
+
+	<!-- 질문글 작성 -->
+	<insert id="newQna"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		INSERT INTO qna (q_no, title, content, hit, writer,
+		p_no, f_part, pet_no, r_check)
+		VALUES (q_seq.nextval, #{title},
+		#{content}, 0, #{writer}, 0, 707, #{pet_no}, #{r_check})
+	</insert>
+
+	<!-- 답변글 작성 -->
+	<insert id="newAns"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		INSERT INTO qna (q_no, title, content, hit, writer,
+		p_no, f_part, r_check)
+		VALUES (q_seq.nextval, #{title}, #{content}, 0,
+		#{writer}, #{p_no}, 707, 0)
+	</insert>
+
+	<!-- 답변글 갯수 -->
+	<select id="replyCnt" resultType="int" parameterType="int">
+		SELECT
+		COUNT(*)
+		FROM qna
+		WHERE p_no = {q_no}
+	</select>
+
+	<!-- 질문글 수정 -->
+
+
+	<!-- 답변글 수정 -->
+
+
+</mapper>
