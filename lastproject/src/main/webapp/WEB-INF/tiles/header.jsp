@@ -62,7 +62,7 @@
 						<li class="menu-active"><a href="index.html">Home</a></li>
 						<li><a href="departments.html">departments</a></li>
 						<li><a href="doctors.html">doctors</a></li>
-						<li class="menu-has-children"><a href="">Pages</a>
+						<li class="menu-has-children"><a href="mypage">Pages</a>
                <li><a href="bTables.do">공지사항</a></li>
 							<ul>
 								<li><a href="about.html">about us</a></li>

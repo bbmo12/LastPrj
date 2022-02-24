@@ -13,33 +13,29 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.last.prj.ffile.service.FfileService;
 import com.last.prj.ffile.service.FfileVO;
 
-@Controller
-public class FfileController {
+
+public class FfileUtil {
 	@Autowired
 	private FfileService ffileDao;
 	
-	@Autowired
-	ServletContext sc;
-	
-
-	@PostMapping("/multiFile")
-	public String multiFileUpload(@RequestParam("multiFile") List<MultipartFile> multiFileList,@RequestParam int f_part,@RequestParam String w_write, FfileVO ffile, HttpServletRequest request) {
-		
+	public String multiFileUpload(List<MultipartFile> multiFileList,  HttpServletRequest request) {
+		FfileVO ffile= new FfileVO();
 			System.out.println("multiFileList : " + multiFileList);
 				
 			// path 가져오기
-			String webPath = "/resources/upload";
-			String realPath = sc.getRealPath(webPath);
+			String path = request.getSession().getServletContext().getRealPath("resources");
+			String root = path + "\\" + "upload";
 			
-			System.out.printf("realPath: %s\n", realPath);
+			System.out.printf("realPath: %s\n", root);
 			
-			File fileCheck = new File(realPath);
+			File fileCheck = new File(root);
 			
 			if(!fileCheck.exists()) fileCheck.mkdirs();
 				
@@ -56,20 +52,22 @@ public class FfileController {
 				map.put("originFile", originFile);
 				map.put("changeFile", changeFile);
 				
-				ffile.setF_part(f_part);
-				ffile.setW_write(w_write);
 				ffile.setPicture(originFile);
 				ffile.setPfile(changeFile);
+				
 				
 				ffileDao.ffileInsert(ffile);
 				
 				fileList.add(map);
 			}
+			
+			//FfileUtil ffileutil = new FfileUtil();
+			//ffileutil.multiFileUpload(null, null)
 				
 			// 파일업로드
 			try {
 				for(int i = 0; i < multiFileList.size(); i++) {
-					File uploadFile = new File(realPath + "\\" + fileList.get(i).get("changeFile"));
+					File uploadFile = new File(root + "\\" + fileList.get(i).get("changeFile"));
 					multiFileList.get(i).transferTo(uploadFile);
 				}
 					
@@ -79,9 +77,8 @@ public class FfileController {
 					System.out.println("다중 파일 업로드 실패");
 					// 만약 업로드 실패하면 파일 삭제
 					for(int i = 0; i < multiFileList.size(); i++) {
-						new File(realPath + "\\" + fileList.get(i).get("changeFile")).delete();
+						new File(root + "\\" + fileList.get(i).get("changeFile")).delete();
 					}
-
 					e.printStackTrace();
 				}
 			return "mypage/memberMypage";		

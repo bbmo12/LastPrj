@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PmemService;
@@ -30,7 +31,7 @@ public class MemController {
 
 	@RequestMapping("joinForm") // 일반회원회원가입
 	public String joinForm() {
-
+		
 		return "member/joinForm";
 	}
 
