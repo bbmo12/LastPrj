@@ -28,6 +28,7 @@
                     <a href="" class="template-btn mt-3">take appointment</a>
                     <a href="reservationSelect" class="template-btn mt-3">일반회원예약조회</a>
                     <a href="preservationSelect" class="template-btn mt-3">파트너회원예약조회</a>
+                    <a href="reservationSetting" class="template-btn mt-3">파트너회원예약설정</a>
                     
                 </div>
             </div>
