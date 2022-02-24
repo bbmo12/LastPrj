@@ -16,8 +16,9 @@ public class MemVO {
 	private Date startDate;		//가입일
 	private Date endDate;		//탈퇴일
 	private int cReport;		//신고당한횟수
-	private String picture;			//첨부파일
-	private String pfile;
+
+	private String picture; 	//프로필사진
+	private String pfile;		//첨부파일
 }
 	
 

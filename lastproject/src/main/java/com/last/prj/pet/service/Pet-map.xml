@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.pet.service.PetMapper">
+	
+	<select id="petOne" parameterType="int" resultType="com.last.prj.pet.service.PetVO">
+		SELECT *
+		FROM pet
+		WHERE pet_no = #{pet_no}
+	</select>
+
+</mapper>

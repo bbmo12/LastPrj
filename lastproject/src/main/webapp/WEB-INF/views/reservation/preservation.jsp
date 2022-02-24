@@ -15,6 +15,7 @@
     <table class="table">
 		<thead>
 			<tr>
+				<th>예약번호</th>
 				<th>예약신청일자</th>
 				<th>예약시간</th>
 				<th>예약자 이름</th>
@@ -25,19 +26,15 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${preservation }" var="pres">
-				<c:forEach items="${preservationCode }" var="code">
-					<c:if test="${pres.p_id eq code.p_id}"> 
 						<tr>
+							<td><input  class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
 							<td>${pres.r_date}</td>
 							<td>${pres.startdate } &nbsp; ${pres.time }시</td>
 							<td>${pres.m_id }</td>
-							<td>${pres.content }</td>
-							
-							<td>${pres.d_name }</td>
-							<td><input class="in_code" type="hidden" value="${code.content }">${code.content }</td>
+							<td>${pres.pcontent }
+							<td>${pres.rcontent }</td>
+							<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
 						</tr>
-					</c:if>
-				</c:forEach>
 			</c:forEach>
 		</tbody>
 	</table>
@@ -51,26 +48,55 @@
 				 val[i].classList.add("code");
 				$(".code").empty();
 			 	var check = $(".code").append(`<button onclick="ok()">승인</button> 
-						       				   <button>거절</button>`);
+						       				   <button onclick="no()">거절</button>`);
 			} 
 		}
 		function ok(){
+			var rno = $(".rno").val();
+			console.log(rno);
 			var flag = confirm("해당 예약신청을 승인하시겠습니까?");
 			if(flag == true){
 				$.ajax({
 					url : 'okupdate',
 					method : 'post',
-					data : 
+					data : {"rno" : rno},
 					success : function(result){
+							console.log(result);
 							alert("해당 승인신청이 성공적으로 완료되었습니다.");
+								location.reload();
 						},
 					error : function(error){
-						alert ("승인확인도중 오류가 발생하였습니다.");
+						alert ("승인확인도중 오류가 발생하였습니다."); 
 					}
-				})
+				});
 			}else{
 				alert("예약신청 승인을 취소하셨습니다.");
 			}
+		}
+		function no(){
+			var rno = $(".rno").val();
+			var flag = confirm("해당 예약신청을 거절하시겠습니까?");
+			
+			var refuse = prompt("거절사유를 작성해주세요."+"");
+			console.log(refuse);
+			if(flag == true){
+				$.ajax({
+					url : 'noupdate',
+					method : 'post',
+					data : {'rno' : rno ,
+							'refuse' : refuse },
+					success : function(result){
+						alert("작성완료.");
+						location.reload();
+					},
+					error : function(error){
+						alert("거절사유 작성중 오류발생")
+					}
+				})
+				alert("해당 예약신청을 거절하셨습니다.");
+				
+			}
+			
 		}
 	
 	</script>

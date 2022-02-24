@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.qtag.service.QtagMapper">
+
+	<!-- 인기 태그 목록 -->
+	<select id="tagList"
+		resultType="com.last.prj.qtag.service.QtagVO">
+		SELECT *
+		FROM q_tag
+		<![CDATA[WHERE ROWNUM <= 16]]>
+	</select>
+
+</mapper>
