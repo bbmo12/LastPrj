@@ -1,40 +1,28 @@
 package com.last.prj.qna.web;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.last.prj.mem.service.MemService;
-import com.last.prj.pet.service.PetMapper;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.qna.service.Criteria;
 import com.last.prj.qna.service.PagingVO;
 import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaVO;
-import com.last.prj.qna.service.QtagVO;
 import com.last.prj.qtag.service.QnaTagService;
-import com.last.prj.qtag.service.QnaTagVO;
-import com.last.prj.qtag.service.QtagMapper;
 import com.last.prj.qtag.service.QtagService;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
-
-import freemarker.core.ParseException;
 
 @Controller
 public class QnaController {
@@ -52,7 +40,7 @@ public class QnaController {
 	private QnaTagService qtDAO;
 	
 	@Autowired
-	private ReportService reportDAO;
+	private ReportService reportService;
 	
 	@Autowired
 	private MemService memDao;
@@ -110,7 +98,7 @@ public class QnaController {
 		report.setCode(Integer.parseInt(request.getParameter("code")));
 		
 		System.out.println(report);
-		reportDAO.newQnaReport(report);
+		reportService.newQnaReport(report);
 		
 		return "qna/qnaDetail";	
 	}

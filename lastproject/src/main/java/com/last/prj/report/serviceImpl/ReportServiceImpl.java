@@ -9,7 +9,7 @@ import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 
-@Repository("reportDao")
+@Repository
 public class ReportServiceImpl implements ReportService {
 
 	@Autowired
