@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.last.prj.report.service.ReportVO;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +34,6 @@ public class QnaVO {
 	private int recnt; //질문에 달린 답변 수
 	
 	private QnaTagVO QnaTagVO;
+	private ReportVO reportVO;
 	
 }

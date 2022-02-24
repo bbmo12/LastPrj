@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.reserv.service.ReservationMapper">
+
+	<select id="reservationSelect" 
+	 resultType="com.last.prj.reserv.service.ReservationVO" 
+	 parameterType="com.last.prj.reserv.service.ReservationVO">
+		SELECT PM.NAME,R.R_DATE ,S.STARTDATE|| ' ' || R.TIME AS TIME,R.CONTENT ,C.CONTENT AS CODE
+		FROM  P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C
+		WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE
+	</select>
+	
+	<select id="reservationSelectList" resultType="com.last.prj.reserv.service.ReservationVO">
+		SELECT * FROM RESERVATION
+	</select>
+
+</mapper>
