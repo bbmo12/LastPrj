@@ -154,10 +154,8 @@
 									<h3>multi file 업로드</h3>
 									<form action="multiFile" method="post"  enctype="multipart/form-data">
 									<div id="ffile">
-										파일 : <input type="file" name="multiFile" multiple><button type="button" onclick="addFile()">+</button><br>
+										파일 : <input type="file" name="multiFileList" multiple><button type="button" onclick="addFile()">+</button><br>
 									</div>
-										파일 분류 : <input type="text" name="f_part"><br>
-										파일 소유자 : <input type="text" name="w_write"><br>
 										<input type="submit" value="제출">
 									</form>
                                 </div>									
