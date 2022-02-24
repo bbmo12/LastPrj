@@ -5,13 +5,15 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class PreservationlistVO {
+public class PreservationVO {
 	//뷰
+	private int r_no;
 	private Date startdate;
 	private Date r_date;
 	private int time;
 	private String m_id;
-	private String content;
-	private String d_name;
+	private String pcontent;
+	private String rcontent;
+	private String rccontent;
 	private String p_id;
 }

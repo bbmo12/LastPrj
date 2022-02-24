@@ -8,15 +8,16 @@ import org.springframework.stereotype.Repository;
 import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistMapper;
 import com.last.prj.reserv.service.PreservationlistService;
-import com.last.prj.reserv.service.PreservationlistVO;
+import com.last.prj.reserv.service.PreservationVO;
 
-@Repository("PreservationlistDao")
+@Repository("pReservationDao")
 public class PreservationlistServiceImpl implements PreservationlistService {
+	
 	@Autowired
 	private PreservationlistMapper map;
 	
 	@Override
-	public List<PreservationlistVO> preservationlist() {
+	public List<PreservationVO> preservationlist() {
 		return map.preservationlist();
 	}
 
