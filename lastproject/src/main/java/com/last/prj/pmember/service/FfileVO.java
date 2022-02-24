@@ -8,8 +8,7 @@ public class FfileVO {
 	private String picture;	 //파일원본이미지
 	private String pfile;	 //파일저장이미지
 	private int f_part;
-	private String w_write;	 //p_id
+		
+	private String photo;
 	
-	private String m_id;
-
 }
