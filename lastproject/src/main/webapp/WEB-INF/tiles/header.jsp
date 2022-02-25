@@ -52,11 +52,11 @@
 	</div> -->
 	<div id="header" id="home">
 		<div class="container">
-		
+
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="home"><img
-						src="resources/assets/images/logo/logo.png" alt="" title="" /></a>
+					<a href="home"><img src="resources/assets/images/logo/logo.png"
+						alt="" title="" /></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
@@ -64,12 +64,13 @@
 						<li><a href="departments.html">departments</a></li>
 						<li><a href="doctors.html">doctors</a></li>
 						<li class="menu-has-children"><a href="mypage">Pages</a>
-               <li><a href="bTables.do">공지사항</a></li>
-							<ul>
-								<li><a href="about.html">about us</a></li>
-								<li><a href="elements.html">elements</a></li>
-							</ul></li>
-            <li><a href="qnaMain">Open Q&A</a></li>
+						<li><a href="bTables.do">공지사항</a></li>
+						<ul>
+							<li><a href="about.html">about us</a></li>
+							<li><a href="elements.html">elements</a></li>
+						</ul>
+						</li>
+						<li><a href="qnaMain">Open Q&A</a></li>
 						<li class="menu-has-children"><a href="">파트너회원</a>
 
 							<ul>
@@ -78,31 +79,45 @@
 								<li><a href="pmemberList?code=102">펫시터</a></li>
 								<li><a href="pmemberList?code=103">미 용</a></li>
 							</ul></li>
-					
-
-					<c:if test="${mId eq null and pId eq null}">
-
-						<li class="menu-has-children"><a href="loginForm">로그인</a> <!--   -->
-
-						</li>
 
 
-						<li><a href="join">회원가입</a></li>
-					</c:if>
+						<c:if test="${mId eq null and pId eq null}">
 
-					<c:if test="${mId ne null or pId ne null}">
-						<li class="menu-has-children"><a href="#">마이페이지</a>
-							<ul>
-								<li><a href="#">내 프로필</a></li>
-								<li><a href="#">반려동물 프로필</a></li>
-								<li><a href="#">예약 내역</a></li>
-								<li><a href="#">결제 내역</a></li>
-								<li><a href="#">상담 내역</a></li>
-								<li><a href="#">신고 내역</a></li>
-								<li><a href="logout">로그아웃</a></li>
+							<li class="menu-has-children"><a href="loginForm">로그인</a> <!--   -->
 
-							</ul></li>
+							</li>
 
+
+							<li><a href="join">회원가입</a></li>
+						</c:if>
+							<!-- 파트너회원 로그인 -->
+						<c:if test="${mId eq null or pId ne null}">
+							<li class="menu-has-children"><a href="#">마이페이지</a>
+								<ul>
+									<li><a href="#">내 프로필</a></li>
+									<li><a href="#">반려동물 프로필</a></li>
+									<li><a href="preservationSelect">예약 내역</a></li>
+									<li><a href="#">결제 내역</a></li>
+									<li><a href="#">상담 내역</a></li>
+									<li><a href="#">신고 내역</a></li>
+									<li><a href="logout">로그아웃</a></li>
+
+								</ul></li>
+						</c:if>
+						<!-- 일반회원 로그인  -->
+						<c:if test="${mId ne null or pId eq null}">
+							<li class="menu-has-children"><a href="#">마이페이지</a>
+								<ul>
+									<li><a href="#">내 프로필</a></li>
+									<li><a href="#">반려동물 프로필</a></li>
+									<li><a href="reservationSelect">예약 내역</a></li>
+									<li><a href="#">결제 내역</a></li>
+									<li><a href="#">상담 내역</a></li>
+									<li><a href="#">신고 내역</a></li>
+									<li><a href="logout">로그아웃</a></li>
+
+								</ul></li>
+						</c:if>
 						<li><a href="#">Contact</a></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link count-indicator dropdown-toggle"
@@ -158,7 +173,6 @@
 								<div class="dropdown-divider"></div>
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 							</div></li>
-					</c:if>
 				</nav>
 				<!-- #nav-menu-container -->
 			</div>
