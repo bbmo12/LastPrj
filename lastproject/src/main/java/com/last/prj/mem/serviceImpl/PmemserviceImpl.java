@@ -27,6 +27,11 @@ public class PmemserviceImpl implements PmemService {
 	public int pmemberInsert1(PmemVO pmember) {
 		return pmap.pmemberInsert1(pmember);
 	}
+
+	@Override
+	public int pmemberInsert2(PmemVO pmember) {
+		return pmap.pmemberInsert2(pmember);
+	}
 	
 	
 
