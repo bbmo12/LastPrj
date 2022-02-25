@@ -2,9 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.ffile.service.FfileMapper">
 
-	<insert id="ffileInsert">
-		insert into f_file (f_no, picture, pfile, f_part, w_write)
-		values(ffile_seq.nextval, #{picture}, #{pfile}, #{f_part}, #{w_write})
+	<insert id="ffileInsert" parameterType="com.last.prj.ffile.service.FilemasterVO">
+		insert into f_file (f_no, picture, pfile, f_part)
+		values(ffile_seq.nextval, #{picture}, #{pfile}, #{f_part})
 	</insert>
 	
+	<insert id="fmInsert">
+		insert into filemaster values(fm_seq.nextval)
+		<selectKey resultType="int" keyProperty="f_part" order="AFTER">
+			select fm_seq.currval from dual
+		</selectKey>
+	</insert>
 </mapper>

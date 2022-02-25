@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.last.prj.board.service.BoardVO;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 import com.last.prj.reserv.service.PreservationCodeListVO;
+
 
 @Controller
 public class AdminController {
