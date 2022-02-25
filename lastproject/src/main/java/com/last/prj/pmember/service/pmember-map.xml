@@ -126,9 +126,9 @@
 	
 	<!-- 관리자 -->
 	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT *
-		FROM P_MEMBER P, F_FILE F
-		WHERE F.W_WRITE = P.P_ID AND F.F_PART = P.P_PROFILE AND P.CODE = #{code}
+		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel
+		from p_member p, f_code f 
+		where f.code = p.code AND p.code = #{code}
 	</select>
 	
 	<select id="admPlist" resultType="com.last.prj.pmember.service.PmemberVO">
@@ -136,6 +136,7 @@
 		FROM P_MEMBER P , F_CODE F 
 		WHERE F.CODE=P.CODE
 	</select>	
+
 	
 	<!-- 아이디로 정보 조회 -->
 	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">

@@ -80,7 +80,7 @@ td {
 		<h1>글쓰기</h1>
 	</div>
 	<div style="margin-top: 150px">
-		<form id="frm" action="boardInsert.do" method="post">
+		<form id="frm" action="boardInsert" method="post">
 			<table width=53% height=500px border=1 align=center>
 				<colgroup>
 					<col width="15%">

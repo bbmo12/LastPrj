@@ -39,7 +39,7 @@ th {
 	text-align: left;
 	font-weight: 500;
 	font-size: 12px;
-	color: #fff;
+	color: #180000;
 	text-transform: uppercase;
 }
 
@@ -49,7 +49,7 @@ td {
 	vertical-align: middle;
 	font-weight: 300;
 	font-size: 12px;
-	color: #fff;
+	color: #180000;
 	border-bottom: solid 1px rgba(255, 255, 255, 0.1);
 }
 
@@ -58,8 +58,8 @@ td {
 	url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 
 body {
-	background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-	background: linear-gradient(to right, #25c481, #25b7c4);
+	/* background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+	background: linear-gradient(to right, #25c481, #25b7c4); */
 	font-family: 'Roboto', sans-serif;
 }
 

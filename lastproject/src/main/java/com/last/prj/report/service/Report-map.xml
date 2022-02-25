@@ -9,10 +9,13 @@
 		VALUES (r_seq.nextval, #{reporter}, sysdate, #{content}, #{q_no}, #{reported}, #{code})
 	</insert>
 
+
 	<!-- 신고 유형 별 리스트 -->
 	<select id="reportPartlist">
 		SELECT * FROM REPORT
 	</select>
+
+
 
 	<!-- 신고전체 리스트 -->
 	<select id="reportList" resultType="com.last.prj.report.service.ReportVO">
@@ -21,6 +24,10 @@
 			WHERE R.CODE = F.CODE
 			ORDER BY R.REP_NO
 	</select>
+	
+	
+	
+	
 	
 	<!-- 신고 전체 건수 -->
 	<select id="reportCount" resultType="int">

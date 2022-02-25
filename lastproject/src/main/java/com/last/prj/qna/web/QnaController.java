@@ -44,7 +44,7 @@ public class QnaController {
 	
 	@Autowired
 	private ReportService reportDao;
-	
+
 	@Autowired
 	private MemService memDao;
 	
@@ -102,6 +102,9 @@ public class QnaController {
 		report.setReported(request.getParameter("reported"));
 		report.setCode(Integer.parseInt(request.getParameter("code")));
 		
+
+		System.out.println(report);
+
 		reportDao.newQnaReport(report);
 		
 		return "qna/qnaDetail";	
