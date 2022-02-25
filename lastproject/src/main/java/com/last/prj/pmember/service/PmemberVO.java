@@ -7,7 +7,7 @@ import lombok.Data;
 
 
 
-
+@Data
 public class PmemberVO {
 	private String p_id;				//파트너회원아이디
 	private String name;			//이름
