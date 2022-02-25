@@ -28,9 +28,10 @@
 		where m_id = #{m_id}
 	</select>
 	
+	<!-- 일반회원 회원가입 -->
 	<insert id="memberInsert" parameterType="com.last.prj.mem.service.MemVO">
-	INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE)
-	VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture})
+	INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE, PFILE)
+	VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture}, #{pfile})
 	</insert>
 	
 </mapper>

@@ -58,4 +58,12 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admPlist();
 	}
 
+
+	//id로 정보 조회
+	@Override
+	public PmemberVO PmemberOne(String p_id) {
+		// TODO Auto-generated method stub
+		return map.PmemberOne(p_id);
+	}
+
 }
