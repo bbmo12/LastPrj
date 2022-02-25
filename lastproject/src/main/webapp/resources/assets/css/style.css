@@ -220,7 +220,7 @@ opacity
 	display: inline-block;
 	color: #222;
 	font-weight: 500;
-	font-size: 12px;
+	font-size: 14px;
 	text-transform: uppercase;
 	outline: none
 }
@@ -438,7 +438,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 	padding: 14px 0;
 	position: fixed;
 	left: 0;
-	top: 48px;
+	top: 20px;
 	right: 0;
 	transition: all 0.5s;
 	z-index: 997
