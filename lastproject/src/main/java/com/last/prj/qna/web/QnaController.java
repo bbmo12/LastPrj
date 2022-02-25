@@ -59,6 +59,7 @@ public class QnaController {
 		model.addAttribute("best", mapper.qnaBest());
 		
 		System.out.println(cri);
+		System.out.println(new PagingVO(cri, mapper.getTotal(cri)));
 		
 		return "qna/qnaMain";
 		
