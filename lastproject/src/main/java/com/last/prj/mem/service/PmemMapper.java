@@ -12,5 +12,7 @@ public interface PmemMapper {
 
 	//아이디로 멤버 정보 조회
 	MemVO memberOne (MemVO member);
+	
+	int pmemberInsert2(PmemVO pmember);
 
 }

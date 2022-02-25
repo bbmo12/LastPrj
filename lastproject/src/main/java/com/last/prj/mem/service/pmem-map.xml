@@ -22,8 +22,24 @@
 	
 	<!-- 파트너회원 회원가입 1차 -->
 	<insert id="pmemberInsert1" parameterType="com.last.prj.mem.service.PmemVO">
-	INSERT INTO P_MEMBER(P_ID, NAME, TEL, PASSWORD, CODE, PICTURE)
-	 VALUES(#{p_id},#{name},#{tel},#{password}, #{code}, #{picture})
+	INSERT INTO P_MEMBER(P_ID, NAME, TEL, PASSWORD, CODE, PICTURE, PFILE)
+	 VALUES(#{p_id},#{name},#{tel},#{password}, #{code}, #{picture}, #{pfile})
 	</insert>
 
+
+	<!-- 파트너회원 회원가입 2차 -->
+	<update id="pmemberInsert2" parameterType="com.last.prj.mem.service.PmemVO">
+	update p_member
+	 <set>
+	  <if test= "w_name != null">w_name = #{w_name},</if>
+	  <if test = "businessnumber != null">businessnumber = #{businessnumber},</if>
+	  <if test =  "w_address != null"> w_address = #{w_address}, </if>
+	  <if test =  "w_d_address != null"> w_d_address = #{w_d_address},</if>
+	  <if test =  "w_tel != null"> w_tel = #{tel},</if>
+	  <if test =  "p_info != null"> p_info = #{p_info},</if>
+	  <if test =  "career != null"> career = #{career},</if> 
+	  <if test =  "speciality != null"> speciality = #{speciality} </if>
+	  </set>
+	where p_id = #{p_id};
+	</update>
 </mapper>

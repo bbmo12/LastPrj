@@ -11,4 +11,6 @@ public interface PmemService {
 	
 	//파티너회원 1차회원가입
 	int pmemberInsert1(PmemVO pmember);
+	
+	int pmemberInsert2(PmemVO pmember);
 }
