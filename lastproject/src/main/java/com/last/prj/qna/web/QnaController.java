@@ -64,6 +64,7 @@ public class QnaController {
 		model.addAttribute("tagList", qtagDAO.tagList());
 		model.addAttribute("best", mapper.qnaBest());
 		
+
 		return "qna/qnaMain";
 		
 	}

@@ -15,7 +15,7 @@
 
 
 </head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
 	<br><br><br><br><br>
      <!-- Banner Area Starts -->
     <section class="banner-area">
@@ -25,7 +25,7 @@
                     <h4>Caring for better life</h4>
                     <h1>Leading the way in medical excellence</h1>
                     <p>Earth greater grass for good. Place for divide evening yielding them that. Creeping beginning over gathered brought.</p>
-                    <a href="" class="template-btn mt-3">take appointment</a>
+                    <a href="" class="test01">take appointment</a>
                     <a href="reservationSelect" class="template-btn mt-3">일반회원예약조회</a>
                     <a href="preservationSelect" class="template-btn mt-3">파트너회원예약조회</a>
                     <a href="reservationSetting" class="template-btn mt-3">파트너회원예약설정</a>

@@ -33,14 +33,14 @@ public class MemController {
 	@Autowired
 	ServletContext sc;
 	
-	private String saveDir;
+
 	
 	@RequestMapping("/memberMypage")
 	public String memMypage() {
 		return "mypage/memberMypage";
 	}
 
-	@RequestMapping("joinForm") // 일반회원회원가입
+	@RequestMapping("joinForm") // 일반회원회원가입폼이동
 	public String joinForm() {
 		return "member/joinForm";
 	}
@@ -117,12 +117,22 @@ public class MemController {
 	  public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
 	  String originalFileName = file.getOriginalFilename();
 	  
+	  String webPath = "/resources/upload";
+		String realPath = sc.getRealPath(webPath);
+	  
+		File savePath = new File(realPath);
+		if (!savePath.exists())
+			savePath.mkdirs();
+
+		realPath += File.separator + originalFileName;
+		File saveFile = new File(realPath);
 	  
 	  if(!originalFileName.isEmpty()) {
 		  String uuid = UUID.randomUUID().toString();
 		  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 	  
-	  try { file.transferTo(new File(saveDir, saveFileName));
+	  try {
+		  file.transferTo(saveFile);
 	  member.setPicture(originalFileName);
 	  member.setPfile(saveFileName);
 	  
@@ -131,12 +141,8 @@ public class MemController {
 	  	}
 	  }
 	  
-	  int n = memDao.memberInsert(member);
-	  if( n!= 0) {
-		  model.addAttribute("message","성공");
-		  } else {
-			  model.addAttribute("message","실패"); }
-	  
+	  model.addAttribute(memDao.memberInsert(member)); 
+	 
 	  
 	  return "home/home";
 	  }
@@ -145,11 +151,23 @@ public class MemController {
 	  public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		  String originalFileName = file.getOriginalFilename();
 		  
+		  String webPath = "/resources/upload";
+			String realPath = sc.getRealPath(webPath);
+		  
+			File savePath = new File(realPath);
+			if (!savePath.exists())
+				savePath.mkdirs();
+
+			realPath += File.separator + originalFileName;
+			File saveFile = new File(realPath);
+
+			
 		  if(!originalFileName.isEmpty()) {
 			  String uuid = UUID.randomUUID().toString();
 			  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 		  
-			  try { file.transferTo(new File(saveDir, saveFileName));
+			  try {
+				  file.transferTo(saveFile);
 			  pmember.setPicture(originalFileName);
 			  pmember.setPfile(saveFileName);
 			  
@@ -157,12 +175,7 @@ public class MemController {
 				  e.printStackTrace();
 			  }
 	  }
-		  int n = pmemDao.pmemberInsert1(pmember);
-		  if(n!= 0) {
-			  model.addAttribute("message","성공");
-		  } else {
-			  model.addAttribute("message","실패");
-		  }
+		  model.addAttribute(pmemDao.pmemberInsert1(pmember));
 		  return "member/pjoinForm2";
 	  }
 	  
@@ -174,5 +187,8 @@ public class MemController {
 			return "member/join";
 		}
 	
-	
+		
+		  @RequestMapping("/jusoPopup") public String test() { return
+		  "member/jusoPopup"; }
+		 
 }
