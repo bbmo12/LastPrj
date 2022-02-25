@@ -19,7 +19,7 @@
 </head>
 
 <header class="header-area">
-	<div class="header-top">
+	<!-- <div class="header-top">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9 d-md-flex">
@@ -49,9 +49,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<div id="header" id="home">
 		<div class="container">
+		
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
 					<a href="home"><img

@@ -153,9 +153,8 @@
                                     <h1 align="center">파일 업로드 하기</h1>
 									<h3>multi file 업로드</h3>
 									<form action="multiFile" method="post"  enctype="multipart/form-data">
-									<div id="ffile">
-										파일 : <input type="file" name="multiFileList" multiple><button type="button" onclick="addFile()">+</button><br>
-									</div>
+									파일 : <input type="file" name="multiFileList" multiple><button type="button" onclick="addFile()">+</button><br>
+									<div id="ffile"></div>
 										<input type="submit" value="제출">
 									</form>
                                 </div>									
@@ -170,7 +169,7 @@
 <script>
 function addFile(){
 	var input = $('<input>').attr({
-		'name' : 'multiFile',
+		'name' : 'multiFileList',
 		'type' : 'file'
 	});
 	
