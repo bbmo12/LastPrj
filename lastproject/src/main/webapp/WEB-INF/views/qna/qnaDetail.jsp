@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -67,6 +69,18 @@
 #bestQna {
 	margin-top: 30px;
 }
+
+#ansBtn {
+	margin-left: 500px;
+}
+
+.updateAns {
+	margin-left: 550px;
+}
+
+#pMemPage {
+	margin-left: 450px;
+}
 </style>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -79,7 +93,9 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
+
 <body>
+
 	<!-- Banner Area Starts -->
 	<section class="banner-area other-page">
 		<div class="container">
@@ -112,19 +128,9 @@
 						<div class="col-lg-9 col-md-9">
 							<!-- 작성자 정보 -->
 							<div>
-								<table>
-									<tr>
-										<td><h3>
-												<c:out value="${writerInfo.m_id }"></c:out>
-											</h3></td>
-										<td rowspan="2"><c:out value="${writerInfo.picture }"></c:out></td>
-									</tr>
-									<tr>
-										<h4>
-											<c:out value="${writerInfo.name }"></c:out>
-										</h4>
-									</tr>
-								</table>
+								<h3>
+									<c:out value="${qnaDetail.writer }"></c:out>
+								</h3>
 							</div>
 
 							<!-- 본문 공간 -->
@@ -136,14 +142,15 @@
 							<div>
 								<table>
 									<tr>
-										<td rowspan="5"><c:out value="${petInfo.picture }"></c:out></td>
-										<td><c:out value="${petInfo.name }"></c:out></td>
+										<td rowspan="5"><img src="resources/upload/${petInfo.picture }">
+										</td>
+										<td>${petInfo.name }</td>
 									</tr>
 									<tr>
-										<td><c:out value="${petInfo.gender }"></c:out></td>
+										<td>${petInfo.gender }</td>
 									</tr>
 									<tr>
-										<td><c:out value="${petInfo.weight }"></c:out></td>
+										<td>${petInfo.weight }</td>
 									</tr>
 								</table>
 							</div>
@@ -187,12 +194,11 @@
 											src="resources/qna/icon-kakao.png"></a></td>
 								</tr>
 							</table>
-
 						</div>
 
 						<!-- 질문글 신고 모달-->
 						<!-- button trigger modal -->
-						<c:if test="${m_id ne null }">
+						<c:if test="${mId ne null || pId ne null}">
 							<div>
 								<button id="reportModal" type="button" class="btn btn-secondary"
 									data-toggle="modal" data-target="#exampleModal">신고</button>
@@ -214,13 +220,18 @@
 									<div class="modal-body">
 
 										<h4>신고 유형</h4>
-
-										<input type="hidden" id="reporter" name="reporter"
-											value="${m_id }"> <input type="hidden" id="q_no"
-											name="q_no" value="${qnaDetail.q_no }"> <input
-											type="hidden" id="reported" name="reported"
-											value="${qnaDetail.writer }"> <select
-											class="reportModal" name="code" id="code">
+										<c:if test="${mId ne null}">
+											<input type="hidden" id="reporter" name="reporter"
+												value="${mId }">
+										</c:if>
+										<c:if test="${pId ne null }">
+											<input type="hidden" id="reporter" name="reporter"
+												value="${pId }">
+										</c:if>
+										<input type="hidden" id="q_no" name="q_no"
+											value="${qnaDetail.q_no }"> <input type="hidden"
+											id="reported" name="reported" value="${qnaDetail.writer }">
+										<select class="reportModal" name="code" id="code">
 											<option value="601">불법 홍보/광고</option>
 											<option value="602">음란물/선정성 콘텐츠</option>
 											<option value="603">욕설/명예훼손</option>
@@ -244,14 +255,54 @@
 						<!-- 신고 모달 끝 -->
 
 						<!-- 이 질문에 답변하기 -->
-
-
 						<div>
 
 
-							<a href="ansForm?q_no=${qnaDetail.q_no }&writer=${qnaDetail.writer}&pet_no=${qnaDetail.pet_no}"><button
-									type="button" id="a-btn" class="btn btn-primary btn-lg">이
-									질문에 답변하기</button></a>
+							<!--로그인 세션 있을 경우 답변 모달창-->
+							<!--modal trigger button-->
+							<c:if test="${mId ne null || pId ne null}">
+								<button type="button" id="ansBtn" class="btn btn-primary btn-lg"
+									data-toggle="modal" data-target=".bd-example-modal-lg">이
+									질문에 답변하기</button>
+							</c:if>
+
+							<!-- 답변 모달창 -->
+							<div class="modal fade bd-example-modal-lg" tabindex="-1"
+								role="dialog" aria-labelledby="myLargeModalLabel"
+								aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="form-group">
+											<label for="title">제목</label> <input type="text"
+												class="form-control" id="title" name="title"
+												value="RE : ${qnaDetail.title }" required="required"
+												pattern=".{4,100}">
+										</div>
+										<div class="form-group">
+											<label for="content">내용</label>
+											<textarea class="form-control" rows="15" id="content"
+												name="content"></textarea>
+										</div>
+										<c:if test="${mId ne null}">
+											<input type="hidden" id="writer" name="writer"
+												value="${mId }">
+										</c:if>
+										<c:if test="${pId ne null}">
+											<input type="hidden" id="writer" name="writer"
+												value="${pId }">
+										</c:if>
+										<input type="hidden" id="p_no" name="p_no"
+											value="${qnaDetail.q_no }">
+
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">취소</button>
+											<button type="button" id="sendAns" name="sendAns"
+												class="btn btn-primary">답변 등록</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -260,21 +311,27 @@
 						<img id="noAns" src="resources/qna/답변유도.png" alt="">
 					</c:if>
 
-					<!-- 답변  -->
+					<!-- 답변 파트 시작  -->
 					<c:forEach items="${ansDetail }" var="ans">
 
 
-						<div class="comments-area">
+
+						<!-- 여러 개의 답변 중 하나의 답변번호를 받아오기 위해 data-no 사용 -->
+						<div class="comments-area" data-no="${ans.q_no }">
+
+							<!-- 전문가 답변 표시 -->
+							<c:if test="${ans.p_id ne null }">
+								<h3>전문가 답변</h3>
+							</c:if>
+
+							<!-- 답변 제목 공간 -->
 							<div class="col-lg-12">
-
 								<h2>${ans.title }</h2>
-
-
 							</div>
 
 							<!-- 작성자 정보 -->
 							<div>${ans.writer }
-								<span class="right-align">${qnaDetail.w_date }&nbsp;&nbsp;<i
+								<span class="right-align">${ans.w_date }&nbsp;&nbsp;<i
 									class="fa fa-calendar-o"></i></span>
 							</div>
 
@@ -283,11 +340,78 @@
 								<h4>${ans.content }</h4>
 							</div>
 
+							<c:if test="${ans.p_id ne null }">
+								<!-- 파트너 회원 정보 공간 -->
+								<div class="pMemberInfo">
+
+									<h3>${ans.name }</h3>
+									<h3>${ans.w_name }</h3>
+									<h3>${ans.w_address }</h3>
+									<h3>${ans.n_content }</h3>
+									<img src="resources/upload/${ans.picture }">
+									<h3>${ans.speciality }</h3>
+									<h3>${ans.career }</h3>
+
+									<!-- 이 전문가와 상담 -->
+									<button id="pMemPage" type="button" class="btn btn-primary">이
+										전문가와 상담하기</button>
+
+								</div>
+							</c:if>
+
+
+							<!-- 답변자와 세션 아이디가 같을 때 수정, 삭제 버튼 -->
+							<div class="updateAns">
+								<c:if test="${mId eq ans.writer || pId eq ans.writer}">
+									<!-- 글 수정 모달 -->
+									<button type="button" id="updateBtn" class="btn btn-primary"
+										data-toggle="modal" data-target=".bd-example-modal-lg2">수정</button>
+									<button type="button" id="deleteBtn" class="btn btn-secondary">삭제</button>
+								</c:if>
+
+								<div class="modal fade bd-example-modal-lg2" tabindex="-1"
+									role="dialog" aria-labelledby="myLargeModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog modal-lg">
+										<div class="modal-content">
+											<div class="form-group">
+												<label for="title">제목</label> <input type="text"
+													class="form-control" id="title" name="title"
+													value="RE : ${qnaDetail.title }" required="required"
+													pattern=".{4,100}">
+											</div>
+											<div class="form-group">
+												<label for="content">내용</label>
+												<textarea class="form-control" rows="15" id="content"
+													name="content"></textarea>
+											</div>
+											<c:if test="${mId ne null}">
+												<input type="hidden" id="writer" name="writer"
+													value="${mId }">
+											</c:if>
+											<c:if test="${pId ne null}">
+												<input type="hidden" id="writer" name="writer"
+													value="${pId }">
+											</c:if>
+											<input type="hidden" id="p_no" name="p_no"
+												value="${qnaDetail.q_no }">
+
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">취소</button>
+												<button type="button" id="sendAns" name="sendAns"
+													class="btn btn-primary">답변 등록</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 
 							<!-- Button trigger modal -->
 							<!-- 질문글 신고 모달-->
 							<!-- button trigger modal -->
-							<c:if test="${m_id ne null }">
+							<c:if
+								test="${mId ne null || mId ne ans.writer || pId ne ans.writer}">
 								<div>
 									<button id="reportModal" type="button"
 										class="btn btn-secondary" data-toggle="modal"
@@ -312,7 +436,7 @@
 											<h4>신고 유형</h4>
 
 											<input type="hidden" id="reporter" name="reporter"
-												value="${m_id }"> <input type="hidden" id="q_no"
+												value="${mId }"> <input type="hidden" id="q_no"
 												name="q_no" value="${ans.q_no }"> <input
 												type="hidden" id="reported" name="reported"
 												value="${ans.writer }"> <select class="reportModal"
@@ -373,26 +497,76 @@
 	<!--================Blog Area =================-->
 	<script>
 		/*신고 모달*/
-		$('#sendReport').click(function() {
+		$('#sendReport').click(
+				function() {
+					$.ajax({
+						method : "POST",
+						url : "newQnaReport",
+						data : {
+							"reporter" : $('#reporter').val(),
+							"content" : $('#content').val(),
+							"q_no" : $('#q_no').val(),
+							"reported" : $('#reported').val(),
+							"code" : $('#code option:selected').val()
+						},
+						success : function() {
+							alert('신고 접수가 완료되었습니다.');
+							location.reload();
+						},
+						error : function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:"
+									+ request.responseText + "\n" + "error:"
+									+ error);
+						}
+					})
+				})
+
+		/*답변글 작성 모달*/
+		$('#sendAns').click(function() {
 			$.ajax({
 				method : "POST",
-				url : "newQnaReport",
+				url : "newAns",
 				data : {
-					"reporter" : $('#reporter').val(),
+					"writer" : $('#writer').val(),
+					"title" : $('#title').val(),
 					"content" : $('#content').val(),
-					"q_no" : $('#q_no').val(),
-					"reported" : $('#reported').val(),
-					"code" : $('#code option:selected').val()
+					"p_no" : $('#p_no').val()
 				},
 				success : function() {
-					alert('신고 접수가 완료되었습니다.');
+					alert('답변이 성공적으로 등록되었습니다.');
 					location.reload();
 				},
-				error : function(request, status, error) {
+				error : function() {
 					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
 				}
 			})
 		})
+
+		/*답변글 수정 모달*/
+
+		/*답변 삭제*/
+		$(function() {
+			$('#deleteBtn').click(function() {
+				if (confirm("정말 삭제하시겠습니까?")) {
+					var no = $(this).closest(".comments-area").data("no");
+					console.log(no)
+					$.ajax({
+						method : "GET",
+						url : "ansDelete",
+						data : {
+							q_no : no
+						},
+						success : function() {
+							alert('성공적으로 삭제되었습니다.');
+							location.reload();
+						},
+						error : function() {
+							alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
+						}
+					})
+				}
+			});
+		});
 
 		/*sns 공유*/
 		function shareTwitter() {
@@ -433,4 +607,3 @@
 	</script>
 
 </body>
-</html>

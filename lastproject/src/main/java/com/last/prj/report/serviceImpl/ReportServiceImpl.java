@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 
-@Repository
+@Repository("reportDao")
 public class ReportServiceImpl implements ReportService {
 
 	@Autowired
