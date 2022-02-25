@@ -152,11 +152,12 @@
         });
 
         // Date Picker
-        jQuery('#datepicker').datetimepicker({
-            timepicker:false,
-            format:'d.m.Y',
-        });
-
+			/*        
+			$('#datepicker').datetimepicker({
+			            timepicker:false,
+			            format:'d.m.Y',
+			        });
+			*/
         // // Nice Select
         $('select').niceSelect();
         

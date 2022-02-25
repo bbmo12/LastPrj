@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div id="main-wrapper">
-		<div class="container-fluid">
+		<div class="container-fluidT">
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -37,7 +37,7 @@
 									class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											<th>순번</th>
+											<th>수정한날짜로 변경</th>
 											<th>제목</th>
 											<th>내용</th>
 											<th>작성자</th>
@@ -55,20 +55,20 @@
 										<c:if test="${boardList ne null }">
 											<c:forEach items="${boardList }" var="boards">
 												<tr>
-													<td align="center">${boards.b_no }</td>
+													<td align="center">${boards.b_no }</td><!-- 수정한날짜로 변경 -->
 													<td align="center"><a
-														href="boardUpdateForm.do?b_no=${boards.b_no }">${boards.title }</a></td>
+														href="boardUpdateForm?b_no=${boards.b_no }">${boards.title }</a></td>
 													<td align="center">${boards.content }</td>
 													<td align="center">${boards.writer }</td>
 													<td align="center">${boards.w_date }</td>
 													<td><button name="modify">수정</button>
-														<button name="btnDelete" id="btnDelete" ><a href="boardDelete.do?b_no=${boards.b_no }">삭제</a></button></td>
+														<button name="btnDelete" id="btnDelete" ><a href="boardDelete?b_no=${boards.b_no }">삭제</a></button></td>
 												</tr>
 											</c:forEach>
 										</c:if>
 									</tbody>
 								</table>
-								<a href="boardInsertForm.do" style="color: white;"><role
+								<a href="boardInsertForm" style="color: white;"><role
 										="button" class="btn btn-outline-info">
 									<h2>글쓰기</h2></a>
 							</div>
