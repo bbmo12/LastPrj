@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.FfileVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
@@ -46,8 +47,6 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<FfileVO> getProfile(String m_id) {
 		return map.getProfile(m_id);
 	}
-
-	
 	
 	//관리자
 	@Override
@@ -59,11 +58,5 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<PmemberVO> admPlist() {
 		return map.admPlist();
 	}
-	
-	
-	
-
-
-	
 
 }
