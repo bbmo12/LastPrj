@@ -119,7 +119,12 @@
 		WHERE F.CODE=P.CODE
 	</select>	
 	
-
+	<!-- 아이디로 정보 조회 -->
+	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM p_member
+		WHERE p_id = #{p_id}
+	</select>
 
 
 </mapper>

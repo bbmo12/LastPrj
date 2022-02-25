@@ -41,5 +41,10 @@ public interface QnaMapper {
 	
 	//답변글 수정
 	
+	//질문글 삭제
+	
+	//답변글 삭제
+	int ansDelete(int q_no);
+	
 
 }

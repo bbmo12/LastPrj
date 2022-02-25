@@ -17,6 +17,9 @@ public interface PmemberMapper {
 	//관리자
 	public List<PmemberVO> admPlistCode(int code);
 	public List<PmemberVO> admPlist();
+	
+	//id로 정보 조회
+	public PmemberVO PmemberOne(String p_id);
 }
 
 
