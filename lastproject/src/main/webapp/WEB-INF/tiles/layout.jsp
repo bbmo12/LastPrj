@@ -44,7 +44,7 @@
 	<!-- 발 -->
 	<tiles:insertAttribute name="footer"/>
   <!-- Javascript -->
-    <script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
     <script src="resources/assets/js/vendor/wow.min.js"></script>
     <script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
@@ -53,7 +53,6 @@
     <script src="resources/assets/js/vendor/superfish.min.js"></script>
     <script src="resources/assets/js/main.js"></script>
     <!-- admin css -->
-    <script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
     <script src="resources/assets123/js/off-canvas.js"></script>
     <script src="resources/assets123/js/hoverable-collapse.js"></script>
     <script src="resources/assets123/js/misc.js"></script>
