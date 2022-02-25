@@ -33,6 +33,7 @@
     <link rel="shortcut icon" href="resources/assets123/images/favicon.png" />
     
       <!-- Javascript -->
+
     <script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
     <script src="resources/assets/js/vendor/wow.min.js"></script>
