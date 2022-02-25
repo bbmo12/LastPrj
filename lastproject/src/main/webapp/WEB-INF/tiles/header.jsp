@@ -60,10 +60,7 @@
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="index.html">Home</a></li>
-						<li><a href="departments.html">departments</a></li>
-						<li><a href="doctors.html">doctors</a></li>
-						<li class="menu-has-children"><a href="mypage">Pages</a>
+
 						<li><a href="bTables.do">공지사항</a></li>
 						<ul>
 							<li><a href="about.html">about us</a></li>
@@ -91,7 +88,7 @@
 							<li><a href="join">회원가입</a></li>
 						</c:if>
 							<!-- 파트너회원 로그인 -->
-						<c:if test="${mId eq null or pId ne null}">
+						<c:if test="${mId eq null and pId ne null}">
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
 									<li><a href="#">내 프로필</a></li>
@@ -105,7 +102,7 @@
 								</ul></li>
 						</c:if>
 						<!-- 일반회원 로그인  -->
-						<c:if test="${mId ne null or pId eq null}">
+						<c:if test="${mId ne null and pId eq null}">
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
 									<li><a href="#">내 프로필</a></li>
