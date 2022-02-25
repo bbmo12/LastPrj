@@ -187,8 +187,8 @@ public class MemController {
 			return "member/join";
 		}
 	
-	@RequestMapping("/jusoPopup")
-	public String test() {
-		return "member/jusoPopup";
-	}
+		
+		  @RequestMapping("/jusoPopup") public String test() { return
+		  "member/jusoPopup"; }
+		 
 }

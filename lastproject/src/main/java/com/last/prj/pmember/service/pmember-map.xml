@@ -102,9 +102,27 @@
 			  ON F.F_PART = RE.F_PART
              WHERE R.P_ID = #{p_id}
 	</select>
+	<select id="memberPageList" resultType="com.last.prj.pmember.service.PmemberVO">
+		   SELECT *
+      			FROM ( SELECT ROWNUM RN, A.*
+     			FROM (SELECT P_ID, NAME, PICTURE, CODE
+      				  FROM P_MEMBER
+       					 WHERE CODE = 100
+        <if test="W_ADDRESS != NULL">AND W_ADDRESS LIKE '%'||#{param}||'%';</if>
+        <if test="W_ADDRESS == null or W_ADDRESS ==''">AND 1 = 1</if>
+        ORDER BY STARTDATE DESC) A)
+      	WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
+	</select>
+	
+	<select id="memberPage" resultType="int" parameterType="com.last.prj.pmember.service.PmemberVO">		
+      SELECT COUNT(*) AS total 
+      	FROM P_MEMBER
+      WHERE CODE = #{code}
+      <if test="W_ADDRESS != NULL">AND W_ADDRESS LIKE '%'||#{param}||'%';</if>
+      <if test="W_ADDRESS == null or W_ADDRESS ==''">AND 1 = 1</if>
+	</select>
 
-	
-	
 	
 	<!-- 관리자 -->
 	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
@@ -119,7 +137,12 @@
 		WHERE F.CODE=P.CODE
 	</select>	
 	
-
+	<!-- 아이디로 정보 조회 -->
+	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM p_member
+		WHERE p_id = #{p_id}
+	</select>
 
 
 </mapper>

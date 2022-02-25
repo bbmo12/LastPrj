@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.last.prj.pmember.service.TimeVO;
 import com.last.prj.report.service.ReportVO;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+
 @Data
 public class QnaVO {
 	private int q_no;
@@ -35,5 +35,18 @@ public class QnaVO {
 	
 	private QnaTagVO QnaTagVO;
 	private ReportVO reportVO;
+	
+	private String p_id;				//파트너회원아이디
+	private String name;			//이
+	private String n_content;		//자기소개
+	private String w_name;			//사업장이름
+	private String w_address;		//사업장주소
+	private String w_tel;			//사업자 전화번호
+	private String w_d_address;		//사업장상세주소
+	private String career;			//대표경력
+	private String speciality;			//전문분야
+	private String picture;
+
+	
 	
 }

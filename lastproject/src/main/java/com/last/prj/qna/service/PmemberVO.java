@@ -1,7 +1,9 @@
-package com.last.prj.pmember.service;
+package com.last.prj.qna.service;
 
 import java.util.Date;
 import java.util.List;
+
+import com.last.prj.pmember.service.TimeVO;
 
 import lombok.Data;
 
@@ -36,7 +38,6 @@ public class PmemberVO {
 	private String w_write;
 	private int f_part;
 	private List<TimeVO> timeList;
-	private PageVO vo;
 
 	//관리자
 	private String f_content; //서비스 구분 코드 내용

@@ -11,12 +11,14 @@ public interface PmemberMapper {
 	public PmemberVO getMember(String p_id); //상세정보
 	public List<ReviewVO> getCounselReview(String p_id); //상담리뷰
 	public List<ReviewVO> getServiceReview(String p_id); //서비스리뷰
-
 	public List<FfileVO> getProfile(String m_id);//회원프로필사진
 	
 	//관리자
 	public List<PmemberVO> admPlistCode(int code);
 	public List<PmemberVO> admPlist();
+	
+	//id로 정보 조회
+	public PmemberVO PmemberOne(String p_id);
 }
 
 
