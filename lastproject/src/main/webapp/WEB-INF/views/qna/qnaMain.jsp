@@ -206,8 +206,9 @@
 							<h4 class="widget_title">베스트 Q&A</h4>
 							<c:forEach items="${best }" var="best">
 							<ul class="list cat-list">
-								<li><a href="qnaDetail?q_no=${best.q_no }" class="d-flex justify-content-between">
-										<p>${best.title}</p>
+								<li><a href="qnaDetail?q_no=${best.q_no }&writer=${best.writer}&pet_no=${best.pet_no}"
+									class="d-flex justify-content-between">
+										<i class="fa-solid fa-q"></i>${best.title}
 								</a></li>
 							</ul>
 							</c:forEach>

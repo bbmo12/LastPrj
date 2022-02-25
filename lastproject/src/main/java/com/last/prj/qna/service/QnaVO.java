@@ -36,6 +36,7 @@ public class QnaVO {
 	private QnaTagVO QnaTagVO;
 	private ReportVO reportVO;
 	
+	//파트너 회원
 	private String p_id;				//파트너회원아이디
 	private String name;			//이
 	private String n_content;		//자기소개
@@ -46,6 +47,7 @@ public class QnaVO {
 	private String career;			//대표경력
 	private String speciality;			//전문분야
 	private String picture;
+	private int code; //코드
 
 	
 	
