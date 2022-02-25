@@ -29,7 +29,7 @@ public class FfileUtil {
 	
 	@Autowired
 	ServletContext sc;
-	
+	 
 	public int multiFileUpload(List<MultipartFile> multiFileList, HttpServletRequest request, FilemasterVO filemaster) {
 		    FfileVO ffile= new FfileVO();
 			System.out.println("multiFileList : " + multiFileList);
