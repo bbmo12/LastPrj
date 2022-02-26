@@ -40,6 +40,7 @@ public interface QnaMapper {
 	//질문글 수정
 	
 	//답변글 수정
+	int ansUpdate(int q_no);
 	
 	//질문글 삭제
 	

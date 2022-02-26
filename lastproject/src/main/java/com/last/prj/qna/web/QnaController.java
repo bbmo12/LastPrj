@@ -64,7 +64,6 @@ public class QnaController {
 		model.addAttribute("tagList", qtagDAO.tagList());
 		model.addAttribute("best", mapper.qnaBest());
 		
-
 		return "qna/qnaMain";
 		
 	}
@@ -102,9 +101,6 @@ public class QnaController {
 		report.setReported(request.getParameter("reported"));
 		report.setCode(Integer.parseInt(request.getParameter("code")));
 		
-
-		System.out.println(report);
-
 		reportDao.newQnaReport(report);
 		
 		return "qna/qnaDetail";	
@@ -143,14 +139,22 @@ public class QnaController {
 		qna.setContent(request.getParameter("content"));
 		qna.setP_no(Integer.parseInt(request.getParameter("p_no")));
 
+		System.out.println(qna);
 		
 		return "qna/qnaDetail";
 	}
 	
 	//답변글 수정 모달 처리
+	@RequestMapping(value="/ansUpdate", method=RequestMethod.POST)
+	public String ansUpdate(HttpServletRequest request, QnaVO qna) throws Exception{
+		
+		qna.setWriter(request.getParameter("title"));
+		qna.setContent(request.getParameter("content"));
+		
+		return "qna/qnaDetail";
+	}
 	
-	
-	//답변글 삭제
+	//답변글 삭제 ajax
 	@RequestMapping(value = "/ansDelete", method=RequestMethod.GET)
 	public String ansDelete(@RequestParam("q_no") int q_no, Model model) throws Exception {
 		

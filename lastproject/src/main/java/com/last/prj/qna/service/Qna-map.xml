@@ -162,8 +162,11 @@
 
 
 	<!-- 답변글 수정 -->
-
-
+	<update id="ansUpdate" parameterType="int">
+		UPDATE qna 
+		SET title=#{title}, content=#{content}
+		WHERE q_no=#{q_no}
+	</update>
 
 
 	<!-- 답변글 삭제 -->

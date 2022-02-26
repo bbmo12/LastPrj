@@ -22,7 +22,7 @@
 }
 
 .social {
-	
+	margin-left: 570px;
 }
 
 .ans-body {
@@ -34,7 +34,7 @@
 }
 
 #qSection {
-	border: 1px solid #a9a9a9;
+	border: 1px solid rgb(220, 220, 220);
 	padding: 20px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 #ansBtn {
-	margin-left: 480px;
+	float: right
 }
 
 .updateAns {
@@ -66,7 +66,7 @@
 }
 
 #pMemPage {
-	margin-left: 450px;
+	margin-left: 380px;
 }
 
 .qnaBody {
@@ -94,6 +94,7 @@
 	margin-left: 20px;
 	background: rgb(241, 241, 241);
 	padding: 20px;
+	margin-bottom: 30px;
 }
 
 .tags {
@@ -102,7 +103,7 @@
 }
 
 #reportModal {
-	margin-left: 600px;
+	margin-right: 500px;
 }
 
 #postInfo {
@@ -122,8 +123,13 @@
 	width: 650px;
 	background: rgb(227, 241, 255);
 	padding: 20px;
-	color : black;
-	margin-left : 20px;
+	color: black;
+	margin-left: 20px;
+	margin-bottom : 20px;
+}
+
+.qRepo {
+	float: left;
 }
 </style>
 <link rel="stylesheet"
@@ -185,15 +191,22 @@
 							</table>
 						</div>
 
-						<c:if test="${mId ne null || pId ne null}">
-							<div>
-								<button id="reportModal" type="button"
-									class="btn btn-secondary btn-sm" data-toggle="modal"
-									data-target="#exampleModal">
-									<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
-								</button>
-							</div>
-						</c:if>
+						<!-- 소셜 공유 -->
+						<div class="social">
+							<table>
+								<tr>
+									<td><a id="btnTwitter" class="link-icon twitter"
+										href="javascript:shareTwitter();"><img
+											src="resources/qna/icon-twitter.png"></a></td>
+									<td><a id="btnFacebook" class="link-icon facebook"
+										href="javascript:shareFacebook();"><img
+											src="resources/qna/icon-facebook.png"></a></td>
+									<td><a id="btnKakao" class="link-icon kakao"
+										href="javascript:shareKakao();"><img
+											src="resources/qna/icon-kakao.png"></a></td>
+								</tr>
+							</table>
+						</div>
 
 
 						<!-- 본문 공간 -->
@@ -313,31 +326,27 @@
 						<!-- 신고 모달 끝 -->
 
 						<div>
-							<!-- 소셜 공유 -->
-							<div class="social">
-								<table>
-									<tr>
-										<td><a id="btnTwitter" class="link-icon twitter"
-											href="javascript:shareTwitter();"><img
-												src="resources/qna/icon-twitter.png"></a></td>
-										<td><a id="btnFacebook" class="link-icon facebook"
-											href="javascript:shareFacebook();"><img
-												src="resources/qna/icon-facebook.png"></a></td>
-										<td><a id="btnKakao" class="link-icon kakao"
-											href="javascript:shareKakao();"><img
-												src="resources/qna/icon-kakao.png"></a></td>
-									</tr>
-								</table>
-							</div>
+
 
 
 							<!--로그인 세션 있을 경우 답변 모달창-->
 							<!--modal trigger button-->
-							<c:if test="${mId ne null || pId ne null}">
-								<button type="button" id="ansBtn" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target=".bd-example-modal-lg">이
-									질문에 답변하기</button>
-							</c:if>
+							<div class="btn_both">
+								<c:if test="${mId ne null || pId ne null}">
+										<button type="button" id="ansBtn"
+											class="btn btn-primary btn-lg" data-toggle="modal"
+											data-target=".bd-example-modal-lg">이 질문에 답변하기</button>
+								</c:if>
+								<c:if test="${mId ne null || pId ne null}">
+									<button id="reportModal" type="button"
+										class="btn btn-secondary btn-sm" data-toggle="modal"
+										data-target="#exampleModal">
+										<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
+									</button>
+								</c:if>
+							</div>
+
+
 
 							<!-- 답변 모달창 -->
 							<div class="modal fade bd-example-modal-lg" tabindex="-1"
@@ -376,6 +385,7 @@
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 
@@ -406,29 +416,19 @@
 											style="margin-right: 20px;"></i>
 										<td>
 										<td
-											style="width: 370px; font-size: 28px; color: black; text-align: left">${ans.title }</td>
-										<td rowspan="2">${ans.w_date }&nbsp;&nbsp;<i
-											class="fa fa-calendar-o"></i>
+											style="width: 460px; font-size: 28px; color: black; text-align: left">${ans.title }</td>
+										<td>${ans.w_date }&nbsp;&nbsp;<i class="fa fa-calendar-o"></i>
 										</td>
 									</tr>
 									<tr>
-										<td style="font-size: 16px; color: rgb(46, 46, 46)"><c:out
+										<td colspan="3"
+											style="font-size: 16px; color: rgb(46, 46, 46)"><c:out
 												value="${ans.writer }"></c:out></td>
 									</tr>
 								</table>
 							</div>
 
-							<!-- button trigger modal -->
-							<c:if
-								test="${mId ne null || mId ne ans.writer || pId ne ans.writer}">
-								<div>
-									<button id="reportModal" type="button"
-										class="btn btn-secondary btn-sm" data-toggle="modal"
-										data-target="#exampleModal">
-										<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
-									</button>
-								</div>
-							</c:if>
+
 
 							<!-- 본문 공간 -->
 							<div class="ans-body">
@@ -465,9 +465,10 @@
 										</tr>
 									</table>
 
+
 									<!-- 이 전문가와 상담 -->
-									<button id="pMemPage" type="button" class="btn btn-primary btn-lg">이
-										전문가와 상담하기</button>
+									<button id="pMemPage" type="button"
+										class="btn btn-primary btn-lg">이 전문가와 상담하기</button>
 								</div>
 							</c:if>
 
@@ -481,6 +482,7 @@
 									<button type="button" id="deleteBtn" class="btn btn-secondary">삭제</button>
 								</c:if>
 
+								<!-- 수정 모달 시작 -->
 								<div class="modal fade bd-example-modal-lg2" tabindex="-1"
 									role="dialog" aria-labelledby="myLargeModalLabel"
 									aria-hidden="true">
@@ -489,30 +491,22 @@
 											<div class="form-group">
 												<label for="title">제목</label> <input type="text"
 													class="form-control" id="title" name="title"
-													value="RE : ${qnaDetail.title }" required="required"
+													value="${ans.title }" required="required"
 													pattern=".{4,100}">
 											</div>
 											<div class="form-group">
 												<label for="content">내용</label>
 												<textarea class="form-control" rows="15" id="content"
-													name="content"></textarea>
+													name="content">${ans.content}</textarea>
 											</div>
-											<c:if test="${mId ne null}">
-												<input type="hidden" id="writer" name="writer"
-													value="${mId }">
-											</c:if>
-											<c:if test="${pId ne null}">
-												<input type="hidden" id="writer" name="writer"
-													value="${pId }">
-											</c:if>
-											<input type="hidden" id="p_no" name="p_no"
-												value="${qnaDetail.q_no }">
-
+											
+											<input type="hidden" id="ansQno" name="ansQno" value="${ans.q_no }">
+											
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">취소</button>
-												<button type="button" id="sendAns" name="sendAns"
-													class="btn btn-primary">답변 등록</button>
+												<button type="button" id="updateAns" name="sendAns"
+													class="btn btn-primary">답변 수정</button>
 											</div>
 										</div>
 									</div>
@@ -521,6 +515,16 @@
 
 							<!-- Button trigger modal -->
 							<!-- 답변글 신고 모달-->
+							<!-- button trigger modal -->
+							<c:if test="${mId ne null || mId ne ans.writer || pId ne ans.writer}">
+								<div>
+									<button id="reportModal" type="button"
+										class="btn btn-secondary btn-sm" data-toggle="modal"
+										data-target="#exampleModal">
+										<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
+									</button>
+								</div>
+							</c:if>
 
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -590,11 +594,11 @@
 					<aside class="single_sidebar_widget post_category_widget">
 						<h4 id="bestQna" class="widget_title">베스트 Q&A</h4>
 						<c:forEach items="${best }" var="best">
-							<ul class="list cat-list">
-								<li><a
+							<ul style="text-align : left;" class="list cat-list">
+								<li style="display : inline-block;"><a
 									href="qnaDetail?q_no=${best.q_no }&writer=${best.writer}&pet_no=${best.pet_no}"
 									class="d-flex justify-content-between"> <i
-										class="fa-solid fa-q"></i>${best.title}
+										class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
 								</a></li>
 							</ul>
 						</c:forEach>
@@ -605,6 +609,7 @@
 		</div>
 	</section>
 	<!--================Blog Area =================-->
+	<!-- 스크립트 영역 -->
 	<script>
 		/*신고 모달*/
 		$('#sendReport').click(function() {
@@ -620,6 +625,7 @@
 				},
 				success : function() {
 					alert('신고 접수가 완료되었습니다.');
+					console.log(data);
 					location.reload();
 				},
 				error : function() {
@@ -639,8 +645,9 @@
 					"content" : $('#content').val(),
 					"p_no" : $('#p_no').val()
 				},
-				success : function() {
+				success : function(data) {
 					alert('답변이 성공적으로 등록되었습니다.');
+					alert(data);
 					location.reload();
 				},
 				error : function() {
@@ -650,6 +657,23 @@
 		})
 
 		/*답변글 수정 모달*/
+		$('#updateAns').click(function(){
+			$.ajax({
+				method : "POST",
+				url : "updateAns",
+				data : {
+					
+					"title" : $('#title').val(),
+					"content" : $('#content').val()
+				},
+				success : function(){
+					alert('답변이 수정되었습니다.');
+					location.reload();
+				}, error : function(){
+					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요');
+				}
+			})
+		})
 
 		/*답변 삭제*/
 		$(function() {

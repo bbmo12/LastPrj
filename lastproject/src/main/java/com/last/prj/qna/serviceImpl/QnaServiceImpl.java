@@ -90,6 +90,12 @@ public class QnaServiceImpl implements QnaService {
 		return map.ansDelete(q_no);
 	}
 
+	@Override
+	public int ansUpdate(int q_no) {
+		// TODO Auto-generated method stub
+		return map.ansUpdate(q_no);
+	}
+
 
 	
 
