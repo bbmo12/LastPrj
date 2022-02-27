@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.calendar.service.CalendarMapper">
+	<select id="revSetList" resultType="com.last.prj.calendar.service.CalendarVO">
+		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID
+		FROM calendar
+	</select>
+	
+	<select id="revSetSelectList" resultType="com.last.prj.calendar.service.CalendarVO">
+		SELECT ID,C_START,
+			   C_END, CATEGORY,TITLE, P_ID			   
+		FROM CALENDAR
+		GROUP BY ID,C_START,
+					   C_END, CATEGORY,TITLE, P_ID
+        HAVING ID=(SELECT MAX(ID) FROM CALENDAR)
+	</select>
+	
+	<select id="revSetUpdateSelect" resultType="com.last.prj.calendar.service.CalendarVO" 
+			parameterType="com.last.prj.calendar.service.CalendarVO">
+		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID
+		FROM calendar
+		WHERE ID = #{id}
+	</select>
+	
+	<insert id="revSetInsert" parameterType="com.last.prj.calendar.service.CalendarVO">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM CALENDAR
+		</selectKey>
+		INSERT INTO CALENDAR (ID,C_START,C_END,CATEGORY,TITLE)
+		VALUES (#{id},#{c_start},#{c_end},#{category},#{title})
+	</insert>
+	
+	<update id="revSetUpdate" parameterType="com.last.prj.calendar.service.CalendarVO">
+		UPDATE CALENDAR
+		<trim prefix="SET" suffixOverrides=",">
+			<if test ="c_start !=null and !c_start.equals('')"> c_start = #{c_start},</if>
+			<if test ="c_end !=null and !c_end.equals('')"> c_end = #{c_end},</if>
+			<if test ="category !=null and !category.equals('')"> category = #{category},</if>
+			<if test ="title !=null and !title.equals('')"> title = #{title},</if>
+   		</trim>
+		WHERE ID = #{id}
+	</update>
+	
+	<delete id="revSetDelete" parameterType="com.last.prj.calendar.service.CalendarVO">
+		DELETE FROM CALENDAR
+		WHERE ID = #{id}
+	</delete>
+</mapper>

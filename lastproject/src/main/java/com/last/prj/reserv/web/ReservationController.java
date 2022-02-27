@@ -29,25 +29,6 @@ public class ReservationController {
 
 	@Autowired
 	private PreservationlistService pReservationDao;
-	/*
-	 * @Autowired private FullcalendarService fullcalendarDao;
-	 */
-
-	// 예약 전체조회
-	/*
-	 * @RequestMapping("/reservationSelectList") public String
-	 * reservationSelectList(Model model,HttpSession session) {
-	 * 
-	 * List<ReservationVO> list = reservationDao.reservationSelectList();
-	 * model.addAttribute("reservation", list); System.out.println(list); return
-	 * "reservation/reservation"; }
-	 */
-	//일반회원 예약하기
-	/*
-	 * @RequestMapping("/reservate") public String reservation(Model model) {
-	 * 
-	 * }
-	 */
 	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
