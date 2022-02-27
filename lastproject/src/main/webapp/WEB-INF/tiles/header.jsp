@@ -115,7 +115,6 @@
 									<li><a href="#">상담 내역</a></li>
 									<li><a href="#">신고 내역</a></li>
 									<li><a href="logout">로그아웃</a></li>
-
 								</ul></li>
 						</c:if>
 						<li><a href="#">Contact</a></li>
