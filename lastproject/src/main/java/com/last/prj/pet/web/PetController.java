@@ -34,7 +34,7 @@ public class PetController {
 	@RequestMapping("/petDetail") //펫 상세페이지
 	public String petDetail(@RequestParam("pet_no") int pet_no, Model model) {
 		
-		model.addAttribute("pet", petDAO.petOne(pet_no));
+		model.addAttribute("pet", petDAO.petSearch(pet_no));
 		return "mypage/petDetail";
 	}
 }

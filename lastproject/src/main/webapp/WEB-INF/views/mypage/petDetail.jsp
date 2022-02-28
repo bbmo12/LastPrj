@@ -78,25 +78,42 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="row" id="data-container">
-						<div class="col-lg-3 col-sm-6">
-							<div class="single-doctor mb-3 mb-lg-0">
-								<div class="doctor-img">
-									<img src="resources/upload/${pet.picture }" alt=""
-										class="img-fluid" style="width: 195px; height: 200px;">
-								</div>
-								<div class="content-area">
-									<div class="doctor-name text-center">
-										<a href="petDetail?pet_no=${pet.pet_no}">
-											<h3>${pet.name }</h3>
-										</a>
-									</div>
-								</div>
+				<div class="col-lg-12 col-md-12 blog_details">
+							<div class="form-group">
+								<h5>
+									<strong>이름</strong>
+								</h5>
+								<input type="text" style="border: none" id="name" name="name"
+									value="${pet.name}" readonly>
 							</div>
-						</div>
-					</div>
-				</div>
 
+							<div class="form-group">
+								<h5>
+									<strong>나이</strong>
+								</h5>
+								<input type="text" style="border: none" id="age" name="age"
+									value="${pet.age}" readonly>
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>품종????</strong>
+								</h5>
+								<input type="text" style="border: none" id="tel" name="tel"
+									value="${pet.weight}" readonly>
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>몸무게</strong>
+								</h5>
+								<input type="text" style="border: none" id="weight" name="weight"
+									value="${pet.weight}" readonly>
+							</div>
+
+							<button type="button" onclick="location.href='memberUpdateForm'"
+								class="genric-btn info radius">반려동물 정보수정</button>
+
+						</div>
+</div>
 			</div>
 		</div>
 

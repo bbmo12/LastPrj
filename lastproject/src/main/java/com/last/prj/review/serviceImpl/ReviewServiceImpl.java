@@ -6,5 +6,7 @@ import com.last.prj.review.service.ReviewService;
 
 @Repository("reviewDao")
 public class ReviewServiceImpl implements ReviewService {
+	
+	
 
 }
