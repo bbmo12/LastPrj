@@ -40,8 +40,10 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public CalendarVO revSetUpdateSelect(CalendarVO cal) {
-		return map.revSetUpdateSelect(cal);
+	public List<CalendarVO> revSetUpdateSelect(int id) {
+		return map.revSetUpdateSelect(id);
 	}
+
+	
 
 }
