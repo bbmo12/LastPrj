@@ -9,9 +9,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title><tiles:getAsString name="title" /></title>
-
-
+<title>asdf</title>
 <!-- plugins:css -->
 <link rel="stylesheet"
 	href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
@@ -32,9 +30,25 @@
 <link rel="stylesheet" href="resources/assets123/css/style.css">
 <!-- End layout styles -->
 <link rel="shortcut icon" href="resources/assets123/images/favicon.png" />
+
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page -->
+<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script>
+<script
+	src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
+<!-- End plugin js for this page -->
+<!-- inject:js -->
+<script src="resources/assets123/js/off-canvas.js"></script>
+<script src="resources/assets123/js/hoverable-collapse.js"></script>
+<script src="resources/assets123/js/misc.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page -->
+<script src="resources/assets123/js/dashboard.js"></script>
+<!-- End custom js for this page -->
 </head>
-
-
 <body>
 	<div class="container-scroller">
 		<!-- partial:partials/_navbar.html -->
@@ -42,7 +56,7 @@
 			class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 			<div
 				class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-				<a class="navbar-brand brand-logo" href="main.do"><img
+				<a class="navbar-brand brand-logo" href="main"><img
 					src="resources/assets123/images/logo.svg" alt="logo" /></a> <a
 					class="navbar-brand brand-logo-mini" href="index.html"><img
 					src="resources/assets123/images/logo-mini.svg" alt="logo" /></a>
@@ -94,37 +108,6 @@
 								class="mdi mdi-pencil-outline mr-2"></i>Edit Project
 							</a>
 						</div></li>
-					<!-- <li class="nav-item nav-language dropdown d-none d-md-block">
-						<a class="nav-link dropdown-toggle" id="languageDropdown" href="#"
-						data-toggle="dropdown" aria-expanded="false">
-							<div class="nav-language-icon">
-								<i class="flag-icon flag-icon-us" title="us" id="us"></i>
-							</div>
-							<div class="nav-language-text">
-								<p class="mb-1 text-black">English</p>
-							</div>
-					</a>
-						<div class="dropdown-menu navbar-dropdown"
-							aria-labelledby="languageDropdown">
-							<a class="dropdown-item" href="#">
-								<div class="nav-language-icon mr-2">
-									<i class="flag-icon flag-icon-ae" title="ae" id="ae"></i>
-								</div>
-								<div class="nav-language-text">
-									<p class="mb-1 text-black">Arabic</p>
-								</div>
-							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">
-								<div class="nav-language-icon mr-2">
-									<i class="flag-icon flag-icon-gb" title="GB" id="gb"></i>
-								</div>
-								<div class="nav-language-text">
-									<p class="mb-1 text-black">English</p>
-								</div>
-							</a>
-						</div>
-					</li> -->
 					<li class="nav-item nav-profile dropdown"><a
 						class="nav-link dropdown-toggle" id="profileDropdown" href="#"
 						data-toggle="dropdown" aria-expanded="false">
@@ -218,8 +201,7 @@
 									<img src="resources/assets123/images/faces/face3.jpg"
 										alt="image" class="profile-pic">
 								</div>
-								<div
-									class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+								<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
 									<h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile
 										picture updated</h6>
 									<p class="text-gray mb-0">18 Minutes ago</p>
@@ -228,7 +210,8 @@
 							<div class="dropdown-divider"></div>
 							<h6 class="p-3 mb-0 text-center">4 new messages</h6>
 						</div></li>
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown">
+					<a
 						class="nav-link count-indicator dropdown-toggle"
 						id="notificationDropdown" href="#" data-toggle="dropdown"> <i
 							class="mdi mdi-bell-outline"></i> <span
@@ -282,7 +265,8 @@
 							</a>
 							<div class="dropdown-divider"></div>
 							<h6 class="p-3 mb-0 text-center">See all notifications</h6>
-						</div></li>
+						</div>
+						</li>
 				</ul>
 				<button
 					class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
@@ -291,17 +275,11 @@
 				</button>
 			</div>
 		</nav>
-
-
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
-
-
 			<!-- partial:partials/_sidebar.html -->
 			<tiles:insertAttribute name="side" />
-
 			<!-- partial -->
-
 			<div class="main-panel">
 				<tiles:insertAttribute name="body" />
 				<!-- content-wrapper ends -->
@@ -316,22 +294,5 @@
 	</div>
 
 
-	<!-- container-scroller -->
-	<!-- plugins:js -->
-	<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script>
-	<script
-		src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script src="resources/assets123/js/off-canvas.js"></script>
-	<script src="resources/assets123/js/hoverable-collapse.js"></script>
-	<script src="resources/assets123/js/misc.js"></script>
-	<!-- endinject -->
-	<!-- Custom js for this page -->
-	<script src="resources/assets123/js/dashboard.js"></script>
-	<!-- End custom js for this page -->
 </body>
 </html>

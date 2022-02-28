@@ -36,12 +36,14 @@
 									class="table table-striped table-bordered">
 									<thead>
 										<tr>
-											
-											<th>신고한 사람</th><!-- 코드 f_content -->
+											<th>순번</th>
+											<th>신고한 사람</th>
+											<!-- 코드 f_content -->
 											<th>신고당한 사람</th>
 											<th>신고한 내용</th>
 											<th>신고한 날짜</th>
 											<th>신고 유형</th>
+											<!-- <th>신고 처리</th> -->
 										</tr>
 									</thead>
 									<tbody>
@@ -53,13 +55,54 @@
 										<c:if test="${reportList ne null }">
 											<c:forEach items="${reportList }" var="reports">
 												<tr>
-													<td style="display:none" value="${reports.rep_no }" />
+													<td align="center">${reports.rep_no }</td>
 													<td align="center">${reports.reporter }</td>
 													<td align="center">${reports.reported }</td>
 													<td align="center">${reports.content }</td>
 													<td align="center">${reports.w_date }</td>
-													<td align="center">${reports.f_content }</td>
+													<td align="center" href="reportDetail?">${reports.f_content }</td>
 												</tr>
+
+												<!-- 신고 내용 상세보기 and 신고 처리 -->
+												<div class="modal fade" id="exampleModal" tabindex="-1"
+													role="dialog" aria-labelledby="exampleModalLabel"
+													aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h3 class="modal-title" id="exampleModalLabel">신고 내역</h3>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+
+																<h4>신고 내역 </h4>
+																
+																<b>신고 한 사람</b>
+																<input type="hidden" id="reporter" name="reporter" value="${신고한사람 아이디 }"> 
+																<b>신고 당한 사람</b>
+																<input type="hidden" id="reported" name="reported" value="${신고당한사람 아이디}"> 
+																<b>신고 사유</b>
+																<input type="hidden" id="q_no" name="q_no" value="${ans.q_no }"> 																
+																<br> <br>
+																<h4>신고 원본</h4>
+																<textarea id="content" name="content" rows="4" cols="50">
+																<!--  -->
+																</textarea>
+
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-dismiss="modal">모달 끄기</button>
+																<button type="button" id="permitReport" name="permitReport" class="btn btn-primary">신고 승인</button>
+																<button type="button" id="cancelReport" name="cancelReport" class="btn btn-primary">신고 기각</button>
+															</div>
+														</div>
+													</div>
+												</div>
+
+
+
 											</c:forEach>
 										</c:if>
 									</tbody>

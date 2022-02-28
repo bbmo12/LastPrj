@@ -1,9 +1,12 @@
-package com.last.prj.pmember.service;
+package com.last.prj.qna.service;
 
 import java.util.Date;
 import java.util.List;
 
+import com.last.prj.pmember.service.TimeVO;
+
 import lombok.Data;
+
 
 
 

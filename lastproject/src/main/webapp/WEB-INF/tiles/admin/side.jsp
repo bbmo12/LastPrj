@@ -17,9 +17,9 @@
 		</a>
 			<div class="collapse" id="ui-basic">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="boardTables.do">boardTable</a></li>
+					<li class="nav-item"><a class="nav-link" href="boardTables">boardTable</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="pmemberTables.do">pmemberTable</a></li>
+						href="pmemberTables">pmemberTable</a></li>
 					
 					<li><a href="admPlistCode?code=100">수의사</a></li>
 					<li><a href="admPlistCode?code=101">훈련사</a></li>

@@ -46,8 +46,6 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<FfileVO> getProfile(String m_id) {
 		return map.getProfile(m_id);
 	}
-
-	
 	
 	//관리자
 	@Override
@@ -59,11 +57,13 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<PmemberVO> admPlist() {
 		return map.admPlist();
 	}
-	
-	
-	
 
 
-	
+	//id로 정보 조회
+	@Override
+	public PmemberVO PmemberOne(String p_id) {
+		// TODO Auto-generated method stub
+		return map.PmemberOne(p_id);
+	}
 
 }

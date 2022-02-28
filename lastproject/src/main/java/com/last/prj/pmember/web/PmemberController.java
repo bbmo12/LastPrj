@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 
@@ -21,12 +22,13 @@ public class PmemberController {
 	private PmemberService pMemberDao;
 	
 	@RequestMapping("/pmemberList")
-	public String pmemberList(@RequestParam("code") int code, Model model) {
-		model.addAttribute("pmember", pMemberDao.memberList(code));
+	public String pmemberList(@RequestParam("code") int code, Model model) {		
+		String json = new Gson().toJson(pMemberDao.memberList(code));
+		model.addAttribute("babo", json);
+		System.out.println(pMemberDao.memberList(code));
+		//model.addAttribute("pmember", pMemberDao.memberList(code));
 		return "pmember/memberList";
 	}
-
-	
 	@ResponseBody
 	@PostMapping("/pmemberLocal")
 	public List<PmemberVO> pmemberLocal(@RequestParam("coded") int code, @RequestParam("local")String w_address, PmemberVO pmember) {
@@ -41,9 +43,7 @@ public class PmemberController {
 		model.addAttribute("pmemdetail", pMemberDao.getMember(p_id));	
 		//후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
-		System.out.println("상담"+pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
 		return "pmember/memberDetail";
 	}
-
 }

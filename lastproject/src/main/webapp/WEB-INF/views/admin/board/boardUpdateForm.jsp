@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 글쓰기</title>
+<title>게시판 상세보기 및 수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
 <body>
 	<div class="container">
 		<h2>게시판 내용 확인 및 수정</h2>
-		<form id="frm" action="boardUpdate.do" method="post">
+		<form id="frm" action="boardUpdate" method="post">
 			<div class="form-group">
 				<label for="b_no"></label> <input type="hidden" class="form-control"
 					id="b_no" name="b_no" value="${boards.b_no}">
@@ -64,6 +64,8 @@
 		</form>
 	</div>
 
+
+	<!-- 수정 버튼 눌렀을 시 로딩 -->
 	<div id="loading" style="margin-left: 0px;">
 		<img src="resources/assets123/images/Spinner-2.gif">
 		<p>변환중입니다..잠시기다려주세요.</p>
@@ -78,6 +80,9 @@
 			});
 		});
 	</script>
+	<!-- end 수정 버튼 눌렀을 시 로딩 -->
+	
+	
 </body>
 </html>
 

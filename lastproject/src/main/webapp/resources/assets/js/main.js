@@ -152,7 +152,8 @@
         });
 
         // Date Picker
-        jQuery('#datepicker').datetimepicker({
+
+        $('#datepicker').datetimepicker({
             timepicker:false,
             format:'d.m.Y',
         });
