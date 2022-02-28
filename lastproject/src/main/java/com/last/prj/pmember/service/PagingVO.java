@@ -1,7 +1,5 @@
 package com.last.prj.pmember.service;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import lombok.Data;
 
 @Data
