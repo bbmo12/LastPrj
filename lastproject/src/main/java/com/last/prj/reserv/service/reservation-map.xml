@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.reserv.service.ReservationMapper">
-
+	<!-- 일반 예약조회 -->
 	<select id="reservationSelect" 
 	 resultType="com.last.prj.reserv.service.ReservationVO" 
 	 parameterType="com.last.prj.reserv.service.ReservationVO">
@@ -10,7 +10,6 @@
 		WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE
 		ORDER BY R.R_NO
 	</select>
-	
 	<select id="reservationSelectList" resultType="com.last.prj.reserv.service.ReservationVO">
 		SELECT * FROM RESERVATION
 	</select>

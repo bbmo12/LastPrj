@@ -30,12 +30,18 @@ public class ReservationController {
 	@Autowired
 	private PreservationlistService pReservationDao;
 	
+	//일반회원 예약하기
+	@RequestMapping("/test")
+	public String reservation() {
+		return "reservation/test";
+	}
+	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
 	public String reservationSetting(Model model,PreservationVO pres) {
 		//List<PreservationVO> list = pReservationDao.preservationlist();
 		
-		return "reservation/test";
+		return "reservation/resvSetting";
 		
 	}
 	
@@ -90,13 +96,6 @@ public class ReservationController {
 		  return "ok";
 	  }
 	  
-	  @GetMapping("/test")
-	  @ResponseBody 
-	  public List<PreservationVO> test(Model model) {
-		  List<PreservationVO> list = pReservationDao.preservationlist();
-		  System.out.println(list);
-		  return list;
-	  }
 	  
 	 
 }
