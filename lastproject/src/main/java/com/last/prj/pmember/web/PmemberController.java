@@ -53,5 +53,9 @@ public class PmemberController {
 	public String home() {
 		return "pmember/memberMain";
 	}
+	@RequestMapping("/pmemberMyPage")
+	public String mypage() {
+		return "pmember/pmemberMypage";
+	}
 	
 }

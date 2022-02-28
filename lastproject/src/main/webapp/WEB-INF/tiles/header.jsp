@@ -54,7 +54,7 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="home"><img src="resources/assets/images/logo/logo.png" alt="" title="" /></a>
+					<a href="home"><img src="resources/upload/pet.PNG" alt="" title=""style="width: 150px; height: 70px;"/></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
@@ -77,7 +77,7 @@
 						<c:if test="${mId eq null and pId ne null}">
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
-									<li><a href="#">내 프로필</a></li>
+									<li><a href="pmemberMyPage">내 프로필</a></li>
 									<li><a href="#">반려동물 프로필</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
 									<li><a href="#">결제 내역</a></li>
