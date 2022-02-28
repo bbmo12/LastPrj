@@ -35,8 +35,17 @@ public class MemServiceImpl implements MemService {
 	//아이디로 일반회원 조회
 	@Override
 	public MemVO memberOne(String m_id) {
-		// TODO Auto-generated method stub
 		return map.memberOne(m_id);
+	}
+	//회원 조회
+	@Override
+	public MemVO memberSearch(String m_id) {
+		return map.memberSearch(m_id);
+	}
+
+	@Override
+	public int memberUpdate(MemVO member) {
+		return map.memberUpdate(member);
 	}
 
 	

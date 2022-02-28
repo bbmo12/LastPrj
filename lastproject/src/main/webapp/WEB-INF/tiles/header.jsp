@@ -83,6 +83,7 @@
 									<li><a href="#">결제 내역</a></li>
 									<li><a href="#">상담 내역</a></li>
 									<li><a href="#">신고 내역</a></li>
+									<li><a href="#">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
@@ -91,15 +92,18 @@
 						<c:if test="${mId ne null and pId eq null}">
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
-									<li><a href="#">내 프로필</a></li>
-									<li><a href="#">반려동물 프로필</a></li>
+									<li><a href="memberMypage">내 프로필</a></li>
+									<li><a href="petmemberForm">반려동물 프로필</a></li>
 									<li><a href="reservationSelect">예약 내역</a></li>
 									<li><a href="#">결제 내역</a></li>
 									<li><a href="#">상담 내역</a></li>
 									<li><a href="#">신고 내역</a></li>
+									<li><a href="#">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>
+
 								</ul>
 							</li>
+
 						</c:if>
 						<li><a href="#">Contact</a></li>
 						<li class="nav-item dropdown">

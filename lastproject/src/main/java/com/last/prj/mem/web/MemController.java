@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -33,10 +34,59 @@ public class MemController {
 	@Autowired
 	ServletContext sc;
 	
+	//일반회원 정보수정
+	@RequestMapping("memberUpdate")
+	public String memberUpdate(@RequestParam("file") MultipartFile file, MemVO member, Model model, @Param("m_id") String m_id) {
+		
+		String originalFileName = file.getOriginalFilename();
 
+		String webPath = "/resources/upload";
+		String realPath = sc.getRealPath(webPath);
+		
+
+		File savePath = new File(realPath);
+		if (!savePath.exists())
+			savePath.mkdirs();
+
+		realPath += File.separator + originalFileName;
+		File saveFile = new File(realPath);
+
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+
+			try {
+				file.transferTo(saveFile);
+				member.setPicture(originalFileName);
+				member.setPfile(saveFileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		model.addAttribute(memDao.memberUpdate(member));
+		model.addAttribute(memDao.memberSearch(m_id));
+		
+		return "mypage/memberMypage";
+	}
+		
 	
+	
+	
+	
+	//내정보 수정페이지로 이동
+	@RequestMapping("/memberUpdateForm")
+	public String memberUpdateFrom(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("m_id");
+		model.addAttribute("member",memDao.memberSearch(m_id));
+		return "mypage/memberUpdateForm";
+	}
+	//내정보페이지로 이동
 	@RequestMapping("/memberMypage")
-	public String memMypage() {
+	public String memberMypage(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("m_id");
+		model.addAttribute("member",memDao.memberSearch(m_id));
 		return "mypage/memberMypage";
 	}
 
@@ -68,7 +118,7 @@ public class MemController {
 		} else {
 			return "member/loginForm";
 		}
-		System.out.println(member);
+		
 		return "redirect:home";
 	}
 
@@ -91,7 +141,7 @@ public class MemController {
 		} else {
 			return "member/loginForm";
 		}
-		System.out.println(pmember);
+		
 		return "redirect:home";
 	}
 
