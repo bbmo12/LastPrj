@@ -36,7 +36,7 @@
 
 
     <script src="resources/assets/js/vendor/jquery-2.2.4.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
     <script src="resources/assets/js/vendor/wow.min.js"></script>
     <script src="resources/assets/js/vendor/owl-carousel.min.js"></script>

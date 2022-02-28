@@ -17,7 +17,34 @@
 	<title>Medino</title>
 
 </head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+<script>
+var socket = null;
+$(document).ready(function(){
+	// 웹소켓 연결
+	sock = new SockJS("<c:url value="/echo"/>");
+	socket = sock;
+	
+	// 데이터를 전달 받았을 때
+	sock.onmessage = onMessage; // toast생성
+});
 
+// toast생성 및 추가
+function onMessage(evt){
+    var data = evt.data;
+    // toast
+    let toast = "<div class='toast' role='alert' aria-live='assertive' aria-atomic='true'>";
+    toast += "<div class='toast-header'><i class='fas fa-bell mr-2'></i><strong class='mr-auto'>알림</strong>";
+    toast += "<small class='text-muted'>just now</small><button type='button' class='ml-2 mb-1 close' data-dismiss='toast' aria-label='Close'>";
+    toast += "<span aria-hidden='true'>&times;</span></button>";
+    toast += "</div> <div class='toast-body'>" + data + "</div></div>";
+    $("#msgStack").append(toast);   // msgStack div에 생성한 toast 추가
+    $(".toast").toast({"animation": true, "autohide": false});
+    $('.toast').toast('show');
+};	
+
+</script>
+<body>
 <header class="header-area">
 	<!-- <div class="header-top">
 		<div class="container">
@@ -86,6 +113,52 @@
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item preview-item">
+										<div class="preview-thumbnail">
+											<div class="preview-icon bg-success">
+												<i class="mdi mdi-calendar"></i>
+											</div>
+										</div>
+										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+											<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
+											<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
+										</div>
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item preview-item">
+										<div class="preview-thumbnail">
+											<div class="preview-icon bg-warning">
+												<i class="mdi mdi-settings"></i>
+											</div>
+										</div>
+										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+											<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
+											<p class="text-gray ellipsis mb-0">Update dashboard</p>
+										</div>
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item preview-item">
+										<div class="preview-thumbnail">
+											<div class="preview-icon bg-info">
+												<i class="mdi mdi-link-variant"></i>
+											</div>
+										</div>
+										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+											<h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
+											<p class="text-gray ellipsis mb-0">New admin wow!</p>
+										</div>
+									</a>
+								<div class="dropdown-divider"></div>
+								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
+							</div>
+						</li>
 						</c:if>
 						<!-- 일반회원 로그인  -->
 						<c:if test="${mId ne null and pId eq null}">
@@ -100,57 +173,55 @@
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
-						</c:if>
-						<li><a href="#">Contact</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-								data-toggle="dropdown">
-								<i class="mdi mdi-bell-outline"></i>
-								<span class="count-symbol bg-danger"></span>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-								aria-labelledby="notificationDropdown">
-								<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-success">
-											<i class="mdi mdi-calendar"></i>
-										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-										<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
-										<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
-									</div>
+							<li class="nav-item dropdown">
+								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
 								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-warning">
-											<i class="mdi mdi-settings"></i>
+								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item preview-item">
+										<div class="preview-thumbnail">
+											<div class="preview-icon bg-success">
+												<i class="mdi mdi-calendar"></i>
+											</div>
 										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-										<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-										<p class="text-gray ellipsis mb-0">Update dashboard</p>
-									</div>
-								</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-info">
-											<i class="mdi mdi-link-variant"></i>
+										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+											<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
+											<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
 										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-										<h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-										<p class="text-gray ellipsis mb-0">New admin wow!</p>
-									</div>
-								</a>
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item preview-item">
+										<div class="preview-thumbnail">
+											<div class="preview-icon bg-warning">
+												<i class="mdi mdi-settings"></i>
+											</div>
+										</div>
+										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+											<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
+											<p class="text-gray ellipsis mb-0">Update dashboard</p>
+										</div>
+									</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item preview-item">
+										<div class="preview-thumbnail">
+											<div class="preview-icon bg-info">
+												<i class="mdi mdi-link-variant"></i>
+											</div>
+										</div>
+										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+											<h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
+											<p class="text-gray ellipsis mb-0">New admin wow!</p>
+										</div>
+									</a>
 								<div class="dropdown-divider"></div>
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 							</div>
 						</li>
+						</c:if>
+						<li><a href="testPage">Contact</a></li>
+						
 					</ul>
 				</nav>
 			</div>
@@ -158,6 +229,8 @@
 	</div>
 </header>
 <!-- Header Area End -->
+<div id="msgStack"></div>
+
 </body>
 
 </html>
