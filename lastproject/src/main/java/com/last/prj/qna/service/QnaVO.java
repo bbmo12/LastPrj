@@ -5,12 +5,9 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.last.prj.pmember.service.TimeVO;
 import com.last.prj.report.service.ReportVO;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Data
