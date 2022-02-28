@@ -3,6 +3,9 @@ package com.last.prj.pmember.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +46,8 @@ public class PmemberController {
 	@RequestMapping("/pmemberDetail")
 	public String pmemberDetail(@RequestParam("id") String p_id, Model model) {		
 		//파트너 정보
-		model.addAttribute("pmemdetail", pMemberDao.getMember(p_id));	
+		model.addAttribute("pmemdetail", pMemberDao.getMember(p_id));
+		System.out.println( pMemberDao.getMember(p_id));
 		//후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
@@ -54,7 +58,10 @@ public class PmemberController {
 		return "pmember/memberMain";
 	}
 	@RequestMapping("/pmemberMyPage")
-	public String mypage() {
+	public String mypage(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		model.addAttribute("pmember", pMemberDao.getMember(p_id));
 		return "pmember/pmemberMypage";
 	}
 	

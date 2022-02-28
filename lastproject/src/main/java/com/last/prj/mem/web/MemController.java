@@ -77,7 +77,7 @@ public class MemController {
 	@RequestMapping("/memberUpdateForm")
 	public String memberUpdateFrom(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("m_id");
+		String m_id = (String) session.getAttribute("mId");
 		model.addAttribute("member",memDao.memberSearch(m_id));
 		return "mypage/memberUpdateForm";
 	}
@@ -85,7 +85,7 @@ public class MemController {
 	@RequestMapping("/memberMypage")
 	public String memberMypage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("m_id");
+		String m_id = (String) session.getAttribute("mId");
 		model.addAttribute("member",memDao.memberSearch(m_id));
 		return "mypage/memberMypage";
 	}
