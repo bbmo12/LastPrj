@@ -137,32 +137,41 @@ $(document).ready(function(){
 		});
 	}
 	calendar.on('clickSchedule', function(event) {
-		$(".table").empty();
-		var val = `
-			<thead>
-				<tr>
-					<th>예약가능일자</th>
-					<th>예약시간</th>
-					<th>예약내용</th>
-					<th>품종</th>
-					<th>예약가능여부</th>
-				</tr>
-			</thead>
-	<tbody>
-		<c:forEach items="${reservset }" var="res">
-			<tr>
-				<td>${res.c_start} </td>
-				<td>${res.c_end}</td>
-			</tr>
-		</c:forEach>
-	</tbody> `;
-		$(".table").append(val);
+		var id = event.schedule.id;
+		console.log(id);
+		$.ajax({
+			url : 'revSetUpdateSelect',
+			method : 'POST',
+			data : {"id" :id},
+			success : function(res){
+				$(".table").empty();
+				for(var i =0; i<res.length;i++){
+					var val = `
+					<thead>
+						<tr>
+							<th>예약가능일자</th>
+							<th>예약시간</th>
+							<th>예약내용</th>
+							<th>품종</th>
+							<th>예약가능여부</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr>
+								<td>`+res[i].c_start+`</td>
+								<td>`+res[i].c_end+`</td>
+							</tr>
+					</tbody> `;
+								}
+				
+				$(".table").append(val);
+			}//ajax success 부분
+		})
 		
 		
 	});
  
 
- 
 
 });
 

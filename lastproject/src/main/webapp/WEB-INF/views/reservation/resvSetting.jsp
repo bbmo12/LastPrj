@@ -92,6 +92,7 @@ $(document).ready(function(){
 		    }
 		  };
 	var calendar;
+	
 	//캘린더 생성
 	function CreateCalendar(){
 			calendar = new tui.Calendar(document.getElementById('calendar'), {
@@ -158,29 +159,18 @@ $(document).ready(function(){
 	    category: scheduleData.isAllDay ? 'allday' : 'time'
 	  }
 	  console.log(schedule);
-	  
-	  //데이터 날짜 형식 변환
-	  const formatDate = (current_datetime)=>{
-	    let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + 
-	    "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + 
-	    ":" + current_datetime.getSeconds();
-	    return formatted_date;
-	}
-  
-
-  
   
   //원하는 값 잘라오기
   
   //end
   //var end = formatDate(schedule.end._date);
-  var end = schedule.end._date.toISOString();
+  var end = new Date(schedule.end._date.getTime() - (schedule.end._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
   var strEnd = end.slice(0,10);
   console.log(end);
   
   //start
   //var start = formatDate(schedule.start._date);
-  var start = schedule.start._date.toISOString();
+  var start = new Date(schedule.start._date.getTime() - (schedule.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
   var strStart = start.slice(0,10);
   console.log(start);
   
@@ -188,18 +178,16 @@ $(document).ready(function(){
 	$.ajax({
 		url : "revsetinsert",
 		method : "POST",
-		data : {"title": scheduleData.title,
+		data : {"title": '예약가능',
 			    "c_start": start,
 			    "c_end": end,
-			    "category": scheduleData.isAllDay ? 'allday' : 'time'},
+			    "category":'allday'},
 		success : function(res){
 			console.log(res);
-			revList();	
+			revList();
 			alert('해당 예약일정을 등록하셨습니다.');
 		}
 	})
-	
-
 });
  //일정 수정이벤트
  calendar.on('beforeUpdateSchedule', function(event) {
@@ -281,8 +269,8 @@ calendar.on('beforeDeleteSchedule', scheduleData => {
 	});
  
 
- });
 
+ });
 
 
 

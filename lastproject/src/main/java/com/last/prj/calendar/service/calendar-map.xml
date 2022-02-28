@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="revSetUpdateSelect" resultType="com.last.prj.calendar.service.CalendarVO" 
-			parameterType="com.last.prj.calendar.service.CalendarVO">
+			parameterType="int">
 		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID
 		FROM calendar
 		WHERE ID = #{id}
