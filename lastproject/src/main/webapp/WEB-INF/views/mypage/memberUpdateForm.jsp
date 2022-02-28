@@ -35,6 +35,7 @@
 
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${member.picture}" style="width:210px" alt="">
+								${member.picture}" alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
 
@@ -44,8 +45,7 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="memberMypage"
-									class="d-flex justify-content-between">
+								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
 								</a></li>
 								<li><a href="petmemberForm" class="d-flex justify-content-between">
@@ -66,9 +66,6 @@
 								<li><a href="#" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>회원탈퇴</p>
-								</a></li>
 							</ul>
 
 						</aside>
@@ -84,14 +81,14 @@
 									alt="">
 							</div>
 						</div>
-						
+						<form action="memberUpdate" enctype="multipart/form-data" method="post">
 							<div class="col-lg-12 col-md-12 blog_details">
 								<div class="form-group">
 									<h5>
 										<strong>이름</strong>
 									</h5>
-									<input type="text" style="border: none" id="name" name="name"
-										value="${member.name}" readonly>
+									<input type="text"  id="name" name="name"
+										value="${member.name}">
 								</div>
 
 								<div class="form-group">
@@ -105,22 +102,36 @@
 									<h5>
 										<strong>비밀번호</strong>
 									</h5>
-									<input type="password" style="border: none" id="name"
-										name="password" value="${member.password}" readonly>
+									<input type="password" id="password"
+										name="password">
+								</div>
+								<div class="form-group">
+									<h5>
+										<strong>비밀번호 재확인</strong>
+									</h5>
+									<input type="password"  id="password1"
+										name="password1">
 								</div>
 								<div class="form-group">
 									<h5>
 										<strong>전화번호</strong>
 									</h5>
-									<input type="text" style="border: none" id="tel" name="tel"
-										value="${member.tel}" readonly>
+									<input type="text"  id="tel" name="tel"
+										value="${member.tel}" >
 								</div>
-
-								<button type="button" onclick="location.href='memberUpdateForm'"
-									class="genric-btn info radius">내정보 수정</button>
+								<div class="form-group">
+									<label>프로필 사진</label>
+									<div class="input-group col-xs-12">
+										<input class="file-upload-browse btn btn-primary" type="file"
+											id="file" name="file">
+									</div>
+								</div>
+								<button type="submit" onclick="location.href='memberUpdateForm'"
+									class="genric-btn info radius">수정 완료</button>
 
 							</div>
-		
+						</form>
+
 						<div class="col-lg-12">
 							<div class="quotes">MCSE boot camps have its supporters and
 								its detractors. Some people do not understand why you should
@@ -129,25 +140,6 @@
 								has the willpower to actually sit through a self-imposed MCSE
 								training.</div>
 							<div class="row">
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br>
-								<div class="col-lg-12 my-4">
-									<h1 align="center">파일 업로드 하기</h1>
-									<h3>multi file 업로드</h3>
-									<form action="multiFile" method="post"
-										enctype="multipart/form-data">
-										파일 : <input type="file" name="multiFileList" multiple>
-										<button type="button" onclick="addFile()">+</button>
-										<br>
-										<div id="ffile"></div>
-										<input type="submit" value="제출">
-									</form>
-								</div>
 							</div>
 						</div>
 					</div>

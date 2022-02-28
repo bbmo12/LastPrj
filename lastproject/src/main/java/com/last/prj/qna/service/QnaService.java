@@ -2,8 +2,6 @@ package com.last.prj.qna.service;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
 public interface QnaService {
 
 	// 질문글 전체 갯수

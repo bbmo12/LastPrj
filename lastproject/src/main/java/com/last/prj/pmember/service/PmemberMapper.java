@@ -19,6 +19,10 @@ public interface PmemberMapper {
 	
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);
+	
+	public int memberPage(Criteria cri);
+	public List<PmemberVO> memberPageList(Criteria cri);
+
 }
 
 
