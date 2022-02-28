@@ -34,7 +34,9 @@
 					<div class="blog_right_sidebar">
 
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${member.picture}" style="width:210px" alt="">
+							<img class="author_img rounded-circle"
+								src="resources/upload/${member.picture}" style="width: 210px"
+								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
 
@@ -48,7 +50,8 @@
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
 								</a></li>
-								<li><a href="petmemberForm" class="d-flex justify-content-between">
+								<li><a href="petmemberForm"
+									class="d-flex justify-content-between">
 										<p>반려동물 프로필</p>
 								</a></li>
 								<li><a href="#" class="d-flex justify-content-between">
@@ -84,43 +87,43 @@
 									alt="">
 							</div>
 						</div>
-						
-							<div class="col-lg-12 col-md-12 blog_details">
-								<div class="form-group">
-									<h5>
-										<strong>이름</strong>
-									</h5>
-									<input type="text" style="border: none" id="name" name="name"
-										value="${member.name}" readonly>
-								</div>
 
-								<div class="form-group">
-									<h5>
-										<strong>아이디</strong>
-									</h5>
-									<input type="email" style="border: none" id="m_id" name="m_id"
-										value="${member.m_id}" readonly>
-								</div>
-								<div class="form-group">
-									<h5>
-										<strong>비밀번호</strong>
-									</h5>
-									<input type="password" style="border: none" id="name"
-										name="password" value="${member.password}" readonly>
-								</div>
-								<div class="form-group">
-									<h5>
-										<strong>전화번호</strong>
-									</h5>
-									<input type="text" style="border: none" id="tel" name="tel"
-										value="${member.tel}" readonly>
-								</div>
-
-								<button type="button" onclick="location.href='memberUpdateForm'"
-									class="genric-btn info radius">내정보 수정</button>
-
+						<div class="col-lg-12 col-md-12 blog_details">
+							<div class="form-group">
+								<h5>
+									<strong>이름</strong>
+								</h5>
+								<input type="text" style="border: none" id="name" name="name"
+									value="${member.name}" readonly>
 							</div>
-		
+
+							<div class="form-group">
+								<h5>
+									<strong>아이디</strong>
+								</h5>
+								<input type="email" style="border: none" id="m_id" name="m_id"
+									value="${member.m_id}" readonly>
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>비밀번호</strong>
+								</h5>
+								<input type="password" style="border: none" id="name"
+									name="password" value="${member.password}" readonly>
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>전화번호</strong>
+								</h5>
+								<input type="text" style="border: none" id="tel" name="tel"
+									value="${member.tel}" readonly>
+							</div>
+
+							<button type="button" onclick="location.href='memberUpdateForm'"
+								class="genric-btn info radius">내정보 수정</button>
+
+						</div>
+
 						<div class="col-lg-12">
 							<div class="quotes">MCSE boot camps have its supporters and
 								its detractors. Some people do not understand why you should
