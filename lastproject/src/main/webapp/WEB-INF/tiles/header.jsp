@@ -179,7 +179,7 @@ function onMessage(evt){
 
 
 						</c:if>
-						<li><a href="#">Contact</a></li>
+						
 			<li class="nav-item dropdown">
 								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
 									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
@@ -242,7 +242,7 @@ function onMessage(evt){
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 							</div>
 						</li>
-						</c:if>
+						
 						<li><a href="testPage">Contact</a></li>
 						
 					</ul>
