@@ -42,22 +42,22 @@ $(document).ready(function(){
 	
 	var templates = {
 		    popupIsAllDay: function() {
-		      return 'All Day';
+		      return '하루종일';
 		    },
 		    titlePlaceholder: function() {
-		      return 'Subject';
+		      return '제목';
 		    },
 		    startDatePlaceholder: function() {
-		      return 'Start date';
+		      return '시작일';
 		    },
 		    endDatePlaceholder: function() {
-		      return 'End date';
+		      return '종료일';
 		    },
 		    popupSave: function() {
-		      return 'Save';
+		      return '등록';
 		    },
 		    popupUpdate: function() {
-		      return 'Update';
+		      return '수정';
 		    },
 		    popupDetailDate: function(isAllDay, start, end) {
 		      var isSameDate = moment(start).isSame(end);
@@ -85,10 +85,10 @@ $(document).ready(function(){
 		      return 'Body : ' + schedule.body;
 		    },
 		    popupEdit: function() {
-		      return 'Edit';
+		      return '수정';
 		    },
 		    popupDelete: function() {
-		      return 'Delete';
+		      return '삭제';
 		    }
 		  };
 	var calendar;
@@ -99,7 +99,7 @@ $(document).ready(function(){
 		    defaultView: 'month',
 		    taskView: true,    // Can be also ['milestone', 'task']
 		    scheduleView: false,  // Can be also ['allday', 'time']
-		    useCreationPopup : true,
+		    useCreationPopup : false,
 		    useDetailPopup : true,
 		    disableClick : false,
 		    disableDblClick : true,
@@ -184,7 +184,15 @@ $(document).ready(function(){
 			    "category":'allday'},
 		success : function(res){
 			console.log(res);
-			revList();
+			calendar.createSchedules([
+				{
+					id: res.id,
+				    title: res.title,
+				    start: res.c_start,
+				    end: res.c_end,
+				    category: res.category
+				}
+			]);
 			alert('해당 예약일정을 등록하셨습니다.');
 		}
 	})

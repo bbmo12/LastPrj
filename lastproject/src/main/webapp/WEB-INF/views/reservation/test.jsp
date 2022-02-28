@@ -145,6 +145,8 @@ $(document).ready(function(){
 			data : {"id" :id},
 			success : function(res){
 				$(".table").empty();
+				
+			
 				for(var i =0; i<res.length;i++){
 					var val = `
 					<thead>
@@ -156,14 +158,15 @@ $(document).ready(function(){
 							<th>예약가능여부</th>
 						</tr>
 					</thead>
+					
 					<tbody>
 							<tr>
 								<td>`+res[i].c_start+`</td>
+								
 								<td>`+res[i].c_end+`</td>
 							</tr>
 					</tbody> `;
 								}
-				
 				$(".table").append(val);
 			}//ajax success 부분
 		})
