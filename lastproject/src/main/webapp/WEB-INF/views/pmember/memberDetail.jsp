@@ -132,7 +132,10 @@
 												style="width: 100px;">
 										</div>
 										<div class="desc">
-											<h5>${counsel.m_id }&nbsp;&nbsp;평점:${counsel.rating }점</h5>
+											<h5>${counsel.m_id }</h5>
+											<div class="star">
+												<input type="hidden" class="rating" value="${counsel.rating }">
+											</div>
 											<input id="counselProfile" type="hidden" value=${counsel.m_id }>
 											<p></p>
 											<h5 class="comment">${counsel.content }</h5>
@@ -160,6 +163,9 @@
 										</div>
 										<div class="desc">
 											<h5>${service.m_id }&nbsp;&nbsp;평점:${service.rating }점</h5>
+											<div class="star">
+												<input type="hidden" class="rating" value="${service.rating }">
+											</div>
 											<input id="serviceProfile" type="hidden" value="${service.m_id }">
 											<p></p>
 											<h5 class="comment">${service.content }</h5>
@@ -184,12 +190,23 @@
 							<a href="#top" class="btn-reply text-uppercase" id="back" style="text-align: center;">Back
 								to top</a>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+		$(function () {
+			$('.star').each(function (index, item) {
+				$(this).raty({
+					score: $(this).find('.rating').val(),
+					path: "resources/star",
+					width: 200,
+					readOnly: true
+				});
+			})
+		});
+	</script>
 	<script type="text/javascript">
 		console.log('${pmemdetail}');
 		$(function () {
