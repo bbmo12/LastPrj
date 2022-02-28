@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.qna.service.QnaService;
+import com.last.prj.qna.service.QnaVO;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 
@@ -23,6 +25,13 @@ public class AdminController {
 	
 	@Autowired
 	private ReportService reportDao;
+	
+	@Autowired
+	private QnaService qnaDAO;
+	
+	
+	
+	
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -55,8 +64,14 @@ public class AdminController {
 	@RequestMapping("/reportTables")
 	public String reportList(Model model) {
 		List<ReportVO> list = reportDao.reportList();
+		List<QnaVO> qlist = qnaDAO.admQnaList();
+		//List<ReviewVO> vlist = revDao.admReviewList();
+		
+		
 		System.out.println(list);
-		model.addAttribute("reportList", list);
+		model.addAttribute("rList", list);
+		model.addAttribute("qList", qlist);
+		//model.addAttribute("vList", vlist);
 		return "admin/board/reportTable";
 	}
 	

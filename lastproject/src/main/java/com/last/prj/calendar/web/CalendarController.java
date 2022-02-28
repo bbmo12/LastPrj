@@ -17,6 +17,7 @@ public class CalendarController {
 	@Autowired
 	private CalendarService CalendarDao;
 	
+	
 	//파트너회원 예약설정 조회
 	@RequestMapping("revsetlist")
 	@ResponseBody
@@ -62,7 +63,14 @@ public class CalendarController {
 		vo.setTitle(title);
 		vo.setCategory(category);
 		CalendarDao.revSetUpdate(vo);
-		System.out.println(CalendarDao.revSetUpdateSelect(vo));
-		return CalendarDao.revSetUpdateSelect(vo);
+		return vo;
+	}
+	
+	@PostMapping("revSetUpdateSelect")
+	@ResponseBody
+	public List<CalendarVO> revSetUpdateSelect(@RequestParam("id")int id,CalendarVO cal) {
+		System.out.println(CalendarDao.revSetUpdateSelect(id));
+		System.out.println(id);
+		return CalendarDao.revSetUpdateSelect(id);
 	}
 }

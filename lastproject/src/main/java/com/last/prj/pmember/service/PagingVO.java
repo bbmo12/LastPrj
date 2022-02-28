@@ -1,7 +1,5 @@
 package com.last.prj.pmember.service;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 import lombok.Data;
 
 @Data
@@ -38,18 +36,6 @@ public class PagingVO {
 		this.prev = this.startPage > 1;
 		this.next = this.endPage < realEnd;
 
-	}
-	public String makeQuery(int page, boolean needSearch) {
-		UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.newInstance()
-			.queryParam("page", page)
-			.queryParam("perPageNum", this.cri.getAmount());
-		//검색 한 경우		
-		if (this.cri.getSearchType() != null) {
-			uriComponentsBuilder
-				.queryParam("searchType", this.cri.getSearchType())
-				.queryParam("keyword", this.cri.getKeyword());
-		}
-		return uriComponentsBuilder.build().encode().toString();
 	}
 
 }

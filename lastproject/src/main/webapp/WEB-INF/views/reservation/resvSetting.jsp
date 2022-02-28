@@ -3,60 +3,288 @@
 <html>
 <head>
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<!-- <link rel="stylesheet" href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
-<script src="https://uicdn.toast.com/tui-grid/latest/tui-grid.js"></script> -->
-<link rel="stylesheet" href="resources/static/css/tui-grid.css" type="text/css">
-<script src="resources/static/js/tui-grid.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css" />
+
+<!-- If you use the default popups, use this. -->
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css" />
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css" />
+
+<script src="https://uicdn.toast.com/tui.code-snippet/v1.5.2/tui-code-snippet.min.js"></script>
+<script src="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.min.js"></script>
+<script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
+<script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
-<script>
+<style>
+#calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div:nth-child(3) > div{
+	display: none;
+}
+#calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div.tui-full-calendar-popup-section.tui-full-calendar-dropdown.tui-full-calendar-close.tui-full-calendar-section-state > button{
+	display: none;
+}
 
-window.onload = function(){
-     $.ajax({
-        url : "test",
-        method :"GET",
-        success : function(result){
-        	console.log(result);
-            grid.resetData(result);
-        } 
-    }); 
-    var grid = new tui.Grid({
-        el: document.getElementById('grid'),
-        scrollX: false,
-        scrollY: false,
-        columns: [
-          {
-            header: '예약번호',
-            name: 'r_no',
-          },
-          {
-            header: '예약신청일',
-            name: 'r_date'
-          },
-          {
-            header: '예약일',
-            name: 'startdate',
-          },
-          {
-            header: '예약시간',
-            name: 'time'
-          },
-          {
-            header: '회원아이디',
-            name: 'm_id',
-          },
-          {
-              header: '승인여부',
-              name: 'rccontent',
-          }
-        ]
-      });
-      };
- </script>
+
+</style>
 <body>
 <br><br><br><br><br><br>
-<div id="grid"></div>
+
+
+<div id="calendar" style="height: 800px;"></div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	revList();
+	
+	
+	
+	var templates = {
+		    popupIsAllDay: function() {
+		      return '하루종일';
+		    },
+		    titlePlaceholder: function() {
+		      return '제목';
+		    },
+		    startDatePlaceholder: function() {
+		      return '시작일';
+		    },
+		    endDatePlaceholder: function() {
+		      return '종료일';
+		    },
+		    popupSave: function() {
+		      return '등록';
+		    },
+		    popupUpdate: function() {
+		      return '수정';
+		    },
+		    popupDetailDate: function(isAllDay, start, end) {
+		      var isSameDate = moment(start).isSame(end);
+		      var endFormat = (isSameDate ? '' : 'YYYY.MM.DD ') + 'hh:mm a';
+		      if (isAllDay) {
+		    	  console.log(start);
+		        return moment(start).format('YYYY.MM.DD') + (isSameDate ? '' : ' - ' + moment(end).format('YYYY.MM.DD'));
+		      }
+
+		      return (moment(start).format('YYYY.MM.DD hh:mm a') + ' - ' + moment(end).format(endFormat));
+		    },
+		    popupDetailLocation: function(schedule) {
+		      return 'Location : ' + schedule.location;
+		    },
+		    popupDetailUser: function(schedule) {
+		      return 'User : ' + (schedule.attendees || []).join(', ');
+		    },
+		    popupDetailState: function(schedule) {
+		      return 'State : ' + schedule.state || 'Free';
+		    },
+		    popupDetailRepeat: function(schedule) {
+		      return 'Repeat : ' + schedule.recurrenceRule;
+		    },
+		    popupDetailBody: function(schedule) {
+		      return 'Body : ' + schedule.body;
+		    },
+		    popupEdit: function() {
+		      return '수정';
+		    },
+		    popupDelete: function() {
+		      return '삭제';
+		    }
+		  };
+	var calendar;
+	
+	//캘린더 생성
+	function CreateCalendar(){
+			calendar = new tui.Calendar(document.getElementById('calendar'), {
+		    defaultView: 'month',
+		    taskView: true,    // Can be also ['milestone', 'task']
+		    scheduleView: false,  // Can be also ['allday', 'time']
+		    useCreationPopup : false,
+		    useDetailPopup : true,
+		    disableClick : false,
+		    disableDblClick : true,
+		    template: templates,
+		    month: {
+		        daynames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		        startDayOfWeek: 0,
+		    },
+		});
+	}
+	//예약설정조회
+	function revList(){
+		$("#calendar").empty();
+		CreateCalendar();
+		$.ajax({
+			url : "revsetlist",
+			dataType : "JSON",
+			success : function(result){
+				console.log(result);
+				for(var i =0;i<result.length;i++){
+					
+				var id = result[i].id;
+				var calendarid = result[i].calendarid;
+				var start = result[i].c_start;
+				var end = result[i].c_end;
+				var time = result[i].c_time;
+				var category = result[i].category;
+				var title = result[i].title;
+				var pid = result[i].p_id;
+				var ctime = result[i].c_time;
+				
+					calendar.createSchedules([
+						{
+							id: id,
+						    title: title,
+						    start: start,
+						    end: end,
+						    category: category
+						}
+					]);
+				}
+			}
+		});
+	}
+	
+ 
+ 
+ 
+
+	//새 일정 생성이벤트
+	calendar.on('beforeCreateSchedule', scheduleData => {
+	  var schedule = {
+	    title: scheduleData.title,
+	    isAllDay: scheduleData.isAllDay,
+	    start: scheduleData.start,
+	    end: scheduleData.end,
+	    category: scheduleData.isAllDay ? 'allday' : 'time'
+	  }
+	  console.log(schedule);
+  
+  //원하는 값 잘라오기
+  
+  //end
+  //var end = formatDate(schedule.end._date);
+  var end = new Date(schedule.end._date.getTime() - (schedule.end._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
+  var strEnd = end.slice(0,10);
+  console.log(end);
+  
+  //start
+  //var start = formatDate(schedule.start._date);
+  var start = new Date(schedule.start._date.getTime() - (schedule.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
+  var strStart = start.slice(0,10);
+  console.log(start);
+  
+  
+	$.ajax({
+		url : "revsetinsert",
+		method : "POST",
+		data : {"title": '예약가능',
+			    "c_start": start,
+			    "c_end": end,
+			    "category":'allday'},
+		success : function(res){
+			console.log(res);
+			calendar.createSchedules([
+				{
+					id: res.id,
+				    title: res.title,
+				    start: res.c_start,
+				    end: res.c_end,
+				    category: res.category
+				}
+			]);
+			alert('해당 예약일정을 등록하셨습니다.');
+		}
+	})
+});
+ //일정 수정이벤트
+ calendar.on('beforeUpdateSchedule', function(event) {
+    var schedule = event.schedule;
+    var changes = event.changes;
+    var end,start,category,title;
+     
+  //원하는 값 잘라오기
+    //end,start 조건문
+    console.log(schedule);
+      if(typeof changes.end == 'undefined'){
+    	end = null;
+    }else{
+    	//end = changes.end._date.toISOString().slice(0,16);
+    	end = new Date(changes.end._date.getTime() - (changes.end._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
+    }
+    
+    if(typeof changes.start =='undefined'){
+    	start = null;
+    }else{
+    	//start = changes.start._date.toISOString().slice(0,16);
+    	start = new Date(changes.start._date.getTime() - (changes.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
+    }
+    
+    if(typeof changes.category =='undefined'){
+    	category = null;
+    }else{
+    	category = changes.category;
+    } 
+    
+    if(typeof changes.title =='undefined'){
+    	title = null;
+    }else{
+    	title = changes.title;
+    } 
+    
+    //end
+    
+    //start
+   // var start = changes.start._date.toISOString();
+    /* var strStart = start.slice(0,16);*/
+    console.log(changes);
+    console.log(start);
+    
+	  $.ajax({
+		url : "revsetupdate",
+		method : "POST",
+		data : { "id" : schedule.id ,
+				 "c_start": start,
+				 "c_end" : end,
+				 "title" : title,
+				 "category" : category
+				},
+		success : function(res){
+			
+		    calendar.updateSchedule(schedule.id, schedule.calendarId, changes);
+		    alert("수정 완료");
+			
+		}
+	})  
+});
+
+//일정 삭제이벤트
+calendar.on('beforeDeleteSchedule', scheduleData => {
+		  const {schedule, start, end} = scheduleData;
+
+		  schedule.start = start;
+		  schedule.end = end;
+		  $.ajax({
+			  url : 'revsetdelete',
+			  method : 'POST',
+			  data : {"id" : schedule.id},
+			  success : function(res){
+				  console.log(res);
+		  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
+		  		alert("해당 예약설정을 해제하였습니다.");
+			  }
+		  })
+	});
+ 
+
+
+ });
+
+
+
+ </script>
+
+
 
 </body>
 </html>

@@ -18,16 +18,6 @@ public class PmemberServiceImpl implements PmemberService{
 	@Autowired PmemberMapper map;
 
 	@Override
-	public List<PmemberVO> memberList(int code) {
-		return map.memberList(code);
-	}
-
-	@Override
-	public List<PmemberVO> memberSelect(String w_address, int code) {
-		return map.memberSelect(w_address, code);
-	}
-
-	@Override
 	public PmemberVO getMember(String p_id) {
 		return map.getMember(p_id);
 	}
@@ -41,7 +31,6 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<ReviewVO> getServiceReview(String p_id) {
 		return map.getServiceReview(p_id);
 	}
-
 
 	@Override
 	public List<FfileVO> getProfile(String m_id) {

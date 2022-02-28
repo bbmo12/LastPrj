@@ -31,18 +31,13 @@ public class PmemberController {
 		PagingVO paging = new PagingVO(cri, mapper.memberPage(cri));
 		model.addAttribute("page", paging);//페이징 수 
 		model.addAttribute("pageList", mapper.memberPageList(cri));//페이징 리스트 
-		System.out.println("ggggg"+paging);
-		System.out.println("나와라 "+pMemberDao.memberPageList(cri));
 		return "pmember/memberList";
 	}
 	//지역검색  
 	@ResponseBody
 	@PostMapping("/pmemberLocal")
-	public List<PmemberVO> pmemberLocal(@RequestParam("coded") int code, @RequestParam("local")String w_address, Model model, PmemberVO pmember) {
-	    pmember.setCode(code);
-	    pmember.setW_address(w_address);
-	    pMemberDao.memberSelect(w_address, code);
-		return pMemberDao.memberSelect(w_address, code);
+	public List<PmemberVO> pmemberLocal(Criteria cri, Model model, PmemberVO pmember) {
+		return pMemberDao.memberPageList(cri);
 	}
 	//상세페이지 
 	@RequestMapping("/pmemberDetail")
@@ -56,8 +51,11 @@ public class PmemberController {
 	}
 	@RequestMapping("/memberMain")
 	public String home() {
-
 		return "pmember/memberMain";
+	}
+	@RequestMapping("/pmemberMyPage")
+	public String mypage() {
+		return "pmember/pmemberMypage";
 	}
 	
 }

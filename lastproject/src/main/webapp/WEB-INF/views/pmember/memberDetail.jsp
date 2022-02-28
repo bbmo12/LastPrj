@@ -52,7 +52,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${pmemdetail.picture }"
-								style="width: 210px;" alt="바보야야야야야">
+								style="width: 210px;" alt="등록된 사진이 없습니다.">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
 							<h3>${pmemdetail.w_name}</h3>
@@ -78,19 +78,19 @@
 											<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 												<div class="categories_post">
 													<img src="resources/assets/images/blog/cat-post/cat-post-3.jpg"
-														alt="post">
+														alt="등록된 사진이 없습니다.">
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 												<div class="categories_post">
 													<img src="resources/assets/images/blog/cat-post/cat-post-2.jpg"
-														alt="post">
+														alt="등록된 사진이 없습니다.">
 												</div>
 											</div>
 											<div class="col-lg-4 col-md-6">
 												<div class="categories_post">
 													<img src="resources/assets/images/blog/cat-post/cat-post-1.jpg"
-														alt="post">
+														alt="등록된 사진이 없습니다.">
 												</div>
 											</div>
 										</div>
@@ -104,18 +104,6 @@
 										</c:forEach>
 										<h3 style="font-weight: normal">${pmemdetail.n_content}</h3>
 									</div>
-									<div class="col-lg-12 my-4">
-										<p>MCSE boot camps have its supporters and its detractors.
-											Some people do not understand why you should have to spend
-											money on boot camp when you can get the MCSE study materials
-											yourself at a fraction of the camp price. However, who has
-											the willpower.</p>
-										<p>MCSE boot camps have its supporters and its detractors.
-											Some people do not understand why you should have to spend
-											money on boot camp when you can get the MCSE study materials
-											yourself at a fraction of the camp price. However, who has
-											the willpower.</p>
-									</div>
 								</section>
 							</div>
 						</div>
@@ -128,11 +116,14 @@
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
 											<img class="author_img rounded-circle"
-												src="resources/upload/${counsel.picture }" alt="회원사진은어디로로로로로로"
+												src="resources/upload/${counsel.picture }" alt="등록된 사진이 없습니다."
 												style="width: 100px;">
 										</div>
 										<div class="desc">
-											<h5>${counsel.m_id }&nbsp;&nbsp;평점:${counsel.rating }점</h5>
+											<h5>${counsel.m_id }</h5>
+											<div class="star">
+												<input type="hidden" class="rating" value="${counsel.rating }">
+											</div>
 											<input id="counselProfile" type="hidden" value=${counsel.m_id }>
 											<p></p>
 											<h5 class="comment">${counsel.content }</h5>
@@ -142,7 +133,7 @@
 								<div class="row" id="servicePhoto">
 									<c:forEach items="${counsel.fileList }" var="photo">
 										<div style="margin-top: 20px;">
-											<img src="resources/upload/${photo.photo }" alt="사진줍쇼오오"
+											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
 									</c:forEach>
@@ -155,11 +146,14 @@
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
 											<img class="author_img rounded-circle"
-												src="resources/upload/${service.picture }" alt="사진줍쇼오오"
+												src="resources/upload/${service.picture }" alt="등록된 사진이 없습니다."
 												style="width: 100px;">
 										</div>
 										<div class="desc">
 											<h5>${service.m_id }&nbsp;&nbsp;평점:${service.rating }점</h5>
+											<div class="star">
+												<input type="hidden" class="rating" value="${service.rating }">
+											</div>
 											<input id="serviceProfile" type="hidden" value="${service.m_id }">
 											<p></p>
 											<h5 class="comment">${service.content }</h5>
@@ -169,7 +163,7 @@
 								<div class="row" id="servicePhoto">
 									<c:forEach items="${service.fileList }" var="photo">
 										<div style="margin-top: 20px;">
-											<img src="resources/upload/${photo.photo }" alt="사진줍쇼오오오"
+											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
 									</c:forEach>
@@ -184,12 +178,23 @@
 							<a href="#top" class="btn-reply text-uppercase" id="back" style="text-align: center;">Back
 								to top</a>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+		$(function () {
+			$('.star').each(function (index, item) {
+				$(this).raty({
+					score: $(this).find('.rating').val(),
+					path: "resources/star",
+					width: 200,
+					readOnly: true
+				});
+			})
+		});
+	</script>
 	<script type="text/javascript">
 		console.log('${pmemdetail}');
 		$(function () {

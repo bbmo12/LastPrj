@@ -43,13 +43,14 @@
 											<th>신고한 내용</th>
 											<th>신고한 날짜</th>
 											<th>신고 유형</th>
-											<!-- <th>신고 처리</th> -->
+											<th>신고 당한 게시글</th>
+											<th>신고 처리</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:if test="${reportList[0].rep_no eq null}">
 											<tr>
-												<td colspan="6" align="center">데이터가 존재하지 않습니다.</td>
+												<td colspan="8" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
 										</c:if>
 										<c:if test="${reportList ne null }">
@@ -60,49 +61,64 @@
 													<td align="center">${reports.reported }</td>
 													<td align="center">${reports.content }</td>
 													<td align="center">${reports.w_date }</td>
-													<td align="center" href="reportDetail?">${reports.f_content }</td>
-												</tr>
+													<td align="center"><a
+														href="reportDetail?rep_no=${reports.rep_no }">
+															${reports.f_content }</a></td>
+													<c:choose>
 
-												<!-- 신고 내용 상세보기 and 신고 처리 -->
-												<div class="modal fade" id="exampleModal" tabindex="-1"
-													role="dialog" aria-labelledby="exampleModalLabel"
-													aria-hidden="true">
-													<div class="modal-dialog" role="document">
+														<c:when test="${reports.rev_no ne 0}">
+															<td align="center">${reports.rev_no }</td>
+
+														</c:when>
+
+														<c:when test="${reports.q_no ne 0 }">
+															<td align="center">${reports.q_no }</td>
+
+														</c:when>
+
+													</c:choose>
+
+													<td><button id="reportModal" type="button"
+															class="btn btn-secondary" data-toggle="modal"
+															data-target="#exampleModal${reports.rev_no }">신고처리</button></td>
+												</tr>
+												<!--Modal 신고 내용 상세보기 and 신고 처리 -->
+												<div class="modal fade" id="exampleModal${reports.rev_no }" tabindex="-1"
+													aria-labelledby="exampleModalLabel" aria-hidden="true">
+													<div class="modal-dialog">
 														<div class="modal-content">
 															<div class="modal-header">
-																<h3 class="modal-title" id="exampleModalLabel">신고 내역</h3>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<h5 class="modal-title" id="exampleModalLabel">신고내역</h5>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
 																	<span aria-hidden="true">&times;</span>
 																</button>
 															</div>
 															<div class="modal-body">
-
-																<h4>신고 내역 </h4>
-																
-																<b>신고 한 사람</b>
-																<input type="hidden" id="reporter" name="reporter" value="${신고한사람 아이디 }"> 
-																<b>신고 당한 사람</b>
-																<input type="hidden" id="reported" name="reported" value="${신고당한사람 아이디}"> 
-																<b>신고 사유</b>
-																<input type="hidden" id="q_no" name="q_no" value="${ans.q_no }"> 																
-																<br> <br>
-																<h4>신고 원본</h4>
-																<textarea id="content" name="content" rows="4" cols="50">
-																<!--  -->
-																</textarea>
-
+																<form>
+																	<div class="form-group">
+																		<label for="recipient-name" class="col-form-label">신고자</label>
+																		<input type="text" class="form-control"
+																			id="recipient-name" value="${reports.reporter }">
+																	</div>
+																	<div class="form-group">
+																		<label for="message-text" class="col-form-label">신고사유</label>
+																		<textarea class="form-control" id="message-text">${reports.content} </textarea>
+																	</div>
+																</form>
 															</div>
 															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary" data-dismiss="modal">모달 끄기</button>
-																<button type="button" id="permitReport" name="permitReport" class="btn btn-primary">신고 승인</button>
-																<button type="button" id="cancelReport" name="cancelReport" class="btn btn-primary">신고 기각</button>
+																<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">모달 끄기</button> -->
+																<button type="button" id="permitReport"
+																	onclick="permitReport()" name="permitReport"
+																	class="btn btn-primary">신고 승인</button>
+																<button type="button" id="cancelReport"
+																	onclick="cancelReport()" name="cancelReport"
+																	class="btn btn-primary">신고 기각</button>
 															</div>
 														</div>
 													</div>
 												</div>
-
-
-
 											</c:forEach>
 										</c:if>
 									</tbody>
@@ -135,6 +151,37 @@
 	<script src="resources/table/js/datatables.min.js"></script>
 	<script>
 		$('#zero_config').DataTable();
+		
+		
+		function permitReport() {
+			
+			var flag = confirm("해당 신고를 승인하시겠습니까?");
+			/* if(flag == true){
+				$.ajax({
+					url : 'permitReport',
+					method : 'post'
+					data : {}
+				});
+			}
+			 */
+			
+		} 
+		function cancelReport() {
+			
+			var flag = confirm("해당 신고를 기각하시겠습니까?")
+	
+		} 
+		
+		
+		//모달 신고내역 초기화
+		$('#exampleModal').on('hidden.bs.modal', function(e){
+            $(this).find('form')[0].reset();
+
+        })
+		
+		
+		
+		
 	</script>
 
 </body>

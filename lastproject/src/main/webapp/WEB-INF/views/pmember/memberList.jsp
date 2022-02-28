@@ -9,7 +9,7 @@
 	<title>Insert title here</title>
 </head>
 <style>
-	#keyword::placeholder {
+	#w_address::placeholder {
 		color: #fff;
 	}
 </style>
@@ -41,16 +41,16 @@
 				</div>
 			</div>
 			<div class="row" id="data-container">
+			<input id="pmemberCode" type="hidden" value="${param.code }">
 				<c:forEach items="${pageList }" var="pmember">
 					<div class="col-lg-3 col-sm-6">
 						<div class="single-doctor mb-4 mb-lg-0">
 							<div class="doctor-img">
-								<img src="resources/upload/${pmember.picture }" alt="난바보" class="img-fluid"
+								<img src="resources/upload/${pmember.picture }" alt="등록된 사진이 없습니다." class="img-fluid"
 									style="width: 300px; height: 200px;">
 							</div>
 							<div class="content-area">
-								<div class="doctor-name text-center">
-									<input id="pmemberCode" type="hidden" value="${pmember.code }">
+								<div class="doctor-name text-center">								
 									<a href="pmemberDetail?id=${pmember.p_id}">
 										<h3>${pmember.name }</h3>
 									</a>
@@ -64,7 +64,7 @@
 		<div class="blog_right_sidebar" style="width: 500px; float: none; margin: 0 auto;">
 			<aside class="single_sidebar_widget search_widget">
 				<div class="input-group">
-					<input type="text" class="form-control" id="keyword" name="keyword" placeholder="지역명을 입력해주세요">
+					<input type="text" class="form-control" id="w_address" name="w_address" placeholder="지역명을 입력해주세요">
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button" onclick="getLocal()">
 							<i class="fa fa-search"></i>
@@ -76,6 +76,7 @@
 		</div>
 		<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">
+				<c:if test="${page.prev }">
 				<li class="page-item">
 					<a href="pmemberList?pageNum=${page.startPage-1}&code=${page.cri.code}" class="page-link"
 						aria-label="Previous">
@@ -83,17 +84,20 @@
 							<span class="fa fa-angle-left"></span>
 						</span></a>
 				</li>
+				</c:if>
 				<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }">
 					<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
 							href="pmemberList?pageNum=${num }&code=${page.cri.code}" class="page-link">${num }</a>
 					</li>
 				</c:forEach>
+				<c:if test="${page.next }">
 				<li class="page-item"><a href="pmemberList?pageNum=${page.endPage+1}&code=${page.cri.code}"
 						class="page-link" aria-label="Next">
 						<span aria-hidden="true">
 							<span class="fa fa-angle-right"></span>
 						</span></a>
 				</li>
+				</c:if>
 			</ul>
 		</nav>
 		<form action="../pmemberList" name="pageForm" method="get">
@@ -104,14 +108,14 @@
 	<script type="text/javascript">
 		function getLocal() {
 			var code = document.getElementById('pmemberCode').value;
-			var local = document.getElementById('keyword').value;
-			$('#keyword').val('');
+			var local = document.getElementById('w_address').value;
+			$('#w_address').val('');
 			$.ajax({
 				url: 'pmemberLocal',
 				method: 'post',
 				data: {
-					coded: code,
-					local: local
+					code: code,
+					w_address: local
 				}
 			}).done(function (data) {
 				console.log(data);
@@ -125,11 +129,10 @@
 					content.className = 'col-lg-3 col-sm-6';
 					content.innerHTML = `<div class="single-doctor mb-4 mb-lg-0">
 								<div class="doctor-img">
-									<img src="resources/upload/\${data[i].picture }" alt="난바보" class="img-fluid">
+									<img src="resources/upload/\${data[i].picture }" alt="등록된 사진이 없습니다" class="img-fluid">
 								</div>
 								<div class="content-area">
 									<div class="doctor-name text-center">
-									<input id="pmemberCode" type="hidden" value="\${data[i].code }">
 										<a href="pmemberDetail?id=\${data[i].p_id}">
 											<h3>\${data[i].name}</h3>
 										</a>

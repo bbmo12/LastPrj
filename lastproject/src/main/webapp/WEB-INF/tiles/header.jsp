@@ -81,7 +81,7 @@ function onMessage(evt){
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="home"><img src="resources/assets/images/logo/logo.png" alt="" title="" /></a>
+					<a href="home"><img src="resources/upload/pet.PNG" alt="" title=""style="width: 150px; height: 70px;"/></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
@@ -104,12 +104,13 @@ function onMessage(evt){
 						<c:if test="${mId eq null and pId ne null}">
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
-									<li><a href="#">내 프로필</a></li>
+									<li><a href="pmemberMyPage">내 프로필</a></li>
 									<li><a href="#">반려동물 프로필</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
 									<li><a href="#">결제 내역</a></li>
 									<li><a href="#">상담 내역</a></li>
 									<li><a href="#">신고 내역</a></li>
+									<li><a href="#">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
@@ -164,18 +165,40 @@ function onMessage(evt){
 						<c:if test="${mId ne null and pId eq null}">
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
-									<li><a href="#">내 프로필</a></li>
-									<li><a href="#">반려동물 프로필</a></li>
+									<li><a href="memberMypage">내 프로필</a></li>
+									<li><a href="petmemberForm">반려동물 프로필</a></li>
 									<li><a href="reservationSelect">예약 내역</a></li>
 									<li><a href="#">결제 내역</a></li>
 									<li><a href="#">상담 내역</a></li>
 									<li><a href="#">신고 내역</a></li>
+									<li><a href="#">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>
+
 								</ul>
 							</li>
-							<li class="nav-item dropdown">
+
+
+						</c:if>
+						<li><a href="#">Contact</a></li>
+			<li class="nav-item dropdown">
 								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
 									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+								aria-labelledby="notificationDropdown">
+								<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item preview-item">
+									<div class="preview-thumbnail">
+										<div class="preview-icon bg-success">
+											<i class="mdi mdi-calendar"></i>
+										</div>
+									</div>
+									<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+										<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
+										<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
+									</div>
+
 								</a>
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
 									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>

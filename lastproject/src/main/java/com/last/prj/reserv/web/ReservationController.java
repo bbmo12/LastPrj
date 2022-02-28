@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.calendar.service.CalendarService;
+import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistService;
 import com.last.prj.reserv.service.ReservationService;
@@ -30,12 +32,25 @@ public class ReservationController {
 	@Autowired
 	private PreservationlistService pReservationDao;
 	
+	@Autowired
+	private CalendarService CalendarDao;
+	
+	//일반회원 예약하기
+	@RequestMapping("/test")
+	public String reservation(Model model) {
+		
+		List<CalendarVO> list = CalendarDao.revSetList();
+		model.addAttribute("reservset",list);
+		System.out.println(list);
+		return "reservation/test";
+	}
+	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
 	public String reservationSetting(Model model,PreservationVO pres) {
 		//List<PreservationVO> list = pReservationDao.preservationlist();
 		
-		return "reservation/test";
+		return "reservation/resvSetting";
 		
 	}
 	
@@ -90,13 +105,6 @@ public class ReservationController {
 		  return "ok";
 	  }
 	  
-	  @GetMapping("/test")
-	  @ResponseBody 
-	  public List<PreservationVO> test(Model model) {
-		  List<PreservationVO> list = pReservationDao.preservationlist();
-		  System.out.println(list);
-		  return list;
-	  }
 	  
 	 
 }
