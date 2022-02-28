@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,13 +32,13 @@
 
 
 <div id="calendar" style="height: 800px;"></div>
+<table class="table"></table>
 
 <script type="text/javascript">
 
 $(document).ready(function(){
 	
 	revList();
-	
 	
 	
 	var templates = {
@@ -135,13 +136,32 @@ $(document).ready(function(){
 			}
 		});
 	}
- $(".tui-full-calendar-weekday-grid-date").on('click',function(){
-	 console.log("ok");
- })
+	calendar.on('clickSchedule', function(event) {
+		$(".table").empty();
+		var val = `
+			<thead>
+				<tr>
+					<th>예약가능일자</th>
+					<th>예약시간</th>
+					<th>예약내용</th>
+					<th>품종</th>
+					<th>예약가능여부</th>
+				</tr>
+			</thead>
+	<tbody>
+		<c:forEach items="${reservset }" var="res">
+			<tr>
+				<td>${res.c_start} </td>
+				<td>${res.c_end}</td>
+			</tr>
+		</c:forEach>
+	</tbody> `;
+		$(".table").append(val);
+		
+		
+	});
  
- $(".tui-full-calendar-weekday-schedule-title").on('click',function(){
-	 console.log("no");
- })
+
  
 
 });

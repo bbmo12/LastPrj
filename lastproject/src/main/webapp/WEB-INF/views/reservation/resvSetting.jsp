@@ -108,7 +108,6 @@ $(document).ready(function(){
 		        startDayOfWeek: 0,
 		    },
 		});
-			d;
 	}
 	//예약설정조회
 	function revList(){
@@ -215,14 +214,14 @@ $(document).ready(function(){
     	end = null;
     }else{
     	//end = changes.end._date.toISOString().slice(0,16);
-    	end = new Date(changes.end._date.getTime() - (changes.end._date.getTimezoneOffset() * 60000)).toISOString().slice(0,16);
+    	end = new Date(changes.end._date.getTime() - (changes.end._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
     }
     
     if(typeof changes.start =='undefined'){
     	start = null;
     }else{
     	//start = changes.start._date.toISOString().slice(0,16);
-    	start = new Date(changes.start._date.getTime() - (changes.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,16);
+    	start = new Date(changes.start._date.getTime() - (changes.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10);
     }
     
     if(typeof changes.category =='undefined'){
