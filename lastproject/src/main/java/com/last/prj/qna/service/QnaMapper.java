@@ -46,5 +46,8 @@ public interface QnaMapper {
 	//답변글 삭제
 	int ansDelete(int q_no);
 	
+	
+	//질문글 전체 조회 (관리자)
+	List<QnaVO> admQnaList();
 
 }
