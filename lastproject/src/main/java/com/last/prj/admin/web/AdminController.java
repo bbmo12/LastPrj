@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.pmember.service.ReviewService;
+import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaVO;
 import com.last.prj.report.service.ReportService;
@@ -25,6 +27,9 @@ public class AdminController {
 	
 	@Autowired
 	private ReportService reportDao;
+	
+	@Autowired
+	private ReviewService reviewDao;
 	
 	@Autowired
 	private QnaService qnaDAO;
@@ -65,13 +70,13 @@ public class AdminController {
 	public String reportList(Model model) {
 		List<ReportVO> list = reportDao.reportList();
 		List<QnaVO> qlist = qnaDAO.admQnaList();
-		//List<ReviewVO> vlist = revDao.admReviewList();
+		List<ReviewVO> vlist = reviewDao.admReviewList();
 		
 		
 		System.out.println(list);
 		model.addAttribute("rList", list);
 		model.addAttribute("qList", qlist);
-		//model.addAttribute("vList", vlist);
+		model.addAttribute("vList", vlist);
 		return "admin/board/reportTable";
 	}
 	
@@ -84,5 +89,6 @@ public class AdminController {
 	}
 
 	// 3. 신고 처리 ()
+	
 
 }

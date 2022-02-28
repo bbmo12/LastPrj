@@ -48,43 +48,47 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:if test="${reportList[0].rep_no eq null}">
+										<c:if
+											test="${rList[0].rep_no eq null && qList[0].q_no eq null && vList[0].rev_no eq null }">
 											<tr>
 												<td colspan="8" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
 										</c:if>
-										<c:if test="${reportList ne null }">
-											<c:forEach items="${reportList }" var="reports">
+										<c:if test="${rList ne null }">
+											<c:forEach items="${rList }" var="rs">
 												<tr>
-													<td align="center">${reports.rep_no }</td>
-													<td align="center">${reports.reporter }</td>
-													<td align="center">${reports.reported }</td>
-													<td align="center">${reports.content }</td>
-													<td align="center">${reports.w_date }</td>
+													<td align="center">${rs.rep_no }</td>
+													<td align="center">${rs.reporter }</td>
+													<td align="center">${rs.reported }</td>
+													<td align="center">${rs.content }</td>
+													<td align="center">${rs.w_date }</td>
 													<td align="center"><a
-														href="reportDetail?rep_no=${reports.rep_no }">
-															${reports.f_content }</a></td>
-													<c:choose>
+														href="reportDetail?rep_no=${rs.rep_no }">
+															${rs.f_content }</a></td>
+													<c:forEach items="${vList }" var="vs">
+														<c:choose>
 
-														<c:when test="${reports.rev_no ne 0}">
-															<td align="center">${reports.rev_no }</td>
+															<c:when test="${rs.rev_no ne 0 }">
+																<td align="center">${rs.rev_no }</td>
 
-														</c:when>
+															</c:when>
 
-														<c:when test="${reports.q_no ne 0 }">
-															<td align="center">${reports.q_no }</td>
+															<c:when test="${rs.q_no ne 0 }">
+																<td align="center">${rs.q_no }</td>
 
-														</c:when>
+															</c:when>
 
-													</c:choose>
+														</c:choose>
+													</c:forEach>
 
 													<td><button id="reportModal" type="button"
 															class="btn btn-secondary" data-toggle="modal"
-															data-target="#exampleModal${reports.rev_no }">신고처리</button></td>
+															data-target="#exampleModal${rs.rev_no }">신고처리</button></td>
 												</tr>
 												<!--Modal 신고 내용 상세보기 and 신고 처리 -->
-												<div class="modal fade" id="exampleModal${reports.rev_no }" tabindex="-1"
-													aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal fade" id="exampleModal${rs.rev_no }"
+													tabindex="-1" aria-labelledby="exampleModalLabel"
+													aria-hidden="true">
 													<div class="modal-dialog">
 														<div class="modal-content">
 															<div class="modal-header">
@@ -99,11 +103,11 @@
 																	<div class="form-group">
 																		<label for="recipient-name" class="col-form-label">신고자</label>
 																		<input type="text" class="form-control"
-																			id="recipient-name" value="${reports.reporter }">
+																			id="recipient-name" value="${rs.reporter }">
 																	</div>
 																	<div class="form-group">
 																		<label for="message-text" class="col-form-label">신고사유</label>
-																		<textarea class="form-control" id="message-text">${reports.content} </textarea>
+																		<textarea class="form-control" id="message-text">${rs.content} </textarea>
 																	</div>
 																</form>
 															</div>
@@ -151,10 +155,9 @@
 	<script src="resources/table/js/datatables.min.js"></script>
 	<script>
 		$('#zero_config').DataTable();
-		
-		
+
 		function permitReport() {
-			
+
 			var flag = confirm("해당 신고를 승인하시겠습니까?");
 			/* if(flag == true){
 				$.ajax({
@@ -164,24 +167,19 @@
 				});
 			}
 			 */
-			
-		} 
-		function cancelReport() {
-			
-			var flag = confirm("해당 신고를 기각하시겠습니까?")
-	
-		} 
-		
-		
-		//모달 신고내역 초기화
-		$('#exampleModal').on('hidden.bs.modal', function(e){
-            $(this).find('form')[0].reset();
 
-        })
-		
-		
-		
-		
+		}
+		function cancelReport() {
+
+			var flag = confirm("해당 신고를 기각하시겠습니까?")
+
+		}
+
+		//모달 신고내역 초기화
+		$('#exampleModal').on('hidden.bs.modal', function(e) {
+			$(this).find('form')[0].reset();
+
+		})
 	</script>
 
 </body>
