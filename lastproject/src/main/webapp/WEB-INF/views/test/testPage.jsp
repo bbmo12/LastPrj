@@ -10,6 +10,7 @@
 //notifySend
 $('#notifySendBtn').click(function(e){
 	
+	
     var n_to = "test1@a.com"
     var content = "예약이 승인되었습니다.";
     
