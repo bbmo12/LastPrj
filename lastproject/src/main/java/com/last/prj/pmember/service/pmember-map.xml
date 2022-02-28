@@ -90,7 +90,7 @@
 			  ON F.F_PART = RE.F_PART
              WHERE R.P_ID = #{p_id}
 	</select>
-	<!-- 페이징번호 -->
+	<!-- 페이징번호 , 검색 가능-->
 	<select id="memberPageList" resultType="com.last.prj.pmember.service.PmemberVO">
 		   SELECT *
       			FROM ( SELECT ROWNUM RN, A.*
