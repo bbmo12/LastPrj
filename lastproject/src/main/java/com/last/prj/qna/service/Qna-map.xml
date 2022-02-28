@@ -23,34 +23,20 @@
 		<result property="t_name" column="t_name" />
 	</resultMap>
 
-	<!-- qna + p_member 
-	<resultMap type="com.last.prj.qna.service.QnaVO"
-		id="pMemInfo">
-		<id property="q_no" column="q_no" />
-		<result property="w_date" column="w_date" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="hit" column="hit" />
-		<result property="writer" column="writer" />
-		<result property="p_no" column="p_no" />
-		<result property="f_part" column="f_part" />
-		<result property="pet_no" column="pet_no" />
-		<result property="r_check" column="r_check" />
-
-		<association property="pmemVO"
-			javaType="com.last.prj.qna.service.PmemberVO">
-			<id column="p_id" property="p_id" />
-			<result column="name" property="name" />
-			<result column="n_content" property="n_content" />
-			<result column="w_name" property="w_name" />
-			<result column="w_address" property="w_address" />
-			<result column="w_tel" property="w_tel" />
-			<result column="p_info" property="p_info" />
-			<result column="w_d_address" property="w_d_address" />
-			<result column="career" property="career" />
-			<result column="picture" property="picture" />
-		</association>
-	</resultMap>-->
+	<!-- qna + p_member <resultMap type="com.last.prj.qna.service.QnaVO" id="pMemInfo"> 
+		<id property="q_no" column="q_no" /> <result property="w_date" column="w_date" 
+		/> <result property="title" column="title" /> <result property="content" 
+		column="content" /> <result property="hit" column="hit" /> <result property="writer" 
+		column="writer" /> <result property="p_no" column="p_no" /> <result property="f_part" 
+		column="f_part" /> <result property="pet_no" column="pet_no" /> <result property="r_check" 
+		column="r_check" /> <association property="pmemVO" javaType="com.last.prj.qna.service.PmemberVO"> 
+		<id column="p_id" property="p_id" /> <result column="name" property="name" 
+		/> <result column="n_content" property="n_content" /> <result column="w_name" 
+		property="w_name" /> <result column="w_address" property="w_address" /> <result 
+		column="w_tel" property="w_tel" /> <result column="p_info" property="p_info" 
+		/> <result column="w_d_address" property="w_d_address" /> <result column="career" 
+		property="career" /> <result column="picture" property="picture" /> </association> 
+		</resultMap> -->
 
 	<!-- 총 개시글 수 출력 -->
 	<select id="getTotal" resultType="int">
@@ -124,7 +110,8 @@
 		resultType="com.last.prj.qna.service.QnaVO">
 		SELECT *
 		FROM qna q LEFT OUTER JOIN p_member p
-		ON q.writer = p.p_id
+		ON q.writer =
+		p.p_id
 		WHERE q.p_no = #{p_no}
 	</select>
 
@@ -155,7 +142,7 @@
 	</select>
 
 	<!-- 질문글 수정 -->
-	
+
 
 
 	<!-- 질문글 삭제 -->
@@ -171,5 +158,16 @@
 		DELETE FROM qna WHERE q_no
 		= #{q_no}
 	</delete>
+
+
+
+	<!-- 관리자 신고당한 질문글 처리 -->
+	<select id="admQnaList" parameterType="int"
+		resultType="com.last.prj.qna.service.QnaVO">
+		select q.q_no, q.w_date, q.title, q.content, q.writer
+		from qna q, report r
+		where q.q_no = r.q_no
+		order by q.q_no
+	</select>
 
 </mapper>

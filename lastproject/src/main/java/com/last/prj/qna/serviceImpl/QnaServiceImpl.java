@@ -90,6 +90,13 @@ public class QnaServiceImpl implements QnaService {
 		return map.ansDelete(q_no);
 	}
 
+	
+	
+	@Override
+	public List<QnaVO> admQnaList() {
+		return map.admQnaList();
+	}
+
 
 	
 
