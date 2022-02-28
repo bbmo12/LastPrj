@@ -16,6 +16,16 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+<style>
+.container-fluid {
+		width:100%;
+		padding-right: 0px;
+		padding-left: 0px;
+		margin-right:auto;
+		margin-left:auto;
+	}
+</style>
+
 <body>
 	<div class="col-lg-12 grid-margin stretch-card container mt-3">
 		<div class="card">

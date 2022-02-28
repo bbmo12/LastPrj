@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.pmember.service.ReviewMapper">
+
+	<select id="admReviewList" resultType="com.last.prj.pmember.service.ReviewVO">
+		select f.content, r.content, re.content, r.reporter, r.reported, re.rev_no
+		from report r, f_code f, review re
+		where r.code = f.code AND r.rev_no = re.rev_no;
+	</select>
+
+</mapper>
