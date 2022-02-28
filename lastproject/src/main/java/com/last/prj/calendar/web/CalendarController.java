@@ -17,6 +17,7 @@ public class CalendarController {
 	@Autowired
 	private CalendarService CalendarDao;
 	
+	
 	//파트너회원 예약설정 조회
 	@RequestMapping("revsetlist")
 	@ResponseBody
