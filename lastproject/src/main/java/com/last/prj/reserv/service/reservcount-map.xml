@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.reserv.service.ReservCountMapper">
+
+<select id="reservCountList" resultType="com.last.prj.reserv.service.ReservCountVO">
+	SELECT * FROM RESERVCOUNT
+</select>
+
+<select id="reservCountSelect" resultType="com.last.prj.reserv.service.ReservCountVO" parameterType="String">
+	SELECT * FROM RESERVCOUNT
+	WHERE RESERV_DATE = #{reserv_date}
+	AND   RESERV_TIME = #{reserv_time}
+</select>
+
+<insert id="reservCountInsert" parameterType="com.last.prj.reserv.service.ReservCountVO">
+	<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM RESERVCOUNT
+	</selectKey>
+	INSERT INTO RESERVCOUNT
+	VALUES (#{no},#{reserv_date},#{reserv_time},#{p_id})
+</insert>
+</mapper>

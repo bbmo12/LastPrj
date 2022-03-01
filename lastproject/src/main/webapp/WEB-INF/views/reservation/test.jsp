@@ -30,11 +30,26 @@
 <body>
 <br><br><br><br><br><br>
 
+ <div id="menu">
+      <span id="menu-navi">
+        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+          <i class="calendar-icon ic-arrow-line-left" data-action="move-prev">이전</i>
+        </button>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+          <i class="calendar-icon ic-arrow-line-right" data-action="move-next">다음</i>
+        </button>
+      </span>
+      <span id="renderRange" class="render-range"></span>
+    </div>
 
-<div id="calendar" style="height: 800px;"></div>
-<table class="table"></table>
+    <div id="calendar" style ="width: 700px"></div>
+    
+<table class="table" ></table>
 
 <script type="text/javascript">
+
+
 
 $(document).ready(function(){
 	
@@ -95,13 +110,15 @@ $(document).ready(function(){
 		    disableClick : true,
 		    disableDblClick : true,
 		    isReadOnly : false,
+		    isAlways6Week : false,
 		    template: templates,
 		    month: {
 		        daynames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 		        startDayOfWeek: 0,
-		    },
+		    }
 		});
 	}
+	
 	//예약설정조회
 	function revList(){
 		$("#calendar").empty();
@@ -145,38 +162,76 @@ $(document).ready(function(){
 			data : {"id" :id},
 			success : function(res){
 				$(".table").empty();
+				//종료일 - 시작일 +1 로 반복횟수 설정
+				var i,$thead,$tbody;
+				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
+				var split = res[0].c_end.split('-');
+				console.log(parseInt(split[0]+split[1]+split[2]));
 				
-			
-				for(var i =0; i<res.length;i++){
-					var val = `
-					<thead>
-						<tr>
-							<th>예약가능일자</th>
-							<th>예약시간</th>
-							<th>예약내용</th>
-							<th>품종</th>
-							<th>예약가능여부</th>
-						</tr>
-					</thead>
-					
-					<tbody>
+				for( i =0; i<len;i++){
+					$thead = `
+						<thead>
 							<tr>
-								<td>`+res[i].c_start+`</td>
-								
-								<td>`+res[i].c_end+`</td>
+								<th>예약가능일자</th>
+								<th>예약시간</th>
+								<th>예약가능여부</th>
 							</tr>
-					</tbody> `;
+						</thead>`
+					$tbody =` 
+						<tbody>
+								<tr>
+									<td>`+split[0]+'-'+split[1]+'-'+(parseInt(split[2])+i)+`</td>
+										<td><select class="selectTime" name="예약시간" onchange="changeSelection()">
+												<option value="">예약시간</option>
+												<option value="9시">09:00~10:00</option>
+												<option value="10시">10:00~11:00</option>
+												<option value="11시">11:00~12:00</option>
+												<option value="2시">14:00~15:00</option>
+												<option value="3시">15:00~16:00</option>
+												<option value="4시">16:00~17:00</option>
+												<option value="5시">17:00~18:00</option>
+											</select>
+										</td>
+									 <td class="resvAble">`+ res[0].c_check +`</td>
+								</tr>
+						</tbody> `;
+					$(".table").append($tbody);
 								}
-				$(".table").append(val);
+				$(".table").append($thead);
 			}//ajax success 부분
 		})
 		
 		
 	});
  
-
-
+	$(".ic-arrow-line-left").on('click',function(event){
+		calendar.prev();
+	});
+	$(".ic-arrow-line-right").on('click',function(event){
+		calendar.next();
+	});
+	
+	$(".selectTime>option").on("click",function(){
+		console.log("왜");
+	})
+	
 });
+function changeSelection(){
+	var date = $(".selectTime").parent().prev().text();
+	var val = $(".selectTime option:selected").val();
+	console.log(date);
+	console.log(val);
+	$.ajax({
+		url : 'reservcount',
+		method : 'POST',
+		data : {"reserv_date": date,
+				"reserv_time": val},
+		success : function(res){
+			console.log(res);
+		}
+	})
+	
+}
 
 
  </script>
