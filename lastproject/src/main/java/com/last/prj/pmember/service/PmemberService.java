@@ -10,6 +10,7 @@ public interface PmemberService {
 	public List<FfileVO> getProfile(String m_id);//회원프로필사진
 	public int memberPage(Criteria cri);//페이징 총 회원수
 	public List<PmemberVO> memberPageList(Criteria cri);//페이징 리스트
+	public int pmemberUpdate(PmemberVO pmember);//파트너회원 정보수정  
 
 	//관리자
 	public List<PmemberVO> admPlistCode(int code);

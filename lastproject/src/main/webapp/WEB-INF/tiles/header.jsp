@@ -14,7 +14,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 	<!-- Page Title -->
-	<title>Medino</title>
+	<title>BanBanBan</title>
 
 </head>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
@@ -105,7 +105,6 @@ function onMessage(evt){
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
 									<li><a href="pmemberMyPage">내 프로필</a></li>
-									<li><a href="#">반려동물 프로필</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
 									<li><a href="#">결제 내역</a></li>
 									<li><a href="#">상담 내역</a></li>

@@ -30,8 +30,9 @@ public class PmemberVO {
 	private int p_profile;			//프로필사진
 	private int p_license;			//경력사진
 	private int p_image;			
-	
 	private String picture;
+	private String pfile;
+	
 	private String w_write;
 	private int f_part;
 	private List<TimeVO> timeList;

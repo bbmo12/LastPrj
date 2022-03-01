@@ -6,14 +6,18 @@
 		id="pmembervo">
 		<result column="p_id" property="p_id" />
 		<result column="name" property="name" />
+		<result column="tel" property="tel" />
+		<result column="password" property="password" />
 		<result column="n_content" property="n_content" />
 		<result column="w_name" property="w_name" />
 		<result column="w_address" property="w_address" />
 		<result column="w_tel" property="w_tel" />
 		<result column="p_info" property="p_info" />
-		<result column="w_d_address" property="w_d_address" />
+		<result column="w_d_address" property="w_d_address"/>
+		<result column="career" property="career"/>
         <result column="code" property="code" />
-		<result column="career" property="career" />
+		<result column="p_license" property="p_license"/>
+		<result column="p_image" property="p_image" />
 		<result column="picture" property="picture" />
 		<collection property="timeList" resultMap="TimeVO" />
 	</resultMap>
@@ -109,6 +113,27 @@
       WHERE CODE = #{code}
  	  <if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>		
 	</select>
+	
+	<!-- 파트너정보수정 -->
+	<update id="pmemberUpdate" parameterType="com.last.prj.pmember.service.PmemberVO">
+		UPDATE P_MEMBER
+			<set>
+				<if test="name != null">name = #{name}, </if>
+				<if test="password != null">password = #{password}, </if>
+				<if test="tel != null">tel = #{tel}, </if>
+				<if test="w_name != null">w_name = #{w_name},</if>
+	  			<if test="w_address != null"> w_address = #{w_address}, </if>
+	  			<if test="w_d_address != null"> w_d_address = #{w_d_address}, </if>				
+	 		 	<if test="w_tel != null"> w_tel = #{w_tel}, </if>
+	 		 	<if test="n_content != null"> n_content = #{n_content},</if>
+	 			<if test="p_info != null"> p_info = #{p_info}, </if>
+	  			<if test="career != null"> career = #{career}, </if> 
+	  			<if test="speciality != null"> speciality = #{speciality} </if>
+				<if test="picture != null">picture = #{picture}, </if>
+				<if test="pfile != null">pfile = #{pfile}, </if>		
+			</set>
+		WHERE P_ID = #{p_id}
+	</update>
 
 	<!-- 관리자 -->
 	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
