@@ -17,6 +17,8 @@ import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistService;
+import com.last.prj.reserv.service.ReservCountService;
+import com.last.prj.reserv.service.ReservCountVO;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
 
@@ -34,6 +36,9 @@ public class ReservationController {
 	
 	@Autowired
 	private CalendarService CalendarDao;
+	
+	@Autowired
+	private ReservCountService reservCountDao;
 	
 	//일반회원 예약하기
 	@RequestMapping("/test")
@@ -104,6 +109,15 @@ public class ReservationController {
 		  reservationDao.payUpdate(Integer.parseInt(rno));
 		  return "ok";
 	  }
+	  @PostMapping("/reservcount")
+	  @ResponseBody
+	  public ReservCountVO reservCountSelect(@RequestParam("reserv_date")String reserv_date, @RequestParam("reserv_time")String reserv_time) {
+		  System.out.println(reserv_date);
+		  System.out.println(reserv_time);
+		  reservCountDao.reservCountSelect(reserv_date,reserv_time);
+		  return reservCountDao.reservCountSelect(reserv_date,reserv_time);
+	  }
+	  
 	  
 	  
 	 

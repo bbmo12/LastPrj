@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
+import com.last.prj.reserv.service.ReservationService;
 
 @Controller
 public class CalendarController {
 	@Autowired
 	private CalendarService CalendarDao;
 	
+	@Autowired
+	private ReservationService reservationDao; 
 	
 	//파트너회원 예약설정 조회
 	@RequestMapping("revsetlist")
@@ -66,6 +69,7 @@ public class CalendarController {
 		return vo;
 	}
 	
+	//일반회원 예약하기
 	@PostMapping("revSetUpdateSelect")
 	@ResponseBody
 	public List<CalendarVO> revSetUpdateSelect(@RequestParam("id")int id,CalendarVO cal) {
