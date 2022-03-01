@@ -46,6 +46,11 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.memberPageList(cri);
 	}
 	
+	@Override
+	public int pmemberUpdate(PmemberVO pmember) {
+		return map.pmemberUpdate(pmember);
+	}
+	
 	//관리자
 	@Override
 	public List<PmemberVO> admPlistCode(int code) {

@@ -65,11 +65,11 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
+                      <form action="pmemberUpdate" enctype="multipart/form-data" name="updatePage" method="post" onSubmit="return checkForm()">
 						<div class="col-lg-9 col-md-9 blog_details">
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">이름</h3>
-								<input type="text" style="border: none" id="name" name="name" value="${pmember.name}"
-									readonly>
+								<input type="text" id="name" name="name" value="${pmember.name}">
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">아이디</h3>
@@ -78,27 +78,29 @@
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">비밀번호</h3>
-								<input type="password" style="border: none" id="password" name="password"
-									value="${pmember.password}" readonly>
+								<input type="password" id="password" name="password" style="width: 350px;"
+								placeholder="영문자+숫자+특수문자 조합으로 8이상입력">
+ 							</div>
+							<div class="form-group">
+								<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
+								<input type="password" id="password1" name="password1" required>
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">전화번호</h3>
-								<input style="border: none" id="tel" name="tel" value="${pmember.tel}" readonly>
+								<input type="tel" id="tel" name="tel" value="${pmember.tel}" placeholder="숫자만 입력하세요." maxlength="13" >
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">사업장 이름</h3>
-								<input style="border: none" id="w_name" name="w_name" value="${pmember.w_name}"
-									readonly>
+								<input type="text" id="w_name" name="w_name" value="${pmember.w_name}">
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">사업장 주소</h3>
-								<textarea style="border: none" id="address" name="address" readonly cols="50"
-									rows="1">${pmember.w_address}  ${pmember.w_d_address }</textarea>
+								<input type="text" id="address" name="address" value="${pmember.w_address}">
+								<input type="text" id="address1" name="address1" value="${pmember.w_d_address }">
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">사업장 전화번호</h3>
-								<input type="text" style="border: none" id="w_tel" name="w_tel" value="${pmember.w_tel}"
-									readonly>
+								<input type="tel" id="w_tel" name="w_tel" value="${pmember.w_tel}"maxlength="13" placeholder="숫자만 입력하세요.">
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">운영안내</h3>
@@ -106,26 +108,82 @@
 									<input type="text" style="border: none" id="time" name="time"
 										value="${time.w_day } ${time.starttime} - ${time.endtime }" readonly>
 								</c:forEach>
-								<input type="text" style="border: none" id="content" name="content"
-									value="${pmember.n_content}" readonly>
+								<input type="text" id="content" name="content" value="${pmember.n_content}">
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">사업장 소개</h3>
-								<textarea style="border: none" id="p_info" name="p_info" readonly cols="100"
-									rows="3">${pmember.p_info}</textarea>
+								<textarea id="p_info" name="p_info" cols="100" rows="3">${pmember.p_info}</textarea>
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">경력</h3>
-								<input type="text" style="border: none" id="career" name="career"
-									value="${pmember.career}" readonly>
+								<input type="text" id="career" name="career" value="${pmember.career}">
 							</div>
-							<button type="button" onclick="location.href='pmemberUpdateForm'" class="genric-btn info radius">내정보 수정</button>
+							<div class="form-group">
+								<h3 style="font-weight: bolder;">프로필 사진</h3>
+								<div class="input-group col-xs-12">
+									<input class="file-upload-browse btn btn-primary" type="file" id="file" name="file">
+								</div>
+							</div>
+							<button type="submit" class="genric-btn info radius">수정 완료</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script>
+		function addFile() {
+			var input = $('<input>').attr({
+				'name': 'multiFileList',
+				'type': 'file'
+			});
+
+			$('#ffile').append(input);
+		}
+		
+		function checkForm() {
+			if( updatePage.name.value == "" ){
+				alert("이름을 입력하세요."); 
+				updatePage.name.focus(); 
+				return false; 
+			}
+			if( updatePage.password.value == "" ){
+				alert("비밀번호 입력하세요."); 
+				updatePage.password.focus(); 
+				return false; 
+			}
+			
+		    var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
+	                	         
+		    if(!pwdCheck.test(updatePage.password.value)){
+		    	alert("비밀번호는 영문자+숫자+특수문자 조합으로 8이상 사용해야 합니다.");
+		    	updatePage.password.focus(); 
+		    	return false; 
+		    }
+			if( updatePage.password.value !== updatePage.password1.value ){
+				alert("비밀번호가 일치하지 않습니다."); 
+				updatePage.password1.focus(); 
+				return false; 
+			}
+			if( updatePage.tel.value == "" || updatePage.w_tel.value == ""){
+				alert("전화번호를 입력해주세요."); 
+				updatePage.tel.focus(); 
+				return false; 
+			}
+			if( updatePage.w_name.value == "" ){
+				alert("사업장 이름을 입력주세요."); 
+				updatePage.w_name.focus(); 
+				return false; 
+			}
+			if( updatePage.address.value == "" && updatePage.address1.value == "" ){
+				alert("사업장 주소를 입력주세요."); 
+				updatePage.address1.focus(); 
+				return false; 
+			}			
+			
+		}
+	</script>
 </body>
 
 </html>
