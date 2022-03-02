@@ -2,11 +2,15 @@ package com.last.prj.admin.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.last.prj.pmember.service.PmemberService;
@@ -69,26 +73,23 @@ public class AdminController {
 	@RequestMapping("/reportTables")
 	public String reportList(Model model) {
 		List<ReportVO> list = reportDao.reportList();
-		List<QnaVO> qlist = qnaDAO.admQnaList();
-		List<ReviewVO> vlist = reviewDao.admReviewList();
+//		List<QnaVO> qlist = qnaDAO.admQnaList();
+//		List<ReviewVO> vlist = reviewDao.admReviewList();
 		
 		
 		System.out.println(list);
 		model.addAttribute("rList", list);
-		model.addAttribute("qList", qlist);
-		model.addAttribute("vList", vlist);
+//		model.addAttribute("qList", qlist);
+//		model.addAttribute("vList", vlist);
 		return "admin/board/reportTable";
 	}
 	
 	
-	// 2. 신고 상세보기 modal 방식
-	@GetMapping(value ="/reportDetail")
+	
+	// 2. 신고 처리
+	@GetMapping(value ="/permitReport")
 	public String reportDetail(Model model, ReportVO report) {
 		
 		return "admin/board/reportTable";
 	}
-
-	// 3. 신고 처리 ()
-	
-
 }

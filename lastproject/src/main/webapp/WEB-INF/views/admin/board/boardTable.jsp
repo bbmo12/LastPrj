@@ -17,6 +17,7 @@
 <link href="resources/table/css/dataTables.bootstrap4.css"
 	rel="stylesheet">
 <link href="resources/table/css/style.min.css" rel="stylesheet">
+
 </head>
 <body>
 	<div class="preloader">

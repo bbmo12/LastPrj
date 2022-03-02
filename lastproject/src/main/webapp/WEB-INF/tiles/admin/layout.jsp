@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -9,45 +8,20 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>asdf</title>
-<!-- plugins:css -->
+<title><tiles:insertAttribute name="title" /></title>
 <link rel="stylesheet"
 	href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
 <link rel="stylesheet"
 	href="resources/assets123/vendors/flag-icon-css/css/flag-icon.min.css">
 <link rel="stylesheet"
 	href="resources/assets123/vendors/css/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- Plugin css for this page -->
 <link rel="stylesheet"
 	href="resources/assets123/vendors/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet"
 	href="resources/assets123/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<!-- endinject -->
-<!-- Layout styles -->
 <link rel="stylesheet" href="resources/assets123/css/style.css">
-<!-- End layout styles -->
 <link rel="shortcut icon" href="resources/assets123/images/favicon.png" />
 
-<!-- container-scroller -->
-<!-- plugins:js -->
-<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script>
-<script
-	src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="resources/assets123/js/off-canvas.js"></script>
-<script src="resources/assets123/js/hoverable-collapse.js"></script>
-<script src="resources/assets123/js/misc.js"></script>
-<!-- endinject -->
-<!-- Custom js for this page -->
-<script src="resources/assets123/js/dashboard.js"></script>
-<!-- End custom js for this page -->
 </head>
 <body>
 	<div class="container-scroller">
@@ -201,7 +175,8 @@
 									<img src="resources/assets123/images/faces/face3.jpg"
 										alt="image" class="profile-pic">
 								</div>
-								<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+								<div
+									class="preview-item-content d-flex align-items-start flex-column justify-content-center">
 									<h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile
 										picture updated</h6>
 									<p class="text-gray mb-0">18 Minutes ago</p>
@@ -210,8 +185,7 @@
 							<div class="dropdown-divider"></div>
 							<h6 class="p-3 mb-0 text-center">4 new messages</h6>
 						</div></li>
-					<li class="nav-item dropdown">
-					<a
+					<li class="nav-item dropdown"><a
 						class="nav-link count-indicator dropdown-toggle"
 						id="notificationDropdown" href="#" data-toggle="dropdown"> <i
 							class="mdi mdi-bell-outline"></i> <span
@@ -265,8 +239,7 @@
 							</a>
 							<div class="dropdown-divider"></div>
 							<h6 class="p-3 mb-0 text-center">See all notifications</h6>
-						</div>
-						</li>
+						</div></li>
 				</ul>
 				<button
 					class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
@@ -278,7 +251,10 @@
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<!-- partial:partials/_sidebar.html -->
-			<tiles:insertAttribute name="side" />
+
+			<nav class="sidebar sidebar-offcanvas" id="sidebar">
+				<tiles:insertAttribute name="side" />
+			</nav>
 			<!-- partial -->
 			<div class="main-panel">
 				<tiles:insertAttribute name="body" />
@@ -292,7 +268,15 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-
-
 </body>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
+	<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script>
+	<script
+		src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
+	<script src="resources/assets123/js/off-canvas.js"></script>
+	<script src="resources/assets123/js/hoverable-collapse.js"></script>
+	<script src="resources/assets123/js/misc.js"></script>
+
+	<script src="resources/assets123/js/dashboard.js"></script>
 </html>

@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
 	<ul class="nav">
 		<li class="nav-item nav-category">Main</li>
 		<li class="nav-item"><a class="nav-link" href="main.do"> <span
@@ -96,4 +95,4 @@
 			</div>
 		</li>
 	</ul>
-</nav>
+
