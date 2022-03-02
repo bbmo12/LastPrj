@@ -16,6 +16,10 @@
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
 <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <style>
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div:nth-child(3) > div{
@@ -24,8 +28,6 @@
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div.tui-full-calendar-popup-section.tui-full-calendar-dropdown.tui-full-calendar-close.tui-full-calendar-section-state > button{
 	display: none;
 }
-.modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; background-color: rgba(0, 0, 0, 0.4); }
-
 
 
 </style>
@@ -48,15 +50,47 @@
     <div id="calendar" style ="width: 700px"></div>
     
 <table class="table" ></table>
-<div class="modal"> 
-	<div class="modal_body">Modal</div> 
-</div> 
-<button class="btn-open-popup">Modal 띄우기</button> 
+
+	<div>
+		<button id="reportModal" type="button" class="btn btn-secondary"
+			data-toggle="modal" data-target="#exampleModal">예약하기</button>
+	</div>
+					<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">예약하기</h3>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div>
+				 증상 : <input type="text" id = "r_content"><br>
+				 <span>품종선택 : <select class="animalType form-control" name="animalType">
+							<option value="">품종</option>
+							<option value="dog">개</option>
+							<option value="cat">고양이</option>
+					   </select>
+				 </span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-dismiss="modal">취소</button>
+				<button id="sendReport" name="sendReport" type="button"
+					class="btn btn-primary">예약하기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
 
-const modal = document.querySelector('.modal'); 
-const btnOpenPopup = document.querySelector('.btn-open-popup'); 
-btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
 
 
 $(document).ready(function(){
@@ -242,20 +276,19 @@ function changeSelection(){
 				$(".selectTime").parent().next().text('');
 				$(".selectTime").parent().next().append(`<button class="reservOK">예약가능</button>`); 
 			}
-			
+			//버튼이벤트
+			$(".reservOK").on('click',function(){
+				console.log('gggggggggggggggggggggg');
+				var flag = confirm("예약하시겠습니까?");
+					if(flag == true){
+						
+				}
+			});
 		}
 	})
 	
 }
 
-$(".reservOK").on('click',function(){
-	var flag = confirm("예약하시겠습니까?");
-		if(flag == true){
-			
-			
-		
-	}
-})
 
  </script>
 
