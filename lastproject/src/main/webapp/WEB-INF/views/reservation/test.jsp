@@ -16,6 +16,11 @@
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
 <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<link rel="stylesheet" href="resources/assets/css/nice-select.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <style>
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div:nth-child(3) > div{
@@ -30,17 +35,68 @@
 <body>
 <br><br><br><br><br><br>
 
+ <div id="menu">
+      <span id="menu-navi">
+        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+          <i class="calendar-icon ic-arrow-line-left" data-action="move-prev">이전</i>
+        </button>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+          <i class="calendar-icon ic-arrow-line-right" data-action="move-next">다음</i>
+        </button>
+      </span>
+      <span id="renderRange" class="render-range"></span>
+    </div>
 
-<div id="calendar" style="height: 800px;"></div>
-<table class="table"></table>
+    <div id="calendar" style ="width: 40%"></div>
+    
+<table class="table" style ="width: 40%"></table>
+
+	
+					<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">예약하기</h3>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- modal 몸통 -->
+			<div class="modal-body">
+				 <span id="dvalue">  <input type ="hidden" id="date_value" ></span> <br>
+				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
+				 <span> 증상   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
+	 	   		 <select class="animalType">
+					 <option value="" disabled selected>품종선택</option>
+					 <option value="501">개</option>
+					 <option value="502">고양이</option>
+		   		 </select>
+			</div>
+			<!-- modal 하단 버튼 -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-dismiss="modal">취소</button>
+				<button id="sendReserv" name="sendReserv" type="button"
+					class="btn btn-primary">예약하기</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script type="text/javascript">
+
+
 
 $(document).ready(function(){
 	
 	revList();
 	
-	
+	//달력 템플릿
 	var templates = {
 		    popupIsAllDay: function() {
 		      return 'All Day';
@@ -95,13 +151,15 @@ $(document).ready(function(){
 		    disableClick : true,
 		    disableDblClick : true,
 		    isReadOnly : false,
+		    isAlways6Week : false,
 		    template: templates,
 		    month: {
 		        daynames: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 		        startDayOfWeek: 0,
-		    },
+		    }
 		});
 	}
+	
 	//예약설정조회
 	function revList(){
 		$("#calendar").empty();
@@ -136,6 +194,8 @@ $(document).ready(function(){
 			}
 		});
 	}
+	
+	//일정 클릭 후 해당예약일자 테이블 표출
 	calendar.on('clickSchedule', function(event) {
 		var id = event.schedule.id;
 		console.log(id);
@@ -145,38 +205,109 @@ $(document).ready(function(){
 			data : {"id" :id},
 			success : function(res){
 				$(".table").empty();
+				//종료일 - 시작일 +1 로 반복횟수 설정
+				var i,$thead,$tbody;
+				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
+				var split = res[0].c_end.split('-');
+				console.log(parseInt(split[0]+split[1]+split[2]));
 				
-			
-				for(var i =0; i<res.length;i++){
-					var val = `
-					<thead>
-						<tr>
-							<th>예약가능일자</th>
-							<th>예약시간</th>
-							<th>예약내용</th>
-							<th>품종</th>
-							<th>예약가능여부</th>
-						</tr>
-					</thead>
-					
-					<tbody>
+				for( i =0; i<len;i++){
+					$thead = `
+						<thead>
 							<tr>
-								<td>`+res[i].c_start+`</td>
-								
-								<td>`+res[i].c_end+`</td>
+								<th>예약가능일자</th>
+								<th>예약시간</th>
+								<th>예약가능여부</th>
 							</tr>
-					</tbody> `;
+						</thead>`
+					$tbody =` 
+						<tbody>
+								<tr>
+									<td>`+split[0]+'-'+split[1]+'-'+(parseInt(split[2])+i)+`</td>
+										<td><select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+												<option value="">예약시간</option>
+												<option value="09시">09:00~10:00</option>
+												<option value="10시">10:00~11:00</option>
+												<option value="11시">11:00~12:00</option>
+												<option value="2시">14:00~15:00</option>
+												<option value="3시">15:00~16:00</option>
+												<option value="4시">16:00~17:00</option>
+												<option value="5시">17:00~18:00</option>
+											</select>
+										</td>
+									 <td></td>
+								</tr>
+						</tbody> `;
+					$(".table").append($tbody);
 								}
-				$(".table").append(val);
+				$(".table").append($thead);
 			}//ajax success 부분
 		})
 		
 		
 	});
  
-
-
+	$(".ic-arrow-line-left").on('click',function(event){
+		calendar.prev();
+	});
+	$(".ic-arrow-line-right").on('click',function(event){
+		calendar.next();
+	});
+	
+	
 });
+//옵션값 설정 후 예약가능/불가 출력
+function changeSelection(event){
+	//var reserv_date = $(".selectTime").parent().prev().text();
+	var reserv_time = $(".selectTime option:selected").val();
+	var tdvalue = $(event.target).parent().prev().text();
+	console.log(tdvalue);
+	$("#dvalue").text('예약일 : ' + tdvalue);
+	$("#tvalue").text('예약시간 : ' + reserv_time);
+	$.ajax({
+		url : 'reservcount',
+		method : 'POST',
+		data : {"reserv_date": tdvalue,
+				"reserv_time": reserv_time},
+		success : function(res){
+			//console.log(event.target);
+			if(res.reserv_date != null && res.reserv_time != null){
+				$(".selectTime").parent().next().text('예약불가');
+			}else{
+				console.log(event.target);
+				$(".selectTime").parent().next().text('');
+				$(event.target).parent().next().append(`<button id="reportModal" type="button" class="btn btn-secondary"
+														  data-toggle="modal" data-target="#exampleModal">예약가능</button>`);
+			}
+			
+		}
+	})
+	
+}
+//모달창 값 보내기
+$("#sendReserv").on('click',function(){
+	//모달창 예약일자
+	var date_value = $("#dvalue").text().slice(6);
+	//모달창 예약시간
+	var time_value = $("#tvalue").text().slice(7);
+	//모달창 증상
+	var r_content = $("#r_content").val();
+	//모달창 품종
+	var animalType = $(".animalType option:selected").val();
+	
+	$.ajax({
+		url : 'reservinsert',
+		method : 'POST',
+		data : {"r_date" : date_value,
+				"time" : time_value,
+				"rcontent" : r_content,
+				"r_code" : animalType},
+		success : function(res){
+			console.log(res);
+		}
+	})
+})
+	
 
 
  </script>

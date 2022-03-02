@@ -1,8 +1,10 @@
 package com.last.prj.pmember.service;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class TimeVO {
 	private int o_no;			//순번
 	private String p_id;			//파트너회원아이디

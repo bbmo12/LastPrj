@@ -11,6 +11,7 @@ public interface PmemberMapper {
 	public int memberPage(Criteria cri);//페이징 총 회원수
 	public List<PmemberVO> memberPageList(Criteria cri);//페이징 리스트
 	public int pmemberUpdate(PmemberVO pmember);//파트너회원 정보수정
+	public int pmemberTime(TimeVO time); //otime 수정
 	
 	//관리자
 	public List<PmemberVO> admPlistCode(int code);

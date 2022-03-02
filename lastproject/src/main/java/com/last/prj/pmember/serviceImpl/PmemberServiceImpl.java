@@ -11,6 +11,7 @@ import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewVO;
+import com.last.prj.pmember.service.TimeVO;
 
 @Repository("pMemberDao")
 public class PmemberServiceImpl implements PmemberService{
@@ -49,6 +50,11 @@ public class PmemberServiceImpl implements PmemberService{
 	@Override
 	public int pmemberUpdate(PmemberVO pmember) {
 		return map.pmemberUpdate(pmember);
+	}
+	
+	@Override
+	public int pmemberTime(TimeVO time) {
+		return map.pmemberTime(time);
 	}
 	
 	//관리자

@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +22,7 @@ import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.pmember.service.TimeVO;
 
 @Controller
 public class PmemberController {
@@ -37,19 +37,23 @@ public class PmemberController {
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
 //		String json = new Gson().toJson(pMemberDao.memberList(code));
 //		model.addAttribute("babo", json);
+		cri.setAmount(12);
 		PagingVO paging = new PagingVO(cri, mapper.memberPage(cri));
+		
 		model.addAttribute("page", paging);// 페이징 수
 		model.addAttribute("pageList", mapper.memberPageList(cri));// 페이징 리스트
 		return "pmember/memberList";
 	}
 
-	// 지역검색
-	@ResponseBody
-	@PostMapping("/pmemberLocal")
-	public List<PmemberVO> pmemberLocal(Criteria cri, Model model, PmemberVO pmember) {
-		return pMemberDao.memberPageList(cri);
-	}
-
+	/*
+	 * // 지역검색
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @PostMapping("/pmemberLocal") public List<PmemberVO> pmemberLocal(Criteria
+	 * cri, Model model, PmemberVO pmember) { return pMemberDao.memberPageList(cri);
+	 * }
+	 */
 	// 상세페이지
 	@RequestMapping("/pmemberDetail")
 	public String pmemberDetail(@RequestParam("id") String p_id, Model model) {
@@ -81,19 +85,18 @@ public class PmemberController {
 	public String pmemberUpdateFrom(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
+		
 		model.addAttribute("pmember", pMemberDao.getMember(p_id));
 		return "pmember/pmemberUpdateForm";
 	}
 	//마이페이지 수정 
 	@RequestMapping("/pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, Model model, @Param("p_id") String p_id) {
-		
-		String originalFileName = file.getOriginalFilename();
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file,@RequestParam("p_id") String p_id ,@RequestParam("w_day") String w_day, PmemberVO pmember, TimeVO time , Model model) {
 
+		String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
 		
-
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
@@ -113,9 +116,14 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(pMemberDao.pmemberUpdate(pmember));		
-		model.addAttribute(pMemberDao.getMember(p_id));
-		return "pmember/pmemberMypage";
+		/*
+		 * model.addAttribute(pMemberDao.pmemberTime(time));
+		 * model.addAttribute(pMemberDao.pmemberUpdate(pmember));
+		 */
+		model.addAttribute("pmember",pMemberDao.getMember(p_id));
+		
+		return "redirect:pmember/pmemberMypage";
+
 	}
 
 }

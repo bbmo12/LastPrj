@@ -2,12 +2,10 @@ package com.last.prj.reserv.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,8 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
-import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistService;
+import com.last.prj.reserv.service.ReservCountService;
+import com.last.prj.reserv.service.ReservCountVO;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
 
@@ -34,6 +33,9 @@ public class ReservationController {
 	
 	@Autowired
 	private CalendarService CalendarDao;
+	
+	@Autowired
+	private ReservCountService reservCountDao;
 	
 	//일반회원 예약하기
 	@RequestMapping("/test")
@@ -104,6 +106,26 @@ public class ReservationController {
 		  reservationDao.payUpdate(Integer.parseInt(rno));
 		  return "ok";
 	  }
+	  @PostMapping("/reservcount")
+	  @ResponseBody
+	  public ReservCountVO reservCountSelect(@RequestParam("reserv_date")String reserv_date, @RequestParam("reserv_time")String reserv_time) {
+		  System.out.println(reserv_date);
+		  System.out.println(reserv_time);
+		  System.out.println(reservCountDao.reservCountSelect(reserv_date,reserv_time));
+		  return reservCountDao.reservCountSelect(reserv_date,reserv_time);
+	  }
+	  //예약등록
+	  @PostMapping("/reservinsert")
+	  @ResponseBody
+	  public int reservInsert(@RequestParam("r_date")String r_date,@RequestParam("time")String time,@RequestParam("rcontent")String rcontent,@RequestParam("r_code")String r_code,ReservationVO vo) {
+		  vo.setR_code(r_code);
+		  vo.setR_date(r_date);
+		  vo.setTime(time);
+		  vo.setRccontent(rcontent);
+		  reservationDao.reservInsert(vo);
+		  return 1;
+	  }
+	  
 	  
 	  
 	 

@@ -14,6 +14,13 @@
 		SELECT * FROM RESERVATION
 	</select>
 	
+	<insert id="reservInsert" parameterType="com.last.prj.reserv.service.ReservationVO">
+		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM RESERVATION
+		</selectKey>
+		
+	</insert>
+	
 	<update id="okUpdate" parameterType="int">
 		UPDATE 	RESERVATION 
 		SET 	CODE = 402

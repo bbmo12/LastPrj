@@ -51,9 +51,11 @@
 					<h1>Open Q&A</h1>
 					<h3>반려동물 전문가와 베테랑 집사들이 반려동물에 관한 모든 궁금증을 해결해드립니다!</h3>
 				</div>
+				<c:if test="${pId eq null}">
 				<div class="qnaForm">
-					<a href="qnaForm"><button type="button" class="btn btn-primary btn-lg">질문글 작성하기</button></a>
+					<a href="qnaForm?m_id=${mId }"><button type="button" class="btn btn-primary btn-lg">질문글 작성하기</button></a>
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</section>
@@ -206,8 +208,9 @@
 							<h4 class="widget_title">베스트 Q&A</h4>
 							<c:forEach items="${best }" var="best">
 							<ul class="list cat-list">
-								<li><a href="qnaDetail?q_no=${best.q_no }" class="d-flex justify-content-between">
-										<p>${best.title}</p>
+								<li><a href="qnaDetail?q_no=${best.q_no }&writer=${best.writer}&pet_no=${best.pet_no}"
+									class="d-flex justify-content-between">
+										<i class="fa-solid fa-q"></i>${best.title}
 								</a></li>
 							</ul>
 							</c:forEach>

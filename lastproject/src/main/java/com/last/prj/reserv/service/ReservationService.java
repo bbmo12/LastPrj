@@ -10,10 +10,12 @@ public interface ReservationService {
 	List<ReservationVO> reservationSelect ();
 	
 	//예약승인
-		int okUpdate(int res);
+	int okUpdate(int res);
 		
 	//예약거절
 	int noUpdate(@Param("rno")int rno,@Param("refuse")String refuse);
+	//예약등록
+	int reservInsert(ReservationVO vo);
 	
 	//결제하기
 	int payUpdate(int res);

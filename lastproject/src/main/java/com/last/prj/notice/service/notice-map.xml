@@ -6,4 +6,7 @@
 	insert into notice values(notice_seq.nextval, #{n_from}, #{n_to}, #{content}, sysdate, default)
 	</insert>
 
+	<select id="noticeSelectList" resultType="com.last.prj.notice.service.NoticeVO">
+	select * from notice where n_to = #{m_id}
+	</select>
 </mapper>

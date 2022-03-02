@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.reserv.service.PreservationlistMapper">
 
-	<select id="preservationlist" resultType="com.last.prj.reserv.service.PreservationVO">
+	<select id="preservationlist" parameterType="String" resultType="com.last.prj.reserv.service.PreservationVO">
 		SELECT R.R_NO,S.STARTDATE,R.R_DATE,R.TIME,P.M_ID,R.CONTENT AS RCONTENT,C.CONTENT AS PCONTENT,RC.CONTENT AS RCCONTENT
         FROM RESERVATION R,SERVICE S, F_CODE C, F_CODE RC,PET P
-        WHERE R.R_NO = S.R_NO AND C.CODE = P.CODE AND RC.CODE=R.CODE AND R.PET_NO=P.PET_NO
+        WHERE R.R_NO = S.R_NO AND C.CODE = P.CODE AND RC.CODE=R.CODE AND R.PET_NO=P.PET_NO AND P.M_ID = #{m_id}
 	</select>
 	
 </mapper>

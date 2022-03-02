@@ -1,20 +1,14 @@
 package com.last.prj.reserv.service;
 
-import java.sql.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
 @Data
 public class PreservationVO {
-	@JsonFormat(pattern = "YYYY-MM-dd")
-	private Date startdate;
-	//뷰
+	private String startdate;
 	private int r_no;
-	@JsonFormat(pattern = "YYYY-MM-dd")
-	private Date r_date;
-	private int time;
+	private String r_date;
+	private String time;
 	private String m_id;
 	private String pcontent;
 	private String rcontent;

@@ -8,4 +8,7 @@ public interface ReportMapper {
 		int newQnaReport(ReportVO report);
 	
 	public List<ReportVO> reportList();
+	
+	//일반사용자 신고내역 조회
+	public List<ReportVO> myReportList(String m_id);
 }

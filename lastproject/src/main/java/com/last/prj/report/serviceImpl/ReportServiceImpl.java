@@ -27,4 +27,9 @@ public class ReportServiceImpl implements ReportService {
 		return map.reportList();
 	}
 
+	@Override
+	public List<ReportVO> myReportList(String m_id) {
+		return null;
+	}
+
 }

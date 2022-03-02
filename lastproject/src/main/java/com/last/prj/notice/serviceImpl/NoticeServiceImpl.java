@@ -1,11 +1,15 @@
 package com.last.prj.notice.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.last.prj.notice.service.NoticeMapper;
 import com.last.prj.notice.service.NoticeService;
 import com.last.prj.notice.service.NoticeVO;
 
+@Repository("noticeDao")
 public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
@@ -13,8 +17,12 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public int noticeInsert(NoticeVO notice) {
-		// TODO Auto-generated method stub
 		return map.noticeInsert(notice);
+	}
+
+	@Override
+	public List<NoticeVO> noticeSelectList(String m_id) {
+		return map.noticeSelectList(m_id);
 	}
 
 }
