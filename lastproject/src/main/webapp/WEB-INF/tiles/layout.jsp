@@ -38,8 +38,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="resources/assets/js/vendor/bootstrap-4.1.3.min.js"></script>
 	
-	<script src="resources/toastr/toastr.min.js"></script>
-	<script src="resources/toastr/toastr.css"></script>
+	<!-- <script src="resources/toastr/toastr.min.js"></script>
+	<script src="resources/toastr/toastr.css"></script> -->
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
     <script src="resources/assets/js/vendor/wow.min.js"></script>
     <script src="resources/assets/js/vendor/owl-carousel.min.js"></script>

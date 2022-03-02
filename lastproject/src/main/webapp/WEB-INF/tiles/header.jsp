@@ -52,7 +52,7 @@ function onMessage(evt){
     }
     
     toastr.info(data);
-
+}
 </script>
 <body>
 <header class="header-area">
