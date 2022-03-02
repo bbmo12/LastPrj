@@ -8,9 +8,6 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
 <style>
 	#my_section {
 		padding: 50px;
@@ -111,8 +108,8 @@
 									<h3 style="font-weight: bolder;">운영안내</h3>
 								</div>
 								<div class="form-group" style="display: inline-block;">
-									<select id="selectday" onchange="Time(this)" style="display: inline-block;">
-										<option value='' selected>=== 요일선택 ===</option>
+									<select id="selectday" onchange="addDay()" style="display: inline-block;">
+										<option value='' selected>요일선택</option>
 										<option value='월'>월</option>
 										<option value='화'>화</option>
 										<option value='수'>수</option>
@@ -123,32 +120,43 @@
 									</select>
 								</div>
 								<div class="form-group" style="display: inline-block;">
-									<select id="selectStart" onchange="selectDay()" style="display: inline-block;">
-										<option value='' selected>=== 오픈시간 ===</option>
-										<option value='월'>월</option>
-										<option value='화'>화</option>
-										<option value='수'>수</option>
-										<option value='목'>목</option>
-										<option value='금'>금</option>
-										<option value='토'>토</option>
-										<option value='일'>일</option>
+									<select id="selectStart" onchange="startTime()" style="display: inline-block;">
+										<option value='' selected>오픈시간</option>
+										<option value='9:00'>9:00</option>
+										<option value='9:30'>9:30</option>
+										<option value='10:30'>10:30</option>
+										<option value='11:00'>11:00</option>
+										<option value='12:00'>12:00</option>
+										<option value='12:30'>12:30</option>
 									</select>
 								</div>
 								<div class="form-group" style="display: inline-block;">
-									<select id="selectEnd" onchange="selectDay()" style="display: inline-block;">
-										<option value='' selected>=== 마감시간 ===</option>
-										<option value='월'>월</option>
-										<option value='화'>화</option>
-										<option value='수'>수</option>
-										<option value='목'>목</option>
-										<option value='금'>금</option>
-										<option value='토'>토</option>
-										<option value='일'>일</option>
+									<select id="selectEnd" onchange="endTime()" style="display: inline-block;">
+										<option value='' selected>마감시간</option>
+										<option value='13:00'>13:00</option>
+										<option value='13:30'>13:30</option>
+										<option value='14:00'>14:00</option>
+										<option value='14:30'>14:30</option>
+										<option value='15:00'>15:00</option>
+										<option value='15:30'>15:30</option>
+										<option value='16:00'>16:00</option>
+										<option value='16:30'>16:30</option>
+										<option value='17:00'>17:00</option>
+										<option value='17:30'>17:30</option>
+										<option value='18:00'>18:00</option>
+										<option value='18:30'>18:30</option>
+										<option value='19:00'>19:00</option>
+										<option value='19:30'>19:30</option>
+										<option value='20:00'>20:00</option>
+										<option value='20:30'>20:30</option>
+										<option value='21:00'>21:00</option>
 									</select>
 								</div>
-								<input type="hidden" name="w_day" id="day">
-								<input type="hidden" name="starttime">
-								<input type="hidden" name="endtime">
+								<c:forEach items="${pmember.timeList }" var="timeList">
+									<input name="w_day" id="w_day" value="${timeList.w_day }">
+									<input name="starttime" id="starttime" value="${timeList.starttime }">
+									<input name="endtime" id="endtime" value="${timeList.endtime }">
+								</c:forEach>
 								<div class="form-group"><input type="text" id="content" name="content"
 										value="${pmember.n_content}"></div>
 								<div class="form-group">
@@ -175,9 +183,19 @@
 		</div>
 	</section>
 	<script>
-		function selectDay() {
-			var selectDay = $("#runtime option:selected").val();
-			document.getElementById('day').value = selectDay;
+		function addDay() {
+			var selectDay = $("#selectday option:selected").val();
+			document.getElementById('w_day').value = selectDay;
+			
+		}
+		function startTime() {
+			var startTime = $("#selectStart option:selected").val();
+			document.getElementById('starttime').value = startTime;
+		}
+		function endTime() {
+			var endTime = $("#selectEnd option:selected").val();
+			document.getElementById('endtime').value = endTime;
+			console.log(endTime);
 		}
 
 		function addFile() {

@@ -45,15 +45,6 @@ public class PmemberController {
 		return "pmember/memberList";
 	}
 
-	/*
-	 * // 지역검색
-	 * 
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/pmemberLocal") public List<PmemberVO> pmemberLocal(Criteria
-	 * cri, Model model, PmemberVO pmember) { return pMemberDao.memberPageList(cri);
-	 * }
-	 */
 	// 상세페이지
 	@RequestMapping("/pmemberDetail")
 	public String pmemberDetail(@RequestParam("id") String p_id, Model model) {
@@ -72,7 +63,7 @@ public class PmemberController {
 	}
 
 	// 파트너 마이페이지
-	@RequestMapping("/pmemberMyPage")
+	@RequestMapping("pmemberMyPage")
 	public String mypage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
@@ -81,7 +72,7 @@ public class PmemberController {
 	}
 
 	// 파트너정보 수정페이지로 이동
-	@RequestMapping("/pmemberUpdateForm")
+	@RequestMapping("pmemberUpdateForm")
 	public String pmemberUpdateFrom(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
@@ -90,8 +81,8 @@ public class PmemberController {
 		return "pmember/pmemberUpdateForm";
 	}
 	//마이페이지 수정 
-	@RequestMapping("/pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file,@RequestParam("p_id") String p_id ,@RequestParam("w_day") String w_day, PmemberVO pmember, TimeVO time , Model model) {
+	@RequestMapping("pmemberUpdate")
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, @RequestParam("p_id") String p_id, PmemberVO pmember, TimeVO time , Model model) {
 
 		String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
@@ -116,14 +107,9 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		/*
-		 * model.addAttribute(pMemberDao.pmemberTime(time));
-		 * model.addAttribute(pMemberDao.pmemberUpdate(pmember));
-		 */
-		model.addAttribute("pmember",pMemberDao.getMember(p_id));
-		
-		return "redirect:pmember/pmemberMypage";
-
+		model.addAttribute(pMemberDao.pmemberTime(time));
+		model.addAttribute(pMemberDao.pmemberUpdate(pmember));
+		return "redirect:/pmemberMypage";
 	}
 
 }
