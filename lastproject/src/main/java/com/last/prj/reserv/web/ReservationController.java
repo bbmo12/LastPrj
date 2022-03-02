@@ -114,6 +114,17 @@ public class ReservationController {
 		  System.out.println(reservCountDao.reservCountSelect(reserv_date,reserv_time));
 		  return reservCountDao.reservCountSelect(reserv_date,reserv_time);
 	  }
+	  //예약등록
+	  @PostMapping("/reservinsert")
+	  @ResponseBody
+	  public int reservInsert(@RequestParam("r_date")String r_date,@RequestParam("time")String time,@RequestParam("rcontent")String rcontent,@RequestParam("r_code")String r_code,ReservationVO vo) {
+		  vo.setR_code(r_code);
+		  vo.setR_date(r_date);
+		  vo.setTime(time);
+		  vo.setRccontent(rcontent);
+		  reservationDao.reservInsert(vo);
+		  return 1;
+	  }
 	  
 	  
 	  

@@ -35,5 +35,9 @@ public class ReservationServiceImpl implements ReservationService{
 		
 		return map.payUpdate(res);
 	}
+	@Override
+	public int reservInsert(ReservationVO vo) {
+		return map.reservInsert(vo);
+	}
 
 }
