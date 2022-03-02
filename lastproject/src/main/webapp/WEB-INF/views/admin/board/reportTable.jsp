@@ -12,13 +12,19 @@
 <meta name="author" content="">
 <title>Table</title>
 <link rel="stylesheet" type="text/css" 	href="resources/table/css/multicheck.css">
+<link href="resources/table/css/dataTables.bootstrap4.css"	rel="stylesheet">
 <link href="resources/table/css/style.min.css" rel="stylesheet">
-<script src="resources/assets123/js/dashboard.js"></script>
-<style>
-	/* .row {	
-		margin-right:-1025px;
-	} */
-</style>		
+		<script src="resources/table/js/jquery.min.js"></script>	
+		<script src="resources/table/js/popper.min.js"></script>
+		<script src="resources/table/js/bootstrap.min.js"></script>	
+		<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
+		<script src="resources/table/js/sparkline.js"></script>	
+		<script src="resources/table/js/waves.js"></script>	
+		<script src="resources/table/js/sidebarmenu.js"></script>	
+		<script src="resources/table/js/custom.min.js"></script>
+		<script src="resources/table/js/datatable-checkbox-init.js"></script>
+		<script src="resources/table/js/jquery.multicheck.js"></script>
+		<script src="resources/table/js/datatables.min.js"></script>
 </head>
 <body>
 	<div class="preloader">
@@ -53,7 +59,7 @@
 									<tbody>
 										<c:if test="${rList[0].rep_no eq null  }">
 											<tr>
-												<td colspan="6" align="center">데이터가 존재하지 않습니다.</td>
+												<td colspan="8" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
 										</c:if>
 										
@@ -135,22 +141,12 @@
 			</div>
 		</div>
 	</div>
-		<script src="resources/table/js/popper.min.js"></script>
-		<script src="resources/table/js/bootstrap.min.js"></script>	
-		<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
-		<script src="resources/table/js/sparkline.js"></script>	
-		<script src="resources/table/js/waves.js"></script>	
-		<script src="resources/table/js/sidebarmenu.js"></script>	
-		<script src="resources/table/js/custom.min.js"></script>
-		<script src="resources/table/js/datatable-checkbox-init.js"></script>
-		<script src="resources/table/js/jquery.multicheck.js"></script>
-		<script src="resources/table/js/datatables.min.js"></script>
 
 	
 	<script>
 		$('#zero_config').DataTable();
 		
-	/* 	$('#permitReport').click(
+		$('#permitReport').click(
 				var flag = confirm("해당 신고를 승인하시겠습니까?");
 				if(flag == true){
 					$.ajax({
@@ -174,7 +170,7 @@
 						}
 					})
 				}
-			);  */
+			);
 				
 		function cancelReport() {
 
@@ -185,6 +181,8 @@
 		//모달 신고내역 초기화
 		$('#exampleModal').on('hidden.bs.modal', function(e) {
 			 $(this).find('form')[0].reset(); 
+			 
+			 
 
 		})
 	</script>
