@@ -5,7 +5,7 @@ import java.util.List;
 public interface CalendarService {
 	
 	//파트너회원 예약설정
-	List<CalendarVO> revSetList();
+	List<CalendarVO> revSetList(CalendarVO cal);
 	
 	//파트너회원 등록 후 단건조회
 	CalendarVO revSetSelectList();

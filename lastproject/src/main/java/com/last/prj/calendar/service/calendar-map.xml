@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.calendar.service.CalendarMapper">
-	<select id="revSetList" resultType="com.last.prj.calendar.service.CalendarVO">
+
+	<select id="revSetList" resultType="com.last.prj.calendar.service.CalendarVO" parameterType="com.last.prj.calendar.service.CalendarVO">
 		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID
 		FROM calendar
+		WHERE P_ID = #{p_id}
 	</select>
 	
 	<select id="revSetSelectList" resultType="com.last.prj.calendar.service.CalendarVO">

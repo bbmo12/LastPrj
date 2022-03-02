@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CalendarMapper {
 	//파트너회원 예약설정
-	List<CalendarVO> revSetList();
+	List<CalendarVO> revSetList(CalendarVO cal);
 	
 	//파트너회원 예약일정 등록
 	int revSetInsert(CalendarVO cal);

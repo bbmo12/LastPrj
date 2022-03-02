@@ -76,6 +76,12 @@
 					 <option value="501">개</option>
 					 <option value="502">고양이</option>
 		   		 </select>
+		   		 <select class="animalNo">
+		   		 	<option value="" disabled selected>펫 번호(이름)</option>
+					 <c:forEach items="${petList}" var="pet">
+		   		 			<option value="${pet.pet_no }"> ${pet.pet_no }(${pet.name })</option>
+		   		 	   </c:forEach>
+		   		 </select>
 			</div>
 			<!-- modal 하단 버튼 -->
 			<div class="modal-footer">
@@ -96,6 +102,8 @@ $(document).ready(function(){
 	
 	revList();
 	
+	
+	var p_id;
 	//달력 템플릿
 	var templates = {
 		    popupIsAllDay: function() {
@@ -194,7 +202,6 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
 	//일정 클릭 후 해당예약일자 테이블 표출
 	calendar.on('clickSchedule', function(event) {
 		var id = event.schedule.id;
@@ -204,6 +211,8 @@ $(document).ready(function(){
 			method : 'POST',
 			data : {"id" :id},
 			success : function(res){
+				p_id = res[0].p_id;
+				console.log(p_id);
 				$(".table").empty();
 				//종료일 - 시작일 +1 로 반복횟수 설정
 				var i,$thead,$tbody;
@@ -244,7 +253,6 @@ $(document).ready(function(){
 			}//ajax success 부분
 		})
 		
-		
 	});
  
 	$(".ic-arrow-line-left").on('click',function(event){
@@ -253,8 +261,6 @@ $(document).ready(function(){
 	$(".ic-arrow-line-right").on('click',function(event){
 		calendar.next();
 	});
-	
-	
 });
 //옵션값 설정 후 예약가능/불가 출력
 function changeSelection(event){
@@ -279,10 +285,8 @@ function changeSelection(event){
 				$(event.target).parent().next().append(`<button id="reportModal" type="button" class="btn btn-secondary"
 														  data-toggle="modal" data-target="#exampleModal">예약가능</button>`);
 			}
-			
 		}
 	})
-	
 }
 //모달창 값 보내기
 $("#sendReserv").on('click',function(){
@@ -292,8 +296,10 @@ $("#sendReserv").on('click',function(){
 	var time_value = $("#tvalue").text().slice(7);
 	//모달창 증상
 	var r_content = $("#r_content").val();
-	//모달창 품종
+	//모달창 품종코드
 	var animalType = $(".animalType option:selected").val();
+	//펫 번호
+	var animalNo = $(".animalNo option:selected").val();
 	
 	$.ajax({
 		url : 'reservinsert',
@@ -301,15 +307,13 @@ $("#sendReserv").on('click',function(){
 		data : {"r_date" : date_value,
 				"time" : time_value,
 				"rcontent" : r_content,
-				"r_code" : animalType},
+				"r_code" : animalType,
+				"r_no" : animalNo},
 		success : function(res){
 			console.log(res);
 		}
 	})
 })
-	
-
-
  </script>
 
 
