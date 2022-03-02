@@ -27,7 +27,6 @@
 		<result column="w_day" property="w_day" />
 		<result column="starttime" property="starttime" />
 		<result column="endtime" property="endtime" />
-		<result column="n_content" property="n_content" />
 	</resultMap>
 	<!-- 상세페이지 -->
 	<select id="getMember" parameterType="String"
@@ -130,7 +129,17 @@
 	  			<if test="career != null"> career = #{career}, </if> 
 	  			<if test="speciality != null"> speciality = #{speciality} </if>
 				<if test="picture != null">picture = #{picture}, </if>
-				<if test="pfile != null">pfile = #{pfile}, </if>		
+				<if test="pfile != null">pfile = #{pfile} </if>		
+			</set>
+		WHERE P_ID = #{p_id}
+	</update>
+	
+	<update id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
+		UPDATE O_TIME
+			<set>
+				<if test="w_day != null">W_DAY = #{w_day}, </if>
+				<if test="starttime != null">STARTTIME = #{starttime}, </if>
+				<if test="endtime != null">ENDTIME = #{endtime} </if> 	
 			</set>
 		WHERE P_ID = #{p_id}
 	</update>

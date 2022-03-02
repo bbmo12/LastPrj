@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="resources/ogani/js/jquery-3.6.0.min.js"></script>
+<script src="resources/org/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<div class="container-scroller">
