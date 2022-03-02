@@ -14,7 +14,7 @@
 		SELECT * FROM RESERVATION
 	</select>
 	
-	<insert id="" parameterType="com.last.prj.reserv.service.ReservationVO">
+	<insert id="reservInsert" parameterType="com.last.prj.reserv.service.ReservationVO">
 		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
 			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM RESERVATION
 		</selectKey>
