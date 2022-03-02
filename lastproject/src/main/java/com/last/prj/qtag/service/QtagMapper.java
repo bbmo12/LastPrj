@@ -9,4 +9,8 @@ public interface QtagMapper {
 
 	// 등록
 	int newTag(QtagVO qtag);
+
+	// 글과 연결.
+	int newQtag(QnaTagVO qnatag);
+
 }

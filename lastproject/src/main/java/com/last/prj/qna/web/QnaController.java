@@ -37,6 +37,7 @@ import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaVO;
 import com.last.prj.qtag.service.QnaTagService;
+import com.last.prj.qtag.service.QnaTagVO;
 import com.last.prj.qtag.service.QtagService;
 import com.last.prj.qtag.service.QtagVO;
 import com.last.prj.report.service.ReportService;
@@ -154,15 +155,16 @@ public class QnaController {
 
 	// 질문글 작성
 	@PostMapping("/qForm")
-	public String qForm(HttpServletRequest request, HttpSession session, QnaVO qna, QtagVO qtag) throws Exception {
+	public String qForm(HttpServletRequest request, HttpSession session, QnaVO qna, QtagVO qtag, QnaTagVO qnatag) throws Exception {
 
 		String mId = (String) session.getAttribute("mId");
 		qna.setWriter(mId);
 
 		qtagDAO.newTag(qtag);
 		qnaDAO.newQna(qna);
+		qtagDAO.newQtag(qnatag);
 
-		return "qna/qnaDetail";
+		return "qna/qnaMain";
 	}
 
 	// 답변글 작성 모달 처리

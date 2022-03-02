@@ -9,6 +9,9 @@ public interface QtagService {
 	// 인기 태그 목록
 	List<QtagVO> tagList();
 
-	// 등록
+	// 태그 등록
 	int newTag(QtagVO qtag);
+
+	// 글과 연결.
+	int newQtag(QnaTagVO qnatag);
 }
