@@ -8,10 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
 #loading {
@@ -79,8 +76,31 @@
 				return true;
 			});
 		});
-	</script>
+	
 	<!-- end 수정 버튼 눌렀을 시 로딩 -->
+	
+	
+	<!-- 수정 버튼 누르면 수정 -->
+	$('#sendAns').click(function() {
+			$.ajax({
+				method : "POST",
+				url : "boardUpdate",
+				data : {
+					"writer" : $('#writer').val(),
+					"title" : $('#title').val(),
+					"content" : $('#content').val(),
+					"b_no" : $('#b_no').val()
+				},
+				success : function() {
+					alert('답변이 성공적으로 등록되었습니다.');
+					location.reload();
+				},
+				error : function() {
+					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
+				}
+			})
+		})
+	</script>
 	
 	
 </body>

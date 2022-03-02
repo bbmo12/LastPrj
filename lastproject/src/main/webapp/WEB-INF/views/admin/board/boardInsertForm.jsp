@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,42 +10,6 @@
 <title>글쓰기</title>
 </head>
 <style>
-th, td {
-	text-align: center;
-}
-
-th {
-	background-color: #f5f5f5;
-}
-
-td {
-	background-color: #fffafa;
-}
-
-.click {
-	position: relative;
-	left: 1370px;
-	top: 40px;
-	background-color: rgba(255, 255, 255, 0);
-	border-color: rgba(255, 255, 255, 0);
-	color: white;
-}
-
-.btn {
-	position: relative;
-	left: 1360px;
-	top: 40px;
-	background-color: rgba(255, 255, 255, 0);
-	border-color: rgba(255, 255, 255, 0);
-	color: white;
-}
-
-.title {
-	position: relative;
-	left: 440px;
-	top: -10px;
-}
-
 #loading {
 	width: 100%;
 	height: 100%;
@@ -72,49 +35,50 @@ td {
 	top: 57%;
 	left: 43%;
 	z-index: 101;
-} 
+}
 }
 </style>
 <body>
-	<div style="color: white;" class="title">
-		<h1>글쓰기</h1>
-	</div>
-	<div style="margin-top: 150px">
-		<form id="frm" action="boardInsert" method="post">
-			<table width=53% height=500px border=1 align=center>
-				<colgroup>
-					<col width="15%">
-					<col width="*">
-				</colgroup>
-				<tbody>
-					<tr>
-						<th scope="row">제목</th>
-						<td class="view_text">
-						<td><input type="text" id="title" name="title"
-							plcaeholder="제목..."></td>
-					</tr>
-					<tr>
-						<th scope="row">내용</th>
-						<td colspan="3" class="view_text"><textarea rows="20"
-								cols="100" title="내용" id="content" name="content"
-								plcaeholder="내용..."></textarea></td>
-					</tr>
-					<tr>
-						<th scope="row">작성자</th>
-						<td class="view_text">
-						<td><input type="text" id="writer" name="writer"
-							plcaeholder="작성자..."></td>
-					</tr>
-			</table>
-			<div>
-				<input type="submit" class="click" value="등 록">&nbsp;&nbsp;
-				<input type="reset" class="btn" value="취 소" onclick="history.back()">
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">글쓰기</h4>
+				<p class="card-description">공지사항 새 글</p>
+				<form class="forms-sample" id="frm" action="boardInsert"
+					method="post">
+					<div class="form-group">
+						<label for="title">제목</label> <input type="text" name="title"
+							class="form-control" id="title" placeholder="제목.." required>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail3">작성자</label> <input
+							type="text" class="form-control writer" id="writer"
+							value="세션값으로 관리자" name="writer" required>
+					</div>
+					<div class="form-group">
+						<label for="exampleSelectGender">태그</label> 
+						<select	class="form-control" id="btag" name="btag">
+							<option disabled selected>선택해주세요.</option>
+							<option value="pmtag">파트너회원</option>
+							<option value="mtag">일반회원</option>
+							<option value="pettag">펫</option>
+							<option value="stag">서비스</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="content">내용</label>
+						<textarea class="form-control" name="content" id="content"
+							rows="4"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary mr-2">등록</button>
+					<button class="btn btn-light" onclick="history.back()">취소</button>
+				</form>
 			</div>
-		</form>
+		</div>
 	</div>
 
 
-	 <div id="loading" style="margin-left: 0px;">
+	<div id="loading" style="margin-left: 0px;">
 		<img src="resources/assets123/images/Spinner-2.gif">
 		<p>변환중입니다..잠시기다려주세요.</p>
 	</div>

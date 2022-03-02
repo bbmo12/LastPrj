@@ -5,17 +5,20 @@
 <html dir="ltr" lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Table</title>
-<link rel="stylesheet" type="text/css"
-	href="resources/table/css/multicheck.css">
-<link href="resources/table/css/dataTables.bootstrap4.css"
-	rel="stylesheet">
+<link rel="stylesheet" type="text/css" 	href="resources/table/css/multicheck.css">
 <link href="resources/table/css/style.min.css" rel="stylesheet">
+<script src="resources/assets123/js/dashboard.js"></script>
+<style>
+	/* .row {	
+		margin-right:-1025px;
+	} */
+</style>		
 </head>
 <body>
 	<div class="preloader">
@@ -48,45 +51,41 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:if
-											test="${rList[0].rep_no eq null && qList[0].q_no eq null && vList[0].rev_no eq null }">
+										<c:if test="${rList[0].rep_no eq null  }">
 											<tr>
-												<td colspan="8" align="center">데이터가 존재하지 않습니다.</td>
+												<td colspan="6" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
 										</c:if>
+										
 										<c:if test="${rList ne null }">
-											<c:forEach items="${rList }" var="rs">
+											<c:forEach items="${rList }" var="rep" varStatus="rs">
 												<tr>
-													<td align="center">${rs.rep_no }</td>
-													<td align="center">${rs.reporter }</td>
-													<td align="center">${rs.reported }</td>
-													<td align="center">${rs.content }</td>
-													<td align="center">${rs.w_date }</td>
+													<td align="center">${rep.rep_no }</td>
+													<td align="center">${rep.reporter }</td>
+													<td align="center">${rep.reported }</td>
+													<td align="center">${rep.content }</td>
+													<td align="center">${rep.w_date }</td>
 													<td align="center"><a
-														href="reportDetail?rep_no=${rs.rep_no }">
-															${rs.f_content }</a></td>
-													<c:forEach items="${vList }" var="vs">
-														<c:choose>
+														href="reportDetail?rep_no=${rep.rep_no }">
+															${rep.f_content }</a></td>
 
-															<c:when test="${rs.rev_no ne 0 }">
-																<td align="center">${rs.rev_no }</td>
+													<c:choose>
 
-															</c:when>
+														<c:when test="${rep.rev_no ne 0 }">
+															<td align="center">${rep.rev_no }</td>
+														</c:when>
 
-															<c:when test="${rs.q_no ne 0 }">
-																<td align="center">${rs.q_no }</td>
+														<c:when test="${rep.q_no ne 0 }">
+															<td align="center">${rep.q_no }</td>
+														</c:when>
 
-															</c:when>
-
-														</c:choose>
-													</c:forEach>
-
+													</c:choose>
 													<td><button id="reportModal" type="button"
 															class="btn btn-secondary" data-toggle="modal"
-															data-target="#exampleModal${rs.rev_no }">신고처리</button></td>
+															data-target="#exampleModal${rep.rep_no }">신고처리</button></td>
 												</tr>
 												<!--Modal 신고 내용 상세보기 and 신고 처리 -->
-												<div class="modal fade" id="exampleModal${rs.rev_no }"
+												<div class="modal fade" id="exampleModal${rep.rep_no }"
 													tabindex="-1" aria-labelledby="exampleModalLabel"
 													aria-hidden="true">
 													<div class="modal-dialog">
@@ -103,19 +102,20 @@
 																	<div class="form-group">
 																		<label for="recipient-name" class="col-form-label">신고자</label>
 																		<input type="text" class="form-control"
-																			id="recipient-name" value="${rs.reporter }">
+																			id="recipient-name" value="${rep.reporter }">
+
 																	</div>
 																	<div class="form-group">
 																		<label for="message-text" class="col-form-label">신고사유</label>
-																		<textarea class="form-control" id="message-text">${rs.content} </textarea>
+																		<textarea class="form-control" id="message-text">${rep.content} </textarea>
 																	</div>
 																</form>
 															</div>
 															<div class="modal-footer">
 																<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">모달 끄기</button> -->
 																<button type="button" id="permitReport"
-																	onclick="permitReport()" name="permitReport"
-																	class="btn btn-primary">신고 승인</button>
+																	name="permitReport" class="btn btn-primary">신고
+																	승인</button>
 																<button type="button" id="cancelReport"
 																	onclick="cancelReport()" name="cancelReport"
 																	class="btn btn-primary">신고 기각</button>
@@ -135,49 +135,56 @@
 			</div>
 		</div>
 	</div>
+		<script src="resources/table/js/popper.min.js"></script>
+		<script src="resources/table/js/bootstrap.min.js"></script>	
+		<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
+		<script src="resources/table/js/sparkline.js"></script>	
+		<script src="resources/table/js/waves.js"></script>	
+		<script src="resources/table/js/sidebarmenu.js"></script>	
+		<script src="resources/table/js/custom.min.js"></script>
+		<script src="resources/table/js/datatable-checkbox-init.js"></script>
+		<script src="resources/table/js/jquery.multicheck.js"></script>
+		<script src="resources/table/js/datatables.min.js"></script>
 
-	<script src="resources/table/js/jquery.min.js"></script>
-	<!-- Bootstrap tether Core JavaScript -->
-	<script src="resources/table/js/popper.min.js"></script>
-	<script src="resources/table/js/bootstrap.min.js"></script>
-	<!-- slimscrollbar scrollbar JavaScript -->
-	<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
-	<script src="resources/table/js/sparkline.js"></script>
-	<!--Wave Effects -->
-	<script src="resources/table/js/waves.js"></script>
-	<!--Menu sidebar -->
-	<script src="resources/table/js/sidebarmenu.js"></script>
-	<!--Custom JavaScript -->
-	<script src="resources/table/js/custom.min.js"></script>
-	<!-- this page js -->
-	<script src="resources/table/js/datatable-checkbox-init.js"></script>
-	<script src="resources/table/js/jquery.multicheck.js"></script>
-	<script src="resources/table/js/datatables.min.js"></script>
+	
 	<script>
 		$('#zero_config').DataTable();
-
-		function permitReport() {
-
-			var flag = confirm("해당 신고를 승인하시겠습니까?");
-			/* if(flag == true){
-				$.ajax({
-					url : 'permitReport',
-					method : 'post'
-					data : {}
-				});
-			}
-			 */
-
-		}
+		
+	/* 	$('#permitReport').click(
+				var flag = confirm("해당 신고를 승인하시겠습니까?");
+				if(flag == true){
+					$.ajax({
+						method : "POST",
+						url : "permitReport",
+						data : {
+							"reporter" : $('#reporter').val(),
+							"content" : $('#content').val(),
+							"q_no" : $('#q_no').val(),
+							"reported" : $('#reported').val(),
+							"code" : $('#code option:selected').val()
+						},
+						success : function() {
+							alert('신고 접수가 완료되었습니다.');
+							location.reload();
+						},
+						error : function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:"
+									+ request.responseText + "\n" + "error:"
+									+ error);
+						}
+					})
+				}
+			);  */
+				
 		function cancelReport() {
 
-			var flag = confirm("해당 신고를 기각하시겠습니까?")
+			var flag1 = confirm("해당 신고를 기각하시겠습니까?");
 
 		}
 
 		//모달 신고내역 초기화
 		$('#exampleModal').on('hidden.bs.modal', function(e) {
-			$(this).find('form')[0].reset();
+			 $(this).find('form')[0].reset(); 
 
 		})
 	</script>
