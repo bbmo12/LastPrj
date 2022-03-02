@@ -37,14 +37,14 @@ function onMessage(evt){
     		"closeButton":true,
     		"debug":false,
 			"newestOnTop": false,
-			"progressBar": true,
+			"progressBar": false,
 			"positionClass": "toast-top-right",
 			"preventDuplicates": true,
 			"onclick": null,
 			"showDuration": "100",
 			"hideDuration": "1000",
-			"timeOut": "2500",
-			"extendedTimeOut": "2000",
+			"timeOut": "3500",
+			"extendedTimeOut": "3500",
 			"showEasing": "swing",
 			"hideEasing": "linear",
 			"showMethod": "fadeIn",
@@ -123,52 +123,7 @@ function onMessage(evt){
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
-								</a>
-								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item preview-item">
-										<div class="preview-thumbnail">
-											<div class="preview-icon bg-success">
-												<i class="mdi mdi-calendar"></i>
-											</div>
-										</div>
-										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
-											<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
-										</div>
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item preview-item">
-										<div class="preview-thumbnail">
-											<div class="preview-icon bg-warning">
-												<i class="mdi mdi-settings"></i>
-											</div>
-										</div>
-										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-											<p class="text-gray ellipsis mb-0">Update dashboard</p>
-										</div>
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item preview-item">
-										<div class="preview-thumbnail">
-											<div class="preview-icon bg-info">
-												<i class="mdi mdi-link-variant"></i>
-											</div>
-										</div>
-										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-											<p class="text-gray ellipsis mb-0">New admin wow!</p>
-										</div>
-									</a>
-								<div class="dropdown-divider"></div>
-								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
-							</div>
-						</li>
+							
 						</c:if>
 						<!-- 일반회원 로그인  -->
 						<c:if test="${mId ne null and pId eq null}">
@@ -185,33 +140,15 @@ function onMessage(evt){
 
 								</ul>
 							</li>
-
-
-						</c:if>
-						
-			<li class="nav-item dropdown">
+							<li class="nav-item dropdown">
 								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
 									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
-							</a>
-							<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-								aria-labelledby="notificationDropdown">
-								<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item preview-item">
-									<div class="preview-thumbnail">
-										<div class="preview-icon bg-success">
-											<i class="mdi mdi-calendar"></i>
-										</div>
-									</div>
-									<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-										<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
-										<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
-									</div>
-
 								</a>
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
 									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
-									<div class="dropdown-divider"></div>
+									
+									<c:forEach items="${noticeList }" var="notice">
+									<div class="dropdown-divider"></div>							
 									<a class="dropdown-item preview-item">
 										<div class="preview-thumbnail">
 											<div class="preview-icon bg-success">
@@ -219,38 +156,19 @@ function onMessage(evt){
 											</div>
 										</div>
 										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">Eventtoday</h6>
-											<p class="text-gray ellipsis mb-0">Just a reminder that you have an event today</p>
+											<h6 class="preview-subject font-weight-normal mb-1">${notice.n_from }</h6>
+											<p class="text-gray ellipsis mb-0">${notice.content }</p>
 										</div>
 									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item preview-item">
-										<div class="preview-thumbnail">
-											<div class="preview-icon bg-warning">
-												<i class="mdi mdi-settings"></i>
-											</div>
-										</div>
-										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-											<p class="text-gray ellipsis mb-0">Update dashboard</p>
-										</div>
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item preview-item">
-										<div class="preview-thumbnail">
-											<div class="preview-icon bg-info">
-												<i class="mdi mdi-link-variant"></i>
-											</div>
-										</div>
-										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-											<p class="text-gray ellipsis mb-0">New admin wow!</p>
-										</div>
-									</a>
+									
+									</c:forEach>
+									
 								<div class="dropdown-divider"></div>
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 							</div>
 						</li>
+
+						</c:if>
 						
 						<li><a href="testPage">Contact</a></li>
 						

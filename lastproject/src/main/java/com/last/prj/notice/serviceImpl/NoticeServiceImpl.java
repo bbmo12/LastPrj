@@ -1,5 +1,7 @@
 package com.last.prj.notice.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,11 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int noticeInsert(NoticeVO notice) {
 		return map.noticeInsert(notice);
+	}
+
+	@Override
+	public List<NoticeVO> noticeSelectList(String m_id) {
+		return map.noticeSelectList(m_id);
 	}
 
 }

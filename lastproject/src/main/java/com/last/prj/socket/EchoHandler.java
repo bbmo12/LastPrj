@@ -50,12 +50,14 @@ public class EchoHandler extends TextWebSocketHandler{
 					String n_to = strs[0]; // mId
 					String content = strs[1];
 					WebSocketSession targetSession = users.get(n_to);  // 메시지를 받을 세션 조회
+					System.out.println("target: "+targetSession);
 					
 					// 실시간 접속시
 					if(targetSession!=null) {
 						// ex: [&분의일] 신청이 들어왔습니다.
 						TextMessage tmpMsg = new TextMessage("[<b>알림</b>] " + content);
 						targetSession.sendMessage(tmpMsg);
+						System.out.println("전송확인");
 					}
 				}
 			}
@@ -89,6 +91,7 @@ public class EchoHandler extends TextWebSocketHandler{
 		private String getMemberId(WebSocketSession session) {
 			Map<String, Object> httpSession = session.getAttributes();
 			String p_id = (String) httpSession.get("pId"); // 세션에 저장된 mId 기준 조회
+			System.out.println("p_id : "+p_id);
 			return p_id==null? null: p_id;
 		}
 	}
