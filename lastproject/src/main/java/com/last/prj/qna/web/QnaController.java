@@ -163,10 +163,6 @@ public class QnaController {
 		qtagDAO.newTag(qtag);
 		qnaDAO.newQna(qna);
 		qtagDAO.newQtag(qnatag);
-		
-		System.out.println(qtag);
-		System.out.println(qna);
-		System.out.println(qnatag);
 
 		return "qna/qnaMain";
 	}
