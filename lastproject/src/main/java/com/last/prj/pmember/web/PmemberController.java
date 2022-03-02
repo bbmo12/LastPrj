@@ -123,6 +123,7 @@ public class PmemberController {
 		model.addAttribute("pmember",pMemberDao.getMember(p_id));
 		
 		return "redirect:pmember/pmemberMypage";
+
 	}
 
 }
