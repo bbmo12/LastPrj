@@ -113,9 +113,8 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
+		model.addAttribute(pMemberDao.pmemberUpdate(pmember));		
 		model.addAttribute(pMemberDao.getMember(p_id));
-		model.addAttribute(pMemberDao.pmemberUpdate(pmember));
-		
 		return "pmember/pmemberMypage";
 	}
 
