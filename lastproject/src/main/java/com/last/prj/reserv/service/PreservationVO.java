@@ -8,12 +8,10 @@ import lombok.Data;
 
 @Data
 public class PreservationVO {
-	@JsonFormat(pattern = "YYYY-MM-dd")
-	private Date startdate;
+	private String startdate;
 	//뷰
 	private int r_no;
-	@JsonFormat(pattern = "YYYY-MM-dd")
-	private Date r_date;
+	private String r_date;
 	private int time;
 	private String m_id;
 	private String pcontent;
