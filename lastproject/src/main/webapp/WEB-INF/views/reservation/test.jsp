@@ -24,6 +24,8 @@
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div.tui-full-calendar-popup-section.tui-full-calendar-dropdown.tui-full-calendar-close.tui-full-calendar-section-state > button{
 	display: none;
 }
+.modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; background-color: rgba(0, 0, 0, 0.4); }
+
 
 
 </style>
@@ -46,9 +48,15 @@
     <div id="calendar" style ="width: 700px"></div>
     
 <table class="table" ></table>
-
+<div class="modal"> 
+	<div class="modal_body">Modal</div> 
+</div> 
+<button class="btn-open-popup">Modal 띄우기</button> 
 <script type="text/javascript">
 
+const modal = document.querySelector('.modal'); 
+const btnOpenPopup = document.querySelector('.btn-open-popup'); 
+btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; });
 
 
 $(document).ready(function(){
@@ -183,7 +191,7 @@ $(document).ready(function(){
 									<td>`+split[0]+'-'+split[1]+'-'+(parseInt(split[2])+i)+`</td>
 										<td><select class="selectTime" name="예약시간" onchange="changeSelection()">
 												<option value="">예약시간</option>
-												<option value="9시">09:00~10:00</option>
+												<option value="09시">09:00~10:00</option>
 												<option value="10시">10:00~11:00</option>
 												<option value="11시">11:00~12:00</option>
 												<option value="2시">14:00~15:00</option>
@@ -192,7 +200,7 @@ $(document).ready(function(){
 												<option value="5시">17:00~18:00</option>
 											</select>
 										</td>
-									 <td class="resvAble">`+ res[0].c_check +`</td>
+									 <td class="resvAble"></td>
 								</tr>
 						</tbody> `;
 					$(".table").append($tbody);
@@ -217,22 +225,37 @@ $(document).ready(function(){
 	
 });
 function changeSelection(){
-	var date = $(".selectTime").parent().prev().text();
-	var val = $(".selectTime option:selected").val();
-	console.log(date);
-	console.log(val);
+	var reserv_date = $(".selectTime").parent().prev().text();
+	var reserv_time = $(".selectTime option:selected").val();
+	console.log(reserv_date);
+	console.log(reserv_time);
 	$.ajax({
 		url : 'reservcount',
 		method : 'POST',
-		data : {"reserv_date": date,
-				"reserv_time": val},
+		data : {"reserv_date": reserv_date,
+				"reserv_time": reserv_time},
 		success : function(res){
 			console.log(res);
+			if(res.reserv_date != null && res.reserv_time != null){
+				$(".selectTime").parent().next().text('예약불가');
+			}else{
+				$(".selectTime").parent().next().text('');
+				$(".selectTime").parent().next().append(`<button class="reservOK">예약가능</button>`); 
+			}
+			
 		}
 	})
 	
 }
 
+$(".reservOK").on('click',function(){
+	var flag = confirm("예약하시겠습니까?");
+		if(flag == true){
+			
+			
+		
+	}
+})
 
  </script>
 
