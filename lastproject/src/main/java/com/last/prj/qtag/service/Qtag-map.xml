@@ -33,8 +33,10 @@
 	<!-- 새로운 태그와 글 번호 연결 -->
 	<insert id="newQtag"
 		parameterType="com.last.prj.qtag.service.QnaTagVO">
+		<foreach collection="nTags" item="item">
 		INSERT INTO qnatag
 		values(q_seq.curval, #{t_name})
+		</foreach>
 	</insert>
 
 </mapper>

@@ -9,4 +9,5 @@ public interface QtagMapper {
 
 	// 등록
 	int newTag(QtagVO qtag);
+
 }
