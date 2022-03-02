@@ -2,12 +2,10 @@ package com.last.prj.reserv.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
-import com.last.prj.reserv.service.PreservationCodeListVO;
 import com.last.prj.reserv.service.PreservationlistService;
 import com.last.prj.reserv.service.ReservCountService;
 import com.last.prj.reserv.service.ReservCountVO;
@@ -114,7 +111,7 @@ public class ReservationController {
 	  public ReservCountVO reservCountSelect(@RequestParam("reserv_date")String reserv_date, @RequestParam("reserv_time")String reserv_time) {
 		  System.out.println(reserv_date);
 		  System.out.println(reserv_time);
-		  reservCountDao.reservCountSelect(reserv_date,reserv_time);
+		  System.out.println(reservCountDao.reservCountSelect(reserv_date,reserv_time));
 		  return reservCountDao.reservCountSelect(reserv_date,reserv_time);
 	  }
 	  
