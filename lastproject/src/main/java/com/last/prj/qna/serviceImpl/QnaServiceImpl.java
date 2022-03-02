@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.prj.qna.service.Criteria;
-import com.last.prj.qna.service.PagingVO;
 import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaTagVO;
 import com.last.prj.qna.service.QnaVO;
-import com.last.prj.qna.service.QtagVO;
 
 @Repository("qnaDAO")
 public class QnaServiceImpl implements QnaService {
@@ -90,15 +88,17 @@ public class QnaServiceImpl implements QnaService {
 		return map.ansDelete(q_no);
 	}
 
-	
-	
+	@Override
+	public int ansUpdate(QnaVO qna) {
+		// TODO Auto-generated method stub
+		return map.ansUpdate(qna);
+	}
+
+
 	@Override
 	public List<QnaVO> admQnaList() {
 		return map.admQnaList();
 	}
-
-
-	
 
 
 }

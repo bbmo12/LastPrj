@@ -40,13 +40,13 @@ public interface QnaMapper {
 	//질문글 수정
 	
 	//답변글 수정
+	int ansUpdate(QnaVO qna);
 	
 	//질문글 삭제
 	
 	//답변글 삭제
 	int ansDelete(int q_no);
-	
-	
+
 	//질문글 전체 조회 (관리자)
 	List<QnaVO> admQnaList();
 

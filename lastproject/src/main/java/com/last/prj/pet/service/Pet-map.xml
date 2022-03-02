@@ -16,6 +16,7 @@
 		WHERE
 		M_ID = #{m_id}
 	</select>
+	
 	<!-- 펫 상세정보 조회 -->
 	<select id="petSearch" parameterType="int"
 		resultType="com.last.prj.pet.service.PetVO">
