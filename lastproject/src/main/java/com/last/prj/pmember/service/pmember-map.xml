@@ -117,19 +117,19 @@
 	<update id="pmemberUpdate" parameterType="com.last.prj.pmember.service.PmemberVO">
 		UPDATE P_MEMBER
 			<set>
-				<if test="name != null">name = #{name}, </if>
-				<if test="password != null">password = #{password}, </if>
-				<if test="tel != null">tel = #{tel}, </if>
-				<if test="w_name != null">w_name = #{w_name},</if>
-	  			<if test="w_address != null"> w_address = #{w_address}, </if>
-	  			<if test="w_d_address != null"> w_d_address = #{w_d_address}, </if>				
-	 		 	<if test="w_tel != null"> w_tel = #{w_tel}, </if>
-	 		 	<if test="n_content != null"> n_content = #{n_content},</if>
-	 			<if test="p_info != null"> p_info = #{p_info}, </if>
-	  			<if test="career != null"> career = #{career}, </if> 
-	  			<if test="speciality != null"> speciality = #{speciality} </if>
-				<if test="picture != null">picture = #{picture}, </if>
-				<if test="pfile != null">pfile = #{pfile} </if>		
+				<if test="name != null">NAME = #{name}, </if>
+				<if test="password != null">PASSWORD = #{password}, </if>
+				<if test="tel != null">TEL = #{tel}, </if>
+				<if test="w_name != null">W_NAME = #{w_name},</if>
+	  			<if test="w_address != null"> W_ADDRESS = #{w_address}, </if>
+	  			<if test="w_d_address != null"> W_D_ADDRESS = #{w_d_address}, </if>				
+	 		 	<if test="w_tel != null"> W_TEL = #{w_tel}, </if>
+	 		 	<if test="n_content != null"> N_CONTENT = #{n_content},</if>
+	 			<if test="p_info != null"> P_INFO = #{p_info}, </if>
+	  			<if test="career != null"> CAREER = #{career}, </if> 
+	  			<if test="speciality != null"> SPECIALITY = #{speciality} </if>
+				<if test="picture != null">PICTURE = #{picture}, </if>
+				<if test="pfile != null">PFILE = #{pfile} </if>		
 			</set>
 		WHERE P_ID = #{p_id}
 	</update>
