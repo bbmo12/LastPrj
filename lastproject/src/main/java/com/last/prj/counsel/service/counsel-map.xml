@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.counsel.service.CounselMapper">
+	<select id="myCounselList" parameterType="String" resultType="com.last.prj.counsel.service.CounselVO">
+		SELECT P.NAME AS p_name, PM.NAME AS pm_name, C.CONTENT, CO.CONTENT AS co_content, C.W_DATE, R.R_CHECK
+		FROM P_MEMBER PM, PET P, COUNSEL C, F_CODE CO, REVIEW R
+		WHERE PM.P_ID = C.P_ID AND C.PET_NO= P.PET_NO AND CO.CODE = C.CODE AND
+		R.C_NO = C.C_NO AND P.M_ID = #{m_id}
+	</select>
+
+</mapper>
