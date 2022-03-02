@@ -1,5 +1,8 @@
 package com.last.prj.notice.web;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +16,7 @@ import com.last.prj.notice.service.NoticeVO;
 public class NoticeController {
 	
 	@Autowired
-	public NoticeService noticeService;
+	public NoticeService noticeDao;
 	
 	@RequestMapping("/testPage")
 	public String testPage() {
@@ -23,8 +26,12 @@ public class NoticeController {
 	
 	@PostMapping("/noticeInsert")
 	@ResponseBody
-	public String noticeInsert(NoticeVO notice) {
-		noticeService.noticeInsert(notice);
+	public String noticeInsert(NoticeVO notice, HttpServletRequest request) {
+		System.out.println("여기까지");
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("pId");
+		notice.setN_from(id);
+		noticeDao.noticeInsert(notice);
 		return "test/testPage";
 	}
 }
