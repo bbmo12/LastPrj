@@ -2,6 +2,8 @@ package com.last.prj.qna.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 public interface QnaService {
 
 	// 질문글 전체 갯수
@@ -37,11 +39,11 @@ public interface QnaService {
 	// 질문글 수정
 
 	// 답변글 수정
-
+	int ansUpdate(QnaVO qna);
+	
 	// 답변글 삭제
 	int ansDelete(int q_no);
-	
-	
+
 	//질문글 전체 조회 (관리자)
 	List<QnaVO> admQnaList();
 }
