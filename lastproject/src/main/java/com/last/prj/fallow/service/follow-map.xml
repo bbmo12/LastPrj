@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.fallow.service.FollowMapper">
+	<select id="myFollowSearch" parameterType="String"
+		resultType="com.last.prj.fallow.service.FollowVO">
+	SELECT F.M_ID, F.P_ID, P.PICTURE AS picture, P.PFILE AS pfile
+	FROM FOLLOW F, P_MEMBER P
+	WHERE F.P_ID = P.P_ID AND M_ID = #{m_id}
+	</select>
+</mapper>
