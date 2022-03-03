@@ -15,8 +15,8 @@ public class ReservationServiceImpl implements ReservationService{
 	@Autowired
 		private ReservationMapper map;
 	@Override
-	public List<ReservationVO> reservationSelect() {
-		return map.reservationSelect();
+	public List<ReservationVO> reservationSelect(ReservationVO vo) {
+		return map.reservationSelect(vo);
 	}
 	@Override
 	public List<ReservationVO> reservationSelectList() {
