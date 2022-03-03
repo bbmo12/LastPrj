@@ -109,6 +109,7 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
+
 		pMemberDao.pmemberTime(time);
 		pMemberDao.pmemberUpdate(pmember);
 		model.addAttribute("pmember", pMemberDao.getMember(p_id));

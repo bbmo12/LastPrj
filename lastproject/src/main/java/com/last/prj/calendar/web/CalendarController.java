@@ -14,19 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
-import com.last.prj.mem.service.MemService;
-import com.last.prj.reserv.service.ReservationService;
 
 @Controller
 public class CalendarController {
 	@Autowired
 	private CalendarService CalendarDao;
 	
-	@Autowired
-	private ReservationService reservationDao; 
-	
-	@Autowired
-	private MemService memDao;
 	
 	//파트너회원 예약설정 조회
 	@RequestMapping("revsetlist")
@@ -34,10 +27,9 @@ public class CalendarController {
 	public List<CalendarVO> revSetList(HttpServletRequest request,CalendarVO vo){
 		//로그인 세션값
 		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		System.out.println("m_id : " +m_id);
-		
-		vo.setP_id(m_id);
+		String p_id = (String) session.getAttribute("pId");
+		System.out.println("p_id : " +p_id);
+		vo.setP_id(p_id);
 		List<CalendarVO> list = CalendarDao.revSetList(vo);
 		System.out.println(list);
 		return list;
@@ -45,25 +37,21 @@ public class CalendarController {
 	//파트너회원 예약설정 등록
 	@PostMapping("revsetinsert")
 	@ResponseBody
-	public CalendarVO revSetInsert(CalendarVO vo,@RequestParam("c_start") String c_start,@RequestParam("c_end") String c_end
-							,@RequestParam("category")String category,@RequestParam("title")String title) {
-		vo.setTitle(title);
-		vo.setCategory(category);
-		vo.setC_start(c_start);
-		vo.setC_end(c_end);
-		System.out.println(c_start);
-		System.out.println(c_end);
+	public CalendarVO revSetInsert(CalendarVO vo,HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		System.out.println("p_id : " +p_id);
+		vo.setP_id(p_id);
 		CalendarDao.revSetInsert(vo); //등록
-		System.out.println(CalendarDao.revSetSelectList());
-		return CalendarDao.revSetSelectList(); //단건조회로 뷰
+		return vo;
 		
 	}
 	
 	//파트너회원 예약설정 삭제
 	@PostMapping("revsetdelete")
 	@ResponseBody
-	public String revSetDelete(@RequestParam("id")int id,CalendarVO vo) {
-		vo.setId(id);
+	public String revSetDelete(CalendarVO vo) {
 		CalendarDao.revSetDelete(vo);
 		return "ok";
 	}
@@ -71,13 +59,7 @@ public class CalendarController {
 	//파트너회원 예약설정 수정
 	@PostMapping("revsetupdate")
 	@ResponseBody
-	public CalendarVO revSetUpdate(CalendarVO vo,@RequestParam("c_start") String c_start,@RequestParam("c_end") String c_end
-			,@RequestParam("category")String category,@RequestParam("title")String title,@RequestParam("id")int id) {
-		vo.setC_end(c_end);
-		vo.setC_start(c_start);
-		vo.setId(id);
-		vo.setTitle(title);
-		vo.setCategory(category);
+	public CalendarVO revSetUpdate(CalendarVO vo) {
 		CalendarDao.revSetUpdate(vo);
 		return vo;
 	}

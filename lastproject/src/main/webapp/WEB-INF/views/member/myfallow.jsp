@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +39,7 @@
 								src="resources/upload/${member.picture}" style="width: 210px"
 								alt="">
 							<div class="br"></div>
-							<h4> ${member.name }</h4>
+							<h4>${member.name }</h4>
 
 							<div class="br"></div>
 						</aside>
@@ -79,33 +79,31 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-				<div class="col-lg-12 col-md-12 blog_details">
-							<table class="table">
-							<thead>
-								<tr>
-									<th>파트너회원이름</th>
-									<th>신고내용</th>
-									<th>신고일</th>
-									<th>분류</th>
-									<th>신고결과</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${report }" var="report">
-									<tr>
-										<td>${report.p_name }</td>
-										<td>${report.content}</td>
-										<td>${report.w_date } </td>
-										<td>${report.f_content }</td>
-										<td>${report.f_content }</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+				<div class="row" id="data-container">
+				<c:forEach items="${follow }" var="follow">
+					<div class="col-lg-3 col-sm-6">
+						<div class="single-doctor mb-3 mb-lg-0">
+							<div class="doctor-img">
+								<img src="resources/upload/${follow.picture }" alt=""  class="img-fluid"
+									style="width: 195px; height: 200px;">
+							</div>
+							<div class="content-area">
+								<div class="doctor-name text-center">
+									<a href=#<%-- "petDetail?pet_no=${pet.pet_no}" --%>>
+										<h3>${follow.p_id }</h3>
+									</a>
+								</div>
+							</div>
+						</div>
+						</div>
+				</c:forEach>
 					</div>
-				</div>
 			</div>
-		</div>
+			
+			</div>
+			</div>
+		
 	</section>
+
 </body>
 </html>

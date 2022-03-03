@@ -25,8 +25,8 @@ public class ReservCountServiceImpl implements ReservCountService {
 	}
 
 	@Override
-	public ReservCountVO reservCountSelect(String reserv_date, String reserv_time) {
-		return map.reservCountSelect(reserv_date, reserv_time);
+	public ReservCountVO reservCountSelect(ReservCountVO vo) {
+		return map.reservCountSelect(vo);
 	}
 
 
