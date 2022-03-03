@@ -21,11 +21,9 @@ public class FfileUtil {
 	
 	@Autowired
 	private FfileService ffileDao;
-	
-	@Autowired
-	ServletContext sc;
+
 	 
-	public int multiFileUpload(List<MultipartFile> multiFileList) {
+	public int multiFileUpload(List<MultipartFile> multiFileList,HttpServletRequest request) {
 			FilemasterVO filemaster = new FilemasterVO();
 		    FfileVO ffile= new FfileVO();
 		    
@@ -34,9 +32,9 @@ public class FfileUtil {
 			// path 가져오기
 			
 			String webPath = "/resources/upload";
-			String realPath = sc.getRealPath(webPath);
+			// String realPath = sc.getRealPath(webPath);
 			
-			//String path = request.getSession().getServletContext().getRealPath("resources");
+			String realPath = request.getSession().getServletContext().getRealPath("resources/upload");
 			//String root = path + "\\" + "upload";
 			
 			System.out.printf("realPath: %s\n", realPath);

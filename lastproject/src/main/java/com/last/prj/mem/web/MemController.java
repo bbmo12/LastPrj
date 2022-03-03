@@ -241,16 +241,16 @@ public class MemController {
 	  }
 	  
 	  @RequestMapping("/pjoin_3") //파트너회원 회원가입 2차
-	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2) {
+	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2, HttpServletRequest request) {
 		  System.out.println("p_id3:"+p_id);
 		  
 		  
-		  FfileUtil ffileutil = new FfileUtil();
+		  FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
 		  
-		  int p_license = ffileutil.multiFileUpload(multiFileList1);
+		  int p_license = ffileutil.multiFileUpload(multiFileList1, request);
 		  System.out.println("p_license = " + p_license);
 		  
-		  int p_image = ffileutil.multiFileUpload(multiFileList2);
+		  int p_image = ffileutil.multiFileUpload(multiFileList2, request);
 		  System.out.println("p_image = " + p_image);
 		  
 		  pmemDao.pmemberInsert3(p_id, p_license, p_image);
