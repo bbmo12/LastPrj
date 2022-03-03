@@ -81,12 +81,16 @@ public class PmemberController {
 		return "pmember/pmemberUpdateForm";
 	}
 	//마이페이지 수정 
-	@RequestMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, @RequestParam("p_id") String p_id, PmemberVO pmember, TimeVO time , Model model) {
+	@PostMapping("pmemberUpdate")
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time , Model model, HttpServletRequest request) {
 
 		String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
+		
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		
 		
 		File savePath = new File(realPath);
 		if (!savePath.exists())
@@ -107,9 +111,10 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(pMemberDao.pmemberTime(time));
-		model.addAttribute(pMemberDao.pmemberUpdate(pmember));
-		return "redirect:/pmemberMypage";
+		model.addAttribute("time",pMemberDao.pmemberTime(time));
+		model.addAttribute("pmember", pMemberDao.getMember(p_id));
+		model.addAttribute("pmember",pMemberDao.pmemberUpdate(pmember));
+		return "redirect:/pmemberMyPage";
 	}
 
 }
