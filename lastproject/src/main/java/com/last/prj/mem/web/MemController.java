@@ -248,9 +248,6 @@ public class MemController {
 	  }
 
 	 
-	 
-
-	
 
 	@RequestMapping("/join") // 회원가입폼 이동
 	public String login() {
@@ -262,9 +259,6 @@ public class MemController {
 		return "member/jusoPopup";
 	}
 
-	@RequestMapping("/myfallow")
-	public String myfallow() {
-		return "member/myfallow";
-	}
+
 
 }
