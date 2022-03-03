@@ -184,6 +184,7 @@
 		</div>
 	</section>
 	<script type="text/javascript">
+	/* 별점주기 */
 		$(function () {
 			$('.star').each(function (index, item) {
 				$(this).raty({
@@ -196,6 +197,7 @@
 		});
 	</script>
 	<script type="text/javascript">
+	/*스크롤 */
 		console.log('${pmemdetail}');
 		$(function () {
 			$('.comment-list').slice(0, 2).show();
