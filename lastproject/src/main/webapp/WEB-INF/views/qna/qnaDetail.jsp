@@ -182,7 +182,8 @@
 											<li>${qnaDetail.w_date }&nbsp;&nbsp;<i
 												class="fa fa-calendar-o"></i></li>
 											<li>${qnaDetail.hit }&nbsp;&nbsp;<i class="fa fa-eye"></i></li>
-											<li>06 Comments&nbsp;&nbsp;<i class="fa fa-comment-o"></i></li>
+											<li>${cnt }Comments&nbsp;&nbsp;<i
+												class="fa fa-comment-o"></i></li>
 										</ul>
 									</td>
 								</tr>
@@ -270,9 +271,20 @@
 								</table>
 							</div>
 						</div>
+						
+						<!-- 질문글 신고 trigger -->
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#exampleModal"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고</button>
+
+						<!-- 세션 아이디와 글쓴이 일치할 때 수정, 삭제 가능 -->
+						<c:if test="${mId eq qnaDetail.writer }">
+							<a href="qModiForm?q_no=${qnaDetail.q_no }"><button
+									type="button" id="qUpdateBtn" class="btn btn-primary">수정</button></a>
+							<button type="button" id="qDelBtn" class="btn btn-secondary"
+								onclick="qDelete(${qnaDetail.q_no });">삭제</button>
+						</c:if>
 
 						<!-- 질문글 신고 모달-->
-						<!-- button trigger modal -->
 
 						<!-- 신고 Modal -->
 						<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -330,10 +342,12 @@
 						<div>
 							<!--로그인 세션 있을 경우 답변 모달창-->
 							<!--modal trigger button-->
-							<c:if test="${mId ne null || pId ne null}">
-								<button type="button" id="ansBtn" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target=".bd-example-modal-lg">이
-									질문에 답변하기</button>
+							<c:if test="${ mId ne null || pId ne null}">
+								<c:if test="${mId ne qnaDetail.writer  }">
+									<button type="button" id="ansBtn"
+										class="btn btn-primary btn-lg" data-toggle="modal"
+										data-target=".bd-example-modal-lg">이 질문에 답변하기</button>
+								</c:if>
 							</c:if>
 
 							<!-- 답변 모달창 -->
@@ -477,9 +491,9 @@
 											<textarea class="form-control" rows="15" id="content"
 												name="content">${ans.content }</textarea>
 
-
-											<input type="hidden" id="q_no" name="q_no"
-												value="${ans.q_no }">
+											<input type="hidden" id="writer" name="writer"
+												value="${ans.writer }"> <input type="hidden"
+												id="q_no" name="q_no" value="${ans.q_no }">
 
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
@@ -502,7 +516,8 @@
 									<div>
 										<button id="reportModal2" type="button"
 											class="btn btn-secondary btn-sm" data-toggle="modal"
-											data-target="#exampleModal2">
+											data-target="#exampleModal2"
+											onclick="transferQno(${ans.q_no }); transferW(${ans.writer });">
 											<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
 										</button>
 									</div>
@@ -513,7 +528,7 @@
 									role="dialog" aria-labelledby="exampleModalLabel"
 									aria-hidden="true">
 									<div class="modal-dialog" role="document">
-										<div class="modal-content">
+										<div class="modal-content ArepModal">
 											<div class="modal-header">
 												<h3 class="modal-title" id="exampleModalLabel">
 													<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시물
@@ -523,6 +538,8 @@
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
+												<input type="hidden" id="qNo"> <input type="hidden"
+													id="Awriter">
 											</div>
 											<div class="modal-body">
 
@@ -547,8 +564,7 @@
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">취소</button>
 												<button id="sendReport2" name="sendReport" type="button"
-													class="btn btn-primary" onclick="ansReport(${ans.q_no })">신고
-													접수</button>
+													class="btn btn-primary">신고 접수</button>
 											</div>
 										</div>
 									</div>
@@ -615,35 +631,97 @@
 			})
 		})
 		
-		/*답변글 신고 모달*/
-		function ansReport(info){
-			console.log(info);
-			var reported = $('#' + info).find('#Awriter').val();
-			var content = $('#' + info).find('#content').val();
-			var code = $('#' + info).find('#code option:selected').val();
+		/*질문 삭제 ajax*/
+		function qDelete(no){
 			
-			console.log(content);
-			console.log(code);
+			console.log(no);
 			
+			//댓글 갯수
+			var count = "${cnt}";
+			
+			if(confirm('정말 삭제하시겠습니까?')){
+				
+			if(count > 0){
 			$.ajax({
 				method : "POST",
-				url : "newQnaReport",
+				url : "qDeleteOne",
 				data : {
-					"reporter" : $('#reporter').val(),
-					"content" : content,
-					"q_no" : info,
-					"reported" : reported,
-					"code" : code
+					q_no : no
 				},
 				success : function(){
-					alert('신고 접수가 완료되었습니다.');
+					alert('삭제되었습니다.');
 					location.reload();
 				},
-				error : function() {
-					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
+				error : function(){
+					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.')
 				}
 			})
+			}
+			else {
+				$.ajax({
+					method : "POST",
+					url : "qDeleteTwo",
+					data : {
+						q_no : no
+					},
+					success : function(){
+						alert('삭제되었습니다.');
+						history.back();
+					},
+					error : function(){
+						alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.')
+					}
+				})
+			}
+		}	
+	 }
+		
+		/*신고 글 번호, 글쓴이 넘김*/
+		function transferQno(no){
+			$('#qNo').val(no);
+			
+			console.log(no);
+			
 		}
+		
+		function transferW(writer){
+			$('#Awriter').val(writer);
+			
+			console.log(writer);
+		}
+		
+		/*답변글 신고 모달*/
+		/* function ansReport(){ */
+			/* console.log(info);
+			var no = $(this).closest(".comments-area").data("no");
+			console.log(no);
+			var reported = $('#' + no).find('#writer').val();
+ */			/* var content = $('#' + info).find('#content').val();
+			var code = $('#' + info).find('#code option:selected').val(); */
+			/* console.log(content);
+			console.log(code); */
+			
+			$('#sendReport2').click(function() {
+				$.ajax({
+					method : "POST",
+					url : "newQnaReport",
+					data : {
+						"reporter" : $('#reporter').val(),
+						"content" : $('.ArepModal #content').val(),
+						"q_no" : $('#qNo').val(),
+						"reported" : $('#Awriter').val(),
+						"code" : $('.ArepModal #code option:selected').val()
+					},
+					success : function() {
+						alert('신고 접수가 완료되었습니다.');
+						location.reload();
+					},
+					error : function() {
+						alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
+					}
+				})
+			})
+			
 			
 		/*답변글 작성 모달*/
 		$('#sendAns').click(function() {

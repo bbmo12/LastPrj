@@ -21,4 +21,17 @@ public class QnaTagServiceImpl implements QnaTagService{
 		return qtmap.qtList();
 	}
 
+	@Override
+	public int newQtag(QnaTagVO qnatag) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delTags(int q_no) {
+		// TODO Auto-generated method stub
+		return qtmap.delTags(q_no);
+	}
+
+
 }

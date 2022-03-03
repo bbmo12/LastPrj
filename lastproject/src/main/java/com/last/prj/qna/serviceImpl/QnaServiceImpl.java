@@ -80,8 +80,6 @@ public class QnaServiceImpl implements QnaService {
 		return map.tagSearch(t_name);
 	}
 
-
-
 	@Override
 	public int ansDelete(int q_no) {
 		// TODO Auto-generated method stub
@@ -94,10 +92,27 @@ public class QnaServiceImpl implements QnaService {
 		return map.ansUpdate(qna);
 	}
 
-
 	@Override
 	public List<QnaVO> admQnaList() {
 		return map.admQnaList();
+	}
+
+	@Override
+	public int qModify(QnaVO qna) {
+		// TODO Auto-generated method stub
+		return map.ansUpdate(qna);
+	}
+
+	@Override
+	public int qDeleteOne(int q_no) {
+		// TODO Auto-generated method stub
+		return map.qDeleteOne(q_no);
+	}
+
+	@Override
+	public int qDeleteTwo(int q_no) {
+		// TODO Auto-generated method stub
+		return map.qDeleteTwo(q_no);
 	}
 
 

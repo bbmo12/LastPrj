@@ -20,6 +20,7 @@
 <!-- ckeditor -->
 <script src="resources/ckeditor/ckeditor.js"></script>
 
+
 <style>
 .radioImg {
 	width: 80px;
@@ -65,15 +66,6 @@ ul li.tag-item {
 }
 }
 </style>
-<script>
-	var ckeditor_config = {
-		resize_enaleb : false,
-		enterMode : CKEDITOR.ENTER_BR,
-		shiftEnterMode : CKEDITOR.ENTER_P,
-		height : '500px',
-		filebrowserUploadUrl : "/common/ckUpload"
-	};
-</script>
 </head>
 
 <body>
@@ -88,21 +80,19 @@ ul li.tag-item {
 			</div>
 		</div>
 	</section>
-
-	<!-- question form starts -->
+	
+	<!-- modify form starts -->
 	<article>
 		<div class="container" role="main">
-			<h2>질문 수정하기</h2>
-			<form name="qForm" id="qForm" action="qForm" method="post"
+			<h2>새로운 질문 작성하기</h2>
+			<form name="qmForm" id="qmForm" action="qModify" method="post"
 				onsubmit="tagInput();">
 
-				<input type="hidden" id="writer" name="writer" value="writer"
-					value="${mId }">
 
 				<div class="mb-3">
 					<label for="title">제목</label> <input type="text"
 						class="form-control" name="title" id="title"
-						placeholder="제목을 입력해 주세요">
+						placeholder="제목을 입력해 주세요" value="${qnaDetail.title }">
 				</div>
 
 				<div class="form-check">
@@ -112,6 +102,7 @@ ul li.tag-item {
 					</div>
 					<input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
 					<label>없음/비공개</label>
+
 
 					<c:forEach items="${petList }" var="pet">
 						<div class="radioImg">
@@ -124,7 +115,7 @@ ul li.tag-item {
 				</div>
 
 				<div class="mb-3">
-					<textarea class="ckeditor4" id="content" name="content"></textarea>
+					<textarea class="ckeditor4" id="content" name="content">${qnaDetail.content }</textarea>
 					<script>
 						CKEDITOR.replace('content', ckeditor_config);
 					</script>
@@ -137,8 +128,10 @@ ul li.tag-item {
 							style="margin-left: 20px; width: 1100px;"
 							placeholder="스페이스 키로 태그를 등록하세요" />
 					</div>
-
+					
+					<!-- 기존 태그 -->
 					<ul id="tag-list">
+						
 					</ul>
 				</div>
 
@@ -240,9 +233,11 @@ ul li.tag-item {
 
 			for (var i = 0; i < tValue.length; i++) {
 				var tags = `<input type="hidden" name="nTags[\${i}].t_name" value="\${tValue[i].innerHTML}">`;
-				$('#qForm').append(tags);
+				$('#qmForm').append(tags);
 			}
 		}
 	</script>
+
+
 </body>
 </html>
