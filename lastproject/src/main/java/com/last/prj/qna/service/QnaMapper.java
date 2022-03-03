@@ -38,11 +38,16 @@ public interface QnaMapper {
 	int replyCnt(int q_no);
 	
 	//질문글 수정
+	int qModify(QnaVO qna);
 	
 	//답변글 수정
 	int ansUpdate(QnaVO qna);
 	
-	//질문글 삭제
+	//질문글 삭제(1)
+	int qDeleteOne(int q_no);
+	
+	//질문글 삭제(2)
+	int qDeleteTwo(int q_no);
 	
 	//답변글 삭제
 	int ansDelete(int q_no);

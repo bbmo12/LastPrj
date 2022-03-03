@@ -41,6 +41,7 @@ public class QtagServiceImpl implements QtagService {
 	@Override
 	public int newQtag(QnaTagVO qnatag) {
 		// TODO Auto-generated method stub
-		return qmap.newQtag(qnatag);
+		return qtmap.newQtag(qnatag);
 	}
+
 }
