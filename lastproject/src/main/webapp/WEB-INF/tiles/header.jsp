@@ -95,7 +95,7 @@ function onMessage(evt){
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li><a href="bTables.do">공지사항</a></li>
+						<li><a href="bTables">공지사항</a></li>
 						<li><a href="qnaMain">Open Q&A</a></li>
 						<li class="menu-has-children"><a href="memberMain">파트너회원</a>
 							<ul>

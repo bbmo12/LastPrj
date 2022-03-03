@@ -5,20 +5,14 @@
 <html dir="ltr" lang="en">
 <head>
 <meta charset="utf-8">
-
-<!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Table</title>
-<link rel="stylesheet" type="text/css" 	href="resources/table/css/multicheck.css">
+<link rel="stylesheet" type="text/css" href="resources/table/css/multicheck.css">
 <link href="resources/table/css/style.min.css" rel="stylesheet">
-<script src="resources/assets123/js/dashboard.js"></script>
 <style>
-	/* .row {	
-		margin-right:-1025px;
-	} */
-</style>		
+</style>
 </head>
 <body>
 	<div class="preloader">
@@ -56,7 +50,7 @@
 												<td colspan="6" align="center">데이터가 존재하지 않습니다.</td>
 											</tr>
 										</c:if>
-										
+
 										<c:if test="${rList ne null }">
 											<c:forEach items="${rList }" var="rep" varStatus="rs">
 												<tr>
@@ -117,7 +111,7 @@
 																	name="permitReport" class="btn btn-primary">신고
 																	승인</button>
 																<button type="button" id="cancelReport"
-																	onclick="cancelReport()" name="cancelReport"
+																	 name="cancelReport"
 																	class="btn btn-primary">신고 기각</button>
 															</div>
 														</div>
@@ -135,47 +129,39 @@
 			</div>
 		</div>
 	</div>
-		<script src="resources/table/js/popper.min.js"></script>
-		<script src="resources/table/js/bootstrap.min.js"></script>	
-		<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
-		<script src="resources/table/js/sparkline.js"></script>	
-		<script src="resources/table/js/waves.js"></script>	
-		<script src="resources/table/js/sidebarmenu.js"></script>	
-		<script src="resources/table/js/custom.min.js"></script>
-		<script src="resources/table/js/datatable-checkbox-init.js"></script>
-		<script src="resources/table/js/jquery.multicheck.js"></script>
-		<script src="resources/table/js/datatables.min.js"></script>
 
-	
+
 	<script>
 		$('#zero_config').DataTable();
-		
-	/* 	$('#permitReport').click(
-				var flag = confirm("해당 신고를 승인하시겠습니까?");
-				if(flag == true){
-					$.ajax({
-						method : "POST",
-						url : "permitReport",
-						data : {
-							"reporter" : $('#reporter').val(),
-							"content" : $('#content').val(),
-							"q_no" : $('#q_no').val(),
-							"reported" : $('#reported').val(),
-							"code" : $('#code option:selected').val()
-						},
-						success : function() {
-							alert('신고 접수가 완료되었습니다.');
-							location.reload();
-						},
-						error : function(request, status, error) {
-							alert("code:" + request.status + "\n" + "message:"
-									+ request.responseText + "\n" + "error:"
-									+ error);
-						}
-					})
-				}
-			);  */
-				
+
+			/*
+			$('#permitReport').click(
+					var flag = confirm("해당 신고를 승인하시겠습니까?");
+					if(flag == true){
+						$.ajax({
+							method : "POST",
+							url : "permitReport",
+							data : {
+								"reporter" : $('#reporter').val(),
+								"content" : $('#content').val(),
+								"q_no" : $('#q_no').val(),
+								"reported" : $('#reported').val(),
+								"code" : $('#code option:selected').val()
+							},
+							success : function() {
+								alert('신고 접수가 완료되었습니다.');
+								location.reload();
+							},
+							error : function(request, status, error) {
+								alert("code:" + request.status + "\n" + "message:"
+										+ request.responseText + "\n" + "error:"
+										+ error);
+							}
+						})
+					}
+				);  
+			*/
+
 		function cancelReport() {
 
 			var flag1 = confirm("해당 신고를 기각하시겠습니까?");
@@ -184,11 +170,22 @@
 
 		//모달 신고내역 초기화
 		$('#exampleModal').on('hidden.bs.modal', function(e) {
-			 $(this).find('form')[0].reset(); 
+			$(this).find('form')[0].reset();
 
 		})
 	</script>
 
 </body>
+<script src="resources/table/js/popper.min.js"></script>
+<script src="resources/table/js/bootstrap.min.js"></script>
+<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="resources/table/js/sparkline.js"></script>
+<script src="resources/table/js/waves.js"></script>
+<script src="resources/table/js/sidebarmenu.js"></script>
+<script src="resources/table/js/custom.min.js"></script>
+<script src="resources/table/js/datatable-checkbox-init.js"></script>
+<script src="resources/table/js/jquery.multicheck.js"></script>
+<script src="resources/table/js/datatables.min.js"></script>
+
 
 </html>

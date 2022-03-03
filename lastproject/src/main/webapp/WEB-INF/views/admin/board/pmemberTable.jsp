@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-	<div class="col-lg-12 grid-margin stretch-card container mt-3">
+	
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">파트너회원</h4>
@@ -59,7 +59,7 @@
 				</table>
 			</div>
 		</div>
-	</div>
+	
 
 	<script>
 		$(document)
