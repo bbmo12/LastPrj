@@ -246,31 +246,9 @@ public class MemController {
 		  
 		  return "member/joinResult";
 	  }
+
 	 
-	  @RequestMapping("/join") // 회원가입폼 이동
-		public String login() {
-			return "member/join";
-
-
-		if (!originalFileName.isEmpty()) {
-			String uuid = UUID.randomUUID().toString();
-			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
-
-			try {
-				file.transferTo(saveFile);
-				member.setPicture(originalFileName);
-				member.setPfile(saveFileName);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
-		memDao.memberInsert(member);
-
-		return "redirect:home"; 
-	}
+	 
 
 	
 
