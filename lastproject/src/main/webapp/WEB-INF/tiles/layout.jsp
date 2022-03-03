@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="resources/assets/css/jquery.datetimepicker.min.css">
     <link rel="stylesheet" href="resources/assets/css/linearicons.css">
     <link rel="stylesheet" href="resources/assets/css/style.css">
-    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+  <link rel="stylesheet" href="resources/assets/css/nice-select.css">
     
     <!-- admin css -->
     <link rel="stylesheet" href="resources/assets123/css/style.css">
@@ -49,14 +49,13 @@
     <script src="resources/assets/js/vendor/wow.min.js"></script>
     <script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
     <script src="resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
-    <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script>
+   <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script> 
     <script src="resources/assets/js/vendor/superfish.min.js"></script>
     <script src="resources/assets/js/main.js"></script>
     
     <script src="resources/assets123/js/off-canvas.js"></script>
     <script src="resources/assets123/js/hoverable-collapse.js"></script>
     <script src="resources/assets123/js/misc.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="resources/assets/js/vendor/jquery.raty.js"></script>
 
 </head>

@@ -1,7 +1,6 @@
 package com.last.prj.pmember.web;
 
 import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.last.prj.pmember.service.Criteria;
@@ -81,12 +79,16 @@ public class PmemberController {
 		return "pmember/pmemberUpdateForm";
 	}
 	//마이페이지 수정 
-	@RequestMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, @RequestParam("p_id") String p_id, PmemberVO pmember, TimeVO time , Model model) {
+	@PostMapping("pmemberUpdate")
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time , Model model, HttpServletRequest request) {
 
 		String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
+		
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		
 		
 		File savePath = new File(realPath);
 		if (!savePath.exists())
@@ -107,9 +109,10 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(pMemberDao.pmemberTime(time));
-		model.addAttribute(pMemberDao.pmemberUpdate(pmember));
-		return "redirect:/pmemberMypage";
+		pMemberDao.pmemberTime(time);
+		pMemberDao.pmemberUpdate(pmember);
+		model.addAttribute("pmember", pMemberDao.getMember(p_id));
+		return "redirect:/pmemberMyPage";
 	}
 
 }
