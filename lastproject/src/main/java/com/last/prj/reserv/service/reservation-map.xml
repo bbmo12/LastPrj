@@ -7,33 +7,38 @@
 	 parameterType="com.last.prj.reserv.service.ReservationVO">
 		SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS PCONTENT, R.REFUSE
 		FROM  P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C, F_CODE FC
-		WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE
+		WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE AND P.M_ID = #{m_id}
 		ORDER BY R.R_NO 
 	</select>
+	<!-- 예약전체조회 -->
 	<select id="reservationSelectList" resultType="com.last.prj.reserv.service.ReservationVO">
 		SELECT * FROM RESERVATION
 	</select>
 	
+	
+	<!-- 예약하기 등록 -->
 	<insert id="reservInsert" parameterType="com.last.prj.reserv.service.ReservationVO">
 		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
-			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM RESERVATION
+			 SELECT NVL(MAX(R_NO) +1 , 1) AS R_NO FROM RESERVATION
 		</selectKey>
-		
+		INSERT INTO RESERVATION (R_NO,R_DATE,CONTENT,CODE,PET_NO,TIME,P_ID)
+		VALUES (#{r_no},#{r_date},#{rcontent},#{r_code},#{pet_no},#{time},#{p_id})
 	</insert>
 	
+	<!-- 파트너회원 예약신청 승인 -->
 	<update id="okUpdate" parameterType="int">
 		UPDATE 	RESERVATION 
 		SET 	CODE = 402
 		WHERE 	R_NO = #{rno}
 	 </update>
-	 
+	 <!-- 파트너회원 예약신청 거절 -->
 	 <update id="noUpdate" >
 		UPDATE 	RESERVATION 
 		SET 	REFUSE = #{refuse},
 				CODE   = 403
 		WHERE 	R_NO   = #{rno}
 	 </update>
-	 
+	 <!-- 파트너회원 결제완료 후 -->
 	 <update id="payUpdate" parameterType="int">
 		UPDATE 	RESERVATION 
 		SET 	CODE = 404

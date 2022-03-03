@@ -17,13 +17,9 @@ public class PreservationlistServiceImpl implements PreservationlistService {
 	private PreservationlistMapper map;
 	
 	@Override
-	public List<PreservationVO> preservationlist() {
-		return map.preservationlist();
+	public List<PreservationVO> preservationlist(PreservationVO vo) {
+		return map.preservationlist(vo);
 	}
 
-	@Override
-	public List<PreservationCodeListVO> preservationCodeList() {
-		return map.preservationCodeList();
-	}
 
 }
