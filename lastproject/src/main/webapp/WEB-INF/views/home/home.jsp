@@ -22,9 +22,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
-                    <h4>Caring for better life</h4>
-                    <h1>Leading the way in medical excellence</h1>
-                    <p>Earth greater grass for good. Place for divide evening yielding them that. Creeping beginning over gathered brought.</p>
+                    <h4>반반반</h4>
+                    <h1>멍멍멍</h1>
+                    <p>하잇</p>
                     <a href="reservationSelect" class="template-btn mt-3">일반회원예약조회</a>
                     <a href="preservationSelect" class="template-btn mt-3">파트너회원예약조회</a>
                     <a href="reservationSetting" class="template-btn mt-3">파트너회원예약설정</a>

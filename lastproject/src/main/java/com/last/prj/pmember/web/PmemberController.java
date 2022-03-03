@@ -1,7 +1,6 @@
 package com.last.prj.pmember.web;
 
 import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.last.prj.pmember.service.Criteria;
@@ -111,9 +109,10 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute("time",pMemberDao.pmemberTime(time));
+
+		pMemberDao.pmemberTime(time);
+		pMemberDao.pmemberUpdate(pmember);
 		model.addAttribute("pmember", pMemberDao.getMember(p_id));
-		model.addAttribute("pmember",pMemberDao.pmemberUpdate(pmember));
 		return "redirect:/pmemberMyPage";
 	}
 
