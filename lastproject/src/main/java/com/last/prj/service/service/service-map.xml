@@ -13,6 +13,13 @@
 		P.M_ID = #{m_id}
 
 	</select>
-
+	
+	<insert id="ServiceInsert" parameterType="com.last.prj.service.service.ServiceVO">
+		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(R_NO) , 1) AS R_NO FROM RESERVATION
+		</selectKey>
+		INSERT INTO SERVICE (R_NO,CONTENT,STARTDATE,P_ID,CODE,PRICE) 
+		VALUES (#{r_no},#{content},#{startdate},#{p_id},#{code},#{price})
+	</insert>
 
 </mapper>

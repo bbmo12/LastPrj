@@ -309,6 +309,8 @@ $("#sendReserv").on('click',function(){
 	//임시 펫번호
 	var pet_no = 2;
 	
+	var code = ${pmember.code};
+	
 	$.ajax({
 		url : 'reservinsert',
 		method : 'POST',
@@ -317,7 +319,8 @@ $("#sendReserv").on('click',function(){
 				"rcontent" : r_content,
 				"r_code" : animalType,
 				"pet_no" : pet_no,
-				"p_id" : p_id},
+				"p_id" : p_id,
+				"code" : code},
 		success : function(res){
 			console.log(res);
 			alert("예약신청이 완료되었습니다.");
@@ -334,13 +337,6 @@ $('#exampleModal').on('hidden.bs.modal', function(e) {
          
 })
 
-function serviceInsert(){
-	
-	$.ajax({
-		url : '',
-		
-	})
-}
       
  
  </script>
