@@ -19,5 +19,10 @@ public class ServiceserviceImpl implements ServiceService {
 	public List<ServiceVO> myPetServiceList(String m_id) {
 		return map.myPetServiceList(m_id);
 	}
+
+	@Override
+	public int ServiceInsert(ServiceVO vo) {
+		return map.ServiceInsert(vo);
+	}
 	
 }
