@@ -120,7 +120,7 @@
 											<option value='토'>토</option>
 											<option value='일'>일</option>
 										</select>
-										<select id="selectStart" onchange="startTime()">
+										<select id="selectStart" name="selectStart" onchange="startTime()">
 											<option value='' selected>오픈시간</option>
 											<option value='9:00'>9:00</option>
 											<option value='9:30'>9:30</option>
@@ -129,7 +129,7 @@
 											<option value='12:00'>12:00</option>
 											<option value='12:30'>12:30</option>
 										</select>
-										<select id="selectEnd" onchange="endTime()">
+										<select id="selectEnd" name="selectEnd" onchange="endTime()">
 											<option value='' selected>마감시간</option>
 											<option value='13:00'>13:00</option>
 											<option value='13:30'>13:30</option>
@@ -150,16 +150,15 @@
 											<option value='21:00'>21:00</option>
 										</select><br>
 									</div>
-								</div>								
-								<button type="button" class="genric-btn info radius" id="addDiv"
-									onclick="plusTime()">시간추가</button><br>
+								</div>
+								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>
 								<c:forEach items="${pmember.timeList }" var="timeList">
 									<input name="w_day" id="w_day" value="${timeList.w_day }">
 									<input name="starttime" id="starttime" value="${timeList.starttime }">
 									<input name="endtime" id="endtime" value="${timeList.endtime }">
-								</c:forEach>								
+								</c:forEach>
 								<div class="form-group">
-								<input type="text" id="content" name="content" value="${pmember.n_content}"></div>
+									<input type="text" id="content" name="content" value="${pmember.n_content}"></div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">사업장 소개</h3>
 									<textarea id="p_info" name="p_info" cols="100" rows="3">${pmember.p_info}</textarea>
@@ -175,7 +174,7 @@
 											name="file">
 									</div>
 								</div>
-								<button type="submit" class="genric-btn info radius">수정완료</button>
+								<button type="submit" id="updatePage" class="genric-btn info radius">수정완료</button>
 							</div>
 						</form>
 					</div>
@@ -185,7 +184,23 @@
 	</section>
 
 	<script>
-		
+
+		$('#addDiv').click(function () { 
+
+			var dayArray =[];
+			var selectDay = $("#selectday option:selected").val();
+
+			$(selectDay).each(function (index, item) {
+				dayArray.push(item);
+			});
+			$('#w_day').val(dayArray);
+
+			
+			alert($('#w_day').val());
+
+		});
+
+
 		function addDay() {
 			var selectDay = $("#selectday option:selected").val();
 			document.getElementById('w_day').value = selectDay;
@@ -199,15 +214,13 @@
 		function endTime() {
 			var endTime = $("#selectEnd option:selected").val();
 			document.getElementById('endtime').value = endTime;
-			console.log(endTime);
 		}
 
 		function plusTime() {
-			var button = document.getElementById('addDiv');
-			var select = document.getElementById('select-one');			
-			button.addEventListener('click', () => {					
-				var form = document.getElementById('form-time');	
-				 form.innerHTML += `							
+
+			var select = document.getElementById('select-one');
+			var form = document.getElementById('form-time');
+			form.innerHTML += `							
 					<select id="selectday" name="selectday" onchange="addDay()">
 					<option value='' selected>요일선택</option>
 					<option value='월'>월</option>
@@ -218,7 +231,7 @@
 					<option value='토'>토</option>
 					<option value='일'>일</option>
 				</select>																	
-				<select id="selectStart" onchange="startTime()">
+				<select id="selectStart" name="selectStart" onchange="startTime()">
 					<option value='' selected>오픈시간</option>
 					<option value='9:00'>9:00</option>
 					<option value='9:30'>9:30</option>
@@ -227,7 +240,7 @@
 					<option value='12:00'>12:00</option>
 					<option value='12:30'>12:30</option>				
 				</select>																					
-				<select id="selectEnd" onchange="endTime()">
+				<select id="selectEnd" name="selectEnd" onchange="endTime()">
 					<option value='' selected>마감시간</option>
 					<option value='13:00'>13:00</option>
 					<option value='13:30'>13:30</option>
@@ -246,10 +259,9 @@
 					<option value='20:00'>20:00</option>
 					<option value='20:30'>20:30</option>
 					<option value='21:00'>21:00</option>				
-				</select><br>`;				
-				select.append(form); 
-				$('select').niceSelect();
-			});
+				</select><br>`;
+			select.append(form);
+			$('select').niceSelect();
 		}
 
 		function addFile() {

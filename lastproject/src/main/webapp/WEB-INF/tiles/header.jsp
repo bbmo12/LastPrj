@@ -91,7 +91,7 @@ function onMessage(evt){
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="home"><img src="resources/upload/pet.PNG" alt="" title=""style="width: 150px; height: 70px;"/></a>
+					<a href="home"><img src="resources/upload/ban.png" alt="" title=""style="width: 150px; height: 70px;"/></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
