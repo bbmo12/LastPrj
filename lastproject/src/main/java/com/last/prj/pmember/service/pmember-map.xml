@@ -146,7 +146,7 @@
 
 	<!-- 관리자 -->
 	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
-		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel
+		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel, p.picture
 		from p_member p, f_code f 
 		where f.code = p.code AND p.code = #{code}
 	</select>

@@ -1,11 +1,15 @@
+
 package com.last.prj.board.web;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.last.prj.board.service.BoardService;
@@ -18,7 +22,7 @@ public class BoardController {
 	private BoardService boardDao;
 
 	// board 게시판 홈페이지 출력
-	@RequestMapping("/bTables.do")
+	@RequestMapping("/bTables")
 	public String boardPage(Model model) {
 		List<BoardVO> list = boardDao.boardSelectList();
 		System.out.println(list);
@@ -48,14 +52,11 @@ public class BoardController {
 	public String boardInsert(BoardVO board, Model model) {
 		// System.out.println(board.getNotice_title());
 		boardDao.boardInsert(board);
-		List<BoardVO> list = boardDao.boardSelectList();
-		System.out.println(list);
-		model.addAttribute("boardList", list);
-		return "admin/board/boardTable";
+
+		return "redirect:boardTables";
 	}
 
 	// 게시글 상세조회 및 수정 화면
-
 	@RequestMapping("/boardUpdateForm")
 	public String noticeSelect(@RequestParam(value = "b_no") int b_no, Model model) {
 
@@ -64,24 +65,21 @@ public class BoardController {
 	}
 
 	// 게시글 수정 
-
-	@RequestMapping("/boardUpdate")
+	@RequestMapping(value="/boardUpdate")
 	public String boardUpdate(BoardVO board, Model model) {
+		
 		boardDao.boardUpdate(board);
-		List<BoardVO> list = boardDao.boardSelectList();
-		System.out.println(list);
-		model.addAttribute("boardList", list);
-		return "admin/board/boardTable";
+		
+		return "redirect:boardTables";
+
 	}
 
 	@RequestMapping("/boardDelete")
 	public String boardDelete(@RequestParam("b_no") int b_no, BoardVO board, Model model) {
 		boardDao.boardDelete(b_no);
-		List<BoardVO> list = boardDao.boardSelectList();
-		System.out.println(list);
-		model.addAttribute("boardList", list);
-		return "admin/board/boardTable";
+		return "redirect:boardTables";
 	}
+	
 
 	// 게시글 순번 업데이트
 	/*

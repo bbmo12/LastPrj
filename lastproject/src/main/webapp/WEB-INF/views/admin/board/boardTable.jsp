@@ -1,22 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Tell the browser to be responsive to screen width -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
 <title>Table</title>
-<link rel="stylesheet" type="text/css"
-	href="resources/table/css/multicheck.css">
-<link href="resources/table/css/dataTables.bootstrap4.css"
-	rel="stylesheet">
+<link rel="stylesheet" type="text/css"	href="resources/table/css/multicheck.css"> 
+<link href="resources/table/css/dataTables.bootstrap4.css"	rel="stylesheet">
 <link href="resources/table/css/style.min.css" rel="stylesheet">
+
+<!-- Modal -->
+<!-- <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous"> -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+		<script src="resources/table/js/jquery.min.js"></script>
+	<!-- Bootstrap tether Core JavaScript -->
+	<script src="resources/table/js/popper.min.js"></script>
+	<script src="resources/table/js/bootstrap.min.js"></script>
+	<!-- slimscrollbar scrollbar JavaScript -->
+	<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
+	<script src="resources/table/js/sparkline.js"></script>
+	<!--Wave Effects -->
+	<script src="resources/table/js/waves.js"></script>
+	<!--Menu sidebar -->
+	<script src="resources/table/js/sidebarmenu.js"></script>
+	<!--Custom JavaScript -->
+	<script src="resources/table/js/custom.min.js"></script>
+	<!-- this page js -->
+	<script src="resources/table/js/datatable-checkbox-init.js"></script>
+	
+	<script src="resources/table/js/datatables.min.js"></script>
+<style> 
+.container-fluid {
+		width:100%;
+		padding-right: 0px;
+		padding-left: 0px;
+		margin-right:auto;
+		margin-left:auto;
+	}
+</style>
 
 </head>
 <body>
@@ -56,90 +91,90 @@
 										<c:if test="${boardList ne null }">
 											<c:forEach items="${boardList }" var="boards">
 												<tr>
-													<td align="center">${boards.b_no }</td><!-- 수정한날짜로 변경 -->
+													<td align="center">${boards.b_no }</td>
+													
 													<td align="center"><a
 														href="boardUpdateForm?b_no=${boards.b_no }">${boards.title }</a></td>
 													<td align="center">${boards.content }</td>
 													<td align="center">${boards.writer }</td>
 													<td align="center">${boards.w_date }</td>
-													<td><button name="modify">수정</button>
-														<button name="btnDelete" id="btnDelete" ><a href="boardDelete?b_no=${boards.b_no }">삭제</a></button></td>
+													<td>
+														<button type="button" class="btn btn-primary"
+															data-toggle="modal"
+															data-target=".bd-example-modal-lg${boards.b_no }"
+															>수정</button>
+															
+														<button name="btnDelete" id="btnDelete">
+															<a href="boardDelete?b_no=${boards.b_no }">삭제</a>
+														</button>
+													</td>
 												</tr>
+												<!--수정 모달 -->
+												<div class="modal fade bd-example-modal-lg${boards.b_no }"
+													tabindex="-1" role="dialog"
+													aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+													<div class="modal-dialog modal-lg">
+														<div class="modal-content">
+															<div class="card">
+																<div class="card-body">
+																	<h4 class="card-title">수정</h4>
+																	<p class="card-description">공지사항 글</p>
+																	<form class="forms-sample" action="boardUpdate" method="post">
+																		<div class="form-group">
+																			<label for="title">제목</label> <input type="text"
+																				class="form-control" id="title" name="title"
+																				value="${boards.title}" required="required" pattern=".{4,100}">
+																		</div>
+																		<input type="hidden" id="b_no" name="b_no"	value="${boards.b_no }">
+																		<%-- <div class="form-group">
+																			<label for="exampleSelectGender">태그</label> <select
+																				class="form-control" id="btag" name="btag">
+																				<option value="${boards.tag}" selected>${boards.tag}</option>
+																				<option value="">선택해주세요.</option>
+																				<option value="pmtag">파트너회원</option>
+																				<option value="mtag">일반회원</option>
+																				<option value="pettag">펫</option>
+																				<option value="stag">서비스</option>
+																			</select>
+																		</div> --%>
+																		<div class="form-group">
+																			<label for="exampleTextarea1">내용</label>
+																			<textarea class="form-control" id="content" name="content"
+																				rows="5" value="${boards.content}"> ${boards.content}</textarea>
+																		</div>
+																		<button type="submit" class="btn btn-primary"
+																			id="modify" name="modify">수정</button>
+																		<button class="btn btn-primary">취소</button>
+																	</form>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--end 수정 모달 -->
 											</c:forEach>
 										</c:if>
 									</tbody>
 								</table>
-								<a href="boardInsertForm" style="color: white;"><role
-										="button" class="btn btn-outline-info">
-									<h2>글쓰기</h2></a>
+								<a href="boardInsertForm" style="color: white;" role="button"
+									>글쓰기</a>
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
-	<script src="resources/table/js/jquery.min.js"></script>
-	<!-- Bootstrap tether Core JavaScript -->
-	<script src="resources/table/js/popper.min.js"></script>
-	<script src="resources/table/js/bootstrap.min.js"></script>
-	<!-- slimscrollbar scrollbar JavaScript -->
-	<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
-	<script src="resources/table/js/sparkline.js"></script>
-	<!--Wave Effects -->
-	<script src="resources/table/js/waves.js"></script>
-	<!--Menu sidebar -->
-	<script src="resources/table/js/sidebarmenu.js"></script>
-	<!--Custom JavaScript -->
-	<script src="resources/table/js/custom.min.js"></script>
-	<!-- this page js -->
-	<script src="resources/table/js/datatable-checkbox-init.js"></script>
-	<script src="resources/table/js/jquery.multicheck.js"></script>
-	<script src="resources/table/js/datatables.min.js"></script>
 	<script>
 		$('#zero_config').DataTable();
-
-		/* function delFNC(b_no) {
-			var an = confirm("삭제하시겠습니까?")
-			if (an) {
-				var date = {
-					"b_no" : b_no
-				}
-				$.ajax({
-					url : "${contextpath}/ bno"
-
-				})
-			}
-
-		} */
-
-	/* 	$(document).on('click', '#btnDelete', function(){
-			b_no = $(this).parent().parent().child[];
-			console.log(b_no)
-		    var url = "${pageContext.request.contextPath}/deleteBoard";
-		    url = url + "?b_no=" + b_no;
-				location.href = url;
-
-			});		 */
 		
-		/* $("button[name='btnDelete']").click(function() {
-			var an = confirm("삭제하시겠습니까?")
-			if (an) {
-				b_no = this.value;
-				
-				$.ajax({
-					url : '/deleteBoard' + b_no,
-					type : 'DELETE',
-				});
-				location.reload();
-			}
-		})  */
+		// 게시글 수정
+		$('.bd-example-modal-lg').on('hidden.bs.modal', function(e) {
+			$(this).find('form')[0].reset();
+		})
+
 	</script>
 
 </body>
 
-</html>
+	</html>

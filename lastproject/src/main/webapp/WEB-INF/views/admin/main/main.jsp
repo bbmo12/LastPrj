@@ -6,271 +6,279 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+.tab-content {
+	border: 0px solid rgba(151, 151, 151, 0.3);
+}
+</style>
 <body>
-	
-		<div class="content-wrapper">
-			<div class="row" id="proBanner">
-				<div class="col-12">
-					<span class="d-flex align-items-center purchase-popup">
-						<p>Like what you see? Check out our premium version for more.</p>
-						<a
-						href="https://github.com/BootstrapDash/ConnectPlusAdmin-Free-Bootstrap-Admin-Template"
-						target="_blank" class="btn ml-auto download-button">Download
-							Free Version</a> <a
-						href="http://www.bootstrapdash.com/demo/connect-plus/jquery/template/"
-						target="_blank" class="btn purchase-button">Upgrade To Pro</a> <i
-						class="mdi mdi-close" id="bannerClose"></i>
-					</span>
-				</div>
+	<div class="content-wrapper">
+		<div class="row" id="proBanner">
+			<div class="col-12">
+				<span class="d-flex align-items-center purchase-popup">
+					관리자님 반갑습니다
+					<a href="home" target="_blank" class="btn ml-auto download-button">메인 홈으로..</a> 
+					<a href="main" target="_blank" class="btn purchase-button">관리자 홈으로..</a>
+					<i class="mdi mdi-close" id="bannerClose"></i>				
+				</span>
 			</div>
-			<div class="d-xl-flex justify-content-between align-items-start">
-				<h2 class="text-dark font-weight-bold mb-2">Overview dashboard
-				</h2>
-				<div
-					class="d-sm-flex justify-content-xl-between align-items-center mb-2">
-					<div class="btn-group bg-white p-3" role="group"
-						aria-label="Basic example">
-						<button type="button"
-							class="btn btn-link text-light py-0 border-right">7 Days</button>
-						<button type="button"
-							class="btn btn-link text-dark py-0 border-right">1 Month</button>
-						<button type="button" class="btn btn-link text-light py-0">3
-							Month</button>
-					</div>
-					<div class="dropdown ml-0 ml-md-4 mt-2 mt-lg-0">
-						<button
-							class="btn bg-white dropdown-toggle p-3 d-flex align-items-center"
-							type="button" id="dropdownMenuButton1" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">
-							<i class="mdi mdi-calendar mr-1"></i>24 Mar 2019 - 24 Mar 2019
-						</button>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="dropdownMenuButton1">
-							<h6 class="dropdown-header">Settings</h6>
-							<a class="dropdown-item" href="#">Action</a> <a
-								class="dropdown-item" href="#">Another action</a> <a
-								class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div>
-					</div>
+		</div>
+		<div class="d-xl-flex justify-content-between align-items-start">
+			<h2 class="text-dark font-weight-bold mb-2">관리자</h2>
+			<div
+				class="d-sm-flex justify-content-xl-between align-items-center mb-2">
+				<div class="btn-group bg-white p-3" role="group"
+					aria-label="Basic example">
+					<button type="button"
+						class="btn btn-link text-light py-0 border-right">7 Days</button>
+					<button type="button"
+						class="btn btn-link text-dark py-0 border-right">1 Month</button>
+					<button type="button" class="btn btn-link text-light py-0">3
+						Month</button>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div
-						class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
-						<ul class="nav nav-tabs tab-transparent" role="tablist">
-							<li class="nav-item"><a class="nav-link" id="home-tab"
-								data-toggle="tab" href="#" role="tab" aria-selected="true">Users</a>
-							</li>
-							<li class="nav-item"><a class="nav-link active"
-								id="business-tab" data-toggle="tab" href="#business-1"
-								role="tab" aria-selected="false">Business</a></li>
-
-
-							<li class="nav-item"><a class="nav-link"
-								id="performance-tab" data-toggle="tab" href="#business-3"
-								role="tab" aria-selected="false">Performance</a></li>
-
-							<li class="nav-item"><a class="nav-link" id="conversion-tab"
-								data-toggle="tab" href="javascript:void(0);" onclick="callFunction();" role="tab" aria-selected="false">Conversion</a>
-							</li>
-
-						</ul>
-						<div class="d-md-block d-none">
-							<a href="#" class="text-light p-1"><i
-								class="mdi mdi-view-dashboard"></i></a> <a href="#"
-								class="text-light p-1"><i class="mdi mdi-dots-vertical"></i></a>
-						</div>
+				<div class="dropdown ml-0 ml-md-4 mt-2 mt-lg-0">
+					<button
+						class="btn bg-white dropdown-toggle p-3 d-flex align-items-center"
+						type="button" id="dropdownMenuButton1" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						<i class="mdi mdi-calendar mr-1"></i>24 Mar 2019 - 24 Mar 2019
+					</button>
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="dropdownMenuButton1">
+						<h6 class="dropdown-header">Settings</h6>
+						<a class="dropdown-item" href="#">Action</a> <a
+							class="dropdown-item" href="#">Another action</a> <a
+							class="dropdown-item" href="#">Something else here</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Separated link</a>
 					</div>
-
-
-					<div class="tab-content tab-transparent-content">
-						<div class="tab-pane fade show active" id="business-3"
-							role="tabpanel" aria-labelledby="business-tab">
-							<div class="row">
-								<div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-									<div class="card">
-										<div class="card-body text-center">
-											<h5 class="mb-2 text-dark font-weight-normal">ㅁㄴㅇㄹ</h5>
-											<h2 class="mb-4 text-dark font-weight-bold">932.00</h2>
-											<div
-												class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent">
-												<i
-													class="mdi mdi-lightbulb icon-md absolute-center text-dark"></i>
-											</div>
-											<p class="mt-4 mb-0">Completed</p>
-											<h3 class="mb-0 font-weight-bold mt-2 text-dark">5443</h3>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-									<div class="card">
-										<div class="card-body text-center">
-											<h5 class="mb-2 text-dark font-weight-normal">Unique
-												Visitors</h5>
-											<h2 class="mb-4 text-dark font-weight-bold">756,00</h2>
-											<div
-												class="dashboard-progress dashboard-progress-2 d-flex align-items-center justify-content-center item-parent">
-												<i
-													class="mdi mdi-account-circle icon-md absolute-center text-dark"></i>
-											</div>
-											<p class="mt-4 mb-0">Increased since yesterday</p>
-											<h3 class="mb-0 font-weight-bold mt-2 text-dark">50%</h3>
-										</div>
-									</div>
-								</div>
-								<div
-									class="col-xl-3  col-lg-6 col-sm-6 grid-margin stretch-card">
-									<div class="card">
-										<div class="card-body text-center">
-											<h5 class="mb-2 text-dark font-weight-normal">Impressions</h5>
-											<h2 class="mb-4 text-dark font-weight-bold">100,38</h2>
-											<div
-												class="dashboard-progress dashboard-progress-3 d-flex align-items-center justify-content-center item-parent">
-												<i class="mdi mdi-eye icon-md absolute-center text-dark"></i>
-											</div>
-											<p class="mt-4 mb-0">Increased since yesterday</p>
-											<h3 class="mb-0 font-weight-bold mt-2 text-dark">35%</h3>
-										</div>
-									</div>
-								</div>
-								<div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-									<div class="card">
-										<div class="card-body text-center">
-											<h5 class="mb-2 text-dark font-weight-normal">Followers</h5>
-											<h2 class="mb-4 text-dark font-weight-bold">4250k</h2>
-											<div
-												class="dashboard-progress dashboard-progress-4 d-flex align-items-center justify-content-center item-parent">
-												<i class="mdi mdi-cube icon-md absolute-center text-dark"></i>
-											</div>
-											<p class="mt-4 mb-0">Decreased since yesterday</p>
-											<h3 class="mb-0 font-weight-bold mt-2 text-dark">25%</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-12 grid-margin">
-									<div class="card">
-										<div class="card-body">
-											<div class="row">
-												<div class="col-sm-12">
-													<div
-														class="d-flex justify-content-between align-items-center mb-4">
-														<h4 class="card-title mb-0">Recent Activity</h4>
-														<div class="dropdown dropdown-arrow-none">
-															<button class="btn p-0 text-dark dropdown-toggle"
-																type="button" id="dropdownMenuIconButton1"
-																data-toggle="dropdown" aria-haspopup="true"
-																aria-expanded="false">
-																<i class="mdi mdi-dots-vertical"></i>
-															</button>
-															<div class="dropdown-menu dropdown-menu-right"
-																aria-labelledby="dropdownMenuIconButton1">
-																<h6 class="dropdown-header">Settings</h6>
-																<a class="dropdown-item" href="#">Action</a> <a
-																	class="dropdown-item" href="#">Another action</a> <a
-																	class="dropdown-item" href="#">Something else here</a>
-																<div class="dropdown-divider"></div>
-																<a class="dropdown-item" href="#">Separated link</a>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-3 col-sm-4 grid-margin  grid-margin-lg-0">
-													<div class="wrapper pb-5 border-bottom">
-														<div
-															class="text-wrapper d-flex align-items-center justify-content-between mb-2">
-															<p class="mb-0 text-dark">Total Profit</p>
-															<span class="text-success"><i
-																class="mdi mdi-arrow-up"></i>2.95%</span>
-														</div>
-														<h3 class="mb-0 text-dark font-weight-bold">$ 92556</h3>
-														<canvas id="total-profit"></canvas>
-													</div>
-													<div class="wrapper pt-5">
-														<div
-															class="text-wrapper d-flex align-items-center justify-content-between mb-2">
-															<p class="mb-0 text-dark">Expenses</p>
-															<span class="text-success"><i
-																class="mdi mdi-arrow-up"></i>52.95%</span>
-														</div>
-														<h3 class="mb-4 text-dark font-weight-bold">$ 59565</h3>
-														<canvas id="total-expences"></canvas>
-													</div>
-												</div>
-												<div class="col-lg-9 col-sm-8 grid-margin  grid-margin-lg-0">
-													<div class="pl-0 pl-lg-4 ">
-														<div
-															class="d-xl-flex justify-content-between align-items-center mb-2">
-															<div class="d-lg-flex align-items-center mb-lg-2 mb-xl-0">
-																<h3 class="text-dark font-weight-bold mr-2 mb-0">Devices
-																	sales</h3>
-																<h5 class="mb-0">( growth 62% )</h5>
-															</div>
-															<div class="d-lg-flex">
-																<p class="mr-2 mb-0">Timezone:</p>
-																<p class="text-dark font-weight-bold mb-0">GMT-0400
-																	Eastern Delight Time</p>
-															</div>
-														</div>
-														<div class="graph-custom-legend clearfix"
-															id="device-sales-legend"></div>
-														<canvas id="device-sales"></canvas>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-4 grid-margin stretch-card">
-									<div class="card card-danger-gradient">
-										<div class="card-body mb-4">
-											<h4 class="card-title text-white">Account Retention</h4>
-											<canvas id="account-retension"></canvas>
-										</div>
-										<div class="card-body bg-white pt-4">
-											<div class="row pt-4">
-												<div class="col-sm-6">
-													<div class="text-center border-right border-md-0">
-														<h4>Conversion</h4>
-														<h1 class="text-dark font-weight-bold mb-md-3">$306</h1>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="text-center">
-														<h4>Cancellation</h4>
-														<h1 class="text-dark font-weight-bold">$1,520</h1>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-8  grid-margin stretch-card">
-									<div class="card">
-										<div class="card-body">
-											<div class="d-xl-flex justify-content-between mb-2">
-												<h4 class="card-title">Page views analytics</h4>
-												<div class="graph-custom-legend primary-dot"
-													id="pageViewAnalyticLengend"></div>
-											</div>
-											<canvas id="page-view-analytic"></canvas>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--  business-1 end -->
-
 				</div>
 			</div>
 		</div>
-	
+		<div class="row">
+			<div class="col">
+				<ul class="nav nav-tabs tab-transparent">
+					<li class="nav-item"><a class="nav-link active"
+						data-toggle="tab" href="#qwe">파트너</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						href="#asd">일반</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						href="#zxc">차트</a></li>
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="qwe">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title"></h4>
+								<p class="card-description">
+									Add class
+									<code>.table-striped</code>
+								</p>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>User</th>
+											<th>First name</th>
+											<th>Progress</th>
+											<th>Amount</th>
+											<th>Deadline</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-1.png"
+												alt="image" /></td>
+											<td>Herman Beck</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-success" role="progressbar"
+														style="width: 25%" aria-valuenow="10" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$ 77.99</td>
+											<td>May 15, 2015</td>
+										</tr>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-2.png"
+												alt="image" /></td>
+											<td>Messsy Adam</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-danger" role="progressbar"
+														style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$245.30</td>
+											<td>July 1, 2015</td>
+										</tr>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-3.png"
+												alt="image" /></td>
+											<td>John Richards</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-warning" role="progressbar"
+														style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$138.00</td>
+											<td>Apr 12, 2015</td>
+										</tr>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-4.png"
+												alt="image" /></td>
+											<td>Peter Meggik</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-primary" role="progressbar"
+														style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$ 77.99</td>
+											<td>May 15, 2015</td>
+										</tr>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-1.png"
+												alt="image" /></td>
+											<td>Edward</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-danger" role="progressbar"
+														style="width: 35%" aria-valuenow="35" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$ 160.25</td>
+											<td>May 03, 2015</td>
+										</tr>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-2.png"
+												alt="image" /></td>
+											<td>John Doe</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-info" role="progressbar"
+														style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$ 123.21</td>
+											<td>April 05, 2015</td>
+										</tr>
+										<tr>
+											<td class="py-1"><img
+												src="resources/assets123/images/faces-clipart/pic-3.png"
+												alt="image" /></td>
+											<td>Henry Tom</td>
+											<td>
+												<div class="progress">
+													<div class="progress-bar bg-warning" role="progressbar"
+														style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+														aria-valuemax="100"></div>
+												</div>
+											</td>
+											<td>$ 150.00</td>
+											<td>June 16, 2015</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="asd">
+						<div class="card">
+							<div class="card-body">
+								<h4 class="card-title">Hoverable Table</h4>
+								<p class="card-description">
+									Add class
+									<code>.table-hover</code>
+								</p>
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>User</th>
+											<th>Product</th>
+											<th>Sale</th>
+											<th>Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Jacob</td>
+											<td>Photoshop</td>
+											<td class="text-danger">28.76% <i
+												class="mdi mdi-arrow-down"></i></td>
+											<td><label class="badge badge-danger">Pending</label></td>
+										</tr>
+										<tr>
+											<td>Messsy</td>
+											<td>Flash</td>
+											<td class="text-danger">21.06% <i
+												class="mdi mdi-arrow-down"></i></td>
+											<td><label class="badge badge-warning">In
+													progress</label></td>
+										</tr>
+										<tr>
+											<td>John</td>
+											<td>Premier</td>
+											<td class="text-danger">35.00% <i
+												class="mdi mdi-arrow-down"></i></td>
+											<td><label class="badge badge-info">Fixed</label></td>
+										</tr>
+										<tr>
+											<td>Peter</td>
+											<td>After effects</td>
+											<td class="text-success">82.00% <i
+												class="mdi mdi-arrow-up"></i></td>
+											<td><label class="badge badge-success">Completed</label></td>
+										</tr>
+										<tr>
+											<td>Dave</td>
+											<td>53275535</td>
+											<td class="text-success">98.05% <i
+												class="mdi mdi-arrow-up"></i></td>
+											<td><label class="badge badge-warning">In
+													progress</label></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="zxc">
+						<div class="row">
+							<div class="col-lg-6 grid-margin stretch-card">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Area chart</h4>
+										<canvas id="areaChart" style="height: 250px"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-6 grid-margin stretch-card">
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title">Doughnut chart</h4>
+										<canvas id="doughnutChart" style="height: 250px"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
