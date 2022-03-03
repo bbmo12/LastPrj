@@ -7,7 +7,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +34,7 @@ public class MemController {
 
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(MultipartFile file, MemVO member, Model model, @Param("m_id") String m_id) { // 세션에서 가져오기
-
+	public String memberUpdate(MultipartFile file, MemVO member, Model model) {		
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -144,13 +142,13 @@ public class MemController {
 
 	@RequestMapping("/pmemberIdSearch") // 파티너회원 아이디 찾기
 	@ResponseBody
-	public String pmemberIdSearch(@Param("name") String name, @Param("tel") String tel) {
+	public String pmemberIdSearch(String name, String tel) {
 		return pmemDao.pmemberIdSearch(name, tel);
 	}
 
 	@RequestMapping("/memberIdSearch") // 일반회원 아이디 찾기
 	@ResponseBody
-	public String memberIdSearch(@Param("name") String name, @Param("tel") String tel) {
+	public String memberIdSearch(@RequestParam("name") String name, @RequestParam("tel") String tel) {
 		return memDao.memberIdSearch(name, tel);
 	}
 
@@ -184,7 +182,7 @@ public class MemController {
 
 		memDao.memberInsert(member);
 
-		return "home/home"; // redirect 수정하기
+		return "redirect:home"; 
 	}
 
 	@RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
