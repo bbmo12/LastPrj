@@ -68,6 +68,7 @@
 			</div>
 			<!-- modal 몸통 -->
 			<div class="modal-body">
+				<form>
 				 <span id="dvalue">  <input type ="hidden" id="date_value" ></span> <br>
 				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
 				 <span> 증상   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
@@ -76,19 +77,21 @@
 					 <option value="501">개</option>
 					 <option value="502">고양이</option>
 		   		 </select>
+		   		 
 		   		 <select class="animalNo">
 		   		 	<option value="" disabled selected>펫 번호(이름)</option>
 					 <c:forEach items="${petList}" var="pet">
 		   		 			<option value="${pet.pet_no }"> ${pet.pet_no }(${pet.name })</option>
 		   		 	   </c:forEach>
 		   		 </select>
+		   		 </form>
 			</div>
 			<!-- modal 하단 버튼 -->
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary"
 					data-dismiss="modal">취소</button>
 				<button id="sendReserv" name="sendReserv" type="button"
-					class="btn btn-primary">예약하기</button>
+					class="btn btn-primary" data-dismiss="modal">예약하기</button>
 			</div>
 		</div>
 	</div>
@@ -278,7 +281,7 @@ function changeSelection(event){
 		success : function(res){
 			//console.log(event.target);
 			if(res.reserv_date != null && res.reserv_time != null){
-				$(".selectTime").parent().next().text('예약불가');
+				$(event.target).parent().next().text('예약불가');
 			}else{
 				console.log(event.target);
 				$(".selectTime").parent().next().text('');
@@ -301,6 +304,11 @@ $("#sendReserv").on('click',function(){
 	//펫 번호
 	var animalNo = $(".animalNo option:selected").val();
 	
+	//임시 파트너회원
+	var p_id = 'kim1@a.com';
+	//임시 펫번호
+	var pet_no = 2;
+	
 	$.ajax({
 		url : 'reservinsert',
 		method : 'POST',
@@ -308,12 +316,33 @@ $("#sendReserv").on('click',function(){
 				"time" : time_value,
 				"rcontent" : r_content,
 				"r_code" : animalType,
-				"r_no" : animalNo},
+				"pet_no" : pet_no,
+				"p_id" : p_id},
 		success : function(res){
 			console.log(res);
+			alert("예약신청이 완료되었습니다.");
+			$(".table").empty();
+			
+		},
+		error : function(){
+			alert("ajax 에러");
 		}
 	})
 })
+$('#exampleModal').on('hidden.bs.modal', function(e) {
+         $(this).find('form')[0].reset();
+         
+})
+
+function serviceInsert(){
+	
+	$.ajax({
+		url : '',
+		
+	})
+}
+      
+ 
  </script>
 
 

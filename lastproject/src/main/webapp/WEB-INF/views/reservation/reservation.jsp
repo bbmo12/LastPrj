@@ -22,6 +22,7 @@
 
 
 <body>
+${sessionScope.mId }
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -114,7 +115,7 @@
 										<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
 										<td>${res.name }</td>
 										<td>${res.r_date}</td>
-										<td>${res.time }시</td>
+										<td>${res.time }</td>
 										<td>${res.rcontent }</td>
 										<td>${res.pcontent }</td>
 										<td><input class="in_code" type="hidden"

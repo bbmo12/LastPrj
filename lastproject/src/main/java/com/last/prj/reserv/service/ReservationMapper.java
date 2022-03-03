@@ -21,4 +21,6 @@ public interface ReservationMapper {
 	//결제하기
 	int payUpdate(int res);
 	
+	
+	
 }

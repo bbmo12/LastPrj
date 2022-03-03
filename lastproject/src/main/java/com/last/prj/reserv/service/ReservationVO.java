@@ -18,6 +18,9 @@ public class ReservationVO {
 	private String rccontent; //예약승인코드
 	private String pcontent; //품종코드
 	private String refuse;
+	private String p_id;
+	private int pet_no;
+	private String m_id;
 	
 	
 	
