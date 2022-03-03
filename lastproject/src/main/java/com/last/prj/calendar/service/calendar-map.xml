@@ -28,8 +28,8 @@
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
 			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM CALENDAR
 		</selectKey>
-		INSERT INTO CALENDAR (ID,C_START,C_END,CATEGORY,TITLE)
-		VALUES (#{id},#{c_start},#{c_end},#{category},#{title})
+		INSERT INTO CALENDAR (ID,C_START,C_END,CATEGORY,TITLE,P_ID)
+		VALUES (#{id},#{c_start},#{c_end},#{category},#{title},#{p_id})
 	</insert>
 	
 	<update id="revSetUpdate" parameterType="com.last.prj.calendar.service.CalendarVO">

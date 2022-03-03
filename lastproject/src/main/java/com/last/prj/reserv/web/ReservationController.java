@@ -29,8 +29,6 @@ import com.last.prj.reserv.service.PreservationVO;
 
 @Controller
 public class ReservationController {
-	@Autowired
-	private MemService memDao;
 
 	@Autowired
 	private ReservationService reservationDao;
@@ -54,7 +52,6 @@ public class ReservationController {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		System.out.println("m_id : " +m_id);
-		
 		vo.setP_id(m_id);
 		//달력리스트
 		List<CalendarVO> list = CalendarDao.revSetList(vo);
@@ -72,8 +69,6 @@ public class ReservationController {
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
 	public String reservationSetting(Model model,PreservationVO pres) {
-		//List<PreservationVO> list = pReservationDao.preservationlist();
-		
 		return "reservation/resvSetting";
 		
 	}
@@ -81,23 +76,23 @@ public class ReservationController {
 	
 	// 일반 예약조회
 	@RequestMapping("/reservationSelect")
-	public String nReservationSelect(Model model, ReservationVO res) {
-		System.out.println(reservationDao.reservationSelect());
+	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");
+		vo.setM_id(m_id);
 		List<ReservationVO> list = reservationDao.reservationSelect();
-		model.addAttribute("reservation", list);
 		System.out.println(list);
+		model.addAttribute("reservation", list);
 		return "reservation/reservation";
 	}
 
 	// 파트너 예약조회
 	@RequestMapping("/preservationSelect")
-	public String pReservationSelect(Model model,HttpServletRequest request) {
+	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo) {
 		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		System.out.println("m_id : " +m_id);
-		model.addAttribute("member",memDao.memberSearch(m_id));
-		System.out.println(pReservationDao.preservationlist());
-		List<PreservationVO> list = pReservationDao.preservationlist();
+		String p_id = (String) session.getAttribute("pId");
+		vo.setP_id(p_id);
+		List<PreservationVO> list = pReservationDao.preservationlist(vo);
 		model.addAttribute("preservation", list);
 		System.out.println(list);
 		return "reservation/preservation";
@@ -106,19 +101,22 @@ public class ReservationController {
 	  //파트너회원 예약승인 후 절차(ajax)
 	  @PostMapping("/okupdate")
 	  @ResponseBody 
-	  public String okUpdate(@RequestParam("rno") String rno) {
+	  public String okUpdate(@RequestParam("rno") int rno) {
 		  System.out.println(rno);
-		  reservationDao.okUpdate(Integer.parseInt(rno));
+		  reservationDao.okUpdate(rno);
 		  return "ok";
 	  }
 	  
 	  //파트너회원 예약거절 사유 입력(ajax)
 	  @PostMapping("/noupdate")
 	  @ResponseBody 
-	  public List<PreservationVO> noUpdate(@RequestParam("rno") String rno,@RequestParam("refuse") String refuse ,Model model) {
+	  public List<PreservationVO> noUpdate(@RequestParam("rno") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request) {
+		  HttpSession session = request.getSession();
+		  String p_id = (String) session.getAttribute("pId");
+		  vo.setP_id(p_id);
 		  System.out.println(rno);
-		  reservationDao.noUpdate(Integer.parseInt(rno),refuse);
-		  List<PreservationVO> list = pReservationDao.preservationlist();
+		  reservationDao.noUpdate(rno,refuse);
+		  List<PreservationVO> list = pReservationDao.preservationlist(vo);
 		  System.out.println(list);
 		  return list;
 	  }
@@ -126,29 +124,25 @@ public class ReservationController {
 	  //일반회원 결제완료 후 코드변경 
 	  @PostMapping("/payupdate")
 	  @ResponseBody 
-	  public String payUpdate(@RequestParam("rno") String rno) {
+	  public String payUpdate(@RequestParam("rno") int rno) {
 		  System.out.println(rno);
-		  reservationDao.payUpdate(Integer.parseInt(rno));
+		  reservationDao.payUpdate(rno);
 		  return "ok";
 	  }
 	  //예약된 날짜/시간 체크
 	  @PostMapping("/reservcount")
 	  @ResponseBody
-	  public ReservCountVO reservCountSelect(@RequestParam("reserv_date")String reserv_date, @RequestParam("reserv_time")String reserv_time) {
-		  System.out.println(reserv_date);
-		  System.out.println(reserv_time);
-		  System.out.println(reservCountDao.reservCountSelect(reserv_date,reserv_time));
-		  return reservCountDao.reservCountSelect(reserv_date,reserv_time);
+	  public ReservCountVO reservCountSelect(ReservCountVO vo) {
+		  return reservCountDao.reservCountSelect(vo);
 	  }
 	  //예약등록
 	  @PostMapping("/reservinsert")
 	  @ResponseBody
-	  public int reservInsert(@RequestParam("r_date")String r_date,@RequestParam("time")String time,@RequestParam("rcontent")String rcontent,@RequestParam("r_code")String r_code,ReservationVO vo) {
-		  vo.setR_code(r_code);
-		  vo.setR_date(r_date);
-		  vo.setTime(time);
-		  vo.setRccontent(rcontent);
+	  public int reservInsert(ReservationVO vo,ReservCountVO co) {
+		  co.setReserv_date(vo.getR_date());
+		  co.setReserv_time(vo.getTime());
 		  reservationDao.reservInsert(vo);
+		  reservCountDao.reservCountInsert(co);
 		  return 1;
 	  }
 	  

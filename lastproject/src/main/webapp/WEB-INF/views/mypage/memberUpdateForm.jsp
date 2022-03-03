@@ -35,7 +35,6 @@
 
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${member.picture}" style="width:210px" alt="">
-								${member.picture}" alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
 

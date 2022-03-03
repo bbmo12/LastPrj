@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,22 +30,20 @@ public class MemController {
 
 	@Autowired
 	private PmemService pmemDao;
-	
+
 	@Autowired
 	private FfileUtil ffileutil;
 	
 	@Autowired
 	ServletContext sc;
-	
-	//일반회원 정보수정
+
+	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(@RequestParam("file") MultipartFile file, MemVO member, Model model, @Param("m_id") String m_id) {
-		
+	public String memberUpdate(MultipartFile file, MemVO member, Model model) {		
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
-		
 
 		File savePath = new File(realPath);
 		if (!savePath.exists())
@@ -67,30 +64,26 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(memDao.memberUpdate(member));
-		model.addAttribute(memDao.memberSearch(m_id));
-		
-		return "mypage/memberMypage";
+		memDao.memberUpdate(member);
+
+		return "redirect:memberMypage";
 	}
-		
-	
-	
-	
-	
-	//내정보 수정페이지로 이동
+
+	// 내정보 수정페이지로 이동
 	@RequestMapping("/memberUpdateForm")
 	public String memberUpdateFrom(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
-		model.addAttribute("member",memDao.memberSearch(m_id));
+		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberUpdateForm";
 	}
-	//내정보페이지로 이동
+
+	// 내정보페이지로 이동
 	@RequestMapping("/memberMypage")
 	public String memberMypage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
-		model.addAttribute("member",memDao.memberSearch(m_id));
+		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberMypage";
 	}
 
@@ -103,7 +96,7 @@ public class MemController {
 	public String pjoinForm() {
 		return "member/pjoinForm";
 	}
-	
+
 	@RequestMapping("loginForm") // 일반회원로그인화면
 	public String loginForm() {
 
@@ -118,16 +111,14 @@ public class MemController {
 			session.setAttribute("member", member);
 			session.setAttribute("mId", member.getM_id());
 			session.setAttribute("password", member.getPassword());
-			
+
 		} else {
 			return "member/loginForm";
 		}
-		
+
 		return "redirect:home";
 	}
 
-	
-	
 	@RequestMapping("/logout") // 로그아웃
 	public String logout(HttpSession session) {
 		session.invalidate();
@@ -145,7 +136,7 @@ public class MemController {
 		} else {
 			return "member/loginForm";
 		}
-		
+
 		return "redirect:home";
 	}
 
@@ -153,42 +144,40 @@ public class MemController {
 	public String memberIdSearchForm() {
 		return "member/memIdSearchForm";
 	}
-	
-	@RequestMapping("/pmemberIdSearch") //파티너회원 아이디 찾기
+
+	@RequestMapping("/pmemberIdSearch") // 파티너회원 아이디 찾기
 	@ResponseBody
-	public String pmemberIdSearch(@Param("name") String name, @Param("tel") String tel) {
+	public String pmemberIdSearch(String name, String tel) {
 		return pmemDao.pmemberIdSearch(name, tel);
 	}
-	
-	@RequestMapping("/memberIdSearch") //일반회원 아이디 찾기
+
+	@RequestMapping("/memberIdSearch") // 일반회원 아이디 찾기
 	@ResponseBody
-	public String memberIdSearch(@Param("name") String name, @Param("tel") String tel) {
+	public String memberIdSearch(@RequestParam("name") String name, @RequestParam("tel") String tel) {
 		return memDao.memberIdSearch(name, tel);
 	}
-	
-	
-	  @RequestMapping("/mjoin") //일반회원 회원가입
-	  public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
-	  String originalFileName = file.getOriginalFilename();
-	  
-	  String webPath = "/resources/upload";
+
+	@RequestMapping("/mjoin") // 일반회원 회원가입
+	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
+		String originalFileName = file.getOriginalFilename();
+
+		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
-	  
+
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
 
 		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
-	  
+		File saveFile = new File(realPath);	  
 	  if(!originalFileName.isEmpty()) {
 		  String uuid = UUID.randomUUID().toString();
 		  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 	  
 	  try {
 		  file.transferTo(saveFile);
-	  member.setPicture(originalFileName);
-	  member.setPfile(saveFileName);
+	    member.setPicture(originalFileName);
+	    member.setPfile(saveFileName);
 	  
 	  } catch(Exception e) {
 		  e.printStackTrace();
@@ -200,42 +189,38 @@ public class MemController {
 	  
 	  return "home/home";
 	  }
-	  
-	  @RequestMapping("/pjoin_1") //파트너회원 회원가입 1차
-	  public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
-		  String originalFileName = file.getOriginalFilename();
-		  
-		  String webPath = "/resources/upload";
-			String realPath = sc.getRealPath(webPath);
-		  
-			File savePath = new File(realPath);
-			if (!savePath.exists())
-				savePath.mkdirs();
+  
+	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
+	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
+		String originalFileName = file.getOriginalFilename();
 
-			realPath += File.separator + originalFileName;
-			File saveFile = new File(realPath);
+		String webPath = "/resources/upload";
+		String realPath = sc.getRealPath(webPath);
 
-			
-		  if(!originalFileName.isEmpty()) {
-			  String uuid = UUID.randomUUID().toString();
-			  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
-		  
-			  try {
-				  file.transferTo(saveFile);
-			  pmember.setPicture(originalFileName);
-			  pmember.setPfile(saveFileName);
-			  
-			  } catch(Exception e) {
-				  e.printStackTrace();
-			  }
-	  }
-	//	  model.addAttribute(pmemDao.pmemberInsert1(pmember));
-		  pmemDao.pmemberInsert1(pmember);
-		  model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
-		  return "member/pjoinForm2";
-	  }
-	  
-	  
+		File savePath = new File(realPath);
+		if (!savePath.exists())
+			savePath.mkdirs();
+
+		realPath += File.separator + originalFileName;
+		File saveFile = new File(realPath);
+
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+
+			try {
+				file.transferTo(saveFile);
+				pmember.setPicture(originalFileName);
+				pmember.setPfile(saveFileName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		model.addAttribute(pmemDao.pmemberInsert1(pmember));
+		return "member/pjoinForm2";
+	}
+
 	  @RequestMapping("/pjoin_2") //파트너회원 회원가입 2차
 	  public String pjoin_2(PmemVO pmember, Model model) {
 		  pmemDao.pmemberInsert2(pmember);
@@ -265,10 +250,43 @@ public class MemController {
 	  @RequestMapping("/join") // 회원가입폼 이동
 		public String login() {
 			return "member/join";
+
+
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+
+			try {
+				file.transferTo(saveFile);
+				member.setPicture(originalFileName);
+				member.setPfile(saveFileName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
+
+		memDao.memberInsert(member);
+
+		return "redirect:home"; 
+	}
+
 	
-		
-		  @RequestMapping("/jusoPopup") public String test() { return
-		  "member/jusoPopup"; }
-		 
+
+	@RequestMapping("/join") // 회원가입폼 이동
+	public String login() {
+		return "member/join";
+	}
+
+	@RequestMapping("/jusoPopup")
+	public String test() {
+		return "member/jusoPopup";
+	}
+
+	@RequestMapping("/myfallow")
+	public String myfallow() {
+		return "member/myfallow";
+	}
+
 }

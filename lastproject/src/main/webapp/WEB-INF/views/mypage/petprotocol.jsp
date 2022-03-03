@@ -83,21 +83,19 @@
 							<table class="table">
 							<thead>
 								<tr>
+									<th>반려동물 이름</th>
 									<th>파트너회원이름</th>
-									<th>신고내용</th>
-									<th>신고일</th>
-									<th>분류</th>
-									<th>신고결과</th>
+									<th>진료명?????</th>
+									<th>날짜</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${report }" var="report">
+								<c:forEach items="${service}" var="service">
 									<tr>
-										<td>${report.p_name }</td>
-										<td>${report.content}</td>
-										<td>${report.w_date } </td>
-										<td>${report.f_content }</td>
-										<td>${report.f_content }</td>
+										<td>${service.p_name }</td>
+										<td>${service.pm_name}</td>
+										<td>${service.content } </td>
+										<td>${service.startdate }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
