@@ -33,6 +33,9 @@ public class MemController {
 	private PmemService pmemDao;
 	
 	@Autowired
+	private FfileUtil ffileutil;
+	
+	@Autowired
 	ServletContext sc;
 	
 	//일반회원 정보수정
@@ -240,12 +243,13 @@ public class MemController {
 		  return "member/pjoinForm3";
 	  }
 	  
-	  @RequestMapping("/pjoin_3") //파트너회원 회원가입 2차
+	  @RequestMapping("/pjoin_3") //파트너회원 회원가입 3차
 	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2, HttpServletRequest request) {
 		  System.out.println("p_id3:"+p_id);
 		  
 		  
-		  FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
+		 // FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
+		  
 		  
 		  int p_license = ffileutil.multiFileUpload(multiFileList1, request);
 		  System.out.println("p_license = " + p_license);
