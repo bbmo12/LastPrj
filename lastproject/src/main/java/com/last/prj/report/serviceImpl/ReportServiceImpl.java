@@ -29,7 +29,7 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public List<ReportVO> myReportList(String m_id) {
-		return null;
+		return map.myReportList(m_id);
 	}
 
 }
