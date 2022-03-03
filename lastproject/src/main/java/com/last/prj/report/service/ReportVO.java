@@ -24,5 +24,6 @@ public class ReportVO {
 	
 	private int count;  			//신고 건수
 	private String f_content; 		//신고 코드 유형
+	private String p_name;
 
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.service.service.ServiceMapper">
+	<select id="myPetServiceList" parameterType="String" resultType="com.last.prj.service.service.ServiceVO">
+		SELECT PM.NAME AS pm_name, S.CONTENT, P.NAME AS p_name,	S.startdate
+		FROM SERVICE S, RESERVATION R, PET P, P_MEMBER PM
+		WHERE S.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
+		P.M_ID = #{m_id}
+
+		UNION
+
+		SELECT PM.NAME as pm_name, D.D_NAME AS content, P.NAME AS p_name, D.W_DATE AS startdate
+		FROM DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
+		WHERE D.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
+		P.M_ID = #{m_id}
+
+	</select>
+
+
+</mapper>
