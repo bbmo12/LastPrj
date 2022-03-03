@@ -244,6 +244,7 @@ public class MemController {
 	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2) {
 		  System.out.println("p_id3:"+p_id);
 		  
+		  
 		  FfileUtil ffileutil = new FfileUtil();
 		  
 		  int p_license = ffileutil.multiFileUpload(multiFileList1);
