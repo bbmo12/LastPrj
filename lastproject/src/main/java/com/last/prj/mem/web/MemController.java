@@ -1,6 +1,7 @@
 package com.last.prj.mem.web;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PmemService;
@@ -224,12 +226,36 @@ public class MemController {
 				  e.printStackTrace();
 			  }
 	  }
-		  model.addAttribute(pmemDao.pmemberInsert1(pmember));
+	//	  model.addAttribute(pmemDao.pmemberInsert1(pmember));
+		  pmemDao.pmemberInsert1(pmember);
+		  model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		  return "member/pjoinForm2";
 	  }
 	  
 	  
+	  @RequestMapping("/pjoin_2") //파트너회원 회원가입 2차
+	  public String pjoin_2(PmemVO pmember, Model model) {
+		  pmemDao.pmemberInsert2(pmember);
+		  model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
+		  return "member/pjoinForm3";
+	  }
 	  
+	  @RequestMapping("/pjoin_3") //파트너회원 회원가입 2차
+	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2) {
+		  System.out.println("p_id3:"+p_id);
+		  
+		  FfileUtil ffileutil = new FfileUtil();
+		  
+		  int p_license = ffileutil.multiFileUpload(multiFileList1);
+		  System.out.println("p_license = " + p_license);
+		  
+		  int p_image = ffileutil.multiFileUpload(multiFileList2);
+		  System.out.println("p_image = " + p_image);
+		  
+		  pmemDao.pmemberInsert3(p_id, p_license, p_image);
+		  
+		  return "member/joinResult";
+	  }
 	 
 	  @RequestMapping("/join") // 회원가입폼 이동
 		public String login() {

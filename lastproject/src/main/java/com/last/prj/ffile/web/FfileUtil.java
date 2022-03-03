@@ -25,8 +25,10 @@ public class FfileUtil {
 	@Autowired
 	ServletContext sc;
 	 
-	public int multiFileUpload(List<MultipartFile> multiFileList, HttpServletRequest request, FilemasterVO filemaster) {
+	public int multiFileUpload(List<MultipartFile> multiFileList) {
+			FilemasterVO filemaster = new FilemasterVO();
 		    FfileVO ffile= new FfileVO();
+		    
 			System.out.println("multiFileList : " + multiFileList);
 				
 			// path 가져오기
