@@ -29,6 +29,9 @@ public class CalendarController {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
 		System.out.println("p_id : " +p_id);
+		if(p_id ==null) {
+			p_id = "kim1@a.com";
+		}
 		vo.setP_id(p_id);
 		List<CalendarVO> list = CalendarDao.revSetList(vo);
 		System.out.println(list);

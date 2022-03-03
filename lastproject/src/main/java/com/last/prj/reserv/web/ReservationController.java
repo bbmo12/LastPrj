@@ -65,11 +65,11 @@ public class ReservationController {
 		String p_id = (String) session.getAttribute("pId");
 		System.out.println("p_id : " + p_id);
 		
-		if(m_id==null) {
+		if(m_id==null || m_id =="") {
 			m_id = "test1@a.com";
 		}
-		if(p_id==null) {
-			p_id="kim1@a.com";
+		if(p_id == null || p_id == "") {
+			p_id= "kim1@a.com";
 		}
 		
 		co.setP_id(p_id);
@@ -82,15 +82,12 @@ public class ReservationController {
 		//펫정보조회
 		List <PetVO> petList = petDAO.petmemberList(m_id);
 		
-		
-		
 		model.addAttribute("petList",petList);
 		model.addAttribute("reservset",list);
 		//해당 파트너회원 정보조회
 		model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
 		System.out.println(list);
 		System.out.println(petList);
-		System.out.println("dddddddddddddddddddddddddddddddddddddddd"+m_id);
 		return "reservation/test";
 	}
 	
@@ -107,8 +104,9 @@ public class ReservationController {
 	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
+		System.out.println("일반예약 아이디세션값 : " + m_id);
 		vo.setM_id(m_id);
-		List<ReservationVO> list = reservationDao.reservationSelect();
+		List<ReservationVO> list = reservationDao.reservationSelect(vo);
 		System.out.println(list);
 		model.addAttribute("reservation", list);
 		return "reservation/reservation";
@@ -169,13 +167,24 @@ public class ReservationController {
 	  public int reservInsert(ReservationVO vo,ReservCountVO co,ServiceVO so,PmemberVO po) {
 		  
 		  int price = 5000;
-		  String content = "진료";
+		  String content;
 		  String enddate = "임시";
 		  reservationDao.reservInsert(vo);
 		  
+		  //예약날짜 , 시간값
 		  co.setReserv_date(vo.getR_date());
 		  co.setReserv_time(vo.getTime());
-		  
+		  System.out.println("코드출력 : " + so.getCode());
+		  if(so.getCode()==100) {
+			  content="진료";
+		  }else if(so.getCode()==101){
+			  content="훈련";
+		  }else if(so.getCode()==102) {
+			  content ="미용";
+		  }else {
+			  content="펫시팅";
+		  }
+			  
 		  so.setR_no(vo.getR_no());
 		  so.setStartdate(vo.getR_date());
 		  so.setP_id(vo.getP_id());
