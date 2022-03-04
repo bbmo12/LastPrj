@@ -47,12 +47,12 @@
 				console.log(val[i]);
 				 val[i].classList.add("code");
 				$(".code").empty();
-			 	var check = $(".code").append(`<button onclick="ok()">승인</button> 
+			 	var check = $(".code").append(`<button onclick="ok(event)">승인</button> 
 						       				   <button onclick="no(event)">거절</button>`);
 			} 
 		}
-		function ok(){
-			var rno = $(".rno").val();
+		function ok(event){
+			var rno = $(event.target).parent().parent().children().first().text();
 			console.log(rno);
 			var flag = confirm("해당 예약신청을 승인하시겠습니까?");
 			if(flag == true){
@@ -74,7 +74,7 @@
 			}
 		}
 		function no(event){
-			var rno = $(event.target).parent().parent().children().first().text()
+			var rno = $(event.target).parent().parent().children().first().text();
 			var flag = confirm("해당 예약신청을 거절하시겠습니까?");
 			
 			var refuse = prompt("거절사유를 작성해주세요."+"");
