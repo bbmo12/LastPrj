@@ -114,7 +114,7 @@
 											</table>
 											<!-- 상세조회 -->
 											<a class="template-btn"
-												href="qnaDetail?q_no=${qnaList.q_no }&writer=${qnaList.writer}&pet_no=${qnaList.pet_no}">View More</a>
+												href="qnaDetail?q_no=${qnaList.q_no }">View More</a>
 										</div>
 									</div>
 								</div>

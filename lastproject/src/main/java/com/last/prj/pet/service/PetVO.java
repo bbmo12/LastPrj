@@ -9,7 +9,7 @@ public class PetVO {
 	
 	private int pet_no;
 	private String name;
-	private Date birth;
+	private String birth;
 	private int r_check;
 	private int gender;
 	private String m_id;

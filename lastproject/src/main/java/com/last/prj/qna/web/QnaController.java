@@ -68,7 +68,7 @@ public class QnaController {
 
 	@Autowired
 	private PmemberService pMemberDao;
-	
+
 	@Autowired
 	ServletContext sc;
 
@@ -111,8 +111,7 @@ public class QnaController {
 
 	// 질문글 상세 조회 + 조회수 증가 + 작성 회원 정보 조회 + 반려동물 정보 조회 + 파트너 회원 정보 + 댓글 갯수
 	@RequestMapping(value = "/qnaDetail")
-	public String qnaDetail(@RequestParam("q_no") int q_no, @RequestParam("writer") String writer,
-			@RequestParam("pet_no") int pet_no, Model model, HttpServletRequest request) {
+	public String qnaDetail(@RequestParam("q_no") int q_no, Model model, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
@@ -122,8 +121,6 @@ public class QnaController {
 		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
 		model.addAttribute("ansDetail", qnaDAO.ansDetail(q_no));
 		model.addAttribute("best", mapper.qnaBest());
-		model.addAttribute("writerInfo", memDao.memberOne(writer));
-		model.addAttribute("petInfo", petDAO.petOne(pet_no));
 		model.addAttribute("cnt", mapper.replyCnt(q_no));
 
 		return "qna/qnaDetail";
@@ -149,35 +146,54 @@ public class QnaController {
 		}
 	}
 
-	// 질문글 작성
+	// 질문글 작성 + 태그 처리
 	@PostMapping("/qForm")
-	public String qForm(HttpServletRequest request, HttpSession session, QnaVO qna, QtagVO qtag, QnaTagVO qnatag)
-			throws Exception {
+	public String qForm(HttpServletRequest request, HttpSession session, HttpServletResponse write, QnaVO qna,
+			QtagVO qtag, QnaTagVO qnatag) throws Exception {
 
 		String mId = (String) session.getAttribute("mId");
 		qna.setWriter(mId);
-		
-		qtagDAO.newTag(qtag);
+
+		if (qtag.getNTags() != null && qtag.getNTags().size() > 0) {
+			qtagDAO.newTag(qtag);
+		}
+
 		qnaDAO.newQna(qna);
-		qtDAO.newQtag(qnatag);
-		
+
+		if (qnatag.getNTags() != null && qnatag.getNTags().size() > 0) {
+			qtagDAO.newQtag(qnatag);
+		}
 		return "redirect:/qnaMain";
 	}
 
 	// 질문 수정 폼으로 이동 + 기존 글 내용 + 멤버별 펫 정보 받아감.
 	@RequestMapping(value = "/qModiForm")
-	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, HttpSession session, Model model) throws Exception {
+	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, HttpSession session,
+			Model model) throws Exception {
 
 		String mId = (String) session.getAttribute("mId");
-		
+
 		model.addAttribute("petList", petDAO.petmemberList(m_id));
-		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));	
+		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
 		return "qna/qModiForm";
 	}
 
 	// 질문 게시글 수정 + 태그 삭제 후 재등록
 	@RequestMapping(value = "/qModify")
-	public String qModify(HttpServletRequest request, QnaVO qna) throws Exception {
+	public String qModify(@RequestParam("q_no") int q_no, HttpServletRequest request, QnaVO qna, QtagVO qtag,
+			QnaTagVO qnatag) throws Exception {
+
+		System.out.println(q_no);
+		
+		qtDAO.delTags(q_no);
+
+		if (qtag.getNTags() != null && qtag.getNTags().size() > 0) {
+			qtagDAO.newTag(qtag);
+		}
+		qnaDAO.ansUpdate(qna);
+		if (qnatag.getNTags() != null && qnatag.getNTags().size() > 0) {
+			qtagDAO.newQtag(qnatag);
+		}
 
 		return "qna/qnaDetail";
 	}
@@ -185,10 +201,10 @@ public class QnaController {
 	// 질문 삭제(1)
 	@RequestMapping(value = "/qDeleteOne", method = RequestMethod.POST)
 	public String qDeleteOne(@RequestParam("q_no") int q_no, Model model) throws Exception {
-		
+
 		qnaDAO.qDeleteOne(q_no);
 		qtDAO.delTags(q_no);
-		
+
 		return "qna/qnaDetail";
 	}
 
@@ -227,112 +243,115 @@ public class QnaController {
 		qnaDAO.ansDelete(q_no);
 		return "qna/qnaDetail";
 	}
-	
-	//이미지 업로드
-	 @RequestMapping(value="/imageUpload", method = RequestMethod.POST)
-	    public void imageUpload(HttpServletRequest request,
-	    		HttpServletResponse response, MultipartHttpServletRequest multiFile
-	    		, @RequestParam MultipartFile upload) throws Exception{
-	    	// 랜덤 문자 생성
-	    	UUID uid = UUID.randomUUID();
-	    	
-	    	OutputStream out = null;
-	    	PrintWriter printWriter = null;
-	    	
-	    	//인코딩
-	    	response.setCharacterEncoding("utf-8");
-	    	response.setContentType("text/html;charset=utf-8");
-	    	try{
-	    		//파일 이름 가져오기
-	    		String fileName = upload.getOriginalFilename();
-	    		byte[] bytes = upload.getBytes();
-	    		
-	    		//이미지 경로 생성
-	    		String path = "resources/upload/";	// 이미지 경로 설정(폴더 자동 생성)
-	    		String realPath = sc.getRealPath(path);
-	    		
-	    		String ckUploadPath = realPath + uid + "_" + fileName;
-	    		File folder = new File(realPath);
-	    		System.out.println("path:"+path);	// 이미지 저장경로 console에 확인
-	    		//해당 디렉토리 확인
-	    		if(!folder.exists()){
-	    			try{
-	    				folder.mkdirs(); // 폴더 생성
-	    		}catch(Exception e){
-	    			e.getStackTrace();
-	    		}
-	    	}
-	    	
-	    	out = new FileOutputStream(new File(ckUploadPath));
-	    	out.write(bytes);
-	    	out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
-	    	
-	    	String callback = request.getParameter("CKEditorFuncNum");
-	    	printWriter = response.getWriter();
-	    	String fileUrl = "ckImgSubmit?uid=" + uid + "&fileName=" + fileName; // 작성화면
-	    	
-	    	// 업로드시 메시지 출력
-	    	printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
-	    	printWriter.flush();
-	    	
-	    	}catch(IOException e){
-	    		e.printStackTrace();
-	    	} finally {
-	    		try {
-	    		if(out != null) { out.close(); }
-	    		if(printWriter != null) { printWriter.close(); }
-	    	} catch(IOException e) { e.printStackTrace(); }
-	    	}
-	    	return;
-	    }
-	 
-	 // 서버로 전송된 이미지 뿌려주기
-	    @RequestMapping(value="/ckImgSubmit")
-	    public void ckSubmit(@RequestParam(value="uid") String uid
-	    		, @RequestParam(value="fileName") String fileName
-	    		, HttpServletRequest request, HttpServletResponse response)
-	    throws ServletException, IOException{
-	    	
-	    	//서버에 저장된 이미지 경로
-	    	String path = "resources/upload/";	// 이미지 경로 설정(폴더 자동 생성)
-    		String realPath = sc.getRealPath(path);
-	    	System.out.println("path:"+realPath);
-	    	String sDirPath = realPath + uid + "_" + fileName;
-	    	
-	    	File imgFile = new File(sDirPath);
-	    	
-	    	//사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
-	    	if(imgFile.isFile()){
-	    		byte[] buf = new byte[1024];
-	    		int readByte = 0;
-	    		int length = 0;
-	    		byte[] imgBuf = null;
-	    		
-	    		FileInputStream fileInputStream = null;
-	    		ByteArrayOutputStream outputStream = null;
-	    		ServletOutputStream out = null;
-	    		
-	    		try{
-	    			fileInputStream = new FileInputStream(imgFile);
-	    			outputStream = new ByteArrayOutputStream();
-	    			out = response.getOutputStream();
-	    			
-	    			while((readByte = fileInputStream.read(buf)) != -1){
-	    				outputStream.write(buf, 0, readByte); 
-	    			}
-	    			
-	    			imgBuf = outputStream.toByteArray();
-	    			length = imgBuf.length;
-	    			out.write(imgBuf, 0, length);
-	    			out.flush();
-	    			
-	    		}catch(IOException e){
-	    			e.printStackTrace();
-	    		}finally {
-	    			outputStream.close();
-	    			fileInputStream.close();
-	    			out.close();
-	    			}
-	    		}
-	    }
+
+	// 이미지 업로드
+	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
+	public void imageUpload(HttpServletRequest request, HttpServletResponse response,
+			MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload) throws Exception {
+		// 랜덤 문자 생성
+		UUID uid = UUID.randomUUID();
+
+		OutputStream out = null;
+		PrintWriter printWriter = null;
+
+		// 인코딩
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		try {
+			// 파일 이름 가져오기
+			String fileName = upload.getOriginalFilename();
+			byte[] bytes = upload.getBytes();
+
+			// 이미지 경로 생성
+			String path = "resources/upload/"; // 이미지 경로 설정(폴더 자동 생성)
+			String realPath = sc.getRealPath(path);
+
+			String ckUploadPath = realPath + "/" + uid + "_" + fileName;
+			File folder = new File(realPath);
+			System.out.println("path:" + path); // 이미지 저장경로 console에 확인
+			// 해당 디렉토리 확인
+			if (!folder.exists()) {
+				try {
+					folder.mkdirs(); // 폴더 생성
+				} catch (Exception e) {
+					e.getStackTrace();
+				}
+			}
+
+			out = new FileOutputStream(new File(ckUploadPath));
+			out.write(bytes);
+			out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
+
+			String callback = request.getParameter("CKEditorFuncNum");
+			printWriter = response.getWriter();
+			String fileUrl = "resources/upload/" + uid + "_" + fileName; // 작성화면
+
+			// 업로드시 메시지 출력
+			printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
+			printWriter.flush();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (printWriter != null) {
+					printWriter.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return;
+	}
+
+	// 서버로 전송된 이미지 뿌려주기
+	@RequestMapping(value = "/ckImgSubmit")
+	public void ckSubmit(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName,
+			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// 서버에 저장된 이미지 경로
+		String path = "resources/upload/"; // 이미지 경로 설정(폴더 자동 생성)
+		String realPath = sc.getRealPath(path);
+		System.out.println("path:" + realPath);
+		String sDirPath = realPath + uid + "_" + fileName;
+
+		File imgFile = new File(sDirPath);
+
+		// 사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
+		if (imgFile.isFile()) {
+			byte[] buf = new byte[1024];
+			int readByte = 0;
+			int length = 0;
+			byte[] imgBuf = null;
+
+			FileInputStream fileInputStream = null;
+			ByteArrayOutputStream outputStream = null;
+			ServletOutputStream out = null;
+
+			try {
+				fileInputStream = new FileInputStream(imgFile);
+				outputStream = new ByteArrayOutputStream();
+				out = response.getOutputStream();
+
+				while ((readByte = fileInputStream.read(buf)) != -1) {
+					outputStream.write(buf, 0, readByte);
+				}
+
+				imgBuf = outputStream.toByteArray();
+				length = imgBuf.length;
+				out.write(imgBuf, 0, length);
+				out.flush();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				outputStream.close();
+				fileInputStream.close();
+				out.close();
+			}
+		}
+	}
 }

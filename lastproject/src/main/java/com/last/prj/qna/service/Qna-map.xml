@@ -2,30 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.qna.service.QnaMapper">
 
-	<resultMap type="com.last.prj.qna.service.QnaVO"
-		id="qnaResult">
-		<id property="q_no" column="q_no" />
-		<result property="w_date" column="w_date" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="hit" column="hit" />
-		<result property="writer" column="writer" />
-		<result property="p_no" column="p_no" />
-		<result property="f_part" column="f_part" />
-		<result property="pet_no" column="pet_no" />
-		<result property="r_check" column="r_check" />
-		<collection property="tagList" resultMap="tagMap"></collection>
-	</resultMap>
-
-	<resultMap type="com.last.prj.qna.service.QnaTagVO"
-		id="tagMap">
-		<result property="q_no" column="q_no" />
-		<result property="t_name" column="t_name" />
-	</resultMap>
-	
-	<!-- qna & petVO -->
-	<resultMap type="com.last.prj.qna.service.QnaVO"
-		id="qnaPet">
+	<resultMap type="com.last.prj.qna.service.QnaVO" id="qnaPetTag">
 		<result property="q_no" column="q_no" />
 		<result property="w_date" column="w_date" />
 		<result property="title" column="title" />
@@ -47,6 +24,28 @@
 		<result property="weight" column="weight"/>
 		<result property="picture" column="picture"/>
 		</association>
+		
+		<collection property="tagList" resultMap="tagMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.last.prj.qna.service.QnaVO" id="qnaResult">
+		<id property="q_no" column="q_no" />
+		<result property="w_date" column="w_date" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="writer" column="writer" />
+		<result property="p_no" column="p_no" />
+		<result property="f_part" column="f_part" />
+		<result property="pet_no" column="pet_no" />
+		<result property="r_check" column="r_check" />
+		
+		<collection property="tagList" resultMap="tagMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.last.prj.qna.service.QnaTagVO" id="tagMap">
+		<result property="q_no" column="q_no" />
+		<result property="t_name" column="t_name" />
 	</resultMap>
 
 	<!-- 총 개시글 수 출력 -->
@@ -101,13 +100,14 @@
 	</select>
 
 	<!-- 질문글 개별 조회 -->
-	<select id="qnaDetail" resultMap="qnaResult">
-		SELECT *
-		FROM qna q LEFT OUTER
-		JOIN qnatag t
+	<select id="qnaDetail" resultMap="qnaPetTag">
+		SELECT t.t_name, q.*, p.*
+		FROM qnatag t 
+		RIGHT JOIN qna q
 		ON q.q_no = t.q_no
-		WHERE q.q_no =
-		#{q_no}
+		LEFT JOIN pet p
+		ON q.pet_no = p.pet_no
+		WHERE q.q_no = #{q_no}
 	</select>
 
 	<!-- 조회수 증가 -->
