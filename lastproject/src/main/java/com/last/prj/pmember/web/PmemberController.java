@@ -22,6 +22,7 @@ import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.TimeVO;
+import com.last.prj.pmember.service.TimeVOList;
 
 @Controller
 public class PmemberController {
@@ -122,7 +123,6 @@ public class PmemberController {
 	}
 	@RequestMapping("pmemberBest")//베스트순위출력
 	public String pmemberBest(PmemberVO pmember, Model model) {
-		System.out.println("나와아라라"+pmember);
 		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
 		return "pmember/memberMain";
 	}

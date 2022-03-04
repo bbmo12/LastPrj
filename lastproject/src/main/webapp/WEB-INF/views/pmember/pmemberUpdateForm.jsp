@@ -183,10 +183,13 @@
 	</section>
 	 <script>
 	 	function addDay() { 
+	 		var dayArray = [];
 	 		$('select[name=selectday] option:selected').each(function (index) {
-				var day = $(this).attr('value');				
-			      
+				var day = $(this).attr('value');
+				dayArray.push(day);
+				console.log(dayArray);
 			});	 	
+	 		$('input[name=w_day]').val(dayArray);
 		} 
 		function startTime() {
 			var start = $('input[name=starttime').val();
