@@ -79,7 +79,7 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<form class="forms-sample" action="mdelete">
+						<form class="forms-sample" action="mdelete" method="post">
 							<h4>회원탈퇴하시겠씁니가?</h4>
 							<button type="submit" class="btn btn-primary mr-2" >네</button>
 							<button type="button" class="btn btn-primary mr-2" onclick="location.href='home'">아니요</button>

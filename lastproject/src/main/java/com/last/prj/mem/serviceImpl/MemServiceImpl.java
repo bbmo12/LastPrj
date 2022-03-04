@@ -49,14 +49,10 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
-	public String memberDelete(MemVO member) {
-		return map.memberDelete(member);
+	public String memberDelete(String m_id) {
+		return map.memberDelete(m_id);
 	}
 
-
-
-
 	
-
 
 }

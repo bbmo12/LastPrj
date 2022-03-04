@@ -50,10 +50,10 @@ public class MemController {
 	@RequestMapping("mdelete")
 	public String mdelete(HttpServletRequest request, MemVO member) {
 		HttpSession session = request.getSession();
-		
-		memDao.memberDelete(member);
+		String m_id = (String) session.getAttribute("mId");
+		memDao.memberDelete(m_id);
 		session.invalidate();
-		return "home/home";
+		return "redirect:home";
 		
 	}
 	
