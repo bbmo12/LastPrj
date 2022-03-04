@@ -9,9 +9,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <link rel="stylesheet"	href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
 <link rel="stylesheet"	href="resources/assets123/vendors/flag-icon-css/css/flag-icon.min.css">
-<link rel="stylesheet"	href="resources/assets123/vendors/css/vendor.bundle.base.css">
 <link rel="stylesheet"	href="resources/assets123/vendors/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet"	href="resources/assets123/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
 <link rel="stylesheet"  href="resources/assets123/css/style.css">

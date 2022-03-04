@@ -24,6 +24,10 @@ public class ReportVO {
 	
 	private int count;  			//신고 건수
 	private String f_content; 		//신고 코드 유형
+
+	private String part;            //신고당한 게시글 유형
+	private int repor; 				//신고 처리 code : 701 : 신고대기 / 702 : 신고기각 / 703 : 신고승인
 	private String p_name;
+
 
 }

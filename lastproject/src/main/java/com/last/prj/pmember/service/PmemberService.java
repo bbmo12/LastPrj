@@ -19,6 +19,7 @@ public interface PmemberService {
 	//관리자
 	public List<PmemberVO> admPlistCode(int code);
 	public List<PmemberVO> admPlist();
+	public List<PmemberVO> admPstartDateList();
 	
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);

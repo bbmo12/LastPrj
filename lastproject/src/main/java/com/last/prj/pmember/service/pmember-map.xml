@@ -151,6 +151,24 @@
 		UPDATE P_MEMBER SET RCOM = RCOM+1 WHERE P_ID = #{p_id}
 	</update>
 	
+
+	<update id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
+		UPDATE O_TIME
+			<set>
+				<if test="w_day != null">W_DAY = #{w_day}, </if>
+				<if test="starttime != null">STARTTIME = #{starttime}, </if>
+				<if test="endtime != null">ENDTIME = #{endtime} </if> 	
+			</set>
+		WHERE P_ID = #{p_id}
+	</update>
+	
+	<!-- 아이디로 정보 조회 -->
+	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM p_member
+		WHERE p_id = #{p_id}
+	</select>
+
 	<!-- 추천베스트 순위 -->
 	<select id="bestLike" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
@@ -164,25 +182,30 @@
 		WHERE ROWNUM<![CDATA[<=4]]>     
 	</select>
 	
+
 	<!-- 관리자 -->
+	
+	<!-- 파트너 전체 조회 -->
+	<select id="admPlist" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
+		FROM P_MEMBER P , F_CODE F 
+		WHERE F.CODE=P.CODE
+	</select>
+	
+	<!-- 파트너쉽 별로 출력 -->
 	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
 		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel, p.picture
 		from p_member p, f_code f 
 		where f.code = p.code AND p.code = #{code}
 	</select>
 	
-	<select id="admPlist" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
-		FROM P_MEMBER P , F_CODE F 
-		WHERE F.CODE=P.CODE
-	</select>	
-
-	
-	<!-- 아이디로 정보 조회 -->
-	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT *
-		FROM p_member
-		WHERE p_id = #{p_id}
+	<!-- 파트너 회원 가입일 조회 -->
+	<select id="admPstartDateList" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS F_CONTENT, P.TEL AS TEL
+		FROM P_MEMBER P, F_CODE F 
+		WHERE P.STARTDATE BETWEEN TO_DATE('220201', 'YYMMDD') AND TO_DATE('220330','YYMMDD')
 	</select>
+	
+	
 
 </mapper>
