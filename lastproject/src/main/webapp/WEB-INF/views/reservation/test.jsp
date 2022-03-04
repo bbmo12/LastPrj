@@ -221,6 +221,8 @@ $(document).ready(function(){
 			}
 		});
 	}
+	
+
 	//일정 클릭 후 해당예약일자 테이블 표출
 	calendar.on('clickSchedule', function(event) {
 		var id = event.schedule.id;
@@ -233,23 +235,24 @@ $(document).ready(function(){
 				p_id = res[0].p_id;
 				console.log(p_id);
 				$(".table").empty();
-				//종료일 - 시작일 +1 로 반복횟수 설정
 				var i=0;
 				var $thead,$tbody,tdval;
 				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
-				var split = res[0].c_end.split('-');
+				var split = res[0].c_start.split('-');
+				var sp2 = split[2]
+				console.log(sp2);
+				console.log(parseInt(sp2.substr(1)));
 				//console.log(parseInt(split[0]+split[1]+split[2]));
-				var ab = String(parseInt(split[2])+i);
-				
-				if(ab.length == 1){
-					tdval = split[0]+'-'+split[1]+'-0'+String(parseInt(split[2])+i);
-				}else{
-					tdval = split[0]+'-'+split[1]+'-'+String(parseInt(split[2])+i);
-				}
+				var ab = String(parseInt(split[2]));
 				console.log(tdval);
 				console.log(ab.length);
-				for( i =0; i<len;i++){
-					
+				//종료일 - 시작일 +1 로 반복횟수 설정
+				for( i; i<len;i++){
+					if(ab.length == 1){
+						tdval = split[0]+'-'+split[1]+'-0';
+					}else{
+						tdval = split[0]+'-'+split[1]+'-';
+					}
 					$thead = `
 						<thead>
 							<tr>
@@ -261,7 +264,7 @@ $(document).ready(function(){
 					$tbody =` 
 						<tbody>
 								<tr>
-									<td>`+tdval+`</td>
+									<td class="tdvalCheck">`+tdval+((parseInt(sp2))+i)+`</td>
 										<td><select class="selectTime" name="예약시간" onchange="changeSelection(event)">
 												<option value="">예약시간</option>
 												<option value="09시">09:00~10:00</option>
@@ -277,6 +280,8 @@ $(document).ready(function(){
 								</tr>
 						</tbody> `;
 					$(".table").append($tbody);
+					ab = $(".tdvalCheck").text();
+					console.log(ab[i]);
 								}
 				$(".table").append($thead);
 			}//ajax success 부분
@@ -297,6 +302,7 @@ $(document).ready(function(){
  		calendar.today();
  	})
 });
+
 //옵션값 설정 후 예약가능/불가 출력
 function changeSelection(event){
 	//var reserv_date = $(".selectTime").parent().prev().text();
