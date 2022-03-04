@@ -237,7 +237,7 @@ $(document).ready(function(){
 				var i=0;
 				var $thead,$tbody,tdval;
 				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
-				var split = res[0].c_end.split('-');
+				var split = res[0].c_start.split('-');
 				//console.log(parseInt(split[0]+split[1]+split[2]));
 				var ab = String(parseInt(split[2])+i);
 				

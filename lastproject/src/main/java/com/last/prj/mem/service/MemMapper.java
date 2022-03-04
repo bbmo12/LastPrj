@@ -16,4 +16,6 @@ public interface MemMapper {
 	MemVO memberOne(@Param("m_id") String m_id);
 	
 	int memberUpdate(MemVO member);
+	
+	int memberDelete(MemVO member);
 }

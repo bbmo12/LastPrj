@@ -48,6 +48,11 @@ public class MemServiceImpl implements MemService {
 		return map.memberUpdate(member);
 	}
 
+	@Override
+	public int memberDelete(MemVO member) {
+		return 0;
+	}
+
 	
 
 

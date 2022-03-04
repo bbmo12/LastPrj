@@ -138,7 +138,7 @@ function onMessage(evt){
 									<li><a href="myreport">신고 내역</a></li>
 									<li><a href="myfallow">팔로우</a></li>
 									<li><a href="logout">로그아웃</a></li>
-									<li><a href="#">회원탈퇴</a></li>
+									<li><a href="mdeleteForm">회원탈퇴</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">

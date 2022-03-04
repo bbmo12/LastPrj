@@ -37,6 +37,15 @@ public class MemController {
 	@Autowired
 	ServletContext sc;
 
+	//회원탈퇴 페이지로 이동
+	@RequestMapping("mdeleteForm")
+	public String mdelete(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");
+		return "mypage/mdelete";
+	}
+	
+	
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
 	public String memberUpdate(MultipartFile file, MemVO member, Model model) {		
