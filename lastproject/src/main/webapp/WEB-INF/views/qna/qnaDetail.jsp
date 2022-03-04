@@ -271,10 +271,16 @@
 								</table>
 							</div>
 						</div>
-						
+
 						<!-- 질문글 신고 trigger -->
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#exampleModal"><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고</button>
+						<c:if test="${mId ne null}">
+							<c:if test="${mId ne qnaDetail.writer }">
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#exampleModal">
+									<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
+								</button>
+							</c:if>
+						</c:if>
 
 						<!-- 세션 아이디와 글쓴이 일치할 때 수정, 삭제 가능 -->
 						<c:if test="${mId eq qnaDetail.writer }">
@@ -511,17 +517,23 @@
 							<!-- 답변글 신고 모달-->
 							<!-- button trigger modal -->
 							<div class="reportAns" data-no="${ans.q_no }">
-								<c:if
-									test="${mId ne null || mId ne ans.writer || pId ne ans.writer}">
-									<div>
-										<button id="reportModal2" type="button"
-											class="btn btn-secondary btn-sm" data-toggle="modal"
-											data-target="#exampleModal2"
-											onclick="transferQno(${ans.q_no }); transferW(${ans.writer });">
-											<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
-										</button>
-									</div>
-								</c:if>
+
+								<div>
+									<c:if test="${mId ne null}">
+										<c:if test="${mId ne ans.writer}">
+											<c:if test="${pId ne ans.writer}">
+												<button id="reportModal2" type="button"
+													class="btn btn-secondary btn-sm" data-toggle="modal"
+													data-target="#exampleModal2"
+													onclick="transferQno('${ans.q_no }','${ans.writer }');">
+													<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글
+													신고
+												</button>
+											</c:if>
+										</c:if>
+									</c:if>
+								</div>
+
 
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal2" tabindex="-1"
@@ -677,30 +689,13 @@
 	 }
 		
 		/*신고 글 번호, 글쓴이 넘김*/
-		function transferQno(no){
+		function transferQno(no, writer){
 			$('#qNo').val(no);
-			
-			console.log(no);
-			
-		}
-		
-		function transferW(writer){
 			$('#Awriter').val(writer);
-			
-			console.log(writer);
 		}
+
 		
 		/*답변글 신고 모달*/
-		/* function ansReport(){ */
-			/* console.log(info);
-			var no = $(this).closest(".comments-area").data("no");
-			console.log(no);
-			var reported = $('#' + no).find('#writer').val();
- */			/* var content = $('#' + info).find('#content').val();
-			var code = $('#' + info).find('#code option:selected').val(); */
-			/* console.log(content);
-			console.log(code); */
-			
 			$('#sendReport2').click(function() {
 				$.ajax({
 					method : "POST",

@@ -71,7 +71,7 @@ ul li.tag-item {
 		enterMode : CKEDITOR.ENTER_BR,
 		shiftEnterMode : CKEDITOR.ENTER_P,
 		height : '500px',
-		filebrowserUploadUrl : "/common/ckUpload"
+		filebrowserUploadUrl : "imageUpload"
 	};
 </script>
 </head>
@@ -92,7 +92,7 @@ ul li.tag-item {
 	<!-- question form starts -->
 	<article>
 		<div class="container" role="main">
-			<h2>질문 수정하기</h2>
+			<h2>새로운 질문 작성하기</h2>
 			<form name="qForm" id="qForm" action="qForm" method="post"
 				onsubmit="tagInput();">
 
@@ -102,7 +102,7 @@ ul li.tag-item {
 				<div class="mb-3">
 					<label for="title">제목</label> <input type="text"
 						class="form-control" name="title" id="title"
-						placeholder="제목을 입력해 주세요">
+						placeholder="제목을 입력해 주세요" required>
 				</div>
 
 				<div class="form-check">
@@ -124,7 +124,7 @@ ul li.tag-item {
 				</div>
 
 				<div class="mb-3">
-					<textarea class="ckeditor4" id="content" name="content"></textarea>
+					<textarea class="ckeditor4" id="content" name="content" required></textarea>
 					<script>
 						CKEDITOR.replace('content', ckeditor_config);
 					</script>

@@ -130,15 +130,21 @@
 	<insert id="newQna"
 		parameterType="com.last.prj.qna.service.QnaVO">
 		INSERT INTO qna (q_no, title, content, hit, writer,
-		p_no, f_part, pet_no, r_check)
+		p_no, pet_no, r_check, qpicture, pfile)
 		VALUES (q_seq.nextval, #{title},
-		#{content}, 0, #{writer}, 0, 707, #{pet_no}, #{r_check})
+		#{content}, 0, #{writer}, 0, #{pet_no}, 0, #{qpicture}, #{pfile})
 	</insert>
 	
 	<!-- 질문글 수정 -->
 	<update id="qModify" parameterType="com.last.prj.qna.service.QnaVO">
 		UPDATE qna
-		SET title=#{title}, content=#{content}, pet_no=#{pet_no}
+			<set>
+				<if test="title != null">title=#{title}</if>
+				<if test="content != null">content=#{content}</if>
+				<if test="pet_no != null">pet_no=#{pet_no}</if>
+				<if test="qpicture != null">qpicture=#{qpicture}</if>
+				<if test="pfile != null">pfile=#{pfile}</if>
+			</set>
 		WHERE q_no=#{q_no}
 	</update>
 
