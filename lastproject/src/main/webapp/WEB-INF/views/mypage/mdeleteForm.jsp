@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,34 +78,15 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="row" id="data-container">
-						<c:forEach items="${pets }" var="pet">
-							<div class="col-lg-3 col-sm-6">
-								<div class="single-doctor mb-3 mb-lg-0">
-									<div class="doctor-img">
-										<img src="resources/upload/${pet.picture }" alt=""
-											class="img-fluid" style="width: 195px; height: 200px;">
-									</div>
-									<div class="content-area">
-										<div class="doctor-name text-center">
-											<a href="petDetail?pet_no=${pet.pet_no}">
-												<h3>${pet.name }</h3>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-						
+					<div class="col-lg-12 col-md-12 blog_details">
+						<form class="forms-sample" action="mdelete" method="post">
+							<h4>회원탈퇴하시겠씁니가?</h4>
+							<button type="submit" class="btn btn-primary mr-2" >네</button>
+							<button type="button" class="btn btn-primary mr-2" onclick="location.href='home'">아니요</button>
+						</form>
 					</div>
-					<form action="mypetAddForm" method="post">
-					<button type="submit">반려등물 등록</button>
-					</form>
 				</div>
 			</div>
-		</div>
-
 	</section>
-
 </body>
 </html>

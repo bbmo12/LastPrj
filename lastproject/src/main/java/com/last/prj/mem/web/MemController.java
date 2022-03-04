@@ -37,6 +37,26 @@ public class MemController {
 	@Autowired
 	ServletContext sc;
 
+	//회원탈퇴 페이지로 이동
+	@RequestMapping("mdeleteForm")
+	public String mdeleteForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");
+		return "mypage/mdeleteForm";
+	}
+	
+	
+	//일반회원 회원탈퇴
+	@RequestMapping("mdelete")
+	public String mdelete(HttpServletRequest request, MemVO member) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");
+		memDao.memberDelete(m_id);
+		session.invalidate();
+		return  "redirect:home";
+		
+	}
+	
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
 	public String memberUpdate(MultipartFile file, MemVO member, Model model) {		
@@ -191,7 +211,7 @@ public class MemController {
 	  }
   
 	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
-	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
+	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember) {
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -217,7 +237,7 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(pmemDao.pmemberInsert1(pmember));
+		pmemDao.pmemberInsert1(pmember);
 		return "member/pjoinForm2";
 	}
 

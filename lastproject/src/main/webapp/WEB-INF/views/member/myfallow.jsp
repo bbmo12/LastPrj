@@ -89,7 +89,7 @@
 							</div>
 							<div class="content-area">
 								<div class="doctor-name text-center">
-									<a href=#<%-- "petDetail?pet_no=${pet.pet_no}" --%>>
+									<a href="pmemberDetail?id=${follow.p_id}" >
 										<h3>${follow.p_id }</h3>
 									</a>
 								</div>

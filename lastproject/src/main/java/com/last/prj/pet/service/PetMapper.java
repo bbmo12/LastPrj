@@ -12,4 +12,6 @@ public interface PetMapper {
 	
 	//일반회원 아이디로 반려동물 조회
 	List<PetVO> petmemberList(@Param("m_id") String m_id);
+	
+	int mypetInsert(PetVO pet);
 }

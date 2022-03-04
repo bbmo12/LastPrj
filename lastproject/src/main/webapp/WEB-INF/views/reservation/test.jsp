@@ -239,6 +239,7 @@ $(document).ready(function(){
 				var $thead,$tbody,tdval;
 				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
 				var split = res[0].c_start.split('-');
+
 				var sp2 = split[2]
 				var ab = String(parseInt(split[2]));
 				//종료일 - 시작일 +1 로 반복횟수 설정
