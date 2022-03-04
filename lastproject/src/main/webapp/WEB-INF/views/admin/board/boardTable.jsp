@@ -41,7 +41,6 @@
 	<script src="resources/table/js/custom.min.js"></script>
 	<!-- this page js -->
 	<script src="resources/table/js/datatable-checkbox-init.js"></script>
-	
 	<script src="resources/table/js/datatables.min.js"></script>
 <style> 
 .container-fluid {

@@ -12,4 +12,9 @@ public interface ReportService {
 
 	//일반사용자 신고내역 조회
 	public List<ReportVO> myReportList(String m_id);
+	
+	//qna에 대한 신고리스트
+	public List<ReportVO> admQnaList();
+	//review에 대한 신고리스트
+	public List<ReportVO> admReviewList();
 }

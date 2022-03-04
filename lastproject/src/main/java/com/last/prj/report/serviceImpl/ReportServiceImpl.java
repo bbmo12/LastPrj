@@ -32,4 +32,14 @@ public class ReportServiceImpl implements ReportService {
 		return null;
 	}
 
+	@Override
+	public List<ReportVO> admQnaList() {
+		return map.admQnaList();
+	}
+
+	@Override
+	public List<ReportVO> admReviewList() {
+		return map.admReviewList();
+	}
+
 }

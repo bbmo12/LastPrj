@@ -1,16 +1,23 @@
 package com.last.prj.pmember.service;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
+
+
 
 @Data
 public class PmemberVO {
 	private String p_id;				//파트너회원아이디
 	private String name;			//이름
 	private String tel;				//전화번호
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startdate;			//가입일
+	@JsonFormat(pattern =  "yyyy-MM-dd")
 	private Date enddate;			//탈퇴일
 	private String password;		//비밀번호
 	private int	c_report;			//신고당한횟수

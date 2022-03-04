@@ -14,21 +14,17 @@
 			href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
 				<span class="icon-bg"><i
 					class="mdi mdi-crosshairs-gps menu-icon"></i></span> <span
-				class="menu-title">Tables</span> <i class="menu-arrow"></i>
+				class="menu-title">관리</span> <i class="menu-arrow"></i>
 		</a>
 			<div class="collapse" id="ui-basic">
 				<ul class="nav flex-column sub-menu">
-					<li class="nav-item"><a class="nav-link" href="boardTables">boardTable</a></li>
+					<li class="nav-item"><a class="nav-link" href="boardTables">공지사항 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="pmemberTables">pmemberTable</a></li>
-					
-					<li><a href="admPlistCode?code=100">수의사</a></li>
-					<li><a href="admPlistCode?code=101">훈련사</a></li>
-					<li><a href="admPlistCode?code=102">펫시터</a></li>
-					<li><a href="admPlistCode?code=103">미 용</a></li>
-					
+						href="pmemberTables">파트너회원 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="reportTables">reportTable</a></li>
+						href="reportTables">신고 관리</a></li>
+						<li class="nav-item"><a class="nav-link"
+						href="reportList">신고 관리2</a></li>
 				</ul>
 			</div></li>
 

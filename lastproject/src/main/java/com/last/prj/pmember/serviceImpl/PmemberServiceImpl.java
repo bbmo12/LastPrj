@@ -76,4 +76,9 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.PmemberOne(p_id);
 	}
 
+	@Override
+	public List<PmemberVO> admPstartDateList() {
+		return map.admPstartDateList();
+	}
+
 }

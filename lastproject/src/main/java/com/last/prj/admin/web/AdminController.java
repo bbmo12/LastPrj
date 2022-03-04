@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
@@ -37,10 +38,6 @@ public class AdminController {
 	
 	@Autowired
 	private QnaService qnaDAO;
-	
-	
-	
-	
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -53,35 +50,53 @@ public class AdminController {
 		List<PmemberVO> list = pMemberDao.admPlist();
 		System.out.println(list);
 		model.addAttribute("pList",list );
+		
 		return "admin/board/pmemberTable";
 	}
 	
-	
-	
 	// 파트너회원관련 파트너쉽별로
 	@RequestMapping("/admPlistCode")
-	public String pmemberList(@RequestParam("code") int code, Model model) {
-		System.out.println(code);
-		List<PmemberVO> list = pMemberDao.admPlistCode(code);
-		System.out.println(list);
-		model.addAttribute("pmembers",list );
-		return "admin/board/pmemberTablePart";
+	@ResponseBody
+	public List<PmemberVO> admPlistCode(@RequestParam("code") int code, Model model) {	
+		System.out.println(pMemberDao.admPlistCode(code));
+		return pMemberDao.admPlistCode(code);
 	}
-
-
-	// 1. 신고리스트 출력
-	@RequestMapping("/reportTables")
-	public String reportList(Model model) {
-		List<ReportVO> list = reportDao.reportList();
-//		List<QnaVO> qlist = qnaDAO.admQnaList();
-//		List<ReviewVO> vlist = reviewDao.admReviewList();
+	
+	
+	//파트너회원 가입일 조회
+	@RequestMapping("/admStartDateList")
+	@ResponseBody
+	public List<PmemberVO> admStartDateList(){
 		
+		return pMemberDao.admPstartDateList();
+	}
+	
+	// 1. 신고
+
+	//신고관리 페이지 이동
+	@RequestMapping("/admReportList")
+	public String reportList() {
+		return "redirect:reportList";
+	}
+	
+	//2. 신고 조건 별 검색 : 날짜 / 후기 / qna / ... 
+	
+	
+	
+	//1.1 qna 글 리스트 조회
+	@RequestMapping("/admQnaList")
+	@ResponseBody
+	public List<ReportVO> admQnaList(){
 		
-		System.out.println(list);
-		model.addAttribute("rList", list);
-//		model.addAttribute("qList", qlist);
-//		model.addAttribute("vList", vlist);
-		return "admin/board/reportTable";
+		return reportDao.admQnaList();
+	}
+	
+	//1.2 후기 글 리스트 조회
+	@RequestMapping("/admReviewList")
+	@ResponseBody
+	public List<ReportVO> admReviewList(){
+		
+		return reportDao.admReviewList();
 	}
 	
 	
