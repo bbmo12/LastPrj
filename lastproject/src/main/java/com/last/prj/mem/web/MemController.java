@@ -53,7 +53,7 @@ public class MemController {
 		String m_id = (String) session.getAttribute("mId");
 		memDao.memberDelete(m_id);
 		session.invalidate();
-		return "redirect:home";
+		return  "redirect:home";
 		
 	}
 	
@@ -211,7 +211,7 @@ public class MemController {
 	  }
   
 	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
-	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
+	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember) {
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -237,7 +237,7 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(pmemDao.pmemberInsert1(pmember));
+		pmemDao.pmemberInsert1(pmember);
 		return "member/pjoinForm2";
 	}
 

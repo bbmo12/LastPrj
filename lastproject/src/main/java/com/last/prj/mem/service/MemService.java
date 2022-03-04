@@ -25,5 +25,5 @@ public interface MemService {
 	int memberUpdate(MemVO member);
 
 	//회원탈퇴버튼클릭
-	String memberDelete(@Param("m_id") String m_id);
+	int memberDelete(@Param("m_id") String m_id);
 }

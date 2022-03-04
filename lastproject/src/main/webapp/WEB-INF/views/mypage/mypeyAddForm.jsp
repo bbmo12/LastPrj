@@ -87,57 +87,88 @@
 									alt="">
 							</div>
 						</div>
-
+						<form action="mypatadd" method="post" enctype="multipart/form-data">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
 								<h5>
 									<strong>이름</strong>
 								</h5>
-								<input type="text" style="border: none" id="name" name="name"
-									value="${member.name}" readonly>
-							</div>
-
-							<div class="form-group">
-								<h5>
-									<strong>아이디</strong>
-								</h5>
-								<input type="email" style="border: none" id="m_id" name="m_id"
-									value="${member.m_id}" readonly>
+								<input type="text" id="name" name="name">
 							</div>
 							<div class="form-group">
 								<h5>
-									<strong>비밀번호</strong>
+									<strong>생년월일</strong>
 								</h5>
-								<input type="password" style="border: none" id="name"
-									name="password" value="${member.password}" readonly>
+								<input type="text" id="birth" name="birth">
 							</div>
 							<div class="form-group">
 								<h5>
-									<strong>전화번호</strong>
+									<strong>성별</strong>
 								</h5>
-								<input type="text" style="border: none" id="tel" name="tel"
-									value="${member.tel}" readonly>
+								<!-- 1이면 여자, 2이면 남자  -->
+								<label>여자<input type="radio" id="gender" name="gender"
+									value="1"><span class="checkmark"></span></label>&emsp; <label>남자<input
+									type="radio" id="gender" name="gender" value="2"><span
+									class="checkmark"></span></label>&emsp;
 							</div>
-
-							<button type="button" onclick="location.href='memberUpdateForm'"
-								class="genric-btn info radius">내정보 수정</button>
-
+							<div class="form-group">
+								<h5>
+									<strong>몸무게</strong>
+								</h5>
+								<input type="text" id="weight" name="weight">
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>품종</strong>
+								</h5>
+								<label>개<input type="radio" id="code" name="code"
+									value="501"><span class="checkmark"></span></label>&emsp; <label>고양이<input
+									type="radio" id="code" name="code" value="502"><span
+									class="checkmark"></span></label>&emsp; <label>조류<input
+									type="radio" id="code" name="code" value="503"><span
+									class="checkmark"></span></label>&emsp; <label>파충류<input
+									type="radio" id="code" name="code" value="504"><span
+									class="checkmark"></span></label>&emsp; <label>어류<input
+									type="radio" id="code" name="code" value="505"><span
+									class="checkmark"></span></label>&emsp; <label>토끼<input
+									type="radio" id="code" name="code" value="506"><span
+									class="checkmark"></span></label>&emsp; <label>돼지<input
+									type="radio" id="code" name="code" value="507"><span
+									class="checkmark"></span></label>&emsp; <label>햄스터<input
+									type="radio" id="code" name="code" value="508"><span
+									class="checkmark"></span></label>&emsp; <label>미어켓<input
+									type="radio" id="code" name="code" value="509"><span
+									class="checkmark"></span></label>&emsp; <label>여우<input
+									type="radio" id="code" name="code" value="510"><span
+									class="checkmark"></span></label>&emsp; <label>거미<input
+									type="radio" id="code" name="code" value="511"><span
+									class="checkmark"></span></label>&emsp;
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>반려동물사진</strong>
+								</h5>
+								<input type="file" id="file" name="file">
+							</div>
+							<div class="form-group">
+								<h5>
+									<strong>반려동물 설명</strong>
+								</h5>
+								<textarea class="form-control" id="n_content" name="n_content"
+									rows="4" cols="130">
+                        		</textarea>
+							</div>
+							<input type="hidden" name="m_id" id="m_id" value="${mId }">
+							<button type="submit" class="genric-btn info radius">반려동물
+								등록</button>
 						</div>
-
-						<div class="col-lg-12">
-							<div class="quotes">MCSE boot camps have its supporters and
-								its detractors. Some people do not understand why you should
-								have to spend money on boot camp when you can get the MCSE study
-								materials yourself at a fraction of the camp price. However, who
-								has the willpower to actually sit through a self-imposed MCSE
-								training.</div>
-						</div>
+						</form>
 					</div>
 				</div>
 
 			</div>
 		</div>
 	</section>
-	
+
 </body>
 </html>
