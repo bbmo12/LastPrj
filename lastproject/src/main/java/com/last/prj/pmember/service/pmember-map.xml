@@ -15,6 +15,7 @@
 		<result column="p_info" property="p_info" />
 		<result column="w_d_address" property="w_d_address"/>
 		<result column="career" property="career"/>
+		<result column="rcom" property="rcom" />
         <result column="code" property="code" />
 		<result column="p_license" property="p_license"/>
 		<result column="p_image" property="p_image" />
@@ -132,18 +133,37 @@
 				<if test="pfile != null">PFILE = #{pfile} </if>		
 			</set>
 		WHERE P_ID = #{p_id}
+	</update> 
+	<!-- 수정시 otime 삭제후 insert -->
+	<delete id="deleteTime" parameterType="com.last.prj.pmember.service.TimeVO">
+	 	DELETE FROM O_TIME WHERE P_ID= #{p_id} AND W_DAY = #{w_day}
+	</delete>
+	<insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
+		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
+				SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
+		</selectKey>
+				INSERT INTO O_TIME(O_NO, P_ID, W_DAY, STARTTIME, ENDTIME)
+				VALUES(#{o_no}, #{p_id}, #{w_day}, #{starttime}, #{endtime})
+	</insert>
+		
+	<!-- 추천 -->
+	<update id="updateLike" parameterType="String">
+		UPDATE P_MEMBER SET RCOM = RCOM+1 WHERE P_ID = #{p_id}
 	</update>
 	
-	<update id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
-		UPDATE O_TIME
-			<set>
-				<if test="w_day != null">W_DAY = #{w_day}, </if>
-				<if test="starttime != null">STARTTIME = #{starttime}, </if>
-				<if test="endtime != null">ENDTIME = #{endtime} </if> 	
-			</set>
-		WHERE P_ID = #{p_id}
-	</update>
-
+	<!-- 추천베스트 순위 -->
+	<select id="bestLike" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+			FROM
+				( SELECT RCOM,P_ID,NAME,PICTURE
+					FROM P_MEMBER
+				GROUP BY RCOM,P_ID,NAME,PICTURE
+				HAVING RCOM IS NOT NULL
+				ORDER BY RCOM DESC
+				)
+		WHERE ROWNUM<![CDATA[<=4]]>     
+	</select>
+	
 	<!-- 관리자 -->
 	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
 		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel, p.picture

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.last.prj.pmember.service.Criteria;
@@ -88,8 +89,7 @@ public class PmemberController {
 		
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
-		
-		
+			
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
@@ -109,11 +109,22 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-
+		pMemberDao.deleteTime(time);
 		pMemberDao.pmemberTime(time);
 		pMemberDao.pmemberUpdate(pmember);
-		model.addAttribute("pmember", pMemberDao.getMember(p_id));
 		return "redirect:/pmemberMyPage";
+	}
+	
+	@RequestMapping("pmemberLike")//추천수
+	@ResponseBody
+	public void pmemberLike(@RequestParam("p_id")String p_id, PmemberVO pmember) {
+		pMemberDao.updateLike(p_id);
+	}
+	@RequestMapping("pmemberBest")//베스트순위출력
+	public String pmemberBest(PmemberVO pmember, Model model) {
+		System.out.println("나와아라라"+pmember);
+		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
+		return "pmember/memberMain";
 	}
 
 }

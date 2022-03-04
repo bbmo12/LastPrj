@@ -97,7 +97,7 @@ function onMessage(evt){
 					<ul class="nav-menu">
 						<li><a href="bTables">공지사항</a></li>
 						<li><a href="qnaMain">Open Q&A</a></li>
-						<li class="menu-has-children"><a href="memberMain">파트너회원</a>
+						<li class="menu-has-children"><a href="pmemberBest">파트너회원</a>
 							<ul>
 								<li><a href="pmemberList?code=100">수의사</a></li>
 								<li><a href="pmemberList?code=101">훈련사</a></li>
