@@ -12,6 +12,7 @@ import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
+import com.last.prj.pmember.service.TimeVOList;
 
 @Repository("pMemberDao")
 public class PmemberServiceImpl implements PmemberService{

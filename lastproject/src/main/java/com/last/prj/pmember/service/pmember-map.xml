@@ -138,6 +138,7 @@
 	<delete id="deleteTime" parameterType="com.last.prj.pmember.service.TimeVO">
 	 	DELETE FROM O_TIME WHERE P_ID= #{p_id} AND W_DAY = #{w_day}
 	</delete>
+	
 	<insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
 		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
 				SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
@@ -151,17 +152,6 @@
 		UPDATE P_MEMBER SET RCOM = RCOM+1 WHERE P_ID = #{p_id}
 	</update>
 	
-
-	<update id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
-		UPDATE O_TIME
-			<set>
-				<if test="w_day != null">W_DAY = #{w_day}, </if>
-				<if test="starttime != null">STARTTIME = #{starttime}, </if>
-				<if test="endtime != null">ENDTIME = #{endtime} </if> 	
-			</set>
-		WHERE P_ID = #{p_id}
-	</update>
-	
 	<!-- 아이디로 정보 조회 -->
 	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
@@ -173,9 +163,9 @@
 	<select id="bestLike" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
 			FROM
-				( SELECT RCOM,P_ID,NAME,PICTURE
+				( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
 					FROM P_MEMBER
-				GROUP BY RCOM,P_ID,NAME,PICTURE
+				GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
 				HAVING RCOM IS NOT NULL
 				ORDER BY RCOM DESC
 				)
