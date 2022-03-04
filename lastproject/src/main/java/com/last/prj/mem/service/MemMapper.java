@@ -17,5 +17,5 @@ public interface MemMapper {
 	
 	int memberUpdate(MemVO member);
 	
-	int memberDelete(MemVO member);
+	String memberDelete(MemVO member);
 }

@@ -39,12 +39,23 @@ public class MemController {
 
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("mdeleteForm")
-	public String mdelete(HttpServletRequest request) {
+	public String mdeleteForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
-		return "mypage/mdelete";
+		return "mypage/mdeleteForm";
 	}
 	
+	
+	//일반회원 회원탈퇴
+	@RequestMapping("mdelete")
+	public String mdelete(HttpServletRequest request, MemVO member) {
+		HttpSession session = request.getSession();
+		
+		memDao.memberDelete(member);
+		session.invalidate();
+		return "home/home";
+		
+	}
 	
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")

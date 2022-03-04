@@ -60,7 +60,7 @@
 	</update>
 
 
-	<update id="memberDelete" parameterType="com.last.prj.mem.service.MemVO">
+	<update id="memberDelete" parameterType="String" >
 		UPDATE MEMBER
 		<set>
 		PASSWORD = NULL, NAME = NULL, TEL=NULL, STARTDATE=NULL,
