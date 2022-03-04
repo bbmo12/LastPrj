@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.PmemberService;
@@ -166,15 +167,19 @@ public class QnaController {
 		return "redirect:/qnaMain";
 	}
 
-	// 질문 수정 폼으로 이동 + 기존 글 내용 + 멤버별 펫 정보 받아감.
+	// 질문 수정 폼으로 이동 + 기존 글 내용 + 기존 태그 + 멤버별 펫 정보 받아감.
 	@RequestMapping(value = "/qModiForm")
 	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, HttpSession session,
 			Model model) throws Exception {
-
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		QnaVO vo = qnaDAO.qnaDetail(q_no);
+		
 		String mId = (String) session.getAttribute("mId");
 
 		model.addAttribute("petList", petDAO.petmemberList(m_id));
-		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
+		model.addAttribute("qnaDetail", vo);
+		model.addAttribute("prevTag", objectMapper.writeValueAsString(vo.getTagList())); //태그리스트를 json으로 변환해 view로 전달한다.
 		return "qna/qModiForm";
 	}
 

@@ -143,7 +143,8 @@ ul li.tag-item {
 					<!-- 기존 태그 -->
 					<ul id="tag-list">
 						<c:forEach items="${qnaDetail.tagList }" var="hash">
-							<li><span>${hash.t_name }</span><span class='del-btn' idx=''>&nbsp;x</span></li>
+							<%-- <li><span>${hash.t_name }</span><span class='del-btn' idx=''>&nbsp;x</span></li> --%>
+
 						</c:forEach>
 					</ul>
 				</div>
@@ -173,6 +174,26 @@ ul li.tag-item {
 
 							var tag = {};
 							var counter = 0;
+							
+							//json 값으로 변환된 기존 태그를 가져온다
+							var list = ${prevTag};
+
+							//태그 등록
+							for (i = 0; i < list.length; i++) {
+								console.log(list[i].t_name);
+								
+								var tagValue = list[i].t_name;
+								counter = i;
+								
+								$("#tag-list")
+										.append(
+												"<li class='tag-item'>"
+														+ "<span>"
+														+ tagValue
+														+ "</span>"
+														+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
+								addTag(tagValue);
+							}
 
 							// 태그를 추가한다.
 							function addTag(value) {
@@ -196,8 +217,7 @@ ul li.tag-item {
 												console.log("keypress");
 
 												// input 에 focus -> 엔터 및 스페이스바 입력시 구동
-												if (e.key === "Enter"
-														|| e.keyCode == 32) {
+												if (e.keyCode == 32) {
 
 													var tagValue = self.val(); // 값 가져오기
 
