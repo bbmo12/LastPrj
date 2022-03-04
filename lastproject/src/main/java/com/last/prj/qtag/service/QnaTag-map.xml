@@ -15,14 +15,6 @@
 		WHERE
 		q_no=#{q_no}
 	</delete>
-	
-	<!-- 새로운 태그와 글 번호 연결 -->
-	<insert id="newQtag" parameterType="com.last.prj.qtag.service.QnaTagVO">
-		<foreach collection="nTags" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
-		INSERT INTO qnatag
-		values(q_seq.currval, #{item.t_name})
-		</foreach>
-	</insert>
 
 
 </mapper>

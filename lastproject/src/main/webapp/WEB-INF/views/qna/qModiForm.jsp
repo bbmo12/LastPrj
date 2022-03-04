@@ -66,6 +66,15 @@ ul li.tag-item {
 }
 }
 </style>
+<script>
+	var ckeditor_config = {
+		resize_enaleb : false,
+		enterMode : CKEDITOR.ENTER_BR,
+		shiftEnterMode : CKEDITOR.ENTER_P,
+		height : '500px',
+		filebrowserUploadUrl : "imageUpload"
+	};
+</script>
 </head>
 
 <body>
@@ -80,14 +89,16 @@ ul li.tag-item {
 			</div>
 		</div>
 	</section>
-	
+
 	<!-- modify form starts -->
 	<article>
 		<div class="container" role="main">
-			<h2>새로운 질문 작성하기</h2>
+			<h2>질문글 수정하기</h2>
 			<form name="qmForm" id="qmForm" action="qModify" method="post"
 				onsubmit="tagInput();">
 
+				<input type="hidden" name="q_no" id="q_no"
+					value="${qnaDetail.q_no }">
 
 				<div class="mb-3">
 					<label for="title">제목</label> <input type="text"
@@ -128,10 +139,13 @@ ul li.tag-item {
 							style="margin-left: 20px; width: 1100px;"
 							placeholder="스페이스 키로 태그를 등록하세요" />
 					</div>
-					
+
 					<!-- 기존 태그 -->
 					<ul id="tag-list">
-						
+						<c:forEach items="${qnaDetail.tagList }" var="hash">
+							<%-- <li><span>${hash.t_name }</span><span class='del-btn' idx=''>&nbsp;x</span></li> --%>
+
+						</c:forEach>
 					</ul>
 				</div>
 
@@ -146,10 +160,12 @@ ul li.tag-item {
 	</article>
 
 	<script>
-		/*form 전송
-		$(document).on('click', '#qSubmit', function(e) {
-			$("#qForm").submit();
-		});*/
+		var pet = "${qnaDetail.pet_no}";
+		console.log(pet);
+
+		/*라디오 버튼 기존 선택값 가져오기*/
+		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked",
+				true);
 
 		/*태그 처리*/
 		$(document)
@@ -158,6 +174,26 @@ ul li.tag-item {
 
 							var tag = {};
 							var counter = 0;
+							
+							//json 값으로 변환된 기존 태그를 가져온다
+							var list = ${prevTag};
+
+							//태그 등록
+							for (i = 0; i < list.length; i++) {
+								console.log(list[i].t_name);
+								
+								var tagValue = list[i].t_name;
+								counter = i;
+								
+								$("#tag-list")
+										.append(
+												"<li class='tag-item'>"
+														+ "<span>"
+														+ tagValue
+														+ "</span>"
+														+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
+								addTag(tagValue);
+							}
 
 							// 태그를 추가한다.
 							function addTag(value) {
@@ -181,8 +217,7 @@ ul li.tag-item {
 												console.log("keypress");
 
 												// input 에 focus -> 엔터 및 스페이스바 입력시 구동
-												if (e.key === "Enter"
-														|| e.keyCode == 32) {
+												if (e.keyCode == 32) {
 
 													var tagValue = self.val(); // 값 가져오기
 
