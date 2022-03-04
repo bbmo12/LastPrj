@@ -37,20 +37,26 @@
 
  <div id="menu">
       <span id="menu-navi">
-        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
         <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
           <i class="calendar-icon ic-arrow-line-left" data-action="move-prev">이전</i>
         </button>
+        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+          <span id="renderRange" class="render-range"></span>
         <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
           <i class="calendar-icon ic-arrow-line-right" data-action="move-next">다음</i>
         </button>
       </span>
-      <span id="renderRange" class="render-range"></span>
+    
     </div>
 
-    <div id="calendar" style ="width: 40%"></div>
-    
-<table class="table" style ="width: 40%"></table>
+    <div id="calendar" style ="width: 40%; display: inline-block;"></div>
+    <div style="width: 20px; height: 600px; display: inline-block;" ></div>
+  
+  <div id="tableDiv" style ="width: 40%; height : 600px; display: inline-block;">  
+	<table class="table" >
+	</table>
+</div>
+
 
 	
 					<!-- Modal -->
@@ -68,27 +74,37 @@
 			</div>
 			<!-- modal 몸통 -->
 			<div class="modal-body">
+				<form>
 				 <span id="dvalue">  <input type ="hidden" id="date_value" ></span> <br>
 				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
 				 <span> 증상   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
 	 	   		 <select class="animalType">
 					 <option value="" disabled selected>품종선택</option>
-					 <option value="501">개</option>
-					 <option value="502">고양이</option>
+					 <c:forEach items="${petList }" var="pet">
+					 	<!-- 중복 값 제거를 어떻게 하지? -->
+					 	<c:if test="${pet.code eq 501  }">
+					 		<option value = "401" >개</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 502 }">
+					 		<option value = "401" >고양이</option>
+					 	</c:if>
+					 </c:forEach>
 		   		 </select>
+		   		 
 		   		 <select class="animalNo">
 		   		 	<option value="" disabled selected>펫 번호(이름)</option>
 					 <c:forEach items="${petList}" var="pet">
 		   		 			<option value="${pet.pet_no }"> ${pet.pet_no }(${pet.name })</option>
 		   		 	   </c:forEach>
 		   		 </select>
+		   		 </form>
 			</div>
 			<!-- modal 하단 버튼 -->
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary"
 					data-dismiss="modal">취소</button>
 				<button id="sendReserv" name="sendReserv" type="button"
-					class="btn btn-primary">예약하기</button>
+					class="btn btn-primary" data-dismiss="modal">예약하기</button>
 			</div>
 		</div>
 	</div>
@@ -100,6 +116,9 @@
 
 $(document).ready(function(){
 	
+	let today = new Date();
+	var day = today.toLocaleDateString().substr(0,7);
+	$("#renderRange").text(day);
 	revList();
 	
 	
@@ -202,6 +221,8 @@ $(document).ready(function(){
 			}
 		});
 	}
+	
+
 	//일정 클릭 후 해당예약일자 테이블 표출
 	calendar.on('clickSchedule', function(event) {
 		var id = event.schedule.id;
@@ -214,25 +235,36 @@ $(document).ready(function(){
 				p_id = res[0].p_id;
 				console.log(p_id);
 				$(".table").empty();
-				//종료일 - 시작일 +1 로 반복횟수 설정
-				var i,$thead,$tbody;
+				var i=0;
+				var $thead,$tbody,tdval;
 				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
-				var split = res[0].c_end.split('-');
-				console.log(parseInt(split[0]+split[1]+split[2]));
-				
-				for( i =0; i<len;i++){
-					$thead = `
-						<thead>
-							<tr>
-								<th>예약가능일자</th>
-								<th>예약시간</th>
-								<th>예약가능여부</th>
-							</tr>
-						</thead>`
-					$tbody =` 
-						<tbody>
-								<tr>
-									<td>`+split[0]+'-'+split[1]+'-'+(parseInt(split[2])+i)+`</td>
+				var split = res[0].c_start.split('-');
+
+				var sp2 = split[2]
+				var ab = String(parseInt(split[2]));
+				//종료일 - 시작일 +1 로 반복횟수 설정
+				for( i; i<len;i++){
+		               var ex = ((parseInt(sp2))+i);
+		               console.log(ex);
+		               if(ex.toString().length == 1){
+		                  console.log(ex.toString().length);
+		                  tdval = split[0]+'-'+split[1]+'-0';
+		               }else{
+		                  console.log(ex.toString().length);
+		                  tdval = split[0]+'-'+split[1]+'-';
+		               }
+		               $thead = `
+		                  <thead>
+		                     <tr>
+		                        <th>예약가능일자</th>
+		                        <th>예약시간</th>
+		                        <th>예약가능여부</th>
+		                     </tr>
+		                  </thead>`;
+		               $tbody =` 
+		                  <tbody>
+		                        <tr>
+		                           <td class="tdvalCheck">`+tdval+ex+`</td>
 										<td><select class="selectTime" name="예약시간" onchange="changeSelection(event)">
 												<option value="">예약시간</option>
 												<option value="09시">09:00~10:00</option>
@@ -252,16 +284,22 @@ $(document).ready(function(){
 				$(".table").append($thead);
 			}//ajax success 부분
 		})
+	});
+ 	 //달력 다음버튼 클릭 이벤트
+	$(".ic-arrow-line-left").on('click',function(event){
+		calendar.prev(); 
 		
 	});
- 
-	$(".ic-arrow-line-left").on('click',function(event){
-		calendar.prev();
-	});
+ 	//달력 이전버튼 클릭 이벤트
 	$(".ic-arrow-line-right").on('click',function(event){
 		calendar.next();
 	});
+ 	//달력 Today 클릭 이벤트
+ 	$(".move-today").on('click',function(event){
+ 		calendar.today();
+ 	})
 });
+
 //옵션값 설정 후 예약가능/불가 출력
 function changeSelection(event){
 	//var reserv_date = $(".selectTime").parent().prev().text();
@@ -278,7 +316,7 @@ function changeSelection(event){
 		success : function(res){
 			//console.log(event.target);
 			if(res.reserv_date != null && res.reserv_time != null){
-				$(".selectTime").parent().next().text('예약불가');
+				$(event.target).parent().next().text('예약불가');
 			}else{
 				console.log(event.target);
 				$(".selectTime").parent().next().text('');
@@ -298,8 +336,18 @@ $("#sendReserv").on('click',function(){
 	var r_content = $("#r_content").val();
 	//모달창 품종코드
 	var animalType = $(".animalType option:selected").val();
-	//펫 번호
-	var animalNo = $(".animalNo option:selected").val();
+	
+	//펫번호
+	var pet_no = $(".animalNo option:selected").val();
+	
+	//파트너회원 아이디 세션값
+	p_id = '${pmember.p_id}';
+	if (p_id == '' ){
+		p_id = 'kim1@a.com';
+	}
+	//파트너회원 해당코드
+	var code = ${pmember.code};
+	
 	
 	$.ajax({
 		url : 'reservinsert',
@@ -308,12 +356,26 @@ $("#sendReserv").on('click',function(){
 				"time" : time_value,
 				"rcontent" : r_content,
 				"r_code" : animalType,
-				"r_no" : animalNo},
+				"pet_no" : pet_no,
+				"p_id" : p_id,
+				"code" : code},
 		success : function(res){
 			console.log(res);
+			alert("예약신청이 완료되었습니다.");
+			$(".table").empty();
+			
+		},
+		error : function(){
+			alert("ajax 에러");
 		}
 	})
 })
+$('#exampleModal').on('hidden.bs.modal', function(e) {
+         $(this).find('form')[0].reset();
+         
+})
+
+ 
  </script>
 
 

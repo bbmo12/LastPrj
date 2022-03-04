@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -17,7 +16,6 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
 	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
 	crossorigin="anonymous">
-</head>
 
 <!-- ckeditor -->
 <script src="resources/ckeditor/ckeditor.js"></script>
@@ -67,6 +65,17 @@ ul li.tag-item {
 }
 }
 </style>
+<script>
+	var ckeditor_config = {
+		resize_enaleb : false,
+		enterMode : CKEDITOR.ENTER_BR,
+		shiftEnterMode : CKEDITOR.ENTER_P,
+		height : '500px',
+		filebrowserUploadUrl : "imageUpload"
+	};
+</script>
+</head>
+
 <body>
 	<!-- header area -->
 	<section class="banner-area other-page">
@@ -84,7 +93,8 @@ ul li.tag-item {
 	<article>
 		<div class="container" role="main">
 			<h2>새로운 질문 작성하기</h2>
-			<form name="qForm" id="qForm" action="qForm" method="post" onsubmit="tagInput();">
+			<form name="qForm" id="qForm" action="qForm" method="post"
+				onsubmit="tagInput();">
 
 				<input type="hidden" id="writer" name="writer" value="writer"
 					value="${mId }">
@@ -92,7 +102,7 @@ ul li.tag-item {
 				<div class="mb-3">
 					<label for="title">제목</label> <input type="text"
 						class="form-control" name="title" id="title"
-						placeholder="제목을 입력해 주세요">
+						placeholder="제목을 입력해 주세요" required>
 				</div>
 
 				<div class="form-check">
@@ -103,10 +113,10 @@ ul li.tag-item {
 					<input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
 					<label>없음/비공개</label>
 
-
 					<c:forEach items="${petList }" var="pet">
 						<div class="radioImg">
-							<img class="petSelection" src="resources/qna/${pet.picture }" onError="this.src='resources/qna/대체이미지2.png'">
+							<img class="petSelection" src="resources/qna/${pet.picture }"
+								onError="this.src='resources/qna/대체이미지2.png'">
 						</div>
 						<input type="radio" id="pet_no" name="pet_no"
 							value="${pet.pet_no}">&nbsp;${pet.name }
@@ -114,12 +124,9 @@ ul li.tag-item {
 				</div>
 
 				<div class="mb-3">
-					<textarea class="ckeditor4" id="content" name="content"></textarea>
+					<textarea class="ckeditor4" id="content" name="content" required></textarea>
 					<script>
-						CKEDITOR.replace('content', {
-							height : '500px',
-							filebrowserUploadUrl : '/imageUpload'
-						});
+						CKEDITOR.replace('content', ckeditor_config);
 					</script>
 				</div>
 
@@ -132,7 +139,6 @@ ul li.tag-item {
 					</div>
 
 					<ul id="tag-list">
-
 					</ul>
 				</div>
 
@@ -204,7 +210,9 @@ ul li.tag-item {
 															$("#tag-list")
 																	.append(
 																			"<li class='tag-item'>"
-																					+ "<span>" + tagValue + "</span>"
+																					+ "<span>"
+																					+ tagValue
+																					+ "</span>"
 																					+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
 															addTag(tagValue);
 															self.val("");
@@ -227,12 +235,13 @@ ul li.tag-item {
 
 		/*li 태그를 input 태그로 바꿔 넘기기 용이하게...*/
 		function tagInput() {
-				var tValue = document.querySelectorAll("li.tag-item span:first-child");
-				
-				for(var i = 0; i<tValue.length; i++){
-					var tags = 	`<input type="hidden" name="nTags[\${i}].t_name" value="\${tValue[i].innerHTML}">`;
-					$('#qForm').append(tags);
-				}
+			var tValue = document
+					.querySelectorAll("li.tag-item span:first-child");
+
+			for (var i = 0; i < tValue.length; i++) {
+				var tags = `<input type="hidden" name="nTags[\${i}].t_name" value="\${tValue[i].innerHTML}">`;
+				$('#qForm').append(tags);
+			}
 		}
 	</script>
 </body>

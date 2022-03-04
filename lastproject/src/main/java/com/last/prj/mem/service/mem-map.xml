@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.mem.service.MemMapper">
-	
+
 	<!-- 일반회원 상세조회 -->
-	<select id="memberSearch" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
-	SELECT * FROM MEMBER
-	WHERE M_ID = #{m_id}
+	<select id="memberSearch" parameterType="String"
+		resultType="com.last.prj.mem.service.MemVO">
+		SELECT * FROM MEMBER
+		WHERE M_ID = #{m_id}
 	</select>
-	
+
 	<!-- 일반회원 로그인 -->
-	<select id="memberSelect" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+	<select id="memberSelect"
+		parameterType="com.last.prj.mem.service.MemVO"
+		resultType="com.last.prj.mem.service.MemVO">
 		select * from member
-		where m_id = #{m_id} 
+		where m_id = #{m_id}
 		<if test="password != null">
 			and password = #{password}
 		</if>
 	</select>
-	
+
 	<!-- 일반회원 아이디 찾기 -->
-	<select id="memberIdSearch" parameterType="String" resultType="String">
+	<select id="memberIdSearch" parameterType="String"
+		resultType="String">
 		select * from member
 		where name = #{name}
 		<if test="tel != null">
@@ -26,30 +30,43 @@
 		</if>
 
 	</select>
-	
+
 	<!-- 아이디로 일반회원 정보 조회 -->
-	<select id="memberOne" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
+	<select id="memberOne" parameterType="String"
+		resultType="com.last.prj.mem.service.MemVO">
 		select * from member
 		where m_id = #{m_id}
 	</select>
-	
+
 	<!-- 일반회원 회원가입 -->
-	<insert id="memberInsert" parameterType="com.last.prj.mem.service.MemVO">
-	INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE, PFILE)
-	VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture}, #{pfile})
+	<insert id="memberInsert"
+		parameterType="com.last.prj.mem.service.MemVO">
+		INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE, PFILE)
+		VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture}, #{pfile})
 	</insert>
-	
-	<!-- 일반회원 정보수정  -->
-	<update id="memberUpdate" parameterType="com.last.prj.mem.service.MemVO">
+
+	<!-- 일반회원 정보수정 -->
+	<update id="memberUpdate"
+		parameterType="com.last.prj.mem.service.MemVO">
 		update member
-			<set>
-				<if test="name != null">name = #{name}, </if>
-				<if test="password != null">password = #{password}, </if>
-				<if test="tel != null">tel = #{tel}, </if>
-				<if test="picture != null">picture = #{picture}, </if>
-				<if test="pfile != null">pfile = #{pfile}, </if>
-			</set>
-			where m_id = #{m_id}
+		<set>
+			<if test="name != null">name = #{name}, </if>
+			<if test="password != null">password = #{password}, </if>
+			<if test="tel != null">tel = #{tel}, </if>
+			<if test="picture != null">picture = #{picture}, </if>
+			<if test="pfile != null">pfile = #{pfile}, </if>
+		</set>
+		where m_id = #{m_id}
 	</update>
-	
+
+
+	<update id="memberDelete" parameterType="String" >
+		UPDATE MEMBER
+		<set>
+		PASSWORD = NULL, NAME = NULL, TEL=NULL, STARTDATE=NULL,
+		ENDDATE=SYSDATE, PICTURE=NULL, PFILE=NULL
+		</set>
+		WHERE M_ID = #{m_id}
+	</update>
+
 </mapper>

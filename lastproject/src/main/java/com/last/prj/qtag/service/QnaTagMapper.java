@@ -6,4 +6,5 @@ public interface QnaTagMapper {
 	// 질문글별 태그 목록
 	List<QnaTagVO> qtList();
 
+	int delTags(int q_no);
 }

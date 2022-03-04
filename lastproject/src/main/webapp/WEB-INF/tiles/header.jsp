@@ -91,13 +91,13 @@ function onMessage(evt){
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="home"><img src="resources/upload/pet.PNG" alt="" title=""style="width: 150px; height: 70px;"/></a>
+					<a href="home"><img src="resources/upload/ban.png" alt="" title=""style="width: 150px; height: 70px;"/></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
 						<li><a href="bTables">공지사항</a></li>
 						<li><a href="qnaMain">Open Q&A</a></li>
-						<li class="menu-has-children"><a href="memberMain">파트너회원</a>
+						<li class="menu-has-children"><a href="pmemberBest">파트너회원</a>
 							<ul>
 								<li><a href="pmemberList?code=100">수의사</a></li>
 								<li><a href="pmemberList?code=101">훈련사</a></li>
@@ -131,13 +131,14 @@ function onMessage(evt){
 								<ul>
 									<li><a href="memberMypage">내 프로필</a></li>
 									<li><a href="petmemberForm">반려동물 프로필</a></li>
+									<li><a href="protocol">반려동물 진료기록</a></li>
 									<li><a href="reservationSelect">예약 내역</a></li>
 									<li><a href="myPay">결제 내역</a></li>
 									<li><a href="mycounsel">상담 내역</a></li>
-									<li><a href="#">신고 내역</a></li>
-									<li><a href="#">회원탈퇴</a></li>
+									<li><a href="myreport">신고 내역</a></li>
+									<li><a href="myfallow">팔로우</a></li>
 									<li><a href="logout">로그아웃</a></li>
-
+									<li><a href="mdeleteForm">회원탈퇴</a></li>
 								</ul>
 							</li>
 							<li class="nav-item dropdown">

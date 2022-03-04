@@ -4,9 +4,12 @@
 
 	<!-- qna 신고 접수 -->
 	<insert id="newQnaReport"
-		parameterType="com.last.prj.report.service.ReportVO"> 		
-		INSERT INTO REPORT (rep_no, reporter, w_date, content, q_no, reported, code)
-		VALUES (r_seq.nextval, #{reporter}, sysdate, #{content}, #{q_no}, #{reported}, #{code})
+		parameterType="com.last.prj.report.service.ReportVO">
+		INSERT INTO REPORT (rep_no, reporter, w_date, content,
+		q_no, reported, code)
+		VALUES (r_seq.nextval, #{reporter}, sysdate,
+		#{content}, #{q_no},
+		#{reported}, #{code})
 	</insert>
 
 
@@ -18,13 +21,16 @@
 
 
 	<!-- 신고전체 리스트 -->
-	<select id="reportList" resultType="com.last.prj.report.service.ReportVO">
-		SELECT R.REP_NO, R.REPORTER,R.REPORTED, R.W_DATE, R.CONTENT, F.CONTENT AS F_CONTENT, r.rev_no, r.q_no
-			FROM REPORT R, F_CODE F
-			WHERE R.CODE = F.CODE
-			ORDER BY R.REP_NO
+	<select id="reportList"
+		resultType="com.last.prj.report.service.ReportVO">
+		SELECT R.REP_NO, R.REPORTER,R.REPORTED, R.W_DATE,
+		R.CONTENT, F.CONTENT AS F_CONTENT, r.rev_no, r.q_no
+		FROM REPORT R,
+		F_CODE F
+		WHERE R.CODE = F.CODE
+		ORDER BY R.REP_NO
 	</select>
-	
+
 	<!-- 신고 전체 건수 -->
 	<select id="reportCount" resultType="int">
 		SELECT COUNT(*) FROM REPORT
@@ -47,13 +53,22 @@
 	
 
 	<!-- 신고 유형에 따른 신고 및 건수 -->
-	<select id="reportPartCount" parameterType="int" resultType="com.last.prj.report.service.ReportVO">
-		SELECT R.CODE AS CODE, F.CONTENT AS CONTENT, COUNT(F.CODE) AS COUNT
+	<select id="reportPartCount" parameterType="int"
+		resultType="com.last.prj.report.service.ReportVO">
+		SELECT R.CODE AS CODE, F.CONTENT AS CONTENT, COUNT(F.CODE)
+		AS COUNT
 		FROM F_CODE F, REPORT R
 		WHERE R.CODE=F.CODE AND F.CODE = {code}
-		GROUP BY F.CODE,F.CONTENT,R.CODE 
+		GROUP BY F.CODE,F.CONTENT,R.CODE
 
 	</select>
 
+	<!-- 일반회원 신고내역 전체조회 -->
+	<select id="myReportList" parameterType="String"
+		resultType="com.last.prj.report.service.ReportVO">
+		SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, C.CONTENT AS f_content
+		FROM REPORT R, F_CODE C, P_MEMBER P
+		WHERE R.CODE=C.CODE AND R.REPORTED=P.P_ID AND REPORTER = #{m_id}
+	</select>
 
 </mapper>

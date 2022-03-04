@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ReservationMapper {
 	List<ReservationVO> reservationSelectList();
 	
-	List<ReservationVO> reservationSelect ();
+	List<ReservationVO> reservationSelect (ReservationVO vo);
 	
 	//예약승인
 	int okUpdate(int res);
@@ -20,5 +20,7 @@ public interface ReservationMapper {
 	
 	//결제하기
 	int payUpdate(int res);
+	
+	
 	
 }

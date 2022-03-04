@@ -1,7 +1,6 @@
 package com.last.prj.pmember.web;
 
 import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -81,13 +80,16 @@ public class PmemberController {
 		return "pmember/pmemberUpdateForm";
 	}
 	//마이페이지 수정 
-	@RequestMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, @RequestParam("p_id") String p_id, PmemberVO pmember, TimeVO time , Model model) {
+	@PostMapping("pmemberUpdate")
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time , Model model, HttpServletRequest request) {
 
 		String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
 		
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+			
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
@@ -107,9 +109,22 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute(pMemberDao.pmemberTime(time));
-		model.addAttribute(pMemberDao.pmemberUpdate(pmember));
-		return "redirect:/pmemberMypage";
+		pMemberDao.deleteTime(time);
+		pMemberDao.pmemberTime(time);
+		pMemberDao.pmemberUpdate(pmember);
+		return "redirect:/pmemberMyPage";
+	}
+	
+	@RequestMapping("pmemberLike")//추천수
+	@ResponseBody
+	public void pmemberLike(@RequestParam("p_id")String p_id, PmemberVO pmember) {
+		pMemberDao.updateLike(p_id);
+	}
+	@RequestMapping("pmemberBest")//베스트순위출력
+	public String pmemberBest(PmemberVO pmember, Model model) {
+		System.out.println("나와아라라"+pmember);
+		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
+		return "pmember/memberMain";
 	}
 
 }

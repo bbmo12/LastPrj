@@ -173,8 +173,8 @@ $(document).ready(function(){
   var start = new Date(schedule.start._date.getTime() - (schedule.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
   var strStart = start.slice(0,10);
   console.log(start);
-  
-  
+  var flag = confirm("등록하시겠습니까?");
+  if(flag == true){
 	$.ajax({
 		url : "revsetinsert",
 		method : "POST",
@@ -196,6 +196,10 @@ $(document).ready(function(){
 			alert('해당 예약일정을 등록하셨습니다.');
 		}
 	})
+  }else{
+	  alert("취소되었습니다.");
+  }
+  
 });
  //일정 수정이벤트
  calendar.on('beforeUpdateSchedule', function(event) {

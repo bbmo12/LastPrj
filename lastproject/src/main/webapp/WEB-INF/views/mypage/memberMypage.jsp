@@ -131,27 +131,6 @@
 								materials yourself at a fraction of the camp price. However, who
 								has the willpower to actually sit through a self-imposed MCSE
 								training.</div>
-							<div class="row">
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br> <br> <br> <br> <br> <br>
-								<br> <br>
-								<div class="col-lg-12 my-4">
-									<h1 align="center">파일 업로드 하기</h1>
-									<h3>multi file 업로드</h3>
-									<form action="multiFile" method="post"
-										enctype="multipart/form-data">
-										파일 : <input type="file" name="multiFileList" multiple>
-										<button type="button" onclick="addFile()">+</button>
-										<br>
-										<div id="ffile"></div>
-										<input type="submit" value="제출">
-									</form>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -159,15 +138,6 @@
 			</div>
 		</div>
 	</section>
-	<script>
-		function addFile() {
-			var input = $('<input>').attr({
-				'name' : 'multiFileList',
-				'type' : 'file'
-			});
-
-			$('#ffile').append(input);
-		}
-	</script>
+	
 </body>
 </html>

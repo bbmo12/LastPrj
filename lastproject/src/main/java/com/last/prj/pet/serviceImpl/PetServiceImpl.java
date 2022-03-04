@@ -31,6 +31,11 @@ public class PetServiceImpl implements PetService{
 		return map.petSearch(pet_no);
 	}
 
+	@Override
+	public int mypetInsert(PetVO pet) {
+		return map.mypetInsert(pet);
+	}
+
 
 
 }

@@ -83,19 +83,21 @@
 							<table class="table">
 							<thead>
 								<tr>
-									<th>반려동물</th>
-									<th>증상</th>
 									<th>파트너회원이름</th>
-									<th>금액</th>
+									<th>신고내용</th>
+									<th>신고일</th>
+									<th>분류</th>
+									<th>신고결과</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${pay }" var="pay">
+								<c:forEach items="${report }" var="report">
 									<tr>
-										<td>${pay.p_name }</td>
-										<td>${pay.content}</td>
-										<td>${pay.pm_name } </td>
-										<td>${pay.price }</td>
+										<td>${report.p_name }</td>
+										<td>${report.content}</td>
+										<td>${report.w_date } </td>
+										<td>${report.f_content }</td>
+										<td>${report.f_content }</td>
 									</tr>
 								</c:forEach>
 							</tbody>

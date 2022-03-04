@@ -40,6 +40,16 @@
 	  <if test =  "career != null"> career = #{career},</if> 
 	  <if test =  "speciality != null"> speciality = #{speciality} </if>
 	  </set>
-	where p_id = #{p_id};
+	where p_id = #{p_id}
+	</update>
+	
+	<!-- 파트너회원 회원가입 3차 -->
+	<update id="pmemberInsert3">
+	update p_member
+	 <set>
+	  <if test= "p_license != null">p_license = #{p_license},</if>
+	  <if test = "p_image != null">p_image = #{p_image}</if>
+	 </set>
+	where p_id = #{p_id}
 	</update>
 </mapper>

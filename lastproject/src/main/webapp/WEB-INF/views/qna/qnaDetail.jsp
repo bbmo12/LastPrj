@@ -182,7 +182,8 @@
 											<li>${qnaDetail.w_date }&nbsp;&nbsp;<i
 												class="fa fa-calendar-o"></i></li>
 											<li>${qnaDetail.hit }&nbsp;&nbsp;<i class="fa fa-eye"></i></li>
-											<li>06 Comments&nbsp;&nbsp;<i class="fa fa-comment-o"></i></li>
+											<li>${cnt }Comments&nbsp;&nbsp;<i
+												class="fa fa-comment-o"></i></li>
 										</ul>
 									</td>
 								</tr>
@@ -229,50 +230,71 @@
 								</div>
 							</div>
 
-							<!-- 펫 정보 공간 -->
-							<div class="petInfo">
-								<table style="color: black">
-									<tr>
-										<td rowspan="3"><img class="profile"
-											src="resources/upload/${petInfo.picture }"
-											onError="this.src='resources/qna/대체이미지2.png'"></td>
-										<td style="font-weight: bold;"><c:if
-												test="${petInfo.code ==501 }">
-												<c:out value="강아지" />
-											</c:if> <c:if test="${petInfo.code ==502 }">
-												<c:out value="고양이" />
-											</c:if> <c:if test="${petInfo.code ==503 }">
-												<c:out value="조류" />
-											</c:if> <c:if test="${petInfo.code ==504 }">
-												<c:out value="파충류" />
-											</c:if> <c:if test="${petInfo.code ==505 }">
-												<c:out value="어류" />
-											</c:if> <c:if test="${petInfo.code ==506 }">
-												<c:out value="토끼" />
-											</c:if> <c:if test="${petInfo.code ==507 }">
-												<c:out value="돼지" />
-											</c:if> <c:if test="${petInfo.code ==508 }">
-												<c:out value="햄스터" />
-											</c:if> <c:if test="${petInfo.code ==509 }">
-												<c:out value="미어캣" />
-											</c:if> <c:if test="${petInfo.code ==510 }">
-												<c:out value="여우" />
-											</c:if> <c:if test="${petInfo.code ==511 }">
-												<c:out value="거미" />
-											</c:if></td>
-									</tr>
-									<tr>
-										<td>이름 : ${petInfo.name }</td>
-									</tr>
-									<tr>
-										<td>몸무게 : ${petInfo.weight } kg</td>
-									</tr>
-								</table>
-							</div>
+							<c:if test="${qnaDetail.petvo.pet_no != null }">
+								<!-- 펫 정보 공간 -->
+								<div class="petInfo">
+									<table style="color: black">
+										<tr>
+											<td rowspan="3"><img class="profile"
+												src="resources/upload/${qnaDetail.petvo.picture }"
+												onError="this.src='resources/qna/대체이미지2.png'"></td>
+											<td style="font-weight: bold;"><c:if
+													test="${qnaDetail.petvo.code ==501 }">
+													<c:out value="강아지" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==502 }">
+													<c:out value="고양이" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==503 }">
+													<c:out value="조류" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==504 }">
+													<c:out value="파충류" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==505 }">
+													<c:out value="어류" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==506 }">
+													<c:out value="토끼" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==507 }">
+													<c:out value="돼지" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==508 }">
+													<c:out value="햄스터" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==509 }">
+													<c:out value="미어캣" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==510 }">
+													<c:out value="여우" />
+												</c:if> <c:if test="${qnaDetail.petvo.code ==511 }">
+													<c:out value="거미" />
+												</c:if></td>
+										</tr>
+										<tr>
+											<td>이름 : ${qnaDetail.petvo.name }</td>
+										</tr>
+										<tr>
+											<td>몸무게 : ${qnaDetail.petvo.weight } kg</td>
+										</tr>
+									</table>
+								</div>
+							</c:if>
 						</div>
 
+						<!-- 질문글 신고 trigger -->
+						<c:if test="${mId ne null}">
+							<c:if test="${mId ne qnaDetail.writer }">
+								<button type="button" class="btn btn-primary"
+									data-toggle="modal" data-target="#exampleModal">
+									<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
+								</button>
+							</c:if>
+						</c:if>
+
+						<!-- 세션 아이디와 글쓴이 일치할 때 수정, 삭제 가능 -->
+						<c:if test="${qnaDetail.title ne '[작성자에 의해 삭제된 게시물입니다.]'}">
+							<c:if test="${mId eq qnaDetail.writer }">
+								<a href="qModiForm?q_no=${qnaDetail.q_no }&m_id=${mId}"><button
+										type="button" id="qUpdateBtn" class="btn btn-primary">수정</button></a>
+								<button type="button" id="qDelBtn" class="btn btn-secondary"
+									onclick="qDelete(${qnaDetail.q_no });">삭제</button>
+							</c:if>
+						</c:if>
+
 						<!-- 질문글 신고 모달-->
-						<!-- button trigger modal -->
 
 						<!-- 신고 Modal -->
 						<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -330,10 +352,12 @@
 						<div>
 							<!--로그인 세션 있을 경우 답변 모달창-->
 							<!--modal trigger button-->
-							<c:if test="${mId ne null || pId ne null}">
-								<button type="button" id="ansBtn" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target=".bd-example-modal-lg">이
-									질문에 답변하기</button>
+							<c:if test="${ mId ne null || pId ne null}">
+								<c:if test="${mId ne qnaDetail.writer  }">
+									<button type="button" id="ansBtn"
+										class="btn btn-primary btn-lg" data-toggle="modal"
+										data-target=".bd-example-modal-lg">이 질문에 답변하기</button>
+								</c:if>
 							</c:if>
 
 							<!-- 답변 모달창 -->
@@ -477,9 +501,9 @@
 											<textarea class="form-control" rows="15" id="content"
 												name="content">${ans.content }</textarea>
 
-
-											<input type="hidden" id="q_no" name="q_no"
-												value="${ans.q_no }">
+											<input type="hidden" id="writer" name="writer"
+												value="${ans.writer }"> <input type="hidden"
+												id="q_no" name="q_no" value="${ans.q_no }">
 
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
@@ -497,23 +521,30 @@
 							<!-- 답변글 신고 모달-->
 							<!-- button trigger modal -->
 							<div class="reportAns" data-no="${ans.q_no }">
-								<c:if
-									test="${mId ne null || mId ne ans.writer || pId ne ans.writer}">
-									<div>
-										<button id="reportModal2" type="button"
-											class="btn btn-secondary btn-sm" data-toggle="modal"
-											data-target="#exampleModal2">
-											<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
-										</button>
-									</div>
-								</c:if>
+
+								<div>
+									<c:if test="${mId ne null}">
+										<c:if test="${mId ne ans.writer}">
+											<c:if test="${pId ne ans.writer}">
+												<button id="reportModal2" type="button"
+													class="btn btn-secondary btn-sm" data-toggle="modal"
+													data-target="#exampleModal2"
+													onclick="transferQno('${ans.q_no }','${ans.writer }');">
+													<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글
+													신고
+												</button>
+											</c:if>
+										</c:if>
+									</c:if>
+								</div>
+
 
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal2" tabindex="-1"
 									role="dialog" aria-labelledby="exampleModalLabel"
 									aria-hidden="true">
 									<div class="modal-dialog" role="document">
-										<div class="modal-content">
+										<div class="modal-content ArepModal">
 											<div class="modal-header">
 												<h3 class="modal-title" id="exampleModalLabel">
 													<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시물
@@ -523,6 +554,8 @@
 													aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
+												<input type="hidden" id="qNo"> <input type="hidden"
+													id="Awriter">
 											</div>
 											<div class="modal-body">
 
@@ -547,8 +580,7 @@
 												<button type="button" class="btn btn-secondary"
 													data-dismiss="modal">취소</button>
 												<button id="sendReport2" name="sendReport" type="button"
-													class="btn btn-primary" onclick="ansReport(${ans.q_no })">신고
-													접수</button>
+													class="btn btn-primary">신고 접수</button>
 											</div>
 										</div>
 									</div>
@@ -615,35 +647,81 @@
 			})
 		})
 		
-		/*답변글 신고 모달*/
-		function ansReport(info){
-			console.log(info);
-			var reported = $('#' + info).find('#Awriter').val();
-			var content = $('#' + info).find('#content').val();
-			var code = $('#' + info).find('#code option:selected').val();
+		/*질문 삭제 ajax*/
+		function qDelete(no){
 			
-			console.log(content);
-			console.log(code);
+			console.log(no);
 			
+			//댓글 갯수
+			var count = "${cnt}";
+			
+			if(confirm('정말 삭제하시겠습니까?')){
+				
+			if(count > 0){
 			$.ajax({
 				method : "POST",
-				url : "newQnaReport",
+				url : "qDeleteOne",
 				data : {
-					"reporter" : $('#reporter').val(),
-					"content" : content,
-					"q_no" : info,
-					"reported" : reported,
-					"code" : code
+					q_no : no
 				},
 				success : function(){
-					alert('신고 접수가 완료되었습니다.');
+					alert('삭제되었습니다.');
 					location.reload();
 				},
-				error : function() {
-					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
+				error : function(){
+					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.')
 				}
 			})
+			}
+			else {
+				$.ajax({
+					method : "POST",
+					url : "qDeleteTwo",
+					data : {
+						q_no : no
+					},
+					success : function(){
+						alert('삭제되었습니다.');
+						history.back();
+						location.reload();
+					},
+					error : function(){
+						alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.')
+					}
+				})
+			}
+		}	
+	 }
+		
+		/*답변글 신고 시 글 번호, 글쓴이 넘김*/
+		function transferQno(no, writer){
+			$('#qNo').val(no);
+			$('#Awriter').val(writer);
 		}
+
+		
+		/*답변글 신고 모달*/
+			$('#sendReport2').click(function() {
+				$.ajax({
+					method : "POST",
+					url : "newQnaReport",
+					data : {
+						"reporter" : $('#reporter').val(),
+						"content" : $('.ArepModal #content').val(),
+						"q_no" : $('#qNo').val(),
+						"reported" : $('#Awriter').val(),
+						"code" : $('.ArepModal #code option:selected').val()
+					},
+					success : function() {
+						alert('신고 접수가 완료되었습니다.');
+						location.reload();
+					},
+					error : function() {
+						alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');
+					}
+				})
+			})
+			
 			
 		/*답변글 작성 모달*/
 		$('#sendAns').click(function() {

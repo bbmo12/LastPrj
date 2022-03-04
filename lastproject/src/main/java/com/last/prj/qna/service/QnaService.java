@@ -36,14 +36,21 @@ public interface QnaService {
 	// 답글 갯수
 	int replyCnt(int q_no);
 
+	// 질문글 삭제(1)
+	int qDeleteOne(int q_no);
+
+	// 질문글 삭제(2)
+	int qDeleteTwo(int q_no);
+
 	// 질문글 수정
+	int qModify(QnaVO qna);
 
 	// 답변글 수정
 	int ansUpdate(QnaVO qna);
-	
+
 	// 답변글 삭제
 	int ansDelete(int q_no);
 
-	//질문글 전체 조회 (관리자)
+	// 질문글 전체 조회 (관리자)
 	List<QnaVO> admQnaList();
 }

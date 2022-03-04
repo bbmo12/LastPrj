@@ -27,6 +27,8 @@ public class QnaVO {
 	// Integer로 선언하면 null값을 넣을 수 있다.
 	private Integer pet_no;
 	private int r_check;
+	private String qpicture;
+	private String pfile;
 	private List<QnaTagVO> tagList;
 
 	// DB에 없음
@@ -46,5 +48,8 @@ public class QnaVO {
 	private String speciality; // 전문분야
 	private String picture; // 사진
 	private String code; //직업코드
+	
+	//pet vo
+	private PetVO petvo;
 
 }

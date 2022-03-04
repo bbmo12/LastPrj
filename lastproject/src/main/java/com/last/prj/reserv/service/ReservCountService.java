@@ -8,7 +8,7 @@ public interface ReservCountService {
 	
 	List<ReservCountVO> reservCountList();
 	
-	ReservCountVO reservCountSelect(@Param("reserv_date")String reserv_date,@Param("reserv_time")String reserv_time);
+	ReservCountVO reservCountSelect(ReservCountVO vo);
 	
 	int reservCountInsert(ReservCountVO no);
 	

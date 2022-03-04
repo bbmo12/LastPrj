@@ -29,7 +29,7 @@
 						<tr>
 							<td><input  class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
 							<td>${pres.r_date}</td>
-							<td>${pres.startdate } &nbsp; ${pres.time }시</td>
+							<td>${pres.startdate } &nbsp; ${pres.time }</td>
 							<td>${pres.m_id }</td>
 							<td>${pres.pcontent }
 							<td>${pres.rcontent }</td>
@@ -47,12 +47,12 @@
 				console.log(val[i]);
 				 val[i].classList.add("code");
 				$(".code").empty();
-			 	var check = $(".code").append(`<button onclick="ok()">승인</button> 
-						       				   <button onclick="no()">거절</button>`);
+			 	var check = $(".code").append(`<button onclick="ok(event)">승인</button> 
+						       				   <button onclick="no(event)">거절</button>`);
 			} 
 		}
-		function ok(){
-			var rno = $(".rno").val();
+		function ok(event){
+			var rno = $(event.target).parent().parent().children().first().text();
 			console.log(rno);
 			var flag = confirm("해당 예약신청을 승인하시겠습니까?");
 			if(flag == true){
@@ -73,8 +73,8 @@
 				alert("예약신청 승인을 취소하셨습니다.");
 			}
 		}
-		function no(){
-			var rno = $(".rno").val();
+		function no(event){
+			var rno = $(event.target).parent().parent().children().first().text();
 			var flag = confirm("해당 예약신청을 거절하시겠습니까?");
 			
 			var refuse = prompt("거절사유를 작성해주세요."+"");

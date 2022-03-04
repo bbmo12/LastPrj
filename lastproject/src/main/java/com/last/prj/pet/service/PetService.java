@@ -15,4 +15,7 @@ public interface PetService {
 	//일반회원 아이디로 반려동물 조회
 	List<PetVO> petmemberList(@Param("m_id") String m_id);
 
+	//펫등록
+	int mypetInsert(PetVO pet);
+	
 }

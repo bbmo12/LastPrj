@@ -17,7 +17,8 @@ public class PayController {
 	@Autowired
 	private PayService payDao;
 	
-	@Autowired MemService memDao;
+	@Autowired
+	private MemService memDao;
 	
 	@RequestMapping("/myPay")
 	public String myPay(Model model, HttpServletRequest request) {

@@ -89,17 +89,17 @@
 
 							<div class="form-group">
 								<h5>
-									<strong>나이</strong>
+									<strong>출생일</strong>
 								</h5>
-								<input type="text" style="border: none" id="age" name="age"
-									value="${pet.age}" readonly>
+								<input type="text" style="border: none" id="birth" name="birth"
+									value="${pet.birth}" readonly>
 							</div>
 							<div class="form-group">
 								<h5>
-									<strong>품종????</strong>
+									<strong>품종</strong>
 								</h5>
-								<input type="text" style="border: none" id="tel" name="tel"
-									value="${pet.weight}" readonly>
+								<input type="text" style="border: none" id="c_content" name="c_content"
+									value="${pet.c_content}" readonly>
 							</div>
 							<div class="form-group">
 								<h5>

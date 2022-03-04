@@ -57,6 +57,19 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.pmemberTime(time);
 	}
 	
+	@Override
+	public int updateLike(String p_id) {		
+		return map.updateLike(p_id);
+	}
+	@Override
+	public List<PmemberVO> bestLike(PmemberVO pmember) {
+		return map.bestLike(pmember);
+	}
+	@Override
+	public int deleteTime(TimeVO time) {
+		return map.deleteTime(time);
+	}
+	
 	//관리자
 	@Override
 	public List<PmemberVO> admPlistCode(int code) {

@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +24,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.PmemberService;
@@ -70,6 +70,9 @@ public class QnaController {
 	@Autowired
 	private PmemberService pMemberDao;
 
+	@Autowired
+	ServletContext sc;
+
 	// 질문글 리스트, 페이징
 	@RequestMapping("/qnaMain")
 	public String QnaMain(Criteria cri, Model model) {
@@ -94,14 +97,6 @@ public class QnaController {
 		return "qna/tagSearch";
 	}
 
-	// 리플 수
-	@GetMapping("/replyCnt")
-	public String replyCnt(Model model) {
-		model.addAttribute("cnt", mapper.replyCnt(0));
-
-		return "qna/qnaMain";
-	}
-
 	// 신고 모달 팝업 처리
 	@RequestMapping(value = "/newQnaReport", method = RequestMethod.POST)
 	public String newQnaReport(HttpServletRequest request, ReportVO report) throws Exception {
@@ -115,10 +110,9 @@ public class QnaController {
 		return "qna/qnaDetail";
 	}
 
-	// 질문글 상세 조회 + 조회수 증가 + 작성 회원 정보 조회 + 반려동물 정보 조회 + 파트너 회원 정보
+	// 질문글 상세 조회 + 조회수 증가 + 작성 회원 정보 조회 + 반려동물 정보 조회 + 파트너 회원 정보 + 댓글 갯수
 	@RequestMapping(value = "/qnaDetail")
-	public String qnaDetail(@RequestParam("q_no") int q_no, @RequestParam("writer") String writer,
-			@RequestParam("pet_no") int pet_no, Model model, HttpServletRequest request) {
+	public String qnaDetail(@RequestParam("q_no") int q_no, Model model, HttpServletRequest request) {
 
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
@@ -128,19 +122,19 @@ public class QnaController {
 		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
 		model.addAttribute("ansDetail", qnaDAO.ansDetail(q_no));
 		model.addAttribute("best", mapper.qnaBest());
-		model.addAttribute("writerInfo", memDao.memberOne(writer));
-		model.addAttribute("petInfo", petDAO.petOne(pet_no));
+		model.addAttribute("cnt", mapper.replyCnt(q_no));
 
 		return "qna/qnaDetail";
 	}
 
 	// 로그인 여부 체크 + 질문 폼으로 이동 + m_id별 펫정보 받아감.
 	@RequestMapping(value = "/qnaForm")
-	public String qnaForm(@RequestParam("m_id") String m_id, HttpSession session, HttpServletResponse write, Model model) throws Exception {
+	public String qnaForm(@RequestParam("m_id") String m_id, HttpSession session, HttpServletResponse write,
+			Model model) throws Exception {
 
-		//String mId = (String) session.getAttribute("mId");
+		String mId = (String) session.getAttribute("mId");
 
-		if (m_id == null) {
+		if (mId == null) {
 			write.setContentType("text/html; charset=UTF-8");
 			PrintWriter out_writer = write.getWriter();
 			out_writer.println("<script>alert('먼저 로그인하세요.');</script>");
@@ -153,16 +147,78 @@ public class QnaController {
 		}
 	}
 
-	// 질문글 작성
+	// 질문글 작성 + 태그 처리
 	@PostMapping("/qForm")
-	public String qForm(HttpServletRequest request, HttpSession session, QnaVO qna, QtagVO qtag, QnaTagVO qnatag) throws Exception {
+	public String qForm(HttpServletRequest request, HttpSession session, HttpServletResponse write, QnaVO qna,
+			QtagVO qtag, QnaTagVO qnatag) throws Exception {
 
 		String mId = (String) session.getAttribute("mId");
 		qna.setWriter(mId);
 
-		qtagDAO.newTag(qtag);
+		if (qtag.getNTags() != null && qtag.getNTags().size() > 0) {
+			qtagDAO.newTag(qtag);
+		}
+
 		qnaDAO.newQna(qna);
-		qtagDAO.newQtag(qnatag);
+
+		if (qnatag.getNTags() != null && qnatag.getNTags().size() > 0) {
+			qtagDAO.newQtag(qnatag);
+		}
+		return "redirect:/qnaMain";
+	}
+
+	// 질문 수정 폼으로 이동 + 기존 글 내용 + 기존 태그 + 멤버별 펫 정보 받아감.
+	@RequestMapping(value = "/qModiForm")
+	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, HttpSession session,
+			Model model) throws Exception {
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		QnaVO vo = qnaDAO.qnaDetail(q_no);
+		
+		String mId = (String) session.getAttribute("mId");
+
+		model.addAttribute("petList", petDAO.petmemberList(m_id));
+		model.addAttribute("qnaDetail", vo);
+		model.addAttribute("prevTag", objectMapper.writeValueAsString(vo.getTagList())); //태그리스트를 json으로 변환해 view로 전달한다.
+		return "qna/qModiForm";
+	}
+
+	// 질문 게시글 수정 + 태그 삭제 후 재등록
+	@RequestMapping(value = "/qModify")
+	public String qModify(@RequestParam("q_no") int q_no, HttpServletRequest request, QnaVO qna, QtagVO qtag,
+			QnaTagVO qnatag) throws Exception {
+
+		System.out.println(q_no);
+		
+		qtDAO.delTags(q_no);
+
+		if (qtag.getNTags() != null && qtag.getNTags().size() > 0) {
+			qtagDAO.newTag(qtag);
+		}
+		qnaDAO.ansUpdate(qna);
+		if (qnatag.getNTags() != null && qnatag.getNTags().size() > 0) {
+			qtagDAO.newQtag(qnatag);
+		}
+
+		return "qna/qnaDetail";
+	}
+
+	// 질문 삭제(1)
+	@RequestMapping(value = "/qDeleteOne", method = RequestMethod.POST)
+	public String qDeleteOne(@RequestParam("q_no") int q_no, Model model) throws Exception {
+
+		qnaDAO.qDeleteOne(q_no);
+		qtDAO.delTags(q_no);
+
+		return "qna/qnaDetail";
+	}
+
+	// 질문 삭제(2)
+	@RequestMapping(value = "/qDeleteTwo", method = RequestMethod.POST)
+	public String qDeleteTwo(@RequestParam("q_no") int q_no, Model model) throws Exception {
+
+		qnaDAO.qDeleteTwo(q_no);
+		qtDAO.delTags(q_no);
 
 		return "qna/qnaMain";
 	}
@@ -170,7 +226,7 @@ public class QnaController {
 	// 답변글 작성 모달 처리
 	@RequestMapping(value = "/newAns", method = RequestMethod.POST)
 	public String newAns(HttpServletRequest request, QnaVO qna) throws Exception {
-		
+
 		qnaDAO.newAns(qna);
 
 		return "qna/qnaDetail";
@@ -179,9 +235,9 @@ public class QnaController {
 	// 답변글 수정 모달 처리
 	@RequestMapping(value = "/ansUpdate", method = RequestMethod.POST)
 	public String ansUpdate(HttpServletRequest request, QnaVO qna) throws Exception {
-		
+
 		qnaDAO.ansUpdate(qna);
-		
+
 		return "qna/qnaDetail";
 	}
 
@@ -193,30 +249,31 @@ public class QnaController {
 		return "qna/qnaDetail";
 	}
 
-	// ckeditor 이미지 업로드
-	/** * @param multiFile * @param request * @return * @throws Exception */
-	@RequestMapping(value = "/mine/imageUpload.do", method = RequestMethod.POST)
+	// 이미지 업로드
+	@RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
 	public void imageUpload(HttpServletRequest request, HttpServletResponse response,
 			MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload) throws Exception {
 		// 랜덤 문자 생성
 		UUID uid = UUID.randomUUID();
+
 		OutputStream out = null;
 		PrintWriter printWriter = null;
 
 		// 인코딩
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-
 		try {
 			// 파일 이름 가져오기
 			String fileName = upload.getOriginalFilename();
 			byte[] bytes = upload.getBytes();
 
 			// 이미지 경로 생성
-			String path = "resources/qna/" + "ckImage/"; // 이미지 경로 설정??
-			String ckUploadPath = path + uid + "_" + fileName;
-			File folder = new File(path);
+			String path = "resources/upload/"; // 이미지 경로 설정(폴더 자동 생성)
+			String realPath = sc.getRealPath(path);
 
+			String ckUploadPath = realPath + "/" + uid + "_" + fileName;
+			File folder = new File(realPath);
+			System.out.println("path:" + path); // 이미지 저장경로 console에 확인
 			// 해당 디렉토리 확인
 			if (!folder.exists()) {
 				try {
@@ -228,15 +285,16 @@ public class QnaController {
 
 			out = new FileOutputStream(new File(ckUploadPath));
 			out.write(bytes);
-			out.flush();// outputStram에 저장된 데이터를 전송하고 초기화
+			out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
 
 			String callback = request.getParameter("CKEditorFuncNum");
 			printWriter = response.getWriter();
-			String fileUrl = "/mine/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName;// 작성화면
+			String fileUrl = "resources/upload/" + uid + "_" + fileName; // 작성화면
 
 			// 업로드시 메시지 출력
-			printWriter.println("{\"filename\" : \"" + fileName + "\",\"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
+			printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
 			printWriter.flush();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -254,16 +312,17 @@ public class QnaController {
 		return;
 	}
 
-	/*
-	 * cKeditor 서버로 전송된 이미지 뿌려주기 * @param uid * @param fileName * @param request
-	 * * @return * @throws ServletException * @throws IOException
-	 */
-	@RequestMapping(value = "/mine/ckImgSubmit.do")
+	// 서버로 전송된 이미지 뿌려주기
+	@RequestMapping(value = "/ckImgSubmit")
 	public void ckSubmit(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName,
 			HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// 서버에 저장된 이미지 경로
-		String path = "resources/qna/" + "ckImage/";
-		String sDirPath = path + uid + "_" + fileName;
+		String path = "resources/upload/"; // 이미지 경로 설정(폴더 자동 생성)
+		String realPath = sc.getRealPath(path);
+		System.out.println("path:" + realPath);
+		String sDirPath = realPath + uid + "_" + fileName;
+
 		File imgFile = new File(sDirPath);
 
 		// 사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
@@ -290,6 +349,7 @@ public class QnaController {
 				length = imgBuf.length;
 				out.write(imgBuf, 0, length);
 				out.flush();
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
