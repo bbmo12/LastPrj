@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="single-feature text-center item-padding">
-                        <img src="resources/assets/images/feature1.png" alt="">
+                        <img src="resources/upload/pmem.png" alt="">
                         <h3>advance technology</h3>
                         <p class="pt-3">Creeping for female light years that lesser can't evening heaven isn't bearing tree appear</p>
                     </div>
@@ -111,7 +111,9 @@
             </div>
         </div>
     </section>
-    <!-- Department Area Starts -->
+    <script>
+
+    </script>
 
 </body>
 </html>

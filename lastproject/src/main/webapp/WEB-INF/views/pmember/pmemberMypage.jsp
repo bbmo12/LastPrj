@@ -92,7 +92,7 @@
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">사업장 주소</h3>
-								<textarea style="border: none" id="address" name="address" readonly cols="50"
+								<textarea style="border: none; overflow: hidden;" id="address" name="address" readonly cols="50"
 									rows="1">${pmember.w_address}  ${pmember.w_d_address }</textarea>
 							</div>
 							<div class="form-group">
@@ -111,7 +111,7 @@
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">사업장 소개</h3>
-								<textarea style="border: none" id="p_info" name="p_info" readonly cols="100"
+								<textarea style="border: none; overflow: hidden;" id="p_info" name="p_info" readonly cols="100"
 									rows="3">${pmember.p_info}</textarea>
 							</div>
 							<div class="form-group">

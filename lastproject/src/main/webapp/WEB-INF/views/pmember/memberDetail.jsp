@@ -55,8 +55,11 @@
 								style="width: 210px;" alt="등록된 사진이 없습니다.">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
-							<h3>${pmemdetail.w_name}</h3>
-							<div class="br"></div>
+							<h3 style="position: relative; top: 10px; right: 10px;">${pmemdetail.w_name}</h3>
+							<img alt="" src="resources/upload/rec.png" id="recommend"
+								onclick="likeHit(`${pmemdetail.p_id}`)"
+								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
+							<div class="br" style="margin-top: -25px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">상담하기</h4>
@@ -183,8 +186,21 @@
 			</div>
 		</div>
 	</section>
-	<script type="text/javascript">
-	/* 별점주기 */
+	<script>
+		function likeHit(p_id) {
+			console.log(p_id);
+			var p_id = p_id;
+			$.ajax({
+				type: "POST",
+				url: "pmemberLike",
+				data: {
+					"p_id": p_id
+				},
+				success: function () {
+			    console.log("dddddd");
+				}
+			});
+		}
 		$(function () {
 			$('.star').each(function (index, item) {
 				$(this).raty({
@@ -195,10 +211,7 @@
 				});
 			})
 		});
-	</script>
-	<script type="text/javascript">
-	/*스크롤 */
-		console.log('${pmemdetail}');
+		/*스크롤 */
 		$(function () {
 			$('.comment-list').slice(0, 2).show();
 			$('#load').click(function (e) {

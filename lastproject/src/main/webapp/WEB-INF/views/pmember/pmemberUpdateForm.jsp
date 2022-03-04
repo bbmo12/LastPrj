@@ -108,55 +108,54 @@
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">운영안내</h3>
 								</div>
-								<div id="select-one">
-									<div class="form-group" id="form-time">
-										<select id="selectday" name="selectday" onchange="addDay()">
+								<div class="form-group" id="form-time">						
+								<c:forEach items="${pmember.timeList }" var="timeList">
+								<select id="selectday" name="selectday" onchange="addDay()">
 											<option value='' selected>요일선택</option>
-											<option value='월'>월</option>
-											<option value='화'>화</option>
-											<option value='수'>수</option>
-											<option value='목'>목</option>
-											<option value='금'>금</option>
-											<option value='토'>토</option>
-											<option value='일'>일</option>
+											<option value='월' <c:if test="${timeList.w_day == '월' }">selected</c:if>>월</option>
+											<option value='화'<c:if test="${timeList.w_day == '화' }">selected</c:if>>화</option>
+											<option value='수'<c:if test="${timeList.w_day == '수' }">selected</c:if>>수</option>
+											<option value='목'<c:if test="${timeList.w_day == '목' }">selected</c:if>>목</option>
+											<option value='금'<c:if test="${timeList.w_day == '금' }">selected</c:if>>금</option>
+											<option value='토'<c:if test="${timeList.w_day == '토' }">selected</c:if>>토</option>
+											<option value='일'<c:if test="${timeList.w_day == '일' }">selected</c:if>>일</option>
 										</select>
 										<select id="selectStart" name="selectStart" onchange="startTime()">
 											<option value='' selected>오픈시간</option>
-											<option value='9:00'>9:00</option>
-											<option value='9:30'>9:30</option>
-											<option value='10:30'>10:30</option>
-											<option value='11:00'>11:00</option>
-											<option value='12:00'>12:00</option>
-											<option value='12:30'>12:30</option>
+											<option value='9:00'<c:if test="${timeList.starttime == '9:00' }">selected</c:if>>9:00</option>
+											<option value='9:30'<c:if test="${timeList.starttime == '9:30' }">selected</c:if>>9:30</option>
+											<option value='10:00'<c:if test="${timeList.starttime == '10:00' }">selected</c:if>>10:00</option>
+											<option value='10:30'<c:if test="${timeList.starttime == '10:30' }">selected</c:if>>10:30</option>
+											<option value='11:00'<c:if test="${timeList.starttime == '11:00' }">selected</c:if>>11:00</option>
+											<option value='11:30'<c:if test="${timeList.starttime == '11:30' }">selected</c:if>>11:30</option>
+											<option value='12:00'<c:if test="${timeList.starttime == '12:00' }">selected</c:if>>12:00</option>
+											<option value='12:30'<c:if test="${timeList.starttime == '12:30' }">selected</c:if>>12:30</option>
 										</select>
 										<select id="selectEnd" name="selectEnd" onchange="endTime()">
 											<option value='' selected>마감시간</option>
-											<option value='13:00'>13:00</option>
-											<option value='13:30'>13:30</option>
-											<option value='14:00'>14:00</option>
-											<option value='14:30'>14:30</option>
-											<option value='15:00'>15:00</option>
-											<option value='15:30'>15:30</option>
-											<option value='16:00'>16:00</option>
-											<option value='16:30'>16:30</option>
-											<option value='17:00'>17:00</option>
-											<option value='17:30'>17:30</option>
-											<option value='18:00'>18:00</option>
-											<option value='18:30'>18:30</option>
-											<option value='19:00'>19:00</option>
-											<option value='19:30'>19:30</option>
-											<option value='20:00'>20:00</option>
-											<option value='20:30'>20:30</option>
-											<option value='21:00'>21:00</option>
-										</select><br>
-									</div>
-								</div>
-								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>
-								<c:forEach items="${pmember.timeList }" var="timeList">
-									<input name="w_day" id="w_day" value="${timeList.w_day }">
-									<input name="starttime" id="starttime" value="${timeList.starttime }">
-									<input name="endtime" id="endtime" value="${timeList.endtime }">
+											<option value='13:00'<c:if test="${timeList.endtime == '13:00' }">selected</c:if>>13:00</option>
+											<option value='13:30'<c:if test="${timeList.endtime == '13:30' }">selected</c:if>>13:30</option>
+											<option value='14:00'<c:if test="${timeList.endtime == '14:00' }">selected</c:if>>14:00</option>
+											<option value='14:30'<c:if test="${timeList.endtime == '14:30' }">selected</c:if>>14:30</option>
+											<option value='15:00'<c:if test="${timeList.endtime == '15:00' }">selected</c:if>>15:00</option>
+											<option value='15:30'<c:if test="${timeList.endtime == '15:30' }">selected</c:if>>15:30</option>
+											<option value='16:00'<c:if test="${timeList.endtime == '16:00' }">selected</c:if>>16:00</option>
+											<option value='16:30'<c:if test="${timeList.endtime == '16:30' }">selected</c:if>>16:30</option>
+											<option value='17:00'<c:if test="${timeList.endtime == '17:00' }">selected</c:if>>17:00</option>
+											<option value='17:30'<c:if test="${timeList.endtime == '17:30' }">selected</c:if>>17:30</option>
+											<option value='18:00'<c:if test="${timeList.endtime == '18:00' }">selected</c:if>>18:00</option>
+											<option value='18:30'<c:if test="${timeList.endtime == '18:30' }">selected</c:if>>18:30</option>
+											<option value='19:00'<c:if test="${timeList.endtime == '19:00' }">selected</c:if>>19:00</option>
+											<option value='19:30'<c:if test="${timeList.endtime == '19:30' }">selected</c:if>>19:30</option>
+											<option value='20:00'<c:if test="${timeList.endtime == '20:00' }">selected</c:if>>20:00</option>
+											<option value='20:30'<c:if test="${timeList.endtime == '20:30' }">selected</c:if>>20:30</option>
+											<option value='21:00'<c:if test="${timeList.endtime == '21:00' }">selected</c:if>>21:00</option>
+										</select><br>		
+										<input name="w_day" id="w_day" value="${timeList.w_day }">
+									    <input name="starttime" id="starttime" value="${timeList.starttime }">
+									    <input name="endtime" id="endtime" value="${timeList.endtime }">						
 								</c:forEach>
+								</div>
 								<div class="form-group">
 									<input type="text" id="content" name="content" value="${pmember.n_content}"></div>
 								<div class="form-group">
@@ -182,88 +181,29 @@
 			</div>
 		</div>
 	</section>
-
-	<script>
-
-		$('#addDiv').click(function () { 
-
-			var dayArray =[];
-			var selectDay = $("#selectday option:selected").val();
-
-			$(selectDay).each(function (index, item) {
-				dayArray.push(item);
-			});
-			$('#w_day').val(dayArray);
-
-			
-			alert($('#w_day').val());
-
-		});
-
-
-		function addDay() {
-			var selectDay = $("#selectday option:selected").val();
-			document.getElementById('w_day').value = selectDay;
-		}
-
+	 <script>
+	 	function addDay() { 
+	 		$('select[name=selectday] option:selected').each(function (index) {
+				var day = $(this).attr('value');				
+			      
+			});	 	
+		} 
 		function startTime() {
-			var startTime = $("#selectStart option:selected").val();
-			document.getElementById('starttime').value = startTime;
+			var start = $('input[name=starttime').val();
+	 		$('select[name=selectStart] option:selected').each(function (index) {
+				var day = $(this).attr('value');				
+				console.log("start" + day);
+			});	 	
 		}
 
 		function endTime() {
-			var endTime = $("#selectEnd option:selected").val();
-			document.getElementById('endtime').value = endTime;
+			var end = $('input[name=endtime').val();
+	 		$('select[name=selectEnd] option:selected').each(function (index) {
+				var day = $(this).attr('value');				
+				console.log("end" + day);
+			});	 	
 		}
-
-		function plusTime() {
-
-			var select = document.getElementById('select-one');
-			var form = document.getElementById('form-time');
-			form.innerHTML += `							
-					<select id="selectday" name="selectday" onchange="addDay()">
-					<option value='' selected>요일선택</option>
-					<option value='월'>월</option>
-					<option value='화'>화</option>
-					<option value='수'>수</option>
-					<option value='목'>목</option>
-					<option value='금'>금</option>
-					<option value='토'>토</option>
-					<option value='일'>일</option>
-				</select>																	
-				<select id="selectStart" name="selectStart" onchange="startTime()">
-					<option value='' selected>오픈시간</option>
-					<option value='9:00'>9:00</option>
-					<option value='9:30'>9:30</option>
-					<option value='10:30'>10:30</option>
-					<option value='11:00'>11:00</option>
-					<option value='12:00'>12:00</option>
-					<option value='12:30'>12:30</option>				
-				</select>																					
-				<select id="selectEnd" name="selectEnd" onchange="endTime()">
-					<option value='' selected>마감시간</option>
-					<option value='13:00'>13:00</option>
-					<option value='13:30'>13:30</option>
-					<option value='14:00'>14:00</option>
-					<option value='14:30'>14:30</option>
-					<option value='15:00'>15:00</option>
-					<option value='15:30'>15:30</option>
-					<option value='16:00'>16:00</option>
-					<option value='16:30'>16:30</option>
-					<option value='17:00'>17:00</option>
-					<option value='17:30'>17:30</option>
-					<option value='18:00'>18:00</option>
-					<option value='18:30'>18:30</option>
-					<option value='19:00'>19:00</option>
-					<option value='19:30'>19:30</option>
-					<option value='20:00'>20:00</option>
-					<option value='20:30'>20:30</option>
-					<option value='21:00'>21:00</option>				
-				</select><br>`;
-			select.append(form);
-			$('select').niceSelect();
-		}
-
+	
 		function addFile() {
 			var input = $('<input>').attr({
 				'name': 'multiFileList',
