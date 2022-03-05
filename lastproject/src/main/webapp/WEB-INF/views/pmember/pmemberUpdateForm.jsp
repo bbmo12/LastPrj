@@ -109,9 +109,9 @@
 									<h3 style="font-weight: bolder;">운영안내</h3>
 								</div>
 								<div class="form-group" id="form-time">						
-								<c:forEach items="${pmember.timeList }" var="timeList">
-								<select id="selectday" name="selectday" onchange="addDay()">
-											<option value='월' <c:if test="${timeList.w_day == '월' }">selected</c:if>>월</option>
+								<c:forEach items="${pmember.timeList }" var="timeList" varStatus="status">
+								<select id="selectday" name="timeVOList[${status.index}].w_day" onchange="addDay()">
+											<option value='월'<c:if test="${timeList.w_day == '월' }">selected</c:if>>월</option>
 											<option value='화'<c:if test="${timeList.w_day == '화' }">selected</c:if>>화</option>
 											<option value='수'<c:if test="${timeList.w_day == '수' }">selected</c:if>>수</option>
 											<option value='목'<c:if test="${timeList.w_day == '목' }">selected</c:if>>목</option>
@@ -119,7 +119,7 @@
 											<option value='토'<c:if test="${timeList.w_day == '토' }">selected</c:if>>토</option>
 											<option value='일'<c:if test="${timeList.w_day == '일' }">selected</c:if>>일</option>
 										</select>
-										<select id="selectStart" name="selectStart" onchange="startTime()">
+										<select id="selectStart" name="timeVOList[${status.index}].starttime" onchange="startTime()">
 											<option value='9:00'<c:if test="${timeList.starttime == '9:00' }">selected</c:if>>9:00</option>
 											<option value='9:30'<c:if test="${timeList.starttime == '9:30' }">selected</c:if>>9:30</option>
 											<option value='10:00'<c:if test="${timeList.starttime == '10:00' }">selected</c:if>>10:00</option>
@@ -129,7 +129,7 @@
 											<option value='12:00'<c:if test="${timeList.starttime == '12:00' }">selected</c:if>>12:00</option>
 											<option value='12:30'<c:if test="${timeList.starttime == '12:30' }">selected</c:if>>12:30</option>
 										</select>
-										<select id="selectEnd" name="selectEnd" onchange="endTime()">
+										<select id="selectEnd" name="timeVOList[${status.index}].endtime" onchange="endTime()">
 											<option value='13:00'<c:if test="${timeList.endtime == '13:00' }">selected</c:if>>13:00</option>
 											<option value='13:30'<c:if test="${timeList.endtime == '13:30' }">selected</c:if>>13:30</option>
 											<option value='14:00'<c:if test="${timeList.endtime == '14:00' }">selected</c:if>>14:00</option>
@@ -148,11 +148,11 @@
 											<option value='20:30'<c:if test="${timeList.endtime == '20:30' }">selected</c:if>>20:30</option>
 											<option value='21:00'<c:if test="${timeList.endtime == '21:00' }">selected</c:if>>21:00</option>
 										</select><br>	
-																							
+										<input type="hidden" name="timeVOList[${status.index}].p_id" value="${pId}">								
 								</c:forEach>		
-										<input name="w_day" id="w_day" value="">
+										<!-- <input name="w_day" id="w_day" value="">
 									    <input name="starttime" id="starttime" value="">
-									    <input name="endtime" id="endtime" value="">						                
+									    <input name="endtime" id="endtime" value=""> -->						                
 								</div>
 								<div class="form-group">
 									<input type="text" id="content" name="content" value="${pmember.n_content}"></div>
