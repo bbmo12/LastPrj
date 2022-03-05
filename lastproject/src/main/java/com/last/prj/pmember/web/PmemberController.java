@@ -109,10 +109,15 @@ public class PmemberController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}	
-		pMemberDao.deleteTime(time);
+		}
+		
+		pMemberDao.deleteTime(p_id);
 		pMemberDao.pmemberUpdate(pmember);
-		pMemberDao.pmemberTime(time);
+		
+		for(int i=0; i < time.getTimeVOList().size(); i++) {
+			pMemberDao.pmemberTime(time.getTimeVOList().get(i));
+		}
+		
 		return "redirect:/pmemberMyPage";
 	}
 	
