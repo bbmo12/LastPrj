@@ -26,4 +26,8 @@ public interface MemService {
 
 	//회원탈퇴버튼클릭
 	int memberDelete(@Param("m_id") String m_id);
+	
+	
+	//아이디 중복체크
+	boolean idCheck(String m_id);
 }

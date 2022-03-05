@@ -8,6 +8,7 @@
 <script src="resources/org/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
+
 	<div class="container-scroller">
 		<div class="container-fluid page-body-wrapper full-page-wrapper">
 			<div class="content-wrapper d-flex align-items-center auth">
@@ -18,9 +19,11 @@
                   <img src="resources/assets123/images/logo-dark.svg">
                 </div> -->
 							<div align="center">
-								<button onclick="mlogin()" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">일반회원
+								<button onclick="mlogin()"
+									class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">일반회원
 								</button>
-								<button onclick="plogin()" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">파트너회원
+								<button onclick="plogin()"
+									class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">파트너회원
 								</button>
 							</div>
 							<div id="test">
@@ -37,6 +40,11 @@
 										<button type="submit"
 											class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">로그인</button>
 									</div>
+									<ul>
+										<li onclick="kakaoLogin();"><a href="javascript:void(0)">
+												<span>카카오 로그인</span>
+										</a></li>
+									</ul>
 									<div
 										class="my-2 d-flex justify-content-between align-items-center">
 										<div class="form-check">
@@ -51,13 +59,13 @@
 										</button>
 									</div>
 									<div align="center">
-										<a href="memberIdSearchForm" class="auth-link text-black">아이디 찾기</a> / <a
-											href="#" class="auth-link text-black">비밀번호 찾기</a>
+										<a href="memberIdSearchForm" class="auth-link text-black">아이디
+											찾기</a> / <a href="#" class="auth-link text-black">비밀번호 찾기</a>
 									</div>
 									<div class="text-center mt-4 font-weight-light">
 										계정이 없으신가요? <a href="joinForm" class="text-primary">회원가입</a>
 									</div>
-								</form> 
+								</form>
 
 
 							</div>
@@ -69,7 +77,7 @@
 		</div>
 		<!-- page-body-wrapper ends -->
 	</div>
-
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
     function mlogin(){
     	
@@ -160,10 +168,65 @@ function plogin(){
   $("#test").append(loginForm);
 	
 }
-    	
+
+function login() {
+    $.ajax({
+       url: 'geturi.do',
+       type: 'get',
+       async: false,
+       dataType: 'text',
+       success: function (res) {
+          location.href = res;
+       }
+    });
     
-    
-    
+   
     </script>
+
+	<script>
+		//카카오로그인
+		function kakaoLogin() {
+
+			$.ajax({
+				url : 'geturi.do',
+				type : 'get',
+				async : false,
+				dataType : 'text',
+				success : function(res) {
+					location.href = res;
+				}
+			});
+
+		}
+		function kakaoLogout() {
+		    if (Kakao.Auth.getAccessToken()) {
+		      Kakao.API.request({
+		        url: '/v1/user/unlink',
+		        success: function (response) {
+		        	console.log(response)
+		        },
+		        fail: function (error) {
+		          console.log(error)
+		        },
+		      })
+		      Kakao.Auth.setAccessToken(undefined)
+		    }
+		  }  
+
+		$(document).ready(
+				function() {
+
+					var kakaoInfo = '${kakaoInfo}';
+
+					if (kakaoInfo != "") {
+						var data = JSON.parse(kakaoInfo);
+
+						alert("카카오로그인 성공 \n accessToken : "
+								+ data['accessToken']);
+						alert("user : \n" + "email : " + data['email']
+								+ "\n nickname : " + data['nickname']);
+					}
+				});    
+		</script>
 </body>
 </html>
