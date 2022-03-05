@@ -22,7 +22,6 @@ import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.TimeVO;
-import com.last.prj.pmember.service.TimeVOList;
 
 @Controller
 public class PmemberController {
@@ -80,11 +79,12 @@ public class PmemberController {
 		model.addAttribute("pmember", pMemberDao.getMember(p_id));
 		return "pmember/pmemberUpdateForm";
 	}
-	//마이페이지 수정 
+	
+	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time , Model model, HttpServletRequest request) {
-
-		String originalFileName = file.getOriginalFilename();
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time, Model model, HttpServletRequest request) {
+		 
+    	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
 		
@@ -109,10 +109,10 @@ public class PmemberController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}	
 		pMemberDao.deleteTime(time);
-		pMemberDao.pmemberTime(time);
 		pMemberDao.pmemberUpdate(pmember);
+		pMemberDao.pmemberTime(time);
 		return "redirect:/pmemberMyPage";
 	}
 	
@@ -128,3 +128,4 @@ public class PmemberController {
 	}
 
 }
+

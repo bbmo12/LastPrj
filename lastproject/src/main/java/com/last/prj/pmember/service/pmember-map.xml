@@ -136,7 +136,7 @@
 	</update> 
 	<!-- 수정시 otime 삭제후 insert -->
 	<delete id="deleteTime" parameterType="com.last.prj.pmember.service.TimeVO">
-	 	DELETE FROM O_TIME WHERE P_ID= #{p_id} AND W_DAY = #{w_day}
+	 	DELETE FROM O_TIME WHERE P_ID= #{p_id}
 	</delete>
 	
 	<insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
