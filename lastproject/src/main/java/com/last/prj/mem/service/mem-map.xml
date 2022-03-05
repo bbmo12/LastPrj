@@ -69,4 +69,10 @@
 		WHERE M_ID = #{m_id}
 	</update>
 
+
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType="boolean">
+		SELECT COUNT(*)
+		FROM MEMBER WHERE m_id = #{m_id}
+	</select>
 </mapper>

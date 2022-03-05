@@ -53,6 +53,11 @@ public class MemServiceImpl implements MemService {
 		return map.memberDelete(m_id);
 	}
 
+	@Override
+	public boolean idCheck(String m_id) {
+		return map.idCheck(m_id);
+	}
+
 	
 
 }
