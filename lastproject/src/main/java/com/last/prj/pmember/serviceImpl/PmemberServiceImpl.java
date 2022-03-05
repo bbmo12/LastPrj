@@ -52,7 +52,7 @@ public class PmemberServiceImpl implements PmemberService{
 	public int pmemberUpdate(PmemberVO pmember) {
 		return map.pmemberUpdate(pmember);
 	}
-	
+	//운영시간insert
 	@Override
 	public int pmemberTime(TimeVO time) {
 		return map.pmemberTime(time);

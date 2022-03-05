@@ -1,5 +1,7 @@
 package com.last.prj.pmember.service;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -12,5 +14,7 @@ public class TimeVO {
 	private String starttime;	//시작시간
 	private String endtime;		//종료시간
 	private String n_content;	//내용
+	
+	private List<TimeVO> timeVOList;
 
 }
