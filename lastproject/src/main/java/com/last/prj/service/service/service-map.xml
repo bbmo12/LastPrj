@@ -11,7 +11,6 @@
 		FROM DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
 		WHERE D.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
 		P.M_ID = #{m_id}
-
 	</select>
 	
 	<insert id="ServiceInsert" parameterType="com.last.prj.service.service.ServiceVO">

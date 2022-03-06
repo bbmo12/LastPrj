@@ -346,9 +346,6 @@ public class MemController {
 	
 	
 	
-	
-	
-	
 	   @RequestMapping("/geturi.do")
 	   @ResponseBody
 	   public String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
@@ -382,9 +379,7 @@ public class MemController {
 			  else { session.setAttribute("userInfo", userInfo);
 				 return "member/joinForm"; // 본인 원하는 경로 설정
 				 }
-				 }
-				 
-				
+				 }				
 	   
 	   
 	// 토큰발급
