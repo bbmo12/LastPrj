@@ -1,6 +1,7 @@
 package com.last.prj.pmember.web;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -48,17 +49,12 @@ public class PmemberController {
 	@RequestMapping("/pmemberDetail")
 	public String pmemberDetail(@RequestParam("id") String p_id, Model model) {
 		// 파트너 정보
-		model.addAttribute("pmemdetail", pMemberDao.getMember(p_id));
-		System.out.println(pMemberDao.getMember(p_id));
+		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); //pmember
+		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
 		return "pmember/memberDetail";
-	}
-
-	@RequestMapping("/memberMain")
-	public String home() {
-		return "pmember/memberMain";
 	}
 
 	// 파트너 마이페이지
@@ -82,8 +78,8 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time, Model model, HttpServletRequest request) {
-		 
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, @RequestParam List<TimeVO> dayArray,  TimeVO time, Model model, HttpServletRequest request) {
+		System.out.println("==================="+dayArray);
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);

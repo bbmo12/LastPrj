@@ -101,7 +101,7 @@
 									<div class="col-lg-9 col-md-9 blog_details">
 										<h3 style="font-weight: bold">
 											${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</h3>
-										<c:forEach items="${pmemdetail.timeList }" var="time">
+										<c:forEach items="${time }" var="time">
 											<h3 style="font-weight: normal">${time.w_day }&nbsp;${time.starttime}
 												&nbsp;-&nbsp;${time.endtime }</h3>
 										</c:forEach>
