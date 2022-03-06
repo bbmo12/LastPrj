@@ -102,7 +102,7 @@
 							</div>
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">운영안내</h3>
-								<c:forEach items="${pmember.timeList }" var="time">
+								<c:forEach items="${time }" var="time">
 									<input type="text" style="border: none" id="time" name="time"
 										value="${time.w_day } ${time.starttime} - ${time.endtime }" readonly>
 								</c:forEach>
