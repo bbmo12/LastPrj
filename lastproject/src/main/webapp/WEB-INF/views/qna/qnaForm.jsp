@@ -21,6 +21,15 @@
 <script src="resources/ckeditor/ckeditor.js"></script>
 
 <style>
+h3 {
+	font-weight: bold;
+}
+
+#qForm {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
 .radioImg {
 	width: 80px;
 	height: 80px;
@@ -57,6 +66,11 @@ ul li.tag-item {
 	color: #000;
 }
 
+.petSelect {
+	displsy: flex;
+	flex-direction: row;
+}
+
 .del-btn {
 	font-size: 12px;
 	font-weight: bold;
@@ -91,8 +105,9 @@ ul li.tag-item {
 
 	<!-- question form starts -->
 	<article>
-		<div class="container" role="main">
-			<h2>새로운 질문 작성하기</h2>
+		<div class="container" id="newq" role="main"
+			style="margin-bottom: 50px; margin-top: 50px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
+			<h2 style="margin-top: 50px;">새로운 질문 작성하기</h2>
 			<form name="qForm" id="qForm" action="qForm" method="post"
 				onsubmit="tagInput();">
 
@@ -100,13 +115,15 @@ ul li.tag-item {
 					value="${mId }">
 
 				<div class="mb-3">
-					<label for="title">제목</label> <input type="text"
-						class="form-control" name="title" id="title"
+					<h3>제목</h3>
+					<input type="text" class="form-control" name="title" id="title"
 						placeholder="제목을 입력해 주세요" required>
 				</div>
 
-				<div class="form-check">
-					<h4>반려동물 선택하기</h4>
+				<div class="petSelect"
+					style="margin-bottom: 50px; margin-top: 50px;">
+					<h3>반려동물 선택</h3>
+					<h4 style="color: gray;">*도움이 필요한 반려동물을 선택해주세요.</h4>
 					<div class="radioImg">
 						<img class="petSelection" src="resources/qna/가위표.png">
 					</div>
@@ -131,10 +148,9 @@ ul li.tag-item {
 				</div>
 
 				<div style="margin-top: 40px; width: 1000px;" class="content">
-					<div style="display: flex;">
-						<h4>태그</h4>
-						<input type="text" id="tag"
-							style="margin-left: 20px; width: 1100px;"
+					<div>
+						<h3>태그</h3>
+						<input type="text" id="tag" class="form-control"
 							placeholder="스페이스 키로 태그를 등록하세요" />
 					</div>
 
@@ -142,9 +158,11 @@ ul li.tag-item {
 					</ul>
 				</div>
 
-				<button type="submit" class="btn btn-primary" id="qSubmit">작성</button>
-				<button type="button" class="btn btn-secondary" id="qCancel"
-					onclick="history.back()">취소</button>
+				<div style="margin-top: 70px; margin-left: 450px;">
+					<button type="submit" class="btn btn-primary btn-lg" id="qSubmit">작성</button>
+					<button type="button" class="btn btn-secondary btn-lg" id="qCancel"
+						style="margin-left: 20px;" onclick="history.back()">취소</button>
+				</div>
 
 			</form>
 
@@ -157,6 +175,11 @@ ul li.tag-item {
 		$(document).on('click', '#qSubmit', function(e) {
 			$("#qForm").submit();
 		});*/
+
+		/*
+		function focusOn() {
+			document.getElementById("tag").focus();
+		}*/
 
 		/*태그 처리*/
 		$(document)

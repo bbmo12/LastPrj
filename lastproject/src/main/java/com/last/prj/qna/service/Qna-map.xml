@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.qna.service.QnaMapper">
 
-	<resultMap type="com.last.prj.qna.service.QnaVO" id="qnaPetTag">
+	<resultMap type="com.last.prj.qna.service.QnaVO"
+		id="qnaPetTag">
 		<result property="q_no" column="q_no" />
 		<result property="w_date" column="w_date" />
 		<result property="title" column="title" />
@@ -13,22 +14,24 @@
 		<result property="f_part" column="f_part" />
 		<result property="pet_no" column="pet_no" />
 		<result property="r_check" column="r_check" />
-		
-		<association property="petvo" javaType="com.last.prj.qna.service.PetVO">
-		<id property="pet_no" column="pet_no"/>
-		<result property="name" column="name"/>
-		<result property="r_check" column="r_check"/>
-		<result property="gender" column="gender"/>
-		<result property="m_id" column="m_id"/>
-		<result property="code" column="code"/>
-		<result property="weight" column="weight"/>
-		<result property="picture" column="picture"/>
+
+		<association property="petvo"
+			javaType="com.last.prj.qna.service.PetVO">
+			<id property="pet_no" column="pet_no" />
+			<result property="name" column="name" />
+			<result property="r_check" column="r_check" />
+			<result property="gender" column="gender" />
+			<result property="m_id" column="m_id" />
+			<result property="code" column="code" />
+			<result property="weight" column="weight" />
+			<result property="picture" column="picture" />
 		</association>
-		
+
 		<collection property="tagList" resultMap="tagMap"></collection>
 	</resultMap>
 
-	<resultMap type="com.last.prj.qna.service.QnaVO" id="qnaResult">
+	<resultMap type="com.last.prj.qna.service.QnaVO"
+		id="qnaResult">
 		<id property="q_no" column="q_no" />
 		<result property="w_date" column="w_date" />
 		<result property="title" column="title" />
@@ -39,11 +42,12 @@
 		<result property="f_part" column="f_part" />
 		<result property="pet_no" column="pet_no" />
 		<result property="r_check" column="r_check" />
-		
+
 		<collection property="tagList" resultMap="tagMap"></collection>
 	</resultMap>
-	
-	<resultMap type="com.last.prj.qna.service.QnaTagVO" id="tagMap">
+
+	<resultMap type="com.last.prj.qna.service.QnaTagVO"
+		id="tagMap">
 		<result property="q_no" column="q_no" />
 		<result property="t_name" column="t_name" />
 	</resultMap>
@@ -82,7 +86,7 @@
 		FROM
 		(SELECT *
 		FROM qna
-		WHERE p_no = 0 
+		WHERE p_no = 0
 		AND NOT title IN ('[작성자에 의해 삭제된 게시물입니다.]')
 		ORDER BY hit DESC
 		)
@@ -102,7 +106,8 @@
 	<!-- 질문글 개별 조회 -->
 	<select id="qnaDetail" resultMap="qnaPetTag">
 		SELECT t.t_name, q.*, p.*
-		FROM qnatag t 
+		FROM
+		qnatag t
 		RIGHT JOIN qna q
 		ON q.q_no = t.q_no
 		LEFT JOIN pet p
@@ -122,7 +127,8 @@
 		resultType="com.last.prj.qna.service.QnaVO">
 		SELECT *
 		FROM qna q LEFT OUTER JOIN p_member p
-		ON q.writer = p.p_id
+		ON q.writer =
+		p.p_id
 		WHERE q.p_no = #{p_no}
 	</select>
 
@@ -131,20 +137,23 @@
 		parameterType="com.last.prj.qna.service.QnaVO">
 		INSERT INTO qna (q_no, title, content, hit, writer,
 		p_no, pet_no, r_check, qpicture, pfile)
-		VALUES (q_seq.nextval, #{title},
-		#{content}, 0, #{writer}, 0, #{pet_no}, 0, #{qpicture}, #{pfile})
+		VALUES (q_seq.nextval,
+		#{title},
+		#{content}, 0, #{writer}, 0, #{pet_no}, 0, #{qpicture},
+		#{pfile})
 	</insert>
-	
+
 	<!-- 질문글 수정 -->
-	<update id="qModify" parameterType="com.last.prj.qna.service.QnaVO">
+	<update id="qModify"
+		parameterType="com.last.prj.qna.service.QnaVO">
 		UPDATE qna
-			<set>
-				<if test="title != null">title=#{title}</if>
-				<if test="content != null">content=#{content}</if>
-				<if test="pet_no != null">pet_no=#{pet_no}</if>
-				<if test="qpicture != null">qpicture=#{qpicture}</if>
-				<if test="pfile != null">pfile=#{pfile}</if>
-			</set>
+		<set>
+			<if test="title != null">title=#{title}</if>
+			<if test="content != null">content=#{content}</if>
+			<if test="pet_no != null">pet_no=#{pet_no}</if>
+			<if test="qpicture != null">qpicture=#{qpicture}</if>
+			<if test="pfile != null">pfile=#{pfile}</if>
+		</set>
 		WHERE q_no=#{q_no}
 	</update>
 
@@ -165,21 +174,25 @@
 		WHERE p_no = #{q_no}
 	</select>
 
-	<!-- 질문글 삭제 (1) : 답변이 있는 경우 제목과 본문 update & 태그와 펫 정보 delete-->
-	<update id="qDeleteOne" parameterType="com.last.prj.qna.service.QnaVO">
+	<!-- 질문글 삭제 (1) : 답변이 있는 경우 제목과 본문 update & 태그와 펫 정보 delete -->
+	<update id="qDeleteOne"
+		parameterType="com.last.prj.qna.service.QnaVO">
 		UPDATE qna
-		SET title='[작성자에 의해 삭제된 게시물입니다.]', content='작성자에 의해 삭제된 게시물입니다.', pet_no=null
+		SET title='[작성자에 의해 삭제된 게시물입니다.]',
+		content='작성자에 의해 삭제된 게시물입니다.', pet_no=null
 		WHERE q_no = #{q_no}
 	</update>
-	
+
 	<!-- 질문글 삭제 (2) : 답변이 없는 게시물은 완전히 delete -->
 	<delete id="qDeleteTwo" parameterType="int">
-		DELETE FROM qna WHERE q_no = #{q_no}
+		DELETE FROM qna WHERE q_no
+		= #{q_no}
 	</delete>
 
 	<!-- 답변글 수정 -->
-	<update id="ansUpdate" parameterType="com.last.prj.qna.service.QnaVO">
-		UPDATE qna 
+	<update id="ansUpdate"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		UPDATE qna
 		SET title=#{title}, content=#{content}
 		WHERE q_no=#{q_no}
 	</update>
@@ -189,12 +202,13 @@
 		DELETE FROM qna WHERE q_no
 		= #{q_no}
 	</delete>
-	
+
 	<!-- 관리자 신고당한 질문글 처리 -->
 	<select id="admQnaList" parameterType="int"
 		resultType="com.last.prj.qna.service.QnaVO">
 		select q.q_no, q.w_date, q.title, q.content, q.writer
-		from qna q, report r
+		from
+		qna q, report r
 		where q.q_no = r.q_no
 		order by q.q_no
 	</select>
