@@ -115,5 +115,11 @@ public class QnaServiceImpl implements QnaService {
 		return map.qDeleteTwo(q_no);
 	}
 
+	@Override
+	public List<QnaVO> qnaRecent() {
+		// TODO Auto-generated method stub
+		return map.qnaRecent();
+	}
+
 
 }
