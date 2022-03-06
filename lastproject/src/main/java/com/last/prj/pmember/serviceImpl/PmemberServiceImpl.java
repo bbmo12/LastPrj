@@ -6,13 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.prj.pmember.service.Criteria;
-import com.last.prj.pmember.service.FfileVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
-import com.last.prj.pmember.service.TimeVOList;
 
 @Repository("pMemberDao")
 public class PmemberServiceImpl implements PmemberService{
@@ -25,6 +23,16 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 	
 	@Override
+	public PmemberVO getPmemberinfo(String p_id) {
+		return map.getPmemberinfo(p_id);
+	}
+
+	@Override
+	public List<TimeVO> getTime(String p_id) {
+		return map.getTime(p_id);
+	}
+	
+	@Override
 	public List<ReviewVO> getCounselReview(String p_id) {
 		return map.getCounselReview(p_id);
 	}
@@ -34,10 +42,6 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.getServiceReview(p_id);
 	}
 
-	@Override
-	public List<FfileVO> getProfile(String m_id) {
-		return map.getProfile(m_id);
-	}
 	@Override
 	public int memberPage(Criteria cri) { 
 		return map.memberPage(cri);
