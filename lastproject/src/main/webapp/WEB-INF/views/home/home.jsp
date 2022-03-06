@@ -214,7 +214,8 @@ h1{
                                 	<c:when test="${best.code eq 101 }"><p id="best_rcom">훈련사</p></c:when>
                                 	<c:when test="${best.code eq 102 }"><p id="best_rcom">펫시터</p></c:when>
                                 	<c:otherwise><p id="best_rcom">미용사</p></c:otherwise>
-                                </c:choose>
+                                </c:choose>        
+                                <a href="pmemberDetail?id=${best.p_id}" class="genric-btn info-border circle" style="text-decoration: none;">이 파트너회원에게 예약하기</a>
                             </div>
                         </div>
                        </c:forEach>
