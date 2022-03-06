@@ -22,5 +22,10 @@ public class PayserviceImpl implements PayService {
 		return map.myPayList(m_id);
 	}
 
+	@Override
+	public int payInsert(PayVO po) {
+		return map.payInsert(po);
+	}
+
 	
 }

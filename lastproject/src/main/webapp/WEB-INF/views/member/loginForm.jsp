@@ -179,7 +179,7 @@ function login() {
           location.href = res;
        }
     });
-    
+}
    
     </script>
 

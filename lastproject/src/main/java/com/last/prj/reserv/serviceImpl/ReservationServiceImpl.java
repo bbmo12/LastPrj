@@ -39,5 +39,9 @@ public class ReservationServiceImpl implements ReservationService{
 	public int reservInsert(ReservationVO vo) {
 		return map.reservInsert(vo);
 	}
+	@Override
+	public int diaCodeUpdate(int res) {
+		return map.diaCodeUpdate(res);
+	}
 
 }
