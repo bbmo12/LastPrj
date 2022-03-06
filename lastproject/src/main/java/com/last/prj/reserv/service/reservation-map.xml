@@ -44,5 +44,11 @@
 		SET 	CODE = 404
 		WHERE 	R_NO = #{rno}
 	 </update>
+	 <!-- 파트너회원 진료작성 후 -->
+	 <update id="diaCodeUpdate" parameterType="int">
+		UPDATE 	RESERVATION 
+		SET 	CODE = 405
+		WHERE 	R_NO = #{rno}
+	 </update>
 
 </mapper>

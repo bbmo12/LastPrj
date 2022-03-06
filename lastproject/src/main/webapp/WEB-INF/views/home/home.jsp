@@ -112,6 +112,7 @@ h1{
     <section class="banner-area">
         <div class="container">
             <div class="row">
+
                 <div class="col-lg-10" style="margin-left: 50px;">
                 <br><br><br><br><br>
                     <h1>반려동물을 위한</h1>

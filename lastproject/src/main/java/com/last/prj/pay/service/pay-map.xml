@@ -9,6 +9,11 @@
 		WHERE P.M_ID = M.M_ID AND R.PET_NO = P.PET_NO AND R.R_NO = PA.R_NO AND
 		PM.P_ID = R.P_ID AND M.M_ID = #{m_id}
 	</select>
+	
+	<insert id="payInsert" parameterType="com.last.prj.pay.service.PayVO">
+		INSERT INTO PAY (R_NO,PRICE,ID) 
+		VALUES (#{r_no},#{price},#{m_id})
+	</insert>
 
 
 </mapper>

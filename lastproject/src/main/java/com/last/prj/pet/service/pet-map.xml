@@ -8,6 +8,14 @@
 		FROM pet
 		WHERE pet_no = #{pet_no}
 	</select>
+	
+	<!-- 예약 품종코드 조회(중복제거) -->
+	<select id="petCodeSearch" parameterType="String" resultType="com.last.prj.pet.service.PetVO">
+		SELECT DISTINCT code FROM  PET
+		WHERE
+		M_ID = #{m_id}
+	</select>
+	
 
 	<!-- 일반회원 반려동물 조회 -->
 	<select id="petmemberList" parameterType="String"
