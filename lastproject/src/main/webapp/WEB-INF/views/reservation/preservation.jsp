@@ -38,6 +38,41 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div class="modal fade" id="exampleModal" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">진료작성</h3>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- modal 몸통 -->
+			<div class="modal-body">
+					<div class="form-group">
+							<input type="hidden" id="p_id" name="p_id" value="${sessionScope.pId }">
+							<input type="hidden" id="r_no" name ="r_no">
+							<span id ="span_d_name" style="width: 250px !important;">&nbsp;진단명 : <input type="text" id="d_name" name="d_name"></span><br><br>
+							<span id ="span_symptom" style="width: 250px !important;"> &nbsp; &nbsp; 증 상 : <input type="text" id="symptom" name="symptom"></span><br><br>
+							<span id ="span_result" style="width: 250px !important;"> &nbsp; &nbsp; 처 방 : <input type="text" id="d_result" name="d_result"></span>
+					</div>
+			</div>
+			<!-- modal 하단 버튼 -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-dismiss="modal">취소</button>
+				<button id="sendDiaLog" name="sendReserv" type="button"
+					class="btn btn-primary" data-dismiss="modal">작성완료</button>
+			</div>
+		</div>
+	</div>
+</div>
+	
+	
+	
 	<script>
 		var val = $(".in_code").parent();
 		console.log (val);
@@ -49,6 +84,11 @@
 				$(".code").empty();
 			 	var check = $(".code").append(`<button onclick="ok(event)">승인</button> 
 						       				   <button onclick="no(event)">거절</button>`);
+			}else if(val[i].innerText == '결제완료'){
+				val[i].classList.add("diaLog");
+				$(".diaLog").empty();
+			 	var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
+						  						data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 			} 
 		}
 		function ok(event){
@@ -96,7 +136,37 @@
 				alert("해당 예약신청을 거절하셨습니다.");
 			}
 		}
-	
+		
+		$(".diaLogModal").on('click',function(){
+			var r_no = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+			$("#r_no").val(r_no);
+			
+		});
+		//모달창 값 보내기
+		$("#sendDiaLog").on('click',function(){
+			
+			var p_id = $("#p_id").val();
+			var d_name = $("#d_name").val();
+			var symptom =$("#symptom").val();
+			var result = $("#d_result").val();
+			var dia_r_no = $("#r_no").val();
+				 $.ajax({
+					url : 'diaInsert',
+					method : 'post',
+					data : {'r_no' : dia_r_no ,
+							'p_id' : p_id,
+							'd_name' : d_name,
+							'symptom' : symptom,
+							'result' : result },
+					success : function(res){
+						alert("작성완료");
+						location.reload();
+						
+					}
+				}); 
+		});
+		
+		
 	</script>
 </body>
 </html>

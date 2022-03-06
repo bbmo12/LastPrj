@@ -29,16 +29,32 @@
 <body>
 <br><br><br><br><br><br>
 
+<div id="menu">
+      <span id="menu-navi">
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+          <i class="calendar-icon ic-arrow-line-left" data-action="move-prev">이전</i>
+        </button>
+        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+          <span id="renderRange" class="render-range"></span>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+          <i class="calendar-icon ic-arrow-line-right" data-action="move-next">다음</i>
+        </button>
+      </span>
+    
+    </div>
 
 <div id="calendar" style="height: 800px;"></div>
 
 <script type="text/javascript">
 
 $(document).ready(function(){
+	let today = new Date();
+	var day = today.toLocaleDateString().substr(5,6).split('.');
+	var month = parseInt(day[0]); 
+	var year = today.toLocaleDateString().substr(0,4);
 	
+	$("#renderRange").text(year+'년'+month+'월');
 	revList();
-	
-	
 	
 	var templates = {
 		    popupIsAllDay: function() {
@@ -144,10 +160,6 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
- 
- 
- 
 
 	//새 일정 생성이벤트
 	calendar.on('beforeCreateSchedule', scheduleData => {
@@ -243,7 +255,6 @@ $(document).ready(function(){
     /* var strStart = start.slice(0,16);*/
     console.log(changes);
     console.log(start);
-    
 	  $.ajax({
 		url : "revsetupdate",
 		method : "POST",
@@ -273,14 +284,37 @@ calendar.on('beforeDeleteSchedule', scheduleData => {
 			  method : 'POST',
 			  data : {"id" : schedule.id},
 			  success : function(res){
-				  console.log(res);
 		  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
 		  		alert("해당 예약설정을 해제하였습니다.");
 			  }
 		  })
 	});
  
-
+	//달력 다음버튼 클릭 이벤트
+	$(".ic-arrow-line-left").on('click',function(event){
+		month = month-1;
+		if(month == 0){
+			year = parseInt(year)-1;
+			month = 12;
+		}
+		calendar.prev();
+		$("#renderRange").text(year+'년'+month+'월');
+		
+	});
+		//달력 이전버튼 클릭 이벤트
+	$(".ic-arrow-line-right").on('click',function(event){
+		month = month+1;
+		if(month == 13){
+			year = parseInt(year)+1;
+			month = 1;
+		}
+		calendar.next();
+		$("#renderRange").text(year+'년'+month+'월');
+	});
+	//달력 Today 클릭 이벤트
+	$(".move-today").on('click',function(event){
+		calendar.today();
+	});
 
  });
 

@@ -22,7 +22,7 @@
 
 
 <body>
-${sessionScope.mId }
+<%-- ${sessionScope.mId } --%>
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -167,6 +167,7 @@ ${sessionScope.mId }
 		$(".payBtn").on('click', function() {
 			var rno = $(this).parent().parent().children().first().text();
 			console.log($(this).parent().parent().children().first().text());
+			var m_id = "${sessionScope.mId }";
 			
 			var IMP = window.IMP; // 생략가능
 			IMP.init('imp48272965');
@@ -199,7 +200,6 @@ ${sessionScope.mId }
 					msg += '결제 금액 : ' + rsp.paid_amount;
 					// success.submit();
 					
-					location.reload();
 					
 					// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 					// 자세한 설명은 구글링으로 보시는게 좋습니다.
@@ -209,12 +209,14 @@ ${sessionScope.mId }
 				}
 				alert(msg);
 			});
-			
-			$.ajax({
+				
+				//결제 완료 후 결제 내역 등록
+				$.ajax({
 				url : 'payupdate',
 				method : 'post',
 				data : {
-					'rno' : rno
+					'rno' : rno,
+					'm_id': m_id
 				},
 				success : function(result) {
 				},

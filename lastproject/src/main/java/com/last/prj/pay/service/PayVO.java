@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class PayVO {
-	private int rNo; 		 //예약순번
+	private int r_no; 		 //예약순번
 	private int price; 		 //결제금액
-	private String wDate; 	 //결제일자
+	private String w_date; 	 //결제일자
 	private String cardANum; //카드승인번호
-	private String id;		 //거래아이디
+	private String m_id;	 //거래아이디
 	private String token;	 //고유아이디
 	
 	private String p_name; //반려동물 이름 

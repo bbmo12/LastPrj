@@ -56,8 +56,6 @@
 	<table class="table" >
 	</table>
 </div>
-
-
 	
 					<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1"
@@ -77,16 +75,39 @@
 				<form>
 				 <span id="dvalue">  <input type ="hidden" id="date_value" ></span> <br>
 				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
-				 <span> 증상   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
+				 <span> 예약내용(증상)   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
 	 	   		 <select class="animalType">
 					 <option value="" disabled selected>품종선택</option>
-					 <c:forEach items="${petList }" var="pet">
-					 	<!-- 중복 값 제거를 어떻게 하지? -->
+					 <c:forEach items="${petCode }" var="pet">
 					 	<c:if test="${pet.code eq 501  }">
 					 		<option value = "401" >개</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 502 }">
 					 		<option value = "401" >고양이</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 503 }">
+					 		<option value = "401" >조류</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 504 }">
+					 		<option value = "401" >파충류</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 505 }">
+					 		<option value = "401" >어류</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 506 }">
+					 		<option value = "401" >토끼</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 507 }">
+					 		<option value = "401" >돼지</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 508 }">
+					 		<option value = "401" >햄스터</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 509 }">
+					 		<option value = "401" >미어캣</option>
+					 	</c:if>
+					 	<c:if test="${pet.code eq 510 }">
+					 		<option value = "401" >여우</option>
 					 	</c:if>
 					 </c:forEach>
 		   		 </select>
@@ -112,15 +133,15 @@
 
 <script type="text/javascript">
 
-
-
 $(document).ready(function(){
 	
-	let today = new Date();
-	var day = today.toLocaleDateString().substr(0,7);
-	$("#renderRange").text(day);
-	revList();
+	 let today = new Date();
+	var day = today.toLocaleDateString().substr(5,6).split('.');
+	var month = parseInt(day[0]); 
+	var year = today.toLocaleDateString().substr(0,4);
 	
+	$("#renderRange").text(year+'년'+month+'월');
+	revList();
 	
 	var p_id;
 	//달력 템플릿
@@ -287,12 +308,24 @@ $(document).ready(function(){
 	});
  	 //달력 다음버튼 클릭 이벤트
 	$(".ic-arrow-line-left").on('click',function(event){
-		calendar.prev(); 
+		month = month-1;
+		if(month == 0){
+			year = parseInt(year)-1;
+			month = 12;
+		}
+		calendar.prev();
+		$("#renderRange").text(year+'년'+month+'월');
 		
 	});
  	//달력 이전버튼 클릭 이벤트
 	$(".ic-arrow-line-right").on('click',function(event){
+		month = month+1;
+		if(month == 13){
+			year = parseInt(year)+1;
+			month = 1;
+		}
 		calendar.next();
+		$("#renderRange").text(year+'년'+month+'월');
 	});
  	//달력 Today 클릭 이벤트
  	$(".move-today").on('click',function(event){
@@ -320,7 +353,7 @@ function changeSelection(event){
 			}else{
 				console.log(event.target);
 				$(".selectTime").parent().next().text('');
-				$(event.target).parent().next().append(`<button id="reportModal" type="button" class="btn btn-secondary"
+				$(event.target).parent().next().append(`<button id="reservModal" type="button" class="btn btn-secondary"
 														  data-toggle="modal" data-target="#exampleModal">예약가능</button>`);
 			}
 		}
