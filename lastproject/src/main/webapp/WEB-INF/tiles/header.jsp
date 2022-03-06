@@ -15,8 +15,17 @@
 
 	<!-- Page Title -->
 	<title>BanBanBan</title>
-
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+<style>
+.nav-menu a {
+	text-decoration: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+}
+
+
+</style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
 var socket = null;
@@ -91,7 +100,7 @@ function onMessage(evt){
 		<div class="container">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="home"><img src="resources/upload/ban.png" alt="" title=""style="width: 150px; height: 70px;"/></a>
+					<a href="home"><img src="resources/upload/logo2.png" alt="" title=""style="width:70px; height:70px;"/></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">

@@ -438,7 +438,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 	padding: 14px 0;
 	position: fixed;
 	left: 0;
-	top: 20px;
+	top: 5px;
 	right: 0;
 	transition: all 0.5s;
 	z-index: 997
@@ -504,9 +504,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-	padding: 400px 0 350px;
+	padding: 200px 0 200px;
 	background-color: #b0b0b0;
-	background-image: url("../images/dog.png");
+	background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url("../images/dog.png");
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
