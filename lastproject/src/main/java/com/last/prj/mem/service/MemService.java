@@ -33,5 +33,7 @@ public interface MemService {
 	
 	//회원가입 아이디 중복체크
 	boolean isIdCheck(String m_id);
-	
+
+	//일반 회원 수
+	int memCount();
 }
