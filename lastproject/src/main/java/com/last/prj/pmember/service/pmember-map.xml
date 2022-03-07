@@ -76,6 +76,7 @@
 	</select>
 	
 	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="servieceReview">
+		<result column="rev_no" property="rev_no"/>
 		<result column="content" property="content"/>
 		<result column="rating" property="rating"/>
 		<result column="m_id" property="m_id"/>
@@ -204,6 +205,34 @@
 		WHERE P.STARTDATE BETWEEN TO_DATE('220201', 'YYMMDD') AND TO_DATE('220330','YYMMDD')
 	</select>
 	
+	<select id="ServiceReviewList" resultMap="servieceReview" resultType="com.last.prj.pmember.service.ReviewVO">
+        SELECT RE.REV_NO,
+        	   RE.CONTENT, 
+			   RE.RATING, 
+			   M.M_ID, 
+			   M.PICTURE,
+               F.PICTURE AS PHOTO
+        FROM REVIEW RE LEFT JOIN RESERVATION R
+			  ON RE.R_NO = R.R_NO
+             LEFT JOIN PET P
+              ON R.PET_NO = P.PET_NO
+			 LEFT JOIN MEMBER  M
+              ON P.M_ID = M.M_ID
+			 LEFT JOIN F_FILE F
+			  ON F.F_PART = RE.F_PART
+			  ORDER BY RE.REV_NO DESC
+	</select>
 	
+	<select id="bestLikeList" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+			FROM
+				( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+					FROM P_MEMBER
+				GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+				HAVING RCOM IS NOT NULL
+				ORDER BY RCOM DESC
+				)
+		WHERE ROWNUM<![CDATA[<=4]]>     
+	</select>
 
 </mapper>

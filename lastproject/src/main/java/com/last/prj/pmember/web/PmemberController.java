@@ -1,7 +1,6 @@
 package com.last.prj.pmember.web;
 
 import java.io.File;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -22,6 +21,8 @@ import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.pmember.service.ReviewService;
+import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
 
 @Controller
@@ -32,6 +33,9 @@ public class PmemberController {
 	private PmemberMapper mapper;	
 	@Autowired
 	ServletContext sc;
+	
+	@Autowired
+	private ReviewService reviewDao;
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
@@ -62,7 +66,8 @@ public class PmemberController {
 	public String mypage(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
-		model.addAttribute("pmember", pMemberDao.getMember(p_id));
+		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
+		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		return "pmember/pmemberMypage";
 	}
 
@@ -71,15 +76,15 @@ public class PmemberController {
 	public String pmemberUpdateFrom(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
-		
-		model.addAttribute("pmember", pMemberDao.getMember(p_id));
+		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
+		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		return "pmember/pmemberUpdateForm";
 	}
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, @RequestParam List<TimeVO> dayArray,  TimeVO time, Model model, HttpServletRequest request) {
-		System.out.println("==================="+dayArray);
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time, Model model, HttpServletRequest request) {
+
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
@@ -127,6 +132,15 @@ public class PmemberController {
 		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
 		return "pmember/memberMain";
 	}
-
+	
+	//일반회원 후기작성
+	@RequestMapping("serviceReviewInsert")
+	@ResponseBody
+	public int serviceReview(ReviewVO review) {
+		System.out.println("여기부터아아아아ㅏ아아아아아아");
+		System.out.println(review);
+		reviewDao.servicereview(review);
+		return 1;
+	}
 }
 

@@ -11,31 +11,125 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Page Title -->
-    <title>Medino</title>
+    <title>BanBanBan</title>
 
 
 </head>
+<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
+	
+<style>
+.partner_img{
+	object-fit: cover;
+	object-position:top;
+	border-radius:50%;
+	width: 120px !important;
+	height: 120px !important;
+	float: none;
+	margin: 0 auto;
+}
 
+#best_rcom{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+	color: #4C4C4C;
+}
+
+#best_name{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 500;
+	font-size: 18px;
+	color: #4C4C4C;
+}
+
+#welcome_1{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+}
+
+h2{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 700;
+}
+#profile{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+#review{
+	display: inline-block;
+	padding: 0 50px 50px 0;
+	text-align: left;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 400;
+}
+
+.profile_img{
+	object-fit: cover;
+	object-position:top;
+	border-radius:50%;
+	width: 60px;
+	height: 60px;
+}
+
+#qSection {
+	border: 1px solid rgb(220, 220, 220);
+}
+
+.card-text {
+	overflow: hidden;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+}
+
+.review_text{
+	overflow: hidden;
+	white-space: normal;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+}
+
+h1{
+	color: white;
+}
+
+#banner_content{
+	color: white;
+}
+
+
+</style>
 	<br><br><br><br><br>
      <!-- Banner Area Starts -->
     <section class="banner-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5">
-                    <h4>반반반</h4>
-                    <h1>멍멍멍</h1>
-                    <p>하잇</p>
-                    <a href="reservationSelect" class="template-btn mt-3">일반회원예약조회</a>
-                    <a href="preservationSelect" class="template-btn mt-3">파트너회원예약조회</a>
-                    <a href="reservationSetting" class="template-btn mt-3">파트너회원예약설정</a>
-                    <a href="test" class="template-btn mt-3">일반회원 예약하기</a>
+
+                <div class="col-lg-10" style="margin-left: 50px;">
+                <br><br><br><br><br>
+                    <h1>반려동물을 위한</h1>
+                    <h1>모든 것</h1>
+                    <p id="banner_content">&nbsp;OOO이 함께합니다</p>
+                    <!-- <a href="reservationSelect" class="genric-btn info circle arrow">일반회원예약조회</a>
+                    <a href="preservationSelect" class="genric-btn info circle arrow">파트너회원예약조회</a>
+                    <a href="reservationSetting" class="genric-btn info circle arrow">파트너회원예약설정</a> -->
+                    <br>
+                    <a href="test" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a>
                     
                 </div>
             </div>
         </div>
     </section>
     <!-- Banner Area End -->
-    <section class="feature-area section-padding">
+    <!-- <section class="feature-area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -68,25 +162,28 @@
                 </div>
             </div>
         </div>
-    </section>
-    
+    </section> -->
+    <br><br><br><br><br><br>
     <section class="welcome-area section-padding3">
+    <div class="col-lg-10" style="float: none; margin: 0 auto;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 align-self-center">
+                <div class="col-lg-6">
                     <div class="welcome-img">
-                        <img src="resources/assets/images/welcome.png" alt="">
+                        <img src="resources/upload/cat.jpg" alt="" style="width:400px; height:550px;">
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="welcome-text mt-5 mt-lg-0">
-                        <h2>Welcome to our clinic</h2>
-                        <p class="pt-3">Subdue whales void god which living don't midst lesser yielding over lights whose. Cattle greater brought sixth fly den dry good tree isn't seed stars were.</p>
-                        <p>Subdue whales void god which living don't midst lesser yielding over lights whose. Cattle greater brought sixth fly den dry good tree isn't seed stars were the boring.</p>
-                        <a href="#" class="template-btn mt-3">learn more</a>
+                <div class="col-lg-6">
+                <br><br><br><br>
+                    <div class="mt-5 mt-lg-0">
+                        <h2>소중한 우리 아이 기록<br>어떻게 보관하고 계신가요?</h2>
+                        <br>
+                        <p id="welcome_1">블록체인에 담을 시간이 있을까?!</p>
+                        <p id="welcome_1">블록체인에 저장하고 잃어버릴 걱정없이 언제든지 확인하세요.</p>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     
@@ -96,62 +193,33 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-top text-center">
-                        <h2>Popular department</h2>
-                        <p>Green above he cattle god saw day multiply under fill in the cattle fowl a all, living, tree word link available in the service for subdue fruit.</p>
+                        <h2>베스트 파트너 회원</h2>
+                        <p></p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="department-slider owl-carousel">
+                    <c:forEach items="${bestList}" var="best">
                         <div class="single-slide">
-                            <div class="slide-img">
-                                <img src="resources/assets/images/department1.jpg" alt="" class="img-fluid">
-                                <div class="hover-state">
-                                    <a href="#"><i class="fa fa-stethoscope"></i></a>
-                                </div>
-                            </div>
                             <div class="single-department item-padding text-center">
-                                <h3>cardiac clinic</h3>
-                                <p>Hath creeping subdue he fish gred face whose spirit that seasons today multiply female midst upon</p>
+                            <div id="best_p_profile">
+                            	<img class="partner_img" src="resources/upload/${best.picture }" onError="this.style.display='none'" alt=''>
+                            </div>
+                            <br>
+                                <p id="best_name">${best.name }</p>
+                                <p id="best_rcom">추천수 : ${best.rcom }</p>
+                                <c:choose>
+                                	<c:when test="${best.code eq 100 }"><p id="best_rcom">수의사</p></c:when>
+                                	<c:when test="${best.code eq 101 }"><p id="best_rcom">훈련사</p></c:when>
+                                	<c:when test="${best.code eq 102 }"><p id="best_rcom">펫시터</p></c:when>
+                                	<c:otherwise><p id="best_rcom">미용사</p></c:otherwise>
+                                </c:choose>        
+                                <a href="pmemberDetail?id=${best.p_id}" class="genric-btn info-border circle" style="text-decoration: none;">이 파트너회원에게 예약하기</a>
                             </div>
                         </div>
-                        <div class="single-slide">
-                            <div class="slide-img">
-                                <img src="resources/assets/images/department2.jpg" alt="" class="img-fluid">
-                                <div class="hover-state">
-                                    <a href="departments.html"><i class="fa fa-stethoscope"></i></a>
-                                </div>
-                            </div>
-                            <div class="single-department item-padding text-center">
-                                <h3>plastic surgery</h3>
-                                <p>Hath creeping subdue he fish gred face whose spirit that seasons today multiply female midst upon</p>
-                            </div>
-                        </div>
-                        <div class="single-slide">
-                            <div class="slide-img">
-                                <img src="resources/assets/images/department3.jpg" alt="" class="img-fluid">
-                                <div class="hover-state">
-                                    <a href="departments.html"><i class="fa fa-stethoscope"></i></a>
-                                </div>
-                            </div>
-                            <div class="single-department item-padding text-center">
-                                <h3>dental clinic</h3>
-                                <p>Hath creeping subdue he fish gred face whose spirit that seasons today multiply female midst upon</p>
-                            </div>
-                        </div>
-                        <div class="single-slide">
-                            <div class="slide-img">
-                                <img src="resources/assets/images/department1.jpg" alt="" class="img-fluid">
-                                <div class="hover-state">
-                                    <a href="departments.html"><i class="fa fa-stethoscope"></i></a>
-                                </div>
-                            </div>
-                            <div class="single-department item-padding text-center">
-                                <h3>cardiac clinic</h3>
-                                <p>Hath creeping subdue he fish gred face whose spirit that seasons today multiply female midst upon</p>
-                            </div>
-                        </div>
+                       </c:forEach>
                     </div>
                 </div>
             </div>
@@ -161,7 +229,7 @@
     
     
     <!-- Patient Area Starts -->
-    <section class="patient-area section-padding">
+    <!-- <section class="patient-area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -208,114 +276,54 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Patient Area Starts -->
+    </section> -->
+    
     <!-- Specialist Area Starts -->
     <section class="specialist-area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-top text-center">
-                        <h2>Our specialish</h2>
-                        <p>Green above he cattle god saw day multiply under fill in the cattle fowl a all, living, tree word link available in the service for subdue fruit.</p>
+                        <h2>최신 후기</h2>
+                        <p>사용자들의 솔직한 후기를 확인하세요</p>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-doctor mb-4 mb-lg-0">
-                        <div class="doctor-img">
-                            <img src="resources/assets/images/doctor1.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="content-area">
-                            <div class="doctor-name text-center">
-                                <h3>ethel davis</h3>
-                                <h6>sr. faculty data science</h6>
-                            </div>
-                            <div class="doctor-text text-center">
-                                <p>If you are looking at blank cassettes on the web, you may be very confused at the.</p>
-                                <ul class="doctor-icon">
-                                    <li><a href="#"><i class="fa fa-facebook"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i><a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-doctor mb-4 mb-lg-0">
-                        <div class="doctor-img">
-                            <img src="resources/assets/images/doctor2.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="content-area">
-                            <div align="center">
-                                <h3>dand mories</h3>
-                                <h6>sr. faculty plastic surgery</h6>
-                            </div>
-                            <div class="doctor-text text-center">
-                                <p>If you are looking at blank cassettes on the web, you may be very confused at the.</p>
-                                <ul class="doctor-icon">
-                                    <li><a href="#"><i class="fa fa-facebook"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i><a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
+            <c:forEach items="${serviceReviewList}" var="review">
+                <div class="col-lg-4 col-sm-6">
                     <div class="single-doctor mb-4 mb-sm-0">
-                        <div class="doctor-img">
-                            <img src="resources/assets/images/doctor3.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="content-area">
-                            <div class="doctor-name text-center">
-                                <h3>align board</h3>
-                                <h6>sr. faculty data science</h6>
-                            </div>
+                        <div class="content-area" style="margin-bottom:20px;">
                             <div class="doctor-text text-center">
-                                <p>If you are looking at blank cassettes on the web, you may be very confused at the.</p>
-                                <ul class="doctor-icon">
-                                    <li><a href="#"><i class="fa fa-facebook"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i><a></li>
-                                </ul>
+                            <div id="profile">
+                            	<img class="profile_img" src="resources/upload/${review.picture }" onError="this.style.display='none'" alt=''>
                             </div>
-                        </div>
+                            <div id="review">
+	                            ${review.m_id }
+	                            <br>
+								<div class="star">
+									<input type="hidden" class="rating" value="${review.rating }">
+								</div>
+							</div>
+								<br>
+                                <p class="review_text">${review.content }</p>
+                                <c:forEach items="${review.fileList }" var="photo">
+								<div style="margin-top: 10px; display:inline-block;">
+									<img src="resources/upload/${photo.photo }" onError="this.style.display='none'" alt=''
+										style="width: 60px; height: 60px;">
+								</div>
+							</c:forEach>
+                            </div>
+                        </div>   
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-doctor">
-                        <div class="doctor-img">
-                            <img src="resources/assets/images/doctor4.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="content-area">
-                            <div class="doctor-name text-center">
-                                <h3>jeson limit</h3>
-                                <h6>sr. faculty plastic surgery</h6>
-                            </div>
-                            <div class="doctor-text text-center">
-                                <p>If you are looking at blank cassettes on the web, you may be very confused at the.</p>
-                                <ul class="doctor-icon">
-                                    <li><a href="#"><i class="fa fa-facebook"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i><a></li>
-                                    <li><a href="#"><i class="fa fa-pinterest"></i><a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </c:forEach>
             </div>
         </div>
     </section>
     <!-- Specialist Area Starts -->
     <!-- Hotline Area Starts -->
-    <section class="hotline-area text-center section-padding">
+    <!-- <section class="hotline-area text-center section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -325,70 +333,57 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- Hotline Area End -->
+    
    <!-- News Area Starts -->
-    <section class="news-area section-padding">
+    <section class="specialist-area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-top text-center">
-                        <h2>Recent medical news</h2>
-                        <p>Green above he cattle god saw day multiply under fill in the cattle fowl a all, living, tree word link available in the service for subdue fruit.</p>
+                        <h2>최신 질문글</h2>
+                        <p>어떤 질문들이 올라오고 있나요?</p>
                     </div>
                 </div>
             </div>
             <div class="row">
+            <c:forEach items="${qnaRecent }" var="recent">
                 <div class="col-lg-4 col-md-6">
-                    <div class="single-news">
-                        <div class="news-img">
-                            <img src="resources/assets/images/news1.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="news-text">
-                            <div class="news-date">
-                                22 July 2018
-                            </div>
-                            <h3><a href="blog-details.html">chip to model coeliac disease</a></h3>
-                            <p>Elementum libero hac leo integer. Risus hac part duriw feugiat litora cursus hendrerit bibendum per person on elit.Tempus inceptos posuere me.</p>
-                            <a href="blog-details.html" class="news-btn">read more <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-news mt-5 mt-md-0">
-                        <div class="news-img">
-                            <img src="resources/assets/images/news2.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="news-text">
-                            <div class="news-date">
-                                22 Oct 2018
-                            </div>
-                            <h3><a href="blog-details.html">Galectins An Ancient FaSi Future</a></h3>
-                            <p>Elementum libero hac leo integer. Risus hac part duriw feugiat litora cursus hendrerit bibendum per person on elit.Tempus inceptos posuere me.</p>
-                            <a href="blog-details.html" class="news-btn">read more <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-news mt-5 mt-lg-0">
-                        <div class="news-img">
-                            <img src="resources/assets/images/news3.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="news-text">
-                            <div class="news-date">
-                                22 Sep 2018
-                            </div>
-                            <h3><a href="blog-details.html">Getting the Most Out of the CLARI</a></h3>
-                            <p>Elementum libero hac leo integer. Risus hac part duriw feugiat litora cursus hendrerit bibendum per person on elit.Tempus inceptos posuere me.</p>
-                            <a href="blog-details.html" class="news-btn">read more <i class="fa fa-long-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+                <div class="single-news mt-5 mt-md-0">
+	                <div class="card">
+					  <div id="qSection" class="card-body">
+					    <span style="color:#4C4C4C; font-size:20px;">
+					    <i class="fa-solid fa-q fa-lg" style="color: dodgerblue; margin-right: 20px;"></i>
+					    ${recent.title }</span>
+					    <hr>
+					    <p class="card-text">${recent.content}</p>
+					    <a href="qnaDetail?q_no=${recent.q_no }" class="news-btn">자세히보기 <i class="fa fa-long-arrow-right"></i></a>
+					  </div>
+					</div>
+                   </div>
+                   </div>
+                   </c:forEach>
+                   <div style="float: none; margin: 0 auto;">
+                   <br>
+                   <a href="qnaMain" class="genric-btn info circle" style="text-decoration: none;">더 많은 질문 보러가기</a>
+                   </div>
             </div>
         </div>
     </section>
     <!-- News Area Starts -->
-    
+    <script>
+    $(function () {
+		$('.star').each(function (index, item) {
+			$(this).raty({
+				score: $(this).find('.rating').val(),
+				path: "resources/star",
+				width: 200,
+				readOnly: true
+			});
+		})
+	});
+    </script>
   
 </body>
 </html>

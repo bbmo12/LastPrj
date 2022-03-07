@@ -3,38 +3,37 @@
 <mapper namespace="com.last.prj.qtag.service.QtagMapper">
 
 	<!-- 인기 태그 목록 -->
-	<select id="tagList"
-		resultType="com.last.prj.qtag.service.QtagVO">
-		SELECT *
-		FROM q_tag
+	<select id="tagList" resultType="com.last.prj.qtag.service.QnaTagVO">
+		SELECT last.*
+		FROM 
+			(SELECT ROWNUM rnum, temp.*
+			FROM 
+				(SELECT t_name, COUNT (t_name) t_rank
+				FROM qnatag
+				GROUP BY (t_name)
+				ORDER BY t_rank DESC)temp
+			)last
 		<![CDATA[WHERE ROWNUM <= 16]]>
 	</select>
 
 	<!-- 태그 등록 시 qTag 테이블에 이미 등록된 태그인지 검사 후 없으면 insert함 -->
-	<insert id="newTag"
-		parameterType="com.last.prj.qtag.service.QtagVO">
-		<!-- <foreach collection="nTags" item="item"> -->
-		MERGE 
+	<insert id="newTag" parameterType="com.last.prj.qtag.service.QtagVO">
+		MERGE
 		INTO q_tag a
 		USING dual
 		ON (a.t_name = #{t_name})
 		WHEN NOT MATCHED THEN
 		INSERT
-		(
-		a.t_name
-		)
+		(a.t_name)
 		VALUES
-		(
-		#{t_name}
-		)
-		<!-- </foreach> -->
+		(#{t_name})
 	</insert>
 
 	<!-- 새로운 태그와 글 번호 연결 -->
 	<insert id="newQtag" parameterType="com.last.prj.qtag.service.QnaTagVO">
 		<foreach collection="nTags" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
-		INSERT INTO qnatag
-		values(q_seq.currval, #{item.t_name})
+			INSERT INTO qnatag
+			values(q_seq.currval, #{item.t_name})
 		</foreach>
 	</insert>
 </mapper>

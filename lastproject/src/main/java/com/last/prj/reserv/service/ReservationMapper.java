@@ -21,6 +21,10 @@ public interface ReservationMapper {
 	//결제하기
 	int payUpdate(int res);
 	
+	//진료기록 작성 후
+	int diaCodeUpdate(int res);
 	
+	//후기작성 폼이동
+	ReservationVO reviewWrithForm(@Param("r_no") int r_no);
 	
 }

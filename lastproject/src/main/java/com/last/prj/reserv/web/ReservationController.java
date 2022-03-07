@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.mem.service.MemService;
+import com.last.prj.pay.service.PayService;
+import com.last.prj.pay.service.PayVO;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pet.service.PetVO;
 import com.last.prj.pmember.service.PmemberService;
@@ -53,10 +55,15 @@ public class ReservationController {
 	@Autowired
 	private PmemberService pMemberDao;
 	
+	@Autowired
+	private MemService memDao;
+	
+	@Autowired
+	private PayService payDao;
+	
 	//일반회원 예약페이지
-	@RequestMapping("/test")
+	@RequestMapping("/reservMember")
 	public String reservation(Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo) {
-		
 		
 		//로그인 세션값
 		HttpSession session = request.getSession();
@@ -64,14 +71,11 @@ public class ReservationController {
 		System.out.println("m_id : " +m_id);
 		String p_id = (String) session.getAttribute("pId");
 		System.out.println("p_id : " + p_id);
-		
-		if(m_id==null || m_id =="") {
-			m_id = "test1@a.com";
-		}
-		if(p_id == null || p_id == "") {
-			p_id= "kim1@a.com";
-		}
-		
+		  if(m_id==null || m_id =="") {
+			  m_id = "test1@a.com"; 
+		  } if(p_id == null || p_id== "") {
+			  p_id= "kim1@a.com"; 
+		  }
 		co.setP_id(p_id);
 		po.setM_id(m_id);
 		pmo.setP_id(p_id);
@@ -82,20 +86,25 @@ public class ReservationController {
 		//펫정보조회
 		List <PetVO> petList = petDAO.petmemberList(m_id);
 		
+		//펫 품종코드 중복제거값
+		List <PetVO> petCode = petDAO.petCodeSearch(m_id);
+	
+		
 		model.addAttribute("petList",petList);
+		model.addAttribute("petCode",petCode);
 		model.addAttribute("reservset",list);
+		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id));
 		//해당 파트너회원 정보조회
 		model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
 		System.out.println(list);
 		System.out.println(petList);
-		return "reservation/test";
+		return "reservation/reservMember";
 	}
 	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
 	public String reservationSetting(Model model,PreservationVO pres) {
 		return "reservation/resvSetting";
-		
 	}
 	
 	
@@ -105,6 +114,7 @@ public class ReservationController {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		System.out.println("일반예약 아이디세션값 : " + m_id);
+		
 		vo.setM_id(m_id);
 		List<ReservationVO> list = reservationDao.reservationSelect(vo);
 		System.out.println(list);
@@ -121,6 +131,7 @@ public class ReservationController {
 		List<PreservationVO> list = pReservationDao.preservationlist(vo);
 		model.addAttribute("preservation", list);
 		System.out.println(list);
+		
 		return "reservation/preservation";
 	}
 	
@@ -147,12 +158,15 @@ public class ReservationController {
 		  return list;
 	  }
 	  
-	  //일반회원 결제완료 후 코드변경 
+	  //일반회원 결제완료 후 코드변경 + 결제내역 등록
 	  @PostMapping("/payupdate")
 	  @ResponseBody 
-	  public String payUpdate(@RequestParam("rno") int rno) {
-		  System.out.println(rno);
-		  reservationDao.payUpdate(rno);
+	  public String payUpdate(@RequestParam("r_no") int r_no,@RequestParam("m_id")String m_id, PayVO po) {
+		  System.out.println(r_no);
+		  reservationDao.payUpdate(r_no);
+		  
+		  //결제내역 등록
+		  payDao.payInsert(po);
 		  return "ok";
 	  }
 	  //예약된 날짜/시간 체크
@@ -197,6 +211,10 @@ public class ReservationController {
 	  }
 	  
 	  
-	  
+	  @RequestMapping("reviewWrithForm")
+	  @ResponseBody
+	  public ReservationVO reviewWrithForm(int r_no) {
+		  return reservationDao.reviewWrithForm(r_no);
+	  }
 	 
 }

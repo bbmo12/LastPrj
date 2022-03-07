@@ -53,4 +53,7 @@ public interface QnaService {
 
 	// 질문글 전체 조회 (관리자)
 	List<QnaVO> admQnaList();
+	
+	// 최근 질문글
+	List<QnaVO> qnaRecent();
 }

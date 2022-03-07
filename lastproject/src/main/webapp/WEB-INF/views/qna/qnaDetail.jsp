@@ -50,7 +50,7 @@
 
 #banner {
 	margin-left: 780px;
-	top: -900px;
+	top: -1200px;
 }
 
 #bestQna {
@@ -58,7 +58,8 @@
 }
 
 #ansBtn {
-	float: right
+	/* float: right; */
+	margin-left : 470px;
 }
 
 .updateAns {
@@ -108,7 +109,7 @@
 
 #postInfo {
 	text-align: right;
-	color: rightgray;
+	color: #353535;
 	margin-top: 20px;
 }
 
@@ -130,6 +131,16 @@
 
 .qRepo {
 	float: left;
+}
+
+#qUpdateBtn {
+	float : right;
+	margin-left : 550px;
+}
+
+#qDelBtn {
+	float : right;
+	margin-left : 10px;
 }
 </style>
 <link rel="stylesheet"
@@ -213,7 +224,7 @@
 
 
 						<!-- 본문 공간 -->
-						<div class="col-lg-9 col-md-9">
+						<div class="col-lg-12 col-md-12">
 
 							<!-- 본문 공간 -->
 							<div>
@@ -273,17 +284,7 @@
 								</div>
 							</c:if>
 						</div>
-
-						<!-- 질문글 신고 trigger -->
-						<c:if test="${mId ne null}">
-							<c:if test="${mId ne qnaDetail.writer }">
-								<button type="button" class="btn btn-primary"
-									data-toggle="modal" data-target="#exampleModal">
-									<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
-								</button>
-							</c:if>
-						</c:if>
-
+						
 						<!-- 세션 아이디와 글쓴이 일치할 때 수정, 삭제 가능 -->
 						<c:if test="${qnaDetail.title ne '[작성자에 의해 삭제된 게시물입니다.]'}">
 							<c:if test="${mId eq qnaDetail.writer }">
@@ -291,6 +292,16 @@
 										type="button" id="qUpdateBtn" class="btn btn-primary">수정</button></a>
 								<button type="button" id="qDelBtn" class="btn btn-secondary"
 									onclick="qDelete(${qnaDetail.q_no });">삭제</button>
+							</c:if>
+						</c:if>
+
+						<!-- 질문글 신고 trigger -->
+						<c:if test="${mId ne null}">
+							<c:if test="${mId ne qnaDetail.writer }">
+								<button type="button" class="btn btn-secondary"
+									data-toggle="modal" data-target="#exampleModal">
+									<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글 신고
+								</button>
 							</c:if>
 						</c:if>
 
@@ -610,7 +621,7 @@
 						<c:forEach items="${best }" var="best">
 							<ul style="text-align: left;" class="list cat-list">
 								<li style="display: inline-block;"><a
-									href="qnaDetail?q_no=${best.q_no }&writer=${best.writer}&pet_no=${best.pet_no}"
+									href="qnaDetail?q_no=${best.q_no }"
 									class="d-flex justify-content-between"> <i
 										class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
 								</a></li>

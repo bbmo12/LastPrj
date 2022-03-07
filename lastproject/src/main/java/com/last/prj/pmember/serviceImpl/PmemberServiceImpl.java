@@ -99,4 +99,14 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admPstartDateList();
 	}
 
+	@Override
+	public List<ReviewVO> ServiceReviewList() {
+		return map.ServiceReviewList();
+	}
+
+	@Override
+	public List<PmemberVO> bestLikeList() {
+		return map.bestLikeList();
+	}
+
 }
