@@ -62,27 +62,28 @@
 		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
 	</select>
 
-	<!-- 질문글 전체 조회 /페이징 -->
+	<!-- 질문글 전체 조회 & 페이징 & 검색 & 글자수 제한-->
 	<select id="qnaList" resultMap="qnaResult">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-		FROM (SELECT *
-		FROM qna q LEFT
-		OUTER JOIN qnatag t
-		ON q.q_no = t.q_no
-		WHERE p_no = 0
-		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
-		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
-		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
-		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
-		ORDER BY w_date DESC) A)
+				FROM (SELECT t.t_name, q.q_no, q.w_date, q.title, q.hit, q.writer, q.p_no, 	q.pet_no,
+							CASE WHEN LENGTH(q.content) > 100 THEN SUBSTR
+							(q.content,0,100)||'...' ELSE q.content END AS content
+					  FROM qna q LEFT OUTER JOIN qnatag t
+					  ON q.q_no = t.q_no
+					  WHERE p_no = 0
+					  <if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
+					  <if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
+					  <if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
+					  <if test="searchType == null or searchType ==''">AND 1 = 1</if>
+					  ORDER BY w_date DESC) A)
 		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
 
 	<!-- 베스트 게시글 -->
 	<select id="qnaBest" resultType="com.last.prj.qna.service.QnaVO">
-		SELECT *
+		 SELECT *
 		FROM
 		(SELECT *
 		FROM qna
@@ -111,7 +112,8 @@
 		RIGHT JOIN qna q
 		ON q.q_no = t.q_no
 		LEFT JOIN pet p
-		ON q.pet_no = p.pet_no
+		ON q.pet_no =
+		p.pet_no
 		WHERE q.q_no = #{q_no}
 	</select>
 
@@ -194,7 +196,8 @@
 		parameterType="com.last.prj.qna.service.QnaVO">
 		UPDATE qna
 		SET title=#{title}, content=#{content}
-		WHERE q_no=#{q_no}
+		WHERE
+		q_no=#{q_no}
 	</update>
 
 	<!-- 답변글 삭제 -->
@@ -214,12 +217,13 @@
 	</select>
 
 	<!-- 최근 qna -->
-	<select id="qnaRecent" resultType="com.last.prj.qna.service.QnaVO">
+	<select id="qnaRecent"
+		resultType="com.last.prj.qna.service.QnaVO">
 		SELECT *
 		FROM
 		(SELECT *
 		FROM qna
-		WHERE p_no = 0 
+		WHERE p_no = 0
 		AND NOT title IN ('[작성자에 의해 삭제된 게시물입니다.]')
 		ORDER BY q_no DESC
 		)

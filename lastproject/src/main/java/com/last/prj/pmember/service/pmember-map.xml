@@ -173,11 +173,24 @@
 		where f.code = p.code AND p.code = #{code}
 	</select>
 	
+	<!-- 파트너 날짜 별 조회 -->
+	<select id="admPmemberDate" parameterType="String" resultType="com.last.prj.qna.service.PmemberVO">
+		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
+		FROM P_MEMBER P , F_CODE F 
+		WHERE F.CODE=P.CODE AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+	</select>
+	
+	
 	<!-- 파트너 회원 가입일 조회 -->
 	<select id="admPstartDateList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS F_CONTENT, P.TEL AS TEL
 		FROM P_MEMBER P, F_CODE F 
 		WHERE F.CODE = P.CODE AND P.STARTDATE BETWEEN '220220' AND '220226'
+	</select>
+	
+	<!-- 파트너 회원 수 -->
+	<select id="pmemCount" resultType="int">
+		SELECT COUNT(*) FROM P_MEMBER
 	</select>
 	
 	<select id="ServiceReviewList" resultMap="servieceReview" resultType="com.last.prj.pmember.service.ReviewVO">

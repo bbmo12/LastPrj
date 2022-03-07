@@ -40,7 +40,7 @@
 				<code>조건 별 검색</code>
 			</p>
 			<div>
-				<form name="searchFrm">
+				<form id="admDateForm">
 					FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
 					TO : <input type="text" id="toDate" name="toDate">
 					<button type="button" id="btnSearch">검 색</button>
@@ -79,9 +79,6 @@
 						<tr>
 							<td>${pmember.name }</td>
 							<td>${pmember.p_id}</td>
-							<!--<a href="pmemberDetail?id=${pmember.p_id}">  -->
-							<%-- <td><meter value="${pmember.c_report}" min="0" max="100"
-									low="20" high="65" optimum="15" style="width: 100%" ></meter></td> --%>
 							<td>
 								<div class="progress">
 									<div class="progress-bar bg-success" role="progressbar"
@@ -267,6 +264,8 @@
 			});
 		});
 
+		
+		// =============날짜 검색 ==============
 		$("#startDate").on('click', function() {
 			$.ajax({
 				url : 'admStartDateList',
@@ -276,6 +275,78 @@
 				}
 			});
 		});
+
+		$('#btnSearch').on('click',function(e){
+			var str = $('#admDateForm').serialize();
+			console.log(str);
+			var fromDate = $("#fromDate").val();
+			var toDate = $("#toDate").val();
+			
+			$.ajax({
+				url : 'admPmemberDate',
+				method : 'post',
+				data : {
+					"fromDate" : fromDate,
+					"toDate" : toDate
+				}, success : function(result) {
+					console.log(result);
+					viewPmemberList(result);
+				}
+			})
+			
+		});
+		
+        $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년',
+            showOtherMonths: true,
+            changeYear: true,
+            changeMonth: true,
+            showOn: "both",
+            buttonImage: "",
+            buttonImageOnly: true,
+            buttonText: "선택"
+
+        });
+        $('#datepicker').datepicker('setDate', 'today');
+
+        $(function () {
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
+                    '12월'
+                ],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                showMonthAfterYear: true,
+                yearSuffix: '년',
+                showOtherMonths: true,
+                changeYear: true,
+                changeMonth: true,
+                showOn: "both",
+                buttonImage: "",
+                buttonImageOnly: false,
+                buttonText: "선택"
+            });
+            $("#fromDate").datepicker();
+            $("#toDate").datepicker();
+
+            $('#fromDate').datepicker('setDate', 'today');
+            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전
+        });// =============end 날짜 검색 ==============
+
 	</script>
 </body>
 

@@ -50,7 +50,7 @@
 
 #banner {
 	margin-left: 780px;
-	top: -1200px;
+	top: -1100px;
 }
 
 #bestQna {
@@ -483,8 +483,8 @@
 
 
 									<!-- 이 전문가와 상담 -->
-									<button id="pMemPage" type="button"
-										class="btn btn-primary btn-lg">이 전문가와 상담하기</button>
+									<a href="goToPdetail?p_id=${ans.writer}"><button id="pMemPage" type="button"
+										class="btn btn-primary btn-lg">이 전문가와 상담하기</button></a>
 								</div>
 							</c:if>
 

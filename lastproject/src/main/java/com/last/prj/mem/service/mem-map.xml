@@ -81,4 +81,9 @@
 		select case when count(m_id) = 1 then 0 else 1 end as m_id
 		from member where m_id = #{m_id}
 	</select>
+	
+	<!-- 일반회원 수 -->
+	<select id="memCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
 </mapper>

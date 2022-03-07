@@ -24,7 +24,7 @@ public interface ReportMapper {
 		//처리 별 신고리스트
 		public List<ReportVO> admReportRepor(@RequestParam("repor")int repor);
 		//신고 모달 단건 조회 : QnA
-		public List<ReportVO> admReportOneQna(int rep_no);
+		public List<ReportVO> admReportOneQna(int repno);
 		//신고 모달 단건 조회 : Review
 		public List<ReportVO> admReportOneReview(int rep_no);
 		//신고 처리

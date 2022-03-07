@@ -56,7 +56,7 @@
 	<select id="admReportOneQna" parameterType="int" resultType="com.last.prj.report.service.ReportVO">
 		SELECT F.CONTENT AS F_CONTENT, R.REPORTER , R.REPORTED, R.REP_NO, R.W_DATE, R.REPOR, R.Q_NO,Q.CONTENT AS Q_CONTENT, R.CONTENT
 		FROM REPORT R, F_CODE F, QNA Q
-		WHERE R.CODE = F.CODE AND Q.Q_NO = R.Q_NO AND R.REP_NO = #{rep_no}
+		WHERE R.CODE = F.CODE AND Q.Q_NO = R.Q_NO AND R.REP_NO = #{repno}
 	</select>
 	
 	<!-- 신고 모달로 단건 조회 Review -->
@@ -66,7 +66,7 @@
 		WHERE R.CODE = F.CODE AND REV.REV_NO = R.REV_NO AND R.REP_NO = #{rep_no}
 	</select>
 	
-		<!-- 신고 처리 -->
+	<!-- 신고 처리 -->
 	<update id="admReportUpdate">
 		UPDATE REPORT
 		SET STATE = #{state}, REPOR = #{repor}
@@ -82,7 +82,6 @@
 		FROM F_CODE F, REPORT R
 		WHERE R.CODE=F.CODE AND F.CODE = {code}
 		GROUP BY F.CODE,F.CONTENT,R.CODE
-
 	</select>
 
 	<!-- 일반회원 신고내역 전체조회 -->

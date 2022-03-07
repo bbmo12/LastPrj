@@ -241,11 +241,6 @@
 				}
 			})
 		};//end 처리 별 신고 리스트 : admRepor
-		
-		
-		
-		
-		
 
 		//리스트 만드는 함수 : viewPmemberList
 		let viewPmemberList = function(result) {
@@ -296,7 +291,6 @@
 															+ result[i].rep_no
 															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#cancelModal'> "
 															+ "기각처리</td></button></tr>");
-
 								} else {
 
 									$("#myTable")

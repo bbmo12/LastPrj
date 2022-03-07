@@ -1,28 +1,25 @@
 package com.last.prj.admin.web;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.mem.service.MemService;
+import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.Criteria;
-import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewService;
-import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.qna.service.QnaService;
-import com.last.prj.qna.service.QnaVO;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 
@@ -44,9 +41,28 @@ public class AdminController {
 	
 	@Autowired
 	private QnaService qnaDAO;
+	
+	@Autowired
+	private PetService petDAO; 
+	
+	@Autowired
+	private MemService memDao;
 
 	@RequestMapping("/main")
 	public String main(Model model) {
+		
+		int pmemCount = pMemberDao.pmemCount();
+		int memCount = memDao.memCount();
+		int petCount = petDAO.petCount();
+		
+		model.addAttribute("pmemCount",pmemCount);
+		model.addAttribute("memCount",memCount);
+		model.addAttribute("petCount",petCount);
+		
+		System.out.println(pmemCount);
+		System.out.println(memCount);
+		System.out.println(petCount);
+		
 		return "admin/main/main";
 	}
 
@@ -80,11 +96,27 @@ public class AdminController {
 	}
 	
 	
+	
 	//파트너회원 가입일 조회
 	@RequestMapping("/admStartDateList")
 	@ResponseBody
 	public List<PmemberVO> admStartDateList(){
 		return pMemberDao.admPstartDateList();
+	}
+	
+	//파트너회원 날짜 조회
+	@RequestMapping("/admPmemberDate")
+	@ResponseBody
+	public List<PmemberVO> admPmemberDate(@RequestParam("fromDate")String fromDate, @RequestParam("toDate")String toDate){
+		//HttpServletRequest req, PmemberVO pmem
+		System.out.println("시작 일~"+fromDate);
+		System.out.println("끝 일"+toDate);
+		
+		List<PmemberVO> list = pMemberDao.admPmemberDate(fromDate, toDate);
+		System.out.println(list);
+		
+		
+		return list;
 	}
 	
 	
@@ -131,10 +163,10 @@ public class AdminController {
 	//4 신고 모달 단건 조회 : QnA
 	@RequestMapping(value ="/admReportOneQna")
 	@ResponseBody
-	public List<ReportVO> admReportOneQna(@RequestParam("rep_no")int rep_no) {
-		System.out.println(rep_no);
-		System.out.println(reportDao.admReportOneQna(rep_no));
-		return reportDao.admReportOneQna(rep_no);
+	public List<ReportVO> admReportOneQna(@RequestParam("rep_no")int repno) {
+		System.out.println(repno);
+		System.out.println(reportDao.admReportOneQna(repno));
+		return reportDao.admReportOneQna(repno);
 	}
 	
 	// 신고 모달 단건 조회 : Review

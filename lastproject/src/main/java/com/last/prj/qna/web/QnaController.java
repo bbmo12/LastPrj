@@ -127,6 +127,21 @@ public class QnaController {
 		return "qna/qnaDetail";
 	}
 
+	// 이 전문가와 상담
+	@RequestMapping(value = "/goToPdetail")
+	public String goToPdetail(@RequestParam("p_id") String p_id, Model model) {
+
+		// 파트너 정보
+		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); // pmember
+		model.addAttribute("time", pMemberDao.getTime(p_id));// otime
+		
+		// 후기
+		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
+		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
+		
+		return "pmember/memberDetail";
+	}
+
 	// 로그인 여부 체크 + 질문 폼으로 이동 + m_id별 펫정보 받아감.
 	@RequestMapping(value = "/qnaForm")
 	public String qnaForm(@RequestParam("m_id") String m_id, HttpSession session, HttpServletResponse write,
@@ -171,15 +186,16 @@ public class QnaController {
 	@RequestMapping(value = "/qModiForm")
 	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, HttpSession session,
 			Model model) throws Exception {
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		QnaVO vo = qnaDAO.qnaDetail(q_no);
-		
+
 		String mId = (String) session.getAttribute("mId");
 
 		model.addAttribute("petList", petDAO.petmemberList(m_id));
 		model.addAttribute("qnaDetail", vo);
-		model.addAttribute("prevTag", objectMapper.writeValueAsString(vo.getTagList())); //태그리스트를 json으로 변환해 view로 전달한다.
+		model.addAttribute("prevTag", objectMapper.writeValueAsString(vo.getTagList())); // 태그리스트를 json으로 변환해 view로
+																							// 전달한다.
 		return "qna/qModiForm";
 	}
 
@@ -189,7 +205,7 @@ public class QnaController {
 			QnaTagVO qnatag) throws Exception {
 
 		System.out.println(q_no);
-		
+
 		qtDAO.delTags(q_no);
 
 		if (qtag.getNTags() != null && qtag.getNTags().size() > 0) {
