@@ -4,9 +4,10 @@ import java.util.List;
 
 public interface PmemberMapper {
 
-	public PmemberVO getMember(String p_id); //상세정보
 	public PmemberVO getPmemberinfo(String p_id);
 	public List<TimeVO> getTime(String p_id);//상세정보 시간표따로 가져옴 
+	public List<FfileVO> getImage(String p_id); //첨부파일 
+	public List<FfileVO> getLicense(String p_id);
 	public List<ReviewVO> getCounselReview(String p_id); //상담리뷰
 	public List<ReviewVO> getServiceReview(String p_id); //서비스리뷰
 	public int memberPage(Criteria cri);//페이징 총 회원수
