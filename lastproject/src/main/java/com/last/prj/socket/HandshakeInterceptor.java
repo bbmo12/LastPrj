@@ -18,9 +18,14 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 		ServletServerHttpRequest ssreq = (ServletServerHttpRequest) request;
 		HttpServletRequest req = ssreq.getServletRequest();
 		
+		LoginVO loginvo = (LoginVO) req.getSession().getAttribute("loginInfo");
+		attributes.put("loginvo", loginvo);
+		System.out.println("loginvo : "+loginvo);
+		/*
 		String mid = (String) req.getSession().getAttribute("mId");
-		attributes.put("mid", mid);
-		
+		attributes.put("mId", mid);
+		// 이거쓰려면 null 체크하기
+		*/
 		return super.beforeHandshake(request, response, wsHandler, attributes);
 	}
 

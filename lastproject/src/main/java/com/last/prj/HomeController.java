@@ -54,11 +54,13 @@ public class HomeController {
 	public String getSessionId(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mId");
-		String pid = (String) session.getAttribute("mId");
+		String pid = (String) session.getAttribute("pId");
 		
-		
-		
-		return
+		if(mid != null) {
+			return mid;
+		}else {
+			return pid;
+		}
 	}
 	
 }

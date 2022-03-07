@@ -27,10 +27,8 @@ public class NoticeController {
 	@PostMapping("/noticeInsert")
 	@ResponseBody
 	public String noticeInsert(NoticeVO notice, HttpServletRequest request) {
-		System.out.println("여기까지");
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("pId");
-		System.out.println("pid:왜 못받아"+id);
 		notice.setN_from(id);
 		noticeDao.noticeInsert(notice);
 		return "test/testPage";

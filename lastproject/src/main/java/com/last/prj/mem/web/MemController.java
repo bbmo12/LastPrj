@@ -144,10 +144,11 @@ public class MemController {
 			session.setAttribute("member", member);
 			session.setAttribute("mId", member.getM_id());
 			session.setAttribute("password", member.getPassword());
+			
 			LoginVO login = new LoginVO();
 			login.setId(member.getM_id());
 			session.setAttribute("loginInfo", login);
-
+			
 		} else {
 			return "member/loginForm";
 		}
@@ -169,6 +170,9 @@ public class MemController {
 			session.setAttribute("pmember", pmember);
 			session.setAttribute("pId", pmember.getP_id());
 			session.setAttribute("password", pmember.getPassword());
+			LoginVO login = new LoginVO();
+			login.setId(pmember.getP_id());
+			session.setAttribute("loginInfo", login);
 		} else {
 			return "member/loginForm";
 		}
@@ -226,7 +230,7 @@ public class MemController {
 	  }
   
 	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
-	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember) {
+	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -252,6 +256,7 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
+		model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		pmemDao.pmemberInsert1(pmember);
 		return "member/pjoinForm2";
 	}
