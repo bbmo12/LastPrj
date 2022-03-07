@@ -62,7 +62,9 @@
 							<div class="br" style="margin-top: -25px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-							<h4 class="widget_title">상담하기</h4>
+							<a href="chatMessage?m_id=${mId }&p_id=${pmemdetail.p_id}">
+							<button class="btn btn-primary">상담하기</button></a>
+							
 							<h4 class="widget_title">예 약</h4>
 						</aside>
 					</div>
