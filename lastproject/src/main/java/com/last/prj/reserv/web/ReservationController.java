@@ -138,7 +138,9 @@ public class ReservationController {
 		String p_id = (String) session.getAttribute("pId");
 		vo.setP_id(p_id);
 		List<PreservationVO> list = pReservationDao.preservationlist(vo);
+		model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
 		model.addAttribute("preservation", list);
+		
 		System.out.println(list);
 		
 		return "reservation/preservation";

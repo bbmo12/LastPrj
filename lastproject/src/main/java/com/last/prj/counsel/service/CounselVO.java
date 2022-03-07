@@ -1,6 +1,6 @@
 package com.last.prj.counsel.service;
 
-import java.util.Date;
+import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

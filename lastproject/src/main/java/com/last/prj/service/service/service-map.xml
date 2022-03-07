@@ -15,7 +15,13 @@
 	</select>
 	
 	<select id="pMembenefit" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
-		SELECT PRICE,ENDDATE
+		SELECT S.CONTENT,S.STARTDATE,S.ENDDATE,S.PRICE,M_ID 
+		FROM SERVICE S,RESERVATION R ,PET P
+		WHERE S.R_NO=R.R_NO AND P.PET_NO=R.PET_NO AND S.P_ID = #{p_id}
+	</select>
+	
+	<select id="totalPrice" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
+		SELECT SUM(PRICE) AS TOTAL_PRICE
 		FROM SERVICE
 		WHERE P_ID = #{p_id}
 	</select>

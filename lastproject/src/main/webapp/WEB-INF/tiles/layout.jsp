@@ -24,7 +24,9 @@
     <link rel="stylesheet" href="resources/assets/css/jquery.datetimepicker.min.css">
     <link rel="stylesheet" href="resources/assets/css/linearicons.css">
     <link rel="stylesheet" href="resources/assets/css/style.css">
-  <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+    <link rel="stylesheet" href="resources/assets/css/nice-select.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   
     
     <!-- admin css -->
     <link rel="stylesheet" href="resources/assets123/css/style.css">
@@ -42,14 +44,14 @@
 	
 	<!-- <script src="resources/toastr/toastr.min.js"></script>
 	<script src="resources/toastr/toastr.css"></script> -->
-	
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	
     <script src="resources/assets/js/vendor/wow.min.js"></script>
     <script src="resources/assets/js/vendor/owl-carousel.min.js"></script>
     <script src="resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
-   <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script> 
+    <script src="resources/assets/js/vendor/jquery.nice-select.min.js"></script> 
     <script src="resources/assets/js/vendor/superfish.min.js"></script>
     <script src="resources/assets/js/main.js"></script>
     
@@ -57,7 +59,7 @@
     <script src="resources/assets123/js/hoverable-collapse.js"></script>
     <script src="resources/assets123/js/misc.js"></script>
     <script src="resources/assets/js/vendor/jquery.raty.js"></script>
-
+	
 </head>
 
 <body>
