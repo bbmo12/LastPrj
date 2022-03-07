@@ -45,6 +45,35 @@
 #my_section {
 	padding: 50px;
 }
+
+.star-rating {
+  
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  padding:0 .2em;
+  text-align:center;
+  width:5em;
+}
+
+.star-rating input {
+  display:none;
+}
+
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+  color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -53,6 +82,7 @@
 
 <body>
 	<%-- ${sessionScope.mId } --%>
+	
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -64,8 +94,6 @@
 			</div>
 		</div>
 	</section>
-
-
 
 	<br>
 	<br>
@@ -155,12 +183,11 @@
 										<td>${res.refuse}</td>
 										<c:choose>
 											<c:when test="${res.code eq 405 }">
-												<td><button onclick="reviewWrite()">성공</button></td>
+												<td><button onclick="reviewWrite(event)">성공</button></td>
 											</c:when>
 											<c:otherwise>
 												<td>
 													<button>실패</button>
-												</td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
@@ -176,38 +203,59 @@
 		<!-- 모달 띄운후 내용입력부분 바디.  -->
 		<div class="modal_body">
 
-			<form class="forms-sample" action="#" method="post">
+			
 				<div class="form-group">
 					<h5 id="pname"></h5>
 				</div>
-				<div>
-				별점주기
+				<div> <h1>여기가 별점?</h1>
+				<div class="star-rating">
+				<input type="radio" id="5-stars" name="rating" value="5" />
+				<label for="5-stars" class="star">&#9733;</label>
+				<input type="radio" id="4-stars" name="rating" value="4" />
+				<label for="4-stars" class="star">&#9733;</label>
+				<input type="radio" id="3-stars" name="rating" value="3" />
+				<label for="3-stars" class="star">&#9733;</label>
+				<input type="radio" id="2-stars" name="rating" value="2" />
+				<label for="2-stars" class="star">&#9733;</label>
+				<input type="radio" id="1-stars" name="rating" value="1" />
+				<label for="1-stars" class="star">&#9733;</label>
+			</div>
 				</div>
-				
 				<div class="form-group">
 					<label for="exampleInputPassword4">후기내용</label>
 					<textarea class="form-control" id="content" name="content"
 						placeholder="후기내용" rows="4" cols="80">
                         </textarea>
 				</div>
-				<input type="hidden" value="">
-				<button type="submit">작성</button>
+				<!-- <div class="form-group">
+								<label>프로필 사진</label>
+								<div class="input-group col-xs-12">
+								<input  class="file-upload-browse btn btn-primary" type="file" id="file" name ="file">
+								</div>
+							</div> -->
+				<input type="hidden" id="rev_no" name="rev_no" value="">
+				<button type="button" onclick="serviceReview()">작성</button>
 				<button type="button">취소</button>
-			</form>
+			
 
 		</div>
 	</div>
 
 	<!-- 모달창 -->
 	<script type="text/javascript">
-   function reviewWrite(){
+	var wow;
+   function reviewWrite(event){
+	   wow = $(event.target).parent().parent().children().first().text()
+	$("#rev_no").val(wow)
+	   console.log("일단여기")
+	   console.log($(event.target).parent().parent().children().first().text());
 	      var body = document.querySelector('body');
 	      var modal = document.querySelector('.modal');	      
 	      
 	          modal.classList.toggle('show');
 	          if (modal.classList.contains('show')) {
 	            body.style.overflow = 'hidden';
-	            reviewadd();
+	            reviewadd(wow);
 	          } 
 	      
 
@@ -225,17 +273,17 @@
    </script>
 	<!-- 후기작성 모달창 -->
 	<script type="text/javascript">
-   	function reviewadd(){
-   		console.log(this)
-   		var r_no = $("#r_no").val()
-   		var name = $("#name").val()
+   	function reviewadd(wow){
+   		var r_no = wow
+   		/* var name = $("#name").val() */
    		$.ajax({
    			url: "reviewWrithForm",
    			type: "post",
    			data: {"r_no":r_no},
    			success : function(result){
+   				
    				console.log(result);
-   				$(".modal_body>p").remove();
+   				/* $(".modal_body").empty(); */
    				if(result == ""){
    	                $(".modal_body").append(`<p>오류</p>`)
    	             } else
@@ -347,14 +395,32 @@
 					alert("결제실패")
 				}
 			})
-			
-			
-			
-
 		})
 	</script>
-
-
+<!-- 리뷰작성 -->
+	<script type="text/javascript">
+	function serviceReview(){
+		var content = $("#content").val();
+		var rating = $(".rating").val();
+		var rev_no = $("#rev_no").val();
+		console.log("별점")
+		console.log(rating)
+		$.ajax({
+			url: "serviceReviewInsert",
+			type: "post",
+			data : {'rating' : rating,
+				'r_no': rev_no,
+				'content': content},
+			success : function(result){
+				alert("ggod")
+				
+			}
+			
+		})
+		
+	}
+	
+	</script>
 
 
 

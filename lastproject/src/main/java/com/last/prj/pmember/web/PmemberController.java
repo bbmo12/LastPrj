@@ -21,6 +21,8 @@ import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.pmember.service.ReviewService;
+import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
 
 @Controller
@@ -31,6 +33,9 @@ public class PmemberController {
 	private PmemberMapper mapper;	
 	@Autowired
 	ServletContext sc;
+	
+	@Autowired
+	private ReviewService reviewDao;
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
@@ -127,6 +132,15 @@ public class PmemberController {
 		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
 		return "pmember/memberMain";
 	}
-
+	
+	//일반회원 후기작성
+	@RequestMapping("serviceReviewInsert")
+	@ResponseBody
+	public int serviceReview(ReviewVO review) {
+		System.out.println("여기부터아아아아ㅏ아아아아아아");
+		System.out.println(review);
+		reviewDao.servicereview(review);
+		return 1;
+	}
 }
 
