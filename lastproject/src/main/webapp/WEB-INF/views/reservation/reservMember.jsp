@@ -135,7 +135,7 @@
 
 $(document).ready(function(){
 	
-	 let today = new Date();
+	let today = new Date();
 	var day = today.toLocaleDateString().substr(5,6).split('.');
 	var month = parseInt(day[0]); 
 	var year = today.toLocaleDateString().substr(0,4);
@@ -329,7 +329,12 @@ $(document).ready(function(){
 	});
  	//달력 Today 클릭 이벤트
  	$(".move-today").on('click',function(event){
+ 		
  		calendar.today();
+ 		day = today.toLocaleDateString().substr(5,6).split('.');
+ 		month = parseInt(day[0]); 
+ 		year = today.toLocaleDateString().substr(0,4);
+ 		$("#renderRange").text(year+'년'+month+'월');
  	})
 });
 
