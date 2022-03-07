@@ -19,11 +19,10 @@
 	box-sizing: border-box;
 	width: 313px;
 }
-#doughnutChart{
 
-	height : 250px;
+#doughnutChart {
+	height: 250px;
 }
-
 </style>
 <body>
 	<div class="content-wrapper">
