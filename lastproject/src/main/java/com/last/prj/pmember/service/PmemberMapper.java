@@ -20,9 +20,10 @@ public interface PmemberMapper {
 	public List<PmemberVO> bestLikeList();
 	
 	//관리자
-	public List<PmemberVO> admPlistCode(int code);
-	public List<PmemberVO> admPlist();
-	public List<PmemberVO> admPstartDateList();
+	public List<PmemberVO> admPlistCode(int code); //파트너쉽 별 리스트
+	public List<PmemberVO> admPlist(); 
+	public List<PmemberVO> admPstartDateList(); //개월 수
+	public List<PmemberVO> admPmemberPageList(Criteria cri); //파트너 회원 페이징
 	
 	
 	//id로 정보 조회
