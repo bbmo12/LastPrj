@@ -70,35 +70,33 @@
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
 						<div class="col-lg-12">
-							<div class="quotes">
+							<div class="quotes" style="margin-bottom: 0px;">
 								<h3>자기소개</h3>
 								${pmemdetail.p_info}
 							</div>
-							<div class="row">
+							<div class="row" style="margin-left: 10px;">
 								<section>
 									<div class="container">
 										<div class="row">
-											<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-												<div class="categories_post">
-													<img src="resources/assets/images/blog/cat-post/cat-post-3.jpg"
-														alt="등록된 사진이 없습니다.">
+											<c:forEach items="${pimage}" var="image">
+												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0" style="margin: 10px -35px 0 0;">
+													<div class="categories_post" style="width: 200px">
+														<img src="resources/upload/${image.picture}"
+														 style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-												<div class="categories_post">
-													<img src="resources/assets/images/blog/cat-post/cat-post-2.jpg"
-														alt="등록된 사진이 없습니다.">
+											</c:forEach>
+											<c:forEach items="${plicense}" var="plicense">
+												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0" style="margin: 10px -35px 0 0;">
+													<div class="categories_post" style="width: 200px">
+														<img src="resources/upload/${plicense.picture}"
+															  style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-4 col-md-6">
-												<div class="categories_post">
-													<img src="resources/assets/images/blog/cat-post/cat-post-1.jpg"
-														alt="등록된 사진이 없습니다.">
-												</div>
-											</div>
+											</c:forEach>
 										</div>
 									</div>
-									<div class="col-lg-9 col-md-9 blog_details">
+									<div class="col-lg-9 col-md-9 blog_details" style="width: 600px;">
 										<h3 style="font-weight: bold">
 											${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</h3>
 										<c:forEach items="${time }" var="time">
@@ -120,7 +118,7 @@
 										<div class="thumb">
 											<img class="author_img rounded-circle"
 												src="resources/upload/${counsel.picture }" alt="등록된 사진이 없습니다."
-												style="width: 100px;">
+												onError="this.style.display='none'" style="width: 100px;">
 										</div>
 										<div class="desc">
 											<h5>${counsel.m_id }</h5>
@@ -137,6 +135,7 @@
 									<c:forEach items="${counsel.fileList }" var="photo">
 										<div style="margin-top: 20px;">
 											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
+												onError="this.style.display='none'"
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
 									</c:forEach>
@@ -150,10 +149,10 @@
 										<div class="thumb">
 											<img class="author_img rounded-circle"
 												src="resources/upload/${service.picture }" alt="등록된 사진이 없습니다."
-												style="width: 100px;">
+												onError="this.style.display='none'" style="width: 100px;">
 										</div>
 										<div class="desc">
-											<h5>${service.m_id }&nbsp;&nbsp;평점:${service.rating }점</h5>
+											<h5>${service.m_id }</h5>
 											<div class="star">
 												<input type="hidden" class="rating" value="${service.rating }">
 											</div>
@@ -167,6 +166,7 @@
 									<c:forEach items="${service.fileList }" var="photo">
 										<div style="margin-top: 20px;">
 											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
+												onError="this.style.display='none'"
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
 									</c:forEach>
@@ -187,6 +187,7 @@
 		</div>
 	</section>
 	<script>
+		//추천버튼 
 		function likeHit(p_id) {
 			console.log(p_id);
 			var p_id = p_id;
@@ -197,10 +198,11 @@
 					"p_id": p_id
 				},
 				success: function () {
-			    console.log("dddddd");
+					console.log("dddddd");
 				}
 			});
 		}
+		//별점
 		$(function () {
 			$('.star').each(function (index, item) {
 				$(this).raty({

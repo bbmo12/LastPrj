@@ -84,8 +84,7 @@
 	<script type="text/javascript">
 	    function go_page(p) {
 	    	goform.pageNum.value=p;
-	    	goform.submit();
-			
+	    	goform.submit();		
 		}
 	    w_address.addEventListener('click', function () {
 			event.target.select();
