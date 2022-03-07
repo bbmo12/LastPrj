@@ -37,6 +37,11 @@ public class PmemserviceImpl implements PmemService {
 	public int pmemberInsert3(String p_id, int p_license, int p_image) {
 		return pmap.pmemberInsert3(p_id, p_license, p_image);
 	}
+
+	@Override
+	public boolean isIdCheck(String p_id) {
+		return pmap.isIdCheck(p_id);
+	}
 	
 	
 
