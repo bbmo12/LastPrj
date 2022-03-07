@@ -64,6 +64,11 @@ public class MemServiceImpl implements MemService {
 		return map.isIdCheck(m_id);
 	}
 
+	@Override
+	public int memCount() {
+		return map.memCount();
+	}
+
 	
 
 }

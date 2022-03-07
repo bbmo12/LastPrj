@@ -114,4 +114,14 @@ public class PmemberServiceImpl implements PmemberService{
 		return  map.admPmemberPageList(cri);
 	}
 
+	@Override
+	public int pmemCount() {
+		return map.pmemCount();
+	}
+
+	@Override
+	public List<PmemberVO> admPmemberDate(String fromDate, String toDate) {
+		return map.admPmemberDate(fromDate, toDate);
+	}
+
 }
