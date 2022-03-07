@@ -58,9 +58,11 @@
 								<li><a href="preservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 								</a></li>
+
 								<li><a href="pMemDiaList" class="d-flex justify-content-between">
 										<p>진료 내역</p>
 								</a></li>
+
 								<li><a href="pMembenefit" class="d-flex justify-content-between">
 										<p>결제 내역</p>
 								</a></li>

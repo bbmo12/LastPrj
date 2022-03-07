@@ -34,5 +34,10 @@ public class ServiceserviceImpl implements ServiceService {
 	public int ServiceUpdate(int r_no) {
 		return map.ServiceUpdate(r_no);
 	}
+
+	@Override
+	public ServiceVO totalPrice(String p_id) {
+		return map.totalPrice(p_id);
+	}
 	
 }
