@@ -11,6 +11,14 @@
 <!-- <script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+	integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 .container-fluid {
 	width: 100%;
@@ -55,8 +63,13 @@
 					<option value="702">기각 처리</option>
 					<option value="703">승인 처리</option>
 				</select>
-				<button type="button" class="btn btn-link btn-rounded btn-fw"
-					id="admReportTime">기간 별 신고</button>
+				<div>
+				<form id="admDateForm">
+					FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
+					TO : <input type="text" id="toDate" name="toDate">
+					<button type="button" id="btnSearch">검 색</button>
+				</form>
+			</div>
 			</div>
 
 			<!-- 모달 -->
@@ -439,6 +452,81 @@
 				}) //end Ajax
 			}//end If
 		})//end 신고 처리
+		
+		
+		$('#btnSearch').on('click',function(e){
+			var str = $('#admDateForm').serialize();
+			console.log(str);
+			var fromDate = $("#fromDate").val();
+			var toDate = $("#toDate").val();
+			
+			$.ajax({
+				url : 'admReportDate',
+				method : 'post',
+				data : {
+					"fromDate" : fromDate,
+					"toDate" : toDate
+				}, success : function(result) {
+					console.log(result);
+					viewPmemberList(result);
+				}
+			})
+			
+		});
+		
+        $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년',
+            showOtherMonths: true,
+            changeYear: true,
+            changeMonth: true,
+            showOn: "both",
+            buttonImage: "",
+            buttonImageOnly: true,
+            buttonText: "선택"
+
+        });
+        $('#datepicker').datepicker('setDate', 'today');
+
+        $(function () {
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
+                    '12월'
+                ],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                showMonthAfterYear: true,
+                yearSuffix: '년',
+                showOtherMonths: true,
+                changeYear: true,
+                changeMonth: true,
+                showOn: "both",
+                buttonImage: "",
+                buttonImageOnly: false,
+                buttonText: "선택"
+            });
+            $("#fromDate").datepicker();
+            $("#toDate").datepicker();
+
+            $('#fromDate').datepicker('setDate', 'today');
+            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전
+        });// =============end 날짜 검색 ==============
+		
+		
+		
 	</script>
 </body>
 </html>

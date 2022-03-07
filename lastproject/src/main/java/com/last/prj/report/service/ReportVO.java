@@ -34,6 +34,9 @@ public class ReportVO {
 	private String q_content; 		//신고 당한 QnA 내역 
 	private String state;           //신고 처리 사유
 	private String rev_content;     //신고 당한 review 내역
+	
+	private String formDate;        //신고 날짜 검색
+	private String toDate;			//신고 날짜 검색
 
 
 }

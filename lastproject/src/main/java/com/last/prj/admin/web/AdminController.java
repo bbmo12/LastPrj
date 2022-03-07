@@ -191,5 +191,24 @@ public class AdminController {
 
 		return "redirect:admin/board/adminReport";
 	}
+	
+	//신고 날짜 검색 : admReportDate
+	@RequestMapping(value = "/admReportDate")
+	@ResponseBody
+	public List<ReportVO> admReportDate(@RequestParam("fromDate")String fromDate, @RequestParam("toDate")String toDate){
+		//HttpServletRequest req, PmemberVO pmem
+		System.out.println("시작 일~"+fromDate);
+		System.out.println("끝 일"+toDate);
+		
+		List<ReportVO> list = reportDao.admReportDate(fromDate, toDate);
+		System.out.println(list);
+		
+		
+		return list;
+	}
+	
+	
+	
+	
 		
 }

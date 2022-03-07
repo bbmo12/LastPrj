@@ -91,5 +91,12 @@
 		FROM REPORT R, F_CODE C, P_MEMBER P
 		WHERE R.CODE=C.CODE AND R.REPORTED=P.P_ID AND REPORTER = #{m_id}
 	</select>
+	
+	<!-- 신고 날짜 별 검색 -->
+	<select id="admReportDate" parameterType="String" resultType="com.last.prj.report.service.ReportVO">
+		SELECT R.REPORTER, R.REPORTED,R.W_DATE, R.CONTENT, F.CONTENT as f_content, R.REPOR
+		FROM REPORT R , F_CODE F 
+		WHERE F.CODE=R.CODE AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
+	</select>
 
 </mapper>
