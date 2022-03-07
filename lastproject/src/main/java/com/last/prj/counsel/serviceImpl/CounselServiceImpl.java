@@ -18,5 +18,10 @@ public class CounselServiceImpl implements CounselService {
 	public List<CounselVO> myCounselList(String m_id) {
 		return map.myCounselList(m_id);
 	}
+
+	@Override
+	public List<CounselVO> pmemCounselList(String p_id) {
+		return map.pmemCounselList(p_id);
+	}
 	
 }

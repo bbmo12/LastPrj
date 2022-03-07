@@ -47,7 +47,7 @@
 								<li><a href="#" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 									</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmemcounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
 									</a></li>
 								<li><a href="#" class="d-flex justify-content-between">
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row">
+					<div class="single-post row" style="margin-left: 10px;">
 						<div class="col-lg-9 col-md-9 blog_details">
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">이름</h3>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.counsel.service.CounselService;
 import com.last.prj.mem.service.MemService;
+import com.last.prj.pmember.service.PmemberService;
 
 @Controller
 public class CounselController {
@@ -21,6 +22,9 @@ public class CounselController {
 	@Autowired
 	private MemService memDao;
 	
+	@Autowired
+	private PmemberService pMemberDao;
+	
 	@RequestMapping("/mycounsel")
 	public String mycounsel(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -30,5 +34,14 @@ public class CounselController {
 		model.addAttribute("mycounsel" ,counselDao.myCounselList(m_id));
 		
 		return "mypage/mcounselSearch";
+	}
+	//파트너회원 상담내역
+	@RequestMapping("/pmemcounsel")
+	public String pmemcounsel(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember 상세정보
+		model.addAttribute("pmemcounsel", counselDao.pmemCounselList(p_id));
+		return "mypage/pmemcounsel";
 	}
 }
