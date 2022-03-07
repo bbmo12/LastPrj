@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.last.prj.pmember.service.Criteria;
+
 public interface ReservationService {
 	List<ReservationVO> reservationSelectList();
 	
@@ -22,4 +24,9 @@ public interface ReservationService {
 	
 	//진료기록 작성 후
 	int diaCodeUpdate(int res);
+	
+	
+	//페이징
+	int reservPage(Criteria cri);
+	List<ReservationVO> reservationPageList(Criteria cri);
 }

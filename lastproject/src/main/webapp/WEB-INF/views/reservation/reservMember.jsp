@@ -143,7 +143,8 @@ $(document).ready(function(){
 	$("#renderRange").text(year+'년'+month+'월');
 	revList();
 	
-	var p_id;
+	var p_id="${pmember.p_id}";
+	console.log("p_id======================"+p_id)
 	//달력 템플릿
 	var templates = {
 		    popupIsAllDay: function() {
@@ -210,10 +211,15 @@ $(document).ready(function(){
 	
 	//예약설정조회
 	function revList(){
+		p_id = "${pmember.p_id}";
+		console.log(p_id);
+		
 		$("#calendar").empty();
 		CreateCalendar();
 		$.ajax({
 			url : "revsetlist",
+			method : "POST",
+			data : {"p_id" : p_id},
 			dataType : "JSON",
 			success : function(result){
 				console.log(result);

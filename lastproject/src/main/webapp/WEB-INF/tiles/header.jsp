@@ -175,8 +175,11 @@ function onMessage(evt){
 								<ul>
 									<li><a href="pmemberMyPage">내 프로필</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
-									<li><a href="#">결제 내역</a></li>
-									<li><a href="pmemcounsel">상담 내역</a></li>
+
+									<li><a href="pMemDiaList">내 진료 내역</a></li>
+									<li><a href="pMembenefit">결제 내역</a></li>
+									<li><a href="#">상담 내역</a></li>
+
 									<li><a href="#">신고 내역</a></li>
 									<li><a href="#">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>

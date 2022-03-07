@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.mem.service.MemService;
 import com.last.prj.service.service.ServiceService;
+import com.last.prj.service.service.ServiceVO;
 
 @Controller
 public class ServiceController {
@@ -34,4 +35,12 @@ public class ServiceController {
 		
 		return "mypage/petprotocol";
 	}
+	
+	//파트너회원 내 수익조회
+	@RequestMapping("pMembenefit")
+	public String pMembenefit(Model model,HttpServletRequest request,ServiceVO vo) {
+		model.addAttribute("pMembenefit",vo);
+		return "mypage/Mybenefit";
+	}
+	
 }
