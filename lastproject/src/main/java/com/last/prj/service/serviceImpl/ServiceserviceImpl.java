@@ -24,5 +24,15 @@ public class ServiceserviceImpl implements ServiceService {
 	public int ServiceInsert(ServiceVO vo) {
 		return map.ServiceInsert(vo);
 	}
+
+	@Override
+	public List<ServiceVO> pMembenefit(String p_id) {
+		return map.pMembenefit(p_id);
+	}
+
+	@Override
+	public int ServiceUpdate(int r_no) {
+		return map.ServiceUpdate(r_no);
+	}
 	
 }

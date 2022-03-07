@@ -62,8 +62,12 @@
 							<div class="br" style="margin-top: -25px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
+						
 							<h4 class="widget_title">상담하기</h4>
-							<h4 class="widget_title">예 약</h4>
+							<form action="reservMember" name="reservForm" method="POST">
+								<input type="hidden" id ="p_id" name ="p_id" value="${pmemdetail.p_id}">
+								<button type="submit" class="widget_title reservBtn">예 약</button>>
+							</form>
 						</aside>
 					</div>
 				</div>
