@@ -1,5 +1,3 @@
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -20,11 +18,9 @@
 				<ul class="nav flex-column sub-menu">
 					<li class="nav-item"><a class="nav-link" href="boardTables">공지사항 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="pmemberTables">파트너회원 관리</a></li>
+						href="admPmember">파트너회원 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="reportTables">신고 관리</a></li>
-						<li class="nav-item"><a class="nav-link"
-						href="reportList">신고 관리2</a></li>
+						href="admReport">신고 관리</a></li>
 				</ul>
 			</div></li>
 

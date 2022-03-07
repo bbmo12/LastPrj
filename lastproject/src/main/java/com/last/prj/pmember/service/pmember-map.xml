@@ -202,7 +202,7 @@
 	<select id="admPstartDateList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS F_CONTENT, P.TEL AS TEL
 		FROM P_MEMBER P, F_CODE F 
-		WHERE P.STARTDATE BETWEEN TO_DATE('220201', 'YYMMDD') AND TO_DATE('220330','YYMMDD')
+		WHERE F.CODE = P.CODE AND P.STARTDATE BETWEEN '220220' AND '220226'
 	</select>
 	
 	<select id="ServiceReviewList" resultMap="servieceReview" resultType="com.last.prj.pmember.service.ReviewVO">

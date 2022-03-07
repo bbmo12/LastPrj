@@ -2,6 +2,8 @@ package com.last.prj.board.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 
 
 public interface BoardService {
@@ -13,5 +15,5 @@ public interface BoardService {
 	int boardDelete(int b_no);
 	
 	int boardIdUpdate(int b_no);
-	List<BoardVO> boardSearch(String key, String val);
+	List<BoardVO> boardSearch(@Param("key")String key, @Param("data")String data);
 }
