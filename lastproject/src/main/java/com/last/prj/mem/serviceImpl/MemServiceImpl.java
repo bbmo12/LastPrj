@@ -58,6 +58,12 @@ public class MemServiceImpl implements MemService {
 		return map.idCheck(m_id);
 	}
 
+	@Override
+	public boolean isIdCheck(String m_id) {
+
+		return map.isIdCheck(m_id);
+	}
+
 	
 
 }

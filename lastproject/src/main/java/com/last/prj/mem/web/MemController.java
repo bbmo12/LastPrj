@@ -20,6 +20,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -278,8 +279,19 @@ public class MemController {
 		  return "member/joinResult";
 	  }
 
-	 
-
+	  //아이디 중복체크
+	@PostMapping("ajaxIsIdCheck")
+	@ResponseBody
+	public boolean ajaxIsIdCheck(String m_id) {
+		return memDao.isIdCheck(m_id);
+	}
+	
+	@PostMapping("pajaxIsIdCheck")
+	@ResponseBody
+	public boolean pajaxIsIdCheck(String p_id) {
+		return pmemDao.isIdCheck(p_id);
+	}
+	
 	@RequestMapping("/join") // 회원가입폼 이동
 	public String login() {
 		return "member/join";

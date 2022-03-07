@@ -122,7 +122,7 @@ h1{
                     <a href="preservationSelect" class="genric-btn info circle arrow">파트너회원예약조회</a>
                     <a href="reservationSetting" class="genric-btn info circle arrow">파트너회원예약설정</a> -->
                     <br>
-                    <a href="test" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="reservMember" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a>
                     
                 </div>
             </div>

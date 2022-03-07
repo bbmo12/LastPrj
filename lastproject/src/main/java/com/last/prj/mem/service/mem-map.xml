@@ -75,4 +75,10 @@
 		SELECT COUNT(*)
 		FROM MEMBER WHERE m_id = #{m_id}
 	</select>
+	
+	<!-- 회원가입 아이디 중복체크  -->
+	<select id="isIdCheck" parameterType="String" resultType="boolean">
+		select case when count(m_id) = 1 then 0 else 1 end as m_id
+		from member where m_id = #{m_id}
+	</select>
 </mapper>

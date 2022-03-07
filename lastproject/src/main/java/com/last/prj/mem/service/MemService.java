@@ -28,6 +28,10 @@ public interface MemService {
 	int memberDelete(@Param("m_id") String m_id);
 	
 	
-	//아이디 중복체크
+	//아이디 중복체크(카카오로그인)
 	boolean idCheck(String m_id);
+	
+	//회원가입 아이디 중복체크
+	boolean isIdCheck(String m_id);
+	
 }

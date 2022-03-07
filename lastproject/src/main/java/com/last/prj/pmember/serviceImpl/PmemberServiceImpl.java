@@ -114,4 +114,10 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<PmemberVO> bestLikeList() {
 		return map.bestLikeList();
 	}
+
+	@Override
+	public List<PmemberVO> admPmemberPageList(Criteria cri) {
+		return  map.admPmemberPageList(cri);
+	}
+
 }

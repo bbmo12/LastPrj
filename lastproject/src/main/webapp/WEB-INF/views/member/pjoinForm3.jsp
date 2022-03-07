@@ -20,6 +20,43 @@
 									type="text" class="form-control" id="p_id" name="p_id"
 									value="${p_id.p_id}" placeholder="">
 							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">월요일</label>
+								 <input
+									type="text" class="form-control" id="p_id" name="p_id"
+									value="${p_id.p_id}" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">화요일</label>
+								 <input
+									type="text" class="form-control" id="" name=""
+									value="${p_id.p_id}" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">수요일</label> <input
+									type="text" class="form-control" id="" name=""
+									value="${p_id.p_id}" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">목요일</label> <input
+									type="text" class="form-control" id="" name=""
+									value="${p_id.p_id}" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">금요일</label> <input
+									type="text" class="form-control" id="" name=""
+									value="${p_id.p_id}" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">토요일</label> <input
+									type="text" class="form-control" id="" name=""
+									value="${p_id.p_id}" placeholder="">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">일요일</label> <input
+									type="text" class="form-control" id="" name=""
+									value="${p_id.p_id}" placeholder="">
+							</div>
 						</form>
 
 						<h4 class="card-title">이미지를 등록하세요</h4>
