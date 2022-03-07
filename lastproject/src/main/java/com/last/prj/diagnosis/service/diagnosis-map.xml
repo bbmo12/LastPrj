@@ -5,6 +5,11 @@
 		INSERT INTO DIAGNOSIS (R_NO,D_NAME,RESULT,SYMPTOM)
 		VALUES (#{r_no},#{d_name},#{result},#{symptom})
 	</insert>
-	
+	<!-- 파트너회원 진료기록 조회 -->
+	<select id="pMemDiaList" parameterType="String" resultType="com.last.prj.diagnosis.service.DiagnosisVO">
+		SELECT P.M_ID,P.NAME AS PET_NAME,D.D_NAME,D.W_DATE
+		FROM DIAGNOSIS D,PET P,RESERVATION R
+		WHERE D.R_NO=R.R_NO AND P.PET_NO =R.PET_NO AND R.P_ID = #{p_id}
+	</select>
 	
 </mapper>

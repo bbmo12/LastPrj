@@ -16,5 +16,7 @@ public interface PmemMapper {
 	int pmemberInsert2(PmemVO pmember);
 	
 	int pmemberInsert3(@Param("p_id") String p_id,@Param("p_license") int p_license,@Param("p_image") int p_image);
+	
+	boolean isIdCheck(String p_id);
 
 }

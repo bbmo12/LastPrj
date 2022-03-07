@@ -7,43 +7,18 @@
  	</select>
  	
  	<select id="getTime" parameterType="String" resultType="com.last.prj.pmember.service.TimeVO">
- 		SELECT * FROM O_TIME WHERE P_ID = #{p_id}
+ 		SELECT * FROM O_TIME WHERE P_ID = #{p_id} ORDER BY O_NO
  	</select>
- 	
-	<resultMap type="com.last.prj.pmember.service.PmemberVO"
-		id="pmembervo">
-		<result column="p_id" property="p_id" />
-		<result column="name" property="name" />
-		<result column="tel" property="tel" />
-		<result column="password" property="password" />
-		<result column="n_content" property="n_content" />
-		<result column="w_name" property="w_name" />
-		<result column="w_address" property="w_address" />
-		<result column="w_tel" property="w_tel" />
-		<result column="p_info" property="p_info" />
-		<result column="w_d_address" property="w_d_address"/>
-		<result column="career" property="career"/>
-		<result column="rcom" property="rcom" />
-        <result column="code" property="code" />
-		<result column="p_license" property="p_license"/>
-		<result column="p_image" property="p_image" />
-		<result column="picture" property="picture" />
-		<collection property="timeList" resultMap="TimeVO" />
-	</resultMap>
-
-	<resultMap type="com.last.prj.pmember.service.TimeVO"
-		id="TimeVO">
-		<result column="w_day" property="w_day" />
-		<result column="starttime" property="starttime" />
-		<result column="endtime" property="endtime" />
-	</resultMap>
-	<!-- 상세페이지 -->
-	<select id="getMember" parameterType="String"
-		resultMap="pmembervo"
-		resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT *
-		FROM P_MEMBER P, O_TIME T
-		WHERE P.P_ID = T.P_ID AND P.P_ID = #{p_id}
+ 	<!-- 상세페이지 첨부파일 따로가져오기 -->
+	<select id="getImage" parameterType="String"  resultType="com.last.prj.pmember.service.FfileVO">
+		SELECT F.PICTURE
+		FROM F_FILE F, P_MEMBER P
+		WHERE P.P_IMAGE = F.F_PART AND P_ID = #{p_id}
+	</select>
+	<select id="getLicense" parameterType="String" resultType="com.last.prj.pmember.service.FfileVO">
+		SELECT F.PICTURE
+		FROM F_FILE F, P_MEMBER P
+		WHERE P.P_LICENSE = F.F_PART AND P_ID =  #{p_id}
 	</select>
 	
 	<!-- 상담리뷰 -->
@@ -198,11 +173,24 @@
 		where f.code = p.code AND p.code = #{code}
 	</select>
 	
+	<!-- 파트너 날짜 별 조회 -->
+	<select id="admPmemberDate" parameterType="String" resultType="com.last.prj.qna.service.PmemberVO">
+		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
+		FROM P_MEMBER P , F_CODE F 
+		WHERE F.CODE=P.CODE AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+	</select>
+	
+	
 	<!-- 파트너 회원 가입일 조회 -->
 	<select id="admPstartDateList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS F_CONTENT, P.TEL AS TEL
 		FROM P_MEMBER P, F_CODE F 
-		WHERE P.STARTDATE BETWEEN TO_DATE('220201', 'YYMMDD') AND TO_DATE('220330','YYMMDD')
+		WHERE F.CODE = P.CODE AND P.STARTDATE BETWEEN '220220' AND '220226'
+	</select>
+	
+	<!-- 파트너 회원 수 -->
+	<select id="pmemCount" resultType="int">
+		SELECT COUNT(*) FROM P_MEMBER
 	</select>
 	
 	<select id="ServiceReviewList" resultMap="servieceReview" resultType="com.last.prj.pmember.service.ReviewVO">

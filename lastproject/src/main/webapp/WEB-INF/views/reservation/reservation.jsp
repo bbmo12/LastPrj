@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,48 +91,51 @@
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>
-
 						</aside>
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>예약번호</th>
-									<th>수의사 이름</th>
-									<th>예약신청일자</th>
-									<th>예약시간</th>
-									<th>예약내용</th>
-									<th>품종</th>
-									<th>예약여부</th>
-									<th>취소사유</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${reservation }" var="res">
+						<form action="reservationSelect" id="goform" name="goform">
+							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
+							<table class="table">
+								<thead>
 									<tr>
-										<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
-										<td>${res.name }</td>
-										<td>${res.r_date}</td>
-										<td>${res.time }</td>
-										<td>${res.rcontent }</td>
-										<td>${res.pcontent }</td>
-										<td><input class="in_code" type="hidden"
-											value="${res.rccontent }"> ${res.rccontent }</td>
-										<td>${res.refuse}</td>
+										<th>예약번호</th>
+										<th>수의사 이름</th>
+										<th>예약신청일자</th>
+										<th>예약시간</th>
+										<th>예약내용</th>
+										<th>품종</th>
+										<th>예약여부</th>
+										<th>취소사유</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									<c:forEach items="${reservation }" var="res">
+										<tr>
+											<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
+											<td>${res.name }</td>
+											<td>${res.r_date}</td>
+											<td>${res.time }</td>
+											<td>${res.rcontent }</td>
+											<td>${res.pcontent }</td>
+											<td><input class="in_code" type="hidden"
+												value="${res.rccontent }"> ${res.rccontent }</td>
+											<td>${res.refuse}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+	<my:nav jsFunc="go_page" page="${page}"/>
 	</section>
-
 	<script>
+	console.log("${page}");
 		//table td값만
 		var val = $(".in_code").parent();
 
@@ -169,6 +173,7 @@
 			console.log($(this).parent().parent().children().first().text());
 			var m_id = "${sessionScope.mId }";
 			
+			
 			var IMP = window.IMP; // 생략가능
 			IMP.init('imp48272965');
 			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -186,7 +191,7 @@
 				// 결제창에서 보여질 이름
 				// name: '주문명 : ${auction.a_title}',
 				// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-				amount: 1000000,
+				amount: 5000,
 				// amount: ${bid.b_bid},
 				// 가격 
 				buyer_name: '이름',
@@ -224,11 +229,12 @@
 					alert("결제실패")
 				}
 			})
-			
-			
-			
-
 		})
+		
+		function go_page(p){
+			goform.pageNum.value=p;
+	    	goform.submit();
+		}
 	</script>
 </body>
 </html>

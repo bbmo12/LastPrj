@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.pmember.service.Criteria;
 import com.last.prj.reserv.service.ReservationMapper;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
@@ -42,6 +43,14 @@ public class ReservationServiceImpl implements ReservationService{
 	@Override
 	public int diaCodeUpdate(int res) {
 		return map.diaCodeUpdate(res);
+	}
+	@Override
+	public int reservPage(Criteria cri) {
+		return map.reservPage(cri);
+	}
+	@Override
+	public List<ReservationVO> reservationPageList(Criteria cri) {
+		return map.reservationPageList(cri);
 	}
 
 }

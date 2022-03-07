@@ -21,13 +21,13 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 	}
 
 	@Override
-	public List<DiagnosisVO> diagnosisPmemSelect(DiagnosisVO vo) {
-		return map.diagnosisPmemSelect(vo);
+	public int diagnosisInsert(DiagnosisVO vo) {
+		return map.diagnosisInsert(vo);
 	}
 
 	@Override
-	public int diagnosisInsert(DiagnosisVO vo) {
-		return map.diagnosisInsert(vo);
+	public List<DiagnosisVO> pMemDiaList(String p_id) {
+		return map.pMemDiaList(p_id);
 	}
 
 

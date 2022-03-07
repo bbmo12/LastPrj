@@ -19,5 +19,9 @@ public interface PetService {
 	int mypetInsert(PetVO pet);
 	
 	//펫 상세정보 조회(코드중복제거)
-	List<PetVO> petCodeSearch(@Param("m_id") String m_id); 
+	List<PetVO> petCodeSearch(@Param("m_id") String m_id);
+	
+	//펫 수
+	int petCount();
+	
 }
