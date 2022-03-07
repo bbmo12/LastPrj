@@ -30,12 +30,34 @@
 <script>
 var socket = null;
 $(document).ready(function(){
-	// 웹소켓 연결
-	sock = new SockJS("<c:url value="/echo"/>");
-	socket = sock;
 	
-	// 데이터를 전달 받았을 때
-	sock.onmessage = onMessage; // toast생성
+	$.ajax({
+		url : "getId",
+		type : "post",
+		success : function(result){
+			console.log(result);
+			
+			if(result != ""){
+				sock = new SockJS("<c:url value="/echo"/>");
+				socket = sock;
+				
+				// 데이터를 전달 받았을 때
+				sock.onmessage = onMessage; // toast생성
+			}
+			
+			notice();
+		}
+	});
+	
+	function notice(){
+		$.ajax({
+			url : "noticeList",
+			type : "post",
+			success : function(result){
+				console.log(result);
+			}
+		});
+	}
 });
 
 // toast생성 및 추가
@@ -157,7 +179,7 @@ function onMessage(evt){
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
 									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
 									
-									<c:forEach items="${noticeList }" var="notice">
+									<%-- <c:forEach items="${noticeList }" var="notice">
 									<div class="dropdown-divider"></div>							
 									<a class="dropdown-item preview-item">
 										<div class="preview-thumbnail">
@@ -171,7 +193,7 @@ function onMessage(evt){
 										</div>
 									</a>
 									
-									</c:forEach>
+									</c:forEach> --%>
 									
 								<div class="dropdown-divider"></div>
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
