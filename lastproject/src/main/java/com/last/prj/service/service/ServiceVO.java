@@ -14,4 +14,6 @@ public class ServiceVO {
 	
 	private String pm_name; //파트너회원 이름
 	private String p_name; //반려동물 이름
+	private String m_id;
+	private int total_price;
 }

@@ -55,10 +55,10 @@
 									class="d-flex justify-content-between">
 										<p>반려동물 프로필</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="preservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pMembenefit" class="d-flex justify-content-between">
 										<p>결제 내역</p>
 								</a></li>
 								<li><a href="#" class="d-flex justify-content-between">
@@ -83,23 +83,31 @@
 							<table class="table">
 							<thead>
 								<tr>
-									<th>금액</th>
-									<th>일자</th>
-									<th>파트너회원이름</th>
+									<th>서비스시작일</th>
+									<th>서비스종료일</th>
+									<th>서비스내용</th>
+									<th>회원이름</th>
 									<th>금액</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${pMembenefit }" var="benefit">
 									<tr>
+										<td>${benefit.startdate }</td>
+										<c:if test="${benefit.enddate eq null }">
+											<td>서비스 진행중</td>
+										</c:if>
+										<c:if test="${benefit.enddate ne null }">
+											<td>${benefit.enddate}</td>
+										</c:if>
+										<td>${benefit.content }</td>
+										<td>${benefit.m_id } </td>
 										<td>${benefit.price }</td>
-										<td>${benefit.enddate}</td>
-										<td>${pay.pm_name } </td>
-										<td>${pay.price }</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<h4 align="center">총 수익은 ${totalPrice.total_price }원 입니다.</h4>
 					</div>
 				</div>
 			</div>
