@@ -24,18 +24,68 @@
 	font-weight: 400;
 }
 
+.p-3.mb-0.text-white.py-4{
+	background-color: #38a4ff;
+}
 
+#notice_content{
+	text-decoration: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	font-size: 10px;
+}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
 var socket = null;
 $(document).ready(function(){
-	// 웹소켓 연결
-	sock = new SockJS("<c:url value="/echo"/>");
-	socket = sock;
 	
-	// 데이터를 전달 받았을 때
-	sock.onmessage = onMessage; // toast생성
+	$.ajax({
+		url : "getId",
+		type : "post",
+		success : function(result){
+			console.log(result);
+			
+			if(result != ""){
+				sock = new SockJS("<c:url value="/echo"/>");
+				socket = sock;
+				
+				// 데이터를 전달 받았을 때
+				sock.onmessage = onMessage; // toast생성
+			}
+			
+			notice();
+		}
+	});
+	
+	function notice(){
+		$.ajax({
+			url : "noticeList",
+			type : "post",
+			success : function(result){
+				console.log(result);
+				
+				for(var i = 0; i < result.length; i++){
+				
+				var alarm = `<a class="dropdown-item preview-item">
+								<div class="preview-thumbnail">
+									<div class="preview-icon bg-success">
+										<i class="mdi mdi-calendar"></i>
+										
+									</div>
+								</div>
+								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+									<h6 class="preview-subject font-weight-normal mb-1"></h6>\${result[i].n_from}
+									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
+								</div>
+							</a>
+						<div class="dropdown-divider"></div>`;
+						
+				$('#noticeli').append(alarm);
+				}
+			}
+		});
+	}
 });
 
 // toast생성 및 추가
@@ -155,25 +205,22 @@ function onMessage(evt){
 									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
-									
-									<c:forEach items="${noticeList }" var="notice">
-									<div class="dropdown-divider"></div>							
-									<a class="dropdown-item preview-item">
+									<h6 class="p-3 mb-0 text-white py-4">Notifications</h6>
+									<div class="dropdown-divider"></div>
+									<div id="noticeli"></div>				
+									<!-- <a class="dropdown-item preview-item">
 										<div class="preview-thumbnail">
 											<div class="preview-icon bg-success">
 												<i class="mdi mdi-calendar"></i>
 											</div>
 										</div>
 										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">${notice.n_from }</h6>
-											<p class="text-gray ellipsis mb-0">${notice.content }</p>
+											<h6 class="preview-subject font-weight-normal mb-1"></h6>
+											<p class="text-gray ellipsis mb-0"></p>
 										</div>
-									</a>
-									
-									</c:forEach>
-									
+									</a> -->
 								<div class="dropdown-divider"></div>
+								
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 							</div>
 						</li>
