@@ -178,7 +178,7 @@ public class MemController {
 		return "member/memIdSearchForm";
 	}
 
-	@RequestMapping("/pmemberIdSearch") // 파티너회원 아이디 찾기
+	@RequestMapping("/pmemberIdSearch") // 파트너회원 아이디 찾기
 	@ResponseBody
 	public String pmemberIdSearch(String name, String tel) {
 		return pmemDao.pmemberIdSearch(name, tel);

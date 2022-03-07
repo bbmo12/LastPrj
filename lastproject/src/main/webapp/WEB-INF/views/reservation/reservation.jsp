@@ -9,7 +9,37 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<style>
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal.show {
+	display: block;
+}
+
+.modal_body {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 600px;
+	padding: 40px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateX(-50%) translateY(-50%);
+}
+</style>
 </head>
 <style>
 #my_section {
@@ -22,7 +52,7 @@
 
 
 <body>
-<%-- ${sessionScope.mId } --%>
+	<%-- ${sessionScope.mId } --%>
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -107,12 +137,14 @@
 									<th>품종</th>
 									<th>예약여부</th>
 									<th>취소사유</th>
+									<th>후기</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${reservation }" var="res">
 									<tr>
-										<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
+										<td><input class="rno" type="hidden" id="r_no"
+											name="r_no" value="${res.r_no }">${res.r_no }</td>
 										<td>${res.name }</td>
 										<td>${res.r_date}</td>
 										<td>${res.time }</td>
@@ -121,6 +153,16 @@
 										<td><input class="in_code" type="hidden"
 											value="${res.rccontent }"> ${res.rccontent }</td>
 										<td>${res.refuse}</td>
+										<c:choose>
+											<c:when test="${res.code eq 405 }">
+												<td><button onclick="reviewWrite()">성공</button></td>
+											</c:when>
+											<c:otherwise>
+												<td>
+													<button>실패</button>
+												</td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -130,6 +172,87 @@
 			</div>
 		</div>
 	</section>
+	<div class="modal">
+		<!-- 모달 띄운후 내용입력부분 바디.  -->
+		<div class="modal_body">
+
+			<form class="forms-sample" action="#" method="post">
+				<div class="form-group">
+					<h5 id="pname"></h5>
+				</div>
+				<div>
+				별점주기
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleInputPassword4">후기내용</label>
+					<textarea class="form-control" id="content" name="content"
+						placeholder="후기내용" rows="4" cols="80">
+                        </textarea>
+				</div>
+				<input type="hidden" value="">
+				<button type="submit">작성</button>
+				<button type="button">취소</button>
+			</form>
+
+		</div>
+	</div>
+
+	<!-- 모달창 -->
+	<script type="text/javascript">
+   function reviewWrite(){
+	      var body = document.querySelector('body');
+	      var modal = document.querySelector('.modal');	      
+	      
+	          modal.classList.toggle('show');
+	          if (modal.classList.contains('show')) {
+	            body.style.overflow = 'hidden';
+	            reviewadd();
+	          } 
+	      
+
+	       modal.addEventListener('click', (event) => {
+	        if (event.target === modal) {
+	          modal.classList.toggle('show');
+	          
+	          if (!modal.classList.contains('show')) {
+	            body.style.overflow = 'auto';
+	            
+	          }
+	        }
+	      });
+	}
+   </script>
+	<!-- 후기작성 모달창 -->
+	<script type="text/javascript">
+   	function reviewadd(){
+   		console.log(this)
+   		var r_no = $("#r_no").val()
+   		var name = $("#name").val()
+   		$.ajax({
+   			url: "reviewWrithForm",
+   			type: "post",
+   			data: {"r_no":r_no},
+   			success : function(result){
+   				console.log(result);
+   				$(".modal_body>p").remove();
+   				if(result == ""){
+   	                $(".modal_body").append(`<p>오류</p>`)
+   	             } else
+   	                {
+   	            	 $("#pname").text("파트너이름:"+result.name)
+   	                /* $(".modal_body").append(`<p> 파트너회원이름은 :`  + result.name +`<p>`) */
+   	                }
+   	             console.log(result)
+   	          },
+   	          error : function(){
+   	          
+   	          }
+   	       }) 
+   	    } 
+   
+   </script>
+
 
 	<script>
 		//table td값만
@@ -230,5 +353,10 @@
 
 		})
 	</script>
+
+
+
+
+
 </body>
 </html>

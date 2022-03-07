@@ -216,8 +216,4 @@ var address = $('#mem_detailaddress');
 			$("#p_id").focus();
 		}
 	}
-	
-	
 	</script>
-</body>
-</html>

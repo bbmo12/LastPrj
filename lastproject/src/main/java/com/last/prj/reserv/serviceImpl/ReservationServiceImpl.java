@@ -43,5 +43,10 @@ public class ReservationServiceImpl implements ReservationService{
 	public int diaCodeUpdate(int res) {
 		return map.diaCodeUpdate(res);
 	}
+	@Override
+	public ReservationVO reviewWrithForm(int r_no) {
+		return map.reviewWrithForm(r_no);
+	}
+
 
 }
