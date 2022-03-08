@@ -2,21 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.reserv.service.PreservationlistMapper">
 	<!-- 해당 파트너회원 예약조회 -->
-	<select id="preservationlist" parameterType="String" resultType="com.last.prj.reserv.service.PreservationVO">
-		SELECT R.R_NO,S.STARTDATE,R.RD_DATE,R.R_DATE,R.TIME,P.M_ID,R.CONTENT AS RCONTENT,C.CONTENT AS PCONTENT,RC.CONTENT AS RCCONTENT
-        FROM RESERVATION R,SERVICE S, F_CODE C, F_CODE RC,PET P
-        WHERE R.R_NO = S.R_NO AND C.CODE = P.CODE AND RC.CODE=R.CODE AND R.PET_NO=P.PET_NO AND R.P_ID = #{p_id}
-	</select>
-	
 	
 	<!-- 페이징(파트너회원 예약조회) -->
 	<select id="preservationPageList" resultType="com.last.prj.reserv.service.PreservationVO">
 		   SELECT *
       			FROM ( SELECT ROWNUM RN, A.*
-     				   FROM (SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS PCONTENT, R.REFUSE
-					   FROM  P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C, F_CODE FC
-					   WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE AND R.P_ID = #{p_id}
-       				  ) A)
+     				   FROM (SELECT R.R_NO,S.STARTDATE,R.RD_DATE,R.R_DATE,R.TIME,P.M_ID,R.CONTENT AS RCONTENT,C.CONTENT AS PCONTENT,RC.CONTENT AS RCCONTENT
+					         FROM RESERVATION R,SERVICE S, F_CODE C, F_CODE RC,PET P
+					         WHERE R.R_NO = S.R_NO AND C.CODE = P.CODE AND RC.CODE=R.CODE AND R.PET_NO=P.PET_NO AND R.P_ID = #{p_id}
+	       				    ) A)
       	WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>

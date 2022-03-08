@@ -72,7 +72,6 @@ public class MemController {
 		memDao.memberDelete(m_id);
 		session.invalidate();
 		return  "redirect:home";
-		
 	}
 	
 	// 일반회원 정보수정

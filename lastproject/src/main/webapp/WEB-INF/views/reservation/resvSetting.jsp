@@ -48,6 +48,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
 	let today = new Date();
 	var day = today.toLocaleDateString().substr(5,6).split('.');
 	var month = parseInt(day[0]); 
@@ -128,11 +129,14 @@ $(document).ready(function(){
 	}
 	//예약설정조회
 	function revList(){
+		var p_id = "${sessionScope.pId}";
 		$("#calendar").empty();
 		CreateCalendar();
 		$.ajax({
 			url : "revsetlist",
+			method : "POST",
 			dataType : "JSON",
+			data : {"p_id" : p_id},
 			success : function(result){
 				console.log(result);
 				for(var i =0;i<result.length;i++){
@@ -153,7 +157,8 @@ $(document).ready(function(){
 						    title: title,
 						    start: start,
 						    end: end,
-						    category: category
+						    category: category,
+						    bgColor : '#00CCFF'
 						}
 					]);
 				}
