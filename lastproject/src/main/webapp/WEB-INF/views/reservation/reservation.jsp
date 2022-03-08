@@ -187,6 +187,7 @@
 											<c:otherwise>
 												<td>
 													<button>실패</button>
+												</td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
