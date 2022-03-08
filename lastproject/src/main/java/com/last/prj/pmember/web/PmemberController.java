@@ -39,8 +39,6 @@ public class PmemberController {
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
-//		String json = new Gson().toJson(pMemberDao.memberList(code));
-//		model.addAttribute("babo", json);
 		cri.setAmount(12);
 		PagingVO paging = new PagingVO(cri, mapper.memberPage(cri));
 		
@@ -55,6 +53,8 @@ public class PmemberController {
 		// 파트너 정보
 		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));

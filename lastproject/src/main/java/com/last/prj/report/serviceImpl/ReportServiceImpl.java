@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+
 import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
@@ -40,6 +41,36 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<ReportVO> admReviewList() {
 		return map.admReviewList();
+	}
+	
+	@Override
+	public List<ReportVO> admReportPart(int code) {
+		return map.admReportPart(code);
+	}
+	
+	@Override
+	public List<ReportVO> admReportOneQna(int rep_no) {
+		return map.admReportOneQna(rep_no);
+	}
+	
+	@Override
+	public int admReportUpdate(int rep_no, int repor, String state) {
+		return map.admReportUpdate(rep_no, repor, state);
+	}
+
+	@Override
+	public List<ReportVO> admReportRepor(int repor) {
+		return map.admReportRepor(repor);
+	}
+
+	@Override
+	public List<ReportVO> admReportOneReview(int rep_no) {
+		return map.admReportOneReview(rep_no);
+	}
+
+	@Override
+	public List<ReportVO> admReportDate(String fromDate, String toDate) {
+		return map.admReportDate(fromDate, toDate);
 	}
 
 }

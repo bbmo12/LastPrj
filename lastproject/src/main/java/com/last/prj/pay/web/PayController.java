@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.mem.service.MemService;
+import com.last.prj.mem.service.PmemService;
 import com.last.prj.pay.service.PayService;
+import com.last.prj.pmember.service.PmemberService;
 
 @Controller
 public class PayController {
@@ -19,6 +21,7 @@ public class PayController {
 	
 	@Autowired
 	private MemService memDao;
+	
 	
 	@RequestMapping("/myPay")
 	public String myPay(Model model, HttpServletRequest request) {

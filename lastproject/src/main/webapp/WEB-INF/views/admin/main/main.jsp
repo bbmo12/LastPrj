@@ -6,20 +6,33 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<!-- <script
+	src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> -->
 <style>
 .tab-content {
 	border: 0px solid rgba(151, 151, 151, 0.3);
+}
+
+#myChart {
+	style: height: 261px;
+	display: block;
+	box-sizing: border-box;
+	width: 313px;
+}
+
+#doughnutChart {
+	height: 250px;
 }
 </style>
 <body>
 	<div class="content-wrapper">
 		<div class="row" id="proBanner">
 			<div class="col-12">
-				<span class="d-flex align-items-center purchase-popup">
-					관리자님 반갑습니다
-					<a href="home" target="_blank" class="btn ml-auto download-button">메인 홈으로..</a> 
-					<a href="main" target="_blank" class="btn purchase-button">관리자 홈으로..</a>
-					<i class="mdi mdi-close" id="bannerClose"></i>				
+				<span class="d-flex align-items-center purchase-popup"> 관리자님
+					반갑습니다 <a href="home" target="_blank"
+					class="btn ml-auto download-button">메인 홈으로..</a> <a href="main"
+					target="_blank" class="btn purchase-button">관리자 홈으로..</a> <i
+					class="mdi mdi-close" id="bannerClose"></i>
 				</span>
 			</div>
 		</div>
@@ -63,7 +76,7 @@
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#asd">일반</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#zxc">차트</a></li>
+						href="#zxc" id="chart">차트</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -261,16 +274,16 @@
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">Area chart</h4>
-										<canvas id="areaChart" style="height: 250px"></canvas>
+										<h4 class="card-title">던킨 chart</h4>
+										<canvas id="dunkinChart" style="height: 250px"></canvas>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">Doughnut chart</h4>
-										<canvas id="doughnutChart" style="height: 250px"></canvas>
+										<h4 class="card-title">추로스 chart</h4>
+										<canvas id="myChart" style="height: 250px"></canvas>
 									</div>
 								</div>
 							</div>
@@ -280,5 +293,66 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		/* 	$("#chart").on("click", function() {
+				
+				$.ajax({
+					url : "admChart",
+					type : 
+				}) 
+				
+			})*/
+
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : [ '파트너회원 수', '일반회원 수', '펫 마릿수' ],
+				datasets : [ {
+					label : '# of Votes',
+					data : [ '${pmemCount}', '${memCount}', '${petCount}' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(255, 159, 64, 0.2)',
+							'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				}
+			}
+		});
+
+		const txc = document.getElementById('dunkinChart').getContext('2d');
+		const dunkinChart = new Chart(txc, {
+			type : 'doughnut',
+			data : {
+				labels : [ '파트너회원 수', '일반회원 수', '펫 마릿수' ],
+				datasets : [ {
+					label : '# of Votes',
+					data : [ '${pmemCount}', '${memCount}', '${petCount}' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+							'rgba(255, 159, 64, 0.2)',
+							'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255, 99, 132, 1)',
+							'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
+					borderWidth : 1
+				} ]
+			},
+			options : {
+				scales : {
+					y : {
+						beginAtZero : true
+					}
+				}
+			}
+		});
+	</script>
 </body>
 </html>

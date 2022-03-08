@@ -23,4 +23,7 @@ public interface MemMapper {
 	boolean idCheck(String m_id);
 	
 	boolean isIdCheck(String m_id);
+	
+	//일반 회원 수
+	int memCount();
 }

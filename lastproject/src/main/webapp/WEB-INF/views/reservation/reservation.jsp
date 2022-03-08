@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,23 +146,24 @@
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>
-
 						</aside>
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>예약번호</th>
-									<th>수의사 이름</th>
-									<th>예약신청일자</th>
-									<th>예약시간</th>
-									<th>예약내용</th>
-									<th>품종</th>
-									<th>예약여부</th>
-									<th>취소사유</th>
+  	<form action="reservationSelect" id="goform" name="goform">
+							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
+							<table class="table">
+								<thead>
+									<tr>
+										<th>예약번호</th>
+										<th>수의사 이름</th>
+										<th>예약신청일자</th>
+										<th>예약시간</th>
+										<th>예약내용</th>
+										<th>품종</th>
+										<th>예약여부</th>
+										<th>취소사유</th>
 									<th>후기</th>
 								</tr>
 							</thead>
@@ -187,15 +189,47 @@
 													<button>실패</button>
 											</c:otherwise>
 										</c:choose>
+
+						<form action="reservationSelect" id="goform" name="goform">
+							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
+							<table class="table">
+								<thead>
+									<tr>
+										<th>예약번호</th>
+										<th>수의사 이름</th>
+										<th>예약신청일자</th>
+										<th>예약시간</th>
+										<th>예약내용</th>
+										<th>품종</th>
+										<th>예약여부</th>
+										<th>취소사유</th>
+
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									<c:forEach items="${reservation }" var="res">
+										<tr>
+											<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
+											<td>${res.name }</td>
+											<td>${res.r_date}</td>
+											<td>${res.time }</td>
+											<td>${res.rcontent }</td>
+											<td>${res.pcontent }</td>
+											<td><input class="in_code" type="hidden"
+												value="${res.rccontent }"> ${res.rccontent }</td>
+											<td>${res.refuse}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+	<my:nav jsFunc="go_page" page="${page}"/>
 	</section>
+
 	<div class="modal">
 		<!-- 모달 띄운후 내용입력부분 바디.  -->
 		<div class="modal_body">
@@ -300,6 +334,7 @@
 
 
 	<script>
+	console.log("${page}");
 		//table td값만
 		var val = $(".in_code").parent();
 
@@ -337,6 +372,7 @@
 			console.log($(this).parent().parent().children().first().text());
 			var m_id = "${sessionScope.mId }";
 			
+			
 			var IMP = window.IMP; // 생략가능
 			IMP.init('imp48272965');
 			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
@@ -345,16 +381,11 @@
 				pg: 'kakao',
 				pay_method: 'card',
 				merchant_uid: 'merchant_' + new Date().getTime(),
-				/* 
-				 *  merchant_uid에 경우 
-				 *  https://docs.iamport.kr/implementation/payment
-				 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
-				 */
 				name: '예약결제',
 				// 결제창에서 보여질 이름
 				// name: '주문명 : ${auction.a_title}',
 				// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-				amount: 1000000,
+				amount: 5000,
 				// amount: ${bid.b_bid},
 				// 가격 
 				buyer_name: '이름',
@@ -370,7 +401,6 @@
 					
 					
 					// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-					// 자세한 설명은 구글링으로 보시는게 좋습니다.
 				} else {
 					var msg = '결제에 실패하였습니다.';
 					msg += '에러내용 : ' + rsp.error_msg;
@@ -392,6 +422,7 @@
 					alert("결제실패")
 				}
 			})
+
 		})
 	</script>
 <!-- 리뷰작성 -->
@@ -417,6 +448,12 @@
 		
 	}
 	
+		})
+		
+		function go_page(p){
+			goform.pageNum.value=p;
+	    	goform.submit();
+		}
 	</script>
 
 

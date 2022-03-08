@@ -7,6 +7,6 @@
 	</insert>
 
 	<select id="noticeSelectList" resultType="com.last.prj.notice.service.NoticeVO">
-	select * from notice where n_to = #{m_id}
+	select * from (select * from notice where n_to = #{m_id} order by notice_no desc) <![CDATA[WHERE ROWNUM <= 4]]>
 	</select>
 </mapper>

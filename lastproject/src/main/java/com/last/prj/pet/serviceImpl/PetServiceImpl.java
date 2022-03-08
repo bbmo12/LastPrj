@@ -41,6 +41,11 @@ public class PetServiceImpl implements PetService{
 		return map.petCodeSearch(m_id);
 	}
 
+	@Override
+	public int petCount() {
+		return map.petCount();
+	}
+
 
 
 }

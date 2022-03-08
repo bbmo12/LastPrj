@@ -1,4 +1,3 @@
-
 package com.last.prj.board.web;
 
 import java.util.List;
@@ -11,23 +10,38 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.board.service.BoardService;
 import com.last.prj.board.service.BoardVO;
+
 
 @Controller
 public class BoardController {
 
 	@Autowired
 	private BoardService boardDao;
+	
 
-	// board 게시판 홈페이지 출력
-	@RequestMapping("/bTables")
+	
+	
+	//admBoardSearch
+	@RequestMapping("/admBoardSearch")
+	@ResponseBody
+	public List<BoardVO> admBoardSearch(@RequestParam("key")String key, @RequestParam("data")String data) {
+		System.out.println("key : " + key);
+		System.out.println("data : "+data);
+		System.out.println(boardDao.boardSearch(key, data));
+		return boardDao.boardSearch(key, data);
+	}
+
+	// board 게시판 홈페이지 출력 admBoard
+	@RequestMapping("/admBoard")
 	public String boardPage(Model model) {
 		List<BoardVO> list = boardDao.boardSelectList();
 		System.out.println(list);
 		model.addAttribute("boardList", list);
-		return "board/boardList";
+		return "board/admBoard";
 
 	}
 
@@ -94,4 +108,8 @@ public class BoardController {
 	 * boardHitUpdate(@RequestParam(value="b_no")int b_no,Model model) {
 	 * System.out.println(b_no); return ""; }
 	 */
+	
+	
+	// =====자주 묻는 QnA Top 10 리스트 출력 ======
+
 }

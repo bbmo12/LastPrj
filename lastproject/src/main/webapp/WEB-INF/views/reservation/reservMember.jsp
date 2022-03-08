@@ -135,7 +135,7 @@
 
 $(document).ready(function(){
 	
-	 let today = new Date();
+	let today = new Date();
 	var day = today.toLocaleDateString().substr(5,6).split('.');
 	var month = parseInt(day[0]); 
 	var year = today.toLocaleDateString().substr(0,4);
@@ -143,7 +143,8 @@ $(document).ready(function(){
 	$("#renderRange").text(year+'년'+month+'월');
 	revList();
 	
-	var p_id;
+	var p_id="${pmember.p_id}";
+	console.log("p_id======================"+p_id)
 	//달력 템플릿
 	var templates = {
 		    popupIsAllDay: function() {
@@ -210,10 +211,15 @@ $(document).ready(function(){
 	
 	//예약설정조회
 	function revList(){
+		p_id = "${pmember.p_id}";
+		console.log(p_id);
+		
 		$("#calendar").empty();
 		CreateCalendar();
 		$.ajax({
 			url : "revsetlist",
+			method : "POST",
+			data : {"p_id" : p_id},
 			dataType : "JSON",
 			success : function(result){
 				console.log(result);
@@ -329,7 +335,12 @@ $(document).ready(function(){
 	});
  	//달력 Today 클릭 이벤트
  	$(".move-today").on('click',function(event){
+ 		
  		calendar.today();
+ 		day = today.toLocaleDateString().substr(5,6).split('.');
+ 		month = parseInt(day[0]); 
+ 		year = today.toLocaleDateString().substr(0,4);
+ 		$("#renderRange").text(year+'년'+month+'월');
  	})
 });
 

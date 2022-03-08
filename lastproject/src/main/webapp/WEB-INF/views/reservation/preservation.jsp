@@ -9,35 +9,104 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>	
-<br><br><br><br>
-    <div align="center"><h1>파트너회원 예약내역조회</h1></div>
+<br><br><br><br><section class="banner-area other-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>MyPage</h1>
+					<a href="index.html">Home</a> <span>|</span> <a
+						href="blog-details.html">MyPage</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	 <div align="center"><h1>파트너회원 예약내역조회</h1></div>
+	<section id="my_section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="blog_right_sidebar">
+
+						<aside class="single_sidebar_widget author_widget">
+							<img class="author_img rounded-circle"
+								src="resources/upload/${pmember.picture}" style="width: 210px"
+								alt="">
+							<div class="br"></div>
+							<h4> ${pmember.name }</h4>
+
+							<div class="br"></div>
+						</aside>
+
+						<aside class="single_sidebar_widget post_category_widget">
+							<h4 class="widget_title">My menu</h4>
+							<ul class="list cat-list">
+								<li><a href="memberMypage"
+									class="d-flex justify-content-between">
+										<p>내 프로필</p>
+								</a></li>
+								<li><a href="petmemberForm"
+									class="d-flex justify-content-between">
+										<p>반려동물 프로필</p>
+								</a></li>
+								<li><a href="preservationSelect" class="d-flex justify-content-between">
+										<p>예약 내역</p>
+								</a></li>
+								<li><a href="pMembenefit" class="d-flex justify-content-between">
+										<p>내 수익</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>상담 내역</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>신고 내역</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>로그아웃</p>
+								</a></li>
+								<li><a href="#" class="d-flex justify-content-between">
+										<p>회원탈퇴</p>
+								</a></li>
+							</ul>
+
+						</aside>
+					</div>
+				</div>
+				<div class="col-lg-9 posts-list">
+				<div class="col-lg-12 col-md-12 blog_details">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>예약번호</th>
+									<th>예약신청일자</th>
+									<th>예약시간</th>
+									<th>예약자 이름</th>
+									<th>품종</th>
+									<th>증상</th>
+									<th>승인여부</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${preservation }" var="pres">
+											<tr>
+												<td><input  class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
+												<td>${pres.r_date}</td>
+												<td>${pres.startdate } &nbsp; ${pres.time }</td>
+												<td>${pres.m_id }</td>
+												<td>${pres.pcontent }
+												<td>${pres.rcontent }</td>
+												<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
+											</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+   
     
-    <table class="table">
-		<thead>
-			<tr>
-				<th>예약번호</th>
-				<th>예약신청일자</th>
-				<th>예약시간</th>
-				<th>예약자 이름</th>
-				<th>품종</th>
-				<th>증상</th>
-				<th>승인여부</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${preservation }" var="pres">
-						<tr>
-							<td><input  class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
-							<td>${pres.r_date}</td>
-							<td>${pres.startdate } &nbsp; ${pres.time }</td>
-							<td>${pres.m_id }</td>
-							<td>${pres.pcontent }
-							<td>${pres.rcontent }</td>
-							<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
-						</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+    
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 	role="dialog" aria-labelledby="exampleModalLabel"
 	aria-hidden="true">

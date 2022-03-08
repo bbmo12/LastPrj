@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,27 +15,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
+import com.last.prj.pmember.service.PmemberService;
 
 @Controller
 public class CalendarController {
 	@Autowired
 	private CalendarService CalendarDao;
+	@Autowired
+	private PmemberService pMemberDao;
 	
 	
 	//파트너회원 예약설정 조회
-	@RequestMapping("revsetlist")
+	@PostMapping("revsetlist")
 	@ResponseBody
-	public List<CalendarVO> revSetList(HttpServletRequest request,CalendarVO vo){
-		//로그인 세션값
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-		System.out.println("p_id : " +p_id);
-		if(p_id ==null) {
-			p_id = "kim1@a.com";
-		}
-		vo.setP_id(p_id);
+	public List<CalendarVO> revSetList(HttpServletRequest request,CalendarVO vo,Model model){
 		List<CalendarVO> list = CalendarDao.revSetList(vo);
 		System.out.println(list);
+		System.out.println(vo);
+		
 		return list;
 	}
 	//파트너회원 예약설정 등록
