@@ -2,52 +2,104 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.chat.service.ChatRoomMapper">
 
-	<insert id="addChatRoom" parameterType="com.last.prj.chat.service.ChatRoomVO" useGeneratedKeys="true" keyProperty="c_no">
-		<selectKey resultType="int" keyProperty="c_no" order="BEFORE">
-			SELECT c_seq.nextval FROM DUAL
-		</selectKey>
-		INSERT INTO CHATROOM(c_no, sender_id, receiver_id, fileName, createdDate, chatReadByS, chatReadByR)
-		VALUES(c_seq.nextval, #{sender_id}, #{receiver_id}, #{fileName}, #{createdDate}, #{chatReadByS}, #{chatReadByR})
+	<insert id="createRoom">
+		insert into CHATROOM (chat_id, p_id, m_id)
+		values(c_no.nextval, #{p_id} , #{m_id} )
 	</insert>
-	
-	<select id="countByChatId" resultType="int">
-		SELECT COUNT(*)
-		FROM CHATROOM
-		WHERE sender_id = #{sender_id}
-		AND receiver_id = #{receiver_id}
+
+	<select id="isRoom" resultType="com.last.prj.chat.service.ChatRoomVO">
+		select * from CHATROOM WHERE p_id = #{p_id} and
+		m_id = #{m_id}
+	</select>
+
+	<insert id="insertMessage">
+		insert into MESSAGE (msg_id, msg_sender, msg_receiver, message_content,
+		chat_id, m_id , p_id)
+		values (msg_no.nextval, #{msg_sender}, #{msg_receiver}, #{message_content} ,
+		#{chat_id} , #{m_id}, #{p_id})
+	</insert>
+
+	<!-- <select id="getPartner" resultType="MessageVO">
+		SELECT USER_user_id from MESSAGE where TUTOR_USER_user_id =
+		#{TUTOR_USER_user_id} and CLASS_class_id = #{CLASS_class_id}
+	</select>
+	<select id="getProfile" resultType="String">
+		select user_profileImagePath from USER WHERE user_id = #{user_id}
+	</select>
+
+	<select id="getName" resultType="String">
+		select user_name from USER where user_id = #{user_id}
+	</select> -->
+
+	<select id="getMessageList" resultType="com.last.prj.chat.service.MessageVO">
+		select m.*, r.name, r.picture
+		from MESSAGE m left outer join MEMBER r
+		on m.msg_sender = r.m_id
+		where chat_id = #{chat_id}
+	</select>
+
+	<select id="getRoomList" resultType="com.last.prj.chat.service.ChatRoomVO">
+		select * from CHATROOM where m_id = #{m_id}
+	</select>
+	<select id="getRoomList2" resultType="com.last.prj.chat.service.ChatRoomVO">
+		select * from CHATROOM where p_id = #{p_id}
+	</select>
+
+	<select id="getRecentMessage" resultType="com.last.prj.chat.service.MessageVO">
+		select *
+		from MESSAGE
+		where CHATROOM_chatroom_id = #{CHATROOM_chatroom_id} 
+		order by msg_id desc;
+	</select>
+
+	<!-- <select id="getTutorId" resultType="String">
+		select tutor_id from TUTOR where USER_user_id = #{USER_user_id}
+	</select>
+
+	<update id="updateReadTime">
+		update MESSAGE set message_readTime = NOW() where TUTOR_USER_user_id =
+		#{TUTOR_USER_user_id} AND CLASS_class_id = #{CLASS_class_id} AND
+		message_readTime = message_sendTime and message_sender =
+		TUTOR_USER_user_id and USER_user_id = #{USER_user_id};
+	</update>
+	<update id="updateReadTimeTutor">
+		update MESSAGE set message_readTime = NOW() where TUTOR_USER_user_id =
+		#{TUTOR_USER_user_id} AND CLASS_class_id = #{CLASS_class_id} AND
+		message_readTime = message_sendTime and message_sender = USER_user_id
+		and USER_user_id = #{USER_user_id};
+
+	</update> -->
+
+
+<!-- 	<select id="getUnReadCount" resultType="int">
+
+		select count(*) from MESSAGE where USER_user_id = #{USER_user_id} and
+		TUTOR_USER_user_id = #{TUTOR_USER_user_id} AND CLASS_class_id =
+		#{CLASS_class_id} AND message_readTime = message_sendTime and
+		message_sender = TUTOR_USER_user_id;
 	</select>
 	
-	<select id="findByChatId" resultType="com.last.prj.chat.service.ChatRoomVO">
-		SELECT *
-		FROM CHATROOM
-		WHERE sender_id = #{sender_id}
-		AND receiver_id = #{receiver_id}
-	</select>
 	
-	<select id="getId" resultType="int">
-		SELECT c_no
-		FROM CHATROOM
-		WHERE sender_id = #{sender_id}
-		AND receiver_id = #{receiver_id}
-	</select>
-	
-	<update id="updateFileName">
-		UPDATE CHATROOM
-		SET FILENAME = #{fileName}
-		WHERE c_no = #{c_no}
-	</update>
-	
-	<update id="updateChatReadS">
-		UPDATE CHATROOM
-		SET chatReadByS = #{chatReadByS}
-		WHERE c_no = #{c_no}
-	</update>
-	
-	<update id="updateChatReadR">
-		UPDATE CHATROOM
-		SET chatReadByR = #{chatReadByR}
-		WHERE c_no = #{c_no}
-	</update>
-	
-	
+	<select id="getUnReadCountTutor" resultType="int">
+
+		select count(*) from MESSAGE where TUTOR_USER_user_id =#{TUTOR_USER_user_id}
+		and CLASS_class_id = #{CLASS_class_id} AND message_readTime =
+		message_sendTime and message_sender = USER_user_id and USER_user_id =
+		#{USER_user_id};
+
+	</select> -->
+
+<!-- 	<select id="getAllCount" resultType="int">
+		select count(*) 
+		from MESSAGE 
+		WHERE (TUTOR_USER_user_id = #{TUTOR_USER_user_id} 
+		and message_readTime = message_sendTime 
+		and message_sender != #{USER_user_id}) 
+		or (USER_user_id = #{USER_user_id}
+		and message_readTime = message_sendTime 
+		and message_sender != #{USER_user_id});
+
+	</select> -->
+
+
 </mapper>

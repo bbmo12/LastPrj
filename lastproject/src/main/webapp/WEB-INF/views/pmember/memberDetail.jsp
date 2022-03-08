@@ -63,7 +63,7 @@
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
 
-							<a href="chatMessage?m_id=${mId }&p_id=${pmemdetail.p_id}">
+							<a href="EnterChat?m_id=${mId }&p_id=${pmemdetail.p_id}">
 							<button class="btn btn-primary">상담하기</button></a>
 
 							<form action="reservMember" name="reservForm" method="POST">

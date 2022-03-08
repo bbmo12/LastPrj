@@ -1,39 +1,49 @@
 package com.last.prj.chat.service;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface ChatRoomService {
 
-	// 채팅 시작
-	public void addChatRoom(ChatRoomVO chatroom);
+	public void createRoom(ChatRoomVO vo) throws Exception;
 
-	// sender와 receiver가 같은 채팅창 수 확인
-	public int countByChatId(@Param("sender_id") String sender_id, @Param("receiver_id") String receiver_id);
+	public ChatRoomVO isRoom(ChatRoomVO vo) throws Exception;
 
-	// sender와 receiver가 같은 채팅창 서치
-	public ChatRoomVO findByChatId(@Param("sender_id") String sender_id, @Param("sender_id") String receiver_id);
+	public void insertMessage(MessageVO vo) throws Exception;
 
-	// 기존 채팅내역 가져옴.
-	public List<ChatRoomVO> readChatHistory(ChatRoomVO chatroom) throws IOException;
+	/*
+	 * public String getPartner(ChatRoomVO vo) throws Exception;
+	 * 
+	 * public String getProfile(String str) throws Exception;
+	 * 
+	 * public String getName(String str) throws Exception;
+	 */
 
-	// 채팅방 id
-	public int getId(@Param("sender_id")String sender_id, @Param("receiver_id")String receiver_id);
+	public List<MessageVO> getMessageList(String str) throws Exception;
 
-	// 메시지 전송
-	public void appendMessage(ChatRoomVO chatroom) throws IOException;
+	public List<ChatRoomVO> getRoomList(String str) throws Exception;
 
-	// 파일 업데이트
-	public void updateFileName(@Param("c_no") int c_no, String fileName);
+	public List<ChatRoomVO> getRoomList2(String str) throws Exception;
 
-	// sender 읽음처리
-	public void updateChatReadS(@Param("c_no") int c_no, int chatReadByS);
+	public MessageVO getRecentMessage(String str) throws Exception;
+	// public String isGetMessageList(String str)throws Exception;
 
-	// reciever 읽음처리
-	public void updateChatReadR(@Param("c_no") int c_no, int chatReadByR);
+	/* public String getTutorId(String str) throws Exception; */
 
-	//파일 생성
-	void createFile(@Param("c_no") int c_no) throws IOException;
+	public List<ChatRoomVO> getRoomListTutor(String str) throws Exception;
+
+	/*
+	 * public void updateReadTime(int class_id, String user_id, String
+	 * TUTOR_USER_user_id) throws Exception;
+	 * 
+	 * public void updateReadTimeTutor(int class_id, String user_id, String
+	 * TUTOR_USER_user_id) throws Exception;
+	 */
+
+	/*
+	 * public int getUnReadCountTutor(String p_id, String m_id) throws Exception;
+	 * 
+	 * public int getAllCount(String str);
+	 * 
+	 * public int getUnReadCount(String p_id, String m_id) throws Exception;
+	 */
 }

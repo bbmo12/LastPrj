@@ -49,6 +49,7 @@
 
 	<context:component-scan base-package="com.last.prj" />
 	
+	<!-- websocket -->
 	<beans:bean id="echoHandler" class="com.last.prj.socket.EchoHandler"/>
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
