@@ -75,9 +75,6 @@
   color:#fc0;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 
 
 <body>
@@ -401,7 +398,7 @@
 	<script type="text/javascript">
 	function serviceReview(){
 		var content = $("#content").val();
-		var rating = $(".rating").val();
+		var rating = $("input[name=rating]").val();
 		var rev_no = $("#rev_no").val();
 		console.log("별점")
 		console.log(rating)
