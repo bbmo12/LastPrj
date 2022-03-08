@@ -19,7 +19,7 @@ public interface PmemberService {
     public List<PmemberVO> bestLike(PmemberVO pmember);//베스트순위
     public List<ReviewVO> ServiceReviewList(); // 홈화면 리뷰
     public List<PmemberVO> bestLikeList(); // 홈화면 베스트
-	
+
 	//관리자
  	public List<PmemberVO> admPlistCode(int code); //파트너쉽 별 리스트
   	public List<PmemberVO> admPlist(); 
