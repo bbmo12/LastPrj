@@ -41,23 +41,25 @@
 			</p>
 			<div>
 				<form id="admDateForm">
-					FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
-					TO : <input type="text" id="toDate" name="toDate">
-					<button type="button" id="btnSearch">검 색</button>
+					<input type="hidden" name="code"> <input type="hidden"
+						name="pageNum" value="1"> FROM : <input type="text"
+						id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
+						type="text" id="toDate" name="toDate">
+					<!-- <button type="button" id="btnSearch">검 색</button> -->
 				</form>
 			</div>
 
 			<div class="template-demo">
-				<button type="button" class="btn btn-link btn-rounded btn-fw"
-					id="doctor">수의사</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw"
-					id="trainer">훈련사</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw"
-					id="groomer">미용사</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw"
-					id="petsitter">펫시터</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw"
-					id="startDate">220220~20226</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					id="doctor" data-code="">전체</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					id="doctor" data-code="100">수의사</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					id="trainer" data-code="101">훈련사</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					id="groomer" data-code="102">미용사</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					id="petsitter" data-code="103">펫시터</button>
 			</div>
 			<div>
 				<input class="form-control" id="myInput" type="text"
@@ -75,23 +77,10 @@
 					</tr>
 				</thead>
 				<tbody id="myTable">
-					<c:forEach items="${pList }" var="pmember">
-						<tr>
-							<td>${pmember.name }</td>
-							<td>${pmember.p_id}</td>
-							<td>
-								<div class="progress">
-									<div class="progress-bar bg-success" role="progressbar"
-										style="width: ${pmember.c_report}%" aria-valuenow="70"
-										aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</td>
-							<td>${pmember.startdate}</td>
-							<td><a href="admPlistCode?content=${pmember.f_content}">${pmember.f_content}</a></td>
-						</tr>
-					</c:forEach>
+
 				</tbody>
 			</table>
+			<div id="pagination"></div>
 		</div>
 	</div>
 
@@ -136,8 +125,10 @@
                             <button type="button" class="btn btn-primary">3</button>
                           </div> -->
 	<script>
+	
 		//검색 함수
 		$(function() {
+		
 			$("#myInput").on(
 					"keyup",
 					function() {
@@ -151,28 +142,8 @@
 								});
 					});
 		});// end 검색함수
-
-		//페이징 처리
-		/*
-		function go_page(p) {
-			goform.pageNum.value = p;
-			goform.submit();
-
-		}//end 페이징 */
-
-		/* //주소 검색
-		w_address.addEventListener('click', function() {
-			event.target.select();
-		})//end 주소 검색 */
-
-		//리스트 만드는 함수 : viewPmemberList
-		/*						<div class="progress">
-									<div class="progress-bar bg-success" role="progressbar"
-										style="width: ${pmember.c_report}%" aria-valuenow="70"
-										aria-valuemin="0" aria-valuemax="100">
-									</div>
-								</div>*/
-
+		
+		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
 			$("#myTable").empty();
 			console.log(result);
@@ -201,80 +172,80 @@
 														+ "</td></tr>");
 							}) // end each.
 
-		}// end viewPmemberList.
+		}//=====================  end리스트 만드는 함수 ====================
 
-		//수의사 리스트 출력
-		$("#doctor").on('click', function() {
-			var code = 100;
+		//===================리스트 호출 버튼==================
+		$(".codep").on('click', function() {
+			var code = $(this).data('code');
+			$('#admDateForm')[0].code.value = code
+			$('#admDateForm')[0].pageNum.value = 1;
+			pagingList();
+			
+		});//===================end 리스트 호출 버튼================== 
+		
+		
+		//===========리스트 ajax 호출==========
+		function pagingList() {
+			var str = $('#admDateForm').serialize();
 			$.ajax({
 				url : 'admPlistCode',
 				method : 'post',
-				data : {
-					'code' : code
-				},
+				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
-					viewPmemberList(result);
+					viewPmemberList(result.list);
+					viewPage(result.page);
 				}
 			});
-		});
-		//훈련사 리스트 출력
-		$("#trainer").on('click', function() {
-			var code = '101';
-			$.ajax({
-				url : 'admPlistCode',
-				method : 'post',
-				data : {
-					'code' : code
-				},
-				success : function(result) {
-					viewPmemberList(result);
+		}//===========end  리스트 ajax 호출==========
+		
+			
+			
+		//===========페이징 처리==========
+		function viewPage(page) {
+			console.log(page);
+			
+			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
+			<ul class="pagination">`
+			if(page.prev) {
+				nav += `<li class="page-item">
+				<a href="javascript:goPage(\${page.startPage-1})" class="page-link"
+					aria-label="Previous">
+					<span aria-hidden="true">
+						<span class="fa fa-angle-left"></span>
+					</span></a>
+				</li>`
+			}
+				for ( var i=page.startPage ; i <  page.endPage; i++){
+					nav += `<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
+								href="javascript:goPage(\${i})" class="page-link">\${i }</a>
+								</li>`
 				}
-			});
-
-		});
-
-		//미용사 리스트 출력
-		$("#groomer").on('click', function() {
-			var code = '103';
-			$.ajax({
-				url : 'admPlistCode',
-				method : 'post',
-				data : {
-					'code' : code
-				},
-				success : function(result) {
-					viewPmemberList(result);
-				}
-			});
-		});
-
-		//펫시터 리스트 출력
-		$("#petsitter").on('click', function() {
-			var code = '102';
-			$.ajax({
-				url : 'admPlistCode',
-				method : 'post',
-				data : {
-					'code' : code
-				},
-				success : function(result) {
-					viewPmemberList(result);
-				}
-			});
-		});
-
+				
+			if(page.next){
+				nav += `<li class="page-item"><a href="javascript:goPage(\${page.endPage+1})"
+					class="page-link" aria-label="Next">
+				<span aria-hidden="true">
+					<span class="fa fa-angle-right"></span>
+				</span></a>
+		</li>`
+		
+			}
+				
+			nav += `</ul></nav>`
+			$('#pagination').html(nav);
+			
+		}//===========end 페이징 처리==========
+		
+		
+		
+		
 		
 		// =============날짜 검색 ==============
-		$("#startDate").on('click', function() {
-			$.ajax({
-				url : 'admStartDateList',
-				method : 'post',
-				success : function(result) {
-					viewPmemberList(result);
-				}
-			});
-		});
+		function goPage(pa) {
+			$('#admDateForm')[0].pageNum.value = pa;
+			pagingList();
+		}
 
 		$('#btnSearch').on('click',function(e){
 			var str = $('#admDateForm').serialize();
@@ -343,10 +314,12 @@
             $("#fromDate").datepicker();
             $("#toDate").datepicker();
 
-            $('#fromDate').datepicker('setDate', 'today');
-            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전
+            /* $('#fromDate').datepicker('setDate', 'today');
+            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전 */
+            
+            
+	    	pagingList();
         });// =============end 날짜 검색 ==============
-
 	</script>
 </body>
 

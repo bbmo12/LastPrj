@@ -32,4 +32,5 @@ public interface ReportMapper {
 		int admReportUpdate(@Param("rep_no")int rep_no, @Param("repor")int repor, @Param("state")String state);
 		//신고 날짜 검색
 		public List<ReportVO> admReportDate(@Param("fromDate")String fromDate, @Param("toDate")String toDate); 
+		
 }
