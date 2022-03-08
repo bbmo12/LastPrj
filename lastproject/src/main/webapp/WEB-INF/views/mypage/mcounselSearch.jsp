@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +81,8 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 				<div class="col-lg-12 col-md-12 blog_details">
+				<form action="mycounsel" id="goform" name="goform">
+							<input type="hidden" id = "pageNum" name="pageNum" value="1">
 							<table class="table">
 							<thead>
 								<tr>
@@ -99,15 +102,31 @@
 										<td>${mycounsel.pm_name } </td>
 										<td>${mycounsel.co_content } </td>
 										<td>${mycounsel.w_date }</td>
-										<td>${mycounsel.r_check }</td>
+										<c:choose>
+											<c:when test="${mycounsel.code eq 303 }">
+												<td><button>성공</button></td>
+											</c:when>
+											<c:otherwise>
+												<td><button>실패</button></td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		<my:nav jsFunc="go_page" page="${page}"/>
 	</section>
+	
+	<script type="text/javascript">
+	function go_page(p){
+		goform.pageNum.value=p;
+    	goform.submit();
+	}</script>
+	
 </body>
 </html>
