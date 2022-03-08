@@ -83,8 +83,8 @@ public class PmemberServiceImpl implements PmemberService{
 	
 	//관리자
 	@Override
-	public List<PmemberVO> admPlistCode(int code) {
-		return map.admPlistCode(code);
+	public List<PmemberVO> admPlistCode(PmemberVO vo) {
+		return map.admPlistCode(vo);
 	}
 	//관리자
 	@Override
@@ -131,8 +131,16 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
+
+	public int admPlistCodeCount(PmemberVO vo) {
+		return map.admPlistCodeCount(vo);
+	}
+	
+	
+@Override
 	public int pmemberNullUpdate(String p_id) {
 		return map.pmemberNullUpdate(p_id);
 	}
+
 
 }

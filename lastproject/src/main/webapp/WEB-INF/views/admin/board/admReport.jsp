@@ -11,7 +11,7 @@
 <!-- <script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script
+<script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
 	integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -56,7 +56,7 @@
 				</select>
 				<!-- <button type="button" class="btn btn-link btn-rounded btn-fw"
 					id="admRepor">처리 별 신고</button> -->
-				<select id="repor" name=" repor" class="admReportRepor"
+				<select id="reporOption" name=" reporOption" class="admReportRepor"
 					onchange="reporSelect()">
 					<option value="" selected disabled>처리 별 신고</option>
 					<option value="701">미처리</option>
@@ -64,35 +64,15 @@
 					<option value="703">승인 처리</option>
 				</select>
 				<div>
-				<form id="admDateForm">
-					FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
-					TO : <input type="text" id="toDate" name="toDate">
-					<button type="button" id="btnSearch">검 색</button>
-				</form>
-			</div>
-			</div>
-
-			<!-- 모달 -->
-			<!-- <div class="modal fade" id="myModal" role="dialog">
-				<div class="modal-dialog">
-					Modal content
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title" id="title"></h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-						<div class="modal-body">
-						
-							<p id="content"></p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-						</div>
-					</div>
+					<form id="admDateForm">
+						FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
+						TO : <input type="text" id="toDate" name="toDate">
+						<button type="button" id="btnSearch">검 색</button>
+					</form>
 				</div>
-			</div> -->
-
+			</div>
+			
+			<!-- Modal 창 -->
 			<div class="modal fade" id="myModal" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -133,7 +113,7 @@
 					</div>
 				</div>
 			</div>
-
+			<!--end Modal 창 -->
 
 			<!-- 검색.. DB 연동 시키는 걸로 -->
 			<div>
@@ -141,7 +121,7 @@
 					placeholder="Search.."> <br>
 			</div>
 
-
+			<input type="hidden" id="index">
 			<!-- 리스트 출력 테이블 -->
 			<table class="table table-striped">
 				<thead>
@@ -160,22 +140,6 @@
 		</div>
 	</div>
 
-
-
-	<!-- 모달 총 3개  -->
-
-	<!-- 1. 모달 미처리 신고 건 보기 : 신고처리 ajax -> 승인 or 기각으로 바꿔줘야 함  -->
-	<!--Modal 신고 내용 상세보기 and 신고 처리 -->
-	<!-- Modal -->
-
-
-	<!-- 2. 모달 신고 기각 된 건 보기 : 신고자 / 신고당한 자 / 신고 게시글 내용 / 신고 사유 / 신고 유형 / 신고 일 / 그리고 관리자의 신고기각 이유  -->
-
-	<!-- 3. 모달 신고승인 된 건 보기 : 신고자 / 신고당한 자 / 신고 게시글 내용 / 신고 사유 / 신고 유형 / 신고 일 -->
-
-
-
-
 	<script>
 		$(function() {
 			$("#myInput").on(
@@ -191,13 +155,14 @@
 								});
 					});
 		});
-		
+
 		//Qna 리스트 출력
 		$("#admQna").on('click', function() {
 			$.ajax({
 				url : 'admQnaList',
 				method : 'post',
 				success : function(result) {
+					$("#index").val('qna');
 					viewPmemberList(result);
 				}
 			});
@@ -209,13 +174,12 @@
 				url : 'admReviewList',
 				method : 'post',
 				success : function(result) {
+					$("#index").val('review');
 					viewPmemberList(result);
 				}
 			});
 
 		});//end Review 리스트 출력
-		
-		
 
 		//유형별 신고 리스트 : admReportPart
 		function codeSelect() {
@@ -238,14 +202,14 @@
 
 		//처리 별 신고 리스트 : admReportRepor
 		function reporSelect() {
-			var select = document.getElementById("repor");
-			var repor = select.options[select.selectedIndex].value;
+			var select = document.getElementById("reporOption");
+			var reporOption = select.options[select.selectedIndex].value;
 			console.log(repor);
 			$.ajax({
 				url : 'admReportRepor',
 				method : 'post',
 				data : {
-					"repor" : repor
+					"repor" : reporOption
 				},
 				success : function(result) {
 					console.log(result);
@@ -260,7 +224,8 @@
 			$("#myTable").empty();
 			console.log(result);
 
-			$.each(
+			$
+					.each(
 							result,
 							function(i) {
 								if (result[i].repor === 701) {
@@ -300,7 +265,7 @@
 															+ "</td><td id='content'>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button id='cancelModal' type='button' onclick='showC("
+															+ "<td><button id='cancelModal' type='button' onclick='show("
 															+ result[i].rep_no
 															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#cancelModal'> "
 															+ "기각처리</td></button></tr>");
@@ -319,7 +284,7 @@
 															+ "</td><td id='content'>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button id='permitModal' type='button' class='btn btn-secondary' onclick='showP("
+															+ "<td><button id='permitModal' type='button' class='btn btn-secondary' onclick='show("
 															+ result[i].rep_no
 															+ ")'  data-toggle='modal' data-target='#permitModal'>"
 															+ "승인처리</td></button></tr>");
@@ -328,107 +293,111 @@
 							});
 		}//end 리스트 만드는 함수 : viewPmemberList
 
-		//===================================================================================================================
+		//======================================================모달=============================================================
 
-		// Modal 미처리 신고 : QnA
-		function show(str) {
-			console.log(str);
-			$
-					.ajax({
-						url : 'admReportOneQna',
-						method : 'post',
-						data : {
-							"rep_no" : str
-						},
-						success : function(res) {
-							console.log(res);
-							if (res == '')
-								alert('해당 데이터가 없습니다');
-
-							console.log(res[0].rep_no);
-
-							$("form")
-									.append(
-											"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
-
-							$("#repo").append(
-									"<ul><li>신고유형 : " + res[0].f_content
-											+ "</li><li>신고날짜 : "
-											+ res[0].w_date + "</li><li>신고자 : "
-											+ res[0].reporter
-											+ "</li><li>신고당한 : "
-											+ res[0].reported
-											+ "</li><li>신고사유 : "
-											+ res[0].content
-											+ "</li><li>게시글 내용 : "
-											+ res[0].q_content + "</li></ul>");
-						},
-						error : function(er) {
-							alert('오류가 났음. 개발자 호츌');
-						}
-					})
-
-			$("#myModal").modal('show');
-		}//end Modal 신고 단건
-
-		// Modal 미처리 신고 : Review
+		// Modal 미처리 신고 : Review,Qna
 		function show(st) {
 			console.log(st);
-			$
-					.ajax({
-						url : 'admReportOneReview',
-						method : 'post',
-						data : {
-							"rep_no" : st
-						},
-						success : function(res) {
-							console.log(res);
-							if (res == '')
-								alert('해당 데이터가 없습니다');
+			var tag = $('#index').val();
+			var url = null;
 
-							console.log(res[0].rep_no);
+			if (tag == 'review') {
+				url = 'admReportOneReview';
+				$
+						.ajax({
+							url : url,
+							method : 'post',
+							data : {
+								"rep_no" : st
+							},
+							success : function(res) {
+								console.log(res[0].state);
+								if (res == '')
+									alert('해당 데이터가 없습니다');
 
-							$("form")
-									.append(
-											"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+								console.log(res[0].rep_no);
 
-							$("#repo").append(
-									"<ul><li>신고유형 : " + res[0].f_content
-											+ "</li><li>신고날짜 : "
-											+ res[0].w_date + "</li><li>신고자 : "
-											+ res[0].reporter
-											+ "</li><li>신고당한 : "
-											+ res[0].reported
-											+ "</li><li>신고사유 : "
-											+ res[0].content
-											+ "</li><li>게시글 내용 : "
-											+ res[0].rev_content + "</li></ul>");
-						},
-						error : function(er) {
-							alert('오류가 났음. 개발자 호츌');
-						}
-					})
+								$("form")
+										.append(
+												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
 
-			$("#myModal").modal('show');
-		}//end Modal 신고 단건
-		
-		
+								$("#repo").append(
+										"<ul><li>신고유형 : " + res[0].f_content
+												+ "</li><li>신고날짜 : "
+												+ res[0].w_date
+												+ "</li><li>신고자 : "
+												+ res[0].reporter
+												+ "</li><li>신고당한 : "
+												+ res[0].reported
+												+ "</li><li>신고사유 : "
+												+ res[0].content
+												+ "</li><li>게시글 내용 : "
+												+ res[0].rev_content
+												+ "</li></ul>");
+							},
+							error : function(er) {
+								alert('오류가 났음. 개발자 호츌');
+							} //end error
+						})// end ajax
+						$("#myModal").modal('show');
+			} else {
+				url = 'admReportOneQna';
+				$
+						.ajax({
+							url : url,
+							method : 'post',
+							data : {
+								"rep_no" : st
+							},
+							success : function(res) {
+								console.log(res[0].state);
+								if (res == '')
+									alert('해당 데이터가 없습니다');
+								console.log(res[0].rep_no);
+								$("form")
+										.append(
+												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+
+								$("#repo").append(
+										"<ul><li>신고유형 : " + res[0].f_content
+												+ "</li><li>신고날짜 : "
+												+ res[0].w_date
+												+ "</li><li>신고자 : "
+												+ res[0].reporter
+												+ "</li><li>신고당한 : "
+												+ res[0].reported
+												+ "</li><li>신고사유 : "
+												+ res[0].content
+												+ "</li><li>게시글 내용 : "
+												+ res[0].q_content
+												+ "</li></ul>");
+							},
+							error : function(er) {
+								alert('오류가 났음. 개발자 호츌');
+							}
+						})
+
+						$("#myModal").modal('show');
+			}//end Modal 신고 단건
+		}// end Show function
 
 		//모달 내용 초기화
 		$('#myModal').on('hidden.bs.modal', function(e) {
 			$(this).find('ul').empty();
 			$(this).find('form')[0].reset();
 
-		})
+		})//END 모달 내용 초기화
 
 		//신고처리 : admReportUpdate
 		$("#admReportUpdate").on("click", function(e) {
 			var str = $('#form').serialize();
-			console.log(str);
+			console.log("str의 값"+str);
 			var rep_no = $("#rep_no").val();
-			console.log(rep_no);
+			console.log("rep_no : "+rep_no);
 			var state = $("#state").val();
+			console.log("state : "+state);
 			var repor = $("#repor").val();
+			console.log("repor : "+repor);
 
 			var flag = confirm("신고처리 하시겠습니까?");
 			if (flag == true) {
@@ -452,81 +421,86 @@
 				}) //end Ajax
 			}//end If
 		})//end 신고 처리
+
+		// 모달 승인 처리 된 건
+
+
+		//========================================================날짜 검색===========================================================
 		
-		
-		$('#btnSearch').on('click',function(e){
+		$('#btnSearch').on('click', function(e) {
 			var str = $('#admDateForm').serialize();
 			console.log(str);
 			var fromDate = $("#fromDate").val();
 			var toDate = $("#toDate").val();
-			
+
 			$.ajax({
 				url : 'admReportDate',
 				method : 'post',
 				data : {
 					"fromDate" : fromDate,
 					"toDate" : toDate
-				}, success : function(result) {
+				},
+				success : function(result) {
 					console.log(result);
 					viewPmemberList(result);
 				}
 			})
-			
+
 		});
-		
-        $("#datepicker").datepicker({
-            dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            showOtherMonths: true,
-            changeYear: true,
-            changeMonth: true,
-            showOn: "both",
-            buttonImage: "",
-            buttonImageOnly: true,
-            buttonText: "선택"
 
-        });
-        $('#datepicker').datepicker('setDate', 'today');
+		$("#datepicker").datepicker(
+				{
+					dateFormat : 'yy-mm-dd',
+					prevText : '이전 달',
+					nextText : '다음 달',
+					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+							'8월', '9월', '10월', '11월', '12월' ],
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+					dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+					dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+					showMonthAfterYear : true,
+					yearSuffix : '년',
+					showOtherMonths : true,
+					changeYear : true,
+					changeMonth : true,
+					showOn : "both",
+					buttonImage : "",
+					buttonImageOnly : true,
+					buttonText : "선택"
 
-        $(function () {
-            $.datepicker.setDefaults({
-                dateFormat: 'yy-mm-dd',
-                prevText: '이전 달',
-                nextText: '다음 달',
-                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
-                    '12월'
-                ],
-                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                showMonthAfterYear: true,
-                yearSuffix: '년',
-                showOtherMonths: true,
-                changeYear: true,
-                changeMonth: true,
-                showOn: "both",
-                buttonImage: "",
-                buttonImageOnly: false,
-                buttonText: "선택"
-            });
-            $("#fromDate").datepicker();
-            $("#toDate").datepicker();
+				});
+		$('#datepicker').datepicker('setDate', 'today');
 
-            $('#fromDate').datepicker('setDate', 'today');
-            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전
-        });// =============end 날짜 검색 ==============
-		
-		
-		
+		$(function() {
+			$.datepicker.setDefaults({
+				dateFormat : 'yy-mm-dd',
+				prevText : '이전 달',
+				nextText : '다음 달',
+				monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+						'9월', '10월', '11월', '12월' ],
+				monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+						'8월', '9월', '10월', '11월', '12월' ],
+				dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+				dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+				dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+				showMonthAfterYear : true,
+				yearSuffix : '년',
+				showOtherMonths : true,
+				changeYear : true,
+				changeMonth : true,
+				showOn : "both",
+				buttonImage : "",
+				buttonImageOnly : false,
+				buttonText : "선택"
+			});
+			$("#fromDate").datepicker();
+			$("#toDate").datepicker();
+
+			/*  $('#fromDate').datepicker('setDate', 'today');
+			$('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전  */
+		});// =============end 날짜 검색 ==============
 	</script>
 </body>
 </html>

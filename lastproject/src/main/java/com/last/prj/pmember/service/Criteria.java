@@ -10,8 +10,10 @@ public class Criteria {
 	private int pageBlock;//페이지 버튼 수 
 	
 
-	private int code;//파트너리스트 조건
+	private Integer code;//map 조건
+
 	private String p_id;
+
 	private String m_id; //예약페이징 조건
 
 	private String w_address;	

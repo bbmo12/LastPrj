@@ -1,9 +1,7 @@
 package com.last.prj.admin.web;
 
-import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
@@ -70,15 +69,6 @@ public class AdminController {
 	//파트너회원 페이징
 	@RequestMapping("/admPmember")
 	public String pmemberTable(Model model, Criteria cri) {
-		
-		//페이징 처리
-		/*
-		 * cri.setAmount(7); PagingVO paging = new PagingVO(cri,
-		 * mapper.memberPage(cri)); model.addAttribute("page", paging);// 페이징 수
-		 * model.addAttribute("pList", mapper.admPmemberPageList(cri));// 페이징 리스트
-		 */
-		//회원 리스트담기
-		
 		 List<PmemberVO> list = pMemberDao.admPlist(); 
 		 System.out.println(list);
 		 model.addAttribute("pList",list );
@@ -87,12 +77,22 @@ public class AdminController {
 		return "admin/board/admPmember";
 	}
 	
+	
+	
 	//  파트너 code별
 	@RequestMapping("/admPlistCode")
 	@ResponseBody
-	public List<PmemberVO> admPlistCode(@RequestParam("code") int code) {	
-		System.out.println(pMemberDao.admPlistCode(code));
-		return pMemberDao.admPlistCode(code);
+	public HashMap<String, Object> admPlistCode(PmemberVO vo, Criteria cri) {
+		int total = pMemberDao.admPlistCodeCount(vo);
+		PagingVO page = new PagingVO(cri, total);
+		HashMap map = new HashMap();
+		vo.setVo(page);
+		
+		map.put("list", pMemberDao
+				.admPlistCode(vo));
+		map.put("page", page);
+		System.out.println("============================="+vo);
+		return map;
 	}
 	
 	
@@ -183,13 +183,12 @@ public class AdminController {
 	@RequestMapping(value ="/admReportUpdate")
 	@ResponseBody
 	public String admReportUpdate(@RequestParam("rep_no")int rep_no,@RequestParam("state")String state,@RequestParam("repor")int repor ) {	
-		System.out.println(repor);
-		System.out.println(rep_no);
-		System.out.println(state);
-		reportDao.admReportUpdate(repor,rep_no,state);
-		
+		System.out.println("repor의 값"+repor);
+		System.out.println("rep_no의 값"+rep_no);
+		System.out.println("state의 값"+state);
+		reportDao.admReportUpdate(rep_no,repor,state);
 
-		return "redirect:admin/board/adminReport";
+		return "admin/board/adminReport";
 	}
 	
 	//신고 날짜 검색 : admReportDate
