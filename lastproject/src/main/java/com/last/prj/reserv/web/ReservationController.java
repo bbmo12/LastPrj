@@ -113,7 +113,10 @@ public class ReservationController {
 	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
-	public String reservationSetting(Model model,PreservationVO pres) {
+	public String reservationSetting(Model model,PreservationVO pres,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		model.addAttribute("p_id",p_id);
 		return "reservation/resvSetting";
 	}
 	
@@ -142,17 +145,13 @@ public class ReservationController {
 		String p_id = (String) session.getAttribute("pId");
 		vo.setP_id(p_id);
 		cri.setP_id(p_id);
-		cri.setAmount(5);
+		cri.setAmount(15);
 		System.out.println("cri=========="+cri);
 		PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
 		
 		model.addAttribute("page", paging);// 페이징 수
-		List<PreservationVO> list = pReservationDao.preservationlist(vo);
 		model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
 		model.addAttribute("preservation", pmapper.preservationPageList(cri));
-		
-		System.out.println(list);
-		
 		return "reservation/preservation";
 	}
 	
@@ -162,6 +161,7 @@ public class ReservationController {
 	  public String okUpdate(@RequestParam("rno") int rno) {
 		  System.out.println(rno);
 		  reservationDao.okUpdate(rno);
+		  
 		  return "ok";
 	  }
 	  

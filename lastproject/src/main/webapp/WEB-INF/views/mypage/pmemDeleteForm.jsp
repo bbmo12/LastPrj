@@ -35,10 +35,10 @@
 
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" style="width: 210px"
+								src="resources/upload/${pmember.picture}" style="width: 210px"
 								alt="">
 							<div class="br"></div>
-							<h4>${member.name }</h4>
+							<h4>${pmember.name }</h4>
 
 							<div class="br"></div>
 						</aside>
@@ -79,7 +79,7 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<form class="forms-sample" action="mdelete" method="post">
+						<form class="forms-sample" action="pmdelete" method="post">
 							<h4>회원탈퇴하시겠습니까?</h4>
 							<button type="submit" class="btn btn-primary mr-2" >네</button>
 							<button type="button" class="btn btn-primary mr-2" onclick="location.href='home'">아니요</button>

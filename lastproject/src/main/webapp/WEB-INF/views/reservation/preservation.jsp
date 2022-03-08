@@ -127,6 +127,7 @@
 			<!-- modal 몸통 -->
 			<div class="modal-body">
 					<div class="form-group">
+							<input type ="hidden" id ="m_id" name="m_id">
 							<input type="hidden" id="p_id" name="p_id" value="${sessionScope.pId }">
 							<input type="hidden" id="r_no" name ="r_no">
 							<span id ="span_d_name" style="width: 250px !important;">&nbsp;진단명 : <input type="text" id="d_name" name="d_name"></span><br><br>
@@ -149,15 +150,12 @@
 	
 	<script>
 		var val = $(".in_code").parent();
-		console.log (val);
-		console.log(val.length);
 		for(var i=0; i<val.length;i++){
 			if(val[i].innerText == '승인대기'){
-				console.log(val[i]);
 				 val[i].classList.add("code");
 				$(".code").empty();
-			 	var check = $(".code").append(`<button onclick="ok(event)">승인</button> 
-						       				   <button onclick="no(event)">거절</button>`);
+			 	var check = $(".code").append(`<button type="button" onclick="ok(event)">승인</button> 
+						       				   <button type="button" onclick="no(event)">거절</button>`);
 			}else if(val[i].innerText == '결제완료'){
 				val[i].classList.add("diaLog");
 				$(".diaLog").empty();
@@ -167,32 +165,32 @@
 		}
 		function ok(event){
 			var rno = $(event.target).parent().parent().children().first().text();
-			console.log(rno);
+			var m_id = $(event.target).parent().prev().prev().prev().text();
+			console.log(m_id);
 			var flag = confirm("해당 예약신청을 승인하시겠습니까?");
 			if(flag == true){
-				$.ajax({
+				 $.ajax({
 					url : 'okupdate',
 					method : 'post',
 					data : {"rno" : rno},
 					success : function(result){
-							console.log(result);
 							alert("해당 승인신청이 성공적으로 완료되었습니다.");
-								location.reload();
-						},
+							okWebAlert(m_id);
+					},
 					error : function(error){
 						alert ("승인확인도중 오류가 발생하였습니다."); 
 					}
-				});
+				}); 
 			}else{
 				alert("예약신청 승인을 취소하셨습니다.");
 			}
 		}
 		function no(event){
 			var rno = $(event.target).parent().parent().children().first().text();
+			var m_id = $(event.target).parent().prev().prev().prev().text();
 			var flag = confirm("해당 예약신청을 거절하시겠습니까?");
 			
 			var refuse = prompt("거절사유를 작성해주세요."+"");
-			console.log(refuse);
 			if(flag == true){
 				$.ajax({
 					url : 'noupdate',
@@ -200,11 +198,12 @@
 					data : {'rno' : rno ,
 							'refuse' : refuse },
 					success : function(result){
-						alert("작성완료.");
+						noWebAlert(m_id);
 						location.reload();
 					},
 					error : function(error){
-						alert("거절사유 작성중 오류발생")
+						alert("거절사유 작성중 오류발생");
+						location.reload();
 					}
 				})
 				alert("해당 예약신청을 거절하셨습니다.");
@@ -214,11 +213,13 @@
 		$(".diaLogModal").on('click',function(){
 			var r_no = $(this).parent().prev().prev().prev().prev().prev().prev().text();
 			$("#r_no").val(r_no);
-			
+			var m_id = $(this).parent().prev().prev().prev().text();
+			$("#m_id").val(m_id);			
 		});
-		//모달창 값 보내기
+		
+		//모달창(진료) 값 보내기
 		$("#sendDiaLog").on('click',function(){
-			
+			var m_id = $("#m_id").val();
 			var p_id = $("#p_id").val();
 			var d_name = $("#d_name").val();
 			var symptom =$("#symptom").val();
@@ -234,11 +235,93 @@
 							'result' : result },
 					success : function(res){
 						alert("작성완료");
+						diaWebAlert(m_id);
 						location.reload();
 						
 					}
 				}); 
 		});
+		function okWebAlert(m_id){
+			
+		    var content = "예약신청이 승인되었습니다.";
+		    // 전송한 정보를 db에 저장	
+		    $.ajax({
+		        type: 'post',
+		        url: 'noticeInsert',
+		        dataType: 'text',
+		        data: {
+		            "n_to": m_id,
+		            "content": content
+		        },
+		        success: function(){    // db전송 성공시 실시간 알림 전송
+		            // 소켓에 전달되는 메시지
+		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+		            socket.send(m_id+","+content);
+		        	alert("전송되었습니다.");
+		        	location.reload();
+		        },
+		        error: function(error){
+		        	console.log(error);
+		        	alert("실패");
+		        }
+		    });
+		}
+		
+		
+		function noWebAlert(m_id){
+			
+		    var content = "예약신청이 거절되었습니다.";
+		    // 전송한 정보를 db에 저장	
+		    $.ajax({
+		        type: 'post',
+		        url: 'noticeInsert',
+		        dataType: 'text',
+		        data: {
+		            "n_to": m_id,
+		            "content": content
+		        },
+		        success: function(){    // db전송 성공시 실시간 알림 전송
+		            // 소켓에 전달되는 메시지
+		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+		            socket.send(m_id+","+content);
+		        	alert("전송되었습니다.");
+		        	location.reload();
+		        },
+		        error: function(error){
+		        	console.log(error);
+		        	alert("실패");
+		        }
+		    });
+		}
+		
+		function diaWebAlert(m_id){
+			
+		    var content = "진료결과 알림";
+		    // 전송한 정보를 db에 저장	
+		    $.ajax({
+		        type: 'post',
+		        url: 'noticeInsert',
+		        dataType: 'text',
+		        data: {
+		            "n_to": m_id,
+		            "content": content
+		        },
+		        success: function(){    // db전송 성공시 실시간 알림 전송
+		            // 소켓에 전달되는 메시지
+		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+		            socket.send(m_id+","+content);
+		        	alert("전송되었습니다.");
+		        	location.reload();
+		        },
+		        error: function(error){
+		        	console.log(error);
+		        	alert("실패");
+		        }
+		    });
+		}
+		
+		
+		
 		function go_page(p){
 			goform.pageNum.value=p;
 	    	goform.submit();

@@ -222,5 +222,17 @@
 				)
 		WHERE ROWNUM<![CDATA[<=4]]>     
 	</select>
+	
+	<!-- 파트너회원 회원탈퇴시 모든정보 NULL로 수정 -->
+	<update id="pmemberNullUpdate" parameterType="String" >
+		WHERE M_ID = #{M_ID}
+		UPDATE P_MEMBER
+		SET NAME = '정보삭제' , TEL = '정보삭제', STARTDATE = NULL, 
+			 ENDDATE =SYSDATE,  PASSWORD ='정보삭제' , C_REPORT = NULL, 
+			 N_CONTENT =NULL, W_NAME=NULL, W_ADDRESS ='정보삭제', W_TEL='정보삭제', P_INFO ='정보삭제',
+		     W_D_ADDRESS ='정보삭제', BUSINESSNUMBER = NULL, CAREER = '정보삭제',
+		     SPECIALITY = '정보삭제', RCOM = NULL, CODE =9999,P_PROFILE=NULL,P_LICENSE=NULL,P_IMAGE=NULL,PICTURE='정보삭제',PFILE='정보삭제'
+		WHERE P_ID = #{p_id}
+	</update>
 
 </mapper>

@@ -130,4 +130,9 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admPmemberDate(fromDate, toDate);
 	}
 
+	@Override
+	public int pmemberNullUpdate(String p_id) {
+		return map.pmemberNullUpdate(p_id);
+	}
+
 }
