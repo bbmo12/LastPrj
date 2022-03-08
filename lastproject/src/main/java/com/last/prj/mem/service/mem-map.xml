@@ -90,9 +90,9 @@
 	<!--서비스 가격 입력  -->
 	<insert id="servicepriceinsert" parameterType="com.last.prj.mem.service.PriceVO">
 		<selectKey keyProperty="price_no" resultType="int" order="BEFORE">
-			SELECT NVL(MAX(PRICE_NO)+1,1) AS PRICE_NO FROM PRICE		
+			SELECT NVL(MAX(PRICE_NO)+1,1) AS PRICE_NO FROM PRICE
 		</selectKey>
-		INSERT INTO PRICE VALUES(#{price_no),#{price},#{content},#{p_id})
+		INSERT INTO PRICE(price_no, price, title, content, p_id) VALUES(#{price_no},#{price},#{title},#{content},#{p_id})
 	</insert>
 	
 	<!-- 진료 가능한 동물  -->
@@ -113,10 +113,5 @@
 		insert into o_time(o_no, p_id, w_day, startime, endtime, n_content) values(#{o_no},#{p_id},#{w_day},#{starttime},#{endtime},#{n_content})
 	</insert>
 	
-	<insert id="servicepriceinsert" parameterType="com.last.prj.mem.service.PriceVO">
-		<selectKey keyProperty="price_no" resultType="int" order="BEFORE">
-			SELECT NVL(MAX(PRICE_NO)+1,1) AS PRICE_NO FROM PRICE
-		</selectKey>
-		INSERT INTO PRICE(price_no, price, title, content, p_id) VALUES(#{price_no},#{price},#{title},#{content},#{p_id})
-	</insert>
+	
 </mapper>

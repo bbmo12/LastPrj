@@ -19,7 +19,7 @@
 						<h4 class="card-title">운영시간</h4>
 							<div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="월">
-								<select  id="selectStart" name="selectStart" onchange="startTime()">
+								<select  id="selectStart" name="timeVOList[${status.index}].starttime">
 									<option value='' selected>오픈시간</option>
 									<option value='9:00'>9:00</option>
 									<option value='9:30'>9:30</option>
@@ -28,7 +28,7 @@
 									<option value='12:00'>12:00</option>
 									<option value='12:30'>12:30</option>
 								</select>
-								<select  id="selectEnd" name="selectEnd" onchange="endTime()">
+								<select  id="selectEnd" name="timeVOList[${status.index}].endtime" >
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>
@@ -54,7 +54,7 @@
 							<div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="화">
 								 <select
-									id="selectStart" name="selectStart" onchange="startTime()">
+									id="selectStart" name="timeVOList[${status.index}].starttime">
 									<option value='' selected>오픈시간</option>
 									<option value='9:00'>9:00</option>
 									<option value='9:30'>9:30</option>
@@ -63,7 +63,7 @@
 									<option value='12:00'>12:00</option>
 									<option value='12:30'>12:30</option>
 								</select>
-								<select id="selectEnd" name="selectEnd" onchange="endTime()">
+								<select id="selectEnd" name="timeVOList[${status.index}].endtime">
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>
@@ -88,7 +88,7 @@
 							</div>
 							<div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="수">
-								<select	id="selectStart" name="selectStart" onchange="startTime()">
+								<select	id="selectStart" name="timeVOList[${status.index}].starttime">
 									<option value='' selected>오픈시간</option>
 									<option value='9:00'>9:00</option>
 									<option value='9:30'>9:30</option>
@@ -96,7 +96,7 @@
 									<option value='11:00'>11:00</option>
 									<option value='12:00'>12:00</option>
 									<option value='12:30'>12:30</option>
-								</select> <select id="selectEnd" name="selectEnd" onchange="endTime()">
+								</select> <select id="selectEnd" name="timeVOList[${status.index}].endtime" >
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>
@@ -120,7 +120,7 @@
 							</div>
 							<div class="form-group">
 								<input type="text" readonly="readonly"name="w_day" id="w_day" value="목">
-								<select id="selectStart" name="selectStart" onchange="startTime()">
+								<select id="selectStart" name="timeVOList[${status.index}].starttime">
 								<option value='' selected>오픈시간</option>
 								<option value='9:00'>9:00</option>
 								<option value='9:30'>9:30</option>
@@ -129,7 +129,7 @@
 								<option value='12:00'>12:00</option>
 								<option value='12:30'>12:30</option>
 								</select>
-								<select id="selectEnd" name="selectEnd" onchange="endTime()">
+								<select id="selectEnd" name="timeVOList[${status.index}].endtime">
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>
@@ -155,7 +155,7 @@
 							<div class="form-group">
 								<input type="text" readonly="readonly"name="w_day" id="w_day"  value="금">
 								<select
-									id="selectStart" name="selectStart" onchange="startTime()">
+									id="selectStart" name="timeVOList[${status.index}].starttime">
 								<option value='' selected>오픈시간</option>
 								<option value='9:00'>9:00</option>
 								<option value='9:30'>9:30</option>
@@ -164,7 +164,7 @@
 								<option value='12:00'>12:00</option>
 								<option value='12:30'>12:30</option>
 								</select>
-								<select id="selectEnd" name="selectEnd" onchange="endTime()">
+								<select id="selectEnd"name="timeVOList[${status.index}].endtime" >
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>
@@ -190,7 +190,7 @@
 							<div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="토">
 								<select
-									id="selectStart" name="selectStart" onchange="startTime()">
+									id="selectStart" name="timeVOList[${status.index}].starttime">
 								<option value='' selected>오픈시간</option>
 								<option value='9:00'>9:00</option>
 								<option value='9:30'>9:30</option>
@@ -199,7 +199,7 @@
 								<option value='12:00'>12:00</option>
 								<option value='12:30'>12:30</option>
 								</select>
-								 <select id="selectEnd" name="selectEnd" onchange="endTime()">
+								 <select id="selectEnd" name="timeVOList[${status.index}].endtime" >
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>
@@ -225,7 +225,7 @@
 							<div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="일">
 								<select
-									id="selectStart" name="selectStart" onchange="startTime()">
+									id="selectStart" name="timeVOList[${status.index}].starttime">
 								<option value='' selected>오픈시간</option>
 								<option value='9:00'>9:00</option>
 								<option value='9:30'>9:30</option>
@@ -234,7 +234,7 @@
 								<option value='12:00'>12:00</option>
 								<option value='12:30'>12:30</option>
 								</select>
-								 <select id="selectEnd" name="selectEnd" onchange="endTime()">
+								 <select id="selectEnd" name="timeVOList[${status.index}].endtime"  >
 									<option value='' selected>마감시간</option>
 									<option value='13:00'>13:00</option>
 									<option value='13:30'>13:30</option>

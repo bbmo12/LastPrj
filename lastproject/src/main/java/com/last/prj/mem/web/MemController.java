@@ -280,6 +280,7 @@ public class MemController {
 		 System.out.println("여기 파트너회원가입 3차");
 		 System.out.println("p_id3:"+p_id);
 		  
+		 
 		  
 		 // FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
 		  
@@ -292,15 +293,21 @@ public class MemController {
 		 
 		  pmemDao.pmemberInsert3(p_id, p_license, p_image); //파일다중업로드
 		  
-		  for(int i=0; i<time.getTimeListVO().size() ; i++) {
-			  memDao.otimeinsert(time);
-		  }
+		  System.out.println("여기 펫케어");
 		  for(int i=0; i<petcare.getPetcareVOList().size() ; i++) {
 			  memDao.petcareinsert(petcare);
 		  }
+		  
+		  System.out.println("여기 가격");
 		  for(int i=0 ; i<price.getPriceVOList().size(); i++) {
 			  memDao.servicepriceinsert(price);
 		  }
+		  
+		  System.out.println("여기 시간");
+		  for(int i=0; i<time.getTimeListVO().size() ; i++) {
+			  memDao.otimeinsert(time);
+		  }
+		 
 		  
 		  return "member/joinResult";
 	  }
