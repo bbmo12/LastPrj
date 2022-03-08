@@ -7,161 +7,148 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="resources/js/sockjs.js"></script>
 </head>
 <body>
-	<section class="banner-area other-page">
-		<div class="container">
-			<div class="row"></div>
-		</div>
-	</section>
-	<section class="blog_area">
-
-		<div class="container">
-			<div>
-				<h2>1:1 채팅 상담</h2>
-			</div>
-
-			<div class="row">
-				<!-- chatHistory -->
-				<div id="content">
-					<c:forEach var="chatRoom" items="${chatHistory }">
-						<p>
-							<span id="chatUser">${chatroom.user }</span><br> <span
-								id="chatContent">${chatroom.content }</span><br> <span
-								id="chatSendTime">${chatroom.sendTime }</span>
-						</p>
-					</c:forEach>
-				</div>
-
-				<!-- 메시지 입력창 & 전송 -->
-				<div class="row_3">
-					<div>
-						<input type="text" placeholder="메시지를 입력하세요..."
-							class="form-control" />
-						<div>
-							<span><button id="send" class="btn btn-primary"
-									onclick="send()">전송</button></span> <span><input type="hidden"
-								value="${chatRoomInfo.sender_id }" id="sender_id" /> <input
-								type="hidden" value="${chatRoomInfo.c_no }" id="c_no" /> <input
-								type="hidden" value="${chatRoomInfo.receiver_id }"
-								id="receiver_id"></span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- STOMP & SockJS import -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
-
-	<script>
-	var stompClient = null;
-	var receiver_id = $('#receiver_id').val();
-	var sender_id = $('#sender_id').val();
-	var c_no = $('#c_no').val();
 	
-	<!-- invoke when DOM(Documents Object Model; HTML(<head>, <body>...etc) is ready -->
-	$(document).ready(connect());
-	$(document).ready(ajaxChatRead());
 	
-	function connect() {
-		<!-- map URL using SockJS-->
-		console.log("connected");
-		var socket = new SockJS('/broadcast');
-		var url = '/user/' + c_no + '/queue/messages';
+
+	<div class="col-12">
+		<div class="col-8" style="float: left; text-align: center;">
+			 님과의 1:1 상담</div>
+	</div>
+
+	<!-- 채팅 내용 -->
+	<div class="col-12">
+		<div class="col-11"
+			style="margin: 0 auto; border: 1px solid #01D1FE; height: 400px; border-radius: 10px; overflow: scroll"
+			id="chatArea">
+
+			<div id="chatMessageArea"
+				style="margin-top: 10px; margin-left: 10px;"></div>
+
+
+
+
+		</div>
+	</div>
+
+	<!-- 채팅 입력창 -->
+	<div class="col-12" style="margin-top: 20px; margin-bottom: 15px;">
+		<div class="col-12" style="float: left">
+			<textarea class="form-control"
+				style="border: 1px solid #01D1FE; height: 65px; float: left; width: 80%"
+				placeholder="Enter ..." id="message">
+
+
+				</textarea>
+			<span
+				style="float: right; width: 18%; height: 65px; text-align: center; background-color: #01D1FE; border-radius: 5px;">
+				<button type="button" style="margin-top: 30px; text-align: center; color: white; font-weight: bold;" id="sendBtn"><br>전송</button>
+			</span>
+		</div>
+
+	</div>
+
+	<input type="button" id="enterBtn" value="입장" style="display: none">
+	<input type="button" id="exitBtn" value="나가기" style="display: none">
+	<script type="text/javascript">
+		connect();
+
+		function connect() {
+			sockChat = new SockJS("<c:url value="/chat"/>");
+			sockChat.onopen = function() {
+				console.log('open');
+			};
+			sockChat.onmessage = function(evt) {
+				var data = evt.data;
+				console.log(data)
+				var obj = JSON.parse(data)
+				console.log(obj)
+				appendMessage(obj.message_content);
+			};
+			sockChat.onclose = function() {
+				appendMessage("연결을 끊었습니다.");
+				console.log('close');
+			};
+		}
+
+		function send() {
+			var msg = $("#message").val();
+			if (msg != "") {
+				message = {};
+				message.message_content = $("#message").val()
+				message.p_id = '${chatroomInfo.p_id}'
+				message.m_id = '${chatroomInfo.m_id}'
+				message.chat_id = '${chatroomInfo.chat_id}'
+				message.msg_sender = '${chatroomInfo.m_id}'
+				message.msg_receiver = '${chatroomInfo.p_id}'
+			}
+
+			sockChat.send(JSON.stringify(message));
+			$("#message").val("");
+		}
+
+		function getTimeStamp() {
+			var d = new Date();
+			var s = leadingZeros(d.getFullYear(), 4) + '-'
+					+ leadingZeros(d.getMonth() + 1, 2) + '-'
+					+ leadingZeros(d.getDate(), 2) + ' ' +
+
+					leadingZeros(d.getHours(), 2) + ':'
+					+ leadingZeros(d.getMinutes(), 2) + ':'
+					+ leadingZeros(d.getSeconds(), 2);
+
+			return s;
+			console.log(s);
+		}
+
+		function leadingZeros(n, digits) {
+			var zero = '';
+			n = n.toString();
+
+			if (n.length < digits) {
+				for (i = 0; i < digits - n.length; i++)
+					zero += '0';
+			}
+			return zero + n;
+		}
+
+		function appendMessage(msg) {
+
+			if (msg == '') {
+				return false;
+			} else {
+
+				var t = getTimeStamp();
+				$("#chatMessageArea")
+						.append(
+								"<div class='col-12 row' style = 'height : auto; margin-top : 5px;'><div class='col-2' style = 'float:left; padding-right:0px; padding-left : 0px;'><div style='font-size:9px; clear:both;'>${user_name}</div></div><div class = 'col-10' style = 'overflow : y ; margin-top : 7px; float:right;'><div class = 'col-12' style = ' background-color:#ACF3FF; padding : 10px 5px; float:left; border-radius:10px;'><span style = 'font-size : 12px;'>"
+										+ msg
+										+ "</span></div><div col-12 style = 'font-size:9px; text-align:right; float:right;'><span style ='float:right; font-size:9px; text-align:right;' >"
+										+ t + "</span></div></div></div>")
+
+				var chatAreaHeight = $("#chatArea").height();
+				var maxScroll = $("#chatMessageArea").height() - chatAreaHeight;
+				$("#chatArea").scrollTop(maxScroll);
+
+			}
+		}
 		
-		<!-- webSocket 대신 SockJS을 사용하므로 Stomp.client()가 아닌 Stomp.over()를 사용함-->
-		stompClient = Stomp.over(socket);
-		
-		console.log("connect ajaxRead");
-		
-		<!-- connect(header, connectCallback(==연결에 성공하면 실행되는 메서드))-->
-		stompClient.connect({}, function() {
-			
-			console.log("connected STOMP");
-			<!-- url: 채팅방 참여자들에게 공유되는 경로-->
-			<!-- callback(function()): 클라이언트가 서버(Controller broker로부터)로부터 메시지를 수신했을 때 실행 -->
-			stompClient.subscribe(url, function(output) {
-				<!-- JSP <body>에 append할 메시지 contents-->
-				showBroadcastMessage(createTextNode(JSON.parse(output.body)));
+		$(document).ready(function() {
+			$('#message').keypress(function(event) {
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if (keycode == '13') {
+					send();
+				}
+				event.stopPropagation();
 			});
-			}, 
-				<!-- connect() 에러 발생 시 실행-->
-					function (err) {
-						alert('error' + err);
+
+			$('#sendBtn').click(function() {
+				send();
+			});/* $('#enterBtn').click(function() { connect(); }); $('#exitBtn').click(function() { disconnect(); }); */
 		});
-	};
-	
-	<!-- WebSocket broker 경로로 JSON형태 String 타입 메시지 데이터를 전송함 -->
-	function sendBroadcast(json) {
-		
-		stompClient.send("/app/broadcast", {}, JSON.stringify(json));
-	}
-	
-	<!-- 보내기 버튼 클릭시 실행되는 메서드-->
-	function send() {
-		var content = $('#message').val();
-		sendBroadcast({
-			'c_no': c_no,
-			'receiver_id': receiver_id,
-			'sender_id' : sender_id,
-			'content': content
-			});
-		$('#message').val("");
-	}
-	
-	<!-- 메시지 입력 창에서 Enter키로 보내기 -->
-	var inputMessage = document.getElementById('message'); 
-	inputMessage.addEventListener('keyup', function enterSend(event) {
-		
-		if (event.keyCode === null) {
-			event.preventDefault();
-		}
-		
-		if (event.keyCode === 13) {
-			send();
-		}
-	});
-	
-	<!-- 입력한 메시지를 HTML 형태로 가공 -->
-	function createTextNode(messageObj) {
-		console.log("createTextNode");
-		console.log("messageObj: " + messageObj.content);
-        return '<p><div class="row alert alert-info"><div class="col_8">' +
-        messageObj.user +
-        '</div><div class="col_4 text-right">' +
-        messageObj.content+
-        '</div><div>[' +
-        messageObj.sendTime +
-        ']</div></p>';
-    }
-	
-	<!-- HTML 형태의 메시지를 화면에 출력해줌 -->
-	<!-- 해당되는 id 태그의 모든 하위 내용들을 message가 추가된 내용으로 갱신해줌 -->
-	function showBroadcastMessage(message) {
-        $("#content").html($("#content").html() + message);
-    }
-	
-	<!-- 읽음처리 -->
-	function ajaxChatRead() {
-		console.log("hi");
-		
-		$.ajax({
-			url:'/chatread/product/ajax',
-			type: 'POST',
-			data: JSON.stringify({
-				c_no: c_no,
-				sender_id : sender_id
-			}),
-			dataType: 'json',
-			contentType: 'application/json'
-		})
-	}
-		
 	</script>
+
 </body>
 </html>
