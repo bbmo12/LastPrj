@@ -112,7 +112,6 @@
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
-
 							<div class="br"></div>
 						</aside>
 
@@ -151,7 +150,7 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-  	<form action="reservationSelect" id="goform" name="goform">
+  						<form action="reservationSelect" id="goform" name="goform">
 							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
 							<table class="table">
 								<thead>
@@ -306,7 +305,6 @@
 
 
 	<script>
-	console.log("${page}");
 		//table td값만
 		var val = $(".in_code").parent();
 
@@ -321,7 +319,7 @@
 				val[i].classList.add("code");
 				$(".code").empty();
 				var check = $(".code").append(
-						`<button class="payBtn">결제하기</button>`);
+						`<button type ="button" class="payBtn">결제하기</button>`);
 
 			} else if (val[i].innerText == '승인거절') {
 
@@ -334,66 +332,75 @@
 				var check = $(".complete").append(`<span>예약완료</span>`);
 			} //else if문
 		} //for문
-		//결제후 코드 업데이트
-		function payUpdate(){
-			
-		}//코드 업데이트 끝부분
 		
 		$(".payBtn").on('click', function() {
 			var rno = $(this).parent().parent().children().first().text();
 			console.log($(this).parent().parent().children().first().text());
 			var m_id = "${sessionScope.mId }";
+			var pay;
 			
-			
-			var IMP = window.IMP; // 생략가능
-			IMP.init('imp48272965');
-			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-			// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
-			IMP.request_pay({
-				pg: 'kakao',
-				pay_method: 'card',
-				merchant_uid: 'merchant_' + new Date().getTime(),
-				name: '예약결제',
-				// 결제창에서 보여질 이름
-				// name: '주문명 : ${auction.a_title}',
-				// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-				amount: 5000,
-				// amount: ${bid.b_bid},
-				// 가격 
-				buyer_name: '이름',
-				// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
-				// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
-				buyer_postcode: '123-456',
-			}, function (rsp) {
-				console.log(rsp);
-				if (rsp.success) {
-					var msg = '결제가 완료되었습니다.';
-					msg += '결제 금액 : ' + rsp.paid_amount;
-					// success.submit();
-					
-					
-					// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-				} else {
-					var msg = '결제에 실패하였습니다.';
-					msg += '에러내용 : ' + rsp.error_msg;
+			$.ajax({
+				url : 'servicePay',
+				method : 'POST',
+				data : {'r_no' : rno },
+				async : false,
+				success : function(result){
+					console.log(result);
+					pay = result.price;
+					//p_id = result.p_id;
+					var IMP = window.IMP; // 생략가능
+					IMP.init('imp48272965');
+					// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+					// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+					IMP.request_pay({
+						pg: 'kakao',
+						pay_method: 'card',
+						merchant_uid: 'merchant_' + new Date().getTime(),
+						name: result.content + "예약",
+						// 결제창에서 보여질 이름
+						// name: '주문명 : ${auction.a_title}',
+						// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+						amount: result.price,
+						// amount: ${bid.b_bid},
+						// 가격 
+						buyer_name: m_id,
+						// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+						// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+						buyer_postcode: '123-456',
+					}, function (rsp) {
+						console.log(rsp);
+						if (rsp.success) {
+							var msg = '결제가 완료되었습니다.';
+							msg += '결제 금액 : ' + rsp.paid_amount;
+							// success.submit();
+							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+						} else {
+							var msg = '결제에 실패하였습니다.';
+							msg += '에러내용 : ' + rsp.error_msg;
+						}
+						alert(msg);
+					});
 				}
-				alert(msg);
 			});
-				
+			
+			
+			
+			console.log(pay+"원");
 				//결제 완료 후 결제 내역 등록
 				$.ajax({
 				url : 'payupdate',
 				method : 'post',
 				data : {
-					'rno' : rno,
-					'm_id': m_id
+					'r_no' : rno,
+					'm_id': m_id,
+					'price': pay
 				},
 				success : function(result) {
 				},
 				error : function(error) {
 					alert("결제실패")
 				}
-			})
+			}) 
 
 		})
 	</script>

@@ -58,6 +58,15 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<ReservationVO> reservationPageList(Criteria cri) {
 		return map.reservationPageList(cri);
 	}
+	@Override
+	public List<ReservationVO> preservationPageList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int preservPage(Criteria cri) {
+		return 0;
+	}
 
 
 }
