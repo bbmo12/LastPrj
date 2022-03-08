@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.counsel.service.CounselMapper;
 import com.last.prj.counsel.service.CounselService;
+import com.last.prj.counsel.service.CounselVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
@@ -32,12 +33,17 @@ public class CounselController {
 	private CounselMapper mapper;
 	
 	@RequestMapping("/mycounsel")
-	public String mycounsel(Model model, HttpServletRequest request) {
+	public String mycounsel(Model model, HttpServletRequest request, CounselVO counsel,Criteria cri) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
+		cri.setM_id(m_id);
+		cri.setAmount(10);
 		
+		PagingVO paging = new PagingVO(cri, mapper.myCounselPage(cri));
+		
+		model.addAttribute("page", paging);// 페이징 수
 		model.addAttribute("member",memDao.memberSearch(m_id));
-		model.addAttribute("mycounsel" ,counselDao.myCounselList(m_id));
+		model.addAttribute("mycounsel" , mapper.myCounselList(cri));
 		
 		return "mypage/mcounselSearch";
 	}

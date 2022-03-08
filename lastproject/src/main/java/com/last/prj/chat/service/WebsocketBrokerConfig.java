@@ -13,7 +13,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebsocketBrokerConfig implements WebSocketMessageBrokerConfigurer{
 
-	
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(WebsocketBrokerConfig.class);
 	 
     @Override

@@ -15,10 +15,6 @@ public class CounselServiceImpl implements CounselService {
 
 	@Autowired CounselMapper map;
 
-	@Override
-	public List<CounselVO> myCounselList(String m_id) {
-		return map.myCounselList(m_id);
-	}
 
 	@Override
 	public List<CounselVO> counselList(Criteria cri) {
@@ -29,5 +25,16 @@ public class CounselServiceImpl implements CounselService {
 	public int counselPage(Criteria cri) {
 		return map.counselPage(cri);
 	}
+
+	@Override
+	public int myCounselPage(Criteria cri) {
+		return map.myCounselPage(cri);
+	}
+
+	@Override
+	public List<CounselVO> myCounselList(Criteria cri) {
+		return map.myCounselList(cri);
+	}
+	
 	
 }

@@ -56,7 +56,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	@Override
 	public List<ChatRoomVO> readChatHistory(ChatRoomVO chatroom) throws IOException {
 
-		String pathName = "D:/chat/" + chatroom.getFileName();
+		String pathName = "C:/chat/" + chatroom.getFileName();
 
 		// DB에 저장된 chat.txt 파일을 읽어옴.
 		BufferedReader br = new BufferedReader(new FileReader(pathName));
@@ -96,7 +96,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public void createFile(int c_no) throws IOException {
 
 		String fileName = c_no + ".txt";
-		String pathName = "D:/chat/" + fileName;
+		String pathName = "C:/chat/" + fileName;
 
 		// File 클래스에 pathName 할당
 		File txtfile = new File(pathName);
@@ -120,7 +120,7 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 
 		ChatRoomVO chatRoomAppend = map.findByChatId(senderId, receiverId);
 
-		String pathName = "D:/chat/" + chatRoomAppend.getFileName();
+		String pathName = "C:/chat/" + chatRoomAppend.getFileName();
 
 		FileOutputStream fos = new FileOutputStream(pathName, true);
 		String content = chatroom.getContent();

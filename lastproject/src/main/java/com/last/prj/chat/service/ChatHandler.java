@@ -11,9 +11,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-public class MyTextWebSocketHandler extends TextWebSocketHandler{
+public class ChatHandler extends TextWebSocketHandler{
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(MyTextWebSocketHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ChatHandler.class);
 	
 	private final List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
@@ -21,7 +21,7 @@ public class MyTextWebSocketHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		sessions.add(session);
 		LOGGER.info("접속: {}	", session);
-		super.afterConnectionEstablished(session);
+		/* super.afterConnectionEstablished(session); */
 	}
 
 	@Override

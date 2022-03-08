@@ -8,4 +8,13 @@
 		where r.code = f.code AND r.rev_no = re.rev_no;
 	</select>
 
+	<insert id="servicereview" parameterType="com.last.prj.pmember.service.ReviewVO">
+		<selectKey keyProperty="rev_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(rev_no)+ 1, 1) AS rev_no FROM REVIEW
+		</selectKey>
+		INSERT INTO REVIEW(REV_NO, CONTENT, RATING, R_NO) VALUES
+		(#{rev_no}, #{content}, #{rating}, #{r_no})
+	</insert>
+
+
 </mapper>
