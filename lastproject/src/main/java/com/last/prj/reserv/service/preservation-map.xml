@@ -8,4 +8,23 @@
         WHERE R.R_NO = S.R_NO AND C.CODE = P.CODE AND RC.CODE=R.CODE AND R.PET_NO=P.PET_NO AND R.P_ID = #{p_id}
 	</select>
 	
+	
+	<!-- 페이징(파트너회원 예약조회) -->
+	<select id="preservationPageList" resultType="com.last.prj.reserv.service.PreservationVO">
+		   SELECT *
+      			FROM ( SELECT ROWNUM RN, A.*
+     				   FROM (SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS PCONTENT, R.REFUSE
+					   FROM  P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C, F_CODE FC
+					   WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE AND R.P_ID = #{p_id}
+       				  ) A)
+      	WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
+	</select>
+	<select id="preservPage" resultType="int" parameterType="com.last.prj.reserv.service.PreservationVO">		
+       SELECT COUNT(*) FROM RESERVATION R ,PET P
+       WHERE R.PET_NO = P.PET_NO
+       GROUP BY R.P_ID 
+       HAVING R.P_ID=#{p_id}
+	</select>
+	
 </mapper>

@@ -33,5 +33,9 @@ public interface ReservationService {
 	//페이징
 	int reservPage(Criteria cri);
 	List<ReservationVO> reservationPageList(Criteria cri);
+	
+	//페이징 (파트너예약조회)
+	List<ReservationVO> preservationPageList(Criteria cri);
+	int preservPage(Criteria cri);
 
 }

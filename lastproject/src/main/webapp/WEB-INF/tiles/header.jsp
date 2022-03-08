@@ -174,6 +174,7 @@ function onMessage(evt){
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
 									<li><a href="pmemberMyPage">내 프로필</a></li>
+									<li><a href="reservationSetting">예약일정 설정</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
 									<li><a href="pMemDiaList">내 진료 내역</a></li>
 									<li><a href="pMembenefit">결제 내역</a></li>
