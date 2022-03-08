@@ -11,6 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.last.prj.mem.service.MemService;
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
+import com.last.prj.pmember.service.PmemberService;
+import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
 
 @Controller
@@ -21,6 +25,11 @@ public class ReportController {
 	
 	@Autowired
 	private MemService memDao;
+	
+	@Autowired
+	private ReportMapper mapper;
+	@Autowired
+	private PmemberService pMemberDao;
 
 	//<!-- 신고전체 리스트 -->
 
@@ -42,6 +51,18 @@ public class ReportController {
 		
 		
 		return "mypage/mreport";
+	}
+	@RequestMapping("/pmemreport")
+	public String pmemreport(Model model, HttpServletRequest request, Criteria cri) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		cri.setReporter(p_id);
+		cri.setAmount(10);
+		PagingVO paging = new PagingVO(cri, mapper.pmemReport(cri));
+		model.addAttribute("page", paging);
+		model.addAttribute("pmemreport", mapper.pmemReportList(cri));
+		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id));
+		return "mypage/pmemreport";
 	}
 	
 }

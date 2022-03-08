@@ -21,6 +21,7 @@ public interface PmemberMapper {
 	public List<PmemberVO> bestLike(PmemberVO pmember);//베스트순위
 	public List<ReviewVO> ServiceReviewList(); // 홈화면 리뷰
 	public List<PmemberVO> bestLikeList();
+	public int pmemberNullUpdate(String p_id); //파트너회원 탈퇴시 모든정보 null
 	
 	//관리자
 	public List<PmemberVO> admPlistCode(PmemberVO vo); //파트너쉽 별 리스트

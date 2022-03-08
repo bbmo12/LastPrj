@@ -131,10 +131,16 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
+
 	public int admPlistCodeCount(PmemberVO vo) {
 		return map.admPlistCodeCount(vo);
 	}
 	
 	
+@Override
+	public int pmemberNullUpdate(String p_id) {
+		return map.pmemberNullUpdate(p_id);
+	}
+
 
 }

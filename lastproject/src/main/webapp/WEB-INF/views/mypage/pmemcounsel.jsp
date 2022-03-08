@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
 <!DOCTYPE html>
 <html>
 
@@ -11,111 +12,107 @@
 </head>
 
 <style>
-#my_section {
-	padding: 50px;
-}
+    #my_section {
+        padding: 50px;
+    }
 
-body {
-	background-color: #f9f9fa
-}
+    body {
+        background-color: #f9f9fa
+    }
 
-.flex {
-	-webkit-box-flex: 1;
-	-ms-flex: 1 1 auto;
-	flex: 1 1 auto
-}
+    .flex {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto
+    }
 
-@media ( max-width :991.98px) {
-	.padding {
-		padding: 1.5rem
-	}
-}
+    @media (max-width :991.98px) {
+        .padding {
+            padding: 1.5rem
+        }
+    }
 
-@media ( max-width :767.98px) {
-	.padding {
-		padding: 1rem
-	}
-}
+    @media (max-width :767.98px) {
+        .padding {
+            padding: 1rem
+        }
+    }
 
-.padding {
-	padding: 5rem
-}
+    .padding {
+        padding: 5rem
+    }
 
-.card {
-	box-shadow: none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	-ms-box-shadow: none
-}
+    .card {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -ms-box-shadow: none
+    }
 
-.pl-3, .px-3 {
-	padding-left: 1rem !important
-}
+    .pl-3,
+    .px-3 {
+        padding-left: 1rem !important
+    }
 
-.card {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-	word-wrap: break-word;
-	background-color: #fff;
-	background-clip: border-box;
-	border: 1px solid #d2d2dc;
-	border-radius: 0
-}
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #d2d2dc;
+        border-radius: 0
+    }
 
-.card .card-title {
-	color: #000000;
-	margin-bottom: 0.625rem;
-	text-transform: capitalize;
-	font-size: 0.875rem;
-	font-weight: 500
-}
+    .card .card-title {
+        color: #000000;
+        margin-bottom: 0.625rem;
+        text-transform: capitalize;
+        font-size: 0.875rem;
+        font-weight: 500
+    }
 
-.card .card-description {
-	margin-bottom: .875rem;
-	font-weight: 400;
-	color: #76838f
-}
+    .card .card-description {
+        margin-bottom: .875rem;
+        font-weight: 400;
+        color: #76838f
+    }
 
-p {
-	font-size: 0.875rem;
-	margin-bottom: .5rem;
-	line-height: .2rem
-}
 
-.table-responsive {
-	display: block;
-	width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: -ms-autohiding-scrollbar
-}
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
 
-.table th {
-	font-size: 20px;
-	font-weight: 500;
-}
+    .table th {
+        font-size: 20px;
+        font-weight: 500;
+    }
 
-.table {
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 1rem;
-	background-color: transparent
-}
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        background-color: transparent
+    }
 
-.table td {
-	font-size: 16px;
-	padding: .875rem 0.9375rem
-}
+    .table td {
+        font-size: 16px;
+        padding: .875rem 0.9375rem
+    }
 
-.badge {
-	border-radius: 0;
-	font-size: 12px;
-	line-height: 1;
-	padding: .375rem .5625rem;
-	font-weight: normal
-}
+    .badge {
+        border-radius: 0;
+        font-size: 12px;
+        line-height: 1;
+        padding: .375rem .5625rem;
+        font-weight: normal
+    }
 </style>
 
 <body>
@@ -160,7 +157,7 @@ p {
                                 <li><a href="pmemcounsel" class="d-flex justify-content-between">
                                         <p>상담 내역</p>
                                     </a></li>
-                                <li><a href="#" class="d-flex justify-content-between">
+                                <li><a href="pmemreport" class="d-flex justify-content-between">
                                         <p>신고 내역</p>
                                     </a></li>
                                 <li><a href="#" class="d-flex justify-content-between">
@@ -173,55 +170,68 @@ p {
                         </aside>
                     </div>
                 </div>
-                <div class="col-lg-9 posts-list">
+                <div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
                     <div class="col-lg-12 col-md-12 blog_details">
-                        <div class="page-content page-container" id="page-content">
+                        <div align="center">
+                            <h1>상담내역조회</h1>
+                        </div>
+                        <div class="page-content page-container" id="page-content" style="margin-top: 20px;">
                             <div class="row container d-flex justify-content-center">
                                 <div class="card" style="width: 100%">
                                     <div class="card-body" style="width: 100%">
                                         <div class="table-responsive" style="width: 100%">
-                                            <table id="htmltable" class="table">
-                                                <thead>
-                                                    <tr style="text-align: center;">
-                                                        <th>동물이름</th>
-                                                        <th>상담회원</th>
-                                                        <th>상담내용</th>
-                                                        <th>상담상태</th>
-                                                        <th>작성일</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="text-align: center">
-                                                    <c:forEach items="${pmemcounsel }" var="counsel">
-                                                        <tr>
-                                                            <td>${counsel.p_name }</td>
-                                                            <td>${counsel.m_id } </td>
-                                                            <td>${counsel.content}</td>
-                                                            <td>
-                                                                <c:if test="${counsel.code eq 301}">
-                                                                    <label class="badge badge-info">상담요청</label>
-                                                                </c:if>
-                                                                <c:if test="${counsel.code eq 302}">
-                                                                    <label class="badge badge-warning">진행중</label>
-                                                                </c:if>
-                                                                <c:if test="${counsel.code eq 303}">
-                                                                    <label class="badge badge-success">상담완료</label>
-                                                                </c:if>
-                                                            </td>
-                                                            <td>${counsel.w_date }</td>
+                                            <form action="pmemcounsel" name="goform">
+                                                <input type="hidden" name="pageNum" value="1">
+                                                <table id="htmltable" class="table">
+                                                    <thead>
+                                                        <tr style="text-align: center;">
+                                                            <th>동물이름</th>
+                                                            <th>상담회원</th>
+                                                            <th>상담내용</th>
+                                                            <th>상담상태</th>
+                                                            <th>작성일</th>
                                                         </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody style="text-align: center">
+                                                        <c:forEach items="${pmemcounsel }" var="counsel">
+                                                            <tr>
+                                                                <td>${counsel.p_name }</td>
+                                                                <td>${counsel.m_id } </td>
+                                                                <td>${counsel.content}</td>
+                                                                <td>
+                                                                    <c:if test="${counsel.code eq 301}">
+                                                                        <label class="badge badge-info">상담요청</label>
+                                                                    </c:if>
+                                                                    <c:if test="${counsel.code eq 302}">
+                                                                        <label class="badge badge-warning">진행중</label>
+                                                                    </c:if>
+                                                                    <c:if test="${counsel.code eq 303}">
+                                                                        <label class="badge badge-success">상담완료</label>
+                                                                    </c:if>
+                                                                </td>
+                                                                <td>${counsel.w_date }</td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <my:nav jsFunc="go_page" page="${page}" />
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        function go_page(p) {
+            goform.pageNum.value = p;
+            goform.submit();
+        }
+    </script>
 </body>
 
 </html>

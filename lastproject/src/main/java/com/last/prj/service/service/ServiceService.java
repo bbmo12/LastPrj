@@ -13,4 +13,8 @@ public interface ServiceService {
 	public int ServiceInsert(ServiceVO vo); //예약할때 같이 서비스 등록
 	
 	public ServiceVO totalPrice(String p_id); //총 수익 출력
+	
+	public ServiceVO serviceSelect(int r_no); //파트너회원 서비스 조회
+	
+	
 }

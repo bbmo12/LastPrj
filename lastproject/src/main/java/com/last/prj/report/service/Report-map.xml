@@ -99,4 +99,21 @@
 		WHERE F.CODE=R.CODE AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
 	</select>
 
+	<!-- 파트너마이페이지 신고내역 -->
+	<select id="pmemReport" resultType="int" parameterType="com.last.prj.report.service.ReportVO">
+		SELECT COUNT(*) AS TOTAL 
+      		FROM REPORT
+      	WHERE REPORTER = #{reporter}	
+	</select>
+	
+	<select id="pmemReportList" resultType="com.last.prj.report.service.ReportVO">
+		 SELECT *
+      		FROM ( SELECT ROWNUM RN, A.*
+     			  FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR
+      				    FROM REPORT
+       				   WHERE REPORTER = #{reporter}	) A)
+      	    WHERE RN BETWEEN  (#{pageNum}-1)*#{amount}+1
+		    AND (#{pageNum})*#{amount}	
+	</select>
+
 </mapper>
