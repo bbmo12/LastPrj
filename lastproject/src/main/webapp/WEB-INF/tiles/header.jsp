@@ -46,7 +46,7 @@ $(document).ready(function(){
 		type : "post",
 		success : function(result){
 			console.log(result);
-			
+			/* 수정하기 */
 			if(result != ""){
 				sock = new SockJS("<c:url value="/echo"/>");
 				socket = sock;
