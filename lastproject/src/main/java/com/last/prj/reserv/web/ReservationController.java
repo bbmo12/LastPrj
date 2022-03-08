@@ -222,6 +222,10 @@ public class ReservationController {
 	  }
 	  
 	  
-	  
+	  @RequestMapping("reviewWrithForm")
+	  @ResponseBody
+	  public ReservationVO reviewWrithForm(int r_no) {
+		  return reservationDao.reviewWrithForm(r_no);
+	  }
 	 
 }

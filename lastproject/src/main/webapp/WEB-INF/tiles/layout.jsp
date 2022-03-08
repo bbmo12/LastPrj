@@ -6,10 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	 <!-- Required Meta Tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!-- Required Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>medino</title>
+
     <!-- Page Title -->
     <title>Medino</title>
 
@@ -27,6 +28,10 @@
     <link rel="stylesheet" href="resources/assets/css/nice-select.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
    
+  <!-- 별점 css -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="resources/reviewstar/fontawesome-stars.css">
+<script type="text/javascript" src="resources/reviewstar/jquery.barrating.min.js"></script>
     
     <!-- admin css -->
     <link rel="stylesheet" href="resources/assets123/css/style.css">
@@ -60,17 +65,18 @@
     <script src="resources/assets123/js/misc.js"></script>
     <script src="resources/assets/js/vendor/jquery.raty.js"></script>
 	
+
 </head>
 
 <body>
 
 	<!-- header -->
-	<tiles:insertAttribute name="header"/>
-		
+	<tiles:insertAttribute name="header" />
+
 	<!-- 몸통 -->
 	<tiles:insertAttribute name="body" />
-	
+
 	<!-- 발 -->
-	<tiles:insertAttribute name="footer"/>
+	<tiles:insertAttribute name="footer" />
 
 </body>
