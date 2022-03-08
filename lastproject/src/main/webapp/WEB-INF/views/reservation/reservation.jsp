@@ -10,20 +10,70 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<style>
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+.modal.show {
+	display: block;
+}
+.modal_body {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 500px;
+	height: 600px;
+	padding: 40px;
+	text-align: center;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateX(-50%) translateY(-50%);
+}
+</style>
 </head>
 <style>
 #my_section {
 	padding: 50px;
 }
+.star-rating {
+  
+  display:flex;
+  flex-direction: row-reverse;
+  font-size:1.5em;
+  justify-content:space-around;
+  padding:0 .2em;
+  text-align:center;
+  width:5em;
+}
+.star-rating input {
+  display:none;
+}
+.star-rating label {
+  color:#ccc;
+  cursor:pointer;
+}
+.star-rating :checked ~ label {
+  color:#f90;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color:#fc0;
+}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 
 
 <body>
-<%-- ${sessionScope.mId } --%>
+	<%-- ${sessionScope.mId } --%>
+	
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -35,8 +85,6 @@
 			</div>
 		</div>
 	</section>
-
-
 
 	<br>
 	<br>
@@ -57,7 +105,6 @@
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
-
 							<div class="br"></div>
 						</aside>
 
@@ -96,7 +143,7 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<form action="reservationSelect" id="goform" name="goform">
+  						<form action="reservationSelect" id="goform" name="goform">
 							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
 							<table class="table">
 								<thead>
@@ -109,126 +156,269 @@
 										<th>품종</th>
 										<th>예약여부</th>
 										<th>취소사유</th>
+										<th>후기</th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach items="${reservation }" var="res">
-										<tr>
-											<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
-											<td>${res.name }</td>
-											<td>${res.r_date}</td>
-											<td>${res.time }</td>
-											<td>${res.rcontent }</td>
-											<td>${res.pcontent }</td>
-											<td><input class="in_code" type="hidden"
-												value="${res.rccontent }"> ${res.rccontent }</td>
-											<td>${res.refuse}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</form>
-					</div>
+							<tbody>
+								<c:forEach items="${reservation }" var="res">
+									<tr>
+										<td><input class="rno" type="hidden" id="r_no"
+											name="r_no" value="${res.r_no }">${res.r_no }</td>
+										<td>${res.name }</td>
+										<td>${res.r_date}</td>
+										<td>${res.time }</td>
+										<td>${res.rcontent }</td>
+										<td>${res.pcontent }</td>
+										<td><input class="in_code" type="hidden"
+											value="${res.rccontent }"> ${res.rccontent }</td>
+										<td>${res.refuse}</td>
+										<c:choose>
+											<c:when test="${res.code eq 405 }">
+												<td><button onclick="reviewWrite(event)">성공</button></td>
+											</c:when>
+											<c:otherwise>
+												<td>
+													<button>실패</button>
+												</td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 	<my:nav jsFunc="go_page" page="${page}"/>
 	</section>
+
+	<div class="modal">
+		<!-- 모달 띄운후 내용입력부분 바디.  -->
+		<div class="modal_body">
+
+			
+				<div class="form-group">
+					<h5 id="pname"></h5>
+				</div>
+				<div> <h1>여기가 별점?</h1>
+				<div class="star-rating">
+				<input type="radio" id="5-stars" name="rating" value="5" />
+				<label for="5-stars" class="star">&#9733;</label>
+				<input type="radio" id="4-stars" name="rating" value="4" />
+				<label for="4-stars" class="star">&#9733;</label>
+				<input type="radio" id="3-stars" name="rating" value="3" />
+				<label for="3-stars" class="star">&#9733;</label>
+				<input type="radio" id="2-stars" name="rating" value="2" />
+				<label for="2-stars" class="star">&#9733;</label>
+				<input type="radio" id="1-stars" name="rating" value="1" />
+				<label for="1-stars" class="star">&#9733;</label>
+			</div>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword4">후기내용</label>
+					<textarea class="form-control" id="content" name="content"
+						placeholder="후기내용" rows="4" cols="80">
+                        </textarea>
+				</div>
+				<!-- <div class="form-group">
+								<label>프로필 사진</label>
+								<div class="input-group col-xs-12">
+								<input  class="file-upload-browse btn btn-primary" type="file" id="file" name ="file">
+								</div>
+							</div> -->
+				<input type="hidden" id="rev_no" name="rev_no" value="">
+				<button type="button" onclick="serviceReview()">작성</button>
+				<button type="button">취소</button>
+			
+
+		</div>
+	</div>
+
+	<!-- 모달창 -->
+	<script type="text/javascript">
+	var wow;
+   function reviewWrite(event){
+	   wow = $(event.target).parent().parent().children().first().text()
+	$("#rev_no").val(wow)
+	   console.log("일단여기")
+	   console.log($(event.target).parent().parent().children().first().text());
+	      var body = document.querySelector('body');
+	      var modal = document.querySelector('.modal');	      
+	      
+	          modal.classList.toggle('show');
+	          if (modal.classList.contains('show')) {
+	            body.style.overflow = 'hidden';
+	            reviewadd(wow);
+	          } 
+	      
+	       modal.addEventListener('click', (event) => {
+	        if (event.target === modal) {
+	          modal.classList.toggle('show');
+	          
+	          if (!modal.classList.contains('show')) {
+	            body.style.overflow = 'auto';
+	            
+	          }
+	        }
+	      });
+	}
+   </script>
+	<!-- 후기작성 모달창 -->
+	<script type="text/javascript">
+   	function reviewadd(wow){
+   		var r_no = wow
+   		/* var name = $("#name").val() */
+   		$.ajax({
+   			url: "reviewWrithForm",
+   			type: "post",
+   			data: {"r_no":r_no},
+   			success : function(result){
+   				
+   				console.log(result);
+   				/* $(".modal_body").empty(); */
+   				if(result == ""){
+   	                $(".modal_body").append(`<p>오류</p>`)
+   	             } else
+   	                {
+   	            	 $("#pname").text("파트너이름:"+result.name)
+   	                /* $(".modal_body").append(`<p> 파트너회원이름은 :`  + result.name +`<p>`) */
+   	                }
+   	             console.log(result)
+   	          },
+   	          error : function(){
+   	          
+   	          }
+   	       }) 
+   	    } 
+   
+   </script>
+
+
 	<script>
-	console.log("${page}");
 		//table td값만
 		var val = $(".in_code").parent();
-
 		console.log(val);
 		console.log(val.length);
 		for (var i = 0; i < val.length; i++) {
 			//예약결과코드 분류
 			if (val[i].innerText == '결제가능') {
-
 				console.log(val[i]);
-
 				val[i].classList.add("code");
 				$(".code").empty();
 				var check = $(".code").append(
-						`<button class="payBtn">결제하기</button>`);
+						`<button type ="button" class="payBtn">결제하기</button>`);
 
 			} else if (val[i].innerText == '승인거절') {
-
 				val[i].classList.add("refuse");
-
 			} else if (val[i].innerText == '결제완료') {
-
 				val[i].classList.add("complete");
 				$(".complete").empty();
 				var check = $(".complete").append(`<span>예약완료</span>`);
 			} //else if문
 		} //for문
-		//결제후 코드 업데이트
-		function payUpdate(){
-			
-		}//코드 업데이트 끝부분
 		
 		$(".payBtn").on('click', function() {
 			var rno = $(this).parent().parent().children().first().text();
 			console.log($(this).parent().parent().children().first().text());
 			var m_id = "${sessionScope.mId }";
+			var pay;
 			
-			
-			var IMP = window.IMP; // 생략가능
-			IMP.init('imp48272965');
-			// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
-			// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
-			IMP.request_pay({
-				pg: 'kakao',
-				pay_method: 'card',
-				merchant_uid: 'merchant_' + new Date().getTime(),
-				name: '예약결제',
-				// 결제창에서 보여질 이름
-				// name: '주문명 : ${auction.a_title}',
-				// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
-				amount: 5000,
-				// amount: ${bid.b_bid},
-				// 가격 
-				buyer_name: '이름',
-				// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
-				// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
-				buyer_postcode: '123-456',
-			}, function (rsp) {
-				console.log(rsp);
-				if (rsp.success) {
-					var msg = '결제가 완료되었습니다.';
-					msg += '결제 금액 : ' + rsp.paid_amount;
-					// success.submit();
-					
-					
-					// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
-				} else {
-					var msg = '결제에 실패하였습니다.';
-					msg += '에러내용 : ' + rsp.error_msg;
+			$.ajax({
+				url : 'servicePay',
+				method : 'POST',
+				data : {'r_no' : rno },
+				async : false,
+				success : function(result){
+					console.log(result);
+					pay = result.price;
+					//p_id = result.p_id;
+					var IMP = window.IMP; // 생략가능
+					IMP.init('imp48272965');
+					// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+					// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+					IMP.request_pay({
+						pg: 'kakao',
+						pay_method: 'card',
+						merchant_uid: 'merchant_' + new Date().getTime(),
+						name: result.content + "예약",
+						// 결제창에서 보여질 이름
+						// name: '주문명 : ${auction.a_title}',
+						// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+						amount: result.price,
+						// amount: ${bid.b_bid},
+						// 가격 
+						buyer_name: m_id,
+						// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+						// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+						buyer_postcode: '123-456',
+					}, function (rsp) {
+						console.log(rsp);
+						if (rsp.success) {
+							var msg = '결제가 완료되었습니다.';
+							msg += '결제 금액 : ' + rsp.paid_amount;
+							location.reload();
+							// success.submit();
+							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+						} else {
+							var msg = '결제에 실패하였습니다.';
+							msg += '에러내용 : ' + rsp.error_msg;
+						}
+						alert(msg);
+					});
 				}
-				alert(msg);
 			});
-				
+			
+			
+			
+			console.log(pay+"원");
 				//결제 완료 후 결제 내역 등록
 				$.ajax({
 				url : 'payupdate',
 				method : 'post',
 				data : {
-					'rno' : rno,
-					'm_id': m_id
+					'r_no' : rno,
+					'm_id': m_id,
+					'price': pay
 				},
 				success : function(result) {
 				},
 				error : function(error) {
 					alert("결제실패")
 				}
-			})
+			}) 
+		})
+	</script>
+<!-- 리뷰작성 -->
+	<script type="text/javascript">
+	function serviceReview(){
+		var content = $("#content").val();
+		var rating = $("input[name=rating]").val();
+		var rev_no = $("#rev_no").val();
+		console.log("별점")
+		console.log(rating)
+		$.ajax({
+			url: "serviceReviewInsert",
+			type: "post",
+			data : {'rating' : rating,
+				'r_no': rev_no,
+				'content': content},
+			success : function(result){
+				alert("ggod")
+				
+			}
+			
 		})
 		
+	}
 		function go_page(p){
 			goform.pageNum.value=p;
 	    	goform.submit();
 		}
 	</script>
+
+
+
 </body>
 </html>

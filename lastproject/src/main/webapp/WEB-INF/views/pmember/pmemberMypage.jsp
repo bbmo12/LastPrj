@@ -56,7 +56,7 @@
 								<li><a href="pmemcounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
 									</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 									</a></li>
 								<li><a href="#" class="d-flex justify-content-between">

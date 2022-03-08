@@ -35,6 +35,7 @@ import com.last.prj.reserv.service.ReservationVO;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
 import com.last.prj.reserv.service.PreservationVO;
+import com.last.prj.reserv.service.PreservationlistMapper;
 
 @Controller
 public class ReservationController {
@@ -64,6 +65,9 @@ public class ReservationController {
 	private MemService memDao;
 	@Autowired
 	private ReservationMapper mapper;
+	
+	@Autowired
+	private PreservationlistMapper pmapper;
 	
 	@Autowired
 	private PayService payDao;
@@ -109,7 +113,10 @@ public class ReservationController {
 	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
-	public String reservationSetting(Model model,PreservationVO pres) {
+	public String reservationSetting(Model model,PreservationVO pres,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		model.addAttribute("p_id",p_id);
 		return "reservation/resvSetting";
 	}
 	
@@ -119,12 +126,12 @@ public class ReservationController {
 	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
-		System.out.println("일반예약 아이디세션값 : " + m_id);
 		cri.setM_id(m_id);
 		cri.setAmount(5);
-		System.out.println("cri=========="+cri);
 		PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+
 		
+		model.addAttribute("member",memDao.memberSearch(m_id));
 		model.addAttribute("page", paging);// 페이징 수
 		model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
 		vo.setM_id(m_id);
@@ -133,16 +140,18 @@ public class ReservationController {
 
 	// 파트너 예약조회
 	@RequestMapping("/preservationSelect")
-	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo) {
+	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo,Criteria cri) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
 		vo.setP_id(p_id);
-		List<PreservationVO> list = pReservationDao.preservationlist(vo);
+		cri.setP_id(p_id);
+		cri.setAmount(15);
+		System.out.println("cri=========="+cri);
+		PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
+		
+		model.addAttribute("page", paging);// 페이징 수
 		model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
-		model.addAttribute("preservation", list);
-		
-		System.out.println(list);
-		
+		model.addAttribute("preservation", pmapper.preservationPageList(cri));
 		return "reservation/preservation";
 	}
 	
@@ -152,6 +161,7 @@ public class ReservationController {
 	  public String okUpdate(@RequestParam("rno") int rno) {
 		  System.out.println(rno);
 		  reservationDao.okUpdate(rno);
+		  
 		  return "ok";
 	  }
 	  
@@ -191,7 +201,7 @@ public class ReservationController {
 	  @ResponseBody
 	  public int reservInsert(ReservationVO vo,ReservCountVO co,ServiceVO so,PmemberVO po) {
 		  
-		  int price = 5000;
+		  int price = 20000;
 		  String content;
 		  String enddate = "임시";
 		  reservationDao.reservInsert(vo);
@@ -221,7 +231,17 @@ public class ReservationController {
 		  return 1;
 	  }
 	  
+	  @PostMapping("servicePay")
+	  @ResponseBody
+	  public ServiceVO servicePay(int r_no) {
+		  return serviceDao.serviceSelect(r_no);
+	  }
 	  
 	  
+	  @RequestMapping("reviewWrithForm")
+	  @ResponseBody
+	  public ReservationVO reviewWrithForm(int r_no) {
+		  return reservationDao.reviewWrithForm(r_no);
+	  }
 	 
 }

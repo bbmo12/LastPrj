@@ -26,10 +26,15 @@ public interface ReservationMapper {
 	//진료기록 작성 후
 	int diaCodeUpdate(int res);
 	
-	//페이징
+
+	//후기작성 폼이동
+	ReservationVO reviewWrithForm(@Param("r_no") int r_no);
+
+	//페이징 (일반예약조회)
 	List<ReservationVO> reservationPageList(Criteria cri);
 	int reservPage(Criteria cri);
 	
+
 	
 	
 	

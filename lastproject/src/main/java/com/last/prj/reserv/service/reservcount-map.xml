@@ -11,6 +11,7 @@
 	SELECT * FROM RESERVCOUNT
 	WHERE RESERV_DATE = #{reserv_date}
 	AND   RESERV_TIME = #{reserv_time}
+	AND   P_ID = #{p_id}
 </select>
 <!-- 예약등록체크할 값 등록 -->
 <insert id="reservCountInsert" parameterType="com.last.prj.reserv.service.ReservCountVO">

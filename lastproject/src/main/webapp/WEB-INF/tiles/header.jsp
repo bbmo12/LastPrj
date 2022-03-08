@@ -17,6 +17,7 @@
 	<title>BanBanBan</title>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
 <style>
 .nav-menu a {
 	text-decoration: none;
@@ -45,7 +46,7 @@ $(document).ready(function(){
 		type : "post",
 		success : function(result){
 			console.log(result);
-			
+			/* 수정하기 */
 			if(result != ""){
 				sock = new SockJS("<c:url value="/echo"/>");
 				socket = sock;
@@ -174,12 +175,13 @@ function onMessage(evt){
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
 									<li><a href="pmemberMyPage">내 프로필</a></li>
+									<li><a href="reservationSetting">예약일정 설정</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
 									<li><a href="pMemDiaList">내 진료 내역</a></li>
 									<li><a href="pMembenefit">결제 내역</a></li>
 									<li><a href="pmemcounsel">상담 내역</a></li>
-									<li><a href="#">신고 내역</a></li>
-									<li><a href="#">회원탈퇴</a></li>
+									<li><a href="pmemreport">신고 내역</a></li>
+									<li><a href="pmdeleteForm">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
@@ -203,7 +205,7 @@ function onMessage(evt){
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
+									<i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
 									<h6 class="p-3 mb-0 text-white py-4">Notifications</h6>

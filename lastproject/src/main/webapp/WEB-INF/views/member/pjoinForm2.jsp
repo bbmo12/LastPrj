@@ -16,9 +16,7 @@
 						<h4 class="card-title">회사 정보</h4>
 						<form class="forms-sample" action="pjoin_2" method="post">
 							<div class="form-group">
-								<label for="exampleInputPassword4">파트너회원id</label> <input
-									type="text" class="form-control" id="p_id" name="p_id" value="${p_id.p_id}"
-									placeholder="">
+								<input type="hidden" class="form-control" id="p_id" name="p_id" value="${p_id.p_id}">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword4">회사명</label> <input
