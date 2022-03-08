@@ -32,9 +32,8 @@
 	</select> -->
 
 	<select id="getMessageList" resultType="com.last.prj.chat.service.MessageVO">
-		select m.*, r.name, r.picture
-		from MESSAGE m left outer join MEMBER r
-		on m.msg_sender = r.m_id
+		select *
+		from MESSAGE
 		where chat_id = #{chat_id}
 	</select>
 

@@ -64,13 +64,14 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	 * str); }
 	 */
 
-	@Override
-	public List<MessageVO> getMessageList(String str) throws Exception {
-		// TODO Auto-generated method stub
-
-		return session.selectList(namespace + ".getMessageList", str);
-
-	}
+	/*
+	 * @Override public List<MessageVO> getMessageList(String str) throws Exception
+	 * { // TODO Auto-generated method stub
+	 * 
+	 * return session.selectList(namespace + ".getMessageList", str);
+	 * 
+	 * }
+	 */
 
 	@Override
 	public List<ChatRoomVO> getRoomList(String str) throws Exception {
@@ -99,6 +100,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 	public List<ChatRoomVO> getRoomListTutor(String str) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + ".getRoomListTutor", str);
+	}
+
+	@Override
+	public List<MessageVO> getMessageList(ChatRoomVO chatroom) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/*

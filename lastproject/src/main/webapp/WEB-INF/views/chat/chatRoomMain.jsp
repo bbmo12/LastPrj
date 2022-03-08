@@ -10,16 +10,12 @@
 <script type="text/javascript" src="resources/js/sockjs.js"></script>
 </head>
 <body>
+	
+	
 
 	<div class="col-12">
-		<div class="col-2" style="float: left">
-			<span> 목록 </span>
-		</div>
 		<div class="col-8" style="float: left; text-align: center;">
-			 님과 대화</div>
-		<div class="col-2" style="float: right">
-			<span> 닫기 </span>
-		</div>
+			 님과의 1:1 상담</div>
 	</div>
 
 	<!-- 채팅 내용 -->
@@ -48,34 +44,30 @@
 				</textarea>
 			<span
 				style="float: right; width: 18%; height: 65px; text-align: center; background-color: #01D1FE; border-radius: 5px;">
-				<a
-				style="margin-top: 30px; text-align: center; color: white; font-weight: bold;"
-				id="sendBtn"><br>전송</a>
+				<button type="button" style="margin-top: 30px; text-align: center; color: white; font-weight: bold;" id="sendBtn"><br>전송</button>
 			</span>
 		</div>
 
 	</div>
 
-	<input type="text" id="nickname" value="${user_name }"
-		style="display: none">
 	<input type="button" id="enterBtn" value="입장" style="display: none">
 	<input type="button" id="exitBtn" value="나가기" style="display: none">
 	<script type="text/javascript">
 		connect();
 
 		function connect() {
-			sock = new SockJS('/chat');
-			sock.onopen = function() {
+			sockChat = new SockJS("<c:url value="/chat"/>");
+			sockChat.onopen = function() {
 				console.log('open');
 			};
-			sock.onmessage = function(evt) {
+			sockChat.onmessage = function(evt) {
 				var data = evt.data;
 				console.log(data)
 				var obj = JSON.parse(data)
 				console.log(obj)
 				appendMessage(obj.message_content);
 			};
-			sock.onclose = function() {
+			sockChat.onclose = function() {
 				appendMessage("연결을 끊었습니다.");
 				console.log('close');
 			};
@@ -86,12 +78,14 @@
 			if (msg != "") {
 				message = {};
 				message.message_content = $("#message").val()
-				message.TUTOR_USER_user_id = '${"p_id"}'
-				message.USER_user_id = '${profile.user_id}'
-				message.message_sender = '${profile.user_id}'
+				message.p_id = '${chatroomInfo.p_id}'
+				message.m_id = '${chatroomInfo.m_id}'
+				message.chat_id = '${chatroomInfo.chat_id}'
+				message.msg_sender = '${chatroomInfo.m_id}'
+				message.msg_receiver = '${chatroomInfo.p_id}'
 			}
 
-			sock.send(JSON.stringify(message));
+			sockChat.send(JSON.stringify(message));
 			$("#message").val("");
 		}
 
@@ -106,6 +100,7 @@
 					+ leadingZeros(d.getSeconds(), 2);
 
 			return s;
+			console.log(s);
 		}
 
 		function leadingZeros(n, digits) {
@@ -128,7 +123,7 @@
 				var t = getTimeStamp();
 				$("#chatMessageArea")
 						.append(
-								"<div class='col-12 row' style = 'height : auto; margin-top : 5px;'><div class='col-2' style = 'float:left; padding-right:0px; padding-left : 0px;'><img id='profileImg' class='img-fluid' src='/displayFile?fileName=${userImage}&directory=profile' style = 'width:50px; height:50px; '><div style='font-size:9px; clear:both;'>${user_name}</div></div><div class = 'col-10' style = 'overflow : y ; margin-top : 7px; float:right;'><div class = 'col-12' style = ' background-color:#ACF3FF; padding : 10px 5px; float:left; border-radius:10px;'><span style = 'font-size : 12px;'>"
+								"<div class='col-12 row' style = 'height : auto; margin-top : 5px;'><div class='col-2' style = 'float:left; padding-right:0px; padding-left : 0px;'><div style='font-size:9px; clear:both;'>${user_name}</div></div><div class = 'col-10' style = 'overflow : y ; margin-top : 7px; float:right;'><div class = 'col-12' style = ' background-color:#ACF3FF; padding : 10px 5px; float:left; border-radius:10px;'><span style = 'font-size : 12px;'>"
 										+ msg
 										+ "</span></div><div col-12 style = 'font-size:9px; text-align:right; float:right;'><span style ='float:right; font-size:9px; text-align:right;' >"
 										+ t + "</span></div></div></div>")
@@ -139,6 +134,7 @@
 
 			}
 		}
+		
 		$(document).ready(function() {
 			$('#message').keypress(function(event) {
 				var keycode = (event.keyCode ? event.keyCode : event.which);

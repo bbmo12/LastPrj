@@ -18,7 +18,7 @@ public interface ChatRoomService {
 	 * public String getName(String str) throws Exception;
 	 */
 
-	public List<MessageVO> getMessageList(String str) throws Exception;
+	public List<MessageVO> getMessageList(ChatRoomVO chatroom) throws Exception;
 
 	public List<ChatRoomVO> getRoomList(String str) throws Exception;
 
