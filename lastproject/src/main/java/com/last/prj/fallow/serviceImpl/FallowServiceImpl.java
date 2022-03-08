@@ -19,6 +19,16 @@ public class FallowServiceImpl implements FollowService {
 	public List<FollowVO> myFollowSearch(String m_id) {
 		return map.myFollowSearch(m_id);
 	}
+
+	@Override
+	public int followInsert(FollowVO follow) {
+		return map.followInsert(follow);
+	}
+
+	@Override
+	public int followDelete(FollowVO follow) {
+		return map.followDelete(follow);
+	}
 	
 
 }

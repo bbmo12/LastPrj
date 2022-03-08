@@ -17,6 +17,11 @@ public class CounselServiceImpl implements CounselService {
 
 
 	@Override
+	public List<CounselVO> myCounselList(String m_id) {
+		return map.myCounselList(m_id);
+	}
+	
+	@Override
 	public List<CounselVO> counselList(Criteria cri) {
 		return map.counselList(cri);
 	}
@@ -30,7 +35,7 @@ public class CounselServiceImpl implements CounselService {
 	public int myCounselPage(Criteria cri) {
 		return map.myCounselPage(cri);
 	}
-
+	
 	@Override
 	public List<CounselVO> myCounselList(Criteria cri) {
 		return map.myCounselList(cri);
@@ -45,6 +50,5 @@ public class CounselServiceImpl implements CounselService {
 	public List<CounselVO> pmemCounselList(String p_id) {
 		return null;
 	}
-	
 	
 }

@@ -123,11 +123,6 @@ public class PmemberController {
 		return "redirect:/pmemberMyPage";
 	}
 	
-	@RequestMapping("pmemberLike")//추천수
-	@ResponseBody
-	public void pmemberLike(@RequestParam("p_id")String p_id, PmemberVO pmember) {
-		pMemberDao.updateLike(p_id);
-	}
 	@RequestMapping("pmemberBest")//베스트순위출력
 	public String pmemberBest(PmemberVO pmember, Model model) {
 		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
