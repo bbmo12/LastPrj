@@ -164,9 +164,9 @@
 										<th>품종</th>
 										<th>예약여부</th>
 										<th>취소사유</th>
-									<th>후기</th>
-								</tr>
-							</thead>
+										<th>후기</th>
+									</tr>
+								</thead>
 							<tbody>
 								<c:forEach items="${reservation }" var="res">
 									<tr>
@@ -189,44 +189,15 @@
 													<button>실패</button>
 											</c:otherwise>
 										</c:choose>
-
-						<form action="reservationSelect" id="goform" name="goform">
-							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
-							<table class="table">
-								<thead>
-									<tr>
-										<th>예약번호</th>
-										<th>수의사 이름</th>
-										<th>예약신청일자</th>
-										<th>예약시간</th>
-										<th>예약내용</th>
-										<th>품종</th>
-										<th>예약여부</th>
-										<th>취소사유</th>
-
 									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${reservation }" var="res">
-										<tr>
-											<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
-											<td>${res.name }</td>
-											<td>${res.r_date}</td>
-											<td>${res.time }</td>
-											<td>${res.rcontent }</td>
-											<td>${res.pcontent }</td>
-											<td><input class="in_code" type="hidden"
-												value="${res.rccontent }"> ${res.rccontent }</td>
-											<td>${res.refuse}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</form>
-					</div>
+								</c:forEach>
+							</tbody>
+						</table>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 	<my:nav jsFunc="go_page" page="${page}"/>
 	</section>
 
@@ -447,9 +418,6 @@
 		})
 		
 	}
-	
-		})
-		
 		function go_page(p){
 			goform.pageNum.value=p;
 	    	goform.submit();
