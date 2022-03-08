@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.counsel.service.CounselMapper">
-	<select id="myCounselList" parameterType="String" resultType="com.last.prj.counsel.service.CounselVO">
-		SELECT P.NAME AS p_name, PM.NAME AS pm_name, C.CONTENT, CO.CONTENT AS co_content, C.W_DATE, R.R_CHECK
-		FROM P_MEMBER PM, PET P, COUNSEL C, F_CODE CO, REVIEW R
-		WHERE PM.P_ID = C.P_ID AND C.PET_NO= P.PET_NO AND CO.CODE = C.CODE AND
+	<!-- <select id="myCounselList" parameterType="String"
+		resultType="com.last.prj.counsel.service.CounselVO">
+		SELECT P.NAME AS p_name, PM.NAME AS pm_name, C.CONTENT,
+		CO.CONTENT AS co_content, C.W_DATE, R.R_CHECK
+		FROM P_MEMBER PM, PET P,
+		COUNSEL C, F_CODE CO, REVIEW R
+		WHERE PM.P_ID = C.P_ID AND C.PET_NO=
+		P.PET_NO AND CO.CODE = C.CODE AND
 		R.C_NO = C.C_NO AND P.M_ID = #{m_id}
+	</select> -->
+
+	<select id="pmemCounselList" parameterType="String"
+		resultType="com.last.prj.counsel.service.CounselVO">
+		SELECT P.NAME AS p_name, P.M_ID, C.CONTENT, C.W_DATE,
+		C.CODE, C.C_NO
+		FROM PET P, MEMBER M, COUNSEL C
+		WHERE P.PET_NO = C.PET_NO AND P.M_ID =
+		M.M_ID AND P_ID= #{p_id} ORDER BY C_NO
+	</select>
+
+	<!-- 페이징 -->
+	<select id="myCounselList"
+		resultType="com.last.prj.counsel.service.CounselVO">
+		SELECT *
+		FROM ( SELECT ROWNUM RN, A.*
+			   FROM (SELECT P.NAME AS p_name, C.CONTENT, PM.NAME AS pm_name, C.W_DATE, C.CODE, CO.CONTENT AS co_content
+       		 	FROM COUNSEL C, PET P, P_MEMBER PM, F_CODE CO
+        	    WHERE C.PET_NO = P.PET_NO AND PM.P_ID = C.P_ID AND C.CODE = CO.CODE AND P.M_ID = #{m_id}
+				) A)
+		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
 	</select>
 	
-	<select id="pmemCounselList" parameterType="String" resultType="com.last.prj.counsel.service.CounselVO">
-		SELECT P.NAME AS p_name, P.M_ID, C.CONTENT, C.W_DATE, C.CODE, C.C_NO
-			FROM PET P, MEMBER M, COUNSEL C
-		WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND P_ID= #{p_id} ORDER BY C_NO
+	<select id="myCounselPage" resultType="int" parameterType="com.last.prj.counsel.service.CounselVO">
+		SELECT COUNT(*)
+		FROM COUNSEL C, PET P
+		WHERE C.PET_NO = P.PET_NO
+		GROUP BY P.M_ID
+		HAVING P.M_ID = #{m_id}
 	</select>
+
 </mapper>
