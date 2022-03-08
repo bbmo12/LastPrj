@@ -20,6 +20,11 @@
 	#back {
 		display: none;
 	}
+
+	.btn {
+		width: 200px;
+		margin-bottom: 10px;
+	}
 </style>
 
 <body>
@@ -54,23 +59,25 @@
 							<img class="author_img rounded-circle" src="resources/upload/${pmemdetail.picture }"
 								style="width: 210px;" alt="등록된 사진이 없습니다.">
 							<div class="br"></div>
-							<h2>${pmemdetail.name}</h2>
-							<h3 style="position: relative; top: 10px; right: 10px;">${pmemdetail.w_name}</h3>
+							<h2 style=" margin: 0 40px -10px 0;">${pmemdetail.name}</h2>
+							<img alt="" src="resources/upload/follow.png" id="follow"
+								onclick="follow('${pmemdetail.p_id}')"
+								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
+							<input type="hidden" value="N" id="changeFollow">
+							<h3 style="position: relative; top: -15px; right: 10px;">${pmemdetail.w_name}</h3>
 							<img alt="" src="resources/upload/rec.png" id="recommend"
 								onclick="likeHit(`${pmemdetail.p_id}`)"
-								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
-							<div class="br" style="margin-top: -25px;"></div>
+								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
+								<input type="hidden" value="N" id="changeHit">
+							<div class="br" style="margin-top: -45px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-
 							<a href="chatMessage?m_id=${mId }&p_id=${pmemdetail.p_id}">
-							<button class="btn btn-primary">상담하기</button></a>
-
+								<button class="btn btn-primary">상담하기</button></a>
 							<form action="reservMember" name="reservForm" method="POST">
-								<input type="hidden" id ="p_id" name ="p_id" value="${pmemdetail.p_id}">
-								<button type="submit" class="widget_title reservBtn">예 약</button>
+								<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
+								<button type="submit" class="btn btn-primary">예약하기</button>
 							</form>
-
 						</aside>
 					</div>
 				</div>
@@ -86,18 +93,20 @@
 									<div class="container">
 										<div class="row">
 											<c:forEach items="${pimage}" var="image">
-												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0" style="margin: 10px -35px 0 0;">
+												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0"
+													style="margin: 10px -35px 0 0;">
 													<div class="categories_post" style="width: 200px">
 														<img src="resources/upload/${image.picture}"
-														 style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
+															style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 													</div>
 												</div>
 											</c:forEach>
 											<c:forEach items="${plicense}" var="plicense">
-												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0" style="margin: 10px -35px 0 0;">
+												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0"
+													style="margin: 10px -35px 0 0;">
 													<div class="categories_post" style="width: 200px">
 														<img src="resources/upload/${plicense.picture}"
-															  style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
+															style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 													</div>
 												</div>
 											</c:forEach>
@@ -196,18 +205,63 @@
 	<script>
 		//추천버튼 
 		function likeHit(p_id) {
-			console.log(p_id);
 			var p_id = p_id;
-			$.ajax({
-				type: "POST",
-				url: "pmemberLike",
-				data: {
-					"p_id": p_id
-				},
-				success: function () {
-					console.log("dddddd");
-				}
-			});
+			var hit = $('#changeHit');
+			if(hit.val() == "N"){
+				$.ajax({
+					type: "POST",
+					url: "pmemberLike",
+					data: {
+						"p_id": p_id
+					},
+					success: function () {
+						alert('추천!');
+						hit.val("Y");
+					}
+				});			
+			} else if(hit.val() == "Y"){			
+				$.ajax({
+					type: "POST",
+					url: "deleteLike",
+					data: {
+						"p_id": p_id
+					},
+					success: function () {
+						alert('추천취소');
+						hit.val("N");
+					}
+				});		
+			}	
+		}
+		//팔로우
+		function follow(p_id) {
+			var p_id = p_id;
+			var change = $('#changeFollow');
+			if (change.val() == "N") {
+				$.ajax({
+					type: "POST",
+					url: "insertFollow",
+					data: {
+						"p_id": p_id
+					},
+					success: function () {
+						alert('팔로우 추가!');
+						change.val("Y");
+					}
+				});
+			} else if (change.val() == "Y") {
+				$.ajax({
+					type: "POST",
+					url: "deleteFollow",
+					data: {
+						"p_id": p_id
+					},
+					success: function () {
+						alert('팔로우취소!');
+						change.val("N");
+					}
+				});
+			}
 		}
 		//별점
 		$(function () {

@@ -49,11 +49,15 @@ public class CounselController {
 	}
 	//파트너회원 상담내역
 	@RequestMapping("/pmemcounsel")
-	public String pmemcounsel(Model model, HttpServletRequest request) {
+	public String pmemcounsel(Model model, HttpServletRequest request, Criteria cri) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
+		cri.setP_id(p_id);
+		cri.setAmount(10);
+		PagingVO paging = new PagingVO(cri, mapper.counselPage(cri));
+		model.addAttribute("page", paging);
+		model.addAttribute("pmemcounsel", mapper.counselList(cri));//페이징
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember 상세정보
-		model.addAttribute("pmemcounsel", counselDao.pmemCounselList(p_id));
 		return "mypage/pmemcounsel";
 	}
 }

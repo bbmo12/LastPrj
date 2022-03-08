@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib tagdir="/WEB-INF/tags"  prefix="my"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,10 +55,10 @@
 								<li><a href="pMembenefit" class="d-flex justify-content-between">
 										<p>내 수익</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmemcounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 								</a></li>
 								<li><a href="#" class="d-flex justify-content-between">
@@ -73,37 +74,41 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 				<div class="col-lg-12 col-md-12 blog_details">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>예약번호</th>
-									<th>예약신청일자</th>
-									<th>예약시간</th>
-									<th>예약자 이름</th>
-									<th>품종</th>
-									<th>증상</th>
-									<th>승인여부</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${preservation }" var="pres">
-											<tr>
-												<td><input  class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
-												<td>${pres.r_date}</td>
-												<td>${pres.startdate } &nbsp; ${pres.time }</td>
-												<td>${pres.m_id }</td>
-												<td>${pres.pcontent }
-												<td>${pres.rcontent }</td>
-												<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
-											</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+						<form action="preservationSelect" id="goform" name="goform">
+							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
+							<table class="table">
+								<thead>
+									<tr>
+										<th>예약번호</th>
+										<th>예약신청일자</th>
+										<th>예약시간</th>
+										<th>예약자 이름</th>
+										<th>품종</th>
+										<th>증상</th>
+										<th>승인여부</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${preservation }" var="pres">
+												<tr>
+													<td><input  class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
+													<td>${pres.r_date}</td>
+													<td>${pres.startdate } &nbsp; ${pres.time }</td>
+													<td>${pres.m_id }</td>
+													<td>${pres.pcontent }
+													<td>${pres.rcontent }</td>
+													<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
+												</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<my:nav jsFunc="go_page" page="${page}"/>
    
     
     
@@ -234,7 +239,10 @@
 					}
 				}); 
 		});
-		
+		function go_page(p){
+			goform.pageNum.value=p;
+	    	goform.submit();
+		}
 		
 	</script>
 </body>

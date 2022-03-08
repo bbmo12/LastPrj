@@ -11,8 +11,14 @@
 		FROM DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
 		WHERE D.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
 		P.M_ID = #{m_id}
-
 	</select>
+	
+	<select id="serviceSelect" parameterType="int" resultType="com.last.prj.service.service.ServiceVO">
+		SELECT *
+		FROM SERVICE
+		WHERE R_NO= #{r_no}
+	</select>
+	
 	
 	<select id="pMembenefit" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
 		SELECT S.CONTENT,S.STARTDATE,S.ENDDATE,S.PRICE,M_ID 

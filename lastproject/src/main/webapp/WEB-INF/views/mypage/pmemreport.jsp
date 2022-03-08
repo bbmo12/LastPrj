@@ -173,7 +173,7 @@
                 <div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
                     <div class="col-lg-12 col-md-12 blog_details">
                         <div align="center">
-                            <h1>상담내역조회</h1>
+                            <h1>신고내역조회</h1>
                         </div>
                         <div class="page-content page-container" id="page-content" style="margin-top: 20px;">
                             <div class="row container d-flex justify-content-center">
@@ -185,31 +185,47 @@
                                                 <table id="htmltable" class="table">
                                                     <thead>
                                                         <tr style="text-align: center;">
-                                                            <th>동물이름</th>
-                                                            <th>상담회원</th>
-                                                            <th>상담내용</th>
-                                                            <th>상담상태</th>
-                                                            <th>작성일</th>
+                                                            <th>신고회원</th>
+                                                            <th>신고내용</th>
+                                                            <th>신고날짜</th>
+                                                            <th>신고유형</th>
+                                                            <th>처리상태</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody style="text-align: center">
-                                                        <c:forEach items="${pmemcounsel }" var="counsel">
+                                                        <c:forEach items="${pmemreport }" var="report">
                                                             <tr>
-                                                                <td>${counsel.p_name }</td>
-                                                                <td>${counsel.m_id } </td>
-                                                                <td>${counsel.content}</td>
+                                                                <td>${report.reported }</td>
+                                                                <td>${report.content } </td>
+                                                                <td>${report.w_date}</td>
                                                                 <td>
-                                                                    <c:if test="${counsel.code eq 301}">
-                                                                        <label class="badge badge-info">상담요청</label>
+                                                                    <c:if test="${report.code eq 601}">
+                                                                        불법 광고 및 홍보
                                                                     </c:if>
-                                                                    <c:if test="${counsel.code eq 302}">
-                                                                        <label class="badge badge-warning">진행중</label>
+                                                                    <c:if test="${report.code eq 602}">
+                                                                        음란물/선정성 콘텐츠
                                                                     </c:if>
-                                                                    <c:if test="${counsel.code eq 303}">
-                                                                        <label class="badge badge-success">상담완료</label>
+                                                                    <c:if test="${report.code eq 603}">
+                                                                        욕설/비속어/모욕
+                                                                    </c:if>
+                                                                    <c:if test="${report.code eq 604}">
+                                                                        사생활침해
+                                                                    </c:if>
+                                                                    <c:if test="${report.code eq 605}">
+                                                                        게시물 도배
                                                                     </c:if>
                                                                 </td>
-                                                                <td>${counsel.w_date }</td>
+                                                                <td>
+                                                                	<c:if test="${report.repor eq 701}">
+                                                                        <label class="badge badge-info">신고대기</label>
+                                                                    </c:if>
+                                                                    <c:if test="${report.repor eq 702}">
+                                                                        <label class="badge badge-danger">신고기각</label>
+                                                                    </c:if>
+                                                                    <c:if test="${report.repor eq 703}">
+                                                                        <label class="badge badge-success">신고승인</label>
+                                                                    </c:if>
+                                                                 </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -225,8 +241,10 @@
                 </div>
             </div>
         </div>
+
     </section>
     <script>
+        console.log("ddddddddddddddddddddddddddddddddd" + '${page}');
         function go_page(p) {
             goform.pageNum.value = p;
             goform.submit();

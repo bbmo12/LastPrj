@@ -30,10 +30,12 @@ public interface ReservationMapper {
 	//후기작성 폼이동
 	ReservationVO reviewWrithForm(@Param("r_no") int r_no);
 
-	//페이징
+	//페이징 (일반예약조회)
 	List<ReservationVO> reservationPageList(Criteria cri);
 	int reservPage(Criteria cri);
 	
 
+	
+	
 	
 }
