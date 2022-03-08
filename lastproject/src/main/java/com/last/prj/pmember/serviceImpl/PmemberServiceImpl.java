@@ -130,4 +130,5 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admPmemberDate(fromDate, toDate);
 	}
 
+
 }
