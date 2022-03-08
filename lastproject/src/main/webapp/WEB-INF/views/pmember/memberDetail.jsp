@@ -68,7 +68,7 @@
 
 							<form action="reservMember" name="reservForm" method="POST">
 								<input type="hidden" id ="p_id" name ="p_id" value="${pmemdetail.p_id}">
-								<button type="submit" class="widget_title reservBtn">예 약</button>>
+								<button type="submit" class="widget_title reservBtn">예 약</button>
 							</form>
 
 						</aside>
