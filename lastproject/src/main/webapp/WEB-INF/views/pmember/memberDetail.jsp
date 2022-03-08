@@ -20,6 +20,10 @@
 	#back {
 		display: none;
 	}
+	.btn {
+	    width: 200px;
+    	margin-bottom: 10px;	
+	}
 </style>
 
 <body>
@@ -62,15 +66,12 @@
 							<div class="br" style="margin-top: -25px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-
 							<a href="chatMessage?m_id=${mId }&p_id=${pmemdetail.p_id}">
 							<button class="btn btn-primary">상담하기</button></a>
-
 							<form action="reservMember" name="reservForm" method="POST">
 								<input type="hidden" id ="p_id" name ="p_id" value="${pmemdetail.p_id}">
-								<button type="submit" class="widget_title reservBtn">예 약</button>>
+								<button type="submit" class="btn btn-primary">예약하기</button>
 							</form>
-
 						</aside>
 					</div>
 				</div>
@@ -205,7 +206,7 @@
 					"p_id": p_id
 				},
 				success: function () {
-					console.log("dddddd");
+					alert('추천!');
 				}
 			});
 		}

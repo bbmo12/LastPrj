@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.last.prj.counsel.service.CounselMapper;
 import com.last.prj.counsel.service.CounselService;
 import com.last.prj.counsel.service.CounselVO;
+import com.last.prj.pmember.service.Criteria;
 
 @Repository("counselDao")
 public class CounselServiceImpl implements CounselService {
@@ -20,8 +21,13 @@ public class CounselServiceImpl implements CounselService {
 	}
 
 	@Override
-	public List<CounselVO> pmemCounselList(String p_id) {
-		return map.pmemCounselList(p_id);
+	public List<CounselVO> counselList(Criteria cri) {
+		return map.counselList(cri);
+	}
+
+	@Override
+	public int counselPage(Criteria cri) {
+		return map.counselPage(cri);
 	}
 	
 }
