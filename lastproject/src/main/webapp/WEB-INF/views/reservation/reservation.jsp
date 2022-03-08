@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,39 +48,37 @@
 }
 
 .star-rating {
-  
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 1.5em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 5em;
 }
 
 .star-rating input {
-  display:none;
+	display: none;
 }
 
 .star-rating label {
-  color:#ccc;
-  cursor:pointer;
+	color: #ccc;
+	cursor: pointer;
 }
 
 .star-rating :checked ~ label {
-  color:#f90;
+	color: #f90;
 }
 
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color:#fc0;
+.star-rating label:hover, .star-rating label:hover ~ label {
+	color: #fc0;
 }
 </style>
 
 
 <body>
 	<%-- ${sessionScope.mId } --%>
-	
+
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -151,47 +149,8 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-  	<form action="reservationSelect" id="goform" name="goform">
-							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
-							<table class="table">
-								<thead>
-									<tr>
-										<th>예약번호</th>
-										<th>수의사 이름</th>
-										<th>예약신청일자</th>
-										<th>예약시간</th>
-										<th>예약내용</th>
-										<th>품종</th>
-										<th>예약여부</th>
-										<th>취소사유</th>
-									<th>후기</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${reservation }" var="res">
-									<tr>
-										<td><input class="rno" type="hidden" id="r_no"
-											name="r_no" value="${res.r_no }">${res.r_no }</td>
-										<td>${res.name }</td>
-										<td>${res.r_date}</td>
-										<td>${res.time }</td>
-										<td>${res.rcontent }</td>
-										<td>${res.pcontent }</td>
-										<td><input class="in_code" type="hidden"
-											value="${res.rccontent }"> ${res.rccontent }</td>
-										<td>${res.refuse}</td>
-										<c:choose>
-											<c:when test="${res.code eq 405 }">
-												<td><button onclick="reviewWrite(event)">성공</button></td>
-											</c:when>
-											<c:otherwise>
-												<td>
-													<button>실패</button>
-											</c:otherwise>
-										</c:choose>
-
 						<form action="reservationSelect" id="goform" name="goform">
-							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
+							<input type="hidden" id="pageNum" name="pageNum" value="1">
 							<table class="table">
 								<thead>
 									<tr>
@@ -203,13 +162,14 @@
 										<th>품종</th>
 										<th>예약여부</th>
 										<th>취소사유</th>
-
+										<th>후기</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${reservation }" var="res">
 										<tr>
-											<td><input class="rno" type="hidden" value="${res.r_no }">${res.r_no }</td>
+											<td><input class="rno" type="hidden" id="r_no"
+												name="r_no" value="${res.r_no }">${res.r_no }</td>
 											<td>${res.name }</td>
 											<td>${res.r_date}</td>
 											<td>${res.time }</td>
@@ -218,6 +178,15 @@
 											<td><input class="in_code" type="hidden"
 												value="${res.rccontent }"> ${res.rccontent }</td>
 											<td>${res.refuse}</td>
+											<c:choose>
+												<c:when test="${res.code eq 405 }">
+													<td><button onclick="reviewWrite(event)">성공</button></td>
+												</c:when>
+												<c:otherwise>
+													<td>
+														<button>실패</button>
+												</c:otherwise>
+											</c:choose>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -227,47 +196,47 @@
 				</div>
 			</div>
 		</div>
-	<my:nav jsFunc="go_page" page="${page}"/>
+		<my:nav jsFunc="go_page" page="${page}" />
 	</section>
 
 	<div class="modal">
 		<!-- 모달 띄운후 내용입력부분 바디.  -->
 		<div class="modal_body">
 
-			
-				<div class="form-group">
-					<h5 id="pname"></h5>
-				</div>
-				<div> <h1>여기가 별점?</h1>
-				<div class="star-rating">
-				<input type="radio" id="5-stars" name="rating" value="5" />
-				<label for="5-stars" class="star">&#9733;</label>
-				<input type="radio" id="4-stars" name="rating" value="4" />
-				<label for="4-stars" class="star">&#9733;</label>
-				<input type="radio" id="3-stars" name="rating" value="3" />
-				<label for="3-stars" class="star">&#9733;</label>
-				<input type="radio" id="2-stars" name="rating" value="2" />
-				<label for="2-stars" class="star">&#9733;</label>
-				<input type="radio" id="1-stars" name="rating" value="1" />
-				<label for="1-stars" class="star">&#9733;</label>
+
+			<div class="form-group">
+				<h5 id="pname"></h5>
 			</div>
+			<div>
+				<h1>여기가 별점?</h1>
+				<div class="star-rating">
+					<input type="radio" id="5-stars" name="rating" value="5" /> <label
+						for="5-stars" class="star">&#9733;</label> <input type="radio"
+						id="4-stars" name="rating" value="4" /> <label for="4-stars"
+						class="star">&#9733;</label> <input type="radio" id="3-stars"
+						name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
+					<input type="radio" id="2-stars" name="rating" value="2" /> <label
+						for="2-stars" class="star">&#9733;</label> <input type="radio"
+						id="1-stars" name="rating" value="1" /> <label for="1-stars"
+						class="star">&#9733;</label>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword4">후기내용</label>
-					<textarea class="form-control" id="content" name="content"
-						placeholder="후기내용" rows="4" cols="80">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword4">후기내용</label>
+				<textarea class="form-control" id="content" name="content"
+					placeholder="후기내용" rows="4" cols="80">
                         </textarea>
-				</div>
-				<!-- <div class="form-group">
+			</div>
+			<!-- <div class="form-group">
 								<label>프로필 사진</label>
 								<div class="input-group col-xs-12">
 								<input  class="file-upload-browse btn btn-primary" type="file" id="file" name ="file">
 								</div>
 							</div> -->
-				<input type="hidden" id="rev_no" name="rev_no" value="">
-				<button type="button" onclick="serviceReview()">작성</button>
-				<button type="button">취소</button>
-			
+			<input type="hidden" id="rev_no" name="rev_no" value="">
+			<button type="button" onclick="serviceReview()">작성</button>
+			<button type="button">취소</button>
+
 
 		</div>
 	</div>
@@ -425,7 +394,7 @@
 
 		})
 	</script>
-<!-- 리뷰작성 -->
+	<!-- 리뷰작성 -->
 	<script type="text/javascript">
 	function serviceReview(){
 		var content = $("#content").val();
@@ -455,8 +424,5 @@
 	    	goform.submit();
 		}
 	</script>
-
-
-
 </body>
 </html>
