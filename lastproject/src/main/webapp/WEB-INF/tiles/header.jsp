@@ -17,6 +17,7 @@
 	<title>BanBanBan</title>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
 <style>
 .nav-menu a {
 	text-decoration: none;
@@ -203,7 +204,7 @@ function onMessage(evt){
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
+									<i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
 									<h6 class="p-3 mb-0 text-white py-4">Notifications</h6>

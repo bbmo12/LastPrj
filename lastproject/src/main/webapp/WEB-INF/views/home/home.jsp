@@ -15,7 +15,6 @@
 
 
 </head>
-<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
 	
 <style>
 .partner_img{
