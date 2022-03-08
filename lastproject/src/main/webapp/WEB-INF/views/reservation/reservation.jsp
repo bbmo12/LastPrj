@@ -22,11 +22,9 @@
 	display: none;
 	background-color: rgba(0, 0, 0, 0.4);
 }
-
 .modal.show {
 	display: block;
 }
-
 .modal_body {
 	position: absolute;
 	top: 50%;
@@ -46,7 +44,6 @@
 #my_section {
 	padding: 50px;
 }
-
 .star-rating {
   
   display:flex;
@@ -57,20 +54,16 @@
   text-align:center;
   width:5em;
 }
-
 .star-rating input {
   display:none;
 }
-
 .star-rating label {
   color:#ccc;
   cursor:pointer;
 }
-
 .star-rating :checked ~ label {
   color:#f90;
 }
-
 .star-rating label:hover,
 .star-rating label:hover ~ label {
   color:#fc0;
@@ -260,7 +253,6 @@
 	            reviewadd(wow);
 	          } 
 	      
-
 	       modal.addEventListener('click', (event) => {
 	        if (event.target === modal) {
 	          modal.classList.toggle('show');
@@ -307,26 +299,20 @@
 	<script>
 		//table td값만
 		var val = $(".in_code").parent();
-
 		console.log(val);
 		console.log(val.length);
 		for (var i = 0; i < val.length; i++) {
 			//예약결과코드 분류
 			if (val[i].innerText == '결제가능') {
-
 				console.log(val[i]);
-
 				val[i].classList.add("code");
 				$(".code").empty();
 				var check = $(".code").append(
 						`<button type ="button" class="payBtn">결제하기</button>`);
 
 			} else if (val[i].innerText == '승인거절') {
-
 				val[i].classList.add("refuse");
-
 			} else if (val[i].innerText == '결제완료') {
-
 				val[i].classList.add("complete");
 				$(".complete").empty();
 				var check = $(".complete").append(`<span>예약완료</span>`);
@@ -401,7 +387,6 @@
 					alert("결제실패")
 				}
 			}) 
-
 		})
 	</script>
 <!-- 리뷰작성 -->
