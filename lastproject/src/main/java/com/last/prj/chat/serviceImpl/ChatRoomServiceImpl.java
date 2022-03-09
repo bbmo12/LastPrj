@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.last.prj.chat.service.ChatRoomService;
 import com.last.prj.chat.service.ChatRoomVO;
+import com.last.prj.chat.service.MemVO;
 import com.last.prj.chat.service.MessageVO;
+import com.last.prj.chat.service.PmemVO;
 
 @Repository("chatDAO")
 @Transactional
@@ -107,6 +109,8 @@ public class ChatRoomServiceImpl implements ChatRoomService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 	/*
 	 * @Override public void updateReadTime(int class_id, String user_id, String

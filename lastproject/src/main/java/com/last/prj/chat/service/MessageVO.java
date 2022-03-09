@@ -1,7 +1,5 @@
 package com.last.prj.chat.service;
 
-import com.google.gson.Gson;
-
 import lombok.Data;
 
 @Data
@@ -18,10 +16,10 @@ public class MessageVO {
 	
 	private int unReadCount;
 	
-	public static MessageVO convertMessage(String source) {
-		MessageVO message = new MessageVO();
-		Gson gson = new Gson();
-		message = gson.fromJson(source,  MessageVO.class);
-		return message;
-	}
+//	public static MessageVO convertMessage(String source) {
+//		MessageVO message = new MessageVO();
+//		Gson gson = new Gson();
+//		message = gson.fromJson(source,  MessageVO.class);
+//		return message;
+//	}
 }

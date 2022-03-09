@@ -27,7 +27,7 @@ public interface ChatRoomMapper {
 	public List<ChatRoomVO> getRoomList2(String str) throws Exception;
 
 	public MessageVO getRecentMessage(String str) throws Exception;
-	
+
 	// public String isGetMessageList(String str)throws Exception;
 
 	/* public String getTutorId(String str) throws Exception; */
