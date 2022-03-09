@@ -15,7 +15,6 @@
 
 
 </head>
-<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
 	
 <style>
 .partner_img{
@@ -122,7 +121,7 @@ h1{
                     <a href="preservationSelect" class="genric-btn info circle arrow">파트너회원예약조회</a>
                     <a href="reservationSetting" class="genric-btn info circle arrow">파트너회원예약설정</a> -->
                     <br>
-                    <a href="test" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="reservMember" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a>
                     
                 </div>
             </div>
@@ -164,16 +163,16 @@ h1{
         </div>
     </section> -->
     <br><br><br><br><br><br>
-    <section class="welcome-area section-padding3">
+    <section class="welcome-area section-padding3" style="padding-bottom: 10px; margin-top: -7em;">
     <div class="col-lg-10" style="float: none; margin: 0 auto;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="welcome-img">
+                    <div class="welcome-img" style="margin-left: 40px;">
                         <img src="resources/upload/cat.jpg" alt="" style="width:400px; height:550px;">
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6"  style="margin-left: -6em;">
                 <br><br><br><br>
                     <div class="mt-5 mt-lg-0">
                         <h2>소중한 우리 아이 기록<br>어떻게 보관하고 계신가요?</h2>
@@ -188,7 +187,7 @@ h1{
     </section>
     
     <!-- Department Area Starts -->
-    <section class="department-area section-padding4">
+    <section class="department-area section-padding4" style="padding: 50px 0 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -279,7 +278,7 @@ h1{
     </section> -->
     
     <!-- Specialist Area Starts -->
-    <section class="specialist-area section-padding">
+    <section class="specialist-area section-padding" style="padding: 50px 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -337,7 +336,7 @@ h1{
     <!-- Hotline Area End -->
     
    <!-- News Area Starts -->
-    <section class="specialist-area section-padding">
+    <section class="specialist-area section-padding" style="padding: 20px 0;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">

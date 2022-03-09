@@ -3,6 +3,8 @@ package com.last.prj.board.service;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 
@@ -15,10 +17,8 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String writer;
+	@JsonFormat(pattern ="yy-mm-dd")
 	private Date w_date;
-	
-	
-	//private int hit
 	
 
 }

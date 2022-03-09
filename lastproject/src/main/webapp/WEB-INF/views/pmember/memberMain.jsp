@@ -1,89 +1,168 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
+
 <body>
-    <section class="department-area section-padding4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="section-top text-center">
-                        <h2>Best Partner</h2>
-                        <p>반려동물을 사랑하는 마음은 물론, 반려동물 관련 자격증 또는 전문 지식을 갖춘 분들이 활동하고 있습니다. 반려동물과 보호자님 모두의 행복한 동행을 위해 든든한 파트너가 되어드립니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="department-slider owl-carousel">
-                    <c:forEach var="pmember" items="${pmember}">
-                        <div class="single-slide">
-                            <div class="slide-img">
-                               <img src="resources/upload/${pmember.picture }" alt="" style="width: 300px; height: 250px;"class="img-fluid">
-                                <div class="hover-state">
-                                    <a href="pmemberDetail?id=${pmember.p_id }"><i class="fa fa-user-o"></i></a>
-                                </div>
-                            </div>
-                            <div class="single-department item-padding text-center"> 
-                            <c:if test="${pmember.code eq 100}">                           
-							<h3>수의사</h3><h2>${pmember.name }</h2>	
-						</c:if>
-						<c:if test="${pmember.code eq 101}">
-							<h3>훈련사</h3><h2>${pmember.name }</h2>							
-						</c:if>
-						<c:if test="${pmember.code eq 102}">
-							<h3>펫시터</h3><h2>${pmember.name }</h2>	
-						</c:if>
-						<c:if test="${pmember.code eq 103}">
-							<h3>미용사</h3><h2>${pmember.name }</h2>	
-						</c:if>                                
-                                <p style="font-size: 18px;">${pmember.n_content }</p>
-                            </div>
-                        </div>
-                         </c:forEach>       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="feature-area section-padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-feature text-center item-padding">
-                        <img src="resources/assets/images/feature1.png" alt="">
-                        <h3>advance technology</h3>
-                        <p class="pt-3">Creeping for female light years that lesser can't evening heaven isn't bearing tree appear</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-feature text-center item-padding mt-4 mt-md-0">
-                        <img src="resources/assets/images/feature2.png" alt="">
-                        <h3>comfortable place</h3>
-                        <p class="pt-3">Creeping for female light years that lesser can't evening heaven isn't bearing tree appear</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-feature text-center item-padding mt-4 mt-lg-0">
-                        <img src="resources/assets/images/feature3.png" alt="">
-                        <h3>quality equipment</h3>
-                        <p class="pt-3">Creeping for female light years that lesser can't evening heaven isn't bearing tree appear</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="single-feature text-center item-padding mt-4 mt-lg-0">
-                        <img src="resources/assets/images/feature4.png" alt="">
-                        <h3>friendly staff</h3>
-                        <p class="pt-3">Creeping for female light years that lesser can't evening heaven isn't bearing tree appear</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+	<section class="department-area section-padding4" style="padding: 130px 0 130px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-3">
+					<div class="section-top text-center">
+						<h2>Best Partner</h2>
+						<p>반려동물을 사랑하는 마음은 물론, 반려동물 관련 자격증 또는 전문 지식을 갖춘 분들이 활동하고 있습니다.
+							반려동물과 보호자님 모두의 행복한 동행을 위해 든든한 파트너가 되어드립니다.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="department-slider owl-carousel">
+						<c:forEach var="pmember" items="${pmember}">
+							<div class="single-slide">
+								<div class="slide-img">
+									<img src="resources/upload/${pmember.picture }" alt=""
+										style="width: 300px; height: 250px;" class="img-fluid">
+									<div class="hover-state">
+										<a href="pmemberDetail?id=${pmember.p_id }"><i class="fa fa-user-o"></i></a>
+									</div>
+								</div>
+								<div class="single-department item-padding text-center">
+									<c:if test="${pmember.code eq 100}">
+										<h3>수의사</h3>
+										<h2>${pmember.name }</h2>
+									</c:if>
+									<c:if test="${pmember.code eq 101}">
+										<h3>훈련사</h3>
+										<h2>${pmember.name }</h2>
+									</c:if>
+									<c:if test="${pmember.code eq 102}">
+										<h3>펫시터</h3>
+										<h2>${pmember.name }</h2>
+									</c:if>
+									<c:if test="${pmember.code eq 103}">
+										<h3>미용사</h3>
+										<h2>${pmember.name }</h2>
+									</c:if>
+									<p style="font-size: 18px;">${pmember.n_content }</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div style="width: 100%; height: 150px">
+		<h1
+			style="font-weight: 700; letter-spacing: 0.2px; text-align: center; padding-top: 30px; font-size: 50px; line-height: 70px; color: #555555">
+			믿을 수 있고<br>안심할 수 있어요
+		</h1>
+		<p style="text-align: center; font-size: 17px; color: #393C47; margin-top: 3px">
+			까다로운 선발·관리 체계와 안전 시스템을 구축하였습니다</p>
+	</div>
+	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 110px">
+		<img src="resources/upload/do.png" style="width: 400px; height: 450px; border-radius: 2px">
+		<div style="margin: 5em 0 0 5em;">
+			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
+				훈련사의<br>체계적 교육!
+			</h1>
+			<h3
+				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+				비대면 상담 / 방문 훈련 예약 <br>우리 아이 성향 맞춤 솔루션을 받아보세요!
+			</h3>
+			<a href="pmemberList?code=101">
+				<div
+					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
+					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">훈련사</p>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div style="display: flex; justify-content: space-between; padding: 50px 400px 0px 550px">
+		<div style="padding-top: 72px">
+			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
+				반려동물의<br>건강 관리!
+			</h1>
+			<h3
+				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+				인증 된 수의사<br>안심하고 반려동물을 맡겨보세요!
+			</h3>
+			<a href="pmemberList?code=100">
+				<div
+					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
+					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">수의사</p>
+				</div>
+			</a>
+		</div>
+		<img src="resources/upload/dod.png"
+			style="width: 400px; height: 450px; border-radius: 2px;  margin-right: 10em;">
+	</div>
+	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 50px">
+		<img src="resources/upload/dogg.png" style="width: 400px; height: 450px; border-radius: 2px">
+		<div style="margin:5em 0 0 5em;">
+			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
+				믿고 맡기는<br>전문 펫시터!
+			</h1>
+			<h3
+				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+				언제 어디서든<br>안심하고 펫시터를 불러보세요!
+			</h3>
+			<a href="pmemberList?code=102">
+				<div
+					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
+					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">펫시터</p>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div style="display: flex; justify-content: space-between; padding: 50px 400px 0px 550px">
+		<div style="padding-top: 72px">
+			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
+				우리아이<br>전담 그루머
+			</h1>
+			<h3
+				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+				전담 그루머가 운영하는<br>트렌디한 미용 샵 지역별로 찾아보세요!
+			</h3>
+			<a href="pmemberList?code=103">
+				<div
+					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
+					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">미용사</p>
+				</div>
+			</a>
+		</div>
+		<img src="resources/upload/ddog.png"
+			style="width: 400px; height: 450px; border-radius: 2px; margin-right: 10em;">
+	</div>
+	<div
+		style="display: flex; align-items: center; flex-direction: column; justify-content: center; height: 500px; background: #FFFFFF">
+		<div style="display: flex; flex-direction: row; align-items: center; padding-right: 30px; ">
+			<div style="margin-bottom: 20px">
+				<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px; padding-left: 20px; ">
+					더 궁금한 점이<br>있으신가요?
+				</h1>
+				<div style="margin: -12em 0  0 30em;">
+					<h2 style="font-size: 50px; font-weight: 700; color: #555555; line-height: 70px">
+						무료 상담!<br>OPEN Q&amp;A!</h2>
+					<h3 style="font-size: 17px; font-weight: 400; color: #333333; margin-top: 20px; line-height: 27px">
+						궁금한 점이 있거나, 사전 상담이 필요하다면<br>Q&amp;A에 질문 글을 올려보세요!</h3>
+					<a href="qnaMain">
+						<div
+							style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
+							<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">질문하기</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>

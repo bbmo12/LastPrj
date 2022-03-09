@@ -49,11 +49,21 @@
 
 	<context:component-scan base-package="com.last.prj" />
 	
+	<!-- websocket -->
 	<beans:bean id="echoHandler" class="com.last.prj.socket.EchoHandler"/>
 	<websocket:handlers>
 		<websocket:mapping handler="echoHandler" path="/echo"/>
 		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+			<beans:bean class="com.last.prj.socket.HandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+		<websocket:sockjs/>
+	</websocket:handlers>
+	
+	<beans:bean id="chatHandler" class="com.last.prj.chat.service.ChatWebSocketHandler"/>
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="com.last.prj.socket.HandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>

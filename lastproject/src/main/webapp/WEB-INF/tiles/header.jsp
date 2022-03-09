@@ -17,6 +17,7 @@
 	<title>BanBanBan</title>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
 <style>
 .nav-menu a {
 	text-decoration: none;
@@ -24,18 +25,68 @@
 	font-weight: 400;
 }
 
+.p-3.mb-0.text-white.py-4{
+	background-color: #38a4ff;
+}
 
+#notice_content{
+	text-decoration: none;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
+	font-size: 10px;
+}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
 var socket = null;
 $(document).ready(function(){
-	// 웹소켓 연결
-	sock = new SockJS("<c:url value="/echo"/>");
-	socket = sock;
 	
-	// 데이터를 전달 받았을 때
-	sock.onmessage = onMessage; // toast생성
+	$.ajax({
+		url : "getId",
+		type : "post",
+		success : function(result){
+			console.log(result);
+			/* 수정하기 */
+			if(result != ""){
+				sock = new SockJS("<c:url value="/echo"/>");
+				socket = sock;
+				
+				// 데이터를 전달 받았을 때
+				sock.onmessage = onMessage; // toast생성
+			}
+			
+			notice();
+		}
+	});
+	
+	function notice(){
+		$.ajax({
+			url : "noticeList",
+			type : "post",
+			success : function(result){
+				console.log(result);
+				
+				for(var i = 0; i < result.length; i++){
+				
+				var alarm = `<a class="dropdown-item preview-item">
+								<div class="preview-thumbnail">
+									<div class="preview-icon bg-success">
+										<i class="mdi mdi-calendar"></i>
+										
+									</div>
+								</div>
+								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+									<h6 class="preview-subject font-weight-normal mb-1"></h6>\${result[i].n_from}
+									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
+								</div>
+							</a>
+						<div class="dropdown-divider"></div>`;
+						
+				$('#noticeli').append(alarm);
+				}
+			}
+		});
+	}
 });
 
 // toast생성 및 추가
@@ -104,7 +155,7 @@ function onMessage(evt){
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li><a href="bTables">공지사항</a></li>
+						<li><a href="admBoard">공지사항</a></li>
 						<li><a href="qnaMain">Open Q&A</a></li>
 						<li class="menu-has-children"><a href="pmemberBest">파트너회원</a>
 							<ul>
@@ -124,11 +175,13 @@ function onMessage(evt){
 							<li class="menu-has-children"><a href="#">마이페이지</a>
 								<ul>
 									<li><a href="pmemberMyPage">내 프로필</a></li>
+									<li><a href="reservationSetting">예약일정 설정</a></li>
 									<li><a href="preservationSelect">예약 내역</a></li>
-									<li><a href="#">결제 내역</a></li>
-									<li><a href="#">상담 내역</a></li>
-									<li><a href="#">신고 내역</a></li>
-									<li><a href="#">회원탈퇴</a></li>
+									<li><a href="pMemDiaList">내 진료 내역</a></li>
+									<li><a href="pMembenefit">결제 내역</a></li>
+									<li><a href="pmemcounsel">상담 내역</a></li>
+									<li><a href="pmemreport">신고 내역</a></li>
+									<li><a href="pmdeleteForm">회원탈퇴</a></li>
 									<li><a href="logout">로그아웃</a></li>
 								</ul>
 							</li>
@@ -152,28 +205,25 @@ function onMessage(evt){
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-									<i class="mdi mdi-bell-outline"></i><span class="count-symbol bg-danger"></span>
+									<i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-									<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
-									
-									<c:forEach items="${noticeList }" var="notice">
-									<div class="dropdown-divider"></div>							
-									<a class="dropdown-item preview-item">
+									<h6 class="p-3 mb-0 text-white py-4">Notifications</h6>
+									<div class="dropdown-divider"></div>
+									<div id="noticeli"></div>				
+									<!-- <a class="dropdown-item preview-item">
 										<div class="preview-thumbnail">
 											<div class="preview-icon bg-success">
 												<i class="mdi mdi-calendar"></i>
 											</div>
 										</div>
 										<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-											<h6 class="preview-subject font-weight-normal mb-1">${notice.n_from }</h6>
-											<p class="text-gray ellipsis mb-0">${notice.content }</p>
+											<h6 class="preview-subject font-weight-normal mb-1"></h6>
+											<p class="text-gray ellipsis mb-0"></p>
 										</div>
-									</a>
-									
-									</c:forEach>
-									
+									</a> -->
 								<div class="dropdown-divider"></div>
+								
 								<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 							</div>
 						</li>

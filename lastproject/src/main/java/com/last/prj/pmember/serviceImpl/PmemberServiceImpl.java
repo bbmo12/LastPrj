@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.FfileVO;
 import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
@@ -16,11 +17,6 @@ import com.last.prj.pmember.service.TimeVO;
 public class PmemberServiceImpl implements PmemberService{
 	
 	@Autowired PmemberMapper map;
-
-	@Override
-	public PmemberVO getMember(String p_id) {
-		return map.getMember(p_id);
-	}
 	
 	@Override
 	public PmemberVO getPmemberinfo(String p_id) {
@@ -30,6 +26,16 @@ public class PmemberServiceImpl implements PmemberService{
 	@Override
 	public List<TimeVO> getTime(String p_id) {
 		return map.getTime(p_id);
+	}
+	
+	@Override
+	public List<FfileVO> getImage(String p_id) {
+		return map.getImage(p_id);
+	}
+
+	@Override
+	public List<FfileVO> getLicense(String p_id) {
+		return map.getLicense(p_id);
 	}
 	
 	@Override
@@ -77,8 +83,8 @@ public class PmemberServiceImpl implements PmemberService{
 	
 	//관리자
 	@Override
-	public List<PmemberVO> admPlistCode(int code) {
-		return map.admPlistCode(code);
+	public List<PmemberVO> admPlistCode(PmemberVO vo) {
+		return map.admPlistCode(vo);
 	}
 	//관리자
 	@Override
@@ -108,5 +114,33 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<PmemberVO> bestLikeList() {
 		return map.bestLikeList();
 	}
+
+	@Override
+	public List<PmemberVO> admPmemberPageList(Criteria cri) {
+		return  map.admPmemberPageList(cri);
+	}
+
+	@Override
+	public int pmemCount() {
+		return map.pmemCount();
+	}
+
+	@Override
+	public List<PmemberVO> admPmemberDate(String fromDate, String toDate) {
+		return map.admPmemberDate(fromDate, toDate);
+	}
+
+	@Override
+
+	public int admPlistCodeCount(PmemberVO vo) {
+		return map.admPlistCodeCount(vo);
+	}
+	
+	
+@Override
+	public int pmemberNullUpdate(String p_id) {
+		return map.pmemberNullUpdate(p_id);
+	}
+
 
 }

@@ -81,4 +81,37 @@
 		select case when count(m_id) = 1 then 0 else 1 end as m_id
 		from member where m_id = #{m_id}
 	</select>
+	
+	<!-- 일반회원 수 -->
+	<select id="memCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<!--서비스 가격 입력  -->
+	<insert id="servicepriceinsert" parameterType="com.last.prj.mem.service.PriceVO">
+		<selectKey keyProperty="price_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(PRICE_NO)+1,1) AS PRICE_NO FROM PRICE
+		</selectKey>
+		INSERT INTO PRICE(price_no, price, title, content, p_id) VALUES(#{price_no},#{price},#{title},#{content},#{p_id})
+	</insert>
+	
+	<!-- 진료 가능한 동물  -->
+	
+	<insert id="petcareinsert" parameterType="com.last.prj.mem.service.PetcareVO">
+		<selectKey keyProperty="care_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(CARE_NO)+1,1) AS CARE_NO FROM PETCARE
+		</selectKey>
+		INSERT INTO PETCARE(care_no, p_id, code) VALUES(#{care_no},#{p_id},#{code})
+	</insert>
+	
+	
+	
+	<insert id="otimeinsert" parameterType="com.last.prj.mem.service.TimeVO">
+		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
+		</selectKey>
+		insert into o_time(o_no, p_id, w_day, startime, endtime, n_content) values(#{o_no},#{p_id},#{w_day},#{starttime},#{endtime},#{n_content})
+	</insert>
+	
+	
 </mapper>

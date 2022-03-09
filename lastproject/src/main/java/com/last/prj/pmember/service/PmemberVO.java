@@ -31,7 +31,7 @@ public class PmemberVO {
 	private String career;			//대표경력
 	private String speciality;			//전문분야
 	private int rcom;				//추천
-	private int code;				//서비스 구분코드
+	private Integer code;				//서비스 구분코드
 	private int p_profile;			//프로필사진
 	private int p_license;			//경력사진
 	private int p_image;			
@@ -47,4 +47,6 @@ public class PmemberVO {
 
 	//관리자
 	private String f_content; //서비스 구분 코드 내용
+	private String fromDate;
+	private String toDate;
 }

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.chat.service.ChatRoomMapper">
+
+	<resultMap type="com.last.prj.chat.service.ChatRoomVO" id="ChatnMsg">
+		<result property="chat_id" column="chat_id"/>
+		<result property="m_id" column="m_id"/>
+		<result property="p_id" column="p_id"/>
+	
+		<collection property="messagevo" resultMap="msg"></collection>
+	</resultMap>
+
+	<resultMap type="com.last.prj.chat.service.MessageVO" id="msg">
+		<result property="msg_id" column="msg_id"/>
+		<result property="p_id" column="p_id"/>
+		<result property="m_id" column="msg_sender"/>
+		<result property="message_content" column="message_content"/>
+		<result property="msg_sender" column="msg_sender"/>
+		<result property="msg_receiver" column="msg_receiver"/>
+		<result property="msg_sendTime" column="msg_sendTime"/>
+		<result property="unReadCount" column="unReadCount"/>		
+	</resultMap>
+	
+	<!-- 채팅방 생성 -->
+	<insert id="createRoom">
+		insert into CHATROOM (chat_id, p_id, m_id)
+		values(c_no.nextval, #{p_id} , #{m_id} )
+	</insert>
+
+	<!-- 기존 채팅방 있는지 여부 -->
+	<select id="isRoom" resultType="com.last.prj.chat.service.ChatRoomVO">
+		select * from CHATROOM WHERE p_id = #{p_id} and
+		m_id = #{m_id}
+	</select>
+
+	<!-- 메시지 전송 시 insert-->
+	<insert id="insertMessage">
+		insert into MESSAGE (msg_id, msg_sender, msg_receiver, message_content,
+		chat_id, m_id , p_id)
+		values (msg_no.nextval, #{msg_sender}, #{msg_receiver}, #{message_content} ,
+		#{chat_id} , #{m_id}, #{p_id})
+	</insert>
+
+	<!-- 일반 회원 정보 -->
+	<select id="memInfo" resultType="com.last.prj.chat.service.MemVO">
+		SELECT *
+		FROM member
+		WHERE m_id = #{m_id}
+	</select>
+	
+	<!-- 파트너 회원 정보 -->
+	<select id="pmemInfo" resultType="com.last.prj.chat.service.PmemVO">
+		SELECT *
+		FROM p_member
+		WHERE p_id = #{p_id}
+	</select>
+	
+	<!-- <select id="getPartner" resultType="MessageVO">
+		SELECT USER_user_id from MESSAGE where TUTOR_USER_user_id =
+		#{TUTOR_USER_user_id} and CLASS_class_id = #{CLASS_class_id}
+	</select>
+	
+	<select id="getProfile" resultType="String">
+		select user_profileImagePath from USER WHERE user_id = #{user_id}
+	</select>
+
+	<select id="getName" resultType="String">
+		select user_name from USER where user_id = #{user_id}
+	</select> -->
+
+	<!-- 채팅방별 채팅 메시지 내역 -->
+	<select id="getMessageList" resultType="com.last.prj.chat.service.MessageVO">
+		select *
+		from MESSAGE
+		where chat_id = #{chat_id}
+	</select>
+
+	<!-- 일반 멤버 채팅 내역 + 최근 메시지 1건-->
+	<select id="getRoomList" resultType="com.last.prj.chat.service.ChatRoomVO">
+		select * 
+		from CHATROOM
+		where m_id = #{m_id}
+	</select>
+	
+	<!-- 파트너 멤버 채팅 내역 -->
+	<select id="getRoomList2" resultType="com.last.prj.chat.service.ChatRoomVO">
+		select * 
+		from CHATROOM 
+		where p_id = #{p_id}
+	</select>
+
+	<!-- 채팅별 최근 메시지 1건 -->
+	<select id="getRecentMessage" resultType="com.last.prj.chat.service.MessageVO">
+		SELECT * 
+		FROM
+		(SELECT *
+		FROM message
+		WHERE chat_id = #{chat_id} 
+		ORDER BY msg_id desc)
+		<![CDATA[WHERE ROWNUM <= 1]]>
+	</select>
+
+	<!-- <select id="getTutorId" resultType="String">
+		select tutor_id from TUTOR where USER_user_id = #{USER_user_id}
+	</select>
+
+	<update id="updateReadTime">
+		update MESSAGE set message_readTime = NOW() where TUTOR_USER_user_id =
+		#{TUTOR_USER_user_id} AND CLASS_class_id = #{CLASS_class_id} AND
+		message_readTime = message_sendTime and message_sender =
+		TUTOR_USER_user_id and USER_user_id = #{USER_user_id};
+	</update>
+	<update id="updateReadTimeTutor">
+		update MESSAGE set message_readTime = NOW() where TUTOR_USER_user_id =
+		#{TUTOR_USER_user_id} AND CLASS_class_id = #{CLASS_class_id} AND
+		message_readTime = message_sendTime and message_sender = USER_user_id
+		and USER_user_id = #{USER_user_id};
+
+	</update> -->
+
+
+<!-- 	<select id="getUnReadCount" resultType="int">
+
+		select count(*) from MESSAGE where USER_user_id = #{USER_user_id} and
+		TUTOR_USER_user_id = #{TUTOR_USER_user_id} AND CLASS_class_id =
+		#{CLASS_class_id} AND message_readTime = message_sendTime and
+		message_sender = TUTOR_USER_user_id;
+	</select>
+	
+	
+	<select id="getUnReadCountTutor" resultType="int">
+
+		select count(*) from MESSAGE where TUTOR_USER_user_id =#{TUTOR_USER_user_id}
+		and CLASS_class_id = #{CLASS_class_id} AND message_readTime =
+		message_sendTime and message_sender = USER_user_id and USER_user_id =
+		#{USER_user_id};
+
+	</select> -->
+
+<!-- 	<select id="getAllCount" resultType="int">
+		select count(*) 
+		from MESSAGE 
+		WHERE (TUTOR_USER_user_id = #{TUTOR_USER_user_id} 
+		and message_readTime = message_sendTime 
+		and message_sender != #{USER_user_id}) 
+		or (USER_user_id = #{USER_user_id}
+		and message_readTime = message_sendTime 
+		and message_sender != #{USER_user_id});
+
+	</select> -->
+
+
+</mapper>

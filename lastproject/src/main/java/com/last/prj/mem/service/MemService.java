@@ -33,5 +33,17 @@ public interface MemService {
 	
 	//회원가입 아이디 중복체크
 	boolean isIdCheck(String m_id);
+
+	//일반 회원 수
+	int memCount();
+	
+	//서비스 가격 입력
+	int servicepriceinsert(PriceVO price);
+	
+	//진료 가능한 동물
+	int petcareinsert(PetcareVO petcare);
+	
+	
+	public int otimeinsert(TimeVO time);
 	
 }

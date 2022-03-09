@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.last.prj.mem.service.MemMapper;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
+import com.last.prj.mem.service.PetcareVO;
+import com.last.prj.mem.service.PriceVO;
+import com.last.prj.mem.service.TimeVO;
 
 
 @Repository("memDao")
@@ -63,6 +66,29 @@ public class MemServiceImpl implements MemService {
 
 		return map.isIdCheck(m_id);
 	}
+
+	@Override
+	public int memCount() {
+		return map.memCount();
+	}
+
+	@Override
+	public int servicepriceinsert(PriceVO price) {
+		return map.servicepriceinsert(price);
+	}
+
+	@Override
+	public int petcareinsert(PetcareVO petcare) {
+		// TODO Auto-generated method stub
+		return map.petcareinsert(petcare);
+	}
+
+	@Override
+	public int otimeinsert(TimeVO time) {
+		return map.otimeinsert(time);
+	}
+
+
 
 	
 

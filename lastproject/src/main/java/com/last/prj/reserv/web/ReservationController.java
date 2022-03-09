@@ -16,20 +16,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.mem.service.MemService;
+import com.last.prj.mem.service.PmemService;
 import com.last.prj.pay.service.PayService;
 import com.last.prj.pay.service.PayVO;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pet.service.PetVO;
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
+import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.reserv.service.PreservationlistService;
 import com.last.prj.reserv.service.ReservCountService;
 import com.last.prj.reserv.service.ReservCountVO;
+import com.last.prj.reserv.service.ReservationMapper;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
 import com.last.prj.reserv.service.PreservationVO;
+import com.last.prj.reserv.service.PreservationlistMapper;
 
 @Controller
 public class ReservationController {
@@ -57,25 +63,30 @@ public class ReservationController {
 	
 	@Autowired
 	private MemService memDao;
+	@Autowired
+	private ReservationMapper mapper;
+	
+	@Autowired
+	private PreservationlistMapper pmapper;
 	
 	@Autowired
 	private PayService payDao;
 	
+	
+	
 	//일반회원 예약페이지
 	@RequestMapping("/reservMember")
-	public String reservation(Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo) {
+	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo) {
 		
 		//로그인 세션값
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		System.out.println("m_id : " +m_id);
-		String p_id = (String) session.getAttribute("pId");
-		System.out.println("p_id : " + p_id);
-		  if(m_id==null || m_id =="") {
-			  m_id = "test1@a.com"; 
-		  } if(p_id == null || p_id== "") {
-			  p_id= "kim1@a.com"; 
-		  }
+		/*
+		 * String p_id = (String) session.getAttribute("pId");
+		 * System.out.println("p_id : " + p_id); if(m_id==null || m_id =="") { m_id =
+		 * "test1@a.com"; } if(p_id == null || p_id== "") { p_id= "kim1@a.com"; }
+		 */
 		co.setP_id(p_id);
 		po.setM_id(m_id);
 		pmo.setP_id(p_id);
@@ -93,7 +104,6 @@ public class ReservationController {
 		model.addAttribute("petList",petList);
 		model.addAttribute("petCode",petCode);
 		model.addAttribute("reservset",list);
-		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id));
 		//해당 파트너회원 정보조회
 		model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
 		System.out.println(list);
@@ -103,35 +113,45 @@ public class ReservationController {
 	
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
-	public String reservationSetting(Model model,PreservationVO pres) {
+	public String reservationSetting(Model model,PreservationVO pres,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		model.addAttribute("p_id",p_id);
 		return "reservation/resvSetting";
 	}
 	
 	
 	// 일반 예약조회
 	@RequestMapping("/reservationSelect")
-	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request) {
+	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
-		System.out.println("일반예약 아이디세션값 : " + m_id);
+		cri.setM_id(m_id);
+		cri.setAmount(5);
+		PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+
 		
+		model.addAttribute("member",memDao.memberSearch(m_id));
+		model.addAttribute("page", paging);// 페이징 수
+		model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
 		vo.setM_id(m_id);
-		List<ReservationVO> list = reservationDao.reservationSelect(vo);
-		System.out.println(list);
-		model.addAttribute("reservation", list);
 		return "reservation/reservation";
 	}
 
 	// 파트너 예약조회
 	@RequestMapping("/preservationSelect")
-	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo) {
+	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo,Criteria cri) {
 		HttpSession session = request.getSession();
 		String p_id = (String) session.getAttribute("pId");
 		vo.setP_id(p_id);
-		List<PreservationVO> list = pReservationDao.preservationlist(vo);
-		model.addAttribute("preservation", list);
-		System.out.println(list);
+		cri.setP_id(p_id);
+		cri.setAmount(15);
+		System.out.println("cri=========="+cri);
+		PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
 		
+		model.addAttribute("page", paging);// 페이징 수
+		model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
+		model.addAttribute("preservation", pmapper.preservationPageList(cri));
 		return "reservation/preservation";
 	}
 	
@@ -141,6 +161,7 @@ public class ReservationController {
 	  public String okUpdate(@RequestParam("rno") int rno) {
 		  System.out.println(rno);
 		  reservationDao.okUpdate(rno);
+		  
 		  return "ok";
 	  }
 	  
@@ -180,7 +201,7 @@ public class ReservationController {
 	  @ResponseBody
 	  public int reservInsert(ReservationVO vo,ReservCountVO co,ServiceVO so,PmemberVO po) {
 		  
-		  int price = 5000;
+		  int price = 20000;
 		  String content;
 		  String enddate = "임시";
 		  reservationDao.reservInsert(vo);
@@ -208,6 +229,12 @@ public class ReservationController {
 		  serviceDao.ServiceInsert(so);
 		  reservCountDao.reservCountInsert(co);
 		  return 1;
+	  }
+	  
+	  @PostMapping("servicePay")
+	  @ResponseBody
+	  public ServiceVO servicePay(int r_no) {
+		  return serviceDao.serviceSelect(r_no);
 	  }
 	  
 	  

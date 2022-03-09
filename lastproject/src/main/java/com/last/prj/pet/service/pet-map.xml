@@ -44,4 +44,11 @@
 	
 	
 	</insert>
+		
+	
+	<!-- 펫 수 -->
+	<select id="petCount" resultType="int">
+		SELECT COUNT(*) FROM PET
+	</select>
+	
 </mapper>

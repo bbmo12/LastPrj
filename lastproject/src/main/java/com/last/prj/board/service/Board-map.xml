@@ -62,6 +62,11 @@
 		UPDATE BOARD SET HIT
 		= HIT + 1 WHERE B_NO = #{b_no}
 	</update> -->
-
-
+	
+	<select id="boardSearch" resultType="com.last.prj.board.service.BoardVO">
+		SELECT * FROM BOARD
+		<if test="key == 'all'"> WHERE UPPER(TITLE) LIKE '%'|| UPPER(#{data}) ||'%' AND UPPER(CONTENT) LIKE '%'|| UPPER(#{data}) ||'%' </if>
+		<if test="key == 'title'"> WHERE UPPER(TITLE) LIKE '%'|| #{data} ||'%' </if>
+		<if test="key == 'content'"> WHERE UPPER(CONTENT) LIKE '%'|| #{data} ||'%' </if>
+	</select>
 </mapper>

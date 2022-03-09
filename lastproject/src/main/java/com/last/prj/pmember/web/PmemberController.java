@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.last.prj.mem.service.MemVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
@@ -39,8 +40,6 @@ public class PmemberController {
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
-//		String json = new Gson().toJson(pMemberDao.memberList(code));
-//		model.addAttribute("babo", json);
 		cri.setAmount(12);
 		PagingVO paging = new PagingVO(cri, mapper.memberPage(cri));
 		
@@ -55,6 +54,8 @@ public class PmemberController {
 		// 파트너 정보
 		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
@@ -122,11 +123,6 @@ public class PmemberController {
 		return "redirect:/pmemberMyPage";
 	}
 	
-	@RequestMapping("pmemberLike")//추천수
-	@ResponseBody
-	public void pmemberLike(@RequestParam("p_id")String p_id, PmemberVO pmember) {
-		pMemberDao.updateLike(p_id);
-	}
 	@RequestMapping("pmemberBest")//베스트순위출력
 	public String pmemberBest(PmemberVO pmember, Model model) {
 		model.addAttribute("pmember", pMemberDao.bestLike(pmember));
@@ -142,5 +138,24 @@ public class PmemberController {
 		reviewDao.servicereview(review);
 		return 1;
 	}
+	//회원탈퇴 페이지로 이동
+	@RequestMapping("pmdeleteForm")
+	public String mdeleteForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		return "mypage/pmemDeleteForm";
+	}
+	
+	//일반회원 회원탈퇴
+	@RequestMapping("pmdelete")
+	public String mdelete(HttpServletRequest request, MemVO member) {
+		HttpSession session = request.getSession();
+		String p_id = (String) session.getAttribute("pId");
+		pMemberDao.pmemberNullUpdate(p_id);
+		session.invalidate();
+		return  "redirect:home";
+	}
+	
+	
 }
 

@@ -199,8 +199,8 @@
 				return false;
 			}
 			/* 	
-			var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
-			        	         
+			var pwdCheck = /^[A-Za-z0-9]{4,12}$/;
+				         
 			if(!pwdCheck.test(updatePage.password.value)){
 				alert("비밀번호는 영문자+숫자+특수문자 조합으로 8이상 사용해야 합니다.");
 				updatePage.password.focus(); 
@@ -227,6 +227,7 @@
 				updatePage.address1.focus();
 				return false;
 			}
+		
 		}
 	</script>
 </body>

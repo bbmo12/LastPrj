@@ -13,6 +13,31 @@
 		P.M_ID = #{m_id}
 	</select>
 	
+	<select id="serviceSelect" parameterType="int" resultType="com.last.prj.service.service.ServiceVO">
+		SELECT *
+		FROM SERVICE
+		WHERE R_NO= #{r_no}
+	</select>
+	
+	
+	<select id="pMembenefit" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
+		SELECT S.CONTENT,S.STARTDATE,S.ENDDATE,S.PRICE,M_ID 
+		FROM SERVICE S,RESERVATION R ,PET P
+		WHERE S.R_NO=R.R_NO AND P.PET_NO=R.PET_NO AND S.P_ID = #{p_id}
+	</select>
+	
+	<select id="totalPrice" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
+		SELECT SUM(PRICE) AS TOTAL_PRICE
+		FROM SERVICE
+		WHERE P_ID = #{p_id}
+	</select>
+	
+	<update id="ServiceUpdate">
+		UPDATE SERVICE
+		SET ENDDATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+        WHERE r_no = #{r_no}
+	</update>
+	
 	<insert id="ServiceInsert" parameterType="com.last.prj.service.service.ServiceVO">
 		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
 			 SELECT NVL(MAX(R_NO) , 1) AS R_NO FROM RESERVATION

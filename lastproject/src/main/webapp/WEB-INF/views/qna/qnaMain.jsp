@@ -105,6 +105,10 @@ hr {
 	margin-bottom: 40px;
 	text-align: justify
 }
+
+.searchSelect{
+	color : black;
+}
 </style>
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

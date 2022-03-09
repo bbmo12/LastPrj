@@ -30,10 +30,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.last.prj.ffile.web.FfileUtil;
+import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
+import com.last.prj.mem.service.PetcareVO;
 import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PmemVO;
+import com.last.prj.mem.service.PriceVO;
+import com.last.prj.mem.service.TimeVO;
 
 @Controller
 public class MemController {
@@ -46,6 +50,7 @@ public class MemController {
 
 	@Autowired
 	private FfileUtil ffileutil;
+	
 	
 	@Autowired
 	ServletContext sc;
@@ -67,7 +72,6 @@ public class MemController {
 		memDao.memberDelete(m_id);
 		session.invalidate();
 		return  "redirect:home";
-		
 	}
 	
 	// 일반회원 정보수정
@@ -144,7 +148,11 @@ public class MemController {
 			session.setAttribute("member", member);
 			session.setAttribute("mId", member.getM_id());
 			session.setAttribute("password", member.getPassword());
-
+			
+			LoginVO login = new LoginVO();
+			login.setId(member.getM_id());
+			session.setAttribute("loginInfo", login);
+			
 		} else {
 			return "member/loginForm";
 		}
@@ -166,6 +174,9 @@ public class MemController {
 			session.setAttribute("pmember", pmember);
 			session.setAttribute("pId", pmember.getP_id());
 			session.setAttribute("password", pmember.getPassword());
+			LoginVO login = new LoginVO();
+			login.setId(pmember.getP_id());
+			session.setAttribute("loginInfo", login);
 		} else {
 			return "member/loginForm";
 		}
@@ -223,7 +234,7 @@ public class MemController {
 	  }
   
 	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
-	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember) {
+	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -250,20 +261,25 @@ public class MemController {
 			}
 		}
 		pmemDao.pmemberInsert1(pmember);
+		model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		return "member/pjoinForm2";
 	}
 
 	  @RequestMapping("/pjoin_2") //파트너회원 회원가입 2차
 	  public String pjoin_2(PmemVO pmember, Model model) {
+		  
+		  
 		  pmemDao.pmemberInsert2(pmember);
 		  model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		  return "member/pjoinForm3";
 	  }
 	  
 	  @RequestMapping("/pjoin_3") //파트너회원 회원가입 3차
-	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2, HttpServletRequest request) {
-		  System.out.println("p_id3:"+p_id);
+	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PriceVO price, PetcareVO petcare) {
+		 System.out.println("여기 파트너회원가입 3차");
+		 System.out.println("p_id3:"+p_id);
 		  
+		 
 		  
 		 // FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
 		  
@@ -273,8 +289,24 @@ public class MemController {
 		  
 		  int p_image = ffileutil.multiFileUpload(multiFileList2, request);
 		  System.out.println("p_image = " + p_image);
+		 
+		  pmemDao.pmemberInsert3(p_id, p_license, p_image); //파일다중업로드
 		  
-		  pmemDao.pmemberInsert3(p_id, p_license, p_image);
+		  System.out.println("여기 펫케어");
+		  for(int i=0; i<petcare.getPetcareVOList().size() ; i++) {
+			  memDao.petcareinsert(petcare);
+		  }
+		  
+		  System.out.println("여기 가격");
+		  for(int i=0 ; i<price.getPriceVOList().size(); i++) {
+			  memDao.servicepriceinsert(price);
+		  }
+		  
+		  System.out.println("여기 시간");
+		  for(int i=0; i<time.getTimeListVO().size() ; i++) {
+			  memDao.otimeinsert(time);
+		  }
+		 
 		  
 		  return "member/joinResult";
 	  }
@@ -453,4 +485,5 @@ public class MemController {
 	      return access_Token;
 	   }
 
+	  
 }
