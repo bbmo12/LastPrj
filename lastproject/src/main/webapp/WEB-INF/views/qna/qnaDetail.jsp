@@ -235,7 +235,7 @@
 									<c:forEach items="${qnaDetail.tagList }" var="hash">
 										<ul class="tagList">
 											<li class="tagli"><a
-												href="tagSearch?t_name=${hash.t_name }">${hash.t_name}</a></li>
+												href="tagSearch?t_name=${hash.t_name }"><button class="genric-btn success circle">${hash.t_name}</button></a></li>
 										</ul>
 									</c:forEach>
 								</div>

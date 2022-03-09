@@ -73,7 +73,7 @@
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
 
-							<a href="EnterChat?m_id=${mId }&p_id=${pmemdetail.p_id}">
+							<a href="EnterCs?m_id=${mId }&p_id=${pmemdetail.p_id}">
 							<button class="btn btn-primary">상담하기</button></a>
 
 							<form action="reservMember" name="reservForm" method="POST">
@@ -205,96 +205,7 @@
 		</div>
 	</section>
 	<script>
-		//추천버튼 
-		function likeHit(p_id) {
-			var p_id = p_id;
-			var hit = $('#changeHit');
-			if(hit.val() == "N"){
-				$.ajax({
-					type: "POST",
-					url: "pmemberLike",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('추천!');
-						hit.val("Y");
-					}
-				});			
-			} else if(hit.val() == "Y"){			
-				$.ajax({
-					type: "POST",
-					url: "deleteLike",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('추천취소');
-						hit.val("N");
-					}
-				});		
-			}	
-		}
-		//팔로우
-		function follow(p_id) {
-			var p_id = p_id;
-			var change = $('#changeFollow');
-			if (change.val() == "N") {
-				$.ajax({
-					type: "POST",
-					url: "insertFollow",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('팔로우 추가!');
-						change.val("Y");
-					}
-				});
-			} else if (change.val() == "Y") {
-				$.ajax({
-					type: "POST",
-					url: "deleteFollow",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('팔로우취소!');
-						change.val("N");
-					}
-				});
-			}
-		}
-		//별점
-		$(function () {
-			$('.star').each(function (index, item) {
-				$(this).raty({
-					score: $(this).find('.rating').val(),
-					path: "resources/star",
-					width: 200,
-					readOnly: true
-				});
-			})
-		});
-		/*스크롤 */
-		$(function () {
-			$('.comment-list').slice(0, 2).show();
-			$('#load').click(function (e) {
-				e.preventDefault();
-				$('.comment-list:hidden').slice(0, 2).show();
-				if ($('.comment-list:hidden').length == 0) {
-					$('#load').fadeOut('fast');
-					$('#back').fadeIn('slow');
-				}
-			});
-		});
 
-		$('#back').click(function () {
-			$('body,html').animate({
-				scrollTop: 0
-			}, 600);
-			return false;
-		});
 	</script>
 </body>
 

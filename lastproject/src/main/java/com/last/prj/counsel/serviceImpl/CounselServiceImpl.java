@@ -41,5 +41,35 @@ public class CounselServiceImpl implements CounselService {
 		return map.myCounselList(cri);
 	}
 
+	@Override
+	public List<CounselVO> csDetail(int p_no) {
+		// TODO Auto-generated method stub
+		return map.csDetail(p_no);
+	}
+
+	@Override
+	public int newCs(CounselVO cs) {
+		// TODO Auto-generated method stub
+		return map.newCs(cs);
+	}
+
+	@Override
+	public int newCsAns(CounselVO cs) {
+		// TODO Auto-generated method stub
+		return map.newCsAns(cs);
+	}
+
+	@Override
+	public int CodeUdt(int c_no) {
+		// TODO Auto-generated method stub
+		return map.CodeUdt(c_no);
+	}
+
+	@Override
+	public int isExist(String m_id, String p_id) {
+		// TODO Auto-generated method stub
+		return map.isExist(m_id, p_id);
+	}
+
 	
 }
