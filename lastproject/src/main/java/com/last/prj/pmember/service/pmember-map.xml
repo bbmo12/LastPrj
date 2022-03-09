@@ -135,6 +135,10 @@
 	<update id="updateLike" parameterType="String">
 		UPDATE P_MEMBER SET RCOM = RCOM+1 WHERE P_ID = #{p_id}
 	</update>
+	<!-- 추천취소시 -->
+	<update id="updateCancel" parameterType="String">
+		UPDATE P_MEMBER SET RCOM = RCOM-1 WHERE P_ID = #{p_id}
+	</update>
 	
 	<!-- 아이디로 정보 조회 -->
 	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
