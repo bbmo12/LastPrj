@@ -109,7 +109,7 @@
 	<select id="pmemReportList" resultType="com.last.prj.report.service.ReportVO">
 		 SELECT *
       		FROM ( SELECT ROWNUM RN, A.*
-     			  FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR
+     			  FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR, STATE
       				    FROM REPORT
        				   WHERE REPORTER = #{reporter}	) A)
       	    WHERE RN BETWEEN  (#{pageNum}-1)*#{amount}+1

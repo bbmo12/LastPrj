@@ -9,5 +9,9 @@
 	<delete id="deleteLike" parameterType="com.last.prj.likehit.service.LikehitVO">
 		DELETE FROM LIKEHIT WHERE M_ID = #{m_id} AND P_ID = #{p_id}
 	</delete>
+	<!-- 추천중복방지select -->
+	<select id="likeCheck" resultType="int" parameterType="com.last.prj.likehit.service.LikehitVO">
+		SELECT COUNT(*) FROM LIKEHIT WHERE M_ID = #{m_id} AND P_ID = #{p_id}
+	</select>
 
 </mapper>

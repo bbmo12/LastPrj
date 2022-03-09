@@ -194,6 +194,7 @@ public class ReservationController {
 	  @PostMapping("/reservcount")
 	  @ResponseBody
 	  public ReservCountVO reservCountSelect(ReservCountVO vo) {
+		  System.out.println("====================================예약 체크" + reservCountDao.reservCountSelect(vo));
 		  return reservCountDao.reservCountSelect(vo);
 	  }
 	  //예약등록

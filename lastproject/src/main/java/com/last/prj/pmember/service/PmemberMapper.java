@@ -18,6 +18,7 @@ public interface PmemberMapper {
 	public int pmemberTime(TimeVO time); //otime 수정
 	public int deleteTime(String p_id); //otime 삭제
 	public int updateLike(String p_id); //파트너회원 추천
+	public int updateCancel(String p_id); //추천취소 
 	public List<PmemberVO> bestLike(PmemberVO pmember);//베스트순위
 	public List<ReviewVO> ServiceReviewList(); // 홈화면 리뷰
 	public List<PmemberVO> bestLikeList();
