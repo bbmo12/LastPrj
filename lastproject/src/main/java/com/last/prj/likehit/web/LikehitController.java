@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.last.prj.fallow.service.FollowVO;
 import com.last.prj.likehit.service.LikehitService;
 import com.last.prj.likehit.service.LikehitVO;
 import com.last.prj.pmember.service.PmemberService;
@@ -24,19 +23,20 @@ public class LikehitController {
 	
 	@RequestMapping("pmemberLike")//추천수
 	@ResponseBody
-	public void pmemberLike(@RequestParam("p_id")String p_id, LikehitVO hit, HttpServletRequest request) {
+	public int pmemberLike(@RequestParam("p_id")String p_id, LikehitVO hit, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		hit.setM_id(m_id);
-		pMemberDao.updateLike(p_id);
-		likehitDao.insertLike(hit);
+		
+		int likeCheck = likehitDao.likeCheck(hit);
+		if(likeCheck == 0) {
+			pMemberDao.updateLike(p_id);
+			likehitDao.insertLike(hit);
+		} else if(likeCheck == 1) {
+			pMemberDao.updateCancel(p_id);
+			likehitDao.deleteLike(hit);
+		}
+		return likeCheck;
 	}
-	@RequestMapping("deleteLike")//추천취소
-	@ResponseBody
-	public void deleteLike(LikehitVO hit, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		hit.setM_id(m_id);
-		likehitDao.deleteLike(hit);
-	}
+
 }

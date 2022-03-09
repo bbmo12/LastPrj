@@ -72,6 +72,12 @@ public class PmemberServiceImpl implements PmemberService{
 	public int updateLike(String p_id) {		
 		return map.updateLike(p_id);
 	}
+	
+	@Override
+	public int updateCancel(String p_id) {
+		return map.updateCancel(p_id);
+	}
+	
 	@Override
 	public List<PmemberVO> bestLike(PmemberVO pmember) {
 		return map.bestLike(pmember);
@@ -137,7 +143,7 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 	
 	
-@Override
+	@Override
 	public int pmemberNullUpdate(String p_id) {
 		return map.pmemberNullUpdate(p_id);
 	}
