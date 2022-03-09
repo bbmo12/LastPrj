@@ -247,7 +247,6 @@
    function reviewWrite(event){
 	   wow = $(event.target).parent().parent().children().first().text()
 	$("#rev_no").val(wow)
-	   console.log("일단여기")
 	   console.log($(event.target).parent().parent().children().first().text());
 	      var body = document.querySelector('body');
 	      var modal = document.querySelector('.modal');	      

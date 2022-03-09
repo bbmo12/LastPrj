@@ -35,7 +35,7 @@
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 <link rel="stylesheet" href="resources/reviewstar/fontawesome-stars.css">
-<script type="text/javascript" src="resources/reviewstar/jquery.barrating.min.js"></script>
+<script type="text/javascript" src="resources/reviewsstar/jquery.barrating.min.js"></script>
 
 
 <!-- admin css -->
