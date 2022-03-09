@@ -107,11 +107,14 @@
     }
 
     .badge {
-        border-radius: 0;
         font-size: 12px;
         line-height: 1;
         padding: .375rem .5625rem;
-        font-weight: normal
+        font-weight: normal;     
+    }
+    .badge-info{
+        background-color: cornflowerblue;
+        border: none;
     }
 </style>
 
