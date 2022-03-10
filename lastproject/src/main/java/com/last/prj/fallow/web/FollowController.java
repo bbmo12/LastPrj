@@ -41,5 +41,4 @@ public class FollowController {
 		}
 		return followCheck;
 	}
-
 }

@@ -230,7 +230,7 @@ public class MemController {
 	  
 	  memDao.memberInsert(member);	 
 	  
-	  return "home/home";
+	  return "redirect:home";
 	  }
   
 	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
