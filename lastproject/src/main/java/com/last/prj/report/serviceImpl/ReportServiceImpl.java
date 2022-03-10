@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
@@ -82,5 +82,16 @@ public class ReportServiceImpl implements ReportService {
 	public List<ReportVO> pmemReportList(Criteria cri) {
 		return map.pmemReportList(cri);
 	}
+
+	@Override
+	public int admRlistCodeCount(ReportVO vo) {
+		return map.admRlistCodeCount(vo);
+	}
+
+	@Override
+	public List<ReviewVO> admRlistCode(ReportVO vo) {
+		return map.admRlistCode(vo);
+	}
+
 
 }

@@ -87,15 +87,9 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.deleteTime(p_id);
 	}
 	
-	//관리자
 	@Override
 	public List<PmemberVO> admPlistCode(PmemberVO vo) {
 		return map.admPlistCode(vo);
-	}
-	//관리자
-	@Override
-	public List<PmemberVO> admPlist() {
-		return map.admPlist();
 	}
 
 
@@ -106,10 +100,6 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.PmemberOne(p_id);
 	}
 
-	@Override
-	public List<PmemberVO> admPstartDateList() {
-		return map.admPstartDateList();
-	}
 
 	@Override
 	public List<ReviewVO> ServiceReviewList() {
@@ -121,20 +111,13 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.bestLikeList();
 	}
 
-	@Override
-	public List<PmemberVO> admPmemberPageList(Criteria cri) {
-		return  map.admPmemberPageList(cri);
-	}
+
 
 	@Override
 	public int pmemCount() {
 		return map.pmemCount();
 	}
 
-	@Override
-	public List<PmemberVO> admPmemberDate(String fromDate, String toDate) {
-		return map.admPmemberDate(fromDate, toDate);
-	}
 
 	@Override
 
