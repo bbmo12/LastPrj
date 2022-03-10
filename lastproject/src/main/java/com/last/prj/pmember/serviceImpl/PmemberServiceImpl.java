@@ -135,4 +135,9 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.pmemberNullUpdate(p_id);
 	}
 
+	@Override
+	public int pmemberJoinCancel(String p_id) {
+		return map.pmemberJoinCancel(p_id);
+	}
+
 }

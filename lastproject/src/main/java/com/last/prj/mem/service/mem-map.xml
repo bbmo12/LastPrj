@@ -110,7 +110,7 @@
 		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
 		</selectKey>
-		insert into o_time(o_no, p_id, w_day, startime, endtime, n_content) values(#{o_no},#{p_id},#{w_day},#{starttime},#{endtime},#{n_content})
+		insert into o_time(o_no, p_id, w_day, starttime, endtime, n_content) values(#{o_no},#{p_id},#{w_day},#{starttime},#{endtime},#{n_content})
 	</insert>
 	
 	

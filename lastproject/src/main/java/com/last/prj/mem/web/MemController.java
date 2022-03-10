@@ -309,6 +309,12 @@ public class MemController {
 		  
 		  return "member/joinResult";
 	  }
+	  @PostMapping("addO_Time")
+	  @ResponseBody
+	  public int addO_Time(TimeVO vo) {
+		  memDao.otimeinsert(vo);
+		  return 1;
+	  }
 
 	  //아이디 중복체크
 	@PostMapping("ajaxIsIdCheck")
