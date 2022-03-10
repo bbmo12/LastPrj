@@ -156,6 +156,14 @@ public class PmemberController {
 		return  "redirect:home";
 	}
 	
+	//파트너회원 가입취소
+	@PostMapping("joinCancel")
+	@ResponseBody
+	public int joinCancel(@RequestParam("p_id") String p_id) {
+		pMemberDao.pmemberJoinCancel(p_id);
+		return 1;
+	}
+	
 	
 }
 
