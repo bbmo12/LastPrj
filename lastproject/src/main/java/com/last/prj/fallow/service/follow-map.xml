@@ -15,4 +15,8 @@
 	<delete id="followDelete" parameterType="com.last.prj.fallow.service.FollowVO">
 	 	DELETE FROM FOLLOW WHERE M_ID = #{m_id} and p_id= #{p_id}
 	</delete>
+	<!-- 팔로우 중복체크 -->
+	<select id="followCheck" resultType="int" parameterType="com.last.prj.fallow.service.FollowVO">
+		SELECT COUNT(*) FROM FOLLOW WHERE M_ID = #{m_id} AND P_ID = #{p_id}
+	</select>
 </mapper>

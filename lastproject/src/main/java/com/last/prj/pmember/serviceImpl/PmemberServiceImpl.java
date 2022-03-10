@@ -72,6 +72,12 @@ public class PmemberServiceImpl implements PmemberService{
 	public int updateLike(String p_id) {		
 		return map.updateLike(p_id);
 	}
+	
+	@Override
+	public int updateCancel(String p_id) {
+		return map.updateCancel(p_id);
+	}
+	
 	@Override
 	public List<PmemberVO> bestLike(PmemberVO pmember) {
 		return map.bestLike(pmember);
@@ -83,8 +89,8 @@ public class PmemberServiceImpl implements PmemberService{
 	
 	//관리자
 	@Override
-	public List<PmemberVO> admPlistCode(int code) {
-		return map.admPlistCode(code);
+	public List<PmemberVO> admPlistCode(PmemberVO vo) {
+		return map.admPlistCode(vo);
 	}
 	//관리자
 	@Override
@@ -131,13 +137,22 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
+
+	public int admPlistCodeCount(PmemberVO vo) {
+		return map.admPlistCodeCount(vo);
+	}
+	
+	
+	@Override
 	public int pmemberNullUpdate(String p_id) {
 		return map.pmemberNullUpdate(p_id);
 	}
+
 
 	@Override
 	public int pmemberJoinCancel(String p_id) {
 		return map.pmemberJoinCancel(p_id);
 	}
+
 
 }

@@ -63,17 +63,18 @@
 							<img alt="" src="resources/upload/follow.png" id="follow"
 								onclick="follow('${pmemdetail.p_id}')"
 								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
-							<input type="hidden" value="N" id="changeFollow">
 							<h3 style="position: relative; top: -15px; right: 10px;">${pmemdetail.w_name}</h3>
 							<img alt="" src="resources/upload/rec.png" id="recommend"
 								onclick="likeHit(`${pmemdetail.p_id}`)"
 								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
-								<input type="hidden" value="N" id="changeHit">
+							<input type="hidden" value="N" id="changeHit">
 							<div class="br" style="margin-top: -45px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-							<a href="chatMessage?m_id=${mId }&p_id=${pmemdetail.p_id}">
-								<button class="btn btn-primary">상담하기</button></a>
+
+							<a href="EnterCs?m_id=${mId }&p_id=${pmemdetail.p_id}">
+							<button class="btn btn-primary">상담하기</button></a>
+
 							<form action="reservMember" name="reservForm" method="POST">
 								<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
 								<button type="submit" class="btn btn-primary">예약하기</button>
@@ -203,65 +204,61 @@
 		</div>
 	</section>
 	<script>
+
+
 		//추천버튼 
 		function likeHit(p_id) {
 			var p_id = p_id;
-			var hit = $('#changeHit');
-			if(hit.val() == "N"){
-				$.ajax({
-					type: "POST",
-					url: "pmemberLike",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('추천!');
-						hit.val("Y");
+			$.ajax({
+				type: "POST",
+				url: "pmemberLike",
+				data: {
+					"p_id": p_id
+				},
+				success: function (likeCheck) {
+					if (likeCheck == 0) {
+						Swal.fire('추천되었습니다:)');
+					} else if (likeCheck == 1) {
+						Swal.fire({
+							title: '추천을 취소시겠습니까?',
+							icon: 'warning',
+							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
+							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+						}).then(result => { // 만약 Promise리턴을 받으면, 
+							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
+								Swal.fire('추천이 취소되었습니다.')
+							}
+						});
 					}
-				});			
-			} else if(hit.val() == "Y"){			
-				$.ajax({
-					type: "POST",
-					url: "deleteLike",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('추천취소');
-						hit.val("N");
-					}
-				});		
-			}	
+				}
+			});
 		}
 		//팔로우
 		function follow(p_id) {
 			var p_id = p_id;
-			var change = $('#changeFollow');
-			if (change.val() == "N") {
-				$.ajax({
-					type: "POST",
-					url: "insertFollow",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('팔로우 추가!');
-						change.val("Y");
+			$.ajax({
+				type: "POST",
+				url: "insertFollow",
+				data: {
+					"p_id": p_id
+				},
+				success: function (followCheck) {
+					if (followCheck == 0) {
+						Swal.fire('팔로우');
+					} else if (followCheck == 1) {
+						Swal.fire({
+							title: '팔로우를 취소하시겠습니까?',
+							icon: 'warning',
+							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
+							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+						}).then(result => { // 만약 Promise리턴을 받으면, 
+							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
+								Swal.fire('팔로우가 취소되었습니다.')
+							}
+						});
 					}
-				});
-			} else if (change.val() == "Y") {
-				$.ajax({
-					type: "POST",
-					url: "deleteFollow",
-					data: {
-						"p_id": p_id
-					},
-					success: function () {
-						alert('팔로우취소!');
-						change.val("N");
-					}
-				});
-			}
+				}
+			});
 		}
 		//별점
 		$(function () {
@@ -287,12 +284,7 @@
 			});
 		});
 
-		$('#back').click(function () {
-			$('body,html').animate({
-				scrollTop: 0
-			}, 600);
-			return false;
-		});
+
 	</script>
 </body>
 

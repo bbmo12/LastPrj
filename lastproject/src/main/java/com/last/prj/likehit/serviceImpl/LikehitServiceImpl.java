@@ -23,4 +23,9 @@ public class LikehitServiceImpl implements LikehitService{
 		return map.deleteLike(hit);
 	}
 
+	@Override
+	public int likeCheck(LikehitVO hit) {
+		return map.likeCheck(hit);
+	}
+
 }

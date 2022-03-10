@@ -135,6 +135,10 @@
 	<update id="updateLike" parameterType="String">
 		UPDATE P_MEMBER SET RCOM = RCOM+1 WHERE P_ID = #{p_id}
 	</update>
+	<!-- 추천취소시 -->
+	<update id="updateCancel" parameterType="String">
+		UPDATE P_MEMBER SET RCOM = RCOM-1 WHERE P_ID = #{p_id}
+	</update>
 	
 	<!-- 아이디로 정보 조회 -->
 	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
@@ -167,11 +171,36 @@
 	</select>
 	
 	<!-- 파트너쉽 별로 출력 -->
-	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
-		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel, p.picture
+	<select id = "admPlistCode" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel, p.picture
 		from p_member p, f_code f 
-		where f.code = p.code AND p.code = #{code}
+		where f.code = p.code 
+		 <if test="code != null ">
+		  AND p.code = #{code}
+		 </if>
+		 <if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+		 AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		  </if>
+		  ORDER BY P_ID DESC
+		  <![CDATA[ 
+        ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
+        ]]>
 	</select>
+		<select id = "admPlistCodeCount" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="int">
+		SELECT count(*)
+		from p_member p
+		<where>
+		
+		 <if test="code != null ">
+		  AND p.code = #{code}
+		 </if>
+		 <if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+		 AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		 </if>
+		 </where>
+		 
+	</select>
+	
 	
 	<!-- 파트너 날짜 별 조회 -->
 	<select id="admPmemberDate" parameterType="String" resultType="com.last.prj.qna.service.PmemberVO">
@@ -180,14 +209,7 @@
 		WHERE F.CODE=P.CODE AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 	</select>
 	
-	
-	<!-- 파트너 회원 가입일 조회 -->
-	<select id="admPstartDateList" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS F_CONTENT, P.TEL AS TEL
-		FROM P_MEMBER P, F_CODE F 
-		WHERE F.CODE = P.CODE AND P.STARTDATE BETWEEN '220220' AND '220226'
-	</select>
-	
+
 	<!-- 파트너 회원 수 -->
 	<select id="pmemCount" resultType="int">
 		SELECT COUNT(*) FROM P_MEMBER

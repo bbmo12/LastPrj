@@ -29,6 +29,11 @@ public class FallowServiceImpl implements FollowService {
 	public int followDelete(FollowVO follow) {
 		return map.followDelete(follow);
 	}
+
+	@Override
+	public int followCheck(FollowVO follow) {
+		return map.followCheck(follow);
+	}
 	
 
 }

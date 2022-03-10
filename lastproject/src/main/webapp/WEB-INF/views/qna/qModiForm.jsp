@@ -20,6 +20,8 @@
 <!-- ckeditor -->
 <script src="resources/ckeditor/ckeditor.js"></script>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 
 <style>
 .radioImg {

@@ -28,18 +28,18 @@ public class FollowController {
 	}
 	@RequestMapping("insertFollow")
 	@ResponseBody
-	public void insertFollow(FollowVO follow, HttpServletRequest request) {
+	public int insertFollow(FollowVO follow, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		follow.setM_id(m_id);
-		followDao.followInsert(follow);
+		
+		int followCheck = followDao.followCheck(follow);
+		if(followCheck == 0) {
+			followDao.followInsert(follow);//팔로우 
+		}else if (followCheck == 1) {
+			followDao.followDelete(follow);//언팔  
+		}
+		return followCheck;
 	}
-	@RequestMapping("deleteFollow")
-	@ResponseBody
-	public void deleteFollow(FollowVO follow, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		follow.setM_id(m_id);
-		followDao.followDelete(follow);
-	}
+
 }
