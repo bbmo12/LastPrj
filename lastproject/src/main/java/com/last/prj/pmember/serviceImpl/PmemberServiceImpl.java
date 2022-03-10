@@ -149,4 +149,10 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 
+	@Override
+	public int pmemberJoinCancel(String p_id) {
+		return map.pmemberJoinCancel(p_id);
+	}
+
+
 }

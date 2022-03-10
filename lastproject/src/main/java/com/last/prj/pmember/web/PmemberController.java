@@ -69,6 +69,8 @@ public class PmemberController {
 		String p_id = (String) session.getAttribute("pId");
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		return "pmember/pmemberMypage";
 	}
 
@@ -79,6 +81,8 @@ public class PmemberController {
 		String p_id = (String) session.getAttribute("pId");
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		return "pmember/pmemberUpdateForm";
 	}
 	
@@ -154,6 +158,14 @@ public class PmemberController {
 		pMemberDao.pmemberNullUpdate(p_id);
 		session.invalidate();
 		return  "redirect:home";
+	}
+	
+	//파트너회원 가입취소
+	@PostMapping("joinCancel")
+	@ResponseBody
+	public int joinCancel(@RequestParam("p_id") String p_id) {
+		pMemberDao.pmemberJoinCancel(p_id);
+		return 1;
 	}
 	
 	

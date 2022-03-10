@@ -247,7 +247,6 @@
 	
 	<!-- 파트너회원 회원탈퇴시 모든정보 NULL로 수정 -->
 	<update id="pmemberNullUpdate" parameterType="String" >
-		WHERE M_ID = #{M_ID}
 		UPDATE P_MEMBER
 		SET NAME = '정보삭제' , TEL = '정보삭제', STARTDATE = NULL, 
 			 ENDDATE =SYSDATE,  PASSWORD ='정보삭제' , C_REPORT = NULL, 
@@ -257,6 +256,12 @@
 		WHERE P_ID = #{p_id}
 	</update>
 
+	
+	<!-- 회원가입취소시 데이터 삭제 -->
+	<delete id="pmemberJoinCancel" parameterType="String" >
+		DELETE FROM P_MEMBER
+		WHERE P_ID = #{p_id}
+	</delete>
 
 
 </mapper>

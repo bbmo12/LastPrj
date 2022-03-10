@@ -83,8 +83,8 @@
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
-									<input type="password" id="password1" name="password1" value="${pmember.password }"
-										required>
+									<input type="password" id="password1" name="password1" value="${pmember.password }" 
+									style="width: 350px;" required>
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">전화번호</h3>

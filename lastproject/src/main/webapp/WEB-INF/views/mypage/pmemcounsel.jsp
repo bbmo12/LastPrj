@@ -12,6 +12,7 @@
 </head>
 
 <style>
+
 #my_section {
 	padding: 50px;
 }
@@ -236,6 +237,7 @@ body {
 			goform.submit();
 		}
 	</script>
+
 </body>
 
 </html>
