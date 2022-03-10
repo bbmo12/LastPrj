@@ -17,7 +17,7 @@
 						<form class="forms-sample" action="pjoin_3" method="post" enctype="multipart/form-data">
 						<input type="hidden" class="form-control" id="p_id" name="p_id" value="${p_id.p_id}">
 						<h4 class="card-title">운영시간</h4>
-							<div class="form-group">
+							<%-- <div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="월">
 								<select  id="selectStart" name="timeVOList[${status.index}].starttime">
 									<option value='' selected>오픈시간</option>
@@ -186,7 +186,7 @@
 								</select>
 								<br>
 								<input type="text" class="form-control" id="n_content" name="n_content">
-							</div>
+							</div> 
 							<div class="form-group">
 								<input type="text" readonly="readonly" name="w_day" id="w_day" value="토">
 								<select
@@ -256,7 +256,7 @@
 								</select>
 								<br>
 								<input type="text" class="form-control" id="n_content" name="n_content">
-							</div>
+							</div>--%>
 						
 
 					
@@ -283,31 +283,29 @@
 
 						
 							<div class="form-group">
-								<h5>
-								<h4 class="card-title">서비스 가능한 동물</h4>	
-								</h5>
+								<h4 class="card-title">서비스 가능한 동물</h4>
 								<label>개
-								<input type="checkbox" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
 								<label>고양이
-								<input type="checkbox" id="code" name="code" value="502"><span	class="checkmark"></span></label>&emsp; 
+								<input type="radio" id="code" name="code" value="502"><span	class="checkmark"></span></label>&emsp; 
 								<label>조류
-								<input type="checkbox" id="code" name="code" value="503"><span class="checkmark"></span></label>&emsp; 
+								<input type="radio" id="code" name="code" value="503"><span class="checkmark"></span></label>&emsp; 
 								<label>파충류
-								<input type="checkbox" id="code" name="code" value="504"><span	class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="504"><span	class="checkmark"></span></label>&emsp;
 								<label>어류
-								<input type="checkbox" id="code" name="code" value="505"><span	class="checkmark"></span></label>&emsp; 
+								<input type="radio" id="code" name="code" value="505"><span	class="checkmark"></span></label>&emsp; 
 								<label>토끼
-								<input type="checkbox" id="code" name="code" value="506"><span class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="506"><span class="checkmark"></span></label>&emsp;
 								<label>돼지
-								<input type="checkbox" id="code" name="code" value="507"><span class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="507"><span class="checkmark"></span></label>&emsp;
 								<label>햄스터
-								<input type="checkbox" id="code" name="code" value="508"><span	class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="508"><span	class="checkmark"></span></label>&emsp;
 								<label>미어켓
-								<input type="checkbox" id="code" name="code" value="509"><span	class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="509"><span	class="checkmark"></span></label>&emsp;
 								<label>여우
-								<input type="checkbox" id="code" name="code" value="510"><span class="checkmark"></span></label>&emsp; 
+								<input type="radio" id="code" name="code" value="510"><span class="checkmark"></span></label>&emsp; 
 								<label>거미
-								<input type="checkbox" id="code" name="code" value="511"><span	class="checkmark"></span></label>&emsp;
+								<input type="radio" id="code" name="code" value="511"><span	class="checkmark"></span></label>&emsp;
 							</div>
 
 						
