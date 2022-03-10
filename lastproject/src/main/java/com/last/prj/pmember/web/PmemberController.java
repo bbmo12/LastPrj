@@ -69,6 +69,8 @@ public class PmemberController {
 		String p_id = (String) session.getAttribute("pId");
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		return "pmember/pmemberMypage";
 	}
 
@@ -79,6 +81,8 @@ public class PmemberController {
 		String p_id = (String) session.getAttribute("pId");
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		return "pmember/pmemberUpdateForm";
 	}
 	

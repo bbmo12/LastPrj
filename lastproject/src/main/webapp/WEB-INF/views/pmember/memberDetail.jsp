@@ -60,14 +60,29 @@
 								style="width: 210px;" alt="등록된 사진이 없습니다.">
 							<div class="br"></div>
 							<h2 style=" margin: 0 40px -10px 0;">${pmemdetail.name}</h2>
-							<img alt="" src="resources/upload/follow.png" id="follow"
-								onclick="follow('${pmemdetail.p_id}')"
-								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
+							<c:choose>
+								<c:when test="${mId ne null}">
+									<img alt="" src="resources/upload/follow.png" id="follow"
+										onclick="follow('${pmemdetail.p_id}')"
+										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
+								</c:when>
+								<c:otherwise>
+									<img alt="" src="resources/upload/follow.png" id="follow" onclick="noMember()"
+										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
+								</c:otherwise>
+							</c:choose>
 							<h3 style="position: relative; top: -15px; right: 10px;">${pmemdetail.w_name}</h3>
-							<img alt="" src="resources/upload/rec.png" id="recommend"
-								onclick="likeHit(`${pmemdetail.p_id}`)"
-								style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
-							<input type="hidden" value="N" id="changeHit">
+							<c:choose>
+								<c:when test="${mId ne null}">
+									<img alt="" src="resources/upload/rec.png" id="recommend"
+										onclick="likeHit(`${pmemdetail.p_id}`)"
+										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
+								</c:when>
+								<c:otherwise>
+									<img alt="" src="resources/upload/rec.png" id="recommend" onclick="noMember()"
+										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
+								</c:otherwise>
+							</c:choose>
 							<div class="br" style="margin-top: -45px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
@@ -189,12 +204,12 @@
 							</div>
 						</c:forEach>
 						<div class="reply-btn">
-							<a href="" class="btn-reply text-uppercase" id="load" style="text-align: center;">More
-								Review</a>
+							<a href="" class="btn-reply text-uppercase" id="load" style="text-align: center;">
+								More Review</a>
 						</div>
 						<div class="reply-btn">
-							<a href="#top" class="btn-reply text-uppercase" id="back" style="text-align: center;">Back
-								to top</a>
+							<a href="#top" class="btn-reply text-uppercase" id="back" style="text-align: center;">
+								Back to top</a>
 						</div>
 					</div>
 				</div>
@@ -218,8 +233,11 @@
 						Swal.fire({
 							title: '추천을 취소시겠습니까?',
 							icon: 'warning',
+							showCancelButton: true, 
 							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
+							cancelButtonColor: '#3085d6',
 							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+							cancelButtonText: '닫기',
 						}).then(result => { // 만약 Promise리턴을 받으면, 
 							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
 								Swal.fire('추천이 취소되었습니다.')
@@ -245,8 +263,11 @@
 						Swal.fire({
 							title: '팔로우를 취소하시겠습니까?',
 							icon: 'warning',
+							showCancelButton: true, 
 							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
+							cancelButtonColor: '#3085d6',
 							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+							cancelButtonText: '닫기',
 						}).then(result => { // 만약 Promise리턴을 받으면, 
 							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
 								Swal.fire('팔로우가 취소되었습니다.')
@@ -255,6 +276,9 @@
 					}
 				}
 			});
+		}
+		function noMember() {
+			Swal.fire('일반회원이 아닙니다.');
 		}
 		//별점
 		$(function () {
