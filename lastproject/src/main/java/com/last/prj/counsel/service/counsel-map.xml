@@ -45,7 +45,7 @@
 	<select id="counselList" resultType="com.last.prj.counsel.service.CounselVO">
 		 SELECT *
       		FROM ( SELECT ROWNUM RN, A.*
-     		        FROM (SELECT P.NAME AS p_name, P.M_ID, C.CONTENT, C.W_DATE, C.CODE, C.C_NO
+     		        FROM (SELECT P.NAME AS p_name, P.M_ID, c.p_id, C.CONTENT, C.W_DATE, C.CODE, C.C_NO
       				        FROM PET P, MEMBER M, COUNSEL C
        				      WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND P_ID = #{p_id} ORDER BY C_NO      				  
        				      ) A)
@@ -60,6 +60,41 @@
 		GROUP BY P.M_ID
 		HAVING P.M_ID = #{m_id}
 	</select>
+	
+	<!-- 기존 채팅방 존재 여부 -->
+	<select id="isExist" parameterType="com.last.prj.counsel.service.CounselVO">
+		SELECT COUNT(*)
+		FROM counsel
+		WHERE p_id=#{p_id} AND m_id=#{m_id} AND code!=303
+	</select>
+	
+	
+	<!-- 상담 상세 조회 -->
+	<select id="csDetail" parameterType="com.last.prj.counsel.service.CounselVO">
+		SELECT *
+		FROM counsel
+		WHERE p_no = #{p_no}
+		ORDER BY w_date asc
+	</select>
 
+	<!-- 새로운 상담 등록 -->
+	<insert id="newCs" parameterType="com.last.prj.counsel.service.CounselVO">
+		INSERT INTO COUNSEL (c_no, content, w_date, p_id, pet_no, m_id, p_no, code)
+		VALUES(c_seq.nextval, #{content}, sysdate, #{p_id}, #{pet_no}, #{m_id}, 0, 301)
+	</insert>
+	
+	<!-- 첫 상담 이후 답변글 -->
+	<insert id="newCsAns" parameterType="com.last.prj.counsel.service.CounselVO">
+		INSERT INTO COUNSEL (c_no, content, w_date, p_id, m_id, p_no, code)
+		VALUES(c_seq.nextval, #{content}, sysdate, #{p_id}, #{m_id}, 0, #{code})
+	</insert>
+	
+	<!-- 상담 종료시 코드 변환 -->
+	<update id="CodeUdt" parameterType="com.last.prj.counsel.service.CounselVO">
+		UPDATE counsel
+		SET code=303
+		WHERE c_no=#{c_no}
+	</update>
+	
 
 </mapper>

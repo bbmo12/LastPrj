@@ -71,8 +71,10 @@
 							<div class="br" style="margin-top: -45px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-							<a href="EnterChat?m_id=${mId }&p_id=${pmemdetail.p_id}">
-								<button class="btn btn-primary">상담하기</button></a>
+
+							<a href="EnterCs?m_id=${mId }&p_id=${pmemdetail.p_id}">
+							<button class="btn btn-primary">상담하기</button></a>
+
 							<form action="reservMember" name="reservForm" method="POST">
 								<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
 								<button type="submit" class="btn btn-primary">예약하기</button>
@@ -202,6 +204,8 @@
 		</div>
 	</section>
 	<script>
+
+
 		//추천버튼 
 		function likeHit(p_id) {
 			var p_id = p_id;
@@ -280,12 +284,7 @@
 			});
 		});
 
-		$('#back').click(function () {
-			$('body,html').animate({
-				scrollTop: 0
-			}, 600);
-			return false;
-		});
+
 	</script>
 </body>
 
