@@ -28,11 +28,7 @@ public interface PmemberService {
 
 	//관리자
  	public List<PmemberVO> admPlistCode(PmemberVO vo); //파트너쉽 별 리스트
-  	public List<PmemberVO> admPlist(); 
-  	public List<PmemberVO> admPstartDateList(); //개월 수
-  	public List<PmemberVO> admPmemberPageList(Criteria cri); //파트너 회원 페이징
-  	public int pmemCount(); //파트너 회원 수
-  	public List<PmemberVO> admPmemberDate(String fromDate, String toDate); //날짜 별 회원 조회
+	public int pmemCount(); //파트너 회원 수
 	
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);

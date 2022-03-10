@@ -3,235 +3,389 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- <script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+	integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+.container-fluid {
+	width: 100%;
+	padding-right: 0px;
+	padding-left: 0px;
+	margin-right: auto;
+	margin-left: auto;
+}
+</style>
 </head>
-
 <body>
-    <table class="sortable paginated">
-        <caption>베스트셀러</caption>
-        <thead>
-            <tr>
-                <th></th>
-                <th class="sorting">순위</th>
-                <th class="sorting">책제목</th>
-                <th class="sorting">저자</th>
-                <th class="sort-date">출판사</th>
-                <th class="sorting">가격</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/061/864/06186469.jpg?type=m1"> </td> <td>1
-                </td>
-                <td>덕혜옹주</td>
-                <td>권비영</td>
-                <td>다산책방</td>
-                <td>11,800원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/062/277/06227737.jpg?type=m1"> </td> <td>2
-                </td>
-                <td>삼성을 생각한다</td>
-                <td>김용철</td>
-                <td>사회평론</td>
-                <td>22,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/061/962/06196209.jpg?type=m1"> </td> <td>3
-                </td>
-                <td>오츠 슈이치</td>
-                <td>21세기북스</td>
-                <td>12,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/062/123/06212320.jpg?type=m1"> </td> <td>4
-                </td>
-                <td>시크릿 두 번째 이야기</td>
-                <td>폴 해링턴</td>
-                <td>살림</td>
-                <td>12,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/060/537/06053729.jpg?type=m1"> </td> <td>5
-                </td>
-                <td>1Q84</td>
-                <td>무라카미 하루키</td>
-                <td>문학동네</td>
-                <td>14,800원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/061/932/06193283.jpg?type=m1"> </td> <td>6
-                </td>
-                <td>마법의 돈관리</td>
-                <td>고득영</td>
-                <td>국일미디어</td>
-                <td>12,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/061/972/06197265.jpg?type=m1"> </td> <td>7
-                </td>
-                <td>박철범의 하루공부법</td>
-                <td>박철범</td>
-                <td>다산에듀</td>
-                <td>12,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/049/791/04979122.jpg?type=m1"> </td> <td>8
-                </td>
-                <td>엄마를 부탁해</td>
-                <td>신경숙</td>
-                <td>창비</td>
-                <td>10,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/060/474/06047439.jpg?type=m1"> </td> <td>9
-                </td>
-                <td>아이의 사생활</td>
-                <td>EBS</td>
-                <td>지식채널</td>
-                <td>16,800원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/060/376/06037660.jpg?type=m1"> </td> <td>10
-                </td>
-                <td>그건, 사랑이였네</td>
-                <td>한비야</td>
-                <td>푸른숲</td>
-                <td>12,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/062/246/06224688.jpg?type=m1"> </td> <td>11
-                </td>
-                <td>김연아의 7분 드라마</td>
-                <td>김연아</td>
-                <td>중아출판사</td>
-                <td>15,000원</td>
-            </tr>
+	<div class="card">
+		<div class="card-body">
+			<h4 class="card-title">파트너회원</h4>
+			<p class="card-description">
+				관리
+				<code>조건 별 검색</code>
+			</p>
+			<div>
+				<form id="admDateForm">
+					<input type="hidden" name="code"> <input type="hidden"
+						name="pageNum" value="1"> FROM : <input type="text"
+						id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
+						type="text" id="toDate" name="toDate">
+					<!-- <button type="button" id="btnSearch">검 색</button> -->
+				</form>
+			</div>
+			<div class="template-demo">
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="">전체</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="601">불법 광고 및 홍보</button>
+					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+						data-code="602">음란물/선정성 콘텐츠</button>
+					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+						data-code="603">욕설,비속어,모욕</button>
+					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+						data-code="604">사생활 침해</button>
+					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+						data-code="605">게시물 도배</button>
+			</div>
+			<div>
+				<input class="form-control" id="myInput" type="text"
+					placeholder="Search.."> <br>
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<!-- <th>사진</th> -->
+						<th>이름</th>
+						<th>아이디</th>
+						<th>신고건수</th>
+						<th>가입날짜</th>
+						<th>파트너쉽</th>
+					</tr>
+				</thead>
+				<tbody id="myTable">
 
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/062/171/06217189.jpg?type=m1"> </td> <td>12
-                </td>
-                <td>아버지의 눈물</td>
-                <td>김정현</td>
-                <td>문이당</td>
-                <td>11,000원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/029/108/02910899.jpg?type=m1"> </td> <td>13
-                </td>
-                <td>쓸만한 아이</td>
-                <td>이금이</td>
-                <td>푸른책들</td>
-                <td>8,800원</td>
-            </tr>
-            <tr>
-                <td>
-                    <imgsrc="http://bookthumb.phinf.naver.net/cover/052/586/05258669.jpg?type=m1"> </td> <td>14
-                </td>
-                <td>일본전산이야기</td>
-                <td>감성호</td>
-                <td>쌤앤파커스</td>
-                <td>14,500원</td>
-            </tr>
-        </tbody>
-    </table>
+				</tbody>
+			</table>
+			<div id="pagination"></div>
+		</div>
+	</div>
+	<script>	
+		//검색 함수
+		$(function() {
+		
+			$("#myInput").on(
+					"keyup",
+					function() {
+						var value = $(this).val().toLowerCase();
 
-    <script>
-        $('table.paginated').each(function () {
-            var currentPage = 0;
-            var numPerPage = 5;
-            var $table = $(this);
-            var repaginate = function () {
-                $table.find('tbody tr').hide()
-                    //기본적으로 모두 감춘다
-                    .slice(currentPage * numPerPage,
-                        (currentPage + 1) * numPerPage)
-                    .show();
-                //현재페이지+1 곱하기 현재페이지까지 보여준다
-            };
-            var numRows = $table.find('tbody tr').length;
-            //length로 전체길이구함
-            var numPages = Math.ceil(numRows / numPerPage);
-            //Math.ceil를 이용하여 반올림
-            var $pager = $('<div class="pager"> </div>');
-            //pager라는 클래스의 div엘리먼트 작성
-            for (var page = 0; page < numPages; page++) {
-                $('<span class="page-number"></span>').text(page + 1)
-                    .bind('click', {
-                        newPage: page
-                    }, function (event) {
-                        currentPage = event.data['newPage'];
-                        repaginate();
-                        //for구문을 이용하여 페이지 수만큼
-                        //버튼을 구현
-                        $(this).addClass('active')
-                            //활성화된페이지에는 active라는 클래스명을 붙여준다.
-                            .siblings().removeClass('active');
-                    }).appendTo($pager).addClass('clickable');
-            }
-            $pager.insertBefore($table)
-                //앞서 설정한 페이지키를 삽입
-                .find('span.page-number:first').addClass('active');
+						$("#myTable tr").filter(
+								function() {
+									$(this).toggle(
+											$(this).text().toLowerCase()
+													.indexOf(value) > -1)
+								});
+					});
+		});// end 검색함수
+		
+		// ===================== 리스트 만드는 함수 ====================
+		
+		let viewReviewList = function(result) {
+			$("#myTable").empty();
+			console.log(result);
+
+			$
+					.each(
+							result,
+							function(i) {
+								if (result[i].repor === 701) {
+									$("#myTable")
+											.append(
+													"<tr><td>"
+															+ result[i].reporter
+															+ "</td><td>"
+															+ result[i].reported
+															+ "</td><td>"
+															+ result[i].w_date
+															+ "</td><td>"
+															+ result[i].content
+															+ "</td><td id='content'>"
+															+ result[i].f_content
+															+ "</td><td>"
+															+ "<button id='reportModal' type='button' class='btn btn-secondary' onclick='show("
+															+ result[i].rep_no
+															+ ")' value="
+															+ result[i].rep_no
+															+ " data-toggle='modal'  data-target='#exampleModal"
+															+ result[i].rep_no
+															+ "'>"
+															+ "미처리</td></button></tr>");
+								} else if (result[i].repor === 702) {
+
+									$("#myTable")
+											.append(
+													"<tr><td>"
+															+ result[i].reporter
+															+ "</td><td>"
+															+ result[i].reported
+															+ "</td><td>"
+															+ result[i].w_date
+															+ "</td><td>"
+															+ result[i].content
+															+ "</td><td id='content'>"
+															+ result[i].f_content
+															+ "</td>"
+															+ "<td><button id='cancelModal' type='button' onclick='show("
+															+ result[i].rep_no
+															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#cancelModal'> "
+															+ "기각처리</td></button></tr>");
+								} else {
+
+									$("#myTable")
+											.append(
+													"<tr><td>"
+															+ result[i].reporter
+															+ "</td><td>"
+															+ result[i].reported
+															+ "</td><td>"
+															+ result[i].w_date
+															+ "</td><td>"
+															+ result[i].content
+															+ "</td><td id='content'>"
+															+ result[i].f_content
+															+ "</td>"
+															+ "<td><button id='permitModal' type='button' class='btn btn-secondary' onclick='show("
+															+ result[i].rep_no
+															+ ")'  data-toggle='modal' data-target='#permitModal'>"
+															+ "승인처리</td></button></tr>");
+								}
+								;
+							});
+		}
+		//==============================end 리스트 만드는 함수 : viewReviewList============================
+		
+		
+		// Modal 미처리 신고 : Review
+		function show(st) {
+			console.log(st);
+				$
+						.ajax({
+							url : admReportOneReview,
+							method : 'post',
+							data : {
+								"rep_no" : st
+							},
+							success : function(res) {
+								console.log(res[0].state);
+								if (res == '')
+									alert('해당 데이터가 없습니다');
+
+								console.log(res[0].rep_no);
+
+								$("form")
+										.append(
+												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+
+								$("#repo").append(
+										"<ul><li>신고유형 : " + res[0].f_content
+												+ "</li><li>신고날짜 : "
+												+ res[0].w_date
+												+ "</li><li>신고자 : "
+												+ res[0].reporter
+												+ "</li><li>신고당한 : "
+												+ res[0].reported
+												+ "</li><li>신고사유 : "
+												+ res[0].content
+												+ "</li><li>게시글 내용 : "
+												+ res[0].rev_content
+												+ "</li></ul>");
+							},
+							error : function(er) {
+								alert('오류가 났음. 개발자 호츌');
+							} //end error
+						})// end ajax
+						$("#myModal").modal('show');
+			
+		}// end Show function Modal 신고 단건
+
+		//모달 내용 초기화
+		$('#myModal').on('hidden.bs.modal', function(e) {
+			$(this).find('ul').empty();
+			$(this).find('form')[0].reset();
+
+		})//END 모달 내용 초기화
+
+		//신고처리 : admReportUpdate
+		$("#admReportUpdate").on("click", function(e) {
+			var str = $('#form').serialize();
+			console.log("str의 값"+str);
+			var rep_no = $("#rep_no").val();
+			console.log("rep_no : "+rep_no);
+			var state = $("#state").val();
+			console.log("state : "+state);
+			var repor = $("#repor").val();
+			console.log("repor : "+repor);
+
+			var flag = confirm("신고처리 하시겠습니까?");
+			if (flag == true) {
+				$.ajax({
+					url : 'admReportUpdate',
+					method : 'post',
+					data : {
+						"rep_no" : rep_no,
+						"state" : state,
+						"repor" : repor
+					},
+					success : function(result) {
+						alert("신고 처리가 성공적으로 완료되었습니다");
+						console.log(result);
+						location.reload();
+					},
+					error : function(err) {
+						alert("신고 처리가 성공적으로 실패했습니다. 관리자 호출!");
+
+					}
+				}) //end Ajax
+			}//end If
+		})//end 신고 처리
+			
+			
+		//===================리스트 호출 버튼==================
+		$(".codep").on('click', function() {
+			var code = $(this).data('code');
+			$('#admDateForm')[0].code.value = code
+			$('#admDateForm')[0].pageNum.value = 1;
+			pagingList();
+			
+		});//===================end 리스트 호출 버튼================== 
+		
+		
+		//===========리스트 ajax 호출==========
+		function pagingList() {
+			var str = $('#admDateForm').serialize();
+			$.ajax({
+				url : 'admRlistCode',
+				method : 'post',
+				data :str,
+				//contentType : 'application/json',
+				success : function(result) {
+					viewReviewList(result.list);
+					viewPage(result.page);
+				}
+			});
+		}//===========end  리스트 ajax 호출==========
+			
+		//===========페이징 처리==========
+		function viewPage(page) {
+			console.log(page);
+			
+			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
+			<ul class="pagination">`
+			if(page.prev) {
+				nav += `<li class="page-item">
+				<a href="javascript:goPage(\${page.startPage-1})" class="page-link"
+					aria-label="Previous">
+					<span aria-hidden="true">
+						<span class="fa fa-angle-left"></span>
+					</span></a>
+				</li>`
+			}
+				for ( var i=page.startPage ; i <=  page.endPage; i++){
+					nav += `<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
+								href="javascript:goPage(\${i})" class="page-link">\${i }</a>
+								</li>`
+				}
+				
+			if(page.next){
+				nav += `<li class="page-item"><a href="javascript:goPage(\${page.endPage+1})"
+					class="page-link" aria-label="Next">
+				<span aria-hidden="true">
+					<span class="fa fa-angle-right"></span>
+				</span></a>
+		</li>`
+		
+			}
+				
+			nav += `</ul></nav>`
+			$('#pagination').html(nav);
+			
+		}
+			
+		function goPage(pa) {
+			$('#admDateForm')[0].pageNum.value = pa;
+			pagingList();
+		}
+		//===========end 페이징 처리==========
+
+		
+		// =============날짜 검색 ==============
+        $("#datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년',
+            showOtherMonths: true,
+            changeYear: true,
+            changeMonth: true,
+            showOn: "both",
+            buttonImage: "",
+            buttonImageOnly: true,
+            buttonText: "선택"
+
         });
-        $(document).ready(function () {
-            $('table.paginated').each(function () {
-                var currentPage = 0;
-                var numPerPage = 5;
-                var $table = $(this);
+        $('#datepicker').datepicker('setDate', 'today');
 
-                $table.bind('repaginate', function () {
-                    $table.find('tbody tr').hide()
-                        .slice(currentPage * numPerPage,
-                            (currentPage + 1) * numPerPage)
-                        .show();
-                });
-
-                var numRows = $table.find('tbody tr').length;
-                var numPages = Math.ceil(numRows / numPerPage);
-                var $pager = $('<div class="pager"></div>');
-                for (var page = 0; page < numPages; page++) {
-                    $('<span class="page-number"></span>').text(page + 1)
-                        .bind('click', {
-                            newPage: page
-                        }, function (event) {
-                            currentPage = event.data['newPage'];
-                            $table.trigger('repaginate');
-                            $(this).addClass('active')
-                                .siblings().removeClass('active');
-                        }).appendTo($pager).addClass('clickable');
-                }
-                $pager.insertBefore($table)
-                    .find('span.page-number:first').addClass('active');
+        $(function () {
+            $.datepicker.setDefaults({
+                dateFormat: 'yy-mm-dd',
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
+                    '12월'
+                ],
+                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                showMonthAfterYear: true,
+                yearSuffix: '년',
+                showOtherMonths: true,
+                changeYear: true,
+                changeMonth: true,
+                showOn: "both",
+                buttonImage: "",
+                buttonImageOnly: false,
+                buttonText: "선택"
             });
-        });
-        $table.find('th').removeClass('sorted-asc')
-            .removeClass('sorted-desc');
-        if (sortDirection == 1) {
-            $header.addClass('sorted-asc');
-        } else {
-            $header.addClass('sorted-desc');
-        }
-        $table.alternateRowColors();
+            $("#fromDate").datepicker();
+            $("#toDate").datepicker();
 
-        $table.trigger('repaginate');
-    </script>
+            /* $('#fromDate').datepicker('setDate', 'today');
+            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전 */
+            
+            
+	    	pagingList();
+        });// =============end 날짜 검색 ==============
+	</script>
 </body>
 
 </html>
