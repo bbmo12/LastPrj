@@ -6,6 +6,8 @@ import com.last.prj.pmember.service.Criteria;
 
 public interface CounselService {
 
+	public List<CounselVO> pmemCounselList(Criteria cri);
+
 	public List<CounselVO> myCounselList(String m_id); // 일반회원 후기조회
 
 	public List<CounselVO> counselList(Criteria cri);// 상담 페이지리스트
@@ -18,7 +20,7 @@ public interface CounselService {
 	List<CounselVO> myCounselList(Criteria cri);
 
 	// 상담 상세 조회
-	List<CounselVO> csDetail(int p_no);
+	List<CounselVO> csDetail(int c_no);
 
 	// 새로운 상담글 등록
 	int newCs(CounselVO cs);
@@ -31,5 +33,10 @@ public interface CounselService {
 
 	// 기존 상담 여부
 	int isExist(String m_id, String p_id);
+
+	// c_no으로 상담 조회
+	CounselVO oneCs(int c_no);
+
+	int codeUpd(int p_no);
 
 }

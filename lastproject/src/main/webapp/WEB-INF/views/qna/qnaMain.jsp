@@ -203,8 +203,10 @@ hr {
 											<div class="tags">
 												<c:forEach items="${qnaList.tagList }" var="hash">
 													<ul class="tagList">
+														<c:if test="${hash.t_name ne null}">
 														<li class="tagli"><a
-															href="tagSearch?t_name=${hash.t_name }"><button class="genric-btn success circle">${hash.t_name}</button></a></li>
+															href="tagSearch?t_name=${hash.t_name }"><button class="genric-btn success circle btn-sm">${hash.t_name}</button></a></li>
+														</c:if>
 													</ul>
 												</c:forEach>
 											</div>
@@ -311,7 +313,7 @@ hr {
 							<c:forEach items="${tagList }" var="tagList">
 								<ul>
 									<li class="tagli"><a
-										href="tagSearch?t_name=${tagList.t_name }"><button class="genric-btn success-border circle">${tagList.t_name }</button></a></li>
+										href="tagSearch?t_name=${tagList.t_name }"><button class="genric-btn success-border circle btn-sm">${tagList.t_name }</button></a></li>
 								</ul>
 							</c:forEach>
 						</aside>
