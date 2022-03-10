@@ -1,18 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-</head>
-
 <style>
-
 #my_section {
 	padding: 50px;
 }
@@ -106,16 +98,32 @@ body {
 }
 
 .badge {
+	border-radius: 0;
 	font-size: 12px;
 	line-height: 1;
 	padding: .375rem .5625rem;
-	font-weight: normal;
+	font-weight: normal
 }
 
-.badge-info {
-	background-color: cornflowerblue;
-	border: none;
+.radioImg {
+	width: 80px;
+	height: 80px;
+	border-radius: 70%;
+	overflow: hidden;
 }
+
+.petSelection {
+	width: 100%;
+	height: 100%;
+	object-fit: cover; ul { padding : 16px 0;
+	list-style: none;
+}
+
+.petSelect {
+	displsy: flex;
+	flex-direction: row;
+}
+
 </style>
 
 <body>
@@ -183,61 +191,64 @@ body {
 					style="position: relative; top: -20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
-							<h1>상담내역조회</h1>
+							<h1>첫 상담 차트 작성</h1>
 						</div>
-						<div class="page-content page-container" id="page-content"
-							style="margin-top: 20px;">
-							<div class="row container d-flex justify-content-center">
-								<div class="card" style="width: 100%">
-									<div class="card-body" style="width: 100%">
-										<div class="table-responsive" style="width: 100%">
-											<input type="hidden" name="pageNum" value="1">
-											<table id="htmltable" class="table">
-												<thead>
-													<tr style="text-align: center;">
-														<th>동물이름</th>
-														<th>상담회원</th>
-														<th>상담내용</th>
-														<th>상담상태</th>
-														<th>작성일</th>
-													</tr>
-												</thead>
-												<tbody style="text-align: center">
-													<c:forEach items="${pmemcounsel }" var="counsel">
-														<tr onclick="location.href='csDetail?p_id=${counsel.p_id }&m_id=${counsel.m_id }&pet_no=${counsel.pet_no }&c_no=${counsel.c_no}'">
-															<td>${counsel.p_name }</td>
-															<td>${counsel.m_id }</td>
-															<td>${counsel.content}</td>
-															<td><c:if test="${counsel.code eq 301}">
-																	<label class="badge badge-info">상담요청</label>
-																</c:if> <c:if test="${counsel.code eq 302}">
-																	<label class="badge badge-warning">진행중</label>
-																</c:if> <c:if test="${counsel.code eq 303}">
-																	<label class="badge badge-success">상담완료</label>
-																</c:if></td>
-															<td>${counsel.w_date }</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
+						<div>
+						 <form name="newCs" id="newCs" action="newCs" method="post">
+								<div>${pInfo.name }님과의상담을 시작합니다.</div>
+									
+								<input type="hidden" id="p_id" name="p_id" value="${pInfo.p_id }">
+								<input type="hidden" id="m_id" name="m_id" value="${mId }" >
+								<input type="hidden" id="sender" name="sender" value="${mId }">
+	
+								<h3>상담받고자 하는 반려동물을 선택해주세요.</h3>
+								<div class="petSelect"
+									style="margin-bottom: 50px; margin-top: 50px;">
+									<c:forEach items="${petList }" var="pet">
+										<div class="radioImg">
+											<img class="petSelection" src="resources/qna/${pet.picture }"
+												onError="this.src='resources/qna/대체이미지2.png'">
 										</div>
-									</div>
+										<input type="radio" id="pet_no" name="pet_no"
+											value="${pet.pet_no}">&nbsp;${pet.name }
+									</c:forEach>
 								</div>
-							</div>
+
+								<h3>상담 내용을 적어주세요</h3>
+								<textarea id="content" name="content"></textarea>
+
+								<button type="submit" id="submitCs" class="btn btn-primary">상담 시작</button>
+								<button type="button" class="btn btn-secondary"
+									onclick="history.back()">취소</button>
+							</form>
 						</div>
-						<my:nav jsFunc="go_page" page="${page}" />
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 	<script>
-		function go_page(p) {
-			goform.pageNum.value = p;
-			goform.submit();
-		}
+		/* $(function(){
+			$('#submitCs').click(function(){
+				$.ajax({
+					method : "POST",
+					url : "newCs",
+					data : {
+						"p_id" : $("#p_id").val(),
+						"m_id" : $("#m_id").val(),
+						"sender" : $("#sender").val(),
+						"pet_no" : $("#pet_no").val(),
+						"content" : $("#content").val()
+					},
+					success : function(){
+						alert('상담이 등록되었습니다.');
+					},
+					error : function(){
+						alert('오류가 발생했습니다');
+					}
+				})
+			})	
+		}) */
+	
 	</script>
-
 </body>
-
 </html>

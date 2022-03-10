@@ -65,7 +65,7 @@
 							</div>
 
 							<button type="submit" class="btn btn-primary mr-2">다음</button>
-							<button class="btn btn-light" onclick="location.href='home'">취소</button>
+							<button type="button" class="btn btn-light" onclick="cancel()">취소</button>
 							</form>
 					</div>
 				</div>
@@ -73,6 +73,19 @@
 		</div>
 	</div>
 	<script>
+	function cancel(){
+		var p_id = "${p_id.p_id}";
+		console.log(p_id);
+		$.ajax({
+			url : 'joinCancel',
+			method : 'POST',
+			data : {"p_id" : p_id},
+			success : function(res){
+				alert("회원가입이 취소되었습니다.");
+			}
+		})
+	}
+	
 		function findAddr() {
 			new daum.Postcode(
 					{

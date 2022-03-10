@@ -65,15 +65,5 @@
 		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
-	
-	<beans:bean id="chatHandler" class="com.last.prj.chat.service.ChatWebSocketHandler"/>
-	<websocket:handlers>
-		<websocket:mapping handler="chatHandler" path="/chat"/>
-		<websocket:handshake-interceptors>
-			<beans:bean class="com.last.prj.socket.HandshakeInterceptor"/>
-		</websocket:handshake-interceptors>
-		<websocket:sockjs/>
-	</websocket:handlers>
-	
 
 </beans:beans>
