@@ -18,9 +18,7 @@ import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewService;
-import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.qna.service.QnaService;
-import com.last.prj.qna.service.QnaVO;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 
@@ -30,17 +28,11 @@ public class AdminController {
 	@Autowired
 	private PmemberService pMemberDao;
 
-	@Autowired
-	private PmemberMapper mapper;
+
 
 	@Autowired
 	private ReportService reportDao;
 
-	@Autowired
-	private ReviewService reviewDao;
-
-	@Autowired
-	private QnaService qnaDAO;
 
 	@Autowired
 	private PetService petDAO;
@@ -80,16 +72,18 @@ public class AdminController {
 	public HashMap<String, Object> admPlistCode(PmemberVO vo, Criteria cri) {
 		int total = pMemberDao.admPlistCodeCount(vo);
 		PagingVO page = new PagingVO(cri, total);
-		HashMap map = new HashMap();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
 
 		map.put("list", pMemberDao.admPlistCode(vo));
 		map.put("page", page);
 		System.out.println("=============================" + vo);
+		System.out.println("=============================" + pMemberDao.admPlistCode(vo));
 		return map;
 	}
 	// =========end 파트너 회원 조회==============
 
+	
 	// =====================Review=========================
 	@RequestMapping("/admReview")
 	public String admReviewTable() {
@@ -100,10 +94,12 @@ public class AdminController {
 	@ResponseBody public HashMap<String,Object> admReview(ReportVO vo, Criteria cri){ 
 	  int total = reportDao.admRlistCodeCount(vo); 
 	  PagingVO page = new PagingVO(cri, total); 
-	  HashMap map = new HashMap();
+	  HashMap<String, Object> map = new HashMap<String, Object>();
 	  vo.setVo(page);
-	  map.put("list", reportDao.admRlistCode(vo)); map.put("page",page);
-	  System.out.println("============"+vo);
+	  map.put("list", reportDao.admRlistCode(vo)); 
+	  map.put("page",page);
+	  System.out.println("============"+reportDao.admRlistCode(vo));
+	  
 	  return map; 
 	  }
 

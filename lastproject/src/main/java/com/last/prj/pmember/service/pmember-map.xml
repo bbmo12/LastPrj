@@ -267,9 +267,10 @@
 
 	<!-- 파트너회원 회원탈퇴시 모든정보 NULL로 수정 -->
 
-	<update id="pmemberNullUpdate" parameterType="String">
+	<!-- <update id="pmemberNullUpdate" parameterType="String">
 		WHERE M_ID
 		= #{M_ID}
+	</update> -->
 
 	<update id="pmemberNullUpdate" parameterType="String" >
 
