@@ -12,8 +12,7 @@ public interface QtagMapper {
 
 	// 글과 연결.
 	int newQtag(QnaTagVO qnatag);
-	
-	
 
+	int ModiTag(QnaTagVO qnatag);
 
 }

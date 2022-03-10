@@ -213,10 +213,10 @@ public class QnaController {
 		}
 		qnaDAO.ansUpdate(qna);
 		if (qnatag.getNTags() != null && qnatag.getNTags().size() > 0) {
-			qtagDAO.newQtag(qnatag);
+			qtagDAO.ModiTag(qnatag);
 		}
 
-		return "qna/qnaDetail";
+		return "redirect:/qnaDetail";
 	}
 
 	// 질문 삭제(1)

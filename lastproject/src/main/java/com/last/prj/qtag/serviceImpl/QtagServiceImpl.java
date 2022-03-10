@@ -42,4 +42,10 @@ public class QtagServiceImpl implements QtagService {
 		return qmap.newQtag(qnatag);
 	}
 
+	@Override
+	public int ModiTag(QnaTagVO qnatag) {
+		// TODO Auto-generated method stub
+		return qmap.ModiTag(qnatag);
+	}
+
 }

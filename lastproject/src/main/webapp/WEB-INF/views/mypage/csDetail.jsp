@@ -5,6 +5,9 @@
 <html>
 
 <style>
+
+
+
 #my_section {
 	padding: 50px;
 }
@@ -123,6 +126,39 @@ body {
 	displsy: flex;
 	flex-direction: row;
 }
+
+img {
+	width: 80px;
+	height: 80px;
+	object-fit: cover;
+	border-radius: 70%;
+	overflow: hidden;
+	border: 2px solid rgb(46, 46, 46);
+	margin-right: 5px;
+}
+
+.petInfo {
+	width: 670px;
+	height: 120px;
+	margin-left: 20px;
+	background: rgb(241, 241, 241);
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+#CounselMsg {
+	width: 800px;
+	height: 300px;
+	border-radius: 10px;
+}
+
+.other{
+	float : left;
+}
+
+.mine {
+	float : right;
+}
 </style>
 
 <body>
@@ -141,14 +177,14 @@ body {
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
-						<aside class="single_sidebar_widget author_widget">
+						<%-- <aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
 								src="resources/upload/${pmember.picture}" style="width: 210px"
 								alt="">
 							<div class="br"></div>
 							<h4>${pmember.name }</h4>
 							<div class="br"></div>
-						</aside>
+						</aside> --%>
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
@@ -193,22 +229,153 @@ body {
 							<h1>1:1 상담</h1>
 						</div>
 						<div>
-							<div>반려동물 정보</div>
-							<c:forEach items="${csDetail }" var="detail">
-							
-						
-							"${detail.content }"
-							
-							
-							</c:forEach>
-							
+
+							<!-- 채팅 상대방 이름 -->
 							<div>
-							
-							
+								<c:if test="${mId ne null }">
+									<span><img class="profile"
+										src="resources/upload/${pInfo.picture }"
+										onError="this.src='resources/qna/대체이미지2.png'"></span>
+									<span>${pInfo.name }</span>&nbsp;<span><c:if
+											test="${pInfo.code == 100}">
+											<c:out value="수의사" />
+										</c:if> <c:if test="${pInfo.code == 101}">
+											<c:out value="훈련사" />
+										</c:if> <c:if test="${pInfo.code == 102}">
+											<c:out value="펫시터" />
+										</c:if> <c:if test="${pInfo.code == 103}">
+											<c:out value="미용사" />
+										</c:if></span>와의 1:1 상담입니다.
+							</c:if>
+
+								<c:if test="${pId ne null }">
+									<span><img class="profile"
+										src="resources/upload/${mInfo.picture }"
+										onError="this.src='resources/qna/대체이미지2.png'"></span>
+									<span><c:out value="${mInfo.name }" />님과의 1:1 상담입니다.</span>
+								</c:if>
 							</div>
+
 							<div>
-								<input type="text" id="CounselMsg" name="CounselMsg"
-									placeholder="메시지를 입력해주세요">
+								<button type="button" id="terminate" name="terminate">상담
+									종료</button>
+
+							</div>
+
+							<!-- 반려동물 정보 -->
+							<div class="petInfo">
+								<table style="color: black">
+									<tr>
+										<td rowspan="3"><img class="profile"
+											src="resources/upload/${petInfo.picture }"
+											onError="this.src='resources/qna/대체이미지2.png'"></td>
+										<td style="font-weight: bold;"><c:if
+												test="${petInfo.code ==501 }">
+												<c:out value="강아지" />
+											</c:if> <c:if test="${petInfo.code ==502 }">
+												<c:out value="고양이" />
+											</c:if> <c:if test="${petInfo.code ==503 }">
+												<c:out value="조류" />
+											</c:if> <c:if test="${petInfo.code ==504 }">
+												<c:out value="파충류" />
+											</c:if> <c:if test="${petInfo.code ==505 }">
+												<c:out value="어류" />
+											</c:if> <c:if test="${petInfo.code ==506 }">
+												<c:out value="토끼" />
+											</c:if> <c:if test="${petInfo.code ==507 }">
+												<c:out value="돼지" />
+											</c:if> <c:if test="${petInfo.code ==508 }">
+												<c:out value="햄스터" />
+											</c:if> <c:if test="${petInfo.code ==509 }">
+												<c:out value="미어캣" />
+											</c:if> <c:if test="${petInfo.code ==510 }">
+												<c:out value="여우" />
+											</c:if> <c:if test="${petInfo.code ==511 }">
+												<c:out value="거미" />
+											</c:if></td>
+									</tr>
+									<tr>
+										<td>이름 : ${petInfo.name }</td>
+									</tr>
+									<tr>
+										<td>몸무게 : ${petInfo.weight } kg</td>
+									</tr>
+								</table>
+							</div>
+
+							<!-- 채팅 내용 -->
+							<div id="chatBody">
+								<c:forEach items="${csDetail }" var="detail">
+
+									<!-- 일반 멤버의 경우 -->
+									<c:if test="${mId ne null }">
+
+										<!-- 채팅 상대방 -->
+										<c:if test="${detail.p_id eq detail.sender }">
+											<div class="other">${pInfo.name }</div>
+											<div class="other"
+												style="background-color: pink; width: 500px; padding: 10px;">
+												${detail.content }</div>
+											<div class="other">${detail.w_date }</div>
+										</c:if>
+
+										<!-- 본인 -->
+										<c:if test="${detail.m_id eq detail.sender }">
+											<div class="mine" style="background-color : dodgerblue; width: 500px; padding:10px;">${detail.content }</div>
+											<div class="mine">${detail.w_date }</div>
+										</c:if>
+									</c:if>
+
+									<!-- 파트너 멤버의 경우 -->
+									<c:if test="${pId ne null }">
+
+										<!-- 채팅 상대방 -->
+										<c:if test="${detail.m_id eq detail.sender }">
+											<div class="other" style="background-color: pink">
+												${mInfo.name } ${detail.content } ${detail.w_date }</div>
+										</c:if>
+
+										<!-- 본인 -->
+										<c:if test="${detail.p_id eq detail.sender }">
+											<div class="mine">${detail.content }${detail.w_date }</div>
+										</c:if>
+
+									</c:if>
+
+
+								</c:forEach>
+							</div>
+
+							<div>
+
+
+
+								<span><input type="text" id="CounselMsg"
+									name="CounselMsg" class="form-control"
+									placeholder="메시지를 입력해주세요"></span> <span><button
+										type="button" id="msgSubmit" name="msgSubmit">전송</button></span>
+
+
+								<c:if test="${oneCs.code == 303 }">
+									<div>
+										<h3>상담이 종료되었습니다. 다시 채팅을 시작하려면 아래 버튼을 눌러주세요</h3>
+										<a href=""><button type="button">채팅 시작하기</button></a>
+									</div>
+								</c:if>
+
+								` <input type="hidden" id="pet_no" name="pet_no"
+									value="${oneCs.pet_no }"> <input type="hidden"
+									id="p_no" name="p_no" value="${oneCs.c_no }"> <input
+									type="hidden" id="m_id" name="m_id" value="${oneCs.m_id }">
+								<input type="hidden" id="p_id" name="p_id"
+									value="${oneCs.p_id }">
+								<c:if test="${mId ne null}">
+									<input type="hidden" id="sender" name="sender" value="${mId }">
+								</c:if>
+								<c:if test="${pId ne null }">
+									<input type="hidden" id="sender" name="sender" value="${pId }">
+								</c:if>
+
 
 							</div>
 
@@ -218,52 +385,91 @@ body {
 			</div>
 	</section>
 	<script>
-		$("#CounselMsg").on('click', function(){
-			$.ajax({
-				method : "POST",
-				url : "newCsAns",
-				data : {
-					p_no
-					m_id
-					p_id
-					content
-					sender
-				},
-				success : function(){
-					location.reload();
-				},
-				error : function(){
-					alert('메시지가 전송되지 않았습니다.');
-				}		
+		$(document).ready(function() {
+
+			/* setInterval(AjaxCall(), 300); */
+
+			/* $('#CounselMsg').focus(); */
+
+			$('#CounselMsg').keypress(function(event) {
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if (keycode == '13') {
+					send();
+				}
+
+				event.stop(propagation);
+			});
+
+			$('#msgSubmit').click(function() {
+				send();
 			})
-		})
+		});
+
+		/*메시지 전송*/
+		function send() {
+			var msg = $("#CounselMsg").val();
+			console.log(msg);
+
+			if (msg != null) {
+				$.ajax({
+					method : "POST",
+					url : "newCsAns",
+					data : {
+						p_no : $("#p_no").val(),
+						m_id : $("#m_id").val(),
+						p_id : $("#p_id").val(),
+						content : $("#CounselMsg").val(),
+						code : $("#code").val(),
+						sender : $("#sender").val(),
+						pet_no : $("#pet_no").val()
+					},
+					success : function(data) {
+						location.reload();
+						console.log(data);
+					},
+					error : function() {
+						alert('메시지가 전송되지 않았습니다.');
+					}
+				})
+			}
+		}
 
 		/*상담 종료*/
-		$(function(){
-			$("#terminate").click(function(){
-				if(confirm("상담을 종료하면 더 이상 메시지를 보낼 수 없습니다. 정말 종료하시겠습니까?")){
+		$(function() {
+			$("#terminate").click(function() {
+				if (confirm("상담을 종료하면 더 이상 메시지를 보낼 수 없습니다. 정말 종료하시겠습니까?")) {
 					$.ajax({
 						method : "GET",
 						url : "CodeUdt",
 						data : {
-							p_no
-							c_no
+							p_no : $("#p_no").val(),
+							c_no : $("#p_no").val()
 						},
-						success : function(){
+						success : function() {
 							alert('상담이 종료되었습니다.');
 							location.reload();
 						},
-						error : function(){
-							alert('오류가 발생했습니다.')
+						error : function() {
+							alert('오류가 발생했습니다.');
 						}
 					})
 				}
-			})	
-		})
-	}
-	
-	</script>
+			})
 
+			/* function AjaxCall() {
+
+				$.ajax({
+
+					cache : false,
+					url : "csDetail",
+					success : function(data) {
+						location.reload();
+					}
+				})
+			}
+
+		}) */
+	</script>
 </body>
 
 </html>

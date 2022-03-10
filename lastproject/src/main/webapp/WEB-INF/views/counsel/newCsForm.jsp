@@ -194,24 +194,16 @@ body {
 							<h1>첫 상담 차트 작성</h1>
 						</div>
 						<div>
-							<form name="newCs" id="newCs" action="newCs" method="post">
+						 <form name="newCs" id="newCs" action="newCs" method="post">
 								<div>${pInfo.name }님과의상담을 시작합니다.</div>
 									
-								<input type="hidden" id="p_id" name="p_id" value="${p_id }">
+								<input type="hidden" id="p_id" name="p_id" value="${pInfo.p_id }">
 								<input type="hidden" id="m_id" name="m_id" value="${mId }" >
-
-
+								<input type="hidden" id="sender" name="sender" value="${mId }">
+	
 								<h3>상담받고자 하는 반려동물을 선택해주세요.</h3>
 								<div class="petSelect"
 									style="margin-bottom: 50px; margin-top: 50px;">
-									<h3>반려동물 선택</h3>
-									<h4 style="color: gray;">*도움이 필요한 반려동물을 선택해주세요.</h4>
-									<div class="radioImg">
-										<img class="petSelection" src="resources/qna/가위표.png">
-									</div>
-									<input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
-									<label>없음/비공개</label>
-
 									<c:forEach items="${petList }" var="pet">
 										<div class="radioImg">
 											<img class="petSelection" src="resources/qna/${pet.picture }"
@@ -225,7 +217,7 @@ body {
 								<h3>상담 내용을 적어주세요</h3>
 								<textarea id="content" name="content"></textarea>
 
-								<button type="submit" class="btn btn-primary">상담 시작</button>
+								<button type="submit" id="submitCs" class="btn btn-primary">상담 시작</button>
 								<button type="button" class="btn btn-secondary"
 									onclick="history.back()">취소</button>
 							</form>
@@ -234,5 +226,29 @@ body {
 				</div>
 			</div>
 	</section>
+	<script>
+		/* $(function(){
+			$('#submitCs').click(function(){
+				$.ajax({
+					method : "POST",
+					url : "newCs",
+					data : {
+						"p_id" : $("#p_id").val(),
+						"m_id" : $("#m_id").val(),
+						"sender" : $("#sender").val(),
+						"pet_no" : $("#pet_no").val(),
+						"content" : $("#content").val()
+					},
+					success : function(){
+						alert('상담이 등록되었습니다.');
+					},
+					error : function(){
+						alert('오류가 발생했습니다');
+					}
+				})
+			})	
+		}) */
+	
+	</script>
 </body>
 </html>
