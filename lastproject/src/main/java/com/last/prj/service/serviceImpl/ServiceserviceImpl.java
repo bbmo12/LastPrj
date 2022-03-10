@@ -45,5 +45,20 @@ public class ServiceserviceImpl implements ServiceService {
 		return map.serviceSelect(r_no);
 	}
 
+	@Override
+	public List<ServiceVO> petService(ServiceVO vo) {
+		return map.petService(vo);
+	}
+
+	@Override
+	public int petServiceCnt(ServiceVO vo) {
+
+		return map.petServiceCnt(vo);
+	}
+
+
+
+
+
 	
 }

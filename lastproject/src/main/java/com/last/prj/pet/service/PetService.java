@@ -24,4 +24,7 @@ public interface PetService {
 	//펫 수
 	int petCount();
 	
+	//펫 검색 찾기
+	List<PetVO> petProtoColSearch(@Param("key")String key, @Param("data")String data, @Param("m_id")String m_id);
+	
 }

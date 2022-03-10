@@ -38,6 +38,7 @@ import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PmemVO;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.TimeVO;
+import com.last.scheduler.Scheduler;
 
 @Controller
 public class MemController {
@@ -70,6 +71,7 @@ public class MemController {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		memDao.memberDelete(m_id);
+	
 		session.invalidate();
 		return  "redirect:home";
 	}

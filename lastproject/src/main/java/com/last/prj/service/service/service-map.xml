@@ -1,49 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.service.service.ServiceMapper">
-	<select id="myPetServiceList" parameterType="String" resultType="com.last.prj.service.service.ServiceVO">
-		SELECT PM.NAME AS pm_name, S.CONTENT, P.NAME AS p_name,	S.startdate
-		FROM SERVICE S, RESERVATION R, PET P, P_MEMBER PM
-		WHERE S.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
+	<select id="myPetServiceList" parameterType="String"
+		resultType="com.last.prj.service.service.ServiceVO">
+		SELECT PM.NAME AS pm_name, S.CONTENT, P.NAME AS p_name,
+		S.startdate, PM.CODE AS pm_code
+		FROM SERVICE S, RESERVATION R, PET P,
+		P_MEMBER PM
+		WHERE S.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID =
+		PM.P_ID AND
 		P.M_ID = #{m_id}
 		UNION
-		SELECT PM.NAME as pm_name, D.D_NAME AS content, P.NAME AS p_name, D.W_DATE AS startdate
+		SELECT PM.NAME as pm_name, D.D_NAME AS
+		content, P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
 		FROM DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
-		WHERE D.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
-		P.M_ID = #{m_id}
+		WHERE D.R_NO =
+		R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
+		P.M_ID =
+		#{m_id}
 	</select>
-	
-	<select id="serviceSelect" parameterType="int" resultType="com.last.prj.service.service.ServiceVO">
+
+	<select id="serviceSelect" parameterType="int"
+		resultType="com.last.prj.service.service.ServiceVO">
 		SELECT *
 		FROM SERVICE
 		WHERE R_NO= #{r_no}
 	</select>
-	
-	
-	<select id="pMembenefit" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
-		SELECT S.CONTENT,S.STARTDATE,S.ENDDATE,S.PRICE,M_ID 
-		FROM SERVICE S,RESERVATION R ,PET P
-		WHERE S.R_NO=R.R_NO AND P.PET_NO=R.PET_NO AND S.P_ID = #{p_id}
+
+
+	<select id="pMembenefit"
+		resultType="com.last.prj.service.service.ServiceVO"
+		parameterType="String">
+		SELECT S.CONTENT,S.STARTDATE,S.ENDDATE,S.PRICE,M_ID
+		FROM
+		SERVICE S,RESERVATION R ,PET P
+		WHERE S.R_NO=R.R_NO AND
+		P.PET_NO=R.PET_NO AND S.P_ID = #{p_id}
 	</select>
-	
-	<select id="totalPrice" resultType="com.last.prj.service.service.ServiceVO" parameterType="String">
+
+	<select id="totalPrice"
+		resultType="com.last.prj.service.service.ServiceVO"
+		parameterType="String">
 		SELECT SUM(PRICE) AS TOTAL_PRICE
 		FROM SERVICE
-		WHERE P_ID = #{p_id}
+		WHERE P_ID =
+		#{p_id}
 	</select>
-	
+
 	<update id="ServiceUpdate">
 		UPDATE SERVICE
-		SET ENDDATE = TO_CHAR(SYSDATE,'YYYY-MM-DD')
-        WHERE r_no = #{r_no}
+		SET ENDDATE =
+		TO_CHAR(SYSDATE,'YYYY-MM-DD')
+		WHERE r_no = #{r_no}
 	</update>
-	
-	<insert id="ServiceInsert" parameterType="com.last.prj.service.service.ServiceVO">
-		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
-			 SELECT NVL(MAX(R_NO) , 1) AS R_NO FROM RESERVATION
+
+	<insert id="ServiceInsert"
+		parameterType="com.last.prj.service.service.ServiceVO">
+		<selectKey keyProperty="r_no" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(R_NO) , 1) AS R_NO FROM RESERVATION
 		</selectKey>
-		INSERT INTO SERVICE (R_NO,CONTENT,STARTDATE,P_ID,CODE,PRICE) 
-		VALUES (#{r_no},#{content},#{startdate},#{p_id},#{code},#{price})
+		INSERT INTO SERVICE (R_NO,CONTENT,STARTDATE,P_ID,CODE,PRICE)
+		VALUES
+		(#{r_no},#{content},#{startdate},#{p_id},#{code},#{price})
 	</insert>
+
+	<!-- 파트너별로 출력 -->
+	<select id="petService"
+		parameterType="com.last.prj.service.service.ServiceVO" resultType="com.last.prj.service.service.ServiceVO">
+		SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (SELECT PM.NAME AS
+		pm_name,
+		S.CONTENT, P.NAME AS p_name, S.startdate, PM.CODE AS pm_code
+		FROM
+		SERVICE S, RESERVATION R, PET P, P_MEMBER PM
+		WHERE S.R_NO = R.R_NO 
+		AND
+		P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID 
+		<if test="code != null">AND pm.code = #{code} </if>
+		AND	P.M_ID = #{m_id}
+		UNION
+		SELECT PM.NAME as pm_name, D.D_NAME AS content,
+		P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
+		FROM
+		DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
+		WHERE D.R_NO = R.R_NO
+		AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID 
+		<if test="code !=null">AND pm.code = #{code}  </if>
+		AND P.M_ID = #{m_id}    <![CDATA[
+	     )A)B
+		WHERE RN BETWEEN(#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
+        ]]>
+	</select>
+	
+	<select id="petServiceCnt" parameterType="com.last.prj.service.service.ServiceVO" resultType="int">
+		SELECT COUNT(*)
+		from(
+		SELECT PM.NAME AS pm_name, S.CONTENT, P.NAME AS p_name, S.startdate, PM.CODE
+		AS pm_code
+		FROM SERVICE S, RESERVATION R, PET P, P_MEMBER PM
+		WHERE
+		S.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
+		<if test="code != null">pm.code = #{code} AND </if>
+		P.M_ID = #{m_id}
+		UNION
+		SELECT PM.NAME as pm_name, D.D_NAME AS content,
+		P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
+		FROM
+		DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
+		WHERE D.R_NO = R.R_NO
+		AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID 
+		<if test="code != null">AND pm.code = #{code} </if>
+		AND P.M_ID = #{m_id}   )
+
+	</select>
+
 
 </mapper>

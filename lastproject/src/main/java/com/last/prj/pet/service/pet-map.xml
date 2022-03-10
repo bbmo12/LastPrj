@@ -51,4 +51,29 @@
 		SELECT COUNT(*) FROM PET
 	</select>
 	
+	<!-- 펫 검색 -->
+	<select id="petProtoColSearch" parameterType="String" resultType="com.last.prj.pet.service.PetVO" >
+		SELECT * FROM(
+        			SELECT PM.NAME AS pm_name, S.CONTENT, P.NAME AS P_NAME, S.startdate, PM.CODE AS pm_code
+					FROM SERVICE S, RESERVATION R, PET P, P_MEMBER PM
+					WHERE S.R_NO = R.R_NO AND
+						  P.PET_NO = R.PET_NO AND
+						  R.P_ID = PM.P_ID AND
+						  P.M_ID = #{m_id}  
+		<if test="key == 'all'">AND  p.NAME LIKE '%'|| #{data}||'%'</if>
+		
+		
+		UNION
+		SELECT PM.NAME AS pm_name, D.D_NAME AS content,
+		P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
+		FROM
+		DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
+		WHERE D.R_NO = R.R_NO
+		AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
+		P.M_ID = #{m_id}  
+		<if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
+        )	
+		
+	</select>
+	
 </mapper>

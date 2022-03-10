@@ -46,6 +46,11 @@ public class PetServiceImpl implements PetService{
 		return map.petCount();
 	}
 
+	@Override
+	public List<PetVO> petProtoColSearch(String key, String data, String m_id) {
+		return map.petProtoColSearch(key, data, m_id);
+	}
+
 
 
 }
