@@ -77,13 +77,20 @@ public class AdminController {
 	// 파트너 code별
 	@RequestMapping("/admPlistCode")
 	@ResponseBody
-	public HashMap<String, Object> admPlistCode(PmemberVO vo, Criteria cri) {
+	public HashMap<String, Object> admPlistCode(PmemberVO vo,Criteria cri) {
 		int total = pMemberDao.admPlistCodeCount(vo);
 		PagingVO page = new PagingVO(cri, total);
 		HashMap map = new HashMap();
 		vo.setVo(page);
 
+		System.out.println(pMemberDao.admPlistCode(vo));
+		
+		map.put("list", pMemberDao
+				.admPlistCode(vo));
+
+
 		map.put("list", pMemberDao.admPlistCode(vo));
+
 		map.put("page", page);
 		System.out.println("=============================" + vo);
 		return map;
