@@ -83,13 +83,62 @@
 			<div id="pagination"></div>
 		</div>
 	</div>
-	<script>	
+
+
+	<!-- 파트너 회원 단건 조회 Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">해당 파트너 회원</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					
+					<div class='mem-body'>
+					
+					</div>
+					
+					<!-- chart.js -->
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">추로스 chart</h4>
+							<canvas id="myChart" style="height: 50px"></canvas>
+						</div>
+					</div>
+					<!--end chart.js -->
+
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- end 파트너 회원 단건 조회 Modal -->
+
+	<!-- 해당 파트너 회원한테 메시지 보내기 Modal -->
+	
+	<!-- end 해당 파트너 회원한테 메시지 보내기 Modal -->
+
+
+
+	<script>
+		
+	
 		//검색 함수
 		$(function() {
 		
-			$("#myInput").on(
-					"keyup",
-					function() {
+			$("#myInput").on("keyup",function() {
 						var value = $(this).val().toLowerCase();
 
 						$("#myTable tr").filter(
@@ -106,16 +155,11 @@
 			$("#myTable").empty();
 			console.log("result는: " + result);
 
-			$
-					.each(
-							result,
-							function(i) {
-
-								$("#myTable")
-										.append(
-												"<tr><td>"
+			$.each(result,function(i) {
+						$("#myTable").append(
+														"<tr><td><a onclick='show()'>"														
 														+ result[i].name
-														+ "</td><td>"
+														+ "</a></td><td>"
 														+ result[i].p_id
 														+ "</td><td>"
 														+ "<div class='progress'>"
@@ -127,11 +171,76 @@
 														+ result[i].startdate
 														+ "</td><td>"
 														+ result[i].f_content
-														+ "</td></tr>");
+														+ "</td></tr>" );
 							}) // end each.
 
 		}//=====================  end리스트 만드는 함수 ====================
 
+			
+		// =================회원 단건 조회 Modal===================
+		
+			function show() {
+				/* var p_id = $(event.target).parent().next().text();
+			console.log(p_id); */
+			var p_id = 'kim1@a.com';
+			//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
+			 $.ajax({
+				url : 'admPmemberOne',
+				method : 'post',
+				data : {'p_id' : p_id },
+				success : function (res) {					
+					console.log(res.list);
+					$('.mem-body').append("<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
+											+ "<li>" +res.list.startdate 
+											+"</li><li>"
+											+ res.list.name
+											+ "</li><li>"
+											+ res.list.w_address
+											+ "</li><li>"
+											+ res.list.w_tel
+											+ "</li><li>"
+											+ res.list.p_info
+							    			+"</li></ul>");
+					
+					//=========================Modal의 Chart 그리기==========================
+					const ctx = document.getElementById('myChart').getContext('2d');
+					const myChart = new Chart(ctx, {
+						type : 'bar',
+						data : {
+							labels : [ '신고 당한 수', '추천 수', '서비스 제공 수' ],
+							datasets : [ {
+								label : '# of Votes',
+								data : [ res.list.c_report, '8', '1' ],
+								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+										'rgba(255, 159, 64, 0.2)',
+										'rgba(255, 159, 64, 0.2)' ],
+								borderColor : [ 'rgba(255, 99, 132, 1)',
+										'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
+								borderWidth : 1
+							} ]
+						},
+						options : {
+							scales : {
+								y : {
+									beginAtZero : true
+								}
+							}
+						}
+					});
+					//========================end Modal의 Chart 그리기=========================
+				}
+			}); //end Modal에 띄어줄 단건조회 ajax
+			
+			
+			
+			$("#myModal").modal('show'); //Modal Open
+			
+		}// =================end 회원 단건 조회 Modal=================
+			
+		
+			
+			
+			
 		//===================리스트 호출 버튼==================
 		$(".codep").on('click', function() {
 			var code = $(this).data('code');
@@ -159,7 +268,7 @@
 			});
 		}//===========end  리스트 ajax 호출==========
 			
-		//===========페이징 처리==========
+		//==================페이징 처리===================
 		function viewPage(page) {
 			console.log("page는 :"+page);
 			
@@ -193,14 +302,15 @@
 			nav += `</ul></nav>`
 			$('#pagination').html(nav);
 			
-		}
+		}// end viewPage
 			
 		function goPage(pa) {
 			console.log("pa 는 :" + pa);
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
-		//===========end 페이징 처리==========
+		
+		//======================end 페이징 처리=================
 
 		
 		// =============날짜 검색 ==============
