@@ -78,7 +78,8 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-				<div class="col-lg-12 col-md-12 blog_details">
+					<div class="col-lg-12 col-md-12 blog_details">
+						<form action="mypetUpdateForm" method="post">
 							<div class="form-group">
 								<h5>
 									<strong>이름</strong>
@@ -98,22 +99,27 @@
 								<h5>
 									<strong>품종</strong>
 								</h5>
-								<input type="text" style="border: none" id="c_content" name="c_content"
-									value="${pet.c_content}" readonly>
+								<input type="text" style="border: none" id="c_content"
+									name="c_content" value="${pet.c_content}" readonly>
 							</div>
 							<div class="form-group">
 								<h5>
 									<strong>몸무게</strong>
 								</h5>
-								<input type="text" style="border: none" id="weight" name="weight"
-									value="${pet.weight}" readonly>
+								<input type="text" style="border: none" id="weight"
+									name="weight" value="${pet.weight}" readonly>
 							</div>
+							
+							<div></div>
+							<input type="hidden" id="pet_no" name="pet_no"
+								value="${pet.pet_no}">
+							<button type="submit" class="genric-btn info radius">반려동물
+								정보수정</button>
+						</form>
+					</div>
+	
+				</div>
 
-							<button type="button" onclick="location.href='memberUpdateForm'"
-								class="genric-btn info radius">반려동물 정보수정</button>
-
-						</div>
-</div>
 			</div>
 		</div>
 
