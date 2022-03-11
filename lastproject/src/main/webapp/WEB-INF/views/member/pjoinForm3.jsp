@@ -13,7 +13,7 @@
 
 <body class="my-login-page">
 	<div class="container">
-		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1000px;">
+		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1250px;">
 			<div class="card-wrapper" style="width: 650px;">
 				<div class="brand">
 					<img src="resources/login/logo.jpg" alt="logo">
@@ -21,7 +21,7 @@
 				<div class="card fat" style="margin-top: -15px;">
 					<div class="card-body">
 						<h4 class="card-title">사업자정보입력</h4>
-						<label for="name">운영시간</label>
+						<label for="name">운영요일과 운영시간을 선택하여 추가버튼을 눌러주세요.</label>
 						<div class="form-group" id="o_time_div">
 							<select id="w_day" name="w_day">
 								<option value='' selected disabled>요일선택</option>
@@ -63,7 +63,7 @@
 								<option value='21:00'>21:00</option>
 							</select>
 							<br>
-							<input type="text" class="form-control" id="n_content" name="n_content" style="width: 465px;margin-top: 10px;">
+							<input type="text" class="form-control" id="n_content" name="n_content" placeholder="특이사항을 입력해주세요 ex)연중무휴" style="width: 465px;margin-top: 10px;">
 						</div>
 						<button type="button" class="btn btn-primary mr-2" onclick="addO_Time()" style="margin: -87px 0 0 30em;">시간추가</button>
 						<h4 class="card-title">서비스 정보를 입력해주세요.</h4>
@@ -80,8 +80,9 @@
 								<label for="exampleInputPassword4">서비스안내</label>
 								<textarea class="form-control" id="content" name="content" placeholder="해당하는 서비스 추가 설명을 입력해주세요." rows="3" cols="130"></textarea>
 							</div>
-						</div>	
-						<button type="button" class="btn btn-primary mr-2" onclick="addService()" style="position: relative; left: 445px;">서비스추가</button>
+							<p style="margin-left: 70px;">서비스를 더 추가 하시러면 서비스 추가 버튼을 눌러주세요.</p>
+						</div>
+						<button type="button" class="btn btn-primary mr-2" onclick="addService()" style="position: relative; left: 445px; top: -45px;">서비스추가</button>
 						<form action="pjoin_3" method="post" enctype="multipart/form-data" class="my-login-validation">
 							<input type="hidden" class="form-control" id="p_id" name="p_id" value="${p_id.p_id}">
 							<div class="form-group">
@@ -132,6 +133,15 @@
 								<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList2" multiple="multiple">
 								<button type="button" class="btn btn-primary btn-sm" onclick="addFile2()">+</button>
 								<div id="ffile2"></div>
+							</div>
+							<div class="form-group">
+								<div class="custom-checkbox custom-control">
+									<input type="checkbox" name="agree" id="agree" class="custom-control-input" required=""> 
+									<label for="agree" class="custom-control-label">
+										I agree to the <a href="#">Terms and Conditions</a>
+									</label>
+									<div class="invalid-feedback">You must agree with our Terms and Conditions</div>
+								</div>
 							</div>
 							<button type="submit" class="btn btn-primary mr-2" style="width: 100px;">완료</button>
 							<button class="btn btn-light" onclick="cancel()" style="width: 100px;">취소</button>

@@ -219,8 +219,7 @@
 		</div>
 	</section>
 	<script>
-
-
+console.log("돈좀줘~~"+${price});
 		//추천버튼 
 		function likeHit(p_id) {
 			var p_id = p_id;

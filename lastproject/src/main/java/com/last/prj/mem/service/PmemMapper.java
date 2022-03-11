@@ -1,5 +1,7 @@
 package com.last.prj.mem.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PmemMapper {
@@ -18,5 +20,6 @@ public interface PmemMapper {
 	int pmemberInsert3(@Param("p_id") String p_id,@Param("p_license") int p_license,@Param("p_image") int p_image);
 	
 	boolean isIdCheck(String p_id);
+	List<PriceVO> getPrice(PriceVO price);
 
 }

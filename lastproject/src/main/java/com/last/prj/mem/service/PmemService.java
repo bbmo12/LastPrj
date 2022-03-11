@@ -1,5 +1,7 @@
 package com.last.prj.mem.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PmemService {
@@ -17,4 +19,5 @@ public interface PmemService {
 	int pmemberInsert3(String p_id, int p_license, int p_image);
 	
 	boolean isIdCheck(String p_id);
+	List<PriceVO> getPrice(PriceVO price);
 }

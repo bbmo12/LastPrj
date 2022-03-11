@@ -106,6 +106,7 @@
 	
 	
 	
+	
 	<insert id="otimeinsert" parameterType="com.last.prj.mem.service.TimeVO">
 		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
