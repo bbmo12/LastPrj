@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -167,7 +168,7 @@ public class MemController {
 		session.invalidate();
 		return "redirect:home";
 	}
-
+/*
 	@RequestMapping("/plogin") // 파트너회원 로그인
 	public String plogin(PmemVO pmember, HttpSession session) {
 		pmember = pmemDao.pmemberSelect(pmember);
@@ -185,7 +186,7 @@ public class MemController {
 
 		return "redirect:home";
 	}
-
+*/
 	@RequestMapping("/memberIdSearchForm") // 일반회원 아이디찾기 폼으로 이동
 	public String memberIdSearchForm() {
 		return "member/memIdSearchForm";
@@ -229,7 +230,10 @@ public class MemController {
 		  e.printStackTrace();
 	  	}
 	  }
-	  
+	  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+	  String inputPwd = member.getPassword();
+	  String pwd = encoder.encode(inputPwd);
+	  member.setPassword(pwd);
 	  memDao.memberInsert(member);	 
 	  
 	  return "redirect:home";
@@ -262,6 +266,12 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = pmember.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		pmember.setPassword(pwd);
+		
 		pmemDao.pmemberInsert1(pmember);
 		model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		return "member/pjoinForm2";

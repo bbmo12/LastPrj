@@ -46,4 +46,7 @@ public class PmemVO {
 	//관리자
 	private String f_content; //서비스 구분 코드 내용
 	
+	private int p_role; // 권한
+	private List<AuthVO> authList;
+	
 }

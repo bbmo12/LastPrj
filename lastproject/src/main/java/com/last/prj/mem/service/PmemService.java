@@ -17,4 +17,6 @@ public interface PmemService {
 	int pmemberInsert3(String p_id, int p_license, int p_image);
 	
 	boolean isIdCheck(String p_id);
+	
+	PmemVO read(String username);
 }

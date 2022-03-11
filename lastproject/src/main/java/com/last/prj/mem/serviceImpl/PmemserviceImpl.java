@@ -42,6 +42,12 @@ public class PmemserviceImpl implements PmemService {
 	public boolean isIdCheck(String p_id) {
 		return pmap.isIdCheck(p_id);
 	}
+
+	@Override
+	public PmemVO read(String username) {
+		// TODO Auto-generated method stub
+		return pmap.read(username);
+	}
 	
 	
 

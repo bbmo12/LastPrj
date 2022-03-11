@@ -44,7 +44,7 @@
 												아이디찾기
 											</a>
 										</label>
-										<input type="email" id="m_id" name="m_id" class="form-control" value="" required
+										<input type="email" id="id" name="id" class="form-control" value="" required
 											autofocus>
 										<div class="invalid-feedback">
 											Email is invalid
@@ -100,7 +100,7 @@
 							아이디찾기
 						</a>
 					</label>
-					<input type="email" id="m_id" name="m_id" class="form-control" value="" required autofocus>
+					<input type="email" id="id" name="id" class="form-control" value="" required autofocus>
 					<div class="invalid-feedback">
 						Email is invalid
 					</div>
@@ -146,7 +146,7 @@
 							아이디찾기
 						</a>
 					</label>
-					<input type="email" id="p_id" name="p_id" class="form-control" value="" required autofocus>
+					<input type="email" id="id" name="id" class="form-control" value="" required autofocus>
 					<div class="invalid-feedback">
 						Email is invalid
 					</div>

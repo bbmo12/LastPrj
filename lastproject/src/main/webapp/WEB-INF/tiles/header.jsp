@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -159,11 +160,16 @@
 									<li><a href="pmemberList?code=103">미 용</a></li>
 								</ul>
 							</li>
-							<c:if test="${mId eq null and pId eq null}">
+							<sec:authorize access="isAnonymous()">
 								<li class="menu-has-children"><a href="loginForm">로그인</a> <!--   -->
 								</li>
 								<li><a href="join">회원가입</a></li>
-							</c:if>
+							</sec:authorize>
+							<%-- <c:if test="${mId eq null and pId eq null}">
+								<li class="menu-has-children"><a href="loginForm">로그인</a> <!--   -->
+								</li>
+								<li><a href="join">회원가입</a></li>
+							</c:if> --%>
 							<!-- 파트너회원 로그인 -->
 							<c:if test="${mId eq null and pId ne null}">
 								<li class="menu-has-children"><a href="#">마이페이지</a>
@@ -181,7 +187,8 @@
 								</li>
 							</c:if>
 							<!-- 일반회원 로그인  -->
-							<c:if test="${mId ne null and pId eq null}">
+							<%-- <c:if test="${mId ne null and pId eq null}"> --%>
+							<sec:authorize access="hasRole('MEMBER')">
 								<li class="menu-has-children"><a href="#">마이페이지</a>
 									<ul>
 										<li><a href="memberMypage">내 프로필</a></li>
@@ -222,7 +229,8 @@
 										<h6 class="p-3 mb-0 text-center">See all notifications</h6>
 									</div>
 								</li>
-							</c:if>
+							<%-- </c:if> --%>
+							</sec:authorize>
 							<li><a href="testPage">Contact</a></li>
 						</ul>
 					</nav>

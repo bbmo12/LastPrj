@@ -19,4 +19,5 @@ public interface PmemMapper {
 	
 	boolean isIdCheck(String p_id);
 
+	PmemVO read(String username);
 }
