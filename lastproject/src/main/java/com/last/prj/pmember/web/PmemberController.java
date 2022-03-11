@@ -173,6 +173,5 @@ public class PmemberController {
 		return 1;
 	}
 	
-	
 }
 

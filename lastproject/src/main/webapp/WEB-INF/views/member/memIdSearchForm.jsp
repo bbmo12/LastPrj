@@ -2,92 +2,82 @@
    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-   crossorigin="anonymous"></script>
-<style>
-.modal {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   display: none;
-   background-color: rgba(0, 0, 0, 0.4);
-}
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
+   <style>
+      .modal {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         display: none;
+         background-color: rgba(0, 0, 0, 0.4);
+      }
 
-.modal.show {
-   display: block;
-}
+      .modal.show {
+         display: block;
+      }
 
-.modal_body {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   width: 500px;
-   height: 600px;
-   padding: 40px;
-   text-align: center;
-   background-color: rgb(255, 255, 255);
-   border-radius: 10px;
-   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-   transform: translateX(-50%) translateY(-50%);
-}
-</style>
+      .modal_body {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         width: 500px;
+         height: 600px;
+         padding: 40px;
+         text-align: center;
+         background-color: rgb(255, 255, 255);
+         border-radius: 10px;
+         box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+         transform: translateX(-50%) translateY(-50%);
+      }
+   </style>
 </head>
 
-<body>
-   <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-         <div class="content-wrapper d-flex align-items-center auth">
-            <div class="row flex-grow">
-               <div class="col-lg-4 mx-auto">
-                  <div class="auth-form-light text-left p-5">
-                     <div align="center">
-                        <button onclick="mIdSearcha()"
-                           class="genric-btn info radius">일반회원
-                        </button>
-                        <button onclick="pIdSearcha()"
-                           class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">파트너회원
-                        </button>
-                     </div>
-                     <br>
+<body class="my-login-page">
+   <section class="h-100" id="main">
+      <div class="container h-100">
+         <div class="row justify-content-md-center align-items-center h-100">
+            <div class="card-wrapper">
+               <div class="brand">
+                  <img src="resources/login/logo.jpg" alt="logo">
+               </div>
+               <button onclick="mIdSearcha()" class="btn btn-primary btn-block" id="regular"
+                  style="width: 200px;position: relative; left: 199px; bottom: -58px;">일반회원</button>
+               <button onclick="pIdSearcha()" class="btn btn-primary btn-block" id="partner"
+                  style="width: 200px;">파트너회원</button>
+               <div class="card fat">
+                  <div class="card-body">
+                     <h4 class="card-title">아이디찾기</h4>
                      <div id="test">
-                        <div align="center" class="auth-link text-black">일반회원 아이디
-                           찾기</div>
-                        <div>이름, 전화번호로 아이디를 찾습니다.</div>
-                        <form class="pt-3" action="#" method="post">
+                        <form method="POST" action="#" class="my-login-validation">
                            <div class="form-group">
-                              <div class="auth-link text-black">이름</div>
-                              <input type="text" class="form-control form-control-lg"
-                                 id="name" name="name" placeholder="이름을 입력하세요">
+                              <label>이름</label>
+                              <input id="name" name="name" type="text" class="form-control" placeholder="이름을 입력하세요" required="required" autofocus>
                            </div>
-                           <div cl ass="form-group">
-                              <div class="auth-link text-black">전화번호</div>
-                              <input type="text" class="form-control form-control-lg"
-                                 id="tel" name="tel" placeholder="ex)01011112222">
+                           <div class="form-group">
+                              <label>전화번호</label>
+                              <input id="tel" name="tel" type="text" class="form-control" placeholder="ex)01011112222" required="required" autofocus>
                            </div>
-                           <div class="mt-3">
-                              <button type="button"
-                                 class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                 id="memIdsearch_btn">아이디찾기</button>
+                           <div class="form-group m-0">
+                              <button type="button" class="btn btn-primary btn-block" id="memIdsearch_btn"
+                              data-toggle="modal" style="margin-bottom: 10px;">
+                                 아이디찾기
+                              </button>
                            </div>
-                           <div
-                              class="my-2 d-flex justify-content-between align-items-center">
-                              <div class="form-check">
-                                 <label class="form-check-label text-muted"> <!-- <input type="checkbox" class="form-check-input"> Keep me signed in  </label>-->
-                              </div>
-
+                           <div class="form-group m-0">
+                              <button type="submit" class="btn btn-primary btn-block">
+                                 비밀번호찾기
+                              </button>
                            </div>
-                           <div class="mb-2"></div>
-                           <div align="center">
-                              <a href="#" class="auth-link text-black">비밀번호 찾기</a>
-                           </div>
-                           <div class="text-center mt-4 font-weight-light">
-                              계정이 없으신가요? <a href=joinForm class="text-primary">회원가입</a>
+                           <div class="mt-4 text-center">
+                              계정이 없으신가요?<a href="joinForm" class="text-primary">회원가입</a>
                            </div>
                         </form>
                      </div>
@@ -95,213 +85,211 @@
                </div>
             </div>
          </div>
-         <!-- content-wrapper ends -->
       </div>
-      <!-- page-body-wrapper ends -->
-   </div>
-   <div class="modal">
-      <!-- 모달 띄운후 내용입력부분 바디.  -->
-      <div class="modal_body"></div>
-   </div>
-   
-         <script type="text/javascript">
-   <!-- 일반회원아이디찾기 폼  -->
-    function mIdSearcha(){
-       
-       $("#test").empty();
-       
-       var mIdSearchForm =`
-          <div align="center" class="auth-link text-black">일반회원 아이디
-         찾기</div>
-      <div>이름, 전화번호로 아이디를 찾습니다.</div>
-      <form class="pt-3" action="#" method="post">
-         <div class="form-group">
-            <div class="auth-link text-black">이름</div>
-            <input type="text" class="form-control form-control-lg"
-               id="name" name="name" placeholder="이름을 입력하세요">
-         </div>
-         <div class="form-group">
-            <div class="auth-link text-black">전화번호</div>
-            <input type="text" class="form-control form-control-lg"
-               id="tel" name="tel" placeholder="ex)01011112222">
-         </div>
-         <div class="mt-3">
-            <button type="submit"
-               class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="memIdSearch_btn" onclick="memIdSearch()">아이디찾기</button>
-         </div>
-         <div
-            class="my-2 d-flex justify-content-between align-items-center">
-            <div class="form-check">
-               <label class="form-check-label text-muted"> <!-- <input type="checkbox" class="form-check-input"> Keep me signed in </label> -->
+   </section>
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h3 class="modal-title" id="exampleModalLongTitle">조회결과</h3>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
             </div>
-
+            <div class="modal-body" style="text-align: center;">
+         
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+            </div>
          </div>
-         <div class="mb-2"></div>
-         <div align="center">
-            <a href="#" class="auth-link text-black">비밀번호 찾기</a>
-         </div>
-         <div class="text-center mt-4 font-weight-light">
-            계정이 없으신가요? <a href="joinForm" class="text-primary">회원가입</a>
-         </div>
-      </form>`
-      
-      $("#test").append(mIdSearchForm);
-       
-    }
-
-/*  파트너회원 아이디찾기 창    */
-function pIdSearcha(){
-       
-   $("#test").empty();
+      </div>
+   </div>
    
-   var pIdSearch =`
-      <div align="center" class="auth-link text-black">파트너회원 아이디
-      찾기</div>
-   <div>이름, 전화번호로 아이디를 찾습니다.</div>
-   <form class="pt-3" action="#" method="post">
-      <div class="form-group">
-         <div class="auth-link text-black">이름</div>
-         <input type="text" class="form-control form-control-lg"
-            id="name" name="name" placeholder="이름을 입력하세요">
-      </div>
-      <div class="form-group">
-         <div class="auth-link text-black">전화번호</div>
-         <input type="text" class="form-control form-control-lg"
-            id="tel" name="tel" placeholder="ex)01011112222">
-      </div>
-      <div class="mt-3">
-         <button type="button"
-            class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" id="pmemIdsearch_btn" onclick="pmemIdSearch()">아이디찾기</button>
-      </div>
-      <div
-         class="my-2 d-flex justify-content-between align-items-center">
-         <div class="form-check">
-            <label class="form-check-label text-muted"> <!-- <input type="checkbox" class="form-check-input"> Keep me signed in </label> -->
-         </div>
 
+   <script src="resources/login/my-login.js"></script>
+   <script type="text/javascript">
+
+
+      <!-- 일반회원아이디찾기 폼   -->
+      function mIdSearcha(){
+   	  var main = $('#main');
+      $('#partner').attr("disabled",true);
+      $("#test").empty();
+      var mIdSearchForm =`
+   <form method="POST" action="#" class="my-login-validation">
+      <div class="form-group">
+         <label>이름</label>
+         <input id="name" name="name" type="text" class="form-control" placeholder="이름을 입력하세요" required autofocus>
       </div>
-      <div class="mb-2"></div>
-      <div align="center">
-         <a href="#" class="auth-link text-black">비밀번호 찾기</a>
+      <div class="form-group">
+         <label>전화번호</label>
+         <input id="tel" name="tel" type="text" class="form-control" placeholder="ex)01011112222" required autofocus>
       </div>
-      <div class="text-center mt-4 font-weight-light">
-         계정이 없으신가요? <a href="pjoinForm" class="text-primary">회원가입</a>
+      <div class="form-group m-0">
+         <button type="button" class="btn btn-primary btn-block" data-toggle="modal" id="memIdsearch_btn" onclick="mIdsearch()"
+            style="margin-bottom: 10px;">
+            아이디찾기
+         </button>
+      </div>
+      <div class="form-group m-0">
+         <button type="submit" class="btn btn-primary btn-block">
+            비밀번호찾기
+         </button>
+      </div>
+      <div class="mt-4 text-center">
+         계정이 없으신가요?<a href="joinForm" class="text-primary">회원가입</a>
       </div>
    </form>`
-  
-  $("#test").append(pIdSearch);
-}
-</script>
+   var modal =`
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h3 class="modal-title" id="exampleModalLongTitle">조회결과</h3>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body" id="members" style="text-align: center;">
+         
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+            </div>
+         </div>
+      </div>
+   </div>`
+   $("#test").append(mIdSearchForm);
+   main.append(modal);
+   }
 
+   /* 파트너회원 아이디찾기 창 */
+   function pIdSearcha(){
+   var main = $('#main');
+   $('#regular').attr("disabled", true);
+   $("#test").empty();
 
-<script type="text/javascript">
-
-function pmemIdSearch(){
-      var body = document.querySelector('body');
-      var modal = document.querySelector('.modal');
-     // var pbtnOpenPopup = document.querySelector('#pmemIdsearch_btn');
-
-      
-      
-          modal.classList.toggle('show');
-          if (modal.classList.contains('show')) {
-            body.style.overflow = 'hidden';
-            pIdsearch();
-          } 
-      
-
-       modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          modal.classList.toggle('show');
-          
-          if (!modal.classList.contains('show')) {
-            body.style.overflow = 'auto';
+   var pIdSearch =`
+   <form method="POST" action="#" class="my-login-validation">
+      <div class="form-group">
+         <label>이름</label>
+         <input id="name" name="name" type="text" class="form-control"placeholder="이름을 입력하세요" required autofocus>
+      </div>
+      <div class="form-group">
+         <label>전화번호</label>
+         <input id="tel" name="tel" type="text" class="form-control" placeholder="ex)01011112222" required autofocus>
+      </div>
+      <div class="form-group m-0">
+         <button type="button"  class="btn btn-primary btn-block" data-toggle="modal" id="pmemIdsearch_btn" onclick="pIdsearch()"
+            style="margin-bottom: 10px;">
+            아이디찾기
+         </button>
+      </div>
+      <div class="form-group m-0">
+         <button type="submit" class="btn btn-primary btn-block">
+            비밀번호찾기
+         </button>
+      </div>
+      <div class="mt-4 text-center">
+         계정이 없으신가요?<a href="pjoinForm" class="text-primary">회원가입</a>
+      </div>
+   </form>`
+   var modal =`
+   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h3 class="modal-title" id="exampleModalLongTitle">조회결과</h3>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body" id="pmembers" style="text-align: center;">
             
-          }
-        }
-      });
-}
-      
-      function memIdSearch(){
-     
-         var body = document.querySelector('body');
-          var modal = document.querySelector('.modal');
-          
-        modal.classList.toggle('show');
-        if (modal.classList.contains('show')) {
-          body.style.overflow = 'hidden';
-          mIdsearch();
-        }
-
-
-      modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-          modal.classList.toggle('show');
-          
-          if (!modal.classList.contains('show')) {
-            body.style.overflow = 'auto';
-            
-          }
-        }
-      });
-      }
-      </script>     
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+            </div>
+         </div>
+      </div>
+   </div>`
    
+   $("#test").append(pIdSearch);
+   main.append(modal);
+   }
+   </script>
+
    <!-- 일반회원 아이디찾기 모달창 ajax -->
    <script type="text/javascript">
-     function mIdsearch(){
-       var tel = $("#tel").val() 
-        var name =$("#name").val();
-        $.ajax({
-          url : "memberIdSearch",
-          type: "post",
-          data: {"tel":tel, "name":name},
-          success : function(result){
-             /* console.log(result) */
-                $(".modal_body>p").remove();
-             if(result == ""){
-             
-                $(".modal_body").append(`<p>아이디가 없습니다</p>`)
-             } else
-                {
-             
-                $(".modal_body").append(`<p> 아이디는 :`  + result +`<p>`)
-                }
-             console.log(result)
-          },
-          error : function(){
-          
-          }
-       }) 
-    } 
-
-   <!-- 파트너회원 아이디찾기 모달창 ajax -->
-      function pIdsearch(){
-        var tel = $("#tel").val() 
-         var name =$("#name").val();
+ 
+      function mIdsearch() {
+   		  
+         var tel = $("#tel").val()
+         var name = $("#name").val();
+         
+         if(tel == '' || name == ''){
+        	 alert("정보를입력해주세요.")
+        	 return
+         }      
+         $('#exampleModalCenter').modal('show');
+              
          $.ajax({
-           url : "pmemberIdSearch",
-           type: "post",
-           data: {"tel":tel, "name":name},
-           success : function(result){
-              /* console.log(result) */
-                 $(".modal_body>p").remove();
-              if(result == ""){
-              
-                 $(".modal_body").append(`<p>아이디가 없습니다</p>`)
-              } else
-                 {
-              
-                 $(".modal_body").append(`<p> 아이디는 :`  + result +`<p>`)
-                 }
-              console.log(result)
-           },
-           error : function(){
-           
-           }
-        }) 
-     }
-</script>
+            url: "memberIdSearch",
+            type: "post",
+            data: {
+               "tel": tel,
+               "name": name
+            },
+            success: function (result) {
+            var member = $('#members');
+            member.empty();
+               if (result == "") {
+            	   member.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
+               } else {
+            	   member.append(result+`&nbsp;&nbsp;<a href="loginForm">로그인하러가기</a>`);
+               }
+            },
+            error: function () {
+            }
+         })
+      }
+
+   /*    파트너회원 아이디찾기 모달창 ajax  */
+      function pIdsearch() {
+         var tel = $("#tel").val()
+         var name = $("#name").val();
+         
+         if(tel == '' || name == ''){
+        	 alert("정보를입력해주세요.")
+        	 return
+         }    
+         $('#exampleModalCenter').modal('show');
+         $.ajax({
+            url: "pmemberIdSearch",
+            type: "post",
+            data: {
+               "tel": tel,
+               "name": name
+            },
+            success: function (result) {   
+            	var pmember = $('#pmembers');
+            	pmember.empty();
+               if (result == "") {
+            	   pmember.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
+               } else {
+            	   pmember.append(`<h3>`+result+`</h3>`+`&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`);
+               }
+            },
+            error: function () {
+            }
+         })
+      }
+   </script>
 
 </body>
+
 </html>

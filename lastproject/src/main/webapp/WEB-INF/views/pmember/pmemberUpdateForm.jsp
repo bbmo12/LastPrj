@@ -185,7 +185,6 @@
 				'name': 'multiFileList',
 				'type': 'file'
 			});
-
 			$('#ffile').append(input);
 		}
 
