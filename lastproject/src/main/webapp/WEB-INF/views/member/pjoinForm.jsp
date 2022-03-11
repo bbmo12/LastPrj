@@ -115,9 +115,8 @@
 		});
 	</script>
 	<body class="my-login-page">
-		<section class="h-100">
-			<div class="container h-100">
-				<div class="row justify-content-md-center h-100" style="margin-top: 8em;">
+			<div class="container">
+				<div class="row justify-content-md-center" style="margin-top: 7em; height: 1000px;">
 					<div class="card-wrapper" style="width: 650px;">
 						<div class="brand">
 							<img src="resources/login/logo.jpg" alt="logo">
@@ -136,28 +135,28 @@
 										<label>훈련사&emsp;<input type="radio" id="code" name="code" value="101"><span class="checkmark"></span></label>							
 									<div class="form-group" style="margin-top: 10px;">
 										<label for="name">이름</label>
-										<input id="name" name="name" type="text" class="form-control" required autofocus>
+										<input id="name" name="name" type="text" class="form-control" value="박박박" required autofocus>
 										<div id="name_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail3">E-Mail 아이디</label>
-										<input id="p_id" name="p_id" type="email" class="form-control" required>
-										<button type="button" class="site-btn" onclick="isIdCheck()" id="idCheck" value="NO">중복체크</button>
+										<input id="p_id" name="p_id" type="email" class="form-control" value="parkkk@a.com" required style="width: 450px;">
+										<button type="button"  class="btn btn-primary mr-2" onclick="isIdCheck()" id="idCheck" value="NO" style="margin: -58px 0 0 29em;">중복체크</button>
 										<div id="id_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">비밀번호</label>
-										<input id="password" name="password" type="password" class="form-control" required data-eye>
+										<input id="password" name="password" type="password" class="form-control" value="1234" required data-eye>
 										<div id="pw_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">비밀번호확인</label>
-										<input id="password1" name="password1" type="password" class="form-control" required data-eye>
+										<input id="password1" name="password1" type="password"  value="1234" class="form-control" required data-eye>
 										<div id="pw1_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleSelectGender">전화번호&nbsp;휴대폰 번호('-'없이 번호만 입력해주세요)</label>
-										<input id="tel" name="tel" type="text" class="form-control" placeholder="tel">
+										<input id="tel" name="tel" type="text" class="form-control" value="01012345678" placeholder="tel">
 										<div id="tel_check"></div>
 									</div>
 									<div class="form-group">
@@ -166,9 +165,8 @@
 											<input class="file-upload-browse btn btn-primary" type="file" id="file" name="file">
 										</div>
 									</div>
-									<button type="submit" class="btn btn-primary mr-2">다음</button>
-									<button class="btn btn-light" onclick="location.href='home'"
-										style="width: 100px;">취소</button>
+									<button type="submit" class="btn btn-primary mr-2"style="width: 100px;">다음</button>
+									<button class="btn btn-light" onclick="location.href='home'" style="width: 100px;">취소</button>
 									<div class="mt-4 text-center">이미 아이디가 있으신가요? <a href="loginForm">로그인</a>
 									</div>
 								</form>
@@ -177,7 +175,6 @@
 					</div>
 				</div>
 			</div>
-		</section>
 		<script src="resources/login/my-login.js"></script>
 		<script type="text/javascript">
 			/* 아이디 중복체크 */

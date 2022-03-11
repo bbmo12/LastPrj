@@ -86,11 +86,11 @@
 		</div>
 	</section>
 	<script src="resources/login/my-login.js"></script>
-
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
 		function mlogin() {
-			$('#partner').attr('disabled', true);
+			
+			$("#partner").toggle();
 			$("#test").empty();
 			var loginForm = `
 				<form class="my-login-validation" action="login" method="post">
@@ -136,6 +136,7 @@
 
 		function plogin() {
 			$('#regular').attr('disabled', true);
+			$("#regular").toggle();
 			$("#test").empty();
 			var loginForm = `
 				<form class="my-login-validation" action="plogin" method="post">
