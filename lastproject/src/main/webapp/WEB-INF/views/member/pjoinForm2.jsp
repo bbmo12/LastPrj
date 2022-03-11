@@ -48,24 +48,21 @@
 							<div class="form-group">
 								<label for="exampleInputPassword4">이용 안내</label>
 								<textarea class="form-control" id="p_info" name="p_info"
-									placeholder="이용안내" rows="10" cols="130">
-                        </textarea>
+									placeholder="이용안내" rows="10" cols="130"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword4">대표경력</label>
 								<textarea class="form-control" id="career" name="career"
-									placeholder="대표경력" rows="4" cols="130">
-                        </textarea>
+									placeholder="대표경력" rows="4" cols="130"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword4">전문분야</label>
 								<textarea class="form-control" id="speciality" name="speciality"
-									placeholder="전문분야" rows="4" cols="130">
-                        </textarea>
+									placeholder="전문분야" rows="4" cols="130"></textarea>
 							</div>
 
 							<button type="submit" class="btn btn-primary mr-2">다음</button>
-							<button class="btn btn-light" onclick="location.href='home'">취소</button>
+							<button type="button" class="btn btn-light" onclick="cancel()">취소</button>
 							</form>
 					</div>
 				</div>
@@ -73,6 +70,19 @@
 		</div>
 	</div>
 	<script>
+	function cancel(){
+		var p_id = "${p_id.p_id}";
+		console.log(p_id);
+		$.ajax({
+			url : 'joinCancel',
+			method : 'POST',
+			data : {"p_id" : p_id},
+			success : function(res){
+				alert("회원가입이 취소되었습니다.");
+			}
+		})
+	}
+	
 		function findAddr() {
 			new daum.Postcode(
 					{

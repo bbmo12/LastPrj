@@ -38,6 +38,7 @@ import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PmemVO;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.TimeVO;
+import com.last.scheduler.Scheduler;
 
 @Controller
 public class MemController {
@@ -70,6 +71,7 @@ public class MemController {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		memDao.memberDelete(m_id);
+	
 		session.invalidate();
 		return  "redirect:home";
 	}
@@ -230,7 +232,7 @@ public class MemController {
 	  
 	  memDao.memberInsert(member);	 
 	  
-	  return "home/home";
+	  return "redirect:home";
 	  }
   
 	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
@@ -278,6 +280,8 @@ public class MemController {
 	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PriceVO price, PetcareVO petcare) {
 		 System.out.println("여기 파트너회원가입 3차");
 		 System.out.println("p_id3:"+p_id);
+		 System.out.println(petcare);
+		 System.out.println(time);
 		  
 		 
 		  
@@ -292,23 +296,26 @@ public class MemController {
 		 
 		  pmemDao.pmemberInsert3(p_id, p_license, p_image); //파일다중업로드
 		  
-		  System.out.println("여기 펫케어");
-		  for(int i=0; i<petcare.getPetcareVOList().size() ; i++) {
+		  
 			  memDao.petcareinsert(petcare);
-		  }
+		  		  
 		  
-		  System.out.println("여기 가격");
-		  for(int i=0 ; i<price.getPriceVOList().size(); i++) {
 			  memDao.servicepriceinsert(price);
-		  }
 		  
-		  System.out.println("여기 시간");
-		  for(int i=0; i<time.getTimeListVO().size() ; i++) {
-			  memDao.otimeinsert(time);
-		  }
+		  
+				/*
+				 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
+				 * i++) { memDao.otimeinsert(time); }
+				 */
 		 
 		  
 		  return "member/joinResult";
+	  }
+	  @PostMapping("addO_Time")
+	  @ResponseBody
+	  public int addO_Time(TimeVO vo) {
+		  memDao.otimeinsert(vo);
+		  return 1;
 	  }
 
 	  //아이디 중복체크

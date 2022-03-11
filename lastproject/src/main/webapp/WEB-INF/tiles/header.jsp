@@ -149,7 +149,7 @@
 					</div>
 					<nav id="nav-menu-container">
 						<ul class="nav-menu">
-							<li><a href="admBoard">공지사항</a></li>
+							<li><a href="admBoard">공지사항</a></li>							
 							<li><a href="qnaMain">Open Q&A</a></li>
 							<li class="menu-has-children"><a href="pmemberBest">파트너회원</a>
 								<ul>

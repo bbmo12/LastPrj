@@ -34,7 +34,6 @@
 </style>
 <body>
 <br><br><br><br><br><br>
-
  <div id="menu">
       <span id="menu-navi">
         <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
@@ -132,6 +131,7 @@
 </div>
 
 <script type="text/javascript">
+
 
 $(document).ready(function(){
 	

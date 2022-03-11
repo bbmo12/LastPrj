@@ -6,7 +6,7 @@ import lombok.Data;
 public class PagingVO {
 	private int startPage; // 첫페이지 번호
 	private int endPage; // 마지막페이지
-	private boolean next; // 다음 버튼 활성화
+	private boolean next=true; // 다음 버튼 활성화
 	private boolean prev; // 이전 버튼 활성화
 	private int pageBlock=5;//페이지 버튼 수 
 	

@@ -45,5 +45,26 @@ public class ServiceserviceImpl implements ServiceService {
 		return map.serviceSelect(r_no);
 	}
 
+	@Override
+	public List<ServiceVO> petService(ServiceVO vo) {
+		return map.petService(vo);
+	}
+
+	@Override
+	public int petServiceCnt(ServiceVO vo) {
+
+		return map.petServiceCnt(vo);
+	}
+
+	@Override
+	public List<ServiceVO> petProtoColSearch(String key, String data, String m_id) {
+		// TODO Auto-generated method stub
+		return map.petProtoColSearch(key, data, m_id);
+	}
+
+
+
+
+
 	
 }

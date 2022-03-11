@@ -60,6 +60,12 @@ a:hover {
 #searchBox {
 	margin-left: 10px;
 	width: 210px;
+	height: 50px;
+	auto-focus: none;
+	background-color: #38a4ff;
+	border: none;
+	border-radius: 30px;
+	color: white;
 }
 
 .ads_widget {
@@ -106,8 +112,23 @@ hr {
 	text-align: justify
 }
 
-.searchSelect{
-	color : black;
+.searchSelect {
+	color: black;
+}
+
+.widget {
+	background-color: #38a4ff;
+	height : 50px;
+	text-align : center;
+	font-size : 20px;
+	color : white;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	padding : 15px;
+}
+
+.genric-btn success{
+	font-size : 13px;
 }
 </style>
 <script
@@ -129,7 +150,7 @@ hr {
 				<c:if test="${pId eq null}">
 					<div class="qnaForm">
 						<a href="qnaForm?m_id=${mId }"><button type="button"
-								class="btn btn-primary btn-lg">질문글 작성하기</button></a>
+								class="genric-btn info circle arrow btn-lg">질문글 작성하기</button></a>
 					</div>
 				</c:if>
 			</div>
@@ -181,16 +202,19 @@ hr {
 											<!-- 태그 목록 -->
 											<div class="tags">
 												<c:forEach items="${qnaList.tagList }" var="hash">
-													<ul class="tagL">
-														<li class="tag-item"><a
-															href="tagSearch?t_name=${hash.t_name }">${hash.t_name}</a></li>
+													<ul class="tagList">
+														<c:if test="${hash.t_name ne null}">
+														<li class="tagli"><a
+															href="tagSearch?t_name=${hash.t_name }"><button class="genric-btn success circle btn-sm">${hash.t_name}</button></a></li>
+														</c:if>
 													</ul>
 												</c:forEach>
 											</div>
 
 
 											<!-- 상세조회 페이지 이동 -->
-											<a class="template-btn"
+											<a style="float: right; margin-left: 400px;'"
+												class="genric-btn info-border radius"
 												href="qnaDetail?q_no=${qnaList.q_no }">View More</a>
 										</div>
 									</div>
@@ -255,8 +279,7 @@ hr {
 											${page.cri.searchType eq 'writer' ? 'selected' : '' }>작성자
 										</option>
 									</select> <span><input type="text" id="searchBox"
-										class="form-control" name="searchValue"></span> <span
-										class="input-group-btn">
+										name="searchValue"></span> <span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<i class="fa fa-search"></i>
 										</button>
@@ -272,7 +295,7 @@ hr {
 
 						<!-- 베스트 QNA -->
 						<aside class="single_sidebar_widget post_category_widget">
-							<h4 id="bestQna" class="widget_title">베스트 Q&A</h4>
+							<h4 id="bestQna" class="widget">베스트 Q&A</h4>
 							<c:forEach items="${best }" var="best">
 								<ul style="text-align: left;" class="list cat-list">
 									<li id="tlist"><a href="qnaDetail?q_no=${best.q_no }"
@@ -285,12 +308,12 @@ hr {
 						</aside>
 
 						<!-- 인기 태그 -->
-						<aside class="single-sidebar-widget tag_cloud_widget">
-							<h4 class="widget_title">인기 태그</h4>
+						<aside class="single-sidebar-widget">
+							<h4 class="widget">인기 태그</h4>
 							<c:forEach items="${tagList }" var="tagList">
-								<ul class="tagList">
+								<ul>
 									<li class="tagli"><a
-										href="tagSearch?t_name=${tagList.t_name }">${tagList.t_name }</a></li>
+										href="tagSearch?t_name=${tagList.t_name }"><button class="genric-btn success-border circle btn-sm">${tagList.t_name }</button></a></li>
 								</ul>
 							</c:forEach>
 						</aside>
@@ -348,7 +371,7 @@ hr {
 
 		$(document).ready(function() {
 			$('.qnaBody').find('img').css('display', 'none');
-			
+
 		});
 	</script>
 </body>
