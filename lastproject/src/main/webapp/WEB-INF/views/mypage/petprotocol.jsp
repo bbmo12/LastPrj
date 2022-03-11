@@ -37,7 +37,6 @@
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
-
 							<div class="br"></div>
 						</aside>
 
@@ -78,14 +77,14 @@
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div class="template-demo">
-							<form id="admDateForm">
+							<form id="admDateForm" onsubmit="return false" onkeypress="eventkey();" onclick="pagingList();">
 								<input type="hidden" name="code"> 
 								<input type="hidden" name="pageNum" value="1"> 
-								<select id="search"	name="search">
+								<select id="key" name="key">
 									<option value="all" selected="selected">전 체</option>
 								</select> 
 								<input type="text" id="data" name="data" size="20">&nbsp;
-								<button type="subim">검 색</button>
+								<button type="submit">검 색</button>
 							</form>
 							<button type="button"
 								class="btn btn-link btn-rounded btn-fw codep" data-code="">전체</button>
@@ -125,50 +124,18 @@
 	<script type="text/javascript">
 	
 	
-	//검색 데이터 호출
-	function searchData() {
-		var m_id = $("input[name=m_id]").val();
-		$.ajax({
-			url : "petProtoColSearch",
-			type : "post",
-			data : {
-				"key" : $("#search option:selected").val(),
-				"data" : $("#data").val(),
-				"m_id" : m_id
-			},
-			dataType : "json",
-			success : function(result) {
-				if (result.length > 0) {
-					htmlView(result);
-				} else {
-					alert("조건에 맞는 결과 없음")
-				}
-			}
-		});
-	}// end 검색 데이터 호출
+	//======================enter 키===================
+	function eventkey() {
+		if (event.keyCode == 13) {
+			pagingList();
+		} else {
+			return false;
+		}
+	}//====================end enter 키================
 	
-	// htmlView 함수 
-	function htmlView(data) {
-
-		$('#myTable').empty();
-		console.log(data);
-		
-		$.each(data, function(i) {
-	
-			$('#myTable').append("<tr><td>" + data[i].p_name + "</td></td>"
-								+data[i].pm_name+"</td><td>"
-								+data[i].content+"</td><td>"
-								+data[i].startdate+"</td></tr>");
-			
-		})
-	} // end htmlView 함수
-	
-	
-	// viewPmemberList : 받아온 데이터로 List만드는 함수
+	// ===================viewPmemberList : 받아온 데이터로 List만드는 함수==========================
 	 let viewPmemberList = function (result) {
 		$("#myTable").empty();
-		console.log("result는: " + result);
-
 		$.each(result,function(i) {
 			console.log(result[i])
 				$("#myTable").append("<tr><td>"
@@ -183,10 +150,10 @@
 										);
 		}) // end each.
 	
-	}//end viewPmemberList : 받아온 데이터로 List만드는 함수
+	}//=========================end viewPmemberList : 받아온 데이터로 List만드는 함수===============
 	
 	
-	
+	// ===========================조건 별 검색 + 페이징 처리==============================
 	$(".codep").on('click', function() {
 		var code = $(this).data('code');
 		$('#admDateForm')[0].code.value = code
@@ -210,7 +177,7 @@
 					viewPage(result.page);
 				}
 			});
-		}
+		}// end paginList()
 	
 		function viewPage(page) {
 			console.log("page는 :"+JSON.stringify(page));
@@ -245,7 +212,7 @@
 			nav += `</ul></nav>`
 			$('#pagination').html(nav);
 			
-		}//===========end 페이징 처리==========
+		}// end viewPage(page)
 	
 			
 		function goPage(pa) {
@@ -254,7 +221,7 @@
 			pagingList();
 		}
 		pagingList();
-	
+		// ===========================end 조건 별 검색 + 페이징 처리==============================
 
 	</script>
 </body>

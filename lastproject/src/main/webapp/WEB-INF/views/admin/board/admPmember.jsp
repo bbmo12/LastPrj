@@ -61,10 +61,12 @@
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					id="petsitter" data-code="103">펫시터</button>
 			</div>
+			<!-- 조건 검색한 리스트에서 검색 -->
 			<div>
 				<input class="form-control" id="myInput" type="text"
 					placeholder="Search.."> <br>
 			</div>
+			<!-- end 조건 검색한 리스트에서 검색 -->
 			<table class="table table-striped">
 				<thead>
 					<tr>
