@@ -144,10 +144,10 @@
 
 	<!--관리자 리뷰 리스트 페이징 처리된 유형 별 조회 -->
 	<select id="admRlistCode"
-		parameterType="com.last.prj.pmember.service.ReviewVO"
-		resultType="com.last.prj.pmember.service.ReviewVO">
+		parameterType="com.last.prj.report.service.ReportVO"
+		resultType="com.last.prj.report.service.ReportVO">
 		SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (SELECT F.CONTENT AS
-		F_CONTENT, RE.CONTENT AS RE_CONTENT, R.REPORTER,
+		F_CONTENT, RE.CONTENT AS REV_CONTENT, R.REPORTER,
 		R.REPORTED,RE.REV_NO,R.REP_NO,R.REPOR, R.W_DATE, R.CONTENT
 		FROM REPORT
 		R, F_CODE F, REVIEW RE
@@ -165,7 +165,7 @@
         ]]>
 	</select>
 	<select id="admRlistCodeCount"
-		parameterType="com.last.prj.pmember.service.ReviewVO" resultType="int">
+		parameterType="com.last.prj.report.service.ReportVO" resultType="int">
 		SELECT COUNT(*)
 		FROM REVIEW RE, REPORT R
 		WHERE RE.REV_NO = R.REV_NO
