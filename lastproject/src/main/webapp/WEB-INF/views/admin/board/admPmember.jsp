@@ -31,7 +31,6 @@
 </style>
 </head>
 <body>
-
 	<div class="card">
 		<div class="card-body">
 			<h4 class="card-title">파트너회원</h4>
@@ -48,7 +47,6 @@
 					<!-- <button type="button" id="btnSearch">검 색</button> -->
 				</form>
 			</div>
-
 			<div class="template-demo">
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					id="doctor" data-code="">전체</button>
@@ -83,49 +81,7 @@
 			<div id="pagination"></div>
 		</div>
 	</div>
-
-	<%-- 
-	<form action="admPmember" name="goform">
-		<input id="pmemberCode" type="hidden" name="code"
-			value="${param.code }"> <input type="hidden" name="pageNum"
-			value="1">
-		<div class="blog_right_sidebar"
-			style="width: 500px; float: none; margin: 0 auto;">
-			<aside class="single_sidebar_widget search_widget">
-				<div class="input-group">
-					<input type="text" class="form-control" id="w_address"
-						name="w_address" placeholder="지역명을 입력해주세요"
-						value="${param.w_address }"> <span class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
-				</div>
-				<!-- /input-group -->
-			</aside>
-		</div>
-	</form>
-	<nav class="blog-pagination justify-content-center d-flex">
-			<ul class="pagination">
-				
-				
-					<li class="page-item active"><a href="javascript:go_page(1)" class="page-link">1</a>
-					</li>
-				
-					<li class="page-item "><a href="javascript:go_page(2)" class="page-link">2</a>
-					</li>
-				
-				
-			</ul>
-		</nav>
-	<my:nav jsFunc="go_page" page="${page}"/>  --%>
-	<!-- <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary">1</button>
-                            <button type="button" class="btn btn-primary">2</button>
-                            <button type="button" class="btn btn-primary">3</button>
-                          </div> -->
-	<script>
-	
+	<script>	
 		//검색 함수
 		$(function() {
 		
@@ -200,8 +156,6 @@
 				}
 			});
 		}//===========end  리스트 ajax 호출==========
-		
-			
 			
 		//===========페이징 처리==========
 		function viewPage(page) {
@@ -237,39 +191,17 @@
 			nav += `</ul></nav>`
 			$('#pagination').html(nav);
 			
-		}//===========end 페이징 처리==========
-		
-		
-		
-		
-		
-		// =============날짜 검색 ==============
+		}
+			
 		function goPage(pa) {
 			console.log("pa 는 :" + pa);
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
+		//===========end 페이징 처리==========
 
-		$('#btnSearch').on('click',function(e){
-			var str = $('#admDateForm').serialize();
-			console.log(str);
-			var fromDate = $("#fromDate").val();
-			var toDate = $("#toDate").val();
-			
-			$.ajax({
-				url : 'admPmemberDate',
-				method : 'post',
-				data : {
-					"fromDate" : fromDate,
-					"toDate" : toDate
-				}, success : function(result) {
-					console.log(result);
-					viewPmemberList(result);
-				}
-			})
-			
-		});
 		
+		// =============날짜 검색 ==============
         $("#datepicker").datepicker({
             dateFormat: 'yy-mm-dd',
             prevText: '이전 달',

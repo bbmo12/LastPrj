@@ -35,9 +35,15 @@
 		<div class="card-body">
 			<h4 class="card-title">신고리스트</h4>
 			<p class="card-description">
-				관리
 				<code>조건 별 검색</code>
 			</p>
+			<div>
+					<form id="admDateForm">
+						FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
+						TO : <input type="text" id="toDate" name="toDate">
+						<button type="button" id="btnSearch">검 색</button>
+					</form>
+				</div>
 			<div class="template-demo">
 				<button type="button" class="btn btn-link btn-rounded btn-fw"
 					id="admQna">QnA 신고</button>
@@ -63,13 +69,7 @@
 					<option value="702">기각 처리</option>
 					<option value="703">승인 처리</option>
 				</select>
-				<div>
-					<form id="admDateForm">
-						FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
-						TO : <input type="text" id="toDate" name="toDate">
-						<button type="button" id="btnSearch">검 색</button>
-					</form>
-				</div>
+				
 			</div>
 			
 			<!-- Modal 창 -->

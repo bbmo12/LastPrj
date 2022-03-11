@@ -121,6 +121,19 @@
 									rows="3">${pmember.p_info}</textarea>
 							</div>
 							<div class="form-group">
+								<h3 style="font-weight: bolder;">이미지</h3>
+								<c:forEach items="${pimage}" var="image">
+								<img src="resources/upload/${image.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
+								</c:forEach>
+								
+							</div>
+							<div class="form-group">
+								<h3 style="font-weight: bolder;">자격증</h3>
+									<c:forEach items="${plicense}" var="plicense">
+									<img src="resources/upload/${plicense.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
+									</c:forEach>
+							</div>
+							<div class="form-group">
 								<h3 style="font-weight: bolder;">경력</h3>
 								<input type="text" style="border: none" id="career" name="career"
 									value="${pmember.career}" readonly>

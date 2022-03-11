@@ -20,6 +20,8 @@
 <!-- ckeditor -->
 <script src="resources/ckeditor/ckeditor.js"></script>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 
 <style>
 .radioImg {
@@ -163,9 +165,7 @@ ul li.tag-item {
 		var pet = "${qnaDetail.pet_no}";
 		console.log(pet);
 
-		/*라디오 버튼 기존 선택값 가져오기*/
-		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked",
-				true);
+		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked", true);
 
 		/*태그 처리*/
 		$(document)
@@ -174,17 +174,17 @@ ul li.tag-item {
 
 							var tag = {};
 							var counter = 0;
-							
+
 							//json 값으로 변환된 기존 태그를 가져온다
 							var list = ${prevTag};
 
 							//태그 등록
 							for (i = 0; i < list.length; i++) {
 								console.log(list[i].t_name);
-								
+
 								var tagValue = list[i].t_name;
 								counter = i;
-								
+
 								$("#tag-list")
 										.append(
 												"<li class='tag-item'>"
