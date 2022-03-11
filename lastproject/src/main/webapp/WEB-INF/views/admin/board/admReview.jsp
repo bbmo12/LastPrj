@@ -83,6 +83,52 @@
 			<div id="pagination"></div>
 		</div>
 	</div>
+	
+				<!-- Modal 창 -->
+			<div class="modal fade" id="myModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">신고내역</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<ul id="repo">
+								<!-- 신고 내역 -->
+							</ul>
+
+							<!-- 신고 처리 Form 태그 -->
+							<form id="form">
+								<div class="form-group">
+									<label for="amdReportOption">처리유형</label> <select class="repor"
+										id="repor" name="repor">
+										<option value="701" selected>미처리</option>
+										<option value="702">기각</option>
+										<option value="703">승인</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">처리사유</label>
+									<textarea class="state" id="state" name="state"></textarea>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="admReportUpdate" name="admReportUpdate"
+								class="btn btn-primary">확 인</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--end Modal 창 -->
+	
+	
+	
 	<script>	
 		//검색 함수
 		$(function() {
@@ -180,10 +226,10 @@
 		
 		// Modal 미처리 신고 : Review
 		function show(st) {
-			console.log(st);
+			console.log("st는 :"+st);
 				$
 						.ajax({
-							url : admReportOneReview,
+							url : 'admReportOneReview',
 							method : 'post',
 							data : {
 								"rep_no" : st
@@ -193,7 +239,7 @@
 								if (res == '')
 									alert('해당 데이터가 없습니다');
 
-								console.log(res[0].rep_no);
+								console.log("rep_no 는 " +res[0].rep_no);
 
 								$("form")
 										.append(
@@ -266,6 +312,7 @@
 		//===================리스트 호출 버튼==================
 		$(".codep").on('click', function() {
 			var code = $(this).data('code');
+			console.log(code);
 			$('#admDateForm')[0].code.value = code
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
@@ -276,12 +323,14 @@
 		//===========리스트 ajax 호출==========
 		function pagingList() {
 			var str = $('#admDateForm').serialize();
+			console.log(str);
 			$.ajax({
 				url : 'admRlistCode',
 				method : 'post',
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
+					console.log(result.list);
 					viewReviewList(result.list);
 					viewPage(result.page);
 				}
@@ -290,7 +339,7 @@
 			
 		//===========페이징 처리==========
 		function viewPage(page) {
-			console.log(page);
+			console.log("얘로 페이지를 만든다!"+page);
 			
 			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">`

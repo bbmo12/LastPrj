@@ -59,10 +59,12 @@
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					id="petsitter" data-code="103">펫시터</button>
 			</div>
+			<!-- 조건 검색한 리스트에서 검색 -->
 			<div>
 				<input class="form-control" id="myInput" type="text"
 					placeholder="Search.."> <br>
 			</div>
+			<!-- end 조건 검색한 리스트에서 검색 -->
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -102,7 +104,7 @@
 		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
 			$("#myTable").empty();
-			console.log(result);
+			console.log("result는: " + result);
 
 			$
 					.each(
@@ -149,6 +151,8 @@
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
+					console.log("리절트리스트는 :"+result.list);
+					console.log("리절트페이지는 : " + result.page);
 					viewPmemberList(result.list);
 					viewPage(result.page);
 				}
@@ -157,7 +161,7 @@
 			
 		//===========페이징 처리==========
 		function viewPage(page) {
-			console.log(page);
+			console.log("page는 :"+page);
 			
 			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">`
@@ -192,6 +196,7 @@
 		}
 			
 		function goPage(pa) {
+			console.log("pa 는 :" + pa);
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
