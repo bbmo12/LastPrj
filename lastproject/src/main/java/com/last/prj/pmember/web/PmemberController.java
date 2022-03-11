@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.last.prj.mem.service.MemVO;
+import com.last.prj.mem.service.PmemService;
+import com.last.prj.mem.service.PriceVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
@@ -31,7 +33,10 @@ public class PmemberController {
 	@Autowired
 	private PmemberService pMemberDao;
 	@Autowired
-	private PmemberMapper mapper;	
+	private PmemberMapper mapper;
+	@Autowired
+	private PmemService pmemDao;
+
 	@Autowired
 	ServletContext sc;
 	
@@ -50,12 +55,13 @@ public class PmemberController {
 
 	// 상세페이지
 	@RequestMapping("/pmemberDetail")
-	public String pmemberDetail(@RequestParam("id") String p_id, Model model) {
+	public String pmemberDetail(@RequestParam("id") String p_id, Model model, PriceVO price) {
 		// 파트너 정보
 		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
+		model.addAttribute("price", pmemDao.getPrice(price));
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
@@ -71,6 +77,7 @@ public class PmemberController {
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
+		
 		return "pmember/pmemberMypage";
 	}
 

@@ -53,6 +53,9 @@
 	where p_id = #{p_id}
 	</update>
 	
+	<select id="getPrice" resultType="com.last.prj.mem.service.PriceVO">
+		SELECT * FROM PRICE WHERE P_ID =#{p_id}
+	</select>
 	
 	<select id="isIdCheck" parameterType="String" resultType="boolean">
 		select case when count(p_id) = 1 then 0 else 1 end as p_id

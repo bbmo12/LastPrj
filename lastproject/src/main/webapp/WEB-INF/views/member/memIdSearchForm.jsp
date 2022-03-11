@@ -9,35 +9,6 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
-   <style>
-      .modal {
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         display: none;
-         background-color: rgba(0, 0, 0, 0.4);
-      }
-
-      .modal.show {
-         display: block;
-      }
-
-      .modal_body {
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         width: 500px;
-         height: 600px;
-         padding: 40px;
-         text-align: center;
-         background-color: rgb(255, 255, 255);
-         border-radius: 10px;
-         box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-         transform: translateX(-50%) translateY(-50%);
-      }
-   </style>
 </head>
 
 <body class="my-login-page">
@@ -248,7 +219,8 @@
                if (result == "") {
             	   member.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
                } else {
-            	   member.append(result+`&nbsp;&nbsp;<a href="loginForm">로그인하러가기</a>`);
+            	   member.append(`<h3>`+result+`</h3>`+
+            			   `&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`);
                }
             },
             error: function () {

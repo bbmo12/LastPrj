@@ -1,10 +1,13 @@
 package com.last.prj.mem.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.prj.mem.service.PmemMapper;
 import com.last.prj.mem.service.PmemVO;
+import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.PmemService;
 
 @Repository("pmemDao")
@@ -42,7 +45,10 @@ public class PmemserviceImpl implements PmemService {
 	public boolean isIdCheck(String p_id) {
 		return pmap.isIdCheck(p_id);
 	}
-	
-	
+
+	@Override
+	public List<PriceVO> getPrice(PriceVO price) {
+		return pmap.getPrice(price);
+	}
 
 }
