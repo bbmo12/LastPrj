@@ -52,4 +52,20 @@
 	</select>
 	
 	
+	<update id="mypetupdate"  parameterType="com.last.prj.pet.service.PetVO">
+		update pet
+		<set>
+			<if test= "nume != null">name = #{name}</if>
+			<if test="birth != null">birth = #{birth}</if>
+			<if test="gender != null">gender = #{gender}</if>
+			<if test="weight != null">weight = #{weight}</if>
+			<if test="code != null"> code = #{code}</if>
+			<if test="picture != null"> picture = #{picture}</if>
+			<if test="pfile != null"> pfile = #{pfile}</if>
+		</set>
+		where m_id = #{m_id}
+	
+	</update>
+	
+
 </mapper>

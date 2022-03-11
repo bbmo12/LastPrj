@@ -22,5 +22,8 @@ public interface PetMapper {
 	
 	//펫 수
 	int petCount();
+
+	int mypetupdate(@Param("pet_no") int pet_no);
 	
+
 }

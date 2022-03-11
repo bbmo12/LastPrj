@@ -77,7 +77,7 @@
 		AND
 		P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID 
 		<if test="code != null">AND pm.code = #{code} </if>
-		<if test="key == 'all'">AND  p.NAME LIKE '%'|| #{data}||'%'</if>
+		<if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
 		AND	P.M_ID = #{m_id}
 		UNION
 		SELECT PM.NAME as pm_name, D.D_NAME AS content,
@@ -87,8 +87,7 @@
 		WHERE D.R_NO = R.R_NO
 		AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID 
 		<if test="code !=null">AND pm.code = #{code}  </if>
-		<if test="key == 'all'">AND  p.NAME LIKE '%'|| #{data}||'%'</if>
-		
+		<if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
 		AND P.M_ID = #{m_id}    <![CDATA[
 	     )A)B
 		WHERE RN BETWEEN(#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
@@ -102,9 +101,9 @@
 		AS pm_code
 		FROM SERVICE S, RESERVATION R, PET P, P_MEMBER PM
 		WHERE
-		S.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
-		<if test="code != null">pm.code = #{code} AND </if>
-		<if test="key == 'all'">AND  p.NAME LIKE '%'|| #{data}||'%'</if>
+		S.R_NO = R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID
+		<if test="code != null">AND pm.code = #{code}</if>
+		<if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
 		AND P.M_ID = #{m_id}
 		UNION
 		SELECT PM.NAME as pm_name, D.D_NAME AS content,
@@ -114,7 +113,7 @@
 		WHERE D.R_NO = R.R_NO
 		AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID 
 		<if test="code != null">AND pm.code = #{code} </if>
-		<if test="key == 'all'">AND  p.NAME LIKE '%'|| #{data}||'%'</if>
+		<if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
 		AND P.M_ID = #{m_id}   )
 
 	</select>

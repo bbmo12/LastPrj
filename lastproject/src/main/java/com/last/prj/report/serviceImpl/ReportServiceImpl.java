@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.last.prj.pmember.service.Criteria;
-import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
@@ -89,7 +88,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<ReviewVO> admRlistCode(ReportVO vo) {
+	public List<ReportVO> admRlistCode(ReportVO vo) {
 		return map.admRlistCode(vo);
 	}
 
