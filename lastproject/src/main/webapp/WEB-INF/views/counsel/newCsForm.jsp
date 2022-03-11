@@ -124,6 +124,19 @@ body {
 	flex-direction: row;
 }
 
+.newCs {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.btns {
+	margin-left: 400px;
+}
+
+#radios{
+	display : flex;
+	flex-direction : row;
+}
 </style>
 
 <body>
@@ -188,43 +201,67 @@ body {
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px;">
+					style="position: relative; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;"">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
-							<h1>첫 상담 차트 작성</h1>
+							<h2>상담 차트 작성</h2>
 						</div>
 						<div>
-						 <form name="newCs" id="newCs" action="newCs" method="post">
-								<div>${pInfo.name }님과의상담을 시작합니다.</div>
-									
-								<input type="hidden" id="p_id" name="p_id" value="${pInfo.p_id }">
-								<input type="hidden" id="m_id" name="m_id" value="${mId }" >
-								<input type="hidden" id="sender" name="sender" value="${mId }">
-	
-								<h3>상담받고자 하는 반려동물을 선택해주세요.</h3>
+							<form name="newCs" id="newCs" action="newCs" method="post"
+								onsubmit="fmcheck();">
+								<div style="text-align: center; margin-bottom: 20px;">
+									<h3>
+										<span>${pInfo.name }</span>&nbsp;<span><c:if
+												test="${pInfo.code == 100}">
+												<c:out value="수의사" />
+											</c:if> <c:if test="${pInfo.code == 101}">
+												<c:out value="훈련사" />
+											</c:if> <c:if test="${pInfo.code == 102}">
+												<c:out value="펫시터" />
+											</c:if> <c:if test="${pInfo.code == 103}">
+												<c:out value="미용사" />
+											</c:if></span>와의 첫 상담을 위한 차트를 작성해주세요.
+									</h3>
+								</div>
+
+								<input type="hidden" id="p_id" name="p_id"
+									value="${pInfo.p_id }"> <input type="hidden" id="m_id"
+									name="m_id" value="${mId }"> <input type="hidden"
+									id="sender" name="sender" value="${mId }">
+
+								<h3>반려동물 선택</h3>
+								<h4 style="color: gray;'">*상담받고자 하는 반려동물을 선택해주세요.</h4>
 								<div class="petSelect"
 									style="margin-bottom: 50px; margin-top: 50px;">
 									<c:forEach items="${petList }" var="pet">
+									<div id="radios">
 										<div class="radioImg">
 											<img class="petSelection" src="resources/qna/${pet.picture }"
 												onError="this.src='resources/qna/대체이미지2.png'">
 										</div>
 										<input type="radio" id="pet_no" name="pet_no"
 											value="${pet.pet_no}">&nbsp;${pet.name }
+									</div>
 									</c:forEach>
 								</div>
 
-								<h3>상담 내용을 적어주세요</h3>
-								<textarea id="content" name="content"></textarea>
+								<h3>상담 내용</h3>
+								<h4 style="color: gray;">*반려동물의 증상, 궁금한 점 등을 자세히 적어주세요.</h4>
+								<textarea id="content" name="content" class="form-control"
+									style="width: 100%; height: 500px; margin-bottom: 30px;"></textarea>
 
-								<button type="submit" id="submitCs" class="btn btn-primary">상담 시작</button>
-								<button type="button" class="btn btn-secondary"
-									onclick="history.back()">취소</button>
+								<div id="btns">
+									<button type="submit" id="submitCs" class="btn btn-primary"
+										style="margin-left: 300px;">상담 시작</button>
+									<button type="button" class="btn btn-secondary"
+										onclick="history.back()">취소</button>
+								</div>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 	<script>
 		/* $(function(){
@@ -248,7 +285,17 @@ body {
 				})
 			})	
 		}) */
-	
+
+		function fmcheck() {
+
+			var content = $('#content').val();
+
+			if (content == "") {
+				alert('상담 내용이 입력되지 않았습니다.');
+				
+				return false;
+			}
+		}
 	</script>
 </body>
 </html>

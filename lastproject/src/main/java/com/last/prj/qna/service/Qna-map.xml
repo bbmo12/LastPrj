@@ -42,6 +42,7 @@
 		<result property="f_part" column="f_part" />
 		<result property="pet_no" column="pet_no" />
 		<result property="r_check" column="r_check" />
+		<result property="recnt" column="recnt"/>
 
 		<collection property="tagList" resultMap="tagMap"></collection>
 	</resultMap>
@@ -66,8 +67,7 @@
 	<select id="qnaList" resultMap="qnaResult">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-				FROM (SELECT t.t_name, q.q_no, q.w_date, q.title, q.hit, q.writer, q.p_no, q.pet_no, (SELECT COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS recnt,
-							CASE WHEN LENGTH(q.content) > 100 THEN SUBSTR
+				FROM (SELECT t.t_name, q.q_no, q.w_date, q.title, q.hit, q.writer, q.p_no, q.pet_no,(SELECT COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS recnt, CASE WHEN LENGTH(q.content) > 100 THEN SUBSTR
 							(q.content,0,100)||'...' ELSE q.content END AS content
 					  FROM qna q LEFT OUTER JOIN qnatag t
 					  ON q.q_no = t.q_no

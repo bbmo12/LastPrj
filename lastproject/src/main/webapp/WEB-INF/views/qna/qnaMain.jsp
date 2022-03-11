@@ -169,7 +169,7 @@ hr {
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="blog_left_sidebar">
-						<c:forEach items="${qnaList }" var="qnaList">
+						<c:forEach items="${qnaList }" var="list">
 							<article class="row blog_item" id="blogBody">
 
 								<div class="col-lg-12">
@@ -179,17 +179,17 @@ hr {
 												<tr>
 													<td><i class="fa-solid fa-q fa-4x"
 														style="color: dodgerblue; margin-right: 20px;"></i></td>
-													<td style="width: 450px; font-size: 28px; color: black;">${qnaList.title }
+													<td style="width: 450px; font-size: 28px; color: black;">${list.title }
 													</td>
 													<td>
 														<ul id="bInfo" class="blog_meta list">
-															<li>${qnaList.writer }&nbsp;&nbsp;<i
+															<li>${list.writer }&nbsp;&nbsp;<i
 																class="fa fa-user-o"></i></li>
-															<li>${qnaList.w_date }&nbsp;&nbsp;<i
+															<li>${list.w_date }&nbsp;&nbsp;<i
 																class="fa fa-calendar-o"></i></li>
-															<li>${qnaList.hit }Views&nbsp;&nbsp;<i
+															<li>${list.hit }Views&nbsp;&nbsp;<i
 																class="fa fa-eye"></i></li>
-															<li>${qnaList.recnt }Comments&nbsp;&nbsp;<i
+															<li>${list.recnt }Comments&nbsp;&nbsp;<i
 																class="fa fa-comment-o"></i></li>
 														</ul>
 													</td>
@@ -197,11 +197,11 @@ hr {
 											</table>
 
 
-											<div class="qnaBody">${qnaList.content }</div>
+											<div class="qnaBody">${list.content }</div>
 
 											<!-- 태그 목록 -->
 											<div class="tags">
-												<c:forEach items="${qnaList.tagList }" var="hash">
+												<c:forEach items="${list.tagList }" var="hash">
 													<ul class="tagList">
 														<c:if test="${hash.t_name ne null}">
 														<li class="tagli"><a
@@ -215,7 +215,7 @@ hr {
 											<!-- 상세조회 페이지 이동 -->
 											<a style="float: right; margin-left: 400px;'"
 												class="genric-btn info-border radius"
-												href="qnaDetail?q_no=${qnaList.q_no }">View More</a>
+												href="qnaDetail?q_no=${list.q_no }">View More</a>
 										</div>
 									</div>
 								</div>
@@ -371,7 +371,7 @@ hr {
 
 		$(document).ready(function() {
 			$('.qnaBody').find('img').css('display', 'none');
-
+	/* 		$('.qnaBody').find('iframe').css('display', 'none'); */
 		});
 	</script>
 </body>

@@ -87,7 +87,7 @@
 
 	<!-- 기존 채팅방 존재 여부 -->
 	<select id="isExist"
-		parameterType="com.last.prj.counsel.service.CounselVO">
+		parameterType="com.last.prj.counsel.service.CounselVO" resultType="int">
 		SELECT COUNT(*)
 		FROM counsel
 		WHERE p_id=#{p_id} AND

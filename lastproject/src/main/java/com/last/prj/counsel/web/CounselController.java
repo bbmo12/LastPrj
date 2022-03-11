@@ -1,6 +1,9 @@
 package com.last.prj.counsel.web;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,13 +90,36 @@ public class CounselController {
 
 	// 기존 채팅방 존재 여부 확인 후 새로운 상담글 폼으로 이동 + p_id 정보 + m_id별 펫정보 받아감.
 	@RequestMapping(value = "/EnterCs")
-	public String EnterCs(@RequestParam("m_id") String m_id, @RequestParam("p_id") String p_id, Model model)
+	public String EnterCs(@RequestParam("m_id") String m_id, @RequestParam("p_id") String p_id, HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model, CounselVO counsel, Criteria cri)
 			throws Exception {
+		
+		String mId = (String) session.getAttribute("mId");
+		
+		if(mId == null) {
+			//로그인 여부 체크
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out_writer = response.getWriter();
+			out_writer.println("<script>alert('먼저 로그인하세요.');</script>");
+			out_writer.flush();
 
-		model.addAttribute("petList", petDAO.petmemberList(m_id));
-		model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
-		return "counsel/newCsForm";
+			return "member/loginForm";
+		} else if(counselDao.isExist(m_id, p_id) > 0){
+			//기존 상담 여부 체크
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out_writer = response.getWriter();
+			out_writer.println("<script>alert('이미 진행 중인 상담이 있습니다. 상담 내역 페이지에서 확인해주세요.');</script>");
+			out_writer.flush();
+			
+			return null;		
+		
+		} else {
+			//새로운 상담 폼으로 이동
+			model.addAttribute("petList", petDAO.petmemberList(m_id));
+			model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
+			return "counsel/newCsForm";
+		}
 	}
+		
 
 	// 새로운 상담 등록
 	@PostMapping("/newCs")
