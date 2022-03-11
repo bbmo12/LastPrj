@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.last.prj.pmember.service.Criteria;
 
 
+
+
 public interface ReportService {
 	
 	
@@ -38,4 +40,7 @@ public interface ReportService {
 	
 	public int pmemReport(Criteria cri);//파트너마이페이지 신고내역
 	public List<ReportVO> pmemReportList(Criteria cri);
+
+	public int admRlistCodeCount(ReportVO vo);
+	public List<ReportVO> admRlistCode(ReportVO vo);
 }

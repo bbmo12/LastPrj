@@ -36,4 +36,12 @@
 			values(q_seq.currval, #{item.t_name})
 		</foreach>
 	</insert>
+	
+	<!-- 글 수정 시 태그 처리 -->
+	<insert id="ModiTag" parameterType="com.last.prj.qtag.service.QnaTagVO">
+		<foreach collection="nTags" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
+			INSERT INTO qnatag
+			values(#{q_no}, #{item.t_name})
+		</foreach>
+	</insert>
 </mapper>

@@ -15,6 +15,6 @@ public interface QtagService {
 	// 글과 연결.
 	int newQtag(QnaTagVO qnatag);
 	
-
+	int ModiTag(QnaTagVO qnatag);
 
 }

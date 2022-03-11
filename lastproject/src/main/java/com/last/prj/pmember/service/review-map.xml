@@ -15,6 +15,9 @@
 		INSERT INTO REVIEW(REV_NO, CONTENT, RATING, R_NO) VALUES
 		(#{rev_no}, #{content}, #{rating}, #{r_no})
 	</insert>
+	
+	
+	
 
 
 </mapper>

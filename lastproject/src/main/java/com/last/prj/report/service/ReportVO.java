@@ -5,6 +5,8 @@ import java.sql.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
 
 import lombok.Data;
 
@@ -23,7 +25,7 @@ public class ReportVO {
 	private int rev_no; 			//신고당한 review의 번호
 	private int q_no; 				//신고당한 QnA의 번호
 	private String reported; 		//신고당한사람의  이메일 
-	private int code;  				//신고 코드
+	private Integer code;  				//신고 코드
 	
 	private int count;  			//신고 건수
 	private String f_content; 		//신고 코드 유형
@@ -35,8 +37,13 @@ public class ReportVO {
 	private String state;           //신고 처리 사유
 	private String rev_content;     //신고 당한 review 내역
 	
-	private String formDate;        //신고 날짜 검색
+	private String fromDate;        //신고 날짜 검색
 	private String toDate;			//신고 날짜 검색
+
+	
+	private PagingVO vo;
+	private Criteria cri;
+	private String total;
 
 
 }

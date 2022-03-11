@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.last.prj.pmember.service.Criteria;
 
 
+
 public interface ReportMapper {
 
 	// qna 신고 인서트
@@ -33,8 +34,12 @@ public interface ReportMapper {
 		//신고 처리
 		int admReportUpdate(@Param("rep_no")int rep_no, @Param("repor")int repor, @Param("state")String state);
 		//신고 날짜 검색
-		public List<ReportVO> admReportDate(@Param("fromDate")String fromDate, @Param("toDate")String toDate); 
-
+		public List<ReportVO> admReportDate(@Param("fromDate")String fromDate, @Param("toDate")String toDate);
+		
+		//신고 리뷰 조회
+		public int admRlistCodeCount(ReportVO vo);
+		public List<ReportVO> admRlistCode(ReportVO vo);
+		
 		public int pmemReport(Criteria cri);//파트너마이페이지 신고내역
 		public List<ReportVO> pmemReportList(Criteria cri);
 

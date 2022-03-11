@@ -12,12 +12,12 @@
  	<!-- 상세페이지 첨부파일 따로가져오기 -->
 	<select id="getImage" parameterType="String"  resultType="com.last.prj.pmember.service.FfileVO">
 		SELECT F.PICTURE
-		FROM F_FILE F, P_MEMBER P
+			FROM F_FILE F, P_MEMBER P
 		WHERE P.P_IMAGE = F.F_PART AND P_ID = #{p_id}
 	</select>
 	<select id="getLicense" parameterType="String" resultType="com.last.prj.pmember.service.FfileVO">
 		SELECT F.PICTURE
-		FROM F_FILE F, P_MEMBER P
+			FROM F_FILE F, P_MEMBER P
 		WHERE P.P_LICENSE = F.F_PART AND P_ID =  #{p_id}
 	</select>
 	
@@ -143,7 +143,7 @@
 	<!-- 아이디로 정보 조회 -->
 	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
-		FROM p_member
+			FROM p_member
 		WHERE p_id = #{p_id}
 	</select>
 
@@ -153,62 +153,44 @@
 			FROM
 				( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
 					FROM P_MEMBER
-				GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-				HAVING RCOM IS NOT NULL
-				ORDER BY RCOM DESC
+						GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+						HAVING RCOM IS NOT NULL
+					ORDER BY RCOM DESC
 				)
 		WHERE ROWNUM<![CDATA[<=4]]>     
 	</select>
 	
-
 	<!-- 관리자 -->
-	
-	<!-- 파트너 전체 조회 -->
-	<select id="admPlist" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
-		FROM P_MEMBER P , F_CODE F 
-		WHERE F.CODE=P.CODE
-	</select>
 	
 	<!-- 파트너쉽 별로 출력 -->
 	<select id = "admPlistCode" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel, p.picture
-		from p_member p, f_code f 
-		where f.code = p.code 
-		 <if test="code != null ">
-		  AND p.code = #{code}
-		 </if>
-		 <if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
-		 AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
-		  </if>
-		  ORDER BY P_ID DESC
-		  <![CDATA[ 
-        ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
-        ]]>
+		SELECT B.* 
+				FROM ( SELECT A.* , ROWNUM RN 
+					   FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS F_CONTENT, P.TEL AS TEL, P.PICTURE
+			                 FROM P_MEMBER P, F_CODE F 
+				WHERE F.CODE = P.CODE 
+		 	<if test="code != null ">	
+		 		 AND p.code = #{code}
+		 	</if>
+			<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+		 		 AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		  	</if>
+		  		 ORDER BY P_ID DESC
+		  <![CDATA[  ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
 	</select>
-		<select id = "admPlistCodeCount" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="int">
-		SELECT count(*)
-		from p_member p
+	
+	<select id = "admPlistCodeCount" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="int">
+		SELECT COUNT(*)
+			FROM P_MEMBER P
 		<where>
-		
-		 <if test="code != null ">
-		  AND p.code = #{code}
-		 </if>
-		 <if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
-		 AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
-		 </if>
-		 </where>
-		 
+		 	<if test="code != null ">
+		  		AND P.CODE = #{code}
+		 	</if>
+		 	<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+				 AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		 	</if>
+		 </where> 
 	</select>
-	
-	
-	<!-- 파트너 날짜 별 조회 -->
-	<select id="admPmemberDate" parameterType="String" resultType="com.last.prj.qna.service.PmemberVO">
-		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
-		FROM P_MEMBER P , F_CODE F 
-		WHERE F.CODE=P.CODE AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
-	</select>
-	
 
 	<!-- 파트너 회원 수 -->
 	<select id="pmemCount" resultType="int">
@@ -246,17 +228,37 @@
 	</select>
 	
 	<!-- 파트너회원 회원탈퇴시 모든정보 NULL로 수정 -->
+
 	<update id="pmemberNullUpdate" parameterType="String" >
-		WHERE M_ID = #{M_ID}
 		UPDATE P_MEMBER
-		SET NAME = '정보삭제' , TEL = '정보삭제', STARTDATE = NULL, 
-			 ENDDATE =SYSDATE,  PASSWORD ='정보삭제' , C_REPORT = NULL, 
-			 N_CONTENT =NULL, W_NAME=NULL, W_ADDRESS ='정보삭제', W_TEL='정보삭제', P_INFO ='정보삭제',
-		     W_D_ADDRESS ='정보삭제', BUSINESSNUMBER = NULL, CAREER = '정보삭제',
-		     SPECIALITY = '정보삭제', RCOM = NULL, CODE =9999,P_PROFILE=NULL,P_LICENSE=NULL,P_IMAGE=NULL,PICTURE='정보삭제',PFILE='정보삭제'
+		SET NAME = '정보삭제',
+		    TEL = '정보삭제', 
+		    STARTDATE = NULL, 
+			ENDDATE =SYSDATE,  
+			PASSWORD ='정보삭제', 
+			C_REPORT = NULL, 
+			N_CONTENT =NULL, 
+			W_NAME=NULL, 
+			W_ADDRESS ='정보삭제', 
+			W_TEL='정보삭제', 
+			P_INFO ='정보삭제',
+		    W_D_ADDRESS ='정보삭제', 
+		    BUSINESSNUMBER = NULL, 
+		    CAREER = '정보삭제',
+		    SPECIALITY = '정보삭제', 
+		    RCOM = NULL, 
+		    CODE =9999,
+		    P_PROFILE=NULL,
+		    P_LICENSE=NULL,
+		    P_IMAGE=NULL,
+		    PICTURE='정보삭제',
+		    PFILE='정보삭제'
 		WHERE P_ID = #{p_id}
 	</update>
-
-
-
+	<!-- 회원가입취소시 데이터 삭제 -->
+	<delete id="pmemberJoinCancel" parameterType="String" >
+		DELETE FROM P_MEMBER
+		WHERE P_ID = #{p_id}
+	</delete>
+	
 </mapper>

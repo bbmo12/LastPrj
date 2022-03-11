@@ -26,18 +26,7 @@
         flex: 1 1 auto
     }
 
-    @media (max-width :991.98px) {
-        .padding {
-            padding: 1.5rem
-        }
-    }
-
-    @media (max-width :767.98px) {
-        .padding {
-            padding: 1rem
-        }
-    }
-
+   
     .padding {
         padding: 5rem
     }
@@ -131,9 +120,9 @@
         </div>
     </section>
     <section id="my_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
+        <div>
+            <div class="row" style="width: 1500px; margin-left: 13em;">
+                <div>
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
@@ -174,15 +163,15 @@
                     </div>
                 </div>
                 <div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
-                    <div class="col-lg-12 col-md-12 blog_details">
+                    <div class="col-lg-12 col-md-12 blog_details" style="width: 100%;">
                         <div align="center">
                             <h1>신고내역조회</h1>
                         </div>
                         <div class="page-content page-container" id="page-content" style="margin-top: 20px;">
                             <div class="row container d-flex justify-content-center">
                                 <div class="card" style="width: 100%">
-                                    <div class="card-body" style="width: 100%">
-                                        <div class="table-responsive" style="width: 100%">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
                                             <form action="pmemcounsel" name="goform">
                                                 <input type="hidden" name="pageNum" value="1">
                                                 <table id="htmltable" class="table">

@@ -9,4 +9,6 @@ public interface ReviewService {
 	//서비스리뷰 등록
 	int servicereview(ReviewVO review);
 
+	
+
 }

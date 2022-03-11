@@ -1,8 +1,11 @@
 package com.last.prj.reserv.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,39 +79,46 @@ public class ReservationController {
 	
 	//일반회원 예약페이지
 	@RequestMapping("/reservMember")
-	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo) {
+	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response) throws Exception {
 		
 		//로그인 세션값
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		System.out.println("m_id : " +m_id);
-		/*
-		 * String p_id = (String) session.getAttribute("pId");
-		 * System.out.println("p_id : " + p_id); if(m_id==null || m_id =="") { m_id =
-		 * "test1@a.com"; } if(p_id == null || p_id== "") { p_id= "kim1@a.com"; }
-		 */
-		co.setP_id(p_id);
-		po.setM_id(m_id);
-		pmo.setP_id(p_id);
 		
-		//달력리스트
-		List<CalendarVO> list = CalendarDao.revSetList(co);
 		
-		//펫정보조회
-		List <PetVO> petList = petDAO.petmemberList(m_id);
+		//비회원 로그인창으로 이동
+		if (m_id == null) {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인이 필요한 서비스입니다.'); </script>");
+			out.flush();
+			return "member/loginForm";
+		}else {
+			
+			co.setP_id(p_id);
+			po.setM_id(m_id);
+			pmo.setP_id(p_id);
+			
+			//달력리스트
+			List<CalendarVO> list = CalendarDao.revSetList(co);
+			
+			//펫정보조회
+			List <PetVO> petList = petDAO.petmemberList(m_id);
+			
+			//펫 품종코드 중복제거값
+			List <PetVO> petCode = petDAO.petCodeSearch(m_id);
 		
-		//펫 품종코드 중복제거값
-		List <PetVO> petCode = petDAO.petCodeSearch(m_id);
-	
-		
-		model.addAttribute("petList",petList);
-		model.addAttribute("petCode",petCode);
-		model.addAttribute("reservset",list);
-		//해당 파트너회원 정보조회
-		model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
-		System.out.println(list);
-		System.out.println(petList);
-		return "reservation/reservMember";
+			
+			model.addAttribute("petList",petList);
+			model.addAttribute("petCode",petCode);
+			model.addAttribute("reservset",list);
+			//해당 파트너회원 정보조회
+			model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
+			System.out.println(list);
+			System.out.println(petList);
+			return "reservation/reservMember";
+		}
 	}
 	
 	//파트너회원 예약설정
@@ -129,7 +139,6 @@ public class ReservationController {
 		cri.setM_id(m_id);
 		cri.setAmount(5);
 		PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
-
 		
 		model.addAttribute("member",memDao.memberSearch(m_id));
 		model.addAttribute("page", paging);// 페이징 수
