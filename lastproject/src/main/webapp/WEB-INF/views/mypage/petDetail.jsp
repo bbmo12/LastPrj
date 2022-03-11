@@ -110,7 +110,7 @@
 									name="weight" value="${pet.weight}" readonly>
 							</div>
 							
-							
+							<div></div>
 							<input type="hidden" id="pet_no" name="pet_no"
 								value="${pet.pet_no}">
 							<button type="submit" class="genric-btn info radius">반려동물
