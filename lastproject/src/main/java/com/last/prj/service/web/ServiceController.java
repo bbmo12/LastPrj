@@ -89,11 +89,12 @@ public class ServiceController {
 	  @ResponseBody
 	  public HashMap<String, Object> PetServiceList(ServiceVO vo, Criteria cri, HttpServletRequest request){
 	  
-		  HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		vo.setM_id(m_id);
 		System.out.println(vo);
 	  int total = serviceDao.petServiceCnt(vo);
+	  
 	  PagingVO page = new PagingVO(cri,total);
 	  HashMap map = new HashMap();
 	  vo.setVo(page);
