@@ -46,4 +46,6 @@ public interface MemService {
 	
 	public int otimeinsert(TimeVO time);
 	
+	MemVO read(String username);
+	
 }

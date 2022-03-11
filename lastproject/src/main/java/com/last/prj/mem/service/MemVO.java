@@ -19,6 +19,8 @@ public class MemVO {
 
 	private String picture; 	//프로필사진
 	private String pfile;		//첨부파일
+	
+	private int m_role; // 권한
 }
 	
 

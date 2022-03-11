@@ -18,29 +18,16 @@
     
      <form-login
       login-page="/loginForm"
-      login-processing-url="/login"
       default-target-url="/home"
-      authentication-failure-url="/loginForm"
-      username-parameter="m_id"
-      password-parameter="password"/> 
+      authentication-failure-url="/loginForm"/> 
     <logout logout-url="/logout" logout-success-url="/home"/>
     <access-denied-handler error-page="/testPage"/>
     <csrf disabled="true"/>
   </http>
 
  <authentication-manager>
-	 <authentication-provider>
-	 <jdbc-user-service data-source-ref="dataSource"/>
-		 <!-- users-by-username-query
-		 ="select m_id, PASSWORD, 1
-			 from member
-			where m_id = ?"
-		 authorities-by-username-query
-		 ="select m_id, role_name
-             from t_role
-             inner join member on t_role.id = member.m_role
-             where m_id = ?"  -->
-		 <!-- <password-encoder hash="bcrypt"/> -->
+	 <authentication-provider user-service-ref="customUserDetailService">
+           <password-encoder hash="bcrypt"/>
 	 </authentication-provider>
  </authentication-manager>
 

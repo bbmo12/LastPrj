@@ -139,7 +139,7 @@ public class MemController {
 
 		return "member/loginForm";
 	}
-
+/*
 	@RequestMapping("/login") // 일반회원로그인창
 	public String loginForm(MemVO member, HttpSession session) {
 		member = memDao.memberSelect(member);
@@ -159,7 +159,7 @@ public class MemController {
 
 		return "redirect:home";
 	}
-
+*/
 	@RequestMapping("/logout") // 로그아웃
 	public String logout(HttpSession session) {
 		session.invalidate();
