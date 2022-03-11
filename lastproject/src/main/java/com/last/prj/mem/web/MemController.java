@@ -51,34 +51,32 @@ public class MemController {
 
 	@Autowired
 	private FfileUtil ffileutil;
-	
-	
+
 	@Autowired
 	ServletContext sc;
 
-	//회원탈퇴 페이지로 이동
+	// 회원탈퇴 페이지로 이동
 	@RequestMapping("mdeleteForm")
 	public String mdeleteForm(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		return "mypage/mdeleteForm";
 	}
-	
-	
-	//일반회원 회원탈퇴
+
+	// 일반회원 회원탈퇴
 	@RequestMapping("mdelete")
 	public String mdelete(HttpServletRequest request, MemVO member) {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		memDao.memberDelete(m_id);
-	
+
 		session.invalidate();
-		return  "redirect:home";
+		return "redirect:home";
 	}
-	
+
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(MultipartFile file, MemVO member, Model model) {		
+	public String memberUpdate(MultipartFile file, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -104,7 +102,6 @@ public class MemController {
 			}
 		}
 		memDao.memberUpdate(member);
-
 		return "redirect:memberMypage";
 	}
 
@@ -150,15 +147,13 @@ public class MemController {
 			session.setAttribute("member", member);
 			session.setAttribute("mId", member.getM_id());
 			session.setAttribute("password", member.getPassword());
-			
+
 			LoginVO login = new LoginVO();
 			login.setId(member.getM_id());
 			session.setAttribute("loginInfo", login);
-			
 		} else {
 			return "member/loginForm";
 		}
-
 		return "redirect:home";
 	}
 
@@ -206,53 +201,43 @@ public class MemController {
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
-
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
-
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
-
 		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);	  
-	  if(!originalFileName.isEmpty()) {
-		  String uuid = UUID.randomUUID().toString();
-		  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
-	  
-	  try {
-		  file.transferTo(saveFile);
-	    member.setPicture(originalFileName);
-	    member.setPfile(saveFileName);
-	  
-	  } catch(Exception e) {
-		  e.printStackTrace();
-	  	}
-	  }
-	  
-	  memDao.memberInsert(member);	 
-	  
-	  return "redirect:home";
-	  }
-  
-	 @RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
+		File saveFile = new File(realPath);
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			try {
+				file.transferTo(saveFile);
+				member.setPicture(originalFileName);
+				member.setPfile(saveFileName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		memDao.memberInsert(member);
+		return "redirect:home";
+	}
+
+	@RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
 	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		String originalFileName = file.getOriginalFilename();
-
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
-
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
-
 		realPath += File.separator + originalFileName;
 		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
-
 			try {
 				file.transferTo(saveFile);
 				pmember.setPicture(originalFileName);
@@ -267,70 +252,64 @@ public class MemController {
 		return "member/pjoinForm2";
 	}
 
-	  @RequestMapping("/pjoin_2") //파트너회원 회원가입 2차
-	  public String pjoin_2(PmemVO pmember, Model model) {
-		  
-		  
-		  pmemDao.pmemberInsert2(pmember);
-		  model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
-		  return "member/pjoinForm3";
-	  }
-	  
-	  @RequestMapping("/pjoin_3") //파트너회원 회원가입 3차
-	  public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1, List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PriceVO price, PetcareVO petcare) {
-		 System.out.println("여기 파트너회원가입 3차");
-		 System.out.println("p_id3:"+p_id);
-		 System.out.println(petcare);
-		 System.out.println(time);
-		  
-		 
-		  
-		 // FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
-		  
-		  
-		  int p_license = ffileutil.multiFileUpload(multiFileList1, request);
-		  System.out.println("p_license = " + p_license);
-		  
-		  int p_image = ffileutil.multiFileUpload(multiFileList2, request);
-		  System.out.println("p_image = " + p_image);
-		 
-		  pmemDao.pmemberInsert3(p_id, p_license, p_image); //파일다중업로드
-		  
-		  
-			  memDao.petcareinsert(petcare);
-		  		  
-		  
-			  memDao.servicepriceinsert(price);
-		  
-		  
-				/*
-				 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
-				 * i++) { memDao.otimeinsert(time); }
-				 */
-		 
-		  
-		  return "member/joinResult";
-	  }
-	  @PostMapping("addO_Time")
-	  @ResponseBody
-	  public int addO_Time(TimeVO vo) {
-		  memDao.otimeinsert(vo);
-		  return 1;
-	  }
+	@RequestMapping("/pjoin_2") // 파트너회원 회원가입 2차
+	public String pjoin_2(PmemVO pmember, Model model) {
 
-	  //아이디 중복체크
+		pmemDao.pmemberInsert2(pmember);
+		model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
+		return "member/pjoinForm3";
+	}
+
+	@RequestMapping("/pjoin_3") // 파트너회원 회원가입 3차
+	public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1,
+			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PetcareVO petcare) {
+		System.out.println("여기 파트너회원가입 3차");
+		System.out.println("p_id3:" + p_id);
+		System.out.println(petcare);
+		System.out.println(time);
+
+		// FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
+		int p_license = ffileutil.multiFileUpload(multiFileList1, request);
+		System.out.println("p_license = " + p_license);
+		int p_image = ffileutil.multiFileUpload(multiFileList2, request);
+		System.out.println("p_image = " + p_image);
+		pmemDao.pmemberInsert3(p_id, p_license, p_image); // 파일다중업로드
+		memDao.petcareinsert(petcare);
+		
+		/*
+		 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
+		 * i++) { memDao.otimeinsert(time); }
+		 */
+
+		return "member/joinResult";
+	}
+	@RequestMapping("addService")
+	@ResponseBody
+	public int addService(PriceVO price) {
+		memDao.servicepriceinsert(price);
+		return 1;
+	}
+	
+	@PostMapping("addO_Time")
+	@ResponseBody
+	public int addO_Time(TimeVO vo) {
+		memDao.otimeinsert(vo);
+		return 1;
+	}
+
+	// 아이디 중복체크
 	@PostMapping("ajaxIsIdCheck")
 	@ResponseBody
 	public boolean ajaxIsIdCheck(String m_id) {
 		return memDao.isIdCheck(m_id);
 	}
-	
+
 	@PostMapping("pajaxIsIdCheck")
 	@ResponseBody
 	public boolean pajaxIsIdCheck(String p_id) {
 		return pmemDao.isIdCheck(p_id);
 	}
-	
+
 	@RequestMapping("/join") // 회원가입폼 이동
 	public String login() {
 		return "member/join";
@@ -341,161 +320,141 @@ public class MemController {
 		return "member/jusoPopup";
 	}
 
-
-	
-	
-	
-	
 	// 유저정보조회
-	   public HashMap<String, Object> getUserInfo(String access_Token) {
+	public HashMap<String, Object> getUserInfo(String access_Token) {
 
-	      // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
-	      HashMap<String, Object> userInfo = new HashMap<String, Object>();
-	      String reqURL = "https://kapi.kakao.com/v2/user/me";
-	      try {
-	         URL url = new URL(reqURL);
+		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+		HashMap<String, Object> userInfo = new HashMap<String, Object>();
+		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		try {
+			URL url = new URL(reqURL);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			// 요청에 필요한 Header에 포함될 내용
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
 
-	         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	         conn.setRequestMethod("GET");
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+			String line = "";
+			String result = "";
 
-	         // 요청에 필요한 Header에 포함될 내용
-	         conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println("response body : " + result);
 
-	         int responseCode = conn.getResponseCode();
-	         System.out.println("responseCode : " + responseCode);
+			@SuppressWarnings("deprecation")
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
 
-	         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-	         String line = "";
-	         String result = "";
+			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-	         while ((line = br.readLine()) != null) {
-	            result += line;
-	         }
-	         System.out.println("response body : " + result);
+			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 
-	         @SuppressWarnings("deprecation")
-	         JsonParser parser = new JsonParser();
-	         JsonElement element = parser.parse(result);
+			userInfo.put("accessToken", access_Token);
+			userInfo.put("nickname", nickname);
+			userInfo.put("email", email);
 
-	         JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
-	         JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userInfo;
+	}
 
-	         String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-	         String email = kakao_account.getAsJsonObject().get("email").getAsString();
+	@RequestMapping("/geturi.do")
+	@ResponseBody
+	public String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=47ef13464842c3a22235787a9d64e6fc"
+				+ "&redirect_uri=http://localhost/prj/dologin" + "&response_type=code";
+		return reqUrl;
+	}
 
-	         userInfo.put("accessToken", access_Token);
-	         userInfo.put("nickname", nickname);
-	         userInfo.put("email", email);
-
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
-
-	      return userInfo;
-	   }
-	
-	
-	
-	
-	
-	
-	
-	   @RequestMapping("/geturi.do")
-	   @ResponseBody
-	   public String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
-	      String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=47ef13464842c3a22235787a9d64e6fc"
-	            + "&redirect_uri=http://localhost/prj/dologin" + "&response_type=code";
-	      return reqUrl;
-	   }
-	
 	// 카카오 연동정보 조회
-	   @RequestMapping(value = "/dologin", produces = "application/json; charset=utf8")
-	   public String oauthKakao(@RequestParam(value = "code", required = false) String code, HttpSession session)
-	         throws Exception {
-	      System.out.println("#########" + code);
-	      String access_Token = getAccessToken(code);
-	      System.out.println("###access_Token#### : " + access_Token);
+	@RequestMapping(value = "/dologin", produces = "application/json; charset=utf8")
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, HttpSession session)
+			throws Exception {
+		System.out.println("#########" + code);
+		String access_Token = getAccessToken(code);
+		System.out.println("###access_Token#### : " + access_Token);
 
-	      HashMap<String, Object> userInfo = getUserInfo(access_Token);
-	      System.out.println("###access_Token#### : " + access_Token);
-	      System.out.println("###userInfo#### : " + userInfo.get("email"));
-	      System.out.println("###nickname#### : " + userInfo.get("nickname"));
-	      System.out.println(userInfo);
+		HashMap<String, Object> userInfo = getUserInfo(access_Token);
+		System.out.println("###access_Token#### : " + access_Token);
+		System.out.println("###userInfo#### : " + userInfo.get("email"));
+		System.out.println("###nickname#### : " + userInfo.get("nickname"));
+		System.out.println(userInfo);
 
-			
-			  if (memDao.idCheck(userInfo.get("email").toString())) {
-			  session.setAttribute("memberinfo", memDao.memberOne(userInfo.get("email").toString()));
-			  memDao.memberOne(userInfo.get("email").toString());
-			 System.out.println("여기-------------------------------------------");
-			 System.out.println(memDao.memberOne(userInfo.get("email").toString()));
-	         return "redirect:home"; // 본인 원하는 경로 설정
-				 }
-			  else { session.setAttribute("userInfo", userInfo);
-				 return "member/joinForm"; // 본인 원하는 경로 설정
-				 }
-				 }
-				 
-				
-	   
-	   
+		if (memDao.idCheck(userInfo.get("email").toString())) {
+			session.setAttribute("memberinfo", memDao.memberOne(userInfo.get("email").toString()));
+			memDao.memberOne(userInfo.get("email").toString());
+			System.out.println("여기-------------------------------------------");
+			System.out.println(memDao.memberOne(userInfo.get("email").toString()));
+			return "redirect:home"; // 본인 원하는 경로 설정
+		} else {
+			session.setAttribute("userInfo", userInfo);
+			return "member/joinForm"; // 본인 원하는 경로 설정
+		}
+	}
+
 	// 토큰발급
-	   public String getAccessToken(String authorize_code) {
-	      String access_Token = "";
-	      String refresh_Token = "";
-	      String reqURL = "https://kauth.kakao.com/oauth/token";
+	public String getAccessToken(String authorize_code) {
+		String access_Token = "";
+		String refresh_Token = "";
+		String reqURL = "https://kauth.kakao.com/oauth/token";
 
-	      try {
-	         URL url = new URL(reqURL);
+		try {
+			URL url = new URL(reqURL);
 
-	         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-	         // URL연결은 입출력에 사용 될 수 있고, POST 혹은 PUT 요청을 하려면 setDoOutput을 true로 설정해야함.
-	         conn.setRequestMethod("POST");
-	         conn.setDoOutput(true);
+			// URL연결은 입출력에 사용 될 수 있고, POST 혹은 PUT 요청을 하려면 setDoOutput을 true로 설정해야함.
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
 
-	         // POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
-	         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-	         StringBuilder sb = new StringBuilder();
-	         sb.append("grant_type=authorization_code");
-	         sb.append("&client_id=47ef13464842c3a22235787a9d64e6fc"); // 본인이 발급받은 key
-	         sb.append("&redirect_uri=http://localhost/prj/dologin"); // 본인이 설정해 놓은 경로
-	         sb.append("&code=" + authorize_code);
-	         bw.write(sb.toString());
-	         bw.flush();
+			// POST 요청에 필요로 요구하는 파라미터 스트림을 통해 전송
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			StringBuilder sb = new StringBuilder();
+			sb.append("grant_type=authorization_code");
+			sb.append("&client_id=47ef13464842c3a22235787a9d64e6fc"); // 본인이 발급받은 key
+			sb.append("&redirect_uri=http://localhost/prj/dologin"); // 본인이 설정해 놓은 경로
+			sb.append("&code=" + authorize_code);
+			bw.write(sb.toString());
+			bw.flush();
 
-	         // 결과 코드가 200이라면 성공
-	         int responseCode = conn.getResponseCode();
-	         System.out.println("responseCode : " + responseCode);
+			// 결과 코드가 200이라면 성공
+			int responseCode = conn.getResponseCode();
+			System.out.println("responseCode : " + responseCode);
 
-	         // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-	         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	         String line = "";
-	         String result = "";
+			// 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String line = "";
+			String result = "";
 
-	         while ((line = br.readLine()) != null) {
-	            result += line;
-	         }
-	         System.out.println("response body : " + result);
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println("response body : " + result);
 
-	         // Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
-	         JSONParser parser = new JSONParser();
-	         JSONObject obj = (JSONObject) parser.parse(result);
+			// Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
+			JSONParser parser = new JSONParser();
+			JSONObject obj = (JSONObject) parser.parse(result);
 
-	         access_Token = (String) obj.get("access_token");
+			access_Token = (String) obj.get("access_token");
 
-	         refresh_Token = (String) obj.get("refresh_token");
+			refresh_Token = (String) obj.get("refresh_token");
 
-	         System.out.println("access_token : " + access_Token);
-	         System.out.println("refresh_token : " + refresh_Token);
+			System.out.println("access_token : " + access_Token);
+			System.out.println("refresh_token : " + refresh_Token);
 
-	         br.close();
-	         bw.close();
-	      } catch (Exception e) {
-	         e.printStackTrace();
-	      }
+			br.close();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-	      return access_Token;
-	   }
+		return access_Token;
+	}
 
-	  
 }

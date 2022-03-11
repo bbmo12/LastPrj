@@ -27,12 +27,9 @@
 					<div class="brand">
 						<img src="resources/login/logo.jpg" alt="logo">
 					</div>
-					<div>
-						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular"
-							style="width: 200px; margin-left: 200px;">일반회원</button>
-						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner"
-							style="width: 200px; margin-top: -50px;">파트너회원</button>
-					</div>
+						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular" 
+						style="width: 200px;position: relative; left: 199px; bottom: -58px;">일반회원</button>
+						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner" style="width: 200px;">파트너회원</button>
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
@@ -89,8 +86,7 @@
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
 		function mlogin() {
-			
-			$("#partner").toggle();
+			$('#partner').attr("disabled", true);
 			$("#test").empty();
 			var loginForm = `
 				<form class="my-login-validation" action="login" method="post">
@@ -135,8 +131,7 @@
 		}
 
 		function plogin() {
-			$('#regular').attr('disabled', true);
-			$("#regular").toggle();
+			$('#regular').attr("disabled", true);
 			$("#test").empty();
 			var loginForm = `
 				<form class="my-login-validation" action="plogin" method="post">
