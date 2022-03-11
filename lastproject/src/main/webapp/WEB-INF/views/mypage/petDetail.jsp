@@ -117,7 +117,7 @@
 								정보수정</button>
 						</form>
 					</div>
-	<div></div>
+	
 				</div>
 
 			</div>
