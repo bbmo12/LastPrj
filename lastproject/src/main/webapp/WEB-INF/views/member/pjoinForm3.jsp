@@ -73,8 +73,7 @@
 					<div class="form-group">
 								<label for="exampleInputPassword4">서비스 설명</label>
 								<textarea class="form-control" id="content" name="content"
-									placeholder="서비스 설명" rows="4" cols="130">
-                        		</textarea>
+									placeholder="서비스 설명" rows="4" cols="130"></textarea>
                         		<button type="button" onclick="serviceadd()">+</button>
                         		<div id="serviceadd"></div>
 					</div>
