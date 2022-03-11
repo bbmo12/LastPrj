@@ -107,8 +107,10 @@
       </div>
    </div>
    
+
    <script src="resources/login/my-login.js"></script>
    <script type="text/javascript">
+
 
       <!-- 일반회원아이디찾기 폼   -->
       function mIdSearcha(){

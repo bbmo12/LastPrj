@@ -38,4 +38,7 @@ public interface ReservationService {
 	List<ReservationVO> preservationPageList(Criteria cri);
 	int preservPage(Criteria cri);
 
+	
+	//리뷰작성후 코드 변경
+	int updatecode(ReservationVO vo);
 }

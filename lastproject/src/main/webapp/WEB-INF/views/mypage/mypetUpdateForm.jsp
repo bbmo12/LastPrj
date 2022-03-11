@@ -46,7 +46,7 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="memberMypage"
+															<li><a href="memberMypage"
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
 								</a></li>
@@ -54,22 +54,28 @@
 									class="d-flex justify-content-between">
 										<p>반려동물 프로필</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="protocol" class="d-flex justify-content-between">
+										<p>반려동물 진료기록</p>
+								</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="myPay" class="d-flex justify-content-between">
 										<p>결제 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="mycounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="myreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="myfallow" class="d-flex justify-content-between">
+										<p>팔로우</p>
+								</a></li>
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>
@@ -88,6 +94,7 @@
 							</div>
 						</div>
 						<form action="mypetupdate" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
 								<h5>
@@ -157,7 +164,7 @@
 								<textarea class="form-control" id="n_content" name="n_content" rows="4" cols="130"></textarea>
 							</div>
 							 
-							<button type="button" onclick="location.href='mypetUpdateForm'"  value="${pet.pet_no }" class="genric-btn info radius">반려동물
+							<button type="submit" class="genric-btn info radius">반려동물
 								정보수정</button>
 						</div>
 						</form>

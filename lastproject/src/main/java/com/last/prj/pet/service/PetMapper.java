@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.last.prj.reserv.service.ReservationVO;
 import com.last.prj.service.service.ServiceVO;
 
 public interface PetMapper {
@@ -23,7 +24,8 @@ public interface PetMapper {
 	//펫 수
 	int petCount();
 
-	int mypetupdate(@Param("pet_no") int pet_no);
-	
+	int mypetupdate(PetVO pet);
+	int updatecode(ReservationVO vo);
+	int mypetDelete(@Param("pet_no") int pet_no);
 
 }

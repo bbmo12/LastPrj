@@ -96,7 +96,6 @@ public class PetController {
 		HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");		
 		
-		System.out.println("요기당당당당"+pet_no);
 		
 		model.addAttribute("pet",petDAO.petSearch(pet_no));
 		 model.addAttribute("member",memDao.memberSearch(m_id));
@@ -133,9 +132,21 @@ public class PetController {
 				e.printStackTrace();
 			}
 		}
-		model.addAttribute("pet",petDAO.mypetupdate(pet_no));
+		model.addAttribute("pet",petDAO.mypetupdate(pet));
 		
-		return "mypage/myPay";
+		return "mypage/mpetprofile";
 	}
+	
+	@RequestMapping("mypetDelete")
+	public String mypetDelete(HttpServletRequest request, @RequestParam("pet_no")int pet_no, Model model) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");		
+		 model.addAttribute("member",memDao.memberSearch(m_id));
+		
+		 petDAO.mypetDelete(pet_no);
+		 model.addAttribute("pets", petDAO.petmemberList(m_id));
+		 return "mypage/mpetprofile";
+	}
+	
 	
 }

@@ -185,7 +185,7 @@
 														</c:when>
 
 														<c:otherwise>
-															<td><button type="button">리뷰보기</button></td>
+															<td><button type="button"  data-toggle="modal" data-target="#exampleModal" >리뷰보기</button></td>
 														</c:otherwise>
 													</c:choose>
 												</c:when>
@@ -253,7 +253,7 @@
 
 
 
-	<!-- 모달창 -->
+	<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
 	var wow;
    function reviewWrite(event){
@@ -282,6 +282,13 @@
 	      });
 	}
    </script>
+   
+   
+   
+   
+   
+   
+   
 	<!-- 후기작성 모달창 -->
 	<script type="text/javascript">
    	function reviewadd(wow){
@@ -423,6 +430,7 @@
 				'content': content},
 			success : function(result){
 				alert("ggod")
+				location.reload();
 				
 			}
 			

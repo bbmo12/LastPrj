@@ -67,6 +67,11 @@ public class ReservationServiceImpl implements ReservationService{
 	public int preservPage(Criteria cri) {
 		return 0;
 	}
+	@Override
+	public int updatecode(ReservationVO vo) {
+
+		return map.updatecode(vo);
+	}
 
 
 }

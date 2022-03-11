@@ -18,4 +18,5 @@ public class PetVO {
 	private String pfile;
 	
 
+	private String c_content;
 }

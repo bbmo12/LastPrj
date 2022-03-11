@@ -28,7 +28,9 @@ public interface PetService {
 
 	
 	//반려동물 수정
-	int mypetupdate(@Param("pet_no") int pet_no);
+	int mypetupdate(PetVO pet);
 
+	//반려동물 삭제
+	int mypetDelete(@Param("pet_no") int pet_no);
 	
 }

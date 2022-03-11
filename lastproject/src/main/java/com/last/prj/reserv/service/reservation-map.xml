@@ -71,9 +71,20 @@
 		WHERE 	R_NO = #{rno}
 	 </update>
 
-
+	<!-- 리뷰 작성 폼 -->
 	<select id="reviewWrithForm" parameterType="com.last.prj.reserv.service.ReservationVO" resultType="com.last.prj.reserv.service.ReservationVO" >
 		SELECT R.R_NO, P.NAME AS NAME FROM RESERVATION R, P_MEMBER P
 		WHERE R.P_ID = P.P_ID AND R_NO = #{r_no}
 	</select>
+	
+	<!-- 리뷰 작성 후 코드 변경 -->
+	<update id="updatecode" parameterType="com.last.prj.reserv.service.ReservationVO">
+	update reservation
+	<set>r_check = 1,
+	</set>
+       where r_no = #{r_no}
+	</update>
+	
+	
+	
 </mapper>
