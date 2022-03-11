@@ -1,6 +1,5 @@
 package com.last.prj.reserv.web;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -19,14 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.mem.service.MemService;
-import com.last.prj.mem.service.PmemService;
 import com.last.prj.pay.service.PayService;
 import com.last.prj.pay.service.PayVO;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pet.service.PetVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
-import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.reserv.service.PreservationlistService;

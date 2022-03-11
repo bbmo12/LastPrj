@@ -52,7 +52,7 @@ public class CalendarController {
 	//파트너회원 예약설정 삭제
 	@PostMapping("revsetdelete")
 	@ResponseBody
-	public String revSetDelete(CalendarVO vo) {
+	public String revSetDelete(@RequestParam("p_id")String p_id ,CalendarVO vo) {
 		CalendarDao.revSetDelete(vo);
 		return "ok";
 	}

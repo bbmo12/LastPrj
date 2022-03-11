@@ -56,4 +56,6 @@ public class DiagnosisController {
 		return "mypage/diagnosisList";
 	}
 	
+	
+	
 }

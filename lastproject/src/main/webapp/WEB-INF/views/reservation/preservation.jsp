@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
+   <script src="template/js/diaLog.js"></script>
 </head>
 <body>	
 <br><br><br><br><section class="banner-area other-page">
@@ -149,6 +153,8 @@
 	
 	
 	<script>
+	const today = moment();
+	console.log("Today's date is" + today.format('YYYY-MM-DD'));
 		var val = $(".in_code").parent();
 		for(var i=0; i<val.length;i++){
 			if(val[i].innerText == '승인대기'){
@@ -217,8 +223,10 @@
 			$("#m_id").val(m_id);			
 		});
 		
-		//모달창(진료) 값 보내기
+		//모달창(진료) 값 보내기 여기 블록체인값 추가로 넣자
 		$("#sendDiaLog").on('click',function(){
+			//날짜,회원아이디,파트너회원아이디는 블록체인에 담을것들
+			var w_date = today.format('YYYY-MM-DD');
 			var m_id = $("#m_id").val();
 			var p_id = $("#p_id").val();
 			var d_name = $("#d_name").val();
@@ -235,8 +243,10 @@
 							'result' : result },
 					success : function(res){
 						alert("작성완료");
-						diaWebAlert(m_id);
-						location.reload();
+						diaWebAlert(m_id);   		//예약번호,진단명,진단결과,증상,작성일자,회원아이디,파트너회원아이디
+				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
+				          .send({from: account, gas:3000000})
+				          .then(function(result){console.log("블록체인 체크 : " + result);})
 						
 					}
 				}); 
@@ -258,7 +268,7 @@
 		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
 		            socket.send(m_id+","+content);
 		        	alert("전송되었습니다.");
-		        	location.reload();
+		        	//location.reload();
 		        },
 		        error: function(error){
 		        	console.log(error);
@@ -285,7 +295,7 @@
 		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
 		            socket.send(m_id+","+content);
 		        	alert("전송되었습니다.");
-		        	location.reload();
+		        	//location.reload();
 		        },
 		        error: function(error){
 		        	console.log(error);
@@ -311,7 +321,7 @@
 		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
 		            socket.send(m_id+","+content);
 		        	alert("전송되었습니다.");
-		        	location.reload();
+		        	//location.reload();
 		        },
 		        error: function(error){
 		        	console.log(error);
