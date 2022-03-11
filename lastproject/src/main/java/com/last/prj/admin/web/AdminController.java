@@ -88,6 +88,17 @@ public class AdminController {
 		System.out.println("=============================" + pMemberDao.admPlistCode(vo));
 		return map;
 	}
+	
+	//파트너 회원 단건 조회 Modal
+	@RequestMapping("/admPmemberOne")
+	@ResponseBody
+	public HashMap<String, Object> admPmemberOne(@RequestParam("p_id")String p_id){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("list", pMemberDao.getPmemberinfo(p_id));		
+		return map;
+	}
+
 	// =========end 파트너 회원 조회==============
 
 	

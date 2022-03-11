@@ -214,7 +214,6 @@
 			
 		}// end viewPage(page)
 	
-			
 		function goPage(pa) {
 			console.log("pa 는 :" + pa);
 			$('#admDateForm')[0].pageNum.value = pa;

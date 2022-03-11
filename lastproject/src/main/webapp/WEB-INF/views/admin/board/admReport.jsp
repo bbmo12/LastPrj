@@ -400,6 +400,8 @@
 			console.log("repor : "+repor);
 
 			var flag = confirm("신고처리 하시겠습니까?");
+			var lag = confirm("해당 사항으로 변경하시겠습니까?"); // DB  값과 input 값을 비교해서 같지 않을 때 뜨게 함 : repor 
+			
 			if (flag == true) {
 				$.ajax({
 					url : 'admReportUpdate',
