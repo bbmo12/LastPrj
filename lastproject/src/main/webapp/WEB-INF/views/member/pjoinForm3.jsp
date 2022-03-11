@@ -65,13 +65,25 @@
 							<br>
 							<input type="text" class="form-control" id="n_content" name="n_content" style="width: 465px;margin-top: 10px;">
 						</div>
-						<button type="button" class="btn btn-primary mr-2" onclick="addO_Time()" style="margin: -87px 0 0 30em;">추가</button>
+						<button type="button" class="btn btn-primary mr-2" onclick="addO_Time()" style="margin: -87px 0 0 30em;">시간추가</button>
+						<h4 class="card-title">서비스 정보를 입력해주세요.</h4>
+						<div id="serviceMain">
+							<div class="form-group">
+								<label for="name">서비스명</label>
+								<input id="title" name="title" type="text" class="form-control" placeholder="서비스명을 입력해주세요.">
+							</div>
+							<div class="form-group">		
+								<label for="exampleInputPassword4">금 액</label>
+								<input type="text" class="form-control" id="price" name="price"	placeholder="해당하는 서비스 금액을 입력해주세요.">
+							</div>
+							<div class="form-group">	
+								<label for="exampleInputPassword4">서비스안내</label>
+								<textarea class="form-control" id="content" name="content" placeholder="해당하는 서비스 추가 설명을 입력해주세요." rows="3" cols="130"></textarea>
+							</div>
+						</div>	
+						<button type="button" class="btn btn-primary mr-2" onclick="addService()" style="position: relative; left: 445px;">서비스추가</button>
 						<form action="pjoin_3" method="post" enctype="multipart/form-data" class="my-login-validation">
 							<input type="hidden" class="form-control" id="p_id" name="p_id" value="${p_id.p_id}">
-							<div class="form-group">
-								<label for="name">이용가능서비스</label>
-								<input id="title" name="title" type="text" class="form-control" placeholder="제공서비스내용을입력해주세요.">
-							</div>
 							<div class="form-group">
 								<label>서비스 가능한 동물</label>
 							</div>
@@ -131,6 +143,42 @@
 	</div>
 	<script src="resources/login/my-login.js"></script>
 	<script>
+		function addService() {
+			var p_id = "${p_id.p_id}";
+			var title = $('#title').val();
+			var price = $('#price').val();
+			var content =$('#content').val();
+			$.ajax({
+				url : 'addService',
+				method : 'POST',
+				data : {
+					'p_id' : p_id,
+					'title' : title,
+					'price' : price,
+					'content' : content
+				},
+				success: function (res) {
+					console.log("ggggggggggggggggg"+res);
+					var service_div = $('#serviceMain');
+					alert("서비스가 추가되었습니다.");
+					var $service =`
+					<div class="form-group">
+						<label for="name">서비스명</label>
+						<input id="title" name="title" type="text" class="form-control" placeholder="서비스명을 입력해주세요.">
+					</div>
+					<div class="form-group">		
+						<label for="exampleInputPassword4">금 액</label>
+						<input type="text" class="form-control" id="price" name="price"	placeholder="해당하는 서비스 금액을 입력해주세요.">
+					</div>
+					<div class="form-group">	
+						<label for="exampleInputPassword4">서비스안내</label>
+						<textarea class="form-control" id="content" name="content" placeholder="해당하는 서비스 추가 설명을 입력해주세요." rows="3" cols="130"></textarea>
+					</div>`
+					service_div.empty();
+					service_div.append($service);
+				}
+			});
+		}
 		function addO_Time() {
 			var p_id = "${p_id.p_id}";
 			var w_day = $("#w_day option:selected").val();
@@ -149,7 +197,7 @@
 				},
 				success: function (res) {
 					var nice_div = $("#o_time_div")
-					alert("추가되었습니다.");
+					alert("운영 시간이 추가되었습니다.");
 					var $nice = `
 		  <select id ="w_day" name="w_day">
 				<option value='' selected disabled>요일선택</option>
