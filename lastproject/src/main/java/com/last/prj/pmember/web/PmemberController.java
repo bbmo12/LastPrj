@@ -25,6 +25,8 @@ import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewService;
 import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
+import com.last.prj.reserv.service.ReservationService;
+import com.last.prj.reserv.service.ReservationVO;
 
 @Controller
 public class PmemberController {
@@ -32,6 +34,9 @@ public class PmemberController {
 	private PmemberService pMemberDao;
 	@Autowired
 	private PmemberMapper mapper;	
+	@Autowired
+	private ReservationService reservationDao;
+	
 	@Autowired
 	ServletContext sc;
 	
@@ -136,10 +141,10 @@ public class PmemberController {
 	//일반회원 후기작성
 	@RequestMapping("serviceReviewInsert")
 	@ResponseBody
-	public int serviceReview(ReviewVO review) {
-		System.out.println("여기부터아아아아ㅏ아아아아아아");
-		System.out.println(review);
+	public int serviceReview(ReviewVO review, ReservationVO vo) {
+		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
+		
 		return 1;
 	}
 	//회원탈퇴 페이지로 이동

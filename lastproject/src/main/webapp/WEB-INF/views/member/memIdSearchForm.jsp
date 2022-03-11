@@ -118,7 +118,7 @@
          <div class="form-group">
             <div class="auth-link text-black">이름</div>
             <input type="text" class="form-control form-control-lg"
-               id="name" name="m_id" placeholder="이름을 입력하세요">
+               id="name" name="name" placeholder="이름을 입력하세요">
          </div>
          <div class="form-group">
             <div class="auth-link text-black">전화번호</div>

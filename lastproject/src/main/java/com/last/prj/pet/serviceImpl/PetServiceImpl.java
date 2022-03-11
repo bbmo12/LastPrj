@@ -48,8 +48,13 @@ public class PetServiceImpl implements PetService{
 	}
 
 	@Override
-	public int mypetupdate(int pet_no) {
-		return map.mypetupdate(pet_no);
+	public int mypetupdate(PetVO pet) {
+		return map.mypetupdate(pet);
+	}
+
+	@Override
+	public int mypetDelete(int pet_no) {
+		return map.mypetDelete(pet_no);
 	}
 
 

@@ -28,7 +28,7 @@
 	<!-- 펫 상세정보 조회 -->
 	<select id="petSearch" parameterType="int"
 		resultType="com.last.prj.pet.service.PetVO">
-		SELECT p.NAME, p.R_CHECK, p.GENDER, p.M_ID, p.BIRTH, c.content AS c_content, p.WEIGHT, p.N_CONTENT, p.PICTURE, p.PFILE
+		SELECT p.pet_no, p.NAME, p.R_CHECK, p.GENDER, p.M_ID, p.BIRTH, c.content AS c_content, p.WEIGHT, p.N_CONTENT, p.PICTURE, p.PFILE
 		FROM PET p, f_code c
 		WHERE P.CODE=C.CODE AND PET_NO = #{pet_no}
 	</select>
@@ -55,17 +55,22 @@
 	<update id="mypetupdate"  parameterType="com.last.prj.pet.service.PetVO">
 		update pet
 		<set>
-			<if test= "nume != null">name = #{name}</if>
-			<if test="birth != null">birth = #{birth}</if>
-			<if test="gender != null">gender = #{gender}</if>
-			<if test="weight != null">weight = #{weight}</if>
-			<if test="code != null"> code = #{code}</if>
-			<if test="picture != null"> picture = #{picture}</if>
-			<if test="pfile != null"> pfile = #{pfile}</if>
+			<if test= "name != null">name = #{name},</if>
+			<if test="birth != null">birth = #{birth},</if>
+			<if test="gender != null">gender = #{gender},</if>
+			<if test="weight != null">weight = #{weight},</if>
+			<if test="code != null"> code = #{code},</if>
+			<if test="picture != null"> picture = #{picture},</if>
+			<if test="pfile != null"> pfile = #{pfile},</if>
 		</set>
-		where m_id = #{m_id}
+		where pet_no = #{pet_no}
 	
 	</update>
-	
 
+
+	<delete id="mypetDelete" parameterType="com.last.prj.pet.service.PetVO">
+		DELETE FROM PET WHERE
+		PET_NO = #{pet_no}
+	</delete>
+	
 </mapper>

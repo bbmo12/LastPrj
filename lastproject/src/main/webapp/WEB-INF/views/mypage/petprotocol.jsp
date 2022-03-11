@@ -11,6 +11,13 @@
 #my_section {
 	padding: 50px;
 }
+.card-text {
+	display: inline-block;
+	width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 </style>
 
 <body>
@@ -43,7 +50,7 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="memberMypage"
+															<li><a href="memberMypage"
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
 								</a></li>
@@ -51,22 +58,28 @@
 									class="d-flex justify-content-between">
 										<p>반려동물 프로필</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="protocol" class="d-flex justify-content-between">
+										<p>반려동물 진료기록</p>
+								</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="myPay" class="d-flex justify-content-between">
 										<p>결제 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="mycounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="myreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="myfallow" class="d-flex justify-content-between">
+										<p>팔로우</p>
+								</a></li>
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>
@@ -142,7 +155,7 @@
 										+ result[i].p_name
 										+ "</td><td>"
 										+ result[i].pm_name
-										+ "</td><td>"
+										+ "</td><td class='card-text'>"
 										+ result[i].content
 										+ "</td><td>"
 										+ result[i].startdate
