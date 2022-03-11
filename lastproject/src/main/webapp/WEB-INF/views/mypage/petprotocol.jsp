@@ -80,23 +80,23 @@
 						<div class="template-demo">
 							<form id="admDateForm">
 								<input type="hidden" name="code"> 
-								<input type="hidden" name="pageNum" value="1">
+								<input type="hidden" name="pageNum" value="1"> 
+								<select id="search"	name="search">
+									<option value="all" selected="selected">전 체</option>
+								</select> 
+								<input type="text" id="data" name="data" size="20">&nbsp;
+								<button type="subim">검 색</button>
 							</form>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" 
-								data-code="">전체</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="">전체</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" 
-								data-code="100">진료</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="100">진료</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" 
-								data-code="101">훈련</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="101">훈련</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" 
-								data-code="102">미용</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="102">미용</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep"
-								data-code="103">돌봄서비스</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
 
 						</div>
 
@@ -115,15 +115,8 @@
 						</table>
 						<div id="pagination"></div>
 						<div>
-						<form id="frm" action="" method="post">
-						<input type="hidden" name="m_id" id="m_id" value="${ member.m_id}">
-							<select id="search" name="search">
-								<option value="all" selected="selected">전 체</option>					
-							</select> <input type="text" id="data" name="data" size="20"
-								onkeypress="eventkey()">&nbsp;
-							<button type="button" onclick="searchData()">검 색</button>
-						</form>
-			</div>
+							<form id="frm" action="" method="post"></form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -146,7 +139,7 @@
 			dataType : "json",
 			success : function(result) {
 				if (result.length > 0) {
-					htmlView(data);
+					htmlView(result);
 				} else {
 					alert("조건에 맞는 결과 없음")
 				}
@@ -171,6 +164,7 @@
 	} // end htmlView 함수
 	
 	
+	// viewPmemberList : 받아온 데이터로 List만드는 함수
 	 let viewPmemberList = function (result) {
 		$("#myTable").empty();
 		console.log("result는: " + result);
@@ -189,7 +183,8 @@
 										);
 		}) // end each.
 	
-	}
+	}//end viewPmemberList : 받아온 데이터로 List만드는 함수
+	
 	
 	
 	$(".codep").on('click', function() {
@@ -202,6 +197,7 @@
 	
 		function pagingList() {
 			var str = $('#admDateForm').serialize();
+			console.log(str);
 			$.ajax({
 				url : 'PetServiceList',
 				method : 'post',

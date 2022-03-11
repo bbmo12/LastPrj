@@ -2,7 +2,7 @@ package com.last.prj.service.service;
 
 import java.util.List;
 
-
+import org.apache.ibatis.annotations.Param;
 
 import com.last.prj.pmember.service.Criteria;
 
@@ -20,7 +20,7 @@ public interface ServiceMapper {
 	
 	public ServiceVO serviceSelect(int r_no); //파트너회원 서비스 조회
 	
-
+	public List<ServiceVO> petProtoColSearch(@Param("key") String key, @Param("data") String data, @Param("m_id")String m_id);
 	
 	public List<ServiceVO> petService(ServiceVO vo);
 	public int petServiceCnt(ServiceVO vo);

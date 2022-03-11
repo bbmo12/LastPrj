@@ -50,21 +50,23 @@ public class ServiceController {
 		return "mypage/petprotocol";
 	}
 	
-	@RequestMapping("/petProtoColSearch")
-	@ResponseBody
-	public List<PetVO> petProtoColSearch(@RequestParam("key")String key, @RequestParam("data")String data, @RequestParam("m_id") String m_id, PetVO vo){
-		System.out.println("key : " + key);
-		System.out.println("data : "+data);
-		System.out.println("m_id :"+ m_id);
-		
-		System.out.println("여기가 vo:" + vo);
-		
-		
-		System.out.println(petDAO.petProtoColSearch(key, data,m_id));
-		
-		return petDAO.petProtoColSearch(key, data, m_id);
-	}
-	
+	/*
+	 * @RequestMapping("/petProtoColSearch")
+	 * 
+	 * @ResponseBody public List<ServiceVO>
+	 * petProtoColSearch(@RequestParam("key")String key, @RequestParam("data")String
+	 * data, @RequestParam("m_id") String m_id, ServiceVO vo){
+	 * System.out.println("key : " + key); System.out.println("data : "+data);
+	 * System.out.println("m_id :"+ m_id);
+	 * 
+	 * 
+	 * 
+	 * System.out.println("여기가 vo:" + vo);
+	 * 
+	 * 
+	 * 
+	 * return serviceDao.petProtoColSearch(key, data, m_id); }
+	 */
 	
 	
 	//파트너회원 내 수익조회
@@ -86,7 +88,8 @@ public class ServiceController {
 	  @RequestMapping("PetServiceList")
 	  @ResponseBody
 	  public HashMap<String, Object> PetServiceList(ServiceVO vo, Criteria cri, HttpServletRequest request){
-	  HttpSession session = request.getSession();
+	  
+		  HttpSession session = request.getSession();
 		String m_id = (String) session.getAttribute("mId");
 		vo.setM_id(m_id);
 		System.out.println(vo);

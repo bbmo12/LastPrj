@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.last.prj.pet.service.PetMapper;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pet.service.PetVO;
+import com.last.prj.service.service.ServiceVO;
 
 @Repository("petDAO")
 public class PetServiceImpl implements PetService{
@@ -45,12 +46,6 @@ public class PetServiceImpl implements PetService{
 	public int petCount() {
 		return map.petCount();
 	}
-
-	@Override
-	public List<PetVO> petProtoColSearch(String key, String data, String m_id) {
-		return map.petProtoColSearch(key, data, m_id);
-	}
-
 
 
 }

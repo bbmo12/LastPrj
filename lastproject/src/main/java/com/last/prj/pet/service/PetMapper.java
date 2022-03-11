@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.last.prj.service.service.ServiceVO;
+
 public interface PetMapper {
 	// 펫넘버로 펫 정보 조회
 	PetVO petOne(@Param("pet_no") int pet_no);
@@ -21,6 +23,4 @@ public interface PetMapper {
 	//펫 수
 	int petCount();
 	
-	//펫 검색 찾기
-	List<PetVO> petProtoColSearch(@Param("key")String key, @Param("data")String data, @Param("m_id")String m_id);
 }

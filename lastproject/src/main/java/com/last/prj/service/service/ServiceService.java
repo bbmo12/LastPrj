@@ -2,6 +2,8 @@ package com.last.prj.service.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.last.prj.pmember.service.Criteria;
 
 public interface ServiceService {
@@ -23,5 +25,6 @@ public interface ServiceService {
 	public List<ServiceVO> petService(ServiceVO vo);
 	public int petServiceCnt(ServiceVO vo);
 	
+	public List<ServiceVO> petProtoColSearch(@Param("key") String key, @Param("data") String data, @Param("m_id")String m_id);
 	
 }

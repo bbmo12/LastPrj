@@ -25,4 +25,6 @@ public class ServiceVO {
 	private PagingVO vo;
 	private Criteria cri;
 	private String total;
+	private String key;
+	private String data;
 }

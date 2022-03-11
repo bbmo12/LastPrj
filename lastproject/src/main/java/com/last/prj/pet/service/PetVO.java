@@ -17,8 +17,5 @@ public class PetVO {
 	private String picture;
 	private String pfile;
 	
-	private String p_name;
-	private String pm_name;
-	private String content;
-	private String startdate;
+
 }
