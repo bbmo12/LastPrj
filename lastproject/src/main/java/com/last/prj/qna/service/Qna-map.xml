@@ -42,7 +42,7 @@
 		<result property="f_part" column="f_part" />
 		<result property="pet_no" column="pet_no" />
 		<result property="r_check" column="r_check" />
-		<result property="recnt" column="recnt"/>
+		<result property="recnt" column="recnt" />
 
 		<collection property="tagList" resultMap="tagMap"></collection>
 	</resultMap>
@@ -63,27 +63,29 @@
 		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
 	</select>
 
-	<!-- 질문글 전체 조회 & 페이징 & 검색 & 글자수 제한-->
+	<!-- 질문글 전체 조회 & 페이징 & 검색 & 글자수 제한 -->
 	<select id="qnaList" resultMap="qnaResult">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-				FROM (SELECT t.t_name, q.q_no, q.w_date, q.title, q.hit, q.writer, q.p_no, q.pet_no,(SELECT COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS recnt, CASE WHEN LENGTH(q.content) > 100 THEN SUBSTR
-							(q.content,0,100)||'...' ELSE q.content END AS content
-					  FROM qna q LEFT OUTER JOIN qnatag t
-					  ON q.q_no = t.q_no
-					  WHERE p_no = 0
-					  <if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
-					  <if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
-					  <if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
-					  <if test="searchType == null or searchType ==''">AND 1 = 1</if>
-					  ORDER BY w_date DESC) A)
+		FROM (SELECT t.t_name, q.q_no, q.w_date, q.title, q.hit, q.writer, q.p_no,
+		q.pet_no,(SELECT COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS
+		recnt, CASE WHEN LENGTH(q.content) > 100 THEN SUBSTR
+		(q.content,0,100)||'...' ELSE q.content END AS content
+		FROM qna q LEFT OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE p_no = 0
+		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
+		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
+		ORDER BY w_date DESC) A)
 		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
 
 	<!-- 베스트 게시글 -->
 	<select id="qnaBest" resultType="com.last.prj.qna.service.QnaVO">
-		 SELECT *
+		SELECT *
 		FROM
 		(SELECT *
 		FROM qna
@@ -96,11 +98,15 @@
 
 	<!-- 태그를 이용한 검색 -->
 	<select id="tagSearch" resultMap="qnaResult">
-		SELECT *
-		FROM qna q LEFT OUTER
-		JOIN qnatag t
+		SELECT t.t_name, q.q_no,
+		q.w_date, q.title, q.hit, q.writer, q.p_no, q.pet_no,(SELECT
+		COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS recnt, CASE WHEN
+		LENGTH(q.content) > 100 THEN SUBSTR
+		(q.content,0,100)||'...' ELSE q.content END AS content
+		FROM qna q LEFT OUTER JOIN qnatag t
 		ON q.q_no = t.q_no
-		WHERE p_no = 0 AND t.t_name = #{t_name}
+		WHERE p_no = 0
+		AND TRIM(t.t_name) = #{t_name}
 		ORDER BY w_date DESC
 	</select>
 
@@ -224,7 +230,8 @@
 		(SELECT *
 		FROM qna
 		WHERE p_no = 0
-		AND NOT title IN ('[작성자에 의해 삭제된 게시물입니다.]')
+		AND NOT title IN ('[작성자에 의해
+		삭제된 게시물입니다.]')
 		ORDER BY q_no DESC
 		)
 		<![CDATA[WHERE ROWNUM <= 3]]>

@@ -55,6 +55,7 @@
 		SELECT COUNT(*) AS TOTAL
 		FROM COUNSEL
 		WHERE P_ID = #{p_id}
+		AND p_no=0
 	</select>
 
 	<select id="counselList"
@@ -67,7 +68,8 @@
 		FROM PET P,
 		MEMBER M, COUNSEL C
 		WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND
-		P_ID = #{p_id} ORDER BY
+		P_ID = #{p_id} AND P_NO = 0
+		 ORDER BY
 		C_NO
 		) A)
 		WHERE RN BETWEEN
@@ -87,7 +89,7 @@
 
 	<!-- 기존 채팅방 존재 여부 -->
 	<select id="isExist"
-		parameterType="com.last.prj.counsel.service.CounselVO" resultType="com.last.prj.counsel.service.CounselVO">
+		parameterType="com.last.prj.counsel.service.CounselVO" resultType="int">
 		SELECT COUNT(*)
 		FROM counsel
 		WHERE p_id=#{p_id} AND

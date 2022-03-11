@@ -103,19 +103,14 @@ public class CounselController {
 			out_writer.flush();
 
 			return "member/loginForm";
-		} else if(counselDao.isExist(m_id, p_id) > 0){
+		} else if(counselDao.isExist(m_id, p_id) > 0 ){
 			//기존 상담 여부 체크
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out_writer = response.getWriter();
-			out_writer.println("<script>alert('이미 진행 중인 상담이 있습니다. 상담 내역 페이지에서 확인해주세요.');</script>");
+			out_writer.println("<script>alert('이미 진행 중인 상담이 있습니다. 상담 내역 페이지에서 확인하세요.');</script>");
 			out_writer.flush();
 			
-			session = request.getSession();
-			String mid = (String) session.getAttribute("mId");
-			cri.setM_id(mid);
-			cri.setAmount(10);
-			
-			return "redirect:/mycounsel";
+			return "";
 		
 		} else {
 			//새로운 상담 폼으로 이동

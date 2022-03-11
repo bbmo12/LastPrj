@@ -66,7 +66,7 @@ public class CounselServiceImpl implements CounselService {
 	}
 
 	@Override
-	public int isExist(String m_id, String p_id) {
+	public Integer isExist(String m_id, String p_id) {
 		// TODO Auto-generated method stub
 		return map.isExist(m_id, p_id);
 	}

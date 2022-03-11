@@ -13,7 +13,7 @@
 				GROUP BY (t_name)
 				ORDER BY t_rank DESC)temp
 			)last
-		<![CDATA[WHERE ROWNUM <= 16]]>
+		<![CDATA[WHERE ROWNUM <= 18]]>
 	</select>
 
 	<!-- 태그 등록 시 qTag 테이블에 이미 등록된 태그인지 검사 후 없으면 insert함 -->
@@ -21,19 +21,19 @@
 		MERGE
 		INTO q_tag a
 		USING dual
-		ON (a.t_name = #{t_name})
+		ON (TRIM(a.t_name) = TRIM(#{t_name}))
 		WHEN NOT MATCHED THEN
 		INSERT
 		(a.t_name)
 		VALUES
-		(#{t_name})
+		(TRIM(#{t_name}))
 	</insert>
 
 	<!-- 새로운 태그와 글 번호 연결 -->
 	<insert id="newQtag" parameterType="com.last.prj.qtag.service.QnaTagVO">
 		<foreach collection="nTags" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
 			INSERT INTO qnatag
-			values(q_seq.currval, #{item.t_name})
+			values(q_seq.currval, TRIM(#{item.t_name}))
 		</foreach>
 	</insert>
 	
@@ -41,7 +41,7 @@
 	<insert id="ModiTag" parameterType="com.last.prj.qtag.service.QnaTagVO">
 		<foreach collection="nTags" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;">
 			INSERT INTO qnatag
-			values(#{q_no}, #{item.t_name})
+			values(#{q_no}, TRIM(#{item.t_name}))
 		</foreach>
 	</insert>
 </mapper>

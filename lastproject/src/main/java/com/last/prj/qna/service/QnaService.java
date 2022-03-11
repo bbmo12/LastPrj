@@ -2,6 +2,7 @@ package com.last.prj.qna.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 
 public interface QnaService {
@@ -25,7 +26,7 @@ public interface QnaService {
 	List<QnaVO> ansDetail(int q_no);
 
 	// 태그를 통한 검색
-	List<QnaTagVO> tagSearch(String t_name);
+	List<QnaTagVO> tagSearch(@Param("t_name") String t_name);
 
 	// 질문글 작성
 	int newQna(QnaVO qna);

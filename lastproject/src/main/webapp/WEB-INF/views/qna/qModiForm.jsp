@@ -38,6 +38,7 @@
 	list-style: none;
 }
 
+}
 ul li {
 	display: inline-block;
 	margin: 0 5px;
@@ -50,14 +51,16 @@ form {
 }
 
 ul li.tag-item {
-	padding: 4px 8px;
-	background-color: #000;
-	color: dodgeblue;
+	padding: 4px 8px 5px;
+	background-color: #4CD3E3;
+	color: white;
+	border-radius : 30px;
 }
 
-.tag-item:hover {
-	background-color: dodgeblue;
-	color: #000;
+ul li.tag-item:hover {
+	background-color: white;
+	color: #4CD3E3;
+	border : 1px solid #4CD3E3;
 }
 
 .del-btn {
@@ -66,6 +69,11 @@ ul li.tag-item {
 	cursor: pointer;
 	margin-left: 8px;
 }
+
+ul.petSct li {
+	list-style-type: none;
+	float: left;
+	margin-left: 20px;
 }
 </style>
 <script>
@@ -94,8 +102,9 @@ ul li.tag-item {
 
 	<!-- modify form starts -->
 	<article>
-		<div class="container" role="main">
-			<h2>질문글 수정하기</h2>
+		<div class="container" role="main"
+			style="margin-bottom: 50px; margin-top: 50px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
+			<h2 style="margin-top: 50px;">질문글 수정하기</h2>
 			<form name="qmForm" id="qmForm" action="qModify" method="post"
 				onsubmit="tagInput();">
 
@@ -103,29 +112,31 @@ ul li.tag-item {
 					value="${qnaDetail.q_no }">
 
 				<div class="mb-3">
-					<label for="title">제목</label> <input type="text"
+					<h3>제목</h3> <input type="text"
 						class="form-control" name="title" id="title"
 						placeholder="제목을 입력해 주세요" value="${qnaDetail.title }">
 				</div>
 
 				<div class="form-check">
-					<h4>반려동물 선택하기</h4>
-					<div class="radioImg">
-						<img class="petSelection" src="resources/qna/가위표.png">
-					</div>
-					<input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
-					<label>없음/비공개</label>
+					<h3>반려동물 선택</h3>
+					<h4 style="color: gray;">*도움이 필요한 반려동물을 선택해주세요.</h4>
+					<ul class="petSct">
+						<li><div class="radioImg">
+								<img class="petSelection" src="resources/qna/가위표.png">
+							</div> <input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
+							<label>없음/비공개</label></li>
 
-
-					<c:forEach items="${petList }" var="pet">
-						<div class="radioImg">
-							<img class="petSelection" src="resources/qna/${pet.picture }"
-								onError="this.src='resources/qna/대체이미지2.png'">
-						</div>
-						<input type="radio" id="pet_no" name="pet_no"
-							value="${pet.pet_no}">&nbsp;${pet.name }
-					</c:forEach>
+						<c:forEach items="${petList }" var="pet">
+							<li><div class="radioImg">
+									<img class="petSelection" src="resources/qna/${pet.picture }"
+										onError="this.src='resources/qna/대체이미지2.png'">
+								</div> <input type="radio" id="pet_no" name="pet_no"
+								value="${pet.pet_no}">&nbsp;${pet.name }</li>
+						</c:forEach>
+					</ul>
 				</div>
+
+				<br> <br> <br> <br> <br> <br>
 
 				<div class="mb-3">
 					<textarea class="ckeditor4" id="content" name="content">${qnaDetail.content }</textarea>
@@ -134,11 +145,10 @@ ul li.tag-item {
 					</script>
 				</div>
 
-				<div style="margin-top: 40px; width: 1000px;" class="content">
-					<div style="display: flex;">
-						<h4>태그</h4>
-						<input type="text" id="tag"
-							style="margin-left: 20px; width: 1100px;"
+				<div style="margin-top: 40px;" class="content">
+					<div>
+						<h3>태그</h3>
+						<input style="margin-bottom : 20px;" type="text" id="tag" class="form-control"
 							placeholder="스페이스 키로 태그를 등록하세요" />
 					</div>
 
@@ -150,11 +160,11 @@ ul li.tag-item {
 						</c:forEach>
 					</ul>
 				</div>
-
-				<button type="submit" class="btn btn-primary" id="qSubmit">작성</button>
-				<button type="button" class="btn btn-secondary" id="qCancel"
-					onclick="history.back()">취소</button>
-
+				<div style="margin-top: 70px; margin-left: 450px;">
+					<button type="submit" class="btn btn-primary" id="qSubmit">작성</button>
+					<button type="button" class="btn btn-secondary" id="qCancel"
+						onclick="history.back()">취소</button>
+				</div>
 			</form>
 
 
@@ -165,7 +175,8 @@ ul li.tag-item {
 		var pet = "${qnaDetail.pet_no}";
 		console.log(pet);
 
-		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked", true);
+		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked",
+				true);
 
 		/*태그 처리*/
 		$(document)

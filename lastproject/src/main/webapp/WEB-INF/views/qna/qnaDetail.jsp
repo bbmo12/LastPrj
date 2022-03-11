@@ -21,6 +21,17 @@
 	float: right;
 }
 
+.widget {
+	background-color: #38a4ff;
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 15px;
+}
+
 .social {
 	margin-left: 570px;
 }
@@ -31,6 +42,12 @@
 
 .right-align {
 	float: right;
+}
+
+ul.tagList li {
+	list-style-type: none;
+	float: left;
+	margin-left: 5px;
 }
 
 #qSection {
@@ -59,7 +76,7 @@
 
 #ansBtn {
 	/* float: right; */
-	margin-left : 470px;
+	margin-left: 470px;
 }
 
 .updateAns {
@@ -134,14 +151,27 @@
 }
 
 #qUpdateBtn {
-	float : right;
-	margin-left : 550px;
+	float: right;
+	margin-left: 550px;
 }
 
 #qDelBtn {
-	float : right;
-	margin-left : 10px;
+	float: right;
+	margin-left: 10px;
 }
+
+.modal-dialog{
+	width : 700px;
+	height : 1000px;
+	color : black;
+	margin-top : 200px;
+
+}
+
+.modal-content{
+	padding : 50px 30px 30px 30px;
+}
+
 </style>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -166,7 +196,7 @@
 				<c:if test="${pId eq null}">
 					<div class="qnaForm">
 						<a href="qnaForm?m_id=${mId }"><button type="button"
-								class="btn btn-primary btn-lg">질문글 작성하기</button></a>
+								class="genric-btn info circle arrow btn-lg">질문글 작성하기</button></a>
 					</div>
 				</c:if>
 			</div>
@@ -231,15 +261,23 @@
 								<p class="qnaBody">${qnaDetail.content }</p>
 
 								<!-- 태그 공간 -->
+								
 								<div class="tags">
 									<c:forEach items="${qnaDetail.tagList }" var="hash">
 										<ul class="tagList">
+											<c:if test="${hash.t_name ne null}">
 											<li class="tagli"><a
-												href="tagSearch?t_name=${hash.t_name }"><button class="genric-btn success circle">${hash.t_name}</button></a></li>
+												href="tagSearch?t_name=${hash.t_name }"><button
+														class="genric-btn success circle btn-sm">${hash.t_name}</button></a></li>
+											</c:if>
 										</ul>
 									</c:forEach>
+									<br> <br> <br>
 								</div>
+								
 							</div>
+
+
 
 							<c:if test="${qnaDetail.petvo.pet_no != null }">
 								<!-- 펫 정보 공간 -->
@@ -284,7 +322,7 @@
 								</div>
 							</c:if>
 						</div>
-						
+
 						<!-- 세션 아이디와 글쓴이 일치할 때 수정, 삭제 가능 -->
 						<c:if test="${qnaDetail.title ne '[작성자에 의해 삭제된 게시물입니다.]'}">
 							<c:if test="${mId eq qnaDetail.writer }">
@@ -377,10 +415,11 @@
 								aria-hidden="true">
 								<div class="modal-dialog modal-lg">
 									<div class="modal-content" id="updForm">
+									<h3>답변글 작성하기</h3>
 										<label for="title">제목</label> <input type="text"
 											class="form-control" id="title" name="title"
 											value="RE : ${qnaDetail.title }" required="required"
-											pattern=".{4,100}"> <label for="content">내용</label>
+											> <label for="content">내용</label>
 										<textarea class="form-control" rows="15" id="content"
 											name="content"></textarea>
 
@@ -435,7 +474,8 @@
 										<td>
 										<td
 											style="width: 460px; font-size: 28px; color: black; text-align: left">${ans.title }</td>
-										<td>${ans.w_date }&nbsp;&nbsp;<i class="fa fa-calendar-o"></i>
+										<td style="color: black;">${ans.w_date }&nbsp;&nbsp;<i
+											class="fa fa-calendar-o"></i>
 										</td>
 									</tr>
 									<tr>
@@ -483,8 +523,9 @@
 
 
 									<!-- 이 전문가와 상담 -->
-									<a href="goToPdetail?p_id=${ans.writer}"><button id="pMemPage" type="button"
-										class="btn btn-primary btn-lg">이 전문가와 상담하기</button></a>
+									<a href="goToPdetail?p_id=${ans.writer}"><button
+											id="pMemPage" type="button" class="btn btn-primary btn-lg">이
+											전문가와 상담하기</button></a>
 								</div>
 							</c:if>
 
@@ -503,6 +544,7 @@
 									aria-hidden="true" id="${ans.q_no }">
 									<div class="modal-dialog modal-lg ansUpdate">
 										<div class="modal-content">
+										<h3>답변글 수정하기</h3>
 											<label for="title">제목</label> <input type="text"
 												class="form-control" id="title" name="title"
 												value="${ans.title }" required="required" pattern=".{4,100}">
@@ -617,7 +659,7 @@
 
 					<!-- 베스트 qna -->
 					<aside class="single_sidebar_widget post_category_widget">
-						<h4 id="bestQna" class="widget_title">베스트 Q&A</h4>
+						<h4 id="bestQna" class="widget">베스트 Q&A</h4>
 						<c:forEach items="${best }" var="best">
 							<ul style="text-align: left;" class="list cat-list">
 								<li style="display: inline-block;"><a
@@ -801,7 +843,6 @@
 						},
 						success : function() {
 							alert('성공적으로 삭제되었습니다.');
-							location.reload();
 						},
 						error : function() {
 							alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');

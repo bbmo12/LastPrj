@@ -271,6 +271,7 @@ img {
 							</div>
 
 							<!-- 반려동물 정보 -->
+							<c:if test="${detail.pet_no != 0 || detail.pet_no eq null }">
 							<h4>반려동물 정보</h4>
 							<div
 								style="width: 670px; height: 120px; margin-left: 30px; background: rgb(241, 241, 241); padding: 20px; margin-bottom: 30px;">
@@ -313,6 +314,7 @@ img {
 									</tr>
 								</table>
 							</div>
+							</c:if>
 
 							<!-- 채팅 내용 -->
 							<div id="chatbody" style="border: 1px solid #d3d3d3; background-color: white; margin: 30px; padding: 30px; color: black; height: 600px; border-radius: 5px; overflow: scroll;">

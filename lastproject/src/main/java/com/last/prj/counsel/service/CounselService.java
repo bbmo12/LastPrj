@@ -34,7 +34,7 @@ public interface CounselService {
 	int CodeUdt(int c_no);
 
 	// 기존 상담 여부
-	int isExist(@Param("m_id") String m_id, @Param("p_id") String p_id);
+	Integer isExist(@Param("m_id") String m_id, @Param("p_id") String p_id);
 
 	// c_no으로 상담 조회
 	CounselVO oneCs(int c_no);
