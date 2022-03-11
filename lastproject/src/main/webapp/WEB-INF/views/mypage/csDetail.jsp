@@ -5,9 +5,6 @@
 <html>
 
 <style>
-
-
-
 #my_section {
 	padding: 50px;
 }
@@ -47,6 +44,21 @@ body {
 
 .pl-3, .px-3 {
 	padding-left: 1rem !important
+}
+
+#leftBubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 32px solid transparent;
+	border-right-color: #d1d1d1;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -16px;
+	margin-left: -32px;
 }
 
 .card {
@@ -152,12 +164,12 @@ img {
 	border-radius: 10px;
 }
 
-.other{
-	float : left;
+.other {
+	float: left;
 }
 
 .mine {
-	float : right;
+	float: right;
 }
 </style>
 
@@ -223,51 +235,50 @@ img {
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px;">
+					style="position: relative; width: 100%; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<div align="center">
-							<h1>1:1 상담</h1>
-						</div>
-						<div>
 
+						<div>
 							<!-- 채팅 상대방 이름 -->
-							<div>
+							<div style="margin-bottom: 20px;">
 								<c:if test="${mId ne null }">
-									<span><img class="profile"
-										src="resources/upload/${pInfo.picture }"
-										onError="this.src='resources/qna/대체이미지2.png'"></span>
-									<span>${pInfo.name }</span>&nbsp;<span><c:if
-											test="${pInfo.code == 100}">
-											<c:out value="수의사" />
-										</c:if> <c:if test="${pInfo.code == 101}">
-											<c:out value="훈련사" />
-										</c:if> <c:if test="${pInfo.code == 102}">
-											<c:out value="펫시터" />
-										</c:if> <c:if test="${pInfo.code == 103}">
-											<c:out value="미용사" />
-										</c:if></span>와의 1:1 상담입니다.
-							</c:if>
+									<h2>
+										<span><img
+											style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
+											class="profile" src="resources/upload/${pInfo.picture }"
+											onError="this.src='resources/qna/대체이미지2.png'"></span> <span>${pInfo.name }</span>&nbsp;<span><c:if
+												test="${pInfo.code == 100}">
+												<c:out value="수의사" />
+											</c:if> <c:if test="${pInfo.code == 101}">
+												<c:out value="훈련사" />
+											</c:if> <c:if test="${pInfo.code == 102}">
+												<c:out value="펫시터" />
+											</c:if> <c:if test="${pInfo.code == 103}">
+												<c:out value="미용사" />
+											</c:if></span>와의 1:1 상담
+									</h2>
+								</c:if>
 
 								<c:if test="${pId ne null }">
-									<span><img class="profile"
-										src="resources/upload/${mInfo.picture }"
-										onError="this.src='resources/qna/대체이미지2.png'"></span>
-									<span><c:out value="${mInfo.name }" />님과의 1:1 상담입니다.</span>
+									<h2>
+										<span><img
+											style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
+											class="profile" src="resources/upload/${mInfo.picture }"
+											onError="this.src='resources/qna/대체이미지2.png'"></span> <span><c:out
+												value="${mInfo.name }" />님과의 1:1 상담입니다.</span>
+									</h2>
 								</c:if>
 							</div>
 
-							<div>
-								<button type="button" id="terminate" name="terminate">상담
-									종료</button>
-
-							</div>
-
 							<!-- 반려동물 정보 -->
-							<div class="petInfo">
+							<h4>반려동물 정보</h4>
+							<div
+								style="width: 670px; height: 120px; margin-left: 30px; background: rgb(241, 241, 241); padding: 20px; margin-bottom: 30px;">
 								<table style="color: black">
 									<tr>
-										<td rowspan="3"><img class="profile"
-											src="resources/upload/${petInfo.picture }"
+										<td rowspan="3"><img
+											style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
+											class="profile" src="resources/upload/${petInfo.picture }"
 											onError="this.src='resources/qna/대체이미지2.png'"></td>
 										<td style="font-weight: bold;"><c:if
 												test="${petInfo.code ==501 }">
@@ -304,7 +315,7 @@ img {
 							</div>
 
 							<!-- 채팅 내용 -->
-							<div id="chatBody">
+							<div id="chatbody" style="border: 1px solid #d3d3d3; background-color: white; margin: 30px; padding: 30px; color: black; height: 600px; border-radius: 5px; overflow: scroll;">
 								<c:forEach items="${csDetail }" var="detail">
 
 									<!-- 일반 멤버의 경우 -->
@@ -313,16 +324,22 @@ img {
 										<!-- 채팅 상대방 -->
 										<c:if test="${detail.p_id eq detail.sender }">
 											<div class="other">${pInfo.name }</div>
-											<div class="other"
-												style="background-color: pink; width: 500px; padding: 10px;">
+											<div>
+											<div class="leftBubble"
+												style="background-color: #d1d1d1; padding: 10px; margin-right : 100px; border-radius: 10px; display: inline-block;">
 												${detail.content }</div>
-											<div class="other">${detail.w_date }</div>
+												<div class="other">${detail.w_date }</div>
+											</div>
+
 										</c:if>
 
 										<!-- 본인 -->
 										<c:if test="${detail.m_id eq detail.sender }">
-											<div class="mine" style="background-color : dodgerblue; width: 500px; padding:10px;">${detail.content }</div>
-											<div class="mine">${detail.w_date }</div>
+											<div align= "right">
+											<div class="mine"
+												style="background-color: #38a4ff; padding: 10px; margin-left : 100px; border-radius: 10px; display: inline-block; color : white;">${detail.content }</div>
+												<div class="mine">${detail.w_date }</div>
+											</div>
 										</c:if>
 									</c:if>
 
@@ -331,35 +348,45 @@ img {
 
 										<!-- 채팅 상대방 -->
 										<c:if test="${detail.m_id eq detail.sender }">
-											<div class="other" style="background-color: pink">
-												${mInfo.name } ${detail.content } ${detail.w_date }</div>
+											<div class="other">${mInfo.name }</div>
+											<div>
+											<div class="leftBubble"
+												style="background-color: #d1d1d1; padding: 10px; margin-right : 100px; border-radius: 10px; display: inline-block;">
+												${detail.content }</div>
+												<div class="other">${detail.w_date }</div>
+											</div>
+
 										</c:if>
 
 										<!-- 본인 -->
 										<c:if test="${detail.p_id eq detail.sender }">
-											<div class="mine">${detail.content }${detail.w_date }</div>
+											<div align= "right">
+											<div class="mine"
+												style="background-color: #38a4ff; padding: 10px; margin-left : 100px; border-radius: 10px; display: inline-block;">${detail.content }</div>
+												<div class="mine">${detail.w_date }</div>
+											</div>
 										</c:if>
-
 									</c:if>
-
-
 								</c:forEach>
 							</div>
 
 							<div>
 
 
+								<c:if test="${oneCs.code == '302' || oneCs.code == '301' }">
+								<div style="display : flex">
+									<span><input type="text" id="CounselMsg"
+										name="CounselMsg" class="form-control"
+										placeholder="메시지를 입력해주세요" style="width : 570px; height : 50px; margin-left : 30px;"></span>
+									<span><button type="button" id="msgSubmit"
+											class="genric-btn info-border radius" name="msgSubmit" style="margin-left : 10px;">전송</button></span>
+								</div>
+								</c:if>
 
-								<span><input type="text" id="CounselMsg"
-									name="CounselMsg" class="form-control"
-									placeholder="메시지를 입력해주세요"></span> <span><button
-										type="button" id="msgSubmit" name="msgSubmit">전송</button></span>
-
-
-								<c:if test="${oneCs.code == 303 }">
-									<div>
-										<h3>상담이 종료되었습니다. 다시 채팅을 시작하려면 아래 버튼을 눌러주세요</h3>
-										<a href=""><button type="button">채팅 시작하기</button></a>
+								<c:if test="${oneCs.code == '303' }">
+									<div
+										style="background-color: rgb(220, 220, 220); text-align: center; border-radius: 10px; width: 300px; height: 60px; padding-top: 20px; margin-left: 200px; color : black;">
+										<p>상담이 종료되었습니다.</p>
 									</div>
 								</c:if>
 
@@ -376,13 +403,20 @@ img {
 									<input type="hidden" id="sender" name="sender" value="${pId }">
 								</c:if>
 
-
+								<c:if test="${oneCs.code == '302' || oneCs.code == '301' }">
+									<div>
+										<button type="button" id="terminate" name="terminate"
+											class="genric-btn success" style="float: right; margin-right : 30px;">상담
+											종료</button>
+									</div>
+								</c:if>
 							</div>
 
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 	<script>
 		$(document).ready(function() {
@@ -390,6 +424,8 @@ img {
 			/* setInterval(AjaxCall(), 300); */
 
 			/* $('#CounselMsg').focus(); */
+
+			/*메시지 전송*/
 
 			$('#CounselMsg').keypress(function(event) {
 				var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -405,7 +441,6 @@ img {
 			})
 		});
 
-		/*메시지 전송*/
 		function send() {
 			var msg = $("#CounselMsg").val();
 			console.log(msg);
@@ -423,9 +458,10 @@ img {
 						sender : $("#sender").val(),
 						pet_no : $("#pet_no").val()
 					},
-					success : function(data) {
+					success : function() {
 						location.reload();
-						console.log(data);
+						var objDiv = document.getElementById("chatbody");
+						objDiv.scrollTop = objDiv.scrollHeight;
 					},
 					error : function() {
 						alert('메시지가 전송되지 않았습니다.');
@@ -443,7 +479,6 @@ img {
 						url : "CodeUdt",
 						data : {
 							p_no : $("#p_no").val(),
-							c_no : $("#p_no").val()
 						},
 						success : function() {
 							alert('상담이 종료되었습니다.');
@@ -455,18 +490,18 @@ img {
 					})
 				}
 			})
+		})
+		/* function AjaxCall() {
 
-			/* function AjaxCall() {
+			$.ajax({
 
-				$.ajax({
-
-					cache : false,
-					url : "csDetail",
-					success : function(data) {
-						location.reload();
-					}
-				})
-			}
+				cache : false,
+				url : "csDetail",
+				success : function(data) {
+					location.reload();
+				}
+			})
+		}
 
 		}) */
 	</script>

@@ -110,7 +110,12 @@ public class CounselController {
 			out_writer.println("<script>alert('이미 진행 중인 상담이 있습니다. 상담 내역 페이지에서 확인해주세요.');</script>");
 			out_writer.flush();
 			
-			return null;		
+			session = request.getSession();
+			String mid = (String) session.getAttribute("mId");
+			cri.setM_id(mid);
+			cri.setAmount(10);
+			
+			return "redirect:/mycounsel";
 		
 		} else {
 			//새로운 상담 폼으로 이동
@@ -145,5 +150,11 @@ public class CounselController {
 	}
 
 	// 상담 종료 ajax
-
+	@RequestMapping(value="/CodeUdt", method=RequestMethod.GET)
+	public String CodeUdt(@RequestParam("p_no") int p_no, Model model) throws Exception{
+		
+		counselDao.CodeUdt(p_no);
+		
+		return "mypage/csDetail";
+	}
 }

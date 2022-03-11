@@ -5,6 +5,12 @@
 <html>
 
 <style>
+ul li {
+	list-style-type: none;
+	float: left;
+	margin-left: 20px;
+}
+
 #my_section {
 	padding: 50px;
 }
@@ -133,9 +139,13 @@ body {
 	margin-left: 400px;
 }
 
-#radios{
-	display : flex;
-	flex-direction : row;
+#radios {
+	display: flex;
+	flex-direction: row;
+}
+
+br.clear {
+	clear: both
 }
 </style>
 
@@ -201,14 +211,14 @@ body {
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;"">
+					style="position: relative; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 							<h2>상담 차트 작성</h2>
 						</div>
 						<div>
 							<form name="newCs" id="newCs" action="newCs" method="post"
-								onsubmit="fmcheck();">
+								onsubmit="return fmcheck();">
 								<div style="text-align: center; margin-bottom: 20px;">
 									<h3>
 										<span>${pInfo.name }</span>&nbsp;<span><c:if
@@ -233,22 +243,33 @@ body {
 								<h4 style="color: gray;'">*상담받고자 하는 반려동물을 선택해주세요.</h4>
 								<div class="petSelect"
 									style="margin-bottom: 50px; margin-top: 50px;">
-									<c:forEach items="${petList }" var="pet">
-									<div id="radios">
-										<div class="radioImg">
-											<img class="petSelection" src="resources/qna/${pet.picture }"
-												onError="this.src='resources/qna/대체이미지2.png'">
-										</div>
-										<input type="radio" id="pet_no" name="pet_no"
-											value="${pet.pet_no}">&nbsp;${pet.name }
-									</div>
-									</c:forEach>
+									<ul>
+										<li><div class="radioImg">
+												<img class="petSelection" src="resources/qna/가위표.png">
+											</div> <input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
+											<label>없음/비공개</label></li>
+
+										<c:forEach items="${petList }" var="pet">
+
+											<li><div class="radioImg">
+													<img class="petSelection"
+														src="resources/qna/${pet.picture }"
+														onError="this.src='resources/qna/대체이미지2.png'">
+												</div> <input type="radio" id="pet_no" name="pet_no"
+												value="${pet.pet_no}">&nbsp;${pet.name }</li>
+
+										</c:forEach>
+									</ul>
 								</div>
 
-								<h3>상담 내용</h3>
-								<h4 style="color: gray;">*반려동물의 증상, 궁금한 점 등을 자세히 적어주세요.</h4>
-								<textarea id="content" name="content" class="form-control"
-									style="width: 100%; height: 500px; margin-bottom: 30px;"></textarea>
+								<br class="clear"> <br class="clear"> <br
+									class="clear"> <br class="clear"> <br class="clear">
+
+								<div style="margin-top: 30px;">
+									<h3>상담 내용</h3>
+									<textarea id="content" name="content" class="form-control"
+										style="width: 100%; height: 500px; margin-bottom: 30px;">*반려동물의 증상, 전문가에게 궁금한 점 등을 자세히 적어주세요.</textarea>
+								</div>
 
 								<div id="btns">
 									<button type="submit" id="submitCs" class="btn btn-primary"
@@ -292,7 +313,7 @@ body {
 
 			if (content == "") {
 				alert('상담 내용이 입력되지 않았습니다.');
-				
+
 				return false;
 			}
 		}

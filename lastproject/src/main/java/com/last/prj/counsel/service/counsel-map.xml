@@ -13,7 +13,7 @@
 		FROM ( SELECT ROWNUM RN, A.*
 		FROM (SELECT P.NAME AS
 		p_name, C.M_ID, C.CONTENT, C.W_DATE,
-		C.CODE, C.C_NO
+		C.CODE, C.C_NO, P.pet_no
 		FROM PET P, MEMBER
 		M, COUNSEL C
 		WHERE P.PET_NO = C.PET_NO
@@ -33,7 +33,7 @@
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
 		FROM (SELECT P.NAME AS
-		p_name, C.CONTENT, PM.NAME AS pm_name, C.W_DATE,
+		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name, C.W_DATE, P.pet_no,
 		C.CODE, CO.CONTENT AS
 		co_content, c.p_id, c.m_id, c.c_no
 		FROM COUNSEL C, PET P, P_MEMBER PM,
@@ -87,7 +87,7 @@
 
 	<!-- 기존 채팅방 존재 여부 -->
 	<select id="isExist"
-		parameterType="com.last.prj.counsel.service.CounselVO" resultType="int">
+		parameterType="com.last.prj.counsel.service.CounselVO" resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT COUNT(*)
 		FROM counsel
 		WHERE p_id=#{p_id} AND
@@ -99,7 +99,7 @@
 	<select id="csDetail"
 		parameterType="com.last.prj.counsel.service.CounselVO"
 		resultType="com.last.prj.counsel.service.CounselVO">
-		SELECT *
+		SELECT c_no, content, TO_CHAR(w_date, 'MM/DD HH24:MI:SS') AS w_date, p_id, pet_no, code, p_no, m_id, sender, r_check
 		FROM counsel
 		WHERE p_no = #{c_no} OR c_no = #{c_no}
 		ORDER BY w_date asc
@@ -135,7 +135,7 @@
 		parameterType="com.last.prj.counsel.service.CounselVO">
 		UPDATE counsel
 		SET code=303
-		WHERE p_no=#{c_no}
+		WHERE c_no=#{c_no}
 	</update>
 
 	<!-- c_no으로 상담 조회 -->
