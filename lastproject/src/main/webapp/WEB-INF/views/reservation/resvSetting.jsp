@@ -280,6 +280,7 @@ $(document).ready(function(){
 
 //일정 삭제이벤트
 calendar.on('beforeDeleteSchedule', scheduleData => {
+		 var p_id = "${sessionScope.pId}";
 		  const {schedule, start, end} = scheduleData;
 
 		  schedule.start = start;
@@ -287,7 +288,8 @@ calendar.on('beforeDeleteSchedule', scheduleData => {
 		  $.ajax({
 			  url : 'revsetdelete',
 			  method : 'POST',
-			  data : {"id" : schedule.id},
+			  data : {"id" : schedule.id,
+				  	  "p_id": p_id},
 			  success : function(res){
 		  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
 		  		alert("해당 예약설정을 해제하였습니다.");

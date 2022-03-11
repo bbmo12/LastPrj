@@ -30,5 +30,10 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 		return map.pMemDiaList(p_id);
 	}
 
+	@Override
+	public List<DiagnosisVO> diaList() {
+		return map.diaList();
+	}
+
 
 }
