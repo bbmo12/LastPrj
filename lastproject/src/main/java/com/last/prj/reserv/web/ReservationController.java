@@ -139,7 +139,6 @@ public class ReservationController {
 		cri.setM_id(m_id);
 		cri.setAmount(5);
 		PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
-
 		
 		model.addAttribute("member",memDao.memberSearch(m_id));
 		model.addAttribute("page", paging);// 페이징 수
