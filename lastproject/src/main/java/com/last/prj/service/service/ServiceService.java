@@ -2,6 +2,10 @@ package com.last.prj.service.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.last.prj.pmember.service.Criteria;
+
 public interface ServiceService {
 
 	public List<ServiceVO> myPetServiceList(String m_id); //내 반려동물 서비스 기록 전체조회
@@ -16,5 +20,11 @@ public interface ServiceService {
 	
 	public ServiceVO serviceSelect(int r_no); //파트너회원 서비스 조회
 	
+
+	
+	public List<ServiceVO> petService(ServiceVO vo);
+	public int petServiceCnt(ServiceVO vo);
+	
+	public List<ServiceVO> petProtoColSearch(@Param("key") String key, @Param("data") String data, @Param("m_id")String m_id);
 	
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.last.prj.service.service.ServiceVO;
+
 public interface PetService {
 	
 	//펫넘버로 펫 정보 조회
@@ -23,5 +25,6 @@ public interface PetService {
 	
 	//펫 수
 	int petCount();
+
 	
 }

@@ -102,7 +102,7 @@
 		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
 			$("#myTable").empty();
-			console.log(result);
+			console.log("result는: " + result);
 
 			$
 					.each(
@@ -149,6 +149,8 @@
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
+					console.log("리절트리스트는 :"+result.list);
+					console.log("리절트페이지는 : " + result.page);
 					viewPmemberList(result.list);
 					viewPage(result.page);
 				}
@@ -157,7 +159,7 @@
 			
 		//===========페이징 처리==========
 		function viewPage(page) {
-			console.log(page);
+			console.log("page는 :"+page);
 			
 			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">`
@@ -192,6 +194,7 @@
 		}
 			
 		function goPage(pa) {
+			console.log("pa 는 :" + pa);
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
