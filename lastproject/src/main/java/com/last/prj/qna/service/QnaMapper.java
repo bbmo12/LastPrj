@@ -25,7 +25,7 @@ public interface QnaMapper {
 	List<QnaVO> ansDetail(int q_no);
 	
 	//태그 클릭 시 검색
-	List<QnaTagVO> tagSearch(String t_name);
+	List<QnaTagVO> tagSearch(@Param("t_name") String t_name);
 	
 	//질문글 작성
 	int newQna(QnaVO qna);

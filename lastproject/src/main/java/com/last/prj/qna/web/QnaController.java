@@ -88,10 +88,9 @@ public class QnaController {
 
 	// 태그 클릭 시 동일 태그 글 검색
 	@GetMapping(value = "/tagSearch")
-	public String tagSearch(@RequestParam("t_name") String t_name, Criteria cri, Model model) {
+	public String tagSearch(@RequestParam("t_name") String t_name, Model model) {
 
-		model.addAttribute("page", new PagingVO(cri, mapper.getTotal(cri)));
-		model.addAttribute("tagSearch", mapper.tagSearch(t_name));
+		model.addAttribute("tagSearch", qnaDAO.tagSearch(t_name));
 		model.addAttribute("tagList", qtagDAO.tagList());
 
 		return "qna/tagSearch";
@@ -226,7 +225,7 @@ public class QnaController {
 		qnaDAO.qDeleteOne(q_no);
 		qtDAO.delTags(q_no);
 
-		return "qna/qnaDetail";
+		return "redirect:/qnaDetail";
 	}
 
 	// 질문 삭제(2)
@@ -236,7 +235,7 @@ public class QnaController {
 		qnaDAO.qDeleteTwo(q_no);
 		qtDAO.delTags(q_no);
 
-		return "qna/qnaMain";
+		return "redirect:/qnaMain";
 	}
 
 	// 답변글 작성 모달 처리

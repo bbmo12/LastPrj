@@ -7,9 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
@@ -37,11 +35,16 @@ h3 {
 	overflow: hidden;
 }
 
+ul.petSct li {
+	list-style-type: none;
+	float: left;
+	margin-left: 20px;
+}
+
 .petSelection {
 	width: 100%;
 	height: 100%;
-	object-fit: cover; ul { padding : 16px 0;
-	list-style: none;
+	object-fit: cover;
 }
 
 ul li {
@@ -51,11 +54,24 @@ ul li {
 	letter-spacing: -.5px;
 }
 
+ul#tag-list li.tag-item {
+	padding: 4px 8px 5px;
+	background-color: #4CD3E3;
+	color: white;
+	border-radius : 30px;
+}
+
+ul#tag-list li.tag-item:hover {
+	background-color: white;
+	color: #4CD3E3;
+	border : 1px solid #4CD3E3;
+}
+
 form {
 	padding-top: 16px;
 }
 
-ul li.tag-item {
+/* ul#tag-list li.tag-item {
 	padding: 4px 8px;
 	background-color: #000;
 	color: dodgeblue;
@@ -64,7 +80,7 @@ ul li.tag-item {
 .tag-item:hover {
 	background-color: dodgeblue;
 	color: #000;
-}
+} */
 
 .petSelect {
 	displsy: flex;
@@ -77,7 +93,7 @@ ul li.tag-item {
 	cursor: pointer;
 	margin-left: 8px;
 }
-}
+
 </style>
 <script>
 	var ckeditor_config = {
@@ -124,21 +140,26 @@ ul li.tag-item {
 					style="margin-bottom: 50px; margin-top: 50px;">
 					<h3>반려동물 선택</h3>
 					<h4 style="color: gray;">*도움이 필요한 반려동물을 선택해주세요.</h4>
-					<div class="radioImg">
-						<img class="petSelection" src="resources/qna/가위표.png">
-					</div>
-					<input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
-					<label>없음/비공개</label>
+					<ul class="petSct">
+						<li><div class="radioImg">
+								<img class="petSelection" src="resources/qna/가위표.png">
+							</div> <input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
+							<label>없음/비공개</label></li>
 
-					<c:forEach items="${petList }" var="pet">
-						<div class="radioImg">
-							<img class="petSelection" src="resources/qna/${pet.picture }"
-								onError="this.src='resources/qna/대체이미지2.png'">
-						</div>
-						<input type="radio" id="pet_no" name="pet_no"
-							value="${pet.pet_no}">&nbsp;${pet.name }
-					</c:forEach>
+						<c:forEach items="${petList }" var="pet">
+							<li><div class="radioImg">
+									<img class="petSelection" src="resources/qna/${pet.picture }"
+										onError="this.src='resources/qna/대체이미지2.png'">
+								</div> <input type="radio" id="pet_no" name="pet_no"
+								value="${pet.pet_no}">&nbsp;${pet.name }</li>
+						</c:forEach>
+					</ul>
 				</div>
+				
+				<br>
+				<br>
+				<br>
+				<br>
 
 				<div class="mb-3">
 					<textarea class="ckeditor4" id="content" name="content" required></textarea>
@@ -150,7 +171,7 @@ ul li.tag-item {
 				<div style="margin-top: 40px; width: 1000px;" class="content">
 					<div>
 						<h3>태그</h3>
-						<input type="text" id="tag" class="form-control"
+						<input type="text" style="margin-bottom : 20px;" id="tag" class="form-control"
 							placeholder="스페이스 키로 태그를 등록하세요" />
 					</div>
 

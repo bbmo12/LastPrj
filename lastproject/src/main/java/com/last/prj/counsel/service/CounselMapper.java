@@ -2,6 +2,8 @@ package com.last.prj.counsel.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.last.prj.pmember.service.Criteria;
 
 public interface CounselMapper {
@@ -36,7 +38,7 @@ public interface CounselMapper {
 	int CodeUdt(int c_no);
 
 	// 기존 상담 여부
-	int isExist(String m_id, String p_id);
+	Integer isExist(@Param("m_id") String m_id, @Param("p_id") String p_id);
 
 	int codeUpd(int p_no);
 }
