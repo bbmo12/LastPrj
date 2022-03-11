@@ -109,7 +109,7 @@
 								<input type="text" style="border: none" id="weight"
 									name="weight" value="${pet.weight}" readonly>
 							</div>
-							<div></div>
+							
 							
 							<input type="hidden" id="pet_no" name="pet_no"
 								value="${pet.pet_no}">
