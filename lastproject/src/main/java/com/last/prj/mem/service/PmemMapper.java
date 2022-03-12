@@ -22,4 +22,5 @@ public interface PmemMapper {
 	boolean isIdCheck(String p_id);
 	List<PriceVO> getPrice(PriceVO price);
 
+	PmemVO read(String username);
 }

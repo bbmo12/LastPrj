@@ -1,6 +1,7 @@
 package com.last.prj.mem.service;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -19,6 +20,9 @@ public class MemVO {
 
 	private String picture; 	//프로필사진
 	private String pfile;		//첨부파일
+	
+	private int m_role; // 권한
+	private List<AuthVO> authList;
 }
 	
 
