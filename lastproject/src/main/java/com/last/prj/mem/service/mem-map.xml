@@ -114,5 +114,24 @@
 		insert into o_time(o_no, p_id, w_day, starttime, endtime, n_content) values(#{o_no},#{p_id},#{w_day},#{starttime},#{endtime},#{n_content})
 	</insert>
 	
+	<!-- 권한 -->
+	<resultMap type="com.last.prj.mem.service.MemVO" id="memberMap">
+		<id property="m_id" column="m_id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="m_role" column="m_role"/>
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
 	
+	<resultMap type="com.last.prj.mem.service.AuthVO" id="authMap">
+		<result property="id" column="id"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	
+	<select id="read" resultMap="memberMap">
+		select M_ID, PASSWORD, NAME, AUTH
+		from TBL_AUTH
+		inner join MEMBER on TBL_AUTH.ID = MEMBER.M_ROLE
+		where M_ID = #{username}
+	</select>
 </mapper>

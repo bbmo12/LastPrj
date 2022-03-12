@@ -62,5 +62,24 @@
 		from p_member where p_id = #{p_id}
 	</select>
 	
+	<!-- 권한 -->
+	<resultMap type="com.last.prj.mem.service.PmemVO" id="pmemberMap">
+		<id property="p_id" column="p_id"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="p_role" column="p_role"/>
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
 	
+	<resultMap type="com.last.prj.mem.service.AuthVO" id="authMap">
+		<result property="id" column="id"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	
+	<select id="read" resultMap="pmemberMap">
+		select P_ID, PASSWORD, NAME, AUTH
+		from TBL_AUTH
+		inner join P_MEMBER on TBL_AUTH.ID = P_MEMBER.P_ROLE
+		where P_ID = #{username}
+	</select>
 </mapper>

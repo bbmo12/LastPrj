@@ -3,8 +3,7 @@ package com.last.prj.mem.service;
 import lombok.Data;
 
 @Data
-public class LoginVO {
+public class AuthVO {
 	private String id;
-	private String password;
-	private String name;
+	private String auth;
 }

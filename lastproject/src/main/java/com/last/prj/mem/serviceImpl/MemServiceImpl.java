@@ -88,6 +88,11 @@ public class MemServiceImpl implements MemService {
 		return map.otimeinsert(time);
 	}
 
+	@Override
+	public MemVO read(String username) {
+		return map.read(username);
+	}
+
 
 
 	
