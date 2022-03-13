@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +44,7 @@ import com.last.prj.qtag.service.QtagService;
 import com.last.prj.qtag.service.QtagVO;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
+import com.last.prj.security.CustomUser;
 
 @Controller
 public class QnaController {
@@ -100,9 +103,11 @@ public class QnaController {
 	@RequestMapping(value = "/newQnaReport", method = RequestMethod.POST)
 	public String newQnaReport(HttpServletRequest request, ReportVO report) throws Exception {
 
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		String p_id = (String) session.getAttribute("pId");
+		/*
+		 * HttpSession session = request.getSession(); String m_id = (String)
+		 * session.getAttribute("mId"); String p_id = (String)
+		 * session.getAttribute("pId");
+		 */
 
 		reportDao.newQnaReport(report);
 
@@ -113,10 +118,11 @@ public class QnaController {
 	@RequestMapping(value = "/qnaDetail")
 	public String qnaDetail(@RequestParam("q_no") int q_no, Model model, HttpServletRequest request) {
 
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		String p_id = (String) session.getAttribute("pId");
-
+		/*
+		 * HttpSession session = request.getSession(); String m_id = (String)
+		 * session.getAttribute("mId"); String p_id = (String)
+		 * session.getAttribute("pId");
+		 */
 		qnaDAO.postCnt(q_no);
 		model.addAttribute("qnaDetail", qnaDAO.qnaDetail(q_no));
 		model.addAttribute("ansDetail", qnaDAO.ansDetail(q_no));
@@ -141,24 +147,25 @@ public class QnaController {
 		return "pmember/memberDetail";
 	}
 
-	// 로그인 여부 체크 + 질문 폼으로 이동 + m_id별 펫정보 받아감.
+	// 질문 폼으로 이동 + m_id별 펫정보 받아감.
 	@RequestMapping(value = "/qnaForm")
-	public String qnaForm(@RequestParam("m_id") String m_id, HttpSession session, HttpServletResponse write,
-			Model model) throws Exception {
+	public String qnaForm(Model model) throws Exception {
 
-		String mId = (String) session.getAttribute("mId");
+		/* String mId = (String) session.getAttribute("mId"); */
 
-		if (mId == null) {
-			write.setContentType("text/html; charset=UTF-8");
-			PrintWriter out_writer = write.getWriter();
-			out_writer.println("<script>alert('먼저 로그인하세요.');</script>");
-			out_writer.flush();
-
-			return "member/loginForm";
-		} else {
-			model.addAttribute("petList", petDAO.petmemberList(m_id));
+		/*
+		 * if (mId == null) { write.setContentType("text/html; charset=UTF-8");
+		 * PrintWriter out_writer = write.getWriter();
+		 * out_writer.println("<script>alert('먼저 로그인하세요.');</script>");
+		 * out_writer.flush();
+		 * 
+		 * return "member/loginForm"; } else {
+		 */
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String id = userDetails.getMember().getM_id();
+		
+			model.addAttribute("petList", petDAO.petmemberList(id));
 			return "qna/qnaForm";
-		}
 	}
 
 	// 질문글 작성 + 태그 처리
@@ -166,8 +173,9 @@ public class QnaController {
 	public String qForm(HttpServletRequest request, HttpSession session, HttpServletResponse write, QnaVO qna,
 			QtagVO qtag, QnaTagVO qnatag) throws Exception {
 
-		String mId = (String) session.getAttribute("mId");
-		qna.setWriter(mId);
+		/*
+		 * String mId = (String) session.getAttribute("mId"); qna.setWriter(mId);
+		 */
 
 		if (qtag.getNTags() != null && qtag.getNTags().size() > 0) {
 			qtagDAO.newTag(qtag);
@@ -183,13 +191,12 @@ public class QnaController {
 
 	// 질문 수정 폼으로 이동 + 기존 글 내용 + 기존 태그 + 멤버별 펫 정보 받아감.
 	@RequestMapping(value = "/qModiForm")
-	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, HttpSession session,
-			Model model) throws Exception {
+	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, Model model) throws Exception {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		QnaVO vo = qnaDAO.qnaDetail(q_no);
 
-		String mId = (String) session.getAttribute("mId");
+		/* String mId = (String) session.getAttribute("mId"); */
 
 		model.addAttribute("petList", petDAO.petmemberList(m_id));
 		model.addAttribute("qnaDetail", vo);
