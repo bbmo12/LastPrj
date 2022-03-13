@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.pmember.service.PmemberService;
+import com.last.prj.reserv.service.ReservCountService;
+import com.last.prj.reserv.service.ReservCountVO;
 import com.last.prj.security.CustomUser;
 
 @Controller
@@ -26,6 +28,8 @@ public class CalendarController {
 	private CalendarService CalendarDao;
 	@Autowired
 	private PmemberService pMemberDao;
+	@Autowired
+	private ReservCountService reservCountDao;
 	
 	
 	//파트너회원 예약설정 조회
@@ -59,9 +63,15 @@ public class CalendarController {
 	//파트너회원 예약설정 삭제
 	@PostMapping("revsetdelete")
 	@ResponseBody
-	public String revSetDelete(@RequestParam("p_id")String p_id ,CalendarVO vo) {
-		CalendarDao.revSetDelete(vo);
-		return "ok";
+	public String revSetDelete(@RequestParam("p_id")String p_id,CalendarVO vo,ReservCountVO rco) {
+		List<ReservCountVO> list = reservCountDao.reservDelCheck(rco);
+		System.out.println("요기 셀렉결과창"+ list); 
+		if(list.size()==0) {
+			CalendarDao.revSetDelete(vo);
+			return "ok";
+		}else {
+			return "no";
+		}
 	}
 	
 	//파트너회원 예약설정 수정

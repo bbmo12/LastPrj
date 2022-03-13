@@ -154,7 +154,7 @@ public class ReservationController {
 				
 				model.addAttribute("member",memDao.memberSearch(m_id));
 				model.addAttribute("page", paging);// 페이징 수
-				
+				model.addAttribute("m_id",m_id);
 				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
 				
 				vo.setM_id(m_id);
