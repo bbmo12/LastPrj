@@ -82,9 +82,24 @@ public class MemController {
 	// 일반회원 회원탈퇴
 	// 이부
 	@RequestMapping("mdelete")
-	public String mdelete(HttpServletRequest request, MemVO member) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String mdelete( Principal principal, MemVO member,HttpSession session) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+				
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+		}
 		memDao.memberDelete(m_id);
 
 		session.invalidate();
@@ -124,22 +139,53 @@ public class MemController {
 
 	// 내정보 수정페이지로 이동
 	@RequestMapping("/memberUpdateForm")
-	public String memberUpdateFrom(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String memberUpdateFrom(Model model, Principal principal) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+			
+		}
 		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberUpdateForm";
 	}
 
 	// 내정보페이지로 이동
 	@RequestMapping("/memberMypage")
-	public String memberMypage(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String memberMypage(Model model, Principal principal) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+		}
 		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberMypage";
 	}
 
+	
+	
 	@RequestMapping("joinForm") // 일반회원회원가입폼이동
 	public String joinForm() {
 		return "member/joinForm";
