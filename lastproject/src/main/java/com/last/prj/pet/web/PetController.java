@@ -107,7 +107,9 @@ public class PetController {
 	
 	//반려동물 정보수정
 	@RequestMapping("mypetupdate")
-	public String mypetupdate(MultipartFile file, PetVO pet, Model model, @RequestParam("pet_no") int pet_no) {
+	public String mypetupdate(MultipartFile file, PetVO pet, Model model, @RequestParam("pet_no") int pet_no, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");		
 		String originalFileName = file.getOriginalFilename();
 
 		String webPath = "/resources/upload";
@@ -133,6 +135,8 @@ public class PetController {
 			}
 		}
 		model.addAttribute("pet",petDAO.mypetupdate(pet));
+		model.addAttribute("pets",petDAO.petmemberList(m_id));
+		model.addAttribute("member",memDao.memberSearch(m_id));
 		
 		return "mypage/mpetprofile";
 	}

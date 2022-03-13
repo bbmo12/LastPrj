@@ -180,5 +180,12 @@ public class PmemberController {
 		return 1;
 	}
 	
+	//후기 조회
+	@RequestMapping("/reviewSearch")
+	@ResponseBody
+	public ReviewVO reviewSearch(ReviewVO r_no) {
+		return reviewDao.reviewSearch(r_no);
+	}
+	
 }
 
