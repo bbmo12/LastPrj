@@ -47,8 +47,23 @@ public class PmemserviceImpl implements PmemService {
 	}
 
 	@Override
-	public List<PriceVO> getPrice(PriceVO price) {
-		return pmap.getPrice(price);
+	public List<PriceVO> getPrice(String p_id) {
+		return pmap.getPrice(p_id);
+	}
+
+	@Override
+	public int deleteService(PriceVO price) {
+		return pmap.deleteService(price);
+	}
+
+	@Override
+	public int insertService(PriceVO price) {
+		return pmap.insertService(price);
+	}
+
+	@Override
+	public int updateService(PriceVO price) {
+		return pmap.updateService(price);
 	}
 
 	@Override

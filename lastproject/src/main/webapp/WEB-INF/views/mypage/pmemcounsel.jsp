@@ -130,7 +130,7 @@ body {
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container">
+		<div class="container" style="max-width: 1200px;">
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
@@ -179,18 +179,17 @@ body {
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px;">
+				<div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 							<h1>상담내역조회</h1>
 						</div>
-						<div class="page-content page-container" id="page-content"
-							style="margin-top: 20px;">
+						<div class="page-content page-container" id="page-content" style="margin-top: 20px;">
 							<div class="row container d-flex justify-content-center">
 								<div class="card" style="width: 100%">
-									<div class="card-body" style="width: 100%">
+									<div class="card-body" style="padding: 25px;">
 										<div class="table-responsive" style="width: 100%">
+										  <form action="pmemcounsel" name="goform">
 											<input type="hidden" name="pageNum" value="1">
 											<table id="htmltable" class="table">
 												<thead>
@@ -220,6 +219,7 @@ body {
 													</c:forEach>
 												</tbody>
 											</table>
+											</form>
 										</div>
 									</div>
 								</div>

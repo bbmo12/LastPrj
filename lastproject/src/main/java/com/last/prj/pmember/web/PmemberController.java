@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,7 +67,7 @@ public class PmemberController {
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
-		model.addAttribute("price", pmemDao.getPrice(price));
+		model.addAttribute("price", pmemDao.getPrice(p_id));
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
@@ -82,7 +83,7 @@ public class PmemberController {
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
-		
+		model.addAttribute("price", pmemDao.getPrice(p_id));
 		return "pmember/pmemberMypage";
 	}
 
@@ -95,12 +96,13 @@ public class PmemberController {
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
+		model.addAttribute("price", pmemDao.getPrice(p_id));
 		return "pmember/pmemberUpdateForm";
 	}
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember, TimeVO time, Model model, HttpServletRequest request) {
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember,ParamMap<TimeVO> time1,TimeVO time, PriceVO price, Model model, HttpServletRequest request) {
 
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
@@ -128,15 +130,38 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		
-		pMemberDao.deleteTime(p_id);
 		pMemberDao.pmemberUpdate(pmember);
-		
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
-			pMemberDao.pmemberTime(time.getTimeVOList().get(i));
+			pMemberDao.updateTime(time.getTimeVOList().get(i));
 		}
-		
+		for(int i=0; i < price.getPriceVOList().size(); i++) {
+			pmemDao.updateService(price.getPriceVOList().get(i));
+		}
+
 		return "redirect:/pmemberMyPage";
+	}
+	//시간추가
+//	@RequestMapping("pmemberUpdate")
+//	@ResponseBody
+//	public int insertTime(TimeVO time) {
+//		for(int i=0; i < time.getTimeVOList().size(); i++) {
+//			pMemberDao.pmemberTime(time.getTimeVOList().get(i));
+//			System.out.println("======================"+time.getTimeVOList().get(i));
+//		}
+//		return 1;
+//	}
+	
+	//서비스삭제 
+	@RequestMapping("deleteService")
+	@ResponseBody
+	public int deleteService(PriceVO price) {
+		return pmemDao.deleteService(price);
+	}
+	//시간삭제 
+	@RequestMapping("deleteTime")
+	@ResponseBody
+	public int deleteTime(TimeVO time) {
+		return pMemberDao.deleteTime(time);
 	}
 	
 	@RequestMapping("pmemberBest")//베스트순위출력

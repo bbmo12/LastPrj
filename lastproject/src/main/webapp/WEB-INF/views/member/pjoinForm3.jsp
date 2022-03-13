@@ -63,7 +63,7 @@
 								<option value='21:00'>21:00</option>
 							</select>
 							<br>
-							<input type="text" class="form-control" id="n_content" name="n_content" placeholder="특이사항을 입력해주세요 ex)연중무휴" style="width: 465px;margin-top: 10px;">
+							<input type="text" class="form-control" id="n_content" name="n_content" placeholder="특이사항을 입력해주세요 ex)연중무휴" style="width: 465px; margin-top: 10px;">
 						</div>
 						<button type="button" class="btn btn-primary mr-2" onclick="addO_Time()" style="margin: -87px 0 0 30em;">시간추가</button>
 						<h4 class="card-title">서비스 정보를 입력해주세요.</h4>
@@ -168,7 +168,6 @@
 					'content' : content
 				},
 				success: function (res) {
-					console.log("ggggggggggggggggg"+res);
 					var service_div = $('#serviceMain');
 					alert("서비스가 추가되었습니다.");
 					var $service =`
@@ -183,7 +182,8 @@
 					<div class="form-group">	
 						<label for="exampleInputPassword4">서비스안내</label>
 						<textarea class="form-control" id="content" name="content" placeholder="해당하는 서비스 추가 설명을 입력해주세요." rows="3" cols="130"></textarea>
-					</div>`
+					</div>
+					<p style="margin-left: 70px;">서비스를 더 추가 하시러면 서비스 추가 버튼을 눌러주세요.</p>`
 					service_div.empty();
 					service_div.append($service);
 				}

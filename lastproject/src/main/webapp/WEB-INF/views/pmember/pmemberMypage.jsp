@@ -12,6 +12,27 @@
 	#my_section {
 		padding: 50px;
 	}
+	#formMain h3,
+	input {
+		display: inline-block;
+	}
+	#address{
+		border: none; 
+		overflow: hidden; 
+		margin-bottom: -8px;
+	}
+	.row h3{
+		font-weight: bolder; 
+		text-align: center;
+		margin-top: 10px;
+	}
+	#middle .doctor-text{
+		display: inline-block;
+	}
+	#formMain .form-group{
+		margin-bottom: 5px;
+	}
+	
 </style>
 
 <body>
@@ -71,73 +92,93 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row" style="margin-left: 10px;">
-						<div class="col-lg-9 col-md-9 blog_details">
+						<div class="col-lg-9 col-md-9 blog_details" id="formMain">
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">이름</h3>
+								<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>	
 								<input type="text" style="border: none" id="name" name="name" value="${pmember.name}"
 									readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">아이디</h3>
+								<h3 style="font-weight: bolder;">아이디&nbsp;:&nbsp;</h3>
 								<input type="email" style="border: none" id="p_id" name="p_id" value="${pmember.p_id}"
 									readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">비밀번호</h3>
+								<h3 style="font-weight: bolder;">비밀번호&nbsp;:&nbsp;</h3>
 								<input type="password" style="border: none" id="password" name="password"
 									value="${pmember.password}" readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">전화번호</h3>
+								<h3 style="font-weight: bolder;">전화번호&nbsp;:&nbsp;</h3>
 								<input style="border: none" id="tel" name="tel" value="${pmember.tel}" readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">사업장 이름</h3>
+								<h3 style="font-weight: bolder;">사업장 이름&nbsp;:&nbsp;</h3>
 								<input style="border: none" id="w_name" name="w_name" value="${pmember.w_name}"
 									readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">사업장 주소</h3>
-								<textarea style="border: none; overflow: hidden;" id="address" name="address" readonly cols="50"
+								<h3 style="font-weight: bolder;">사업장 주소&nbsp;:&nbsp;</h3>
+								<textarea style="border: none; overflow: hidden; margin-bottom: -8px;" id="address" name="address" readonly cols="50"
 									rows="1">${pmember.w_address}  ${pmember.w_d_address }</textarea>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">사업장 전화번호</h3>
+								<h3 style="font-weight: bolder;">사업장 전화번호&nbsp;:&nbsp;</h3>
 								<input type="text" style="border: none" id="w_tel" name="w_tel" value="${pmember.w_tel}"
 									readonly>
+							</div>					
+							<div class="form-group">
+								<h3 style="font-weight: bolder;">경력&nbsp;:&nbsp;</h3>
+								<input type="text" style="border: none" id="career" name="career"
+									value="${pmember.career}" readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">운영안내</h3>
-								<c:forEach items="${time }" var="time">
-									<input type="text" style="border: none" id="time" name="time"
-										value="${time.w_day } ${time.starttime} - ${time.endtime }" readonly>
-								</c:forEach>
-								<input type="text" style="border: none" id="content" name="content"
-									value="${pmember.n_content}" readonly>
+								<h3 style="font-weight: bolder;">전문분야&nbsp;:&nbsp;</h3>
+								<input type="text" style="border: none" id="speciality" name="speciality"
+									value="${pmember.speciality}" readonly>
+							</div>
+							<div class="form-group" style="width: 800px;">
+							  <div class="row" id="middle">
+									<div class="col-6" style="padding-left: 10px;">
+									<h3>운영시간</h3><br>
+										<c:forEach items="${time }" var="time">
+											<div class="doctor-text text-center" style="margin-top: -10px;">
+												<h3 style="font-weight: normal">${time.w_day }&nbsp;${time.starttime}
+													&nbsp;-&nbsp;${time.endtime }</h3>
+											</div>
+											<div class="doctor-text text-center" style="color: black;">${time.n_content}</div><br>										
+										</c:forEach>
+									</div>
+									<div class="col-6">
+										<h3>서비스정보</h3><br>
+										<c:forEach items="${price }" var="price">
+											<div class="doctor-text text-center" style="height: 22px; margin-top: -10px;">
+												<h3 style="font-weight: normal">${price.title}&nbsp;:&nbsp;${price.price}</h3>
+											</div><br>
+											<div class="doctor-text text-center" style="margin-bottom: 5px;">${price.content }</div><br>	
+										</c:forEach>
+									</div>
+								</div>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">사업장 소개</h3>
+								<h3 style="font-weight: bolder;">자기 소개</h3>
 								<textarea style="border: none; overflow: hidden;" id="p_info" name="p_info" readonly cols="100"
 									rows="3">${pmember.p_info}</textarea>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">이미지</h3>
+								<h3 style="font-weight: bolder;">활동사진</h3><br>
 								<c:forEach items="${pimage}" var="image">
 								<img src="resources/upload/${image.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 								</c:forEach>
 								
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">자격증</h3>
+								<h3 style="font-weight: bolder;">자격증</h3><br>
 									<c:forEach items="${plicense}" var="plicense">
 									<img src="resources/upload/${plicense.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 									</c:forEach>
 							</div>
-							<div class="form-group">
-								<h3 style="font-weight: bolder;">경력</h3>
-								<input type="text" style="border: none" id="career" name="career"
-									value="${pmember.career}" readonly>
-							</div>
+							
 							<button type="button" onclick="location.href='pmemberUpdateForm'" class="genric-btn info radius">내정보 수정</button>
 						</div>
 					</div>

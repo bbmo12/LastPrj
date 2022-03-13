@@ -83,8 +83,8 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.bestLike(pmember);
 	}
 	@Override
-	public int deleteTime(String p_id) {
-		return map.deleteTime(p_id);
+	public int deleteTime(TimeVO time) {
+		return map.deleteTime(time);
 	}
 	
 	@Override
@@ -135,6 +135,11 @@ public class PmemberServiceImpl implements PmemberService{
 	@Override
 	public int pmemberJoinCancel(String p_id) {
 		return map.pmemberJoinCancel(p_id);
+	}
+
+	@Override
+	public int updateTime(TimeVO time) {
+		return map.updateTime(time);
 	}
 
 

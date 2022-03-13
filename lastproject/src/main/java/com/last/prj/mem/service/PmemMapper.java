@@ -20,7 +20,12 @@ public interface PmemMapper {
 	int pmemberInsert3(@Param("p_id") String p_id,@Param("p_license") int p_license,@Param("p_image") int p_image);
 	
 	boolean isIdCheck(String p_id);
-	List<PriceVO> getPrice(PriceVO price);
+
+	List<PriceVO> getPrice(String p_id);
+	int deleteService(PriceVO price);
+	int insertService(PriceVO price);
+	int updateService(PriceVO price);
 
 	PmemVO read(String username);
+
 }

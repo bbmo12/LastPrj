@@ -10,6 +10,19 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
+<style>
+   .options {
+      transform: translateY(-35px);
+   }
+
+   .options {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-evenly;
+   }
+</style>
 
 <body class="my-login-page">
    <section class="h-100" id="main">
@@ -19,26 +32,30 @@
                <div class="brand">
                   <img src="resources/login/logo.jpg" alt="logo">
                </div>
-               <button onclick="mIdSearcha()" class="btn btn-primary btn-block" id="regular"
-                  style="width: 200px;position: relative; left: 199px; bottom: -58px;">일반회원</button>
-               <button onclick="pIdSearcha()" class="btn btn-primary btn-block" id="partner"
-                  style="width: 200px;">파트너회원</button>
-               <div class="card fat">
+               <div class="options">
+                  <button onclick="mIdSearcha()" class="btn btn-primary btn-block" id="regular"
+                     style="width: 200px;margin-top: 8px;">일반회원</button>
+                  <button onclick="pIdSearcha()" class="btn btn-primary btn-block" id="partner"
+                     style="width: 200px;">파트너회원</button>
+               </div>
+               <div class="card fat" style="margin-top: -35px;">
                   <div class="card-body">
                      <h4 class="card-title">아이디찾기</h4>
                      <div id="test">
                         <form method="POST" action="#" class="my-login-validation">
                            <div class="form-group">
                               <label>이름</label>
-                              <input id="name" name="name" type="text" class="form-control" placeholder="이름을 입력하세요" required="required" autofocus>
+                              <input id="name" name="name" type="text" class="form-control" placeholder="이름을 입력하세요"
+                                 required="required" autofocus>
                            </div>
                            <div class="form-group">
                               <label>전화번호</label>
-                              <input id="tel" name="tel" type="text" class="form-control" placeholder="ex)01011112222" required="required" autofocus>
+                              <input id="tel" name="tel" type="text" class="form-control" placeholder="ex)01011112222"
+                                 required="required" autofocus>
                            </div>
                            <div class="form-group m-0">
                               <button type="button" class="btn btn-primary btn-block" id="memIdsearch_btn"
-                              data-toggle="modal" style="margin-bottom: 10px;">
+                                 onclick="insertInfo()" data-toggle="modal" style="margin-bottom: 10px;">
                                  아이디찾기
                               </button>
                            </div>
@@ -69,7 +86,7 @@
                </button>
             </div>
             <div class="modal-body" style="text-align: center;">
-         
+
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
@@ -77,18 +94,18 @@
          </div>
       </div>
    </div>
-   
-
    <script src="resources/login/my-login.js"></script>
    <script type="text/javascript">
-
-
-      <!-- 일반회원아이디찾기 폼   -->
-      function mIdSearcha(){
-   	  var main = $('#main');
-      $('#partner').attr("disabled",true);
-      $("#test").empty();
-      var mIdSearchForm =`
+      function insertInfo() {
+         alert("회원정보를 선택해주세요.");
+         return;
+      }
+      /* 일반회원아이디찾기 폼 */
+      function mIdSearcha() {
+         var main = $('#main');
+         $('#partner').toggle();
+         $("#test").empty();
+         var mIdSearchForm = `
    <form method="POST" action="#" class="my-login-validation">
       <div class="form-group">
          <label>이름</label>
@@ -113,7 +130,7 @@
          계정이 없으신가요?<a href="joinForm" class="text-primary">회원가입</a>
       </div>
    </form>`
-   var modal =`
+         var modal = `
    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -133,17 +150,18 @@
          </div>
       </div>
    </div>`
-   $("#test").append(mIdSearchForm);
-   main.append(modal);
-   }
+         $("#test").append(mIdSearchForm);
+         main.append(modal);
+      }
 
-   /* 파트너회원 아이디찾기 창 */
-   function pIdSearcha(){
-   var main = $('#main');
-   $('#regular').attr("disabled", true);
-   $("#test").empty();
+      /* 파트너회원 아이디찾기 창 */
+      function pIdSearcha() {
+         var main = $('#main');
+         $('#regular').toggle();
 
-   var pIdSearch =`
+         $("#test").empty();
+
+         var pIdSearch = `
    <form method="POST" action="#" class="my-login-validation">
       <div class="form-group">
          <label>이름</label>
@@ -168,7 +186,7 @@
          계정이 없으신가요?<a href="pjoinForm" class="text-primary">회원가입</a>
       </div>
    </form>`
-   var modal =`
+         var modal = `
    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
       aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -188,26 +206,24 @@
          </div>
       </div>
    </div>`
-   
-   $("#test").append(pIdSearch);
-   main.append(modal);
-   }
+
+         $("#test").append(pIdSearch);
+         main.append(modal);
+      }
    </script>
 
    <!-- 일반회원 아이디찾기 모달창 ajax -->
    <script type="text/javascript">
- 
       function mIdsearch() {
-   		  
+
          var tel = $("#tel").val()
          var name = $("#name").val();
-         
-         if(tel == '' || name == ''){
-        	 alert("정보를입력해주세요.")
-        	 return
-         }      
+
+         if (tel == '' || name == '') {
+            alert("정보를입력해주세요.")
+            return;
+         }
          $('#exampleModalCenter').modal('show');
-              
          $.ajax({
             url: "memberIdSearch",
             type: "post",
@@ -216,29 +232,29 @@
                "name": name
             },
             success: function (result) {
-            var member = $('#members');
-            member.empty();
+               var member = $('#members');
+               member.empty();
                if (result == "") {
-            	   member.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
+                  member.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
                } else {
-            	   member.append(`<h3>`+result+`</h3>`+
-            			   `&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`);
+                  member.append(`<h3>` + result + `</h3>` +
+                     `&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`
+                  );
                }
             },
-            error: function () {
-            }
+            error: function () {}
          })
       }
 
-   /*    파트너회원 아이디찾기 모달창 ajax  */
+      /*    파트너회원 아이디찾기 모달창 ajax  */
       function pIdsearch() {
          var tel = $("#tel").val()
          var name = $("#name").val();
-         
-         if(tel == '' || name == ''){
-        	 alert("정보를입력해주세요.")
-        	 return
-         }    
+
+         if (tel == '' || name == '') {
+            alert("정보를입력해주세요.")
+            return
+         }
          $('#exampleModalCenter').modal('show');
          $.ajax({
             url: "pmemberIdSearch",
@@ -247,16 +263,19 @@
                "tel": tel,
                "name": name
             },
-            success: function (result) {   
-            	var pmember = $('#pmembers');
-            	pmember.empty();
+            success: function (result) {
+               var pmember = $('#pmembers');
+               pmember.empty();
                if (result == "") {
-            	   pmember.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
+                  pmember.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
                } else {
-            	   pmember.append(`<h3>`+result+`</h3>`+`&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`);
+                  pmember.append(`<h3>` + result + `</h3>` +
+                     `&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`
+                  );
                }
             },
             error: function () {
+
             }
          })
       }

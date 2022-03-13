@@ -53,9 +53,30 @@
 	where p_id = #{p_id}
 	</update>
 	
-	<select id="getPrice" resultType="com.last.prj.mem.service.PriceVO">
+	<select id="getPrice" parameterType="String" resultType="com.last.prj.mem.service.PriceVO">
 		SELECT * FROM PRICE WHERE P_ID =#{p_id}
 	</select>
+	<!-- 서비스정보 수정 후 삭제 -->
+	<delete id="deleteService" parameterType="com.last.prj.mem.service.PriceVO">
+		DELETE FROM PRICE WHERE PRICE_NO = #{price_no}
+	</delete>
+	<insert id="insertService" parameterType="com.last.prj.mem.service.PriceVO">
+		<selectKey keyProperty="price_no" resultType="int" order="BEFORE">
+				SELECT NVL(MAX(PRICE_NO)+1,1) AS PRICE_NO FROM PRICE
+		</selectKey>
+				INSERT INTO PRICE
+				VALUES(#{price_no}, #{price}, #{title}, #{content}, #{p_id})
+	</insert>
+	
+	<update id="updateService" parameterType="com.last.prj.mem.service.PriceVO">
+		UPDATE PRICE 
+			<set>
+				<if test="price != null">PRICE = #{price},</if>
+				<if test="title != null">TITLE = #{title},</if>
+				<if test="content != null">CONTENT = #{content}</if>
+			</set>
+		WHERE PRICE_NO= #{price_no} AND P_ID = #{p_id}
+	</update>
 	
 	<select id="isIdCheck" parameterType="String" resultType="boolean">
 		select case when count(p_id) = 1 then 0 else 1 end as p_id

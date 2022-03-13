@@ -68,7 +68,14 @@
         font-weight: 400;
         color: #76838f
     }
-
+    
+    .card-text {
+		display: inline-block;
+		width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
     .table-responsive {
         display: block;
@@ -120,9 +127,9 @@
         </div>
     </section>
     <section id="my_section">
-        <div>
-            <div class="row" style="width: 1500px; margin-left: 13em;">
-                <div>
+       <div class="container" style="max-width: 1200px;">
+            <div class="row">
+                <div class="col-lg-3">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
@@ -163,16 +170,16 @@
                     </div>
                 </div>
                 <div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
-                    <div class="col-lg-12 col-md-12 blog_details" style="width: 100%;">
+                    <div class="col-lg-12 col-md-12 blog_details">
                         <div align="center">
                             <h1>신고내역조회</h1>
                         </div>
                         <div class="page-content page-container" id="page-content" style="margin-top: 20px;">
                             <div class="row container d-flex justify-content-center">
-                                <div class="card" style="width: 100%">
-                                    <div class="card-body">
+                                <div class="card"  style="width: 100%">
+                                    <div class="card-body" style="padding: 25px;">
                                         <div class="table-responsive">
-                                            <form action="pmemcounsel" name="goform">
+                                            <form action="pmemreport" name="goform">
                                                 <input type="hidden" name="pageNum" value="1">
                                                 <table id="htmltable" class="table">
                                                     <thead>
@@ -189,7 +196,7 @@
                                                         <c:forEach items="${pmemreport }" var="report">
                                                             <tr>
                                                                 <td>${report.reported }</td>
-                                                                <td>${report.content } </td>
+                                                                <td class="card-text">${report.content } </td>
                                                                 <td>${report.w_date}</td>
                                                                 <td>
                                                                     <c:if test="${report.code eq 601}">

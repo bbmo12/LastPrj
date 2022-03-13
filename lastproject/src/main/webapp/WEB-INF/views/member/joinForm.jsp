@@ -116,81 +116,80 @@
 	</script>
 
 	<body class="my-login-page">
-		<section class="h-100">
-			<div class="container h-100">
-				<div class="row justify-content-md-center h-100" style="margin-top: 8em;">
-					<div class="card-wrapper" style="width: 650px;">
-						<div class="brand">
-							<img src="resources/login/logo.jpg" alt="logo">
-						</div>
-						<div class="card fat" style="margin-top: -15px;">
-							<div class="card-body">
-								<h4 class="card-title">Register</h4>
-								<form action="mjoin" method="post" class="my-login-validation" enctype="multipart/form-data">
-									<div class="form-group">
-										<label for="name">이름</label>
-										<input id="name" name="name" type="text" class="form-control" required
-											autofocus>
-										<div id="name_check"></div>
+		<div class="container">
+			<div class="row justify-content-md-center" style="margin-top: 8em; height: 1000px;">
+				<div class="card-wrapper" style="width: 650px;">
+					<div class="brand">
+						<img src="resources/login/logo.jpg" alt="logo">
+					</div>
+					<div class="card fat" style="margin-top: -15px;">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
+							<form action="mjoin" method="post" class="my-login-validation"
+								enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="name">이름</label>
+									<input id="name" name="name" type="text" class="form-control" required autofocus>
+									<div id="name_check"></div>
+								</div>
+								<div class="form-group">
+									<label for="email">E-Mail 아이디</label>
+									<input id="m_id" name="m_id" type="email" class="form-control" required>
+									<button type="button" class="site-btn" onclick="isIdCheck()" id="idCheck"
+										value="NO">중복체크</button>
+									<div id="id_check"></div>
+								</div>
+								<div class="form-group">
+									<label for="password">비밀번호</label>
+									<input id="password" name="password" type="password" class="form-control" required
+										data-eye>
+									<div id="pw_check"></div>
+								</div>
+								<div class="form-group">
+									<label for="password">비밀번호확인</label>
+									<input id="password1" name="password1" type="password" class="form-control" required
+										data-eye>
+									<div id="pw1_check"></div>
+								</div>
+								<div class="form-group">
+									<label for="tel">전화번호&nbsp;휴대폰 번호('-'없이 번호만 입력해주세요)</label>
+									<input id="tel" name="tel" type="text" class="form-control" placeholder="tel">
+									<div id="tel_check"></div>
+								</div>
+								<div class="form-group">
+									<label for="profile">프로필사진</label>
+									<div class="input-group col-xs-12">
+										<input class="file-upload-browse btn btn-primary" type="file" id="file"
+											name="file">
 									</div>
-									<div class="form-group">
-										<label for="email">E-Mail 아이디</label>
-										<input id="m_id" name="m_id" type="email" class="form-control" required>
-										<button type="button" class="site-btn" onclick="isIdCheck()" id="idCheck" value="NO">중복체크</button>
-										<div id="id_check"></div>
-									</div>
-									<div class="form-group">
-										<label for="password">비밀번호</label>
-										<input id="password" name="password" type="password" class="form-control"
-											required data-eye>
-										<div id="pw_check"></div>
-									</div>
-									<div class="form-group">
-										<label for="password">비밀번호확인</label>
-										<input id="password1" name="password1" type="password" class="form-control"
-											required data-eye>
-										<div id="pw1_check"></div>
-									</div>
-									<div class="form-group">
-										<label for="tel">전화번호&nbsp;휴대폰 번호('-'없이 번호만 입력해주세요)</label>
-										<input id="tel" name="tel" type="text" class="form-control" placeholder="tel">
-										<div id="tel_check"></div>
-									</div>
-									<div class="form-group">
-										<label for="profile">프로필사진</label>
-										<div class="input-group col-xs-12">
-											<input class="file-upload-browse btn btn-primary" type="file" id="file"
-												name="file">
+								</div>
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="agree" id="agree" class="custom-control-input"
+											required="">
+										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms
+												and Conditions</a></label>
+										<div class="invalid-feedback">
+											You must agree with our Terms and Conditions
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="custom-checkbox custom-control">
-											<input type="checkbox" name="agree" id="agree" class="custom-control-input"
-												required="">
-											<label for="agree" class="custom-control-label">I agree to the <a
-													href="#">Terms and Conditions</a></label>
-											<div class="invalid-feedback">
-												You must agree with our Terms and Conditions
-											</div>
-										</div>
-									</div>
-									<button type="submit" class="btn btn-primary mr-2">회원가입</button>
-									<button class="btn btn-light" style="width: 100px;">취소</button>
-									<div class="mt-4 text-center">이미 아이디가 있으신가요? <a href="loginForm">로그인</a>
-									</div>
-								</form>
-							</div>
+								</div>
+								<button type="submit" class="btn btn-primary mr-2">회원가입</button>
+								<button class="btn btn-light" style="width: 100px;">취소</button>
+								<div class="mt-4 text-center">이미 아이디가 있으신가요? <a href="loginForm">로그인</a>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 
 		<script src="resources/login/my-login.js"></script>
 		<script type="text/javascript">
 			/* 아이디 중복체크 */
 			function isIdCheck() {
-				
+
 				var id = $("#m_id").val();
 				console.log(id);
 				if (id != '') {
