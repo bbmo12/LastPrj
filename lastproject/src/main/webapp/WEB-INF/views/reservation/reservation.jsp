@@ -1,79 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset='utf-8' />
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+
 <script type="text/javascript"
 	src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<style>
-.modal {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-	background-color: rgba(0, 0, 0, 0.4);
-}
-.modal.show {
-	display: block;
-}
-.modal_body {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 500px;
-	height: 600px;
-	padding: 40px;
-	text-align: center;
-	background-color: rgb(255, 255, 255);
-	border-radius: 10px;
-	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-	transform: translateX(-50%) translateY(-50%);
-}
-</style>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <style>
 #my_section {
 	padding: 50px;
 }
+
 .star-rating {
-  
-  display:flex;
-  flex-direction: row-reverse;
-  font-size:1.5em;
-  justify-content:space-around;
-  padding:0 .2em;
-  text-align:center;
-  width:5em;
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 1.5em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 5em;
 }
+
 .star-rating input {
-  display:none;
+	display: none;
 }
+
 .star-rating label {
-  color:#ccc;
-  cursor:pointer;
+	color: #ccc;
+	cursor: pointer;
 }
+
 .star-rating :checked ~ label {
-  color:#f90;
+	color: #f90;
 }
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  color:#fc0;
+
+.star-rating label:hover, .star-rating label:hover ~ label {
+	color: #fc0;
 }
 </style>
-
-
 <body>
 	<%-- ${sessionScope.mId } --%>
-	
+
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -143,8 +116,8 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="col-lg-12 col-md-12 blog_details">
-  						<form action="reservationSelect" id="goform" name="goform">
-							<input type="hidden" id = "pageNum" name="pageNum" value="1">	
+						<form action="reservationSelect" id="goform" name="goform">
+							<input type="hidden" id="pageNum" name="pageNum" value="1">
 							<table class="table">
 								<thead>
 									<tr>
@@ -159,84 +132,141 @@
 										<th>후기</th>
 									</tr>
 								</thead>
-							<tbody>
-								<c:forEach items="${reservation }" var="res">
-									<tr>
-										<td><input class="rno" type="hidden" id="r_no"
-											name="r_no" value="${res.r_no }">${res.r_no }</td>
-										<td>${res.name }</td>
-										<td>${res.r_date}</td>
-										<td>${res.time }</td>
-										<td>${res.rcontent }</td>
-										<td>${res.pcontent }</td>
-										<td><input class="in_code" type="hidden"
-											value="${res.rccontent }"> ${res.rccontent }</td>
-										<td>${res.refuse}</td>
-										<c:choose>
-											<c:when test="${res.code eq 405 }">
-												<td><button onclick="reviewWrite(event)">성공</button></td>
-											</c:when>
-											<c:otherwise>
-												<td>
-													<button>실패</button>
-												</td>
-											</c:otherwise>
-										</c:choose>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</form>
+								<tbody>
+									<c:forEach items="${reservation }" var="res">
+										<tr>
+											<td><input class="rno" type="hidden" id="r_no"
+												name="r_no" value="${res.r_no }">${res.r_no }</td>
+											<td>${res.name }</td>
+											<td>${res.r_date}</td>
+											<td>${res.time }</td>
+											<td>${res.rcontent }</td>
+											<td>${res.pcontent }</td>
+											<td><input class="in_code" type="hidden"
+												value="${res.rccontent }"> ${res.rccontent }</td>
+											<td>${res.refuse}</td>
+											<c:choose>
+												<c:when test="${res.code eq 405 }">
+													<c:choose>
+														<c:when test="${res.r_check eq 0 }">
+															<td><button type="button"
+																	onclick="reviewWrite(event)">리뷰작성</button></td>
+														</c:when>
+
+														<c:otherwise>
+															<td><button type="button" 
+																onclick="reviewRead('${res.r_no}')" data-toggle="modal">리뷰보기
+															</button></td>
+														</c:otherwise>
+													</c:choose>
+												</c:when>
+												<c:otherwise>
+													<td>
+														<button>실패</button>
+													</td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<my:nav jsFunc="go_page" page="${page}" />
+	</section>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body">
+
+					<span id="dvalue"> <input type="hidden" id="date_value"></span>
+					<br> <span id="tvalue"> <input type="hidden"
+						id="time_value"></span> <br> <input type="text" id="rating"
+						name="rating" value="res.rating" readonly="readonly"
+						style="font-size: 15px; border: none;"><br> <input
+						name="content" id="content"> <select class="animalNo">
+						<option value="" disabled selected>펫 번호(이름)</option>
+						<c:forEach items="${petList}" var="pet">
+							<option value="${pet.pet_no }">${pet.pet_no }(${pet.name })</option>
+						</c:forEach>
+					</select>
+
+				</div>
+				<!-- modal 하단 버튼 -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">취소</button>
+					<button id="sendReserv" name="sendReserv" type="button"
+						class="btn btn-primary" data-dismiss="modal">예약하기</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<my:nav jsFunc="go_page" page="${page}"/>
-	</section>
 
-	<div class="modal">
-		<!-- 모달 띄운후 내용입력부분 바디.  -->
+
+
+
+
+
+	<!-- <div class="modal">
+		모달 띄운후 내용입력부분 바디. 
 		<div class="modal_body">
-
-			
-				<div class="form-group">
-					<h5 id="pname"></h5>
-				</div>
-				<div> <h1>여기가 별점?</h1>
-				<div class="star-rating">
-				<input type="radio" id="5-stars" name="rating" value="5" />
-				<label for="5-stars" class="star">&#9733;</label>
-				<input type="radio" id="4-stars" name="rating" value="4" />
-				<label for="4-stars" class="star">&#9733;</label>
-				<input type="radio" id="3-stars" name="rating" value="3" />
-				<label for="3-stars" class="star">&#9733;</label>
-				<input type="radio" id="2-stars" name="rating" value="2" />
-				<label for="2-stars" class="star">&#9733;</label>
-				<input type="radio" id="1-stars" name="rating" value="1" />
-				<label for="1-stars" class="star">&#9733;</label>
+			<div class="form-group">
+				<h5 id="pname"></h5>
 			</div>
+			<div>
+				<h1>여기가 별점?</h1>
+				<div class="star-rating">
+					<input type="radio" id="5-stars" name="rating" value="5" /> <label
+						for="5-stars" class="star">&#9733;</label> <input type="radio"
+						id="4-stars" name="rating" value="4" /> <label for="4-stars"
+						class="star">&#9733;</label> <input type="radio" id="3-stars"
+						name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
+					<input type="radio" id="2-stars" name="rating" value="2" /> <label
+						for="2-stars" class="star">&#9733;</label> <input type="radio"
+						id="1-stars" name="rating" value="1" /> <label for="1-stars"
+						class="star">&#9733;</label>
 				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword4">후기내용</label>
-					<textarea class="form-control" id="content" name="content"
-						placeholder="후기내용" rows="4" cols="80">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword4">후기내용</label>
+				<textarea class="form-control" id="content" name="content"
+					placeholder="후기내용" rows="4" cols="80">
                         </textarea>
-				</div>
-				<!-- <div class="form-group">
+			</div>
+			<div class="form-group">
 								<label>프로필 사진</label>
 								<div class="input-group col-xs-12">
 								<input  class="file-upload-browse btn btn-primary" type="file" id="file" name ="file">
 								</div>
-							</div> -->
-				<input type="hidden" id="rev_no" name="rev_no" value="">
-				<button type="button" onclick="serviceReview()">작성</button>
-				<button type="button">취소</button>
-			
+							</div>
+			<input type="hidden" id="rev_no" name="rev_no" value="">
+			<button type="button" onclick="serviceReview()">작성</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+
 
 		</div>
-	</div>
+	</div> -->
 
-	<!-- 모달창 -->
+
+
+
+
+	<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
 	var wow;
    function reviewWrite(event){
@@ -264,8 +294,37 @@
 	      });
 	}
    </script>
-	<!-- 후기작성 모달창 -->
+
+
+	<!--리뷰 보는 모달창  -->
 	<script type="text/javascript">
+   	function reviewRead(re){
+   		var r_no = re;
+   		console.log(r_no)
+   		 $.ajax({
+   			url: 'reviewSearch',
+   			method : 'post',
+   			data: {"r_no" : r_no},
+   			success : function(res) {
+   				console.log(res[0].rating)
+   				$("#modal-body").append("<tr><td>" + res[0].rating + "</td></tr>");
+				
+			}
+   		});
+   		
+   		$("#myModal").modal('show');
+   		
+   	}; 
+   	<!--리뷰 보는 모달창  -->
+   
+   
+   
+   </script>
+
+
+
+	<!-- 후기작성 모달창 -->
+<!-- 	<script type="text/javascript">
    	function reviewadd(wow){
    		var r_no = wow
    		/* var name = $("#name").val() */
@@ -292,7 +351,7 @@
    	       }) 
    	    } 
    
-   </script>
+   </script> -->
 
 
 	<script>
@@ -389,7 +448,7 @@
 			}) 
 		})
 	</script>
-<!-- 리뷰작성 -->
+	<!-- 리뷰작성 -->
 	<script type="text/javascript">
 	function serviceReview(){
 		var content = $("#content").val();
@@ -405,6 +464,7 @@
 				'content': content},
 			success : function(result){
 				alert("ggod")
+				location.reload();
 				
 			}
 			

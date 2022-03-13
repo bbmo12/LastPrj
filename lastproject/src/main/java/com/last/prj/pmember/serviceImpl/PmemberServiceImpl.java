@@ -72,6 +72,12 @@ public class PmemberServiceImpl implements PmemberService{
 	public int updateLike(String p_id) {		
 		return map.updateLike(p_id);
 	}
+	
+	@Override
+	public int updateCancel(String p_id) {
+		return map.updateCancel(p_id);
+	}
+	
 	@Override
 	public List<PmemberVO> bestLike(PmemberVO pmember) {
 		return map.bestLike(pmember);
@@ -81,15 +87,9 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.deleteTime(p_id);
 	}
 	
-	//관리자
 	@Override
 	public List<PmemberVO> admPlistCode(PmemberVO vo) {
 		return map.admPlistCode(vo);
-	}
-	//관리자
-	@Override
-	public List<PmemberVO> admPlist() {
-		return map.admPlist();
 	}
 
 
@@ -100,10 +100,6 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.PmemberOne(p_id);
 	}
 
-	@Override
-	public List<PmemberVO> admPstartDateList() {
-		return map.admPstartDateList();
-	}
 
 	@Override
 	public List<ReviewVO> ServiceReviewList() {
@@ -115,20 +111,13 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.bestLikeList();
 	}
 
-	@Override
-	public List<PmemberVO> admPmemberPageList(Criteria cri) {
-		return  map.admPmemberPageList(cri);
-	}
+
 
 	@Override
 	public int pmemCount() {
 		return map.pmemCount();
 	}
 
-	@Override
-	public List<PmemberVO> admPmemberDate(String fromDate, String toDate) {
-		return map.admPmemberDate(fromDate, toDate);
-	}
 
 	@Override
 
@@ -137,9 +126,15 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 	
 	
-@Override
+	@Override
 	public int pmemberNullUpdate(String p_id) {
 		return map.pmemberNullUpdate(p_id);
+	}
+
+
+	@Override
+	public int pmemberJoinCancel(String p_id) {
+		return map.pmemberJoinCancel(p_id);
 	}
 
 

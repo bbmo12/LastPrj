@@ -42,9 +42,11 @@ public class PetController {
 	}
 	
 	@RequestMapping("/petDetail") //펫 상세페이지
-	public String petDetail(@RequestParam("pet_no") int pet_no, Model model) {
-		
+	public String petDetail(@RequestParam("pet_no") int pet_no, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");		
 		model.addAttribute("pet", petDAO.petSearch(pet_no));
+		model.addAttribute("member",memDao.memberSearch(m_id));
 		return "mypage/petDetail";
 	}
 	
@@ -86,4 +88,69 @@ public class PetController {
 	  model.addAttribute("pets", petDAO.petmemberList(m_id));
 	  return "mypage/mpetprofile";
 	}
+
+	
+	//반려동물 수정페이지로 이동
+	@RequestMapping("/mypetUpdateForm")
+	public String mypetUpdateForm(Model model, @RequestParam("pet_no") int pet_no, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");		
+		
+		
+		model.addAttribute("pet",petDAO.petSearch(pet_no));
+		 model.addAttribute("member",memDao.memberSearch(m_id));
+		
+		System.out.println(pet_no);
+	
+		return "mypage/mypetUpdateForm";
+	}
+	
+	//반려동물 정보수정
+	@RequestMapping("mypetupdate")
+	public String mypetupdate(MultipartFile file, PetVO pet, Model model, @RequestParam("pet_no") int pet_no, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");		
+		String originalFileName = file.getOriginalFilename();
+
+		String webPath = "/resources/upload";
+		String realPath = sc.getRealPath(webPath);
+
+		File savePath = new File(realPath);
+		if (!savePath.exists())
+			savePath.mkdirs();
+
+		realPath += File.separator + originalFileName;
+		File saveFile = new File(realPath);
+
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+
+			try {
+				file.transferTo(saveFile);
+				pet.setPicture(originalFileName);
+				pet.setPfile(saveFileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		model.addAttribute("pet",petDAO.mypetupdate(pet));
+		model.addAttribute("pets",petDAO.petmemberList(m_id));
+		model.addAttribute("member",memDao.memberSearch(m_id));
+		
+		return "mypage/mpetprofile";
+	}
+	
+	@RequestMapping("mypetDelete")
+	public String mypetDelete(HttpServletRequest request, @RequestParam("pet_no")int pet_no, Model model) {
+		HttpSession session = request.getSession();
+		String m_id = (String) session.getAttribute("mId");		
+		 model.addAttribute("member",memDao.memberSearch(m_id));
+		
+		 petDAO.mypetDelete(pet_no);
+		 model.addAttribute("pets", petDAO.petmemberList(m_id));
+		 return "mypage/mpetprofile";
+	}
+	
+	
 }

@@ -83,8 +83,8 @@
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
-									<input type="password" id="password1" name="password1" value="${pmember.password }"
-										required>
+									<input type="password" id="password1" name="password1" value="${pmember.password }" 
+									style="width: 350px;" required>
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">전화번호</h3>
@@ -108,6 +108,7 @@
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">운영안내</h3>
 								</div>
+								<div id="select-one">
 								<div class="form-group" id="form-time">						
 								<c:forEach items="${time }" var="timeList" varStatus="status">
 									<select id="selectday" name="timeVOList[${status.index}].w_day">
@@ -150,8 +151,9 @@
 									</select><br>
 									<input type="hidden" name="timeVOList[${status.index}].p_id" value="${pId}">
 								</c:forEach>
-											                
 								</div>
+								</div>
+								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>						                
 								<div class="form-group">
 									<input type="text" id="content" name="content" value="${pmember.n_content}"></div>
 								<div class="form-group">
@@ -183,10 +185,56 @@
 				'name': 'multiFileList',
 				'type': 'file'
 			});
-
 			$('#ffile').append(input);
 		}
 
+		function plusTime() {
+			var select = document.getElementById('select-one');
+			var form = document.getElementById('form-time');
+			form.innerHTML += `							
+					<select id="selectday" name="selectday">
+					<option value='' selected>요일선택</option>
+					<option value='월'>월</option>
+					<option value='화'>화</option>
+					<option value='수'>수</option>
+					<option value='목'>목</option>
+					<option value='금'>금</option>
+					<option value='토'>토</option>
+					<option value='일'>일</option>
+				</select>																	
+				<select id="selectStart" name="selectStart">
+					<option value='' selected>오픈시간</option>
+					<option value='9:00'>9:00</option>
+					<option value='9:30'>9:30</option>
+					<option value='10:30'>10:30</option>
+					<option value='11:00'>11:00</option>
+					<option value='12:00'>12:00</option>
+					<option value='12:30'>12:30</option>				
+				</select>																					
+				<select id="selectEnd" name="selectEnd">
+					<option value='' selected>마감시간</option>
+					<option value='13:00'>13:00</option>
+					<option value='13:30'>13:30</option>
+					<option value='14:00'>14:00</option>
+					<option value='14:30'>14:30</option>
+					<option value='15:00'>15:00</option>
+					<option value='15:30'>15:30</option>
+					<option value='16:00'>16:00</option>
+					<option value='16:30'>16:30</option>
+					<option value='17:00'>17:00</option>
+					<option value='17:30'>17:30</option>
+					<option value='18:00'>18:00</option>
+					<option value='18:30'>18:30</option>
+					<option value='19:00'>19:00</option>
+					<option value='19:30'>19:30</option>
+					<option value='20:00'>20:00</option>
+					<option value='20:30'>20:30</option>
+					<option value='21:00'>21:00</option>				
+				</select><br>`;
+			select.append(form);
+			$('select').niceSelect();
+		}
+		
 		function checkForm() {
 			if (updatePage.name.value == "") {
 				alert("이름을 입력하세요.");

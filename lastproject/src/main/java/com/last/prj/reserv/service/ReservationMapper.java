@@ -32,8 +32,10 @@ public interface ReservationMapper {
 
 	//페이징 (일반예약조회)
 	List<ReservationVO> reservationPageList(Criteria cri);
+	
 	int reservPage(Criteria cri);
 	
+	int updatecode(ReservationVO vo);
 
 	
 	

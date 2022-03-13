@@ -22,6 +22,7 @@ public class ReservationVO {
 	private String p_id;
 	private int pet_no;
 	private String m_id;
+	private int r_check;
 	
 	
 	

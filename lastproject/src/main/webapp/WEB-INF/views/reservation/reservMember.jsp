@@ -34,7 +34,6 @@
 </style>
 <body>
 <br><br><br><br><br><br>
-
  <div id="menu">
       <span id="menu-navi">
         <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
@@ -132,6 +131,7 @@
 </div>
 
 <script type="text/javascript">
+
 
 $(document).ready(function(){
 	
@@ -241,7 +241,8 @@ $(document).ready(function(){
 						    title: title,
 						    start: start,
 						    end: end,
-						    category: category
+						    category: category,
+						    bgColor : '#00CCFF'
 						}
 					]);
 				}
@@ -346,23 +347,24 @@ $(document).ready(function(){
 
 //옵션값 설정 후 예약가능/불가 출력
 function changeSelection(event){
+	console.log($(event.target).val());
 	//var reserv_date = $(".selectTime").parent().prev().text();
-	var reserv_time = $(".selectTime option:selected").val();
+	var reserv_time = $(event.target).val();
 	var tdvalue = $(event.target).parent().prev().text();
-	console.log(tdvalue);
+	var p_id = "${pmember.p_id}";
 	$("#dvalue").text('예약일 : ' + tdvalue);
 	$("#tvalue").text('예약시간 : ' + reserv_time);
 	$.ajax({
 		url : 'reservcount',
 		method : 'POST',
 		data : {"reserv_date": tdvalue,
-				"reserv_time": reserv_time},
+				"reserv_time": reserv_time,
+				"p_id" : p_id},
 		success : function(res){
 			//console.log(event.target);
 			if(res.reserv_date != null && res.reserv_time != null){
 				$(event.target).parent().next().text('예약불가');
 			}else{
-				console.log(event.target);
 				$(".selectTime").parent().next().text('');
 				$(event.target).parent().next().append(`<button id="reservModal" type="button" class="btn btn-secondary"
 														  data-toggle="modal" data-target="#exampleModal">예약가능</button>`);
@@ -384,11 +386,6 @@ $("#sendReserv").on('click',function(){
 	//펫번호
 	var pet_no = $(".animalNo option:selected").val();
 	
-	//파트너회원 아이디 세션값
-	p_id = '${pmember.p_id}';
-	if (p_id == '' ){
-		p_id = 'kim1@a.com';
-	}
 	//파트너회원 해당코드
 	var code = ${pmember.code};
 	

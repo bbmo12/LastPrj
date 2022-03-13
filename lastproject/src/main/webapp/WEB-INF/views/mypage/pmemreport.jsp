@@ -26,18 +26,7 @@
         flex: 1 1 auto
     }
 
-    @media (max-width :991.98px) {
-        .padding {
-            padding: 1.5rem
-        }
-    }
-
-    @media (max-width :767.98px) {
-        .padding {
-            padding: 1rem
-        }
-    }
-
+   
     .padding {
         padding: 5rem
     }
@@ -91,7 +80,7 @@
 
     .table th {
         font-size: 20px;
-        font-weight: 500;
+        font-weight: bold;
     }
 
     .table {
@@ -107,11 +96,14 @@
     }
 
     .badge {
-        border-radius: 0;
         font-size: 12px;
         line-height: 1;
         padding: .375rem .5625rem;
         font-weight: normal
+    }
+    .badge-info{
+        background-color: cornflowerblue;
+        border: none;
     }
 </style>
 
@@ -128,9 +120,9 @@
         </div>
     </section>
     <section id="my_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
+        <div>
+            <div class="row" style="width: 1500px; margin-left: 13em;">
+                <div>
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
@@ -171,15 +163,15 @@
                     </div>
                 </div>
                 <div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
-                    <div class="col-lg-12 col-md-12 blog_details">
+                    <div class="col-lg-12 col-md-12 blog_details" style="width: 100%;">
                         <div align="center">
                             <h1>신고내역조회</h1>
                         </div>
                         <div class="page-content page-container" id="page-content" style="margin-top: 20px;">
                             <div class="row container d-flex justify-content-center">
                                 <div class="card" style="width: 100%">
-                                    <div class="card-body" style="width: 100%">
-                                        <div class="table-responsive" style="width: 100%">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
                                             <form action="pmemcounsel" name="goform">
                                                 <input type="hidden" name="pageNum" value="1">
                                                 <table id="htmltable" class="table">
@@ -190,6 +182,7 @@
                                                             <th>신고날짜</th>
                                                             <th>신고유형</th>
                                                             <th>처리상태</th>
+                                                            <th>기각사유</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody style="text-align: center">
@@ -216,7 +209,7 @@
                                                                     </c:if>
                                                                 </td>
                                                                 <td>
-                                                                	<c:if test="${report.repor eq 701}">
+                                                                    <c:if test="${report.repor eq 701}">
                                                                         <label class="badge badge-info">신고대기</label>
                                                                     </c:if>
                                                                     <c:if test="${report.repor eq 702}">
@@ -225,7 +218,33 @@
                                                                     <c:if test="${report.repor eq 703}">
                                                                         <label class="badge badge-success">신고승인</label>
                                                                     </c:if>
-                                                                 </td>
+                                                                </td>
+                                                                <td>
+                                                                    <c:if test="${report.repor eq 702}">
+                                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;">
+                                                                            사유확인
+                                                                        </button>
+                                                                        <!-- Modal -->
+                                                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h3 class="modal-title" id="exampleModalLongTitle">신고기각사유</h3>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        ${report.state }
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-primary" data-dismiss="modal">확 인</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </c:if>
+                                                                </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -241,10 +260,8 @@
                 </div>
             </div>
         </div>
-
     </section>
     <script>
-        console.log("ddddddddddddddddddddddddddddddddd" + '${page}');
         function go_page(p) {
             goform.pageNum.value = p;
             goform.submit();

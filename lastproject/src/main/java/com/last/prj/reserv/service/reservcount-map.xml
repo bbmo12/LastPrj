@@ -6,7 +6,7 @@
 	SELECT * FROM RESERVCOUNT
 </select>
 
-<!-- 예약중복체크 (p_id 추가로 받아야됨) -->
+<!-- 예약중복체크 -->
 <select id="reservCountSelect" resultType="com.last.prj.reserv.service.ReservCountVO" parameterType="String">
 	SELECT * FROM RESERVCOUNT
 	WHERE RESERV_DATE = #{reserv_date}

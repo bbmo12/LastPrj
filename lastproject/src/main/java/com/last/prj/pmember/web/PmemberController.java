@@ -25,6 +25,8 @@ import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewService;
 import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
+import com.last.prj.reserv.service.ReservationService;
+import com.last.prj.reserv.service.ReservationVO;
 
 @Controller
 public class PmemberController {
@@ -32,6 +34,9 @@ public class PmemberController {
 	private PmemberService pMemberDao;
 	@Autowired
 	private PmemberMapper mapper;	
+	@Autowired
+	private ReservationService reservationDao;
+	
 	@Autowired
 	ServletContext sc;
 	
@@ -69,6 +74,8 @@ public class PmemberController {
 		String p_id = (String) session.getAttribute("pId");
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		return "pmember/pmemberMypage";
 	}
 
@@ -79,6 +86,8 @@ public class PmemberController {
 		String p_id = (String) session.getAttribute("pId");
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		return "pmember/pmemberUpdateForm";
 	}
 	
@@ -132,10 +141,10 @@ public class PmemberController {
 	//일반회원 후기작성
 	@RequestMapping("serviceReviewInsert")
 	@ResponseBody
-	public int serviceReview(ReviewVO review) {
-		System.out.println("여기부터아아아아ㅏ아아아아아아");
-		System.out.println(review);
+	public int serviceReview(ReviewVO review, ReservationVO vo) {
+		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
+		
 		return 1;
 	}
 	//회원탈퇴 페이지로 이동
@@ -156,6 +165,20 @@ public class PmemberController {
 		return  "redirect:home";
 	}
 	
+	//파트너회원 가입취소
+	@PostMapping("joinCancel")
+	@ResponseBody
+	public int joinCancel(@RequestParam("p_id") String p_id) {
+		pMemberDao.pmemberJoinCancel(p_id);
+		return 1;
+	}
+	
+	//후기 조회
+	@RequestMapping("/reviewSearch")
+	@ResponseBody
+	public ReviewVO reviewSearch(ReviewVO r_no) {
+		return reviewDao.reviewSearch(r_no);
+	}
 	
 }
 

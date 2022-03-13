@@ -15,6 +15,12 @@
 		INSERT INTO REVIEW(REV_NO, CONTENT, RATING, R_NO) VALUES
 		(#{rev_no}, #{content}, #{rating}, #{r_no})
 	</insert>
+	
+	<select id="reviewSearch" parameterType="com.last.prj.pmember.service.ReviewVO" resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT * FROM REVIEW
+		WHERE R_NO = #{r_no}
+	</select>
+	
 
 
 </mapper>
