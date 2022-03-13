@@ -33,9 +33,6 @@ public class HomeController {
 
 	@RequestMapping("/home")
 	public String home(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("mId");
-		//model.addAttribute("noticeList", noticeDao.noticeSelectList(id));
 		model.addAttribute("bestList", pMemberDao.bestLikeList());
 		model.addAttribute("serviceReviewList", pMemberDao.ServiceReviewList());
 		model.addAttribute("qnaRecent", qnaDAO.qnaRecent());
@@ -45,10 +42,16 @@ public class HomeController {
 	
 	@RequestMapping("/noticeList")
 	@ResponseBody
-	public List<NoticeVO> noticeList(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String id = (String) session.getAttribute("mId");
+	public List<NoticeVO> noticeList(Model model, HttpServletRequest request,  Principal principal) {
+		String id = "";
+		if(principal != null) {
+			
+		CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		id = userDetails.getMember().getM_id();
+		
 		model.addAttribute("noticeList", noticeDao.noticeSelectList(id));
+		
+		}
 		return noticeDao.noticeSelectList(id);
 	}
 	
@@ -59,24 +62,26 @@ public class HomeController {
 		
 		// 세션 가져오기
 		// 로그인 전에도 실행되는 부분이라 null체크
+		String id = "";
 		if(principal != null) {
 			
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			
 			if(userDetails.getRole() == "일반회원") {
-				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
-				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				//System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				//System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				id = userDetails.getMember().getM_id();
+				
 				
 			}else if(userDetails.getRole() == "파트너회원") {
-				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
-				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
-			}else if(userDetails.getRole() =="관리자") {
+				//System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				//System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+				id = userDetails.getPmember().getP_id();
 				
 			}
-			
 		}
 		
-		return "home/home";
+		return id;
 		/*
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("mId");

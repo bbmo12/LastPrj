@@ -49,7 +49,7 @@
 				console.log(result);
 				/* 수정하기 */
 				if (result != "") {
-					sock = new SockJS("<c:url value=" / echo "/>");
+					sock = new SockJS("<c:url value="/echo"/>");
 					socket = sock;
 					// 데이터를 전달 받았을 때
 					sock.onmessage = onMessage; // toast생성
