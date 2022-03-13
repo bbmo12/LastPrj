@@ -86,8 +86,22 @@ public class PetController {
 	}
 	
 	@RequestMapping("/mypetAddForm")
-	public String mypetAddForm() {
-		return "mypage/mypeyAddForm";
+	public String mypetAddForm(Principal principal, Model model) {
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				String m_id =userDetails.getMember().getM_id();
+				
+				model.addAttribute("member",memDao.memberSearch(m_id));
+				return "mypage/mypeyAddForm";
+				
+			}
+		}
+		return null;
 	}
 	
 	@RequestMapping("/mypatadd")

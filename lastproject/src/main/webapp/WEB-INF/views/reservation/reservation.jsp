@@ -380,7 +380,7 @@
 		$(".payBtn").on('click', function() {
 			var rno = $(this).parent().parent().children().first().text();
 			console.log($(this).parent().parent().children().first().text());
-			var m_id = "${sessionScope.mId }";
+			var m_id = "${m_id }";
 			var pay;
 			
 			$.ajax({

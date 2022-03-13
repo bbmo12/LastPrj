@@ -383,6 +383,8 @@ $("#sendReserv").on('click',function(){
 	//모달창 품종코드
 	var animalType = $(".animalType option:selected").val();
 	
+	
+	var p_id = "${pmember.p_id}";
 	//펫번호
 	var pet_no = $(".animalNo option:selected").val();
 	

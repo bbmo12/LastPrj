@@ -29,5 +29,10 @@ public class ReservCountServiceImpl implements ReservCountService {
 		return map.reservCountSelect(vo);
 	}
 
+	@Override
+	public List<ReservCountVO> reservDelCheck(ReservCountVO vo) {
+		return map.reservDelCheck(vo);
+	}
+
 
 }

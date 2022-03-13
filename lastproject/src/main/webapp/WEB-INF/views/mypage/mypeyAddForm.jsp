@@ -153,7 +153,7 @@
 									rows="4" cols="130">
                         		</textarea>
 							</div>
-							<input type="hidden" name="m_id" id="m_id" value="${mId }">
+							<input type="hidden" name="m_id" id="m_id" value="${member.m_id }">
 							<button type="submit" class="genric-btn info radius">반려동물
 								등록</button>
 						</div>
