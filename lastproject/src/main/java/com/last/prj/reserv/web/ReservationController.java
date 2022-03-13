@@ -1,13 +1,14 @@
 package com.last.prj.reserv.web;
 
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,7 @@ import com.last.prj.reserv.service.ReservCountVO;
 import com.last.prj.reserv.service.ReservationMapper;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
+import com.last.prj.security.CustomUser;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
 import com.last.prj.reserv.service.PreservationVO;
@@ -76,90 +78,113 @@ public class ReservationController {
 	
 	//일반회원 예약페이지
 	@RequestMapping("/reservMember")
-	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response) throws Exception {
+	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response, Principal principal) throws Exception {
 		
-		//로그인 세션값
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		System.out.println("m_id : " +m_id);
-		
-		
-		//비회원 로그인창으로 이동
-		if (m_id == null) {
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 필요한 서비스입니다.'); </script>");
-			out.flush();
-			return "member/loginForm";
-		}else {
+			if(principal != null) {
 			
-			co.setP_id(p_id);
-			po.setM_id(m_id);
-			pmo.setP_id(p_id);
-			
-			//달력리스트
-			List<CalendarVO> list = CalendarDao.revSetList(co);
-			
-			//펫정보조회
-			List <PetVO> petList = petDAO.petmemberList(m_id);
-			
-			//펫 품종코드 중복제거값
-			List <PetVO> petCode = petDAO.petCodeSearch(m_id);
-		
-			
-			model.addAttribute("petList",petList);
-			model.addAttribute("petCode",petCode);
-			model.addAttribute("reservset",list);
-			//해당 파트너회원 정보조회
-			model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
-			System.out.println(list);
-			System.out.println(petList);
-			return "reservation/reservMember";
+				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				
+				if(userDetails.getRole() == "일반회원") {
+					System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+					System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+					co.setP_id(p_id);
+					po.setM_id(userDetails.getMember().getM_id());
+					pmo.setP_id(p_id);
+					
+					//달력리스트
+					List<CalendarVO> list = CalendarDao.revSetList(co);
+					
+					//펫정보조회
+					List <PetVO> petList = petDAO.petmemberList(userDetails.getMember().getM_id());
+					
+					//펫 품종코드 중복제거값
+					List <PetVO> petCode = petDAO.petCodeSearch(userDetails.getMember().getM_id());
+				
+					
+					model.addAttribute("petList",petList);
+					model.addAttribute("petCode",petCode);
+					model.addAttribute("reservset",list);
+					//해당 파트너회원 정보조회
+					model.addAttribute("pmember", pMemberDao.PmemberOne(p_id));
+					System.out.println(list);
+					System.out.println(petList);
+					return "reservation/reservMember";
+					
+				}
 		}
+			//비회원 로그인창으로 이동
+			response.setContentType("text/html; charset=utf-8"); PrintWriter out =
+			response.getWriter();
+			out.println("<script>alert('로그인이 필요한 서비스입니다.'); </script>"); out.flush();
+			return "member/loginForm"; 
 	}
-	
+		
 	//파트너회원 예약설정
 	@RequestMapping("/reservationSetting")
-	public String reservationSetting(Model model,PreservationVO pres,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-		model.addAttribute("p_id",p_id);
+	public String reservationSetting(Model model,PreservationVO pres,HttpServletRequest request,Principal principal) {
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+				model.addAttribute("p_id",userDetails.getPmember().getP_id());
+				return "reservation/resvSetting";
+			}
+		}
+		
 		return "reservation/resvSetting";
 	}
 	
 	
 	// 일반 예약조회
 	@RequestMapping("/reservationSelect")
-	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
-		cri.setM_id(m_id);
-		cri.setAmount(5);
-		PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri,Principal principal) {
 		
-		model.addAttribute("member",memDao.memberSearch(m_id));
-		model.addAttribute("page", paging);// 페이징 수
-	    
-		model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
-
-		vo.setM_id(m_id);
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				String m_id = userDetails.getMember().getM_id();
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				cri.setM_id(m_id);
+				cri.setAmount(5);
+				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+				
+				model.addAttribute("member",memDao.memberSearch(m_id));
+				model.addAttribute("page", paging);// 페이징 수
+				
+				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
+				
+				vo.setM_id(m_id);
+				return "reservation/reservation";
+			}
+		}
 		return "reservation/reservation";
 	}
 
 	// 파트너 예약조회
 	@RequestMapping("/preservationSelect")
-	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo,Criteria cri) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-		vo.setP_id(p_id);
-		cri.setP_id(p_id);
-		cri.setAmount(15);
-		System.out.println("cri=========="+cri);
-		PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
-		
-		model.addAttribute("page", paging);// 페이징 수
-		model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
-		model.addAttribute("preservation", pmapper.preservationPageList(cri));
+	public String pReservationSelect(Model model,HttpServletRequest request,PreservationVO vo,Criteria cri,Principal principal) {
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "파트너회원") {
+				String p_id = userDetails.getPmember().getP_id();
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+				vo.setP_id(p_id);
+				cri.setP_id(p_id);
+				cri.setAmount(15);
+				System.out.println("cri=========="+cri);
+				PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
+				
+				model.addAttribute("page", paging);// 페이징 수
+				model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
+				model.addAttribute("preservation", pmapper.preservationPageList(cri));
+				return "reservation/preservation";
+			}
+		}
 		return "reservation/preservation";
 	}
 	
@@ -176,15 +201,22 @@ public class ReservationController {
 	  //파트너회원 예약거절 사유 입력(ajax)
 	  @PostMapping("/noupdate")
 	  @ResponseBody 
-	  public List<PreservationVO> noUpdate(@RequestParam("rno") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request) {
-		  HttpSession session = request.getSession();
-		  String p_id = (String) session.getAttribute("pId");
-		  vo.setP_id(p_id);
-		  System.out.println(rno);
-		  reservationDao.noUpdate(rno,refuse);
-		  List<PreservationVO> list = pReservationDao.preservationlist(vo);
-		  System.out.println(list);
-		  return list;
+	  public List<PreservationVO> noUpdate(@RequestParam("rno") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request,Principal principal) {
+		  if(principal != null) {
+				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+				if(userDetails.getRole() == "파트너회원") {
+					String p_id = userDetails.getPmember().getP_id();
+					System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+					System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+					vo.setP_id(p_id);
+					System.out.println(rno);
+					reservationDao.noUpdate(rno,refuse);
+					List<PreservationVO> list = pReservationDao.preservationlist(vo);
+					System.out.println(list);
+					return list;
+				}
+		  }
+		  return null;
 	  }
 	  
 	  //일반회원 결제완료 후 코드변경 + 결제내역 등록
