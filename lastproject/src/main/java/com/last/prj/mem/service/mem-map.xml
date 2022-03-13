@@ -60,6 +60,12 @@
 	</update>
 
 
+
+
+
+
+
+
 	<update id="memberDelete" parameterType="String" >
 		UPDATE MEMBER
 		<set>

@@ -70,7 +70,10 @@ public class HomeController {
 			}else if(userDetails.getRole() == "파트너회원") {
 				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
 			}
+			
 		}
 		
 		return "home/home";

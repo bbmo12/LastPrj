@@ -129,7 +129,6 @@
 			</form>`
 			$("#test").append(loginForm);
 		}
-
 		function plogin() {
 			$('#regular').attr("disabled", true);
 			$("#test").empty();
@@ -174,7 +173,6 @@
 			</form>`
 			$("#test").append(loginForm);
 		}
-
 		function login() {
 			$.ajax({
 				url: 'geturi.do',
