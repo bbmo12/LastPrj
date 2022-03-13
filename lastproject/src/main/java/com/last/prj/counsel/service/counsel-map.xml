@@ -61,29 +61,22 @@
 	<select id="counselList"
 		resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT *
-		FROM ( SELECT ROWNUM RN, A.*
-		FROM (SELECT P.NAME AS
-		p_name, P.M_ID, c.p_id, C.CONTENT, C.W_DATE,
-		C.CODE, C.C_NO
-		FROM PET P,
-		MEMBER M, COUNSEL C
-		WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND
-		P_ID = #{p_id} AND P_NO = 0
-		 ORDER BY
-		C_NO
-		) A)
-		WHERE RN BETWEEN
-		(#{pageNum}-1)*#{amount}+1
-		AND (#{pageNum})*#{amount}
+				FROM ( SELECT ROWNUM RN, A.*
+						FROM (SELECT P.NAME AS p_name, P.M_ID, c.p_id, C.CONTENT, C.W_DATE, C.CODE, C.C_NO
+								FROM PET P, MEMBER M, COUNSEL C
+							  WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND P_ID = #{p_id} AND P_NO = 0 
+							  ORDER BY C_NO ) A)
+				WHERE RN BETWEEN
+				(#{pageNum}-1)*#{amount}+1 
+				AND (#{pageNum})*#{amount}
 	</select>
 
 	<select id="myCounselPage" resultType="int"
 		parameterType="com.last.prj.counsel.service.CounselVO">
 		SELECT COUNT(*)
-		FROM COUNSEL C, PET P
-		WHERE C.PET_NO =
-		P.PET_NO
-		GROUP BY P.M_ID
+			FROM COUNSEL C, PET P
+		WHERE C.PET_NO = P.PET_NO
+			GROUP BY P.M_ID
 		HAVING P.M_ID = #{m_id}
 	</select>
 

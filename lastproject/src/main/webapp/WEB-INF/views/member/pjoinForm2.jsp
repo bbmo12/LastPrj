@@ -47,8 +47,8 @@
 									<input id="w_tel" name="w_tel" type="tel" class="form-control">
 								</div>
 								<div class="form-group">
-									<label>이용안내</label>
-									<textarea class="form-control" id="p_info" name="p_info" placeholder="이용안내" rows="4" cols="130"></textarea>
+									<label>자기소개</label>
+									<textarea class="form-control" id="p_info" name="p_info" placeholder="소개입력" rows="4" cols="130"></textarea>
 								</div>
 								<div class="form-group">
 									<label>대표경력</label>

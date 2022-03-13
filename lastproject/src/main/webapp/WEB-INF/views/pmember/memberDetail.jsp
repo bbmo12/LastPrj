@@ -25,6 +25,7 @@
 		width: 200px;
 		margin-bottom: 10px;
 	}
+	
 </style>
 
 <body>
@@ -86,10 +87,8 @@
 							<div class="br" style="margin-top: -45px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-
 							<a href="EnterCs?m_id=${mId }&p_id=${pmemdetail.p_id}">
-							<button class="btn btn-primary">상담하기</button></a>
-
+								<button class="btn btn-primary">상담하기</button></a>
 							<form action="reservMember" name="reservForm" method="POST">
 								<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
 								<button type="submit" class="btn btn-primary">예약하기</button>
@@ -104,44 +103,66 @@
 								<h3>자기소개</h3>
 								${pmemdetail.p_info}
 							</div>
-							<div class="row" style="margin-left: 10px;">
-								<section>
-									<div class="container">
-										<div class="row">
-											<c:forEach items="${pimage}" var="image">
-												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0"
-													style="margin: 10px -35px 0 0;">
-													<div class="categories_post" style="width: 200px">
-														<img src="resources/upload/${image.picture}"
-															style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
-													</div>
-												</div>
-											</c:forEach>
-											<c:forEach items="${plicense}" var="plicense">
-												<div class="col-lg-4 col-md-6 mb-4 mb-lg-0"
-													style="margin: 10px -35px 0 0;">
-													<div class="categories_post" style="width: 200px">
-														<img src="resources/upload/${plicense.picture}"
-															style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
-													</div>
-												</div>
-											</c:forEach>
+							<h3 style="font-weight: bold; margin: 15px 0 0 20px;">경력·자격</h3>
+							<div class="container">
+								<div class="row" style="margin-top: 20px;">
+									<c:forEach items="${pimage}" var="image">
+										<div class="col-xl-4 col-lg-3">
+											<div class="categories_post">
+												<img src="resources/upload/${image.picture}"
+													style="width: 290px; height: 200px;" alt="등록된 사진이 없습니다.">
+											</div>
 										</div>
-									</div>
-									<div class="col-lg-9 col-md-9 blog_details" style="width: 600px;">
-										<h3 style="font-weight: bold">
-											${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</h3>
+									</c:forEach>
+									<c:forEach items="${plicense}" var="plicense">
+										<div class="col-xl-4 col-lg-3">
+											<div class="categories_post">
+												<img src="resources/upload/${plicense.picture}"
+													style="width: 290px; height: 200px;" alt="등록된 사진이 없습니다.">
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+							<div class="container" style="margin-top: 20px; border: solid 1px; border-color: #eee;">
+								<div class="row">
+									<div class="col-6" style="padding: 10px;">
+										<img src="resources/upload/location.png" style="width: 40px; height: 40px;">
+										<h3 style="display: inline-block;">주 소</h3>
+										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
+										${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</div>
+										<img src="resources/upload/time.png" style="width: 40px; height: 40px;">
+										<h3 style="display: inline-block;">운영시간</h3><br>
 										<c:forEach items="${time }" var="time">
-											<h3 style="font-weight: normal">${time.w_day }&nbsp;${time.starttime}
-												&nbsp;-&nbsp;${time.endtime }</h3>
+											<div class="doctor-text text-center" style="display: inline-block; padding-left:45px; color: black;">
+												${time.w_day }&nbsp;${time.starttime}&nbsp;-&nbsp;${time.endtime }
+											</div>			
+											<div class="doctor-text text-center" style="display: inline-block; color: black;">${time.n_content}</div><br>								
 										</c:forEach>
-										<h3 style="font-weight: normal">${pmemdetail.n_content}</h3>
+										<img src="resources/upload/career.png" style="width: 40px; height: 40px;">
+										<h3 style="display: inline-block;">대표경력</h3>
+										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
+										${pmemdetail.career }</div>
+										<img src="resources/upload/career2.png" style="width: 40px; height: 40px;">
+										<h3 style="display: inline-block;">전문분야</h3>
+										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
+										${pmemdetail.speciality }</div>
 									</div>
-								</section>
+									<div class="col-6" style="padding-top: 10px; margin-left:-35px;">
+										<img src="resources/upload/price.png" style="width: 40px; height: 40px;">
+										<h3 style="display: inline-block;">서비스정보</h3><br>
+										<c:forEach items="${price }" var="price">
+											<div class="doctor-text text-center" style="display: inline-block; height: 22px; padding-left:45px; color: black;">
+												${price.title}&nbsp;:&nbsp;${price.price}
+											</div><br>
+										    <div class="doctor-text text-center" style="display: inline-block; margin-bottom: 5px; padding-left:45px;">${price.content }</div><br>	
+										</c:forEach>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="comments-area">
+					<div class="comments-area" style="width: 850px;">
 						<h3>고객후기</h3>
 						<c:forEach items="${counsel }" var="counsel">
 							<div class="comment-list">
@@ -157,7 +178,7 @@
 											<div class="star">
 												<input type="hidden" class="rating" value="${counsel.rating }">
 											</div>
-											<input id="counselProfile" type="hidden" value=${counsel.m_id }>
+											<input id="counselProfile" type="hidden" value="${counsel.m_id }">
 											<p></p>
 											<h5 class="comment">${counsel.content }</h5>
 										</div>
@@ -219,7 +240,6 @@
 		</div>
 	</section>
 	<script>
-console.log("돈좀줘~~"+${price});
 		//추천버튼 
 		function likeHit(p_id) {
 			var p_id = p_id;
@@ -236,7 +256,7 @@ console.log("돈좀줘~~"+${price});
 						Swal.fire({
 							title: '추천을 취소시겠습니까?',
 							icon: 'warning',
-							showCancelButton: true, 
+							showCancelButton: true,
 							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
 							cancelButtonColor: '#3085d6',
 							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
@@ -266,7 +286,7 @@ console.log("돈좀줘~~"+${price});
 						Swal.fire({
 							title: '팔로우를 취소하시겠습니까?',
 							icon: 'warning',
-							showCancelButton: true, 
+							showCancelButton: true,
 							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
 							cancelButtonColor: '#3085d6',
 							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
@@ -280,6 +300,7 @@ console.log("돈좀줘~~"+${price});
 				}
 			});
 		}
+
 		function noMember() {
 			Swal.fire('일반회원이 아닙니다.');
 		}
@@ -306,8 +327,6 @@ console.log("돈좀줘~~"+${price});
 				}
 			});
 		});
-
-
 	</script>
 </body>
 

@@ -19,5 +19,8 @@ public interface PmemService {
 	int pmemberInsert3(String p_id, int p_license, int p_image);
 	
 	boolean isIdCheck(String p_id);
-	List<PriceVO> getPrice(PriceVO price);
+	List<PriceVO> getPrice(String p_id);
+	int deleteService(PriceVO price);
+	int insertService(PriceVO price);
+	int updateService(PriceVO price);
 }

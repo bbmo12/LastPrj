@@ -12,11 +12,23 @@
 </head>
 <style>
 	body {
-         background-image: url("${pageContext.request.contextPath}/resources/upload/jjan.gif");
-         background-size: cover;
-         background-repeat: no-repeat;
-         background-color: #fff;
-      } 
+		background-image: url("${pageContext.request.contextPath}/resources/upload/jjan.gif");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-color: #fff;
+	}
+
+	.options {
+		transform: translateY(-35px);
+	}
+
+	.options {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-evenly;
+	}
 </style>
 
 <body class="my-login-page">
@@ -27,10 +39,13 @@
 					<div class="brand">
 						<img src="resources/login/logo.jpg" alt="logo">
 					</div>
-						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular" 
-						style="width: 200px;position: relative; left: 199px; bottom: -58px;">일반회원</button>
-						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner" style="width: 200px;">파트너회원</button>
-					<div class="card fat">
+					<div class="options">
+						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular"
+							style="width: 200px; margin-top: 8px;">일반회원</button>
+						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner"
+							style="width: 200px;">파트너회원</button>
+					</div>
+					<div class="card fat" style="margin-top: -35px;">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
 							<div id="test">
@@ -86,7 +101,8 @@
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
 		function mlogin() {
-			$('#partner').attr("disabled", true);
+
+			$('#partner').toggle();
 			$("#test").empty();
 			var loginForm = `
 				<form class="my-login-validation" action="login" method="post">
@@ -131,7 +147,7 @@
 		}
 
 		function plogin() {
-			$('#regular').attr("disabled", true);
+			$('#regular').toggle();
 			$("#test").empty();
 			var loginForm = `
 				<form class="my-login-validation" action="plogin" method="post">

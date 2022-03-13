@@ -102,34 +102,55 @@
 	<update id="pmemberUpdate" parameterType="com.last.prj.pmember.service.PmemberVO">
 		UPDATE P_MEMBER
 			<set>
-				<if test="name != null">NAME = #{name}, </if>
-				<if test="password != null">PASSWORD = #{password}, </if>
-				<if test="tel != null">TEL = #{tel}, </if>
+				<if test="name != null">NAME = #{name},</if>
+				<if test="password != null">PASSWORD = #{password},</if>
+				<if test="tel != null">TEL = #{tel},</if>
 				<if test="w_name != null">W_NAME = #{w_name},</if>
-	  			<if test="w_address != null"> W_ADDRESS = #{w_address}, </if>
-	  			<if test="w_d_address != null"> W_D_ADDRESS = #{w_d_address}, </if>				
-	 		 	<if test="w_tel != null"> W_TEL = #{w_tel}, </if>
-	 		 	<if test="n_content != null"> N_CONTENT = #{n_content},</if>
-	 			<if test="p_info != null"> P_INFO = #{p_info}, </if>
-	  			<if test="career != null"> CAREER = #{career}, </if> 
-	  			<if test="speciality != null"> SPECIALITY = #{speciality} </if>
-				<if test="picture != null">PICTURE = #{picture}, </if>
-				<if test="pfile != null">PFILE = #{pfile} </if>		
+	  			<if test="w_address != null"> W_ADDRESS = #{w_address},</if>
+	  			<if test="w_d_address != null"> W_D_ADDRESS = #{w_d_address},</if>				
+	 		 	<if test="w_tel != null"> W_TEL = #{w_tel},</if>
+	 			<if test="p_info != null"> P_INFO = #{p_info},</if>
+	  			<if test="career != null"> CAREER = #{career},</if> 
+	  			<if test="speciality != null"> SPECIALITY = #{speciality},</if>
+				<if test="picture != null">PICTURE = #{picture},</if>
+				<if test="pfile != null">PFILE = #{pfile}</if>		
 			</set>
 		WHERE P_ID = #{p_id}
 	</update> 
 	<!-- 수정시 otime 삭제후 insert -->
 	<delete id="deleteTime" parameterType="com.last.prj.pmember.service.TimeVO">
-	 	DELETE FROM O_TIME WHERE P_ID= #{p_id}
+	 	DELETE FROM O_TIME WHERE O_NO = #{o_no}
 	</delete>
 	
-	<insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
+	<!-- <insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
 		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
 				SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
 		</selectKey>
-				INSERT INTO O_TIME(O_NO, P_ID, W_DAY, STARTTIME, ENDTIME)
-				VALUES(#{o_no}, #{p_id}, #{w_day}, #{starttime}, #{endtime})
+				INSERT INTO O_TIME
+				VALUES(#{o_no}, #{p_id}, #{w_day}, #{starttime}, #{endtime}, #{n_content})
 	</insert>
+ -->
+ <insert id="pmemberTime" parameterType="java.util.Map">
+    INSERT into O_TIME(O_NO,P_ID,W_DAY,STARTTIME,ENDTIME,N_CONTENT)
+    <foreach item="item" collection="list" separator="UNION ALL " >
+        select  NVL(MAX(O_NO)+1,1) AS O_NO
+        from dual
+    </foreach>
+</insert>
+
+
+
+	
+	<update id="updateTime" parameterType="com.last.prj.pmember.service.TimeVO" >
+		UPDATE O_TIME 
+			<set>
+				<if test="w_day != null">W_DAY = #{w_day},</if>
+				<if test="starttime != null">STARTTIME = #{starttime},</if>
+				<if test="endtime != null">ENDTIME = #{endtime},</if>
+				<if test="n_content != null">N_CONTENT = #{n_content}</if>
+			</set>
+		 WHERE O_NO = #{o_no} AND P_ID = #{p_id}
+	</update>
 		
 	<!-- 추천 -->
 	<update id="updateLike" parameterType="String">
