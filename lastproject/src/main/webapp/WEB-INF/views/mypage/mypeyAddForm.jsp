@@ -127,28 +127,17 @@
 								<h5>
 									<strong>품종</strong>
 								</h5>
-								<label>개<input type="radio" id="code" name="code"
-									value="501"><span class="checkmark"></span></label>&emsp; <label>고양이<input
-									type="radio" id="code" name="code" value="502"><span
-									class="checkmark"></span></label>&emsp; <label>조류<input
-									type="radio" id="code" name="code" value="503"><span
-									class="checkmark"></span></label>&emsp; <label>파충류<input
-									type="radio" id="code" name="code" value="504"><span
-									class="checkmark"></span></label>&emsp; <label>어류<input
-									type="radio" id="code" name="code" value="505"><span
-									class="checkmark"></span></label>&emsp; <label>토끼<input
-									type="radio" id="code" name="code" value="506"><span
-									class="checkmark"></span></label>&emsp; <label>돼지<input
-									type="radio" id="code" name="code" value="507"><span
-									class="checkmark"></span></label>&emsp; <label>햄스터<input
-									type="radio" id="code" name="code" value="508"><span
-									class="checkmark"></span></label>&emsp; <label>미어켓<input
-									type="radio" id="code" name="code" value="509"><span
-									class="checkmark"></span></label>&emsp; <label>여우<input
-									type="radio" id="code" name="code" value="510"><span
-									class="checkmark"></span></label>&emsp; <label>거미<input
-									type="radio" id="code" name="code" value="511"><span
-									class="checkmark"></span></label>&emsp;
+								<label>개<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
+								<label>고양이<input type="radio" id="code" name="code" value="502"><span class="checkmark"></span></label>&emsp;
+								<label>조류<input type="radio" id="code" name="code" value="503"><span class="checkmark"></span></label>&emsp;
+								<label>파충류<input type="radio" id="code" name="code" value="504"><span class="checkmark"></span></label>&emsp;
+								<label>어류<input type="radio" id="code" name="code" value="505"><span class="checkmark"></span></label>&emsp;
+								<label>토끼<input type="radio" id="code" name="code" value="506"><span class="checkmark"></span></label>&emsp;
+								<label>돼지<input type="radio" id="code" name="code" value="507"><span class="checkmark"></span></label>&emsp;
+								<label>햄스터<input type="radio" id="code" name="code" value="508"><span class="checkmark"></span></label>&emsp;
+								<label>미어켓<input type="radio" id="code" name="code" value="509"><span class="checkmark"></span></label>&emsp;
+								<label>여우<input type="radio" id="code" name="code" value="510"><span class="checkmark"></span></label>&emsp;
+								<label>거미<input	 type="radio" id="code" name="code" value="511"><span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
 								<h5>
@@ -164,7 +153,7 @@
 									rows="4" cols="130">
                         		</textarea>
 							</div>
-							<input type="hidden" name="m_id" id="m_id" value="${mId }">
+							<input type="hidden" name="m_id" id="m_id" value="${member.m_id }">
 							<button type="submit" class="genric-btn info radius">반려동물
 								등록</button>
 						</div>

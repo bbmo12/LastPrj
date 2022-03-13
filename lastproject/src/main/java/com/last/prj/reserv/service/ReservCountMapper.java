@@ -10,4 +10,6 @@ public interface ReservCountMapper {
 	ReservCountVO reservCountSelect(ReservCountVO vo);
 	
 	int reservCountInsert(ReservCountVO no);
+	
+	List<ReservCountVO> reservDelCheck(ReservCountVO vo); //일정삭제시 해당일자 예약일정체크
 }

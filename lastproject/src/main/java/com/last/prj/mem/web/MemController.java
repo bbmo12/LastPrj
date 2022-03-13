@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +33,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.last.prj.ffile.web.FfileUtil;
-import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PetcareVO;
@@ -38,7 +40,7 @@ import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PmemVO;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.TimeVO;
-import com.last.scheduler.Scheduler;
+import com.last.prj.security.CustomUser;
 
 @Controller
 public class MemController {
@@ -57,17 +59,47 @@ public class MemController {
 
 	// 회원탈퇴 페이지로 이동
 	@RequestMapping("mdeleteForm")
-	public String mdeleteForm(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String mdeleteForm(Principal principal) {
+		if (principal != null) {
+
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+
+			} else if (userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			} else if (userDetails.getRole() == "관리자") {
+
+			}
+
+		}
 		return "mypage/mdeleteForm";
 	}
 
 	// 일반회원 회원탈퇴
+	// 이부
 	@RequestMapping("mdelete")
-	public String mdelete(HttpServletRequest request, MemVO member) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String mdelete( Principal principal, MemVO member,HttpSession session) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+				
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+		}
 		memDao.memberDelete(m_id);
 
 		session.invalidate();
@@ -107,22 +139,53 @@ public class MemController {
 
 	// 내정보 수정페이지로 이동
 	@RequestMapping("/memberUpdateForm")
-	public String memberUpdateFrom(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String memberUpdateFrom(Model model, Principal principal) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+			
+		}
 		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberUpdateForm";
 	}
 
 	// 내정보페이지로 이동
 	@RequestMapping("/memberMypage")
-	public String memberMypage(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String m_id = (String) session.getAttribute("mId");
+	public String memberMypage(Model model, Principal principal) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+		}
 		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberMypage";
 	}
 
+	
+	
 	@RequestMapping("joinForm") // 일반회원회원가입폼이동
 	public String joinForm() {
 		return "member/joinForm";
@@ -139,48 +202,36 @@ public class MemController {
 		return "member/loginForm";
 	}
 
-	@RequestMapping("/login") // 일반회원로그인창
-	public String loginForm(MemVO member, HttpSession session) {
-		member = memDao.memberSelect(member);
-
-		if (member != null) {
-			session.setAttribute("member", member);
-			session.setAttribute("mId", member.getM_id());
-			session.setAttribute("password", member.getPassword());
-
-			LoginVO login = new LoginVO();
-			login.setId(member.getM_id());
-			session.setAttribute("loginInfo", login);
-		} else {
-			return "member/loginForm";
-		}
-		return "redirect:home";
-	}
-
+	/*
+	 * @RequestMapping("/login") // 일반회원로그인창 public String loginForm(MemVO member,
+	 * HttpSession session) { member = memDao.memberSelect(member);
+	 * 
+	 * if (member != null) { session.setAttribute("member", member);
+	 * session.setAttribute("mId", member.getM_id());
+	 * session.setAttribute("password", member.getPassword());
+	 * 
+	 * LoginVO login = new LoginVO(); login.setId(member.getM_id());
+	 * session.setAttribute("loginInfo", login); } else { return "member/loginForm";
+	 * } return "redirect:home"; }
+	 */
 	@RequestMapping("/logout") // 로그아웃
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:home";
 	}
 
-	@RequestMapping("/plogin") // 파트너회원 로그인
-	public String plogin(PmemVO pmember, HttpSession session) {
-		pmember = pmemDao.pmemberSelect(pmember);
-
-		if (pmember != null) {
-			session.setAttribute("pmember", pmember);
-			session.setAttribute("pId", pmember.getP_id());
-			session.setAttribute("password", pmember.getPassword());
-			LoginVO login = new LoginVO();
-			login.setId(pmember.getP_id());
-			session.setAttribute("loginInfo", login);
-		} else {
-			return "member/loginForm";
-		}
-
-		return "redirect:home";
-	}
-
+	/*
+	 * @RequestMapping("/plogin") // 파트너회원 로그인 public String plogin(PmemVO pmember,
+	 * HttpSession session) { pmember = pmemDao.pmemberSelect(pmember);
+	 * 
+	 * if (pmember != null) { session.setAttribute("pmember", pmember);
+	 * session.setAttribute("pId", pmember.getP_id());
+	 * session.setAttribute("password", pmember.getPassword()); LoginVO login = new
+	 * LoginVO(); login.setId(pmember.getP_id()); session.setAttribute("loginInfo",
+	 * login); } else { return "member/loginForm"; }
+	 * 
+	 * return "redirect:home"; }
+	 */
 	@RequestMapping("/memberIdSearchForm") // 일반회원 아이디찾기 폼으로 이동
 	public String memberIdSearchForm() {
 		return "member/memIdSearchForm";
@@ -220,6 +271,12 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = member.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		member.setPassword(pwd);
+
 		memDao.memberInsert(member);
 		return "redirect:home";
 	}
@@ -247,6 +304,12 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = pmember.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		pmember.setPassword(pwd);
+
 		pmemDao.pmemberInsert1(pmember);
 		model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		return "member/pjoinForm2";
@@ -275,7 +338,7 @@ public class MemController {
 		System.out.println("p_image = " + p_image);
 		pmemDao.pmemberInsert3(p_id, p_license, p_image); // 파일다중업로드
 		memDao.petcareinsert(petcare);
-		
+
 		/*
 		 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
 		 * i++) { memDao.otimeinsert(time); }
@@ -283,13 +346,14 @@ public class MemController {
 
 		return "member/joinResult";
 	}
+
 	@RequestMapping("addService")
 	@ResponseBody
 	public int addService(PriceVO price) {
 		memDao.servicepriceinsert(price);
 		return 1;
 	}
-	
+
 	@PostMapping("addO_Time")
 	@ResponseBody
 	public int addO_Time(TimeVO vo) {

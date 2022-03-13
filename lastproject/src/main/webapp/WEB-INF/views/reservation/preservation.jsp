@@ -268,7 +268,7 @@
 		            // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
 		            socket.send(m_id+","+content);
 		        	alert("전송되었습니다.");
-		        	//location.reload();
+		        	location.reload();
 		        },
 		        error: function(error){
 		        	console.log(error);

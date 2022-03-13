@@ -23,4 +23,7 @@ public interface PmemService {
 	int deleteService(PriceVO price);
 	int insertService(PriceVO price);
 	int updateService(PriceVO price);
+	
+	PmemVO read(String username);
+
 }

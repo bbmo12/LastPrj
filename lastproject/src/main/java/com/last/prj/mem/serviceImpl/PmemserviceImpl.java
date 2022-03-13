@@ -66,4 +66,9 @@ public class PmemserviceImpl implements PmemService {
 		return pmap.updateService(price);
 	}
 
+	@Override
+	public PmemVO read(String username) {
+		return pmap.read(username);
+	}
+
 }

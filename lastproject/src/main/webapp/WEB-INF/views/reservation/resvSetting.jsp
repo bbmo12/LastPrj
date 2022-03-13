@@ -129,7 +129,7 @@ $(document).ready(function(){
 	}
 	//예약설정조회
 	function revList(){
-		var p_id = "${sessionScope.pId}";
+		var p_id = "${p_id}";
 		$("#calendar").empty();
 		CreateCalendar();
 		$.ajax({
@@ -210,7 +210,7 @@ $(document).ready(function(){
 				    category: res.category
 				}
 			]);
-			alert('해당 예약일정을 등록하셨습니다.');
+			alert('등록이 완료되었습니다.');
 		}
 	})
   }else{
@@ -280,19 +280,28 @@ $(document).ready(function(){
 
 //일정 삭제이벤트
 calendar.on('beforeDeleteSchedule', scheduleData => {
-		 var p_id = "${sessionScope.pId}";
 		  const {schedule, start, end} = scheduleData;
-
+		
 		  schedule.start = start;
 		  schedule.end = end;
+		 var start_date = start;
+		 var end_date = end;
+		 var p_id = "${p_id}";
 		  $.ajax({
 			  url : 'revsetdelete',
 			  method : 'POST',
 			  data : {"id" : schedule.id,
-				  	  "p_id": p_id},
+				  	  "p_id": p_id,
+				  	  "start_date" : start_date,
+				  	  "end_date" : end_date},
 			  success : function(res){
-		  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
-		  		alert("해당 예약설정을 해제하였습니다.");
+				  console.log(res)
+				  if(res == "ok"){
+			  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
+			  		alert("해당 예약설정을 해제하였습니다.");
+				  }else if(res ="no"){
+					  alert("예약건수가 있어 삭제할수 없습니다.");
+				  }
 			  }
 		  })
 	});
