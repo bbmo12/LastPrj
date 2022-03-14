@@ -49,4 +49,6 @@ public class PmemberVO {
 	private String f_content; //서비스 구분 코드 내용
 	private String fromDate;
 	private String toDate;
+	private int to;
+	private int ch;	
 }
