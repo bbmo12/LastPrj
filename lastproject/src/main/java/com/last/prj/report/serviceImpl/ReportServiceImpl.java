@@ -92,5 +92,17 @@ public class ReportServiceImpl implements ReportService {
 		return map.admRlistCode(vo);
 	}
 
+	
+	@Override
+	public ReportVO admReSearch(int rep_no) {
+		return map.admReSearch(rep_no);
+	}
+
+	@Override
+	public int admReSearchUpdate(ReportVO vo) {
+		return map.admReSearchUpdate(vo);
+	}
+
+
 
 }
