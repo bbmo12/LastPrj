@@ -59,8 +59,7 @@
 		where m_id = #{m_id}
 	</update>
 
-
-
+	
 
 
 
@@ -140,4 +139,30 @@
 		inner join MEMBER on TBL_AUTH.ID = MEMBER.M_ROLE
 		where M_ID = #{username}
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="searchPwd"
+      resultType="com.last.prj.mem.service.LoginVO"
+      parameterType="String">
+      select 'M' as user_type, m.m_id as id, m.password as password
+	  from member m
+	  where m_id = #{id}
+
+	  union all
+
+	  select 'P', p.p_id , p.password
+	  from p_member p
+	  where p_id = #{id}
+   </select>
+   
+   <!-- 비밀번호 업데이트 -->
+	<update id="memberPwdUpdate"
+		parameterType="com.last.prj.mem.service.MemVO">
+		update member
+		<set>
+			<if test="password != null">password = #{password}, </if>
+		</set>
+		where m_id = #{m_id}
+	</update>
+   
 </mapper>

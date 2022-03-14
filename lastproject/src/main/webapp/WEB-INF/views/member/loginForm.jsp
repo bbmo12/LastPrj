@@ -64,7 +64,7 @@
 									</div>
 									<div class="form-group">
 										<label for="password">Password
-											<a href="forgot.html" class="float-right">
+											<a href="pwdSearchForm" class="float-right">
 												비밀번호찾기
 											</a>
 										</label>
@@ -100,6 +100,12 @@
 	<script src="resources/login/my-login.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
+	
+	var result = '${resultMsg1}';
+	if(result === 'result1'){
+		alert("임시 비밀번호가 발급되었습니다. 메일을 확인해주세요.");
+	}
+	
 		function mlogin() {
 
 			$('#partner').toggle();

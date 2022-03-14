@@ -4,6 +4,7 @@ package com.last.prj.mem.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemMapper;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
@@ -91,6 +92,16 @@ public class MemServiceImpl implements MemService {
 	@Override
 	public MemVO read(String username) {
 		return map.read(username);
+	}
+
+	@Override
+	public LoginVO searchPwd(String id) {
+		return map.searchPwd(id);
+	}
+
+	@Override
+	public int memberPwdUpdate(MemVO mem) {
+		return map.memberPwdUpdate(mem);
 	}
 
 
