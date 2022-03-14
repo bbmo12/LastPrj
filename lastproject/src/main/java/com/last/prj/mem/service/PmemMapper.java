@@ -28,5 +28,8 @@ public interface PmemMapper {
 	int updateService(PriceVO price);
 
 	PmemVO read(String username);
+	
 
+	
+	int pmemdelete();
 }

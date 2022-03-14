@@ -38,4 +38,6 @@ public interface MemMapper {
 	public int otimeinsert(TimeVO time); //otime 입력
 	
 	MemVO read(String username);
+	
+	int memdelete();
 }

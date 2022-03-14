@@ -2,6 +2,8 @@ package com.last.prj.pmember.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface PmemberService {
 
 	public PmemberVO getPmemberinfo(String p_id);//pmember 정보
@@ -35,4 +37,6 @@ public interface PmemberService {
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);
 	public int admPlistCodeCount(PmemberVO vo);
+	
+
 }
