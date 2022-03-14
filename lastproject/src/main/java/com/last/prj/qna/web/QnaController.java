@@ -117,8 +117,7 @@ public class QnaController {
 
 	// 질문글 상세 조회 + 조회수 증가 + 작성 회원 정보 조회 + 반려동물 정보 조회 + 파트너 회원 정보 + 댓글 갯수
 	@RequestMapping(value = "/qnaDetail")
-	public String qnaDetail(@RequestParam("q_no") int q_no, Model model, HttpServletRequest request,
-			Principal principal) {
+	public String qnaDetail(@RequestParam("q_no") int q_no, Model model, HttpServletRequest request, Principal principal) {
 
 		/*
 		 * HttpSession session = request.getSession(); String m_id = (String)
@@ -212,8 +211,7 @@ public class QnaController {
 
 	// 질문 수정 폼으로 이동 + 기존 글 내용 + 기존 태그 + 멤버별 펫 정보 받아감.
 	@RequestMapping(value = "/qModiForm")
-	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, Model model)
-			throws Exception {
+	public String qModiForm(@RequestParam("q_no") int q_no, @RequestParam("m_id") String m_id, Model model) throws Exception {
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		QnaVO vo = qnaDAO.qnaDetail(q_no);
@@ -222,8 +220,11 @@ public class QnaController {
 
 		model.addAttribute("petList", petDAO.petmemberList(m_id));
 		model.addAttribute("qnaDetail", vo);
-		model.addAttribute("prevTag", objectMapper.writeValueAsString(vo.getTagList())); // 태그리스트를 json으로 변환해 view로
-																							// 전달한다.
+		model.addAttribute("prevTag", objectMapper.writeValueAsString(vo.getTagList())); // 태그리스트를 json으로 변환해 view로 전달
+		
+	 System.out.println("기존 태그 : " + vo.getTagList()); 
+		
+		
 		return "qna/qModiForm";
 	}
 
@@ -244,11 +245,11 @@ public class QnaController {
 			qtagDAO.ModiTag(qnatag);
 		}
 
-		return "redirect:/qnaDetail";
+		return "redirect:/qnaMain";
 	}
 
 	// 질문 삭제(1)
-	@RequestMapping(value = "/qDeleteOne", method = RequestMethod.POST)
+	@RequestMapping(value = "/qDeleteOne", method = RequestMethod.GET)
 	public String qDeleteOne(@RequestParam("q_no") int q_no, Model model) throws Exception {
 
 		qnaDAO.qDeleteOne(q_no);
@@ -258,7 +259,8 @@ public class QnaController {
 	}
 
 	// 질문 삭제(2)
-	@RequestMapping(value = "/qDeleteTwo", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/qDeleteTwo", method = RequestMethod.GET)
 	public String qDeleteTwo(@RequestParam("q_no") int q_no, Model model) throws Exception {
 
 		qnaDAO.qDeleteTwo(q_no);
