@@ -13,7 +13,7 @@ public class CounselVO {
 	private String m_id;
 	private int p_no;
 	private String sender;
-	private int pet_no;		//반려동물순번
+	private Integer pet_no;		//반려동물순번
 	private int code;		//상담상태코드
 	private String r_check; //후기 작성 여부
 	

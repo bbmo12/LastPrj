@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -240,6 +243,7 @@ img {
 
 						<div>
 							<!-- 채팅 상대방 이름 -->
+							<%-- <p>세션아이디 : ${mId }</p> --%>
 							<div style="margin-bottom: 20px;">
 								<c:if test="${mId ne null }">
 									<h2>
@@ -364,7 +368,7 @@ img {
 										<c:if test="${detail.p_id eq detail.sender }">
 											<div align= "right">
 											<div class="mine"
-												style="background-color: #38a4ff; padding: 10px; margin-left : 100px; border-radius: 10px; display: inline-block;">${detail.content }</div>
+												style="background-color: #38a4ff; padding: 10px; margin-left : 100px; border-radius: 10px; display: inline-block; color : white;">${detail.content }</div>
 												<div class="mine">${detail.w_date }</div>
 											</div>
 										</c:if>
