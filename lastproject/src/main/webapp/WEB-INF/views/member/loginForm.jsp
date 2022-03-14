@@ -76,7 +76,7 @@
 									</div>
 									<div class="form-group m-0">
 										<a href="javascript:void(0)">
-											<img alt="" src="resources/upload/kakaologin.png" onclick="kakaoLogin();"
+											<img alt="" src="resources/upload/kakaoo.png" onclick="kakaoLogin();"
 												style="width: 298px; height: 50px; margin-top: 10px;">
 										</a>
 									</div>

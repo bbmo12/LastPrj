@@ -186,7 +186,7 @@ h1{
         </div>
     </section>
     
-    <!-- Department Area Starts -->
+<!-- Department Area Starts -->
     <section class="department-area section-padding4" style="padding: 50px 0 50px;">
         <div class="container">
             <div class="row">
