@@ -272,6 +272,7 @@ public class MemController {
 		return "member/pwdSearchForm";
 	}
 	
+	/*
 	// 이메일 인증, 비밀번호찾기
 	@RequestMapping("/searchPassword")
 	   public String searchPassword(@RequestParam("id") String uid, Model model, RedirectAttributes re) {
@@ -331,7 +332,7 @@ public class MemController {
 	             * System.out.println(password); System.out.println(username.substring(0,
 	             * index));
 	             */
-	           Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	      /*     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 
 	               // String un=username.substring(0, index);
 	               // String pw=password.substring(0,indexPw);
@@ -360,7 +361,7 @@ public class MemController {
 	      }
 
 	   }
-	
+	*/
 	
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
