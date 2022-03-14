@@ -2,9 +2,6 @@ package com.last.prj.fallow.web;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -48,7 +45,7 @@ public class FollowController {
 	}
 	@RequestMapping("insertFollow")
 	@ResponseBody
-	public int insertFollow(FollowVO follow, Principal principal) {
+	public int insertFollow(FollowVO follow, Principal principal, Model model) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -68,7 +65,6 @@ public class FollowController {
 			
 		}	
 		follow.setM_id(m_id);
-		
 		int followCheck = followDao.followCheck(follow);
 		if(followCheck == 0) {
 			followDao.followInsert(follow);//팔로우 

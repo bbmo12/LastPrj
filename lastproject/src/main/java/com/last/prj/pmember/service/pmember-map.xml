@@ -122,25 +122,18 @@
 	 	DELETE FROM O_TIME WHERE O_NO = #{o_no}
 	</delete>
 	
-	<!-- <insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
+	<delete id="deleteTimeId" parameterType="com.last.prj.pmember.service.TimeVO">
+	 	DELETE FROM O_TIME WHERE P_ID = #{p_id}
+	</delete>
+	
+	<insert id="pmemberTime" parameterType="com.last.prj.pmember.service.TimeVO">
 		<selectKey keyProperty="o_no" resultType="int" order="BEFORE">
 				SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
 		</selectKey>
 				INSERT INTO O_TIME
 				VALUES(#{o_no}, #{p_id}, #{w_day}, #{starttime}, #{endtime}, #{n_content})
 	</insert>
- -->
- <insert id="pmemberTime" parameterType="java.util.Map">
-    INSERT into O_TIME(O_NO,P_ID,W_DAY,STARTTIME,ENDTIME,N_CONTENT)
-    <foreach item="item" collection="list" separator="UNION ALL " >
-        select  NVL(MAX(O_NO)+1,1) AS O_NO
-        from dual
-    </foreach>
-</insert>
-
-
-
-	
+<!-- 	
 	<update id="updateTime" parameterType="com.last.prj.pmember.service.TimeVO" >
 		UPDATE O_TIME 
 			<set>
@@ -150,7 +143,7 @@
 				<if test="n_content != null">N_CONTENT = #{n_content}</if>
 			</set>
 		 WHERE O_NO = #{o_no} AND P_ID = #{p_id}
-	</update>
+	</update> -->
 		
 	<!-- 추천 -->
 	<update id="updateLike" parameterType="String">

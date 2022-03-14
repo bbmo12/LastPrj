@@ -20,7 +20,8 @@ public interface PmemService {
 	
 	boolean isIdCheck(String p_id);
 	List<PriceVO> getPrice(String p_id);
-	int deleteService(PriceVO price);
+	int deleteService(PriceVO price);//no삭제
+	int deleteServiceId(PriceVO price);//id로삭제
 	int insertService(PriceVO price);
 	int updateService(PriceVO price);
 	

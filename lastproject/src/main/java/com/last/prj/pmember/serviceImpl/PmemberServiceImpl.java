@@ -86,7 +86,11 @@ public class PmemberServiceImpl implements PmemberService{
 	public int deleteTime(TimeVO time) {
 		return map.deleteTime(time);
 	}
-	
+	@Override
+	public int deleteTimeId(TimeVO time) {
+		return map.deleteTimeId(time);
+	}
+
 	@Override
 	public List<PmemberVO> admPlistCode(PmemberVO vo) {
 		return map.admPlistCode(vo);
@@ -141,6 +145,5 @@ public class PmemberServiceImpl implements PmemberService{
 	public int updateTime(TimeVO time) {
 		return map.updateTime(time);
 	}
-
 
 }

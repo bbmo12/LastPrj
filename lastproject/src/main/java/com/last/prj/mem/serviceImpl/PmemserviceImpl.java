@@ -71,4 +71,9 @@ public class PmemserviceImpl implements PmemService {
 		return pmap.read(username);
 	}
 
+	@Override
+	public int deleteServiceId(PriceVO price) {
+		return pmap.deleteServiceId(price);
+	}
+
 }

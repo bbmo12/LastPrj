@@ -127,8 +127,8 @@ form {
 			<form name="qForm" id="qForm" action="qForm" method="post"
 				onsubmit="tagInput();">
 
-				<input type="hidden" id="writer" name="writer" value="writer"
-					value="${mId }">
+				<%-- <input type="hidden" id="writer" name="writer" value="writer"
+					value="${mId }"> --%>
 
 				<div class="mb-3">
 					<h3>제목</h3>

@@ -8,7 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -64,24 +63,30 @@ public class PmemberController {
 
 	// 상세페이지
 	@RequestMapping("/pmemberDetail")
-	public String pmemberDetail(@RequestParam("id") String p_id, Model model, PriceVO price) {
+	public String pmemberDetail(@RequestParam("id") String p_id, Model model, PriceVO price) {	
 		// 파트너 정보
-		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); //pmember
-		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
+		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); // pmember
+		model.addAttribute("time", pMemberDao.getTime(p_id));// otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		model.addAttribute("price", pmemDao.getPrice(p_id));
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
+
 		return "pmember/memberDetail";
 	}
 
 	// 파트너 마이페이지
 	@RequestMapping("pmemberMyPage")
-	public String mypage(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
+	public String mypage(Model model, Principal principal) {
+		String p_id = "0";
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() =="파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
@@ -92,9 +97,14 @@ public class PmemberController {
 
 	// 파트너정보 수정페이지로 이동
 	@RequestMapping("pmemberUpdateForm")
-	public String pmemberUpdateFrom(Model model, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
+	public String pmemberUpdateFrom(Model model, Principal principal) {
+		String p_id = "";
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() =="파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
@@ -105,15 +115,19 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember,ParamMap<TimeVO> time1,TimeVO time, PriceVO price, Model model, HttpServletRequest request) {
-
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
+		String p_id = "0";
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() =="파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
+		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
 		
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-			
 		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
@@ -133,27 +147,24 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
+		pMemberDao.deleteTimeId(time);//시간삭제
+		
 		pMemberDao.pmemberUpdate(pmember);
+		//시간 추가
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
-			pMemberDao.updateTime(time.getTimeVOList().get(i));
+			if(time.getTimeVOList().get(i).getO_no() != 0){
+				pMemberDao.pmemberTime(time.getTimeVOList().get(i));
+			}
 		}
+		pmemDao.deleteServiceId(price);//서비스 삭제
+		//서비스 추가
 		for(int i=0; i < price.getPriceVOList().size(); i++) {
-			pmemDao.updateService(price.getPriceVOList().get(i));
+			pmemDao.insertService(price.getPriceVOList().get(i));
 		}
 
 		return "redirect:/pmemberMyPage";
 	}
-	//시간추가
-//	@RequestMapping("pmemberUpdate")
-//	@ResponseBody
-//	public int insertTime(TimeVO time) {
-//		for(int i=0; i < time.getTimeVOList().size(); i++) {
-//			pMemberDao.pmemberTime(time.getTimeVOList().get(i));
-//			System.out.println("======================"+time.getTimeVOList().get(i));
-//		}
-//		return 1;
-//	}
-	
+
 	//서비스삭제 
 	@RequestMapping("deleteService")
 	@ResponseBody
@@ -184,6 +195,7 @@ public class PmemberController {
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")
+
 	public String mdeleteForm(HttpServletRequest request,Principal principal,Model model) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -195,11 +207,14 @@ public class PmemberController {
 			}
 		}
 		return null;
+
+
 	}
 	
 	//일반회원 회원탈퇴
 	@RequestMapping("pmdelete")
 	public String mdelete(HttpServletRequest request, MemVO member,Principal principal) {
+
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
