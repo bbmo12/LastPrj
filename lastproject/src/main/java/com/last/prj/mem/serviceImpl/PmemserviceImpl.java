@@ -77,4 +77,15 @@ public class PmemserviceImpl implements PmemService {
 		return pmap.pmemberPwdUpdate(pmem);
 	}
 
+
+	public int pmemdelete() {
+		return pmap.pmemdelete();
+	}
+
+
+
+	public int deleteServiceId(PriceVO price) {
+		return pmap.deleteServiceId(price);
+	}
+
 }

@@ -27,4 +27,11 @@
 	INSERT INTO RESERVCOUNT
 	VALUES (#{reserv_count},#{reserv_date},#{reserv_time},#{p_id},#{start_date},#{end_date})
 </insert>
+
+<!--  시작일 종료일 데이터넣기 
+<update id="reservdateUpdate" parameterType="com.last.prj.reserv.service.ReservCountVO">
+	UPDATE RESERVCOUNT
+	SET START_DATE = #{start_date} , END_DATE = #{end_date}
+	WHERE RESERV_COUNT = #{reserv_count}
+</update> -->
 </mapper>

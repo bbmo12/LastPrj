@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
 <!DOCTYPE html>
 <html>
 
@@ -61,33 +62,29 @@
 								style="width: 210px;" alt="등록된 사진이 없습니다.">
 							<div class="br"></div>
 							<h2 style=" margin: 0 40px -10px 0;">${pmemdetail.name}</h2>
-							<c:choose>
-								<c:when test="${mId ne null}">
+							<sec:authorize access="hasRole('MEMBER')">		
 									<img alt="" src="resources/upload/follow.png" id="follow"
 										onclick="follow('${pmemdetail.p_id}')"
 										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
-								</c:when>
-								<c:otherwise>
+							</sec:authorize>
+							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
 									<img alt="" src="resources/upload/follow.png" id="follow" onclick="noMember()"
 										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -50px;">
-								</c:otherwise>
-							</c:choose>
+							</sec:authorize>	
 							<h3 style="position: relative; top: -15px; right: 10px;">${pmemdetail.w_name}</h3>
-							<c:choose>
-								<c:when test="${mId ne null}">
+							<sec:authorize access="hasRole('MEMBER')">								
 									<img alt="" src="resources/upload/rec.png" id="recommend"
 										onclick="likeHit(`${pmemdetail.p_id}`)"
 										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
-								</c:when>
-								<c:otherwise>
+							</sec:authorize>
+							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
 									<img alt="" src="resources/upload/rec.png" id="recommend" onclick="noMember()"
 										style="cursor:pointer; width: 50px; height: 50px; position: relative; left: 70px; top: -70px;">
-								</c:otherwise>
-							</c:choose>
+							</sec:authorize>			
 							<div class="br" style="margin-top: -45px;"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-							<a href="EnterCs?m_id=${mId }&p_id=${pmemdetail.p_id}">
+							<a href="EnterCs?p_id=${pmemdetail.p_id}">
 								<button class="btn btn-primary">상담하기</button></a>
 							<form action="reservMember" name="reservForm" method="POST">
 								<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">

@@ -11,8 +11,8 @@
 		PM.P_ID AND
 		P.M_ID = #{m_id}
 		UNION
-		SELECT PM.NAME as pm_name, D.D_NAME AS
-		content, P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
+		SELECT PM.NAME AS PM_NAME, D.D_NAME AS
+		CONTENT, P.NAME AS P_NAME, D.W_DATE AS STARTDATE, PM.CODE AS PM_CODE
 		FROM DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
 		WHERE D.R_NO =
 		R.R_NO AND P.PET_NO = R.PET_NO AND R.P_ID = PM.P_ID AND
@@ -43,8 +43,7 @@
 		parameterType="String">
 		SELECT SUM(PRICE) AS TOTAL_PRICE
 		FROM SERVICE
-		WHERE P_ID =
-		#{p_id}
+		WHERE P_ID = #{p_id}
 	</select>
 
 	<update id="ServiceUpdate">
@@ -81,7 +80,7 @@
 		AND	P.M_ID = #{m_id}
 		UNION
 		SELECT PM.NAME as pm_name, D.D_NAME AS content,
-		P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
+		P.NAME AS p_name, D.W_DATE AS STARTDATE, PM.CODE AS pm_code
 		FROM
 		DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
 		WHERE D.R_NO = R.R_NO
@@ -107,7 +106,7 @@
 		AND P.M_ID = #{m_id}
 		UNION
 		SELECT PM.NAME as pm_name, D.D_NAME AS content,
-		P.NAME AS p_name, D.W_DATE AS startdate, PM.CODE AS pm_code
+		P.NAME AS p_name, D.W_DATE AS STARTDATE, PM.CODE AS pm_code
 		FROM
 		DIAGNOSIS D, RESERVATION R, PET P, P_MEMBER PM
 		WHERE D.R_NO = R.R_NO

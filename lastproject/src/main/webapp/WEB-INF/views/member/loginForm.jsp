@@ -39,12 +39,7 @@
 					<div class="brand">
 						<img src="resources/login/logo.jpg" alt="logo">
 					</div>
-					<div class="options">
-						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular"
-							style="width: 200px; margin-top: 8px;">일반회원</button>
-						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner"
-							style="width: 200px;">파트너회원</button>
-					</div>
+					
 					<div class="card fat" style="margin-top: -35px;">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
@@ -100,6 +95,7 @@
 	<script src="resources/login/my-login.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
+
 	
 	var result = '${resultMsg1}';
 	if(result === 'result1'){
@@ -195,6 +191,7 @@
 			</form>`
 			$("#test").append(loginForm);
 		}
+
 		function login() {
 			$.ajax({
 				url: 'geturi.do',

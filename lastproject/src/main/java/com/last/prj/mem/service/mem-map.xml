@@ -59,7 +59,11 @@
 		where m_id = #{m_id}
 	</update>
 
-	
+
+	<delete id="memdelete">
+		DELETE FROM MEMBER
+		WHERE ENDDATE <![CDATA[ <= SYSDATE-25 ]]>
+	</delete>
 
 
 
@@ -165,4 +169,5 @@
 		where m_id = #{m_id}
 	</update>
    
+
 </mapper>

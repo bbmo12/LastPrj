@@ -177,8 +177,7 @@
 									<c:forEach items="${plicense}" var="plicense">
 									<img src="resources/upload/${plicense.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 									</c:forEach>
-							</div>
-							
+							</div>			
 							<button type="button" onclick="location.href='pmemberUpdateForm'" class="genric-btn info radius">내정보 수정</button>
 						</div>
 					</div>

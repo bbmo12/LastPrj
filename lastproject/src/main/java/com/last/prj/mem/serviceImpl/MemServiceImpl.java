@@ -95,6 +95,7 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
+
 	public LoginVO searchPwd(String id) {
 		return map.searchPwd(id);
 	}
@@ -105,7 +106,10 @@ public class MemServiceImpl implements MemService {
 	}
 
 
+	public int memdelete() {
+		return map.memdelete();
+	}
 
-	
+
 
 }

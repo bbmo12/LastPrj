@@ -14,10 +14,12 @@
 		FROM (SELECT P.NAME AS
 		p_name, C.M_ID, C.CONTENT, C.W_DATE,
 		C.CODE, C.C_NO, P.pet_no
-		FROM PET P, MEMBER
+		FROM PET
+		P, MEMBER
 		M, COUNSEL C
 		WHERE P.PET_NO = C.PET_NO
-		AND P.M_ID = M.M_ID AND c.P_ID=
+		AND P.M_ID = M.M_ID AND
+		c.P_ID=
 		#{p_id} AND c.p_no = 0
 		ORDER BY C_NO
 		) A)
@@ -33,14 +35,18 @@
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
 		FROM (SELECT P.NAME AS
-		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name, C.W_DATE, P.pet_no,
+		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name,
+		C.W_DATE, P.pet_no,
 		C.CODE, CO.CONTENT AS
-		co_content, c.p_id, c.m_id, c.c_no
+		co_content, c.p_id, c.m_id,
+		c.c_no
 		FROM COUNSEL C, PET P, P_MEMBER PM,
 		F_CODE CO
-		WHERE C.PET_NO = P.PET_NO AND PM.P_ID = C.P_ID AND C.CODE =
+		WHERE C.PET_NO =
+		P.PET_NO AND PM.P_ID = C.P_ID AND C.CODE =
 		CO.CODE AND
-		P.M_ID = #{m_id} AND c.p_no=0
+		P.M_ID = #{m_id}
+		AND c.p_no=0
 		) A)
 		WHERE RN BETWEEN
 		(#{pageNum}-1)*#{amount}+1
@@ -61,28 +67,33 @@
 	<select id="counselList"
 		resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT *
-				FROM ( SELECT ROWNUM RN, A.*
-						FROM (SELECT P.NAME AS p_name, P.M_ID, c.p_id, C.CONTENT, C.W_DATE, C.CODE, C.C_NO
-								FROM PET P, MEMBER M, COUNSEL C
-							  WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND P_ID = #{p_id} AND P_NO = 0 
-							  ORDER BY C_NO ) A)
-				WHERE RN BETWEEN
-				(#{pageNum}-1)*#{amount}+1 
-				AND (#{pageNum})*#{amount}
+		FROM ( SELECT ROWNUM RN, A.*
+		FROM (SELECT P.NAME AS p_name, P.M_ID, c.p_id, C.CONTENT, C.W_DATE,
+		C.CODE, C.C_NO
+		FROM PET P, MEMBER M, COUNSEL C
+		WHERE P.PET_NO = C.PET_NO
+		AND P.M_ID = M.M_ID
+		AND P_ID = #{p_id}
+		AND P_NO = 0
+		ORDER BY C_NO ) A)
+		WHERE RN BETWEEN
+		(#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
 	</select>
 
 	<select id="myCounselPage" resultType="int"
 		parameterType="com.last.prj.counsel.service.CounselVO">
 		SELECT COUNT(*)
-			FROM COUNSEL C, PET P
+		FROM COUNSEL C, PET P
 		WHERE C.PET_NO = P.PET_NO
-			GROUP BY P.M_ID
-		HAVING P.M_ID = #{m_id}
+		AND P_NO = 0
+		AND P.M_ID = #{m_id}
 	</select>
 
 	<!-- 기존 채팅방 존재 여부 -->
 	<select id="isExist"
-		parameterType="com.last.prj.counsel.service.CounselVO" resultType="int">
+		parameterType="com.last.prj.counsel.service.CounselVO"
+		resultType="int">
 		SELECT COUNT(*)
 		FROM counsel
 		WHERE p_id=#{p_id} AND
@@ -94,7 +105,8 @@
 	<select id="csDetail"
 		parameterType="com.last.prj.counsel.service.CounselVO"
 		resultType="com.last.prj.counsel.service.CounselVO">
-		SELECT c_no, content, TO_CHAR(w_date, 'MM/DD HH24:MI:SS') AS w_date, p_id, pet_no, code, p_no, m_id, sender, r_check
+		SELECT c_no, content, TO_CHAR(w_date, 'MM/DD HH24:MI:SS')
+		AS w_date, p_id, pet_no, code, p_no, m_id, sender, r_check
 		FROM counsel
 		WHERE p_no = #{c_no} OR c_no = #{c_no}
 		ORDER BY w_date asc
@@ -112,14 +124,17 @@
 	<!-- 첫 상담 이후 답변글 -->
 	<insert id="newCsAns"
 		parameterType="com.last.prj.counsel.service.CounselVO">
-		INSERT INTO COUNSEL (c_no, content, w_date, p_id, m_id, pet_no,
+		INSERT INTO COUNSEL (c_no, content, w_date, p_id, m_id,
+		pet_no,
 		p_no, sender)
-		VALUES(c_seq.nextval, #{content}, sysdate, #{p_id},
+		VALUES(c_seq.nextval, #{content}, sysdate,
+		#{p_id},
 		#{m_id}, #{pet_no}, #{p_no}, #{sender})
 	</insert>
 
 	<!-- 코드 업데이트 -->
-	<update id="codeUpd" parameterType="com.last.prj.counsel.service.CounselVO">
+	<update id="codeUpd"
+		parameterType="com.last.prj.counsel.service.CounselVO">
 		UPDATE counsel
 		SET code=302
 		WHERE c_no=#{p_no}

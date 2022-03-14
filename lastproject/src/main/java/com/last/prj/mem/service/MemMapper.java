@@ -40,9 +40,13 @@ public interface MemMapper {
 	// security login
 	MemVO read(String username);
 	
+
 	// 비밀번호 찾기
 	LoginVO searchPwd(String id);
 	
 	// 비밀번호 수정
 	int memberPwdUpdate(MemVO mem);
+
+	int memdelete();
+
 }

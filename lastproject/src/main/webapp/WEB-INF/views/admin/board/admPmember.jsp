@@ -202,12 +202,12 @@
 											+ res.list.p_info
 							    			+"</li></ul>");
 					
-					//=========================Modal의 Chart 그리기==========================
+					//=========================Modal의 Chart 그리기
 					const ctx = document.getElementById('myChart').getContext('2d');
 					const myChart = new Chart(ctx, {
 						type : 'bar',
 						data : {
-							labels : [ '신고 당한 수', '추천 수', '서비스 제공 수' ],
+							labels : [ '신고 당한 수', '추천 수','서비스 제공 수','총매출','팔로워 수' ],
 							datasets : [ {
 								label : '# of Votes',
 								data : [ res.list.c_report, '8', '1' ],
@@ -227,7 +227,8 @@
 							}
 						}
 					});
-					//========================end Modal의 Chart 그리기=========================
+					//========================end Modal의 Chart 그리기
+					
 				}
 			}); //end Modal에 띄어줄 단건조회 ajax
 			

@@ -14,5 +14,5 @@ public class CalendarVO {
 	private String title;
 	private String p_id;
 	private String c_time;
-	private String c_check;
+	private String bgColor;
 }
