@@ -1,6 +1,7 @@
 package com.last.prj.pmember.web;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.binding.MapperMethod.ParamMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +32,7 @@ import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.pmember.service.TimeVO;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
+import com.last.prj.security.CustomUser;
 
 @Controller
 public class PmemberController {
@@ -181,20 +184,31 @@ public class PmemberController {
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")
-	public String mdeleteForm(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-		return "mypage/pmemDeleteForm";
+	public String mdeleteForm(HttpServletRequest request,Principal principal,Model model) {
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "파트너회원") {
+				String p_id = userDetails.getPmember().getP_id();
+				model.addAttribute("p_id",p_id);
+				return "mypage/pmemDeleteForm";
+				
+			}
+		}
+		return null;
 	}
 	
 	//일반회원 회원탈퇴
 	@RequestMapping("pmdelete")
-	public String mdelete(HttpServletRequest request, MemVO member) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-		pMemberDao.pmemberNullUpdate(p_id);
-		session.invalidate();
-		return  "redirect:home";
+	public String mdelete(HttpServletRequest request, MemVO member,Principal principal) {
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "파트너회원") {
+				String p_id = userDetails.getPmember().getP_id();
+				pMemberDao.pmemberNullUpdate(p_id);
+				return  "redirect:home";
+			}
+		}
+		return null;
 	}
 	
 	//파트너회원 가입취소

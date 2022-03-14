@@ -2,6 +2,8 @@ package com.last.prj.calendar.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface CalendarMapper {
 	//파트너회원 예약설정
 	List<CalendarVO> revSetList(CalendarVO cal);
@@ -18,4 +20,7 @@ public interface CalendarMapper {
 	
 	//파트너회원 예약일정 삭제
 	int revSetDelete(CalendarVO cal);
+	
+	//현재날짜 비교해서 업데이트
+	void yyyy(@Param("title") String title,@Param("bgColor") String bgColor);
 }

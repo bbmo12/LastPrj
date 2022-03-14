@@ -207,7 +207,6 @@ public class ReservationController {
 				if(userDetails.getRole() == "파트너회원") {
 					String p_id = userDetails.getPmember().getP_id();
 					System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
-					System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
 					vo.setP_id(p_id);
 					System.out.println(rno);
 					reservationDao.noUpdate(rno,refuse);
