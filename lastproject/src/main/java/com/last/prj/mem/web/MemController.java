@@ -313,7 +313,7 @@ public class MemController {
 	            // int index = username.indexOf("@");
 	            // int indexPw = password.indexOf(",");
 	            String id = "nuriyy433";// id
-	            String pwd = "snfl4335!";// 비번 입력해야됨
+	            String pwd = "";// 비번 입력해야됨
 	            String host = "smtp.gmail.com";
 	            // 네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
 	            // 네이버 이메일 비밀번호를 기재합니다.
