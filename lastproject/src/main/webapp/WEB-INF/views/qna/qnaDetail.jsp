@@ -197,7 +197,7 @@ ul.tagList li {
 				</div>
 				<sec:authorize access="hasRole('MEMBER')">
 					<div class="qnaForm">
-						<a href="qnaForm?m_id=${mId }"><button type="button"
+						<a href="qnaForm"><button type="button"
 								class="genric-btn info circle arrow btn-lg">질문글 작성하기</button></a>
 					</div>
 				</sec:authorize>
@@ -336,7 +336,7 @@ ul.tagList li {
 						</c:if>
 
 						<!-- 질문글 신고 trigger -->
-						<c:if test="${mId ne null}">
+						<c:if test="${ mId ne null || pId ne null}">
 							<c:if test="${mId ne qnaDetail.writer }">
 								<button type="button" class="btn btn-secondary"
 									data-toggle="modal" data-target="#exampleModal">
@@ -578,7 +578,7 @@ ul.tagList li {
 							<div class="reportAns" data-no="${ans.q_no }">
 
 								<div>
-									<c:if test="${mId ne null}">
+									<c:if test="${ mId ne null || pId ne null}">
 										<c:if test="${mId ne ans.writer}">
 											<c:if test="${pId ne ans.writer}">
 												<button id="reportModal2" type="button"

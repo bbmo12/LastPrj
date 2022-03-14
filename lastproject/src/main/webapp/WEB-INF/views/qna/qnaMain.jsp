@@ -61,7 +61,7 @@ a:hover {
 
 #searchBox {
 	margin-left: 10px;
-	width: 210px;
+	width: 190px;
 	height: 50px;
 	auto-focus: none;
 	background-color: #38a4ff;
@@ -198,8 +198,10 @@ hr {
 												</tr>
 											</table>
 
-
-											<div class="qnaBody">${list.content }</div>
+											
+											<div class="qnaBody">${list.content }
+											
+											</div>
 
 											<!-- 태그 목록 -->
 											<div class="tags">
@@ -283,7 +285,7 @@ hr {
 									</select> <span><input type="text" id="searchBox"
 										name="searchValue"></span> <span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
-											<i class="fa fa-search"></i>
+											<i style="margin-right : 5px;" class="fa fa-search"></i>
 										</button>
 									</span>
 
