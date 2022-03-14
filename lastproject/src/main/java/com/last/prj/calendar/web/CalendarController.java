@@ -64,6 +64,7 @@ public class CalendarController {
 	@PostMapping("revsetdelete")
 	@ResponseBody
 	public String revSetDelete(@RequestParam("p_id")String p_id,CalendarVO vo,ReservCountVO rco) {
+		
 		List<ReservCountVO> list = reservCountDao.reservDelCheck(rco);
 		System.out.println("요기 셀렉결과창"+ list); 
 		if(list.size()==0) {

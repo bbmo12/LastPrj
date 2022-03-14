@@ -214,6 +214,7 @@
 
    <!-- 일반회원 아이디찾기 모달창 ajax -->
    <script type="text/javascript">
+      
       function mIdsearch() {
 
          var tel = $("#tel").val()

@@ -16,7 +16,8 @@ public interface PmemberMapper {
 	public List<PmemberVO> memberPageList(Criteria cri);//페이징 리스트
 	public int pmemberUpdate(PmemberVO pmember);//파트너회원 정보수정
 	public int pmemberTime(TimeVO time); //otime insert
-	public int deleteTime(TimeVO time); //otime 삭제
+	public int deleteTime(TimeVO time); //otime o_no조건 삭제
+	public int deleteTimeId(TimeVO time);//pid조건 삭제
 	public int updateTime(TimeVO time);
 	public int updateLike(String p_id); //파트너회원 추천
 	public int updateCancel(String p_id); //추천취소 

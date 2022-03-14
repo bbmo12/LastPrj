@@ -109,9 +109,12 @@
 								class="btn btn-link btn-rounded btn-fw codep" data-code="102">미용</button>
 							<button type="button"
 								class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
+							<button type="button"
+								class="btn btn-link btn-rounded btn-fw codep" id="block_chain" >블록체인진료기록</button>
 
 						</div>
-
+						
+						<div id='blockChain'></div>
 						<table class="table table-striped">
 
 							<thead>
@@ -186,8 +189,20 @@
 				success : function(result) {
 					console.log("리절트리스트는 :"+result.list);
 					console.log("리절트페이지는 : " + result.page);
-					viewPmemberList(result.list);
-					viewPage(result.page);
+					if(result.list == ''){
+						$("#myTable").empty();
+						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
+						
+						/* $(".table").empty();
+						$(".table").append(`<h4>데이터가 없습니다</h4>`); */
+						
+					}else {
+						viewPmemberList(result.list);
+						viewPage(result.page);
+						
+						
+					}
+					
 				}
 			});
 		}// end paginList()
@@ -234,7 +249,18 @@
 		}
 		pagingList();
 		// ===========================end 조건 별 검색 + 페이징 처리==============================
-
+		
+			
+		// ==============================블록체인 ===============================================
+		$("#block_chain").on('click',function(event){
+			$(".table").empty();
+			$("#blockChain").append(`전자지갑 주소 : <input type ="text" id = "address"> <br><br>
+									 예약번호 입력 : <input type ="text"> id ="r_no" <button type="button">조회</button>
+									 `);
+			
+			
+		});	
+			
 	</script>
 </body>
 </html>

@@ -234,6 +234,7 @@ $(document).ready(function(){
 				var title = result[i].title;
 				var pid = result[i].p_id;
 				var ctime = result[i].c_time;
+				var bgColor = result[i].bgColor;
 				
 					calendar.createSchedules([
 						{
@@ -242,7 +243,7 @@ $(document).ready(function(){
 						    start: start,
 						    end: end,
 						    category: category,
-						    bgColor : '#00CCFF'
+						    bgColor : bgColor
 						}
 					]);
 				}
@@ -253,65 +254,70 @@ $(document).ready(function(){
 
 	//일정 클릭 후 해당예약일자 테이블 표출
 	calendar.on('clickSchedule', function(event) {
-		var id = event.schedule.id;
-		console.log(id);
-		$.ajax({
-			url : 'revSetUpdateSelect',
-			method : 'POST',
-			data : {"id" :id},
-			success : function(res){
-				p_id = res[0].p_id;
-				console.log(p_id);
-				$(".table").empty();
-				var i=0;
-				var $thead,$tbody,tdval;
-				var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
-				var split = res[0].c_start.split('-');
-
-				var sp2 = split[2]
-				var ab = String(parseInt(split[2]));
-				//종료일 - 시작일 +1 로 반복횟수 설정
-				for( i; i<len;i++){
-		               var ex = ((parseInt(sp2))+i);
-		               console.log(ex);
-		               if(ex.toString().length == 1){
-		                  console.log(ex.toString().length);
-		                  tdval = split[0]+'-'+split[1]+'-0';
-		               }else{
-		                  console.log(ex.toString().length);
-		                  tdval = split[0]+'-'+split[1]+'-';
-		               }
-		               $thead = `
-		                  <thead>
-		                     <tr>
-		                        <th>예약가능일자</th>
-		                        <th>예약시간</th>
-		                        <th>예약가능여부</th>
-		                     </tr>
-		                  </thead>`;
-		               $tbody =` 
-		                  <tbody>
-		                        <tr>
-		                           <td class="tdvalCheck">`+tdval+ex+`</td>
-										<td><select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-												<option value="">예약시간</option>
-												<option value="09시">09:00~10:00</option>
-												<option value="10시">10:00~11:00</option>
-												<option value="11시">11:00~12:00</option>
-												<option value="2시">14:00~15:00</option>
-												<option value="3시">15:00~16:00</option>
-												<option value="4시">16:00~17:00</option>
-												<option value="5시">17:00~18:00</option>
-											</select>
-										</td>
-									 <td></td>
-								</tr>
-						</tbody> `;
-					$(".table").append($tbody);
-								}
-				$(".table").append($thead);
-			}//ajax success 부분
-		})
+		var title = event.schedule.title;
+		if ( title=='예약불가'){
+			$(".table").empty();
+		}else{
+			var id = event.schedule.id;
+			console.log(id);
+			$.ajax({
+				url : 'revSetUpdateSelect',
+				method : 'POST',
+				data : {"id" :id},
+				success : function(res){
+					p_id = res[0].p_id;
+					console.log(p_id);
+					$(".table").empty();
+					var i=0;
+					var $thead,$tbody,tdval;
+					var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
+					var split = res[0].c_start.split('-');
+	
+					var sp2 = split[2]
+					var ab = String(parseInt(split[2]));
+					//종료일 - 시작일 +1 로 반복횟수 설정
+					for( i; i<len;i++){
+			               var ex = ((parseInt(sp2))+i);
+			               console.log(ex);
+			               if(ex.toString().length == 1){
+			                  console.log(ex.toString().length);
+			                  tdval = split[0]+'-'+split[1]+'-0';
+			               }else{
+			                  console.log(ex.toString().length);
+			                  tdval = split[0]+'-'+split[1]+'-';
+			               }
+			               $thead = `
+			                  <thead>
+			                     <tr>
+			                        <th>예약가능일자</th>
+			                        <th>예약시간</th>
+			                        <th>예약가능여부</th>
+			                     </tr>
+			                  </thead>`;
+			               $tbody =` 
+			                  <tbody>
+			                        <tr>
+			                           <td class="tdvalCheck">`+tdval+ex+`</td>
+											<td><select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+													<option value="">예약시간</option>
+													<option value="09시">09:00~10:00</option>
+													<option value="10시">10:00~11:00</option>
+													<option value="11시">11:00~12:00</option>
+													<option value="2시">14:00~15:00</option>
+													<option value="3시">15:00~16:00</option>
+													<option value="4시">16:00~17:00</option>
+													<option value="5시">17:00~18:00</option>
+												</select>
+											</td>
+										 <td></td>
+									</tr>
+							</tbody> `;
+						$(".table").append($tbody);
+									}
+					$(".table").append($thead);
+				}//ajax success 부분
+			})
+		}
 	});
  	 //달력 다음버튼 클릭 이벤트
 	$(".ic-arrow-line-left").on('click',function(event){
@@ -383,7 +389,7 @@ $("#sendReserv").on('click',function(){
 	//모달창 품종코드
 	var animalType = $(".animalType option:selected").val();
 	
-	
+	//파트너회원아이디값
 	var p_id = "${pmember.p_id}";
 	//펫번호
 	var pet_no = $(".animalNo option:selected").val();

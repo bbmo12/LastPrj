@@ -3,7 +3,10 @@
 <mapper namespace="com.last.prj.likehit.service.LikehitMapper">
 	<!-- 추천 insert -->
 	<insert id="insertLike" parameterType="com.last.prj.likehit.service.LikehitVO">
-	    INSERT INTO LIKEHIT VALUES(#{m_id},#{p_id})
+			<selectKey keyProperty="like_no" resultType="int" order="BEFORE">
+					SELECT NVL(MAX(LIKE_NO)+1,1) AS LIKE_NO FROM LIKEHIT
+			</selectKey>
+	    INSERT INTO LIKEHIT VALUES(#{like_no}, #{m_id}, #{p_id})
 	</insert>
 	<!-- 추천취소 -->
 	<delete id="deleteLike" parameterType="com.last.prj.likehit.service.LikehitVO">
