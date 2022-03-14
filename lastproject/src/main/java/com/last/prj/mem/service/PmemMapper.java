@@ -30,6 +30,11 @@ public interface PmemMapper {
 	PmemVO read(String username);
 	
 
+	// 비밀번호 업데이트
+	int pmemberPwdUpdate(PmemVO pmem);
+
+
 	
 	int pmemdelete();
+
 }

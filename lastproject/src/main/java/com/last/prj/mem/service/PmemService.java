@@ -25,7 +25,11 @@ public interface PmemService {
 	int insertService(PriceVO price);
 	int updateService(PriceVO price);
 	
+	// security login
 	PmemVO read(String username);
+	
+	// 비밀번호 업데이트
+	int pmemberPwdUpdate(PmemVO pmem);
 
 	int pmemdelete();
 	
