@@ -93,8 +93,10 @@ public class MemServiceImpl implements MemService {
 		return map.read(username);
 	}
 
+	@Override
+	public int memdelete() {
+		return map.memdelete();
+	}
 
-
-	
 
 }

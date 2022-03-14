@@ -59,7 +59,10 @@
 		where m_id = #{m_id}
 	</update>
 
-
+	<delete id="memdelete">
+		DELETE FROM MEMBER
+		WHERE ENDDATE <![CDATA[ <= SYSDATE-25 ]]>
+	</delete>
 
 
 
@@ -140,4 +143,5 @@
 		inner join MEMBER on TBL_AUTH.ID = MEMBER.M_ROLE
 		where M_ID = #{username}
 	</select>
+		
 </mapper>

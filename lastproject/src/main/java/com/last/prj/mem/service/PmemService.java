@@ -26,4 +26,7 @@ public interface PmemService {
 	
 	PmemVO read(String username);
 
+	int pmemdelete();
+	
+
 }

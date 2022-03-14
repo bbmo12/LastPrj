@@ -103,4 +103,13 @@
 		inner join P_MEMBER on TBL_AUTH.ID = P_MEMBER.P_ROLE
 		where P_ID = #{username}
 	</select>
+	
+	
+	<delete id="pmemdelete">
+		DELETE FROM P_MEMBER
+		WHERE ENDDATE <![CDATA[ <= SYSDATE-25 ]]>
+	</delete>
+	
+	
+
 </mapper>

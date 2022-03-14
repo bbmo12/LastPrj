@@ -9,7 +9,11 @@
 	</select>
 	<!-- 팔로우 -->
 	<insert id="followInsert" parameterType="com.last.prj.fallow.service.FollowVO">
-		INSERT INTO FOLLOW VALUES(#{m_id},#{p_id})
+		<selectKey keyProperty="follow_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(follow_no) +1 , 1) AS R_NO FROM follow
+		</selectKey>
+		INSERT INTO FOLLOW VALUES(#{follow_no}, #{m_id},#{p_id})
+		
 	</insert>
 	<!-- 언팔 -->
 	<delete id="followDelete" parameterType="com.last.prj.fallow.service.FollowVO">

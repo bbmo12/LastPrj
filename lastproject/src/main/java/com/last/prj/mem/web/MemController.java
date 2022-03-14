@@ -100,7 +100,8 @@ public class MemController {
 				
 			}
 		}
-		memDao.memberDelete(m_id);
+		memDao.memberDelete(m_id); //업데이트 이름, end date 빼고 다 널 시킴
+		
 
 		session.invalidate();
 		return "redirect:home";
@@ -133,6 +134,14 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
+		
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = member.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		member.setPassword(pwd);
+		
+		
 		memDao.memberUpdate(member);
 		return "redirect:memberMypage";
 	}
@@ -438,26 +447,48 @@ public class MemController {
 
 	// 카카오 연동정보 조회
 	@RequestMapping(value = "/dologin", produces = "application/json; charset=utf8")
-	public String oauthKakao(@RequestParam(value = "code", required = false) String code, HttpSession session)
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Principal principal, Model model)
 			throws Exception {
+		// 세션 가져오기
+				// 로그인 전에도 실행되는 부분이라 null체크
+				String id = "";
+				if(principal != null) {
+					
+					CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+					
+					if(userDetails.getRole() == "일반회원") {
+						//System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+						//System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+						id = userDetails.getMember().getM_id();
+
+					}
+				}
+				
 		System.out.println("#########" + code);
 		String access_Token = getAccessToken(code);
 		System.out.println("###access_Token#### : " + access_Token);
 
 		HashMap<String, Object> userInfo = getUserInfo(access_Token);
+		System.out.println("------------------------------------------------------------");
 		System.out.println("###access_Token#### : " + access_Token);
 		System.out.println("###userInfo#### : " + userInfo.get("email"));
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println(userInfo);
 
 		if (memDao.idCheck(userInfo.get("email").toString())) {
-			session.setAttribute("memberinfo", memDao.memberOne(userInfo.get("email").toString()));
+
+			model.addAttribute("memberinfo",memDao.memberOne(userInfo.get("email").toString()));
 			memDao.memberOne(userInfo.get("email").toString());
 			System.out.println("여기-------------------------------------------");
 			System.out.println(memDao.memberOne(userInfo.get("email").toString()));
 			return "redirect:home"; // 본인 원하는 경로 설정
+			
+			
+			
+			
+			
 		} else {
-			session.setAttribute("userInfo", userInfo);
+			model.addAttribute("userInfo",userInfo);
 			return "member/joinForm"; // 본인 원하는 경로 설정
 		}
 	}

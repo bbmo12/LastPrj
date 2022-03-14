@@ -142,5 +142,4 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.updateTime(time);
 	}
 
-
 }
