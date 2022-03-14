@@ -175,6 +175,14 @@
 	</select>
 	
 	<!-- 관리자 -->
+	<!-- chart -->
+	<select id="admPlistChart" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT COUNT(CODE)AS CH,CODE,(SELECT COUNT(*) FROM P_MEMBER)AS "TO" FROM P_MEMBER 
+		<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			WHERE STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		GROUP BY CODE
+	</select>
 	
 	<!-- 파트너쉽 별로 출력 -->
 	<select id = "admPlistCode" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">

@@ -183,16 +183,16 @@
 	<!-- 리서치 업데이트를 위한 -->
 	<select id="admReSearch" parameterType="int"
 		resultType="com.last.prj.report.service.ReportVO">
-		select m.m_id AS id, m.m_role as role, m.c_report, r.rep_no
-		from member m , report r
-		where m.m_role = 1 and m.m_id = r.reported and
-		r.rep_no = #{rep_no}
-		union
-		select p.p_id AS id, p.p_role as role,
-		p.c_report, r.rep_no
-		from p_member p , report r
-		where p.p_role = 2 and
-		p.p_id = r.reported and r.rep_no = #{rep_no}
+		SELECT M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, R.REP_NO
+		FROM MEMBER M , REPORT R
+		WHERE M.M_ROLE = 1 AND M.M_ID = R.REPORTED AND
+		R.REP_NO = #{rep_no}
+		UNION
+		SELECT P.P_ID AS ID, P.P_ROLE AS ROLE,
+		P.C_REPORT, R.REP_NO
+		FROM P_MEMBER P , REPORT R
+		WHERE P.P_ROLE = 2 AND
+		P.P_ID = R.REPORTED AND R.REP_NO = #{rep_no}
 	</select>
 
 	<!-- 신고건수 업데이트 -->

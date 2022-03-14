@@ -146,4 +146,11 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.updateTime(time);
 	}
 
+	@Override
+	public List<PmemberVO> admPlistChart(PmemberVO vo) {
+		return map.admPlistChart(vo);
+	}
+
+	
+
 }

@@ -37,6 +37,7 @@ public interface PmemberService {
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);
 	public int admPlistCodeCount(PmemberVO vo);
+	public List<PmemberVO> admPlistChart(PmemberVO vo);
 	
 
 }

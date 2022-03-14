@@ -54,7 +54,20 @@ public class AdminController {
 
 		return "admin/main/main";
 	}
-
+	
+	// =========일반 회원============
+	@RequestMapping("/admMember")
+	public String admMemberTable() {
+		return "admin/board/admMember";
+	}
+	
+	
+	
+	// ==========end 일반 회원==========
+	
+	
+	
+	
 	// ======= 파트너 회원 =============
 
 	// 파트너회원 처음에 갈 때
@@ -68,14 +81,21 @@ public class AdminController {
 	@ResponseBody
 	public HashMap<String, Object> admPlistCode(PmemberVO vo, Criteria cri) {
 		int total = pMemberDao.admPlistCodeCount(vo);
+		System.out.println("total은~"+total);
 		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(7); //5개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
-
+		
+		//메인 파트너쉽 별 명 수
+		System.out.println("차트~"+pMemberDao.admPlistChart(vo));
+		
+		if(pMemberDao.admPlistChart(vo) != null ) {	
+			map.put("chart", pMemberDao.admPlistChart(vo));	
+		}
+		
 		System.out.println(pMemberDao.admPlistCode(vo));
-
-		map.put("list", pMemberDao.admPlistCode(vo));
-
+		
 		map.put("list", pMemberDao.admPlistCode(vo));
 
 		map.put("page", page);
@@ -112,6 +132,8 @@ public class AdminController {
 		map.put("list", reportDao.admRlistCode(vo));
 		map.put("page", page);
 		System.out.println("============" + reportDao.admRlistCode(vo));
+		
+		//count
 
 		return map;
 	}
@@ -192,7 +214,7 @@ public class AdminController {
 		return reportDao.admReportOneReview(rep_no);
 	}
 
-	// ?. 신고 처리
+	// 신고 처리
 	@RequestMapping(value = "/admReportUpdate")
 	@ResponseBody
 	public String admReportUpdate(@RequestParam("rep_no") int rep_no, @RequestParam("state") String state,
