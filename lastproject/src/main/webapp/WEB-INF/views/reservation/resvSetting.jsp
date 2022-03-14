@@ -150,6 +150,8 @@ $(document).ready(function(){
 				var title = result[i].title;
 				var pid = result[i].p_id;
 				var ctime = result[i].c_time;
+				var bgColor = result[i].bgColor;
+				console.log(bgColor);
 				
 					calendar.createSchedules([
 						{
@@ -158,7 +160,7 @@ $(document).ready(function(){
 						    start: start,
 						    end: end,
 						    category: category,
-						    bgColor : '#00CCFF'
+						    bgColor : bgColor
 						}
 					]);
 				}
@@ -191,6 +193,7 @@ $(document).ready(function(){
   var strStart = start.slice(0,10);
   console.log(start);
   var flag = confirm("등록하시겠습니까?");
+  var bgColor = "#00CCFF";
   if(flag == true){
 	$.ajax({
 		url : "revsetinsert",
@@ -198,7 +201,8 @@ $(document).ready(function(){
 		data : {"title": '예약가능',
 			    "c_start": start,
 			    "c_end": end,
-			    "category":'allday'},
+			    "category":'allday',
+			    "bgColor" : bgColor},
 		success : function(res){
 			console.log(res);
 			calendar.createSchedules([
@@ -207,7 +211,8 @@ $(document).ready(function(){
 				    title: res.title,
 				    start: res.c_start,
 				    end: res.c_end,
-				    category: res.category
+				    category: res.category,
+				    bgColor : bgColor
 				}
 			]);
 			alert('등록이 완료되었습니다.');
@@ -281,19 +286,15 @@ $(document).ready(function(){
 //일정 삭제이벤트
 calendar.on('beforeDeleteSchedule', scheduleData => {
 		  const {schedule, start, end} = scheduleData;
-		
 		  schedule.start = start;
 		  schedule.end = end;
-		 var start_date = start;
-		 var end_date = end;
+		  console.log(start);
 		 var p_id = "${p_id}";
 		  $.ajax({
 			  url : 'revsetdelete',
 			  method : 'POST',
 			  data : {"id" : schedule.id,
-				  	  "p_id": p_id,
-				  	  "start_date" : start_date,
-				  	  "end_date" : end_date},
+				  	  "p_id": p_id},
 			  success : function(res){
 				  console.log(res)
 				  if(res == "ok"){

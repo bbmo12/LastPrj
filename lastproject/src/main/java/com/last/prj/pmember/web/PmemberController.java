@@ -195,25 +195,35 @@ public class PmemberController {
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")
-	public String mdeleteForm(Principal principal) {
-		String p_id = "";
+
+	public String mdeleteForm(HttpServletRequest request,Principal principal,Model model) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			if(userDetails.getRole() =="파트너회원") {
-				p_id = userDetails.getPmember().getP_id();
+			if(userDetails.getRole() == "파트너회원") {
+				String p_id = userDetails.getPmember().getP_id();
+				model.addAttribute("p_id",p_id);
+				return "mypage/pmemDeleteForm";
+				
 			}
 		}
-		return "mypage/pmemDeleteForm";
+		return null;
+
+
 	}
 	
 	//일반회원 회원탈퇴
 	@RequestMapping("pmdelete")
 	public String mdelete(HttpServletRequest request, MemVO member,Principal principal) {
-		HttpSession session = request.getSession();
-		String p_id = (String) session.getAttribute("pId");
-		pMemberDao.pmemberNullUpdate(p_id);
-		session.invalidate();
-		return  "redirect:home";
+
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "파트너회원") {
+				String p_id = userDetails.getPmember().getP_id();
+				pMemberDao.pmemberNullUpdate(p_id);
+				return  "redirect:home";
+			}
+		}
+		return null;
 	}
 	
 	//파트너회원 가입취소
