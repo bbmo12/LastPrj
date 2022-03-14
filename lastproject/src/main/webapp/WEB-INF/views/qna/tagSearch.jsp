@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -147,12 +148,12 @@ hr {
 					<h1>Open Q&A</h1>
 					<h3>반려동물 전문가와 베테랑 집사들이 반려동물에 관한 모든 궁금증을 해결해드립니다!</h3>
 				</div>
-				<c:if test="${pId eq null}">
+				<sec:authorize access="hasRole('MEMBER')">
 					<div class="qnaForm">
-						<a href="qnaForm?m_id=${mId }"><button type="button"
+						<a href="qnaForm"><button type="button"
 								class="genric-btn info circle arrow btn-lg">질문글 작성하기</button></a>
 					</div>
-				</c:if>
+				</sec:authorize>
 			</div>
 		</div>
 	</section>
@@ -281,7 +282,7 @@ hr {
 									</select> <span><input type="text" id="searchBox"
 										name="searchValue"></span> <span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
-											<i class="fa fa-search"></i>
+											<i style="margin-right : 5px;" class="fa fa-search"></i>
 										</button>
 									</span>
 

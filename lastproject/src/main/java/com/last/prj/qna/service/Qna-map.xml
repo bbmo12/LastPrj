@@ -138,17 +138,15 @@
 		ON q.writer =
 		p.p_id
 		WHERE q.p_no = #{p_no}
+		ORDER BY w_date asc
 	</select>
 
 	<!-- 질문글 작성 -->
 	<insert id="newQna"
 		parameterType="com.last.prj.qna.service.QnaVO">
 		INSERT INTO qna (q_no, title, content, hit, writer,
-		p_no, pet_no, r_check, qpicture, pfile)
-		VALUES (q_seq.nextval,
-		#{title},
-		#{content}, 0, #{writer}, 0, #{pet_no}, 0, #{qpicture},
-		#{pfile})
+		p_no, pet_no)
+		VALUES (q_seq.nextval, #{title}, #{content}, 0, #{writer}, 0, #{pet_no})
 	</insert>
 
 	<!-- 질문글 수정 -->
@@ -159,8 +157,6 @@
 			<if test="title != null">title=#{title}</if>
 			<if test="content != null">content=#{content}</if>
 			<if test="pet_no != null">pet_no=#{pet_no}</if>
-			<if test="qpicture != null">qpicture=#{qpicture}</if>
-			<if test="pfile != null">pfile=#{pfile}</if>
 		</set>
 		WHERE q_no=#{q_no}
 	</update>
@@ -169,9 +165,9 @@
 	<insert id="newAns"
 		parameterType="com.last.prj.qna.service.QnaVO">
 		INSERT INTO qna (q_no, title, content, hit, writer,
-		p_no, f_part, r_check)
+		p_no)
 		VALUES (q_seq.nextval, #{title}, #{content}, 0,
-		#{writer}, #{p_no}, 707, 0)
+		#{writer}, #{p_no})
 	</insert>
 
 	<!-- 답변글 갯수 -->
@@ -230,8 +226,7 @@
 		(SELECT *
 		FROM qna
 		WHERE p_no = 0
-		AND NOT title IN ('[작성자에 의해
-		삭제된 게시물입니다.]')
+		AND NOT title IN ('[작성자에 의해 삭제된 게시물입니다.]')
 		ORDER BY q_no DESC
 		)
 		<![CDATA[WHERE ROWNUM <= 3]]>
