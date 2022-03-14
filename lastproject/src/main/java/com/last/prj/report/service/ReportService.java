@@ -43,4 +43,11 @@ public interface ReportService {
 
 	public int admRlistCodeCount(ReportVO vo);
 	public List<ReportVO> admRlistCode(ReportVO vo);
+
+	//리서치 업데이트를 위한
+			public ReportVO admReSearch(int rep_no);
+			//회원의 신고 카운트 업데이트
+			public int admReSearchUpdate(ReportVO vo);
+
+	
 }

@@ -169,17 +169,45 @@
 		SELECT COUNT(*)
 		FROM REVIEW RE, REPORT R
 		WHERE RE.REV_NO = R.REV_NO
-			<if test="code != null">
-				AND R.CODE = #{code}
-			</if>
-			<if
-				test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
-				AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
-			</if>
-		
+		<if test="code != null">
+			AND R.CODE = #{code}
+		</if>
+		<if
+			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+
 	</select>
-	
 
 
+	<!-- 리서치 업데이트를 위한 -->
+	<select id="admReSearch" parameterType="int"
+		resultType="com.last.prj.report.service.ReportVO">
+		select m.m_id AS id, m.m_role as role, m.c_report, r.rep_no
+		from member m , report r
+		where m.m_role = 1 and m.m_id = r.reported and
+		r.rep_no = #{rep_no}
+		union
+		select p.p_id AS id, p.p_role as role,
+		p.c_report, r.rep_no
+		from p_member p , report r
+		where p.p_role = 2 and
+		p.p_id = r.reported and r.rep_no = #{rep_no}
+	</select>
 
+	<!-- 신고건수 업데이트 -->
+	<update id="admReSearchUpdate" parameterType="com.last.prj.report.service.ReportVO">
+		<choose>
+			<when test='role == "1"'>
+				UPDATE MEMBER
+				<set> C_REPORT = C_REPORT+1 </set>
+				WHERE M_ID = #{id}
+			</when>
+			<when test='role == "2"'>
+				UPDATE P_MEMBER
+				<set> C_REPORT = C_REPORT+1 </set>
+				WHERE P_ID = #{id}
+			</when>
+		</choose>
+	</update>
 </mapper>

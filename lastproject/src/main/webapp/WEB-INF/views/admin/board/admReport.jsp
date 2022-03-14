@@ -38,12 +38,12 @@
 				<code>조건 별 검색</code>
 			</p>
 			<div>
-					<form id="admDateForm">
-						FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
-						TO : <input type="text" id="toDate" name="toDate">
-						<button type="button" id="btnSearch">검 색</button>
-					</form>
-				</div>
+				<form id="admDateForm">
+					FROM : <input type="text" id="fromDate" name="fromDate">&nbsp;&nbsp;
+					TO : <input type="text" id="toDate" name="toDate">
+					<button type="button" id="btnSearch">검 색</button>
+				</form>
+			</div>
 			<div class="template-demo">
 				<button type="button" class="btn btn-link btn-rounded btn-fw"
 					id="admQna">QnA 신고</button>
@@ -69,9 +69,9 @@
 					<option value="702">기각 처리</option>
 					<option value="703">승인 처리</option>
 				</select>
-				
+
 			</div>
-			
+
 			<!-- Modal 창 -->
 			<div class="modal fade" id="myModal" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -339,7 +339,7 @@
 								alert('오류가 났음. 개발자 호츌');
 							} //end error
 						})// end ajax
-						$("#myModal").modal('show');
+				$("#myModal").modal('show');
 			} else {
 				url = 'admReportOneQna';
 				$
@@ -371,13 +371,18 @@
 												+ "</li><li>게시글 내용 : "
 												+ res[0].q_content
 												+ "</li></ul>");
+								$(".modal-footer").append(
+										"<a href='qnaDetail?q_no="
+												+ res[0].q_no
+												+ "'>해당 게시글로 이동</a>");
+
 							},
 							error : function(er) {
 								alert('오류가 났음. 개발자 호츌');
 							}
 						})
 
-						$("#myModal").modal('show');
+				$("#myModal").modal('show');
 			}//end Modal 신고 단건
 		}// end Show function
 
@@ -391,17 +396,17 @@
 		//신고처리 : admReportUpdate
 		$("#admReportUpdate").on("click", function(e) {
 			var str = $('#form').serialize();
-			console.log("str의 값"+str);
+			console.log("str의 값" + str);
 			var rep_no = $("#rep_no").val();
-			console.log("rep_no : "+rep_no);
+			console.log("rep_no : " + rep_no);
 			var state = $("#state").val();
-			console.log("state : "+state);
+			console.log("state : " + state);
 			var repor = $("#repor").val();
-			console.log("repor : "+repor);
+			console.log("repor : " + repor);
 
 			var flag = confirm("신고처리 하시겠습니까?");
 			var lag = confirm("해당 사항으로 변경하시겠습니까?"); // DB  값과 input 값을 비교해서 같지 않을 때 뜨게 함 : repor 
-			
+
 			if (flag == true) {
 				$.ajax({
 					url : 'admReportUpdate',
@@ -426,9 +431,8 @@
 
 		// 모달 승인 처리 된 건
 
-
 		//========================================================날짜 검색===========================================================
-		
+
 		$('#btnSearch').on('click', function(e) {
 			var str = $('#admDateForm').serialize();
 			console.log(str);
