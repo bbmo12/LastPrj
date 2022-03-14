@@ -344,7 +344,7 @@ public class MemController {
 	            Message mimeMessage = new MimeMessage(session);
 	            mimeMessage.setFrom(new InternetAddress(id + "@gmail.com"));// 보내는사람 주소
 	            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));// 받는사람 주소
-	            mimeMessage.setSubject("[BanBanBan] 임시비밀번호 발급");
+	            mimeMessage.setSubject("임시비밀번호 발급");
 	            mimeMessage.setText(email + "님의 임시비밀번호는" + pw + "입니다");
 	            Transport.send(mimeMessage);
 
