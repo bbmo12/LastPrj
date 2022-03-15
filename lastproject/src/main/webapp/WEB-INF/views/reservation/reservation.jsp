@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +134,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${reservation }" var="res">
+										<c:if test="${fn:length(reservation) == 0 }">
+											<tr>
+												<td colspan="9" align="center">조회된 결과가 없습니다.</td>
+											</tr>
+										</c:if>
+									<c:forEach items="${reservation }" var="res" varStatus="status">
 										<tr>
 											<td><input class="rno" type="hidden" id="r_no"
 												name="r_no" value="${res.r_no }">${res.r_no }</td>
