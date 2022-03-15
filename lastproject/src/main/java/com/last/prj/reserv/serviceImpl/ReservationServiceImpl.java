@@ -73,10 +73,10 @@ public class ReservationServiceImpl implements ReservationService{
 		return map.updatecode(vo);
 	}
 	@Override
-
 	public List<ReservationVO> reservationSelect(String m_id) {
 		return map.reservationSelect(m_id);
-
+	}
+	@Override 
 	public ReservationVO rnoreview(int r_no) {
 		return map.rnoreview(r_no);
 
