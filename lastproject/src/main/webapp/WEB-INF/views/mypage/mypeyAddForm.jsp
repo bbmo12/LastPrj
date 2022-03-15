@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
 <style>
 #my_section {
@@ -14,7 +17,89 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
+	
+
+	
 <body>
+	<script>
+		//생일 정규식
+		var birthJ = /^\d{8}$/;
+		//모든 공백 체크 정규식
+		var empJ = /\s/g;
+		// 이름 정규식
+		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
+		// 몸무게
+		var weightJ = /^\d{1,3}$/;
+		
+		
+		$(document).ready(function () {
+			/* 아이디 중복체크 */
+			$('form').on('submit', function () {
+				var inval_Arr = new Array(4).fill(false);
+
+				// 생일 정규식
+				if (birthJ.test($('#birth').val())) {
+					inval_Arr[0] = true;
+				} else {
+					inval_Arr[0] = false;
+					alert('생년월일 8자리 입력하세요.');
+					return false;
+				}
+				
+				// 이름 정규식
+				if (nameJ.test($('#name').val())) {
+					inval_Arr[1] = true;
+				} else {
+					inval_Arr[1] = false;
+					alert('이름을 확인하세요.');
+					return false;
+				}
+				// 몸무게 정규식
+				if (weightJ.test($('#weight').val())) {
+					inval_Arr[2] = true;
+				} else {
+					inval_Arr[2] = false;
+					alert('몸무게를 확인하세요.');
+					return false;
+				}
+			});
+				
+				$("#name").blur(function () {
+					if (nameJ.test($(this).val())) {
+						
+						$("#name_check").text('');
+					} else {
+						$('#name_check').text('한글3자리 이내로 입력하세요.');
+						$('#name_check').css('color', 'red');
+					}
+				});
+				
+				
+				$("#birth").blur(function () {
+					if (birthJ.test($(this).val())) {
+					
+						$("#birth_check").text('');
+					} else {
+						$('#birth_check').text('생년월일8자리 입력하세요.');
+						$('#birth_check').css('color', 'red');
+					}
+				});
+				
+
+			$("#weight").blur(function () {
+				if (nameJ.test($(this).val())) {
+					console.log(nameJ.test($(this).val()));
+					$("#weight_check").text('');
+				} else {
+					$('#weight_check').text('3자리 이하 숫자만 입력하세요.');
+					$('#weight_check').css('color', 'red');
+				}
+			});
+			
+			
+		});
+	</script>
+	
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -39,7 +124,6 @@
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
-
 							<div class="br"></div>
 						</aside>
 
@@ -100,12 +184,14 @@
 									<strong>이름</strong>
 								</h5>
 								<input type="text" id="name" name="name">
+						<div id="name_check"></div>
 							</div>
 							<div class="form-group">
 								<h5>
 									<strong>생년월일</strong>
 								</h5>
 								<input type="text" id="birth" name="birth">
+								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
 								<h5>
@@ -122,6 +208,7 @@
 									<strong>몸무게</strong>
 								</h5>
 								<input type="text" id="weight" name="weight">
+								<div id="weight_check"></div>
 							</div>
 							<div class="form-group">
 								<h5>
@@ -150,8 +237,7 @@
 									<strong>반려동물 설명</strong>
 								</h5>
 								<textarea class="form-control" id="n_content" name="n_content"
-									rows="4" cols="130">
-                        		</textarea>
+									rows="4" cols="130"></textarea>
 							</div>
 							<input type="hidden" name="m_id" id="m_id" value="${member.m_id }">
 							<button type="submit" class="genric-btn info radius">반려동물

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +134,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach items="${reservation }" var="res">
+										<c:if test="${fn:length(reservation) == 0 }">
+											<tr>
+												<td colspan="9" align="center">조회된 결과가 없습니다.</td>
+											</tr>
+										</c:if>
+									<c:forEach items="${reservation }" var="res" varStatus="status">
 										<tr>
 											<td><input class="rno" type="hidden" id="r_no"
 												name="r_no" value="${res.r_no }">${res.r_no }</td>
@@ -149,13 +155,18 @@
 												<c:when test="${res.code eq 405 }">
 													<c:choose>
 														<c:when test="${res.r_check eq 0 }">
-															<td><button type="button"
-																	onclick="reviewWrite(event)">리뷰작성</button></td>
+															<td><button id="reviewWriteBtn" type="button" class="btn btn-secondary"
+														  data-toggle="modal" data-target="#reviewWriteModal">리뷰쓰기</button>
+															
+															<!-- <button type="button"
+																	onclick="reviewWrite(event)">리뷰작성</button> --></td>
+																	
+																	
 														</c:when>
 
 														<c:otherwise>
 															<td><button type="button" 
-																onclick="reviewRead('${res.r_no}')" data-toggle="modal">리뷰보기
+																onclick="reviewRead('${res.r_no}')" data-toggle="#exampleModal">리뷰보기
 															</button></td>
 														</c:otherwise>
 													</c:choose>
@@ -177,34 +188,34 @@
 		</div>
 		<my:nav jsFunc="go_page" page="${page}" />
 	</section>
-
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+				
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
 				<!-- modal 몸통 -->
 				<div class="modal-body">
 
-					<span id="dvalue"> <input type="hidden" id="date_value"></span>
-					<br> <span id="tvalue"> <input type="hidden"
-						id="time_value"></span> <br> <input type="text" id="rating"
-						name="rating" value="res.rating" readonly="readonly"
-						style="font-size: 15px; border: none;"><br> <input
-						name="content" id="content"> <select class="animalNo">
-						<option value="" disabled selected>펫 번호(이름)</option>
+					<span id="dvalue"><input type="hidden" id="date_value"></span>
+					<br><span id="tvalue"><input type="hidden" id="time_value"></span><br>
+					<input type="text" id="read_rating" name="read_rating" value="res.rating" readonly="readonly"
+						style="font-size: 15px; border: none;"><br>
+						<input name="read_content" id="read_content">
+						<select class="animalNo"><option value="" disabled selected>펫 번호(이름)</option>
 						<c:forEach items="${petList}" var="pet">
 							<option value="${pet.pet_no }">${pet.pet_no }(${pet.name })</option>
 						</c:forEach>
 					</select>
-
+					
 				</div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
@@ -219,10 +230,74 @@
 
 
 
+<!-- Modal -->
+<div class="modal fade" id="reviewWriteModal" tabindex="-1"
+	role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="serviceReviewInsert" method="post" enctype="multipart/form-data">
+				<!-- modal 몸통 -->
+				<div class="modal-body">
+	
+			<div align="center">
+				<h3 align="center">후기를 남겨주세요!</h3>
+				<div class="star-rating">
+					<input type="radio" id="5-stars" name="rating" value="5" />
+					<label for="5-stars" class="star">&#9733;</label>
+					<input type="radio" id="4-stars" name="rating" value="4" />
+					<label for="4-stars" class="star">&#9733;</label>
+					<input type="radio" id="3-stars" name="rating" value="3" />
+					<label for="3-stars" class="star">&#9733;</label>
+					<input type="radio" id="2-stars" name="rating" value="2" />
+					<label for="2-stars" class="star">&#9733;</label>
+					<input type="radio" id="1-stars" name="rating" value="1" />
+					<label for="1-stars" class="star">&#9733;</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword4">후기내용</label>
+				<textarea class="form-control" id="content" name="content"
+					placeholder="후기내용" rows="4" cols="80">
+                        </textarea>
+			</div>
+			<!-- <div class="form-group">
+					<label>프로필 사진</label>
+					<div class="input-group col-xs-12">
+					<input  class="file-upload-browse btn btn-primary" type="file" id="file" name ="file">
+					</div>
+				</div> -->
+					
+					<div class="form-group" style="margin-top: -10px;">
+						<label>후기사진</label><br>
+						<input class="file-upload-browse btn btn-primary" type="file" id="multiFileList1" name="multiFileList1" multiple="multiple">
+						<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
+						<div id="ffile1"></div>
+					</div>
+				</div>
+				<!-- modal 하단 버튼 -->
+				<div class="modal-footer">		
+			<input id="insert_r_no" name="r_no" value="">
+			<button type="submit">작성</button>
+			<!-- onclick="serviceReview()" -->
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
 
 
-
-	<!-- <div class="modal">
+<!-- 
+	<div class="modal">
 		모달 띄운후 내용입력부분 바디. 
 		<div class="modal_body">
 			<div class="form-group">
@@ -254,6 +329,7 @@
 								<input  class="file-upload-browse btn btn-primary" type="file" id="file" name ="file">
 								</div>
 							</div>
+							
 			<input type="hidden" id="rev_no" name="rev_no" value="">
 			<button type="button" onclick="serviceReview()">작성</button>
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -265,9 +341,19 @@
 
 
 
-
 	<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
+	function addFile1() {
+		var input = $('<input>').attr({
+			'id': 'multiFileList1',
+			'class': 'file-upload-browse btn btn-primary',
+			'name': 'multiFileList1',
+			'type': 'file'
+		}).css('margin-top', '3px');
+		$('#ffile1').append(input);
+	}
+	
+	/*
 	var wow;
    function reviewWrite(event){
 	   wow = $(event.target).parent().parent().children().first().text()
@@ -292,7 +378,7 @@
 	          }
 	        }
 	      });
-	}
+	}*/
    </script>
 
 
@@ -324,34 +410,49 @@
 
 
 	<!-- 후기작성 모달창 -->
-<!-- 	<script type="text/javascript">
-   	function reviewadd(wow){
-   		var r_no = wow
+	<script type="text/javascript">
+	
+	$("#reviewWriteBtn").click(function(e){
+		var r_no = $(event.target).parent().parent().children().first().text();
+   		console.log(r_no);
+   	 $("#insert_r_no").val(r_no);
+	});
+	
+	
+   	function reviewadd(e){
+   		//var r_no = $(event.target).parent().parent().children().first().text();
+   		//console.log(r_no);
+
    		/* var name = $("#name").val() */
-   		$.ajax({
+   		/*$.ajax({
    			url: "reviewWrithForm",
    			type: "post",
    			data: {"r_no":r_no},
    			success : function(result){
-   				
    				console.log(result);
-   				/* $(".modal_body").empty(); */
+   				
+   				$("#rev_no").val(result.r_no);
+   				result.name
+   				/* console.log(result);
+   				$(".modal_body").empty();
    				if(result == ""){
    	                $(".modal_body").append(`<p>오류</p>`)
    	             } else
    	                {
    	            	 $("#pname").text("파트너이름:"+result.name)
-   	                /* $(".modal_body").append(`<p> 파트너회원이름은 :`  + result.name +`<p>`) */
+   	                $(".modal_body").append(`<p> 파트너회원이름은 :`  + result.name +`<p>`)
    	                }
    	             console.log(result)
    	          },
    	          error : function(){
    	          
    	          }
-   	       }) 
+   	       }) */
    	    } 
    
-   </script> -->
+
+   </script>
+
 
 
 	<script>
@@ -451,17 +552,27 @@
 	<!-- 리뷰작성 -->
 	<script type="text/javascript">
 	function serviceReview(){
+		
 		var content = $("#content").val();
-		var rating = $("input[name=rating]").val();
+		var rating = $("input[name=rating]:checked").val();
 		var rev_no = $("#rev_no").val();
+		var multiFileList1 = $("multiFileList1").val();
 		console.log("별점")
 		console.log(rating)
+		
 		$.ajax({
 			url: "serviceReviewInsert",
+			enctype: 'multipart/form-data',
 			type: "post",
-			data : {'rating' : rating,
+			data : {
+				'rating' : rating,
 				'r_no': rev_no,
-				'content': content},
+				'content': content,
+				'multiFileList1': multiFileList1
+				},
+			processData: false,
+			contentType: false,
+			cache: false,
 			success : function(result){
 				alert("ggod")
 				location.reload();

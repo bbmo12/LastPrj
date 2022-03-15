@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib tagdir="/WEB-INF/tags"  prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 
@@ -224,6 +225,7 @@
 							</div>
 						</div>
 						<my:nav jsFunc="go_page" page="${page}" />
+
 					</div>
 				</div>
 			</div>
@@ -338,7 +340,6 @@
 					},
 					error: function (error) {
 						alert("거절사유 작성중 오류발생");
-						location.reload();
 					}
 				})
 				alert("해당 예약신청을 거절하셨습니다.");
@@ -362,30 +363,22 @@
 			var symptom = $("#symptom").val();
 			var result = $("#d_result").val();
 			var dia_r_no = $("#r_no").val();
-			$.ajax({
-				url: 'diaInsert',
-				method: 'post',
-				data: {
-					'r_no': dia_r_no,
-					'p_id': p_id,
-					'd_name': d_name,
-					'symptom': symptom,
-					'result': result
-				},
-				success: function (res) {
-					alert("작성완료");
-					diaWebAlert(m_id); //예약번호,진단명,진단결과,증상,작성일자,회원아이디,파트너회원아이디
-					diaLog.methods.diagnosis(dia_r_no, d_name, result, symptom, w_date, m_id, p_id)
-						.send({
-							from: account,
-							gas: 3000000
-						})
-						.then(function (result) {
-							console.log("블록체인 체크 : " + result);
-						})
-
-				}
-			});
+				 $.ajax({
+					url : 'diaInsert',
+					method : 'post',
+					data : {'r_no' : dia_r_no ,
+							'p_id' : p_id,
+							'd_name' : d_name,
+							'symptom' : symptom,
+							'result' : result },
+					success : function(res){
+						alert("작성완료");
+						diaWebAlert(m_id);   		//예약번호,진단명,진단결과,증상,작성일자,회원아이디,파트너회원아이디
+				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
+				          .send({from: account, gas:3000000})
+				          .then(function(result){console.log("블록체인 체크 : " + result);})
+					}
+				}); 
 		});
 
 		function okWebAlert(m_id) {

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 
@@ -196,6 +197,11 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody style="text-align: center">
+                                                    	<c:if test="${ fn:length(pmemreport) == 0  }">
+															<tr>
+																<td colspan="6" align="center">조회된 결과가 없습니다.</td>
+															</tr>
+														</c:if>
                                                         <c:forEach items="${pmemreport }" var="report">
                                                             <tr>
                                                                 <td>${report.reported }</td>

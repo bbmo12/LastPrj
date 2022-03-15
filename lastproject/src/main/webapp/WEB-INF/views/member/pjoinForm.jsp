@@ -13,6 +13,8 @@
 
 <body>
 	<script>
+		//자격증번호 정규식
+		var noJ = /^\d{3}-\d{2}-\d{5}$/;
 		//모든 공백 체크 정규식
 		var empJ = /\s/g;
 		//아이디 정규식
@@ -31,7 +33,7 @@
 		$(document).ready(function () {
 			/* 아이디 중복체크 */
 			$('form').on('submit', function () {
-				var inval_Arr = new Array(5).fill(false);
+				var inval_Arr = new Array(6).fill(false);
 
 				if ($('#idCheck').val() === 'NO') {
 					alert("아이디 중복체크를 해주세요.");
@@ -50,7 +52,17 @@
 				} else {
 					inval_Arr[1] = true;
 				}
-
+				
+				
+				// 자격증 정규식
+				if (noJ.test($('#no').val())) {
+					inval_Arr[5] = true;
+				} else {
+					inval_Arr[5] = false;
+					alert('자격증 번호를 확인하세요.');
+					return false;
+				}
+				
 				// 이름 정규식
 				if (nameJ.test($('#name').val())) {
 					inval_Arr[2] = true;
@@ -102,6 +114,19 @@
 					$('#name_check').css('color', 'red');
 				}
 			});
+			
+			
+			//자격증번호 요휴성
+			$("#no").blur(function () {
+				if (noJ.test($(this).val())) {
+					console.log(noJ.test($(this).val()));
+					$("#no_check").text('');
+				} else {
+					$('#no_check').text('111-11-11111 형식으로 입력하세요');
+					$('#no_check').css('color', 'red');
+				}
+			});
+			
 			// 휴대전화
 			$('#tel').blur(function () {
 				if (phoneJ.test($(this).val())) {
@@ -127,7 +152,8 @@
 								<form action="pjoin_1" method="post" enctype="multipart/form-data" class="my-login-validation">
 									<div class="form-group">
 										<label for="name">자격증번호</label>
-										<input type="text" class="form-control" id="no" name="no" placeholder="자격증번호를 입력하세요">
+										<input type="text" class="form-control" id="no" name="no" placeholder="000-00-00000">
+										<div id="no_check"></div>
 									</div>							
 										<label>수의사&emsp;<input type="radio" id="code" name="code" value="100"><span class="checkmark"></span></label>
 										<label>미용사&emsp;<input type="radio" id="code" name="code" value="103"><span class="checkmark"></span></label>

@@ -26,6 +26,7 @@
       	WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
+	
 	<select id="reservPage" resultType="int" parameterType="com.last.prj.reserv.service.ReservationVO">		
        SELECT COUNT(*) FROM RESERVATION R ,PET P
        WHERE R.PET_NO = P.PET_NO
