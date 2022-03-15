@@ -404,6 +404,7 @@
 	$("#reviewWriteBtn").click(function(e){
 		var r_no = $(event.target).parent().parent().children().first().text();
    		console.log(r_no);
+   	 $("#rev_no").val(r_no);
 	});
 	
 	
