@@ -81,14 +81,13 @@ public class ReservationController {
 	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response, Principal principal) throws Exception {
 		
 			if(principal != null) {
-			
 				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-				
 				if(userDetails.getRole() == "일반회원") {
+					String m_id = userDetails.getMember().getM_id();
 					System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
 					System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 					co.setP_id(p_id);
-					po.setM_id(userDetails.getMember().getM_id());
+					po.setM_id(m_id);
 					pmo.setP_id(p_id);
 					
 					//달력리스트
@@ -125,8 +124,6 @@ public class ReservationController {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
-				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
-				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
 				model.addAttribute("p_id",userDetails.getPmember().getP_id());
 				return "reservation/resvSetting";
 			}
@@ -150,10 +147,12 @@ public class ReservationController {
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 				cri.setM_id(m_id);
 				cri.setAmount(5);
-				//PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
-				
+
+				if(mapper.reservPage(cri)!=null) {
+				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+					model.addAttribute("page", paging);// 페이징 수
+				}
 				model.addAttribute("member",memDao.memberSearch(m_id));
-				//model.addAttribute("page", paging);// 페이징 수
 				model.addAttribute("m_id",m_id);
 				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
 				
@@ -170,6 +169,7 @@ public class ReservationController {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
+					
 				String p_id = userDetails.getPmember().getP_id();
 				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
@@ -177,12 +177,13 @@ public class ReservationController {
 				cri.setP_id(p_id);
 				cri.setAmount(15);
 				System.out.println("cri=========="+cri);
-				PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
-				
-				model.addAttribute("page", paging);// 페이징 수
-				model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
-				model.addAttribute("preservation", pmapper.preservationPageList(cri));
-				return "reservation/preservation";
+				if(pmapper.preservPage(cri) != null) {
+					PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
+					model.addAttribute("page", paging);// 페이징 수
+				}
+					model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
+					model.addAttribute("preservation", pmapper.preservationPageList(cri));
+					return "reservation/preservation";
 			}
 		}
 		return "reservation/preservation";

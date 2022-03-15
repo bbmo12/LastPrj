@@ -7,10 +7,10 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PriceVO;
@@ -42,15 +43,16 @@ public class PmemberController {
 	private PmemberMapper mapper;
 	@Autowired
 	private PmemService pmemDao;
-
+	@Autowired
+	private ReviewService reviewDao;
 	@Autowired
 	private ReservationService reservationDao;
 	
 	@Autowired
-	ServletContext sc;
-	
+	private ServletContext sc;
 	@Autowired
-	private ReviewService reviewDao;
+	private FfileUtil ffileutil;
+
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
@@ -148,9 +150,9 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		pMemberDao.deleteTimeId(time);//시간삭제
 		
 		pMemberDao.pmemberUpdate(pmember);
+		pMemberDao.deleteTimeId(time);//시간삭제
 		//시간 추가
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
 			if(time.getTimeVOList().get(i).getO_no() != 0){
@@ -162,6 +164,12 @@ public class PmemberController {
 		for(int i=0; i < price.getPriceVOList().size(); i++) {
 			pmemDao.insertService(price.getPriceVOList().get(i));
 		}
+
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = pmember.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		pmember.setPassword(pwd);
 
 		return "redirect:/pmemberMyPage";
 	}

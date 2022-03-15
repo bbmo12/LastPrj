@@ -45,35 +45,45 @@ public class CounselController {
 	private CounselMapper mapper;
 
 	@RequestMapping("/mycounsel")
-	public String mycounsel(Model model, HttpServletRequest request, CounselVO counsel, Criteria cri) {
 
-		CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String mId = userDetails.getMember().getM_id();
-		/* model.addAttribute("mId", mId); */
-		cri.setM_id(mId);
-		cri.setAmount(10);
-
-		PagingVO paging = new PagingVO(cri, mapper.myCounselPage(cri));
-
-		model.addAttribute("page", paging);// 페이징 수
-		model.addAttribute("member", memDao.memberSearch(mId));
-		model.addAttribute("mycounsel", mapper.myCounselList(cri));
-
+	public String mycounsel(Model model, Principal principal, CounselVO counsel, Criteria cri) {
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "일반회원") {
+				String m_id = userDetails.getMember().getM_id();
+				cri.setM_id(m_id);
+				cri.setAmount(10);
+				if(mapper.myCounselPage(cri) != null) {
+					PagingVO paging = new PagingVO(cri, mapper.myCounselPage(cri));
+					model.addAttribute("page", paging);// 페이징 수
+				}
+				model.addAttribute("member", memDao.memberSearch(m_id));
+				model.addAttribute("mycounsel", mapper.myCounselList(cri));
+				return "mypage/mcounselSearch";
+			}
+		}
 		return "mypage/mcounselSearch";
+		
 	}
 
 	// 파트너회원 상담내역
 	@RequestMapping("/pmemcounsel")
-	public String pmemcounsel(Model model, HttpServletRequest request, Criteria cri) {
-		CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String pId = userDetails.getPmember().getP_id();
-		cri.setP_id(pId);
-		cri.setAmount(10);
-		PagingVO paging = new PagingVO(cri, mapper.counselPage(cri));
-		model.addAttribute("page", paging);
-		model.addAttribute("pmember", pMemberDao.getPmemberinfo(pId)); // pmember 상세정보
-		model.addAttribute("pmemcounsel", mapper.pmemCounselList(cri));// 페이징
 
+	public String pmemcounsel(Model model, Principal principal, Criteria cri) {
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "파트너회원") {
+				String p_id = userDetails.getPmember().getP_id();
+				cri.setP_id(p_id);
+				cri.setAmount(10);
+				PagingVO paging = new PagingVO(cri, mapper.counselPage(cri));
+				model.addAttribute("page", paging);
+				model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); // pmember 상세정보
+				model.addAttribute("pmemcounsel", mapper.pmemCounselList(cri));// 페이징
+				
+				return "mypage/pmemcounsel";
+			}
+		}
 		return "mypage/pmemcounsel";
 	}
 

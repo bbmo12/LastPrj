@@ -109,7 +109,7 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
-						<form action="pmemberUpdate" enctype="multipart/form-data" name="updatePage" method="post" >
+						<form action="pmemberUpdate" enctype="multipart/form-data" name="updatePage" method="post" onsubmit="return checkForm()">
 							<div class="col-lg-9 col-md-9 blog_details" id="main-form">
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">이름</h3>
@@ -140,8 +140,8 @@
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">사업장 주소</h3>
-									<input type="text" id="address" name="address"class="form-control" value="${pmember.w_address}"> 
-									<input type="text" id="address1" name="address1" class="form-control"value="${pmember.w_d_address }">
+									<input type="text" id="w_address" name="w_address"class="form-control" value="${pmember.w_address}"> 
+									<input type="text" id="w_d_address" name="w_d_address" class="form-control"value="${pmember.w_d_address }">
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">사업장 전화번호</h3>
@@ -410,18 +410,18 @@
 			$('select').niceSelect();
 		}
 		
-		/* function checkForm() {
+		 function checkForm() {
 			if (updatePage.name.value == "") {
 				alert("이름을 입력하세요.");
 				updatePage.name.focus();
 				return false;
 			}
-			if (updatePage.password.value == "") {
+			else if (updatePage.password.value == "") {
 				alert("비밀번호 입력하세요.");
 				updatePage.password.focus();
 				return false;
 			}
-				
+			/* 	
 			var pwdCheck = /^[A-Za-z0-9]{4,12}$/;
 				         
 			if(!pwdCheck.test(updatePage.password.value)){
@@ -433,25 +433,26 @@
 				alert("비밀번호가 일치하지 않습니다."); 
 				updatePage.password1.focus(); 
 				return false; 
-			} 
-			if (updatePage.tel.value == "" || updatePage.w_tel.value == "") {
+			}  */
+			else if (updatePage.tel.value == "" && updatePage.w_tel.value == "") {
 				alert("전화번호를 입력해주세요.");
 				updatePage.tel.focus();
 				return false;
 			}
-			if (updatePage.w_name.value == "") {
+			else if (updatePage.w_name.value == "") {
 				alert("사업장 이름을 입력주세요.");
 				updatePage.w_name.focus();
 				return false;
 			}
-			if (updatePage.address.value == "" &&
-				updatePage.address1.value == "") {
+			else if (updatePage.w_address.value == "" && updatePage.w_d_address.value == "") {
 				alert("사업장 주소를 입력주세요.");
-				updatePage.address1.focus();
+				updatePage.w_address.focus();
 				return false;
-			} 
-		
-		}*/
+			} else{
+				return true;
+			}
+			
+		}
 	</script>
 </body>
 
