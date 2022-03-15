@@ -19,6 +19,7 @@ import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewService;
 import com.last.prj.qna.service.QnaService;
+import com.last.prj.qna.service.QnaVO;
 import com.last.prj.report.service.ReportService;
 import com.last.prj.report.service.ReportVO;
 
@@ -54,20 +55,15 @@ public class AdminController {
 
 		return "admin/main/main";
 	}
-	
+
 	// =========일반 회원============
 	@RequestMapping("/admMember")
 	public String admMemberTable() {
 		return "admin/board/admMember";
 	}
-	
-	
-	
+
 	// ==========end 일반 회원==========
-	
-	
-	
-	
+
 	// ======= 파트너 회원 =============
 
 	// 파트너회원 처음에 갈 때
@@ -81,21 +77,21 @@ public class AdminController {
 	@ResponseBody
 	public HashMap<String, Object> admPlistCode(PmemberVO vo, Criteria cri) {
 		int total = pMemberDao.admPlistCodeCount(vo);
-		System.out.println("total은~"+total);
+		System.out.println("total은~" + total);
 		PagingVO page = new PagingVO(cri, total);
-		page.setAmount(7); //5개씩 출력
+		page.setAmount(9); // n개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
-		
-		//메인 파트너쉽 별 명 수
-		System.out.println("차트~"+pMemberDao.admPlistChart(vo));
-		
-		if(pMemberDao.admPlistChart(vo) != null ) {	
-			map.put("chart", pMemberDao.admPlistChart(vo));	
+
+		// 메인 파트너쉽 별 명 수
+		System.out.println("차트~" + pMemberDao.admPlistChart(vo));
+
+		if (pMemberDao.admPlistChart(vo) != null) {
+			map.put("chart", pMemberDao.admPlistChart(vo));
 		}
-		
+
 		System.out.println(pMemberDao.admPlistCode(vo));
-		
+
 		map.put("list", pMemberDao.admPlistCode(vo));
 
 		map.put("page", page);
@@ -116,6 +112,12 @@ public class AdminController {
 
 	// =========end 파트너 회원 조회==============
 
+	
+	@RequestMapping("/admService")
+	public String admService() {
+		return "admin/board/admService";
+	}
+	
 	// =====================Review=========================
 	@RequestMapping("/admReview")
 	public String admReviewTable() {
@@ -125,84 +127,19 @@ public class AdminController {
 	@RequestMapping("/admRlistCode")
 	@ResponseBody
 	public HashMap<String, Object> admReview(ReportVO vo, Criteria cri) {
+		System.out.println("vo는~~~~~~~"+vo);
 		int total = reportDao.admRlistCodeCount(vo);
 		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9); // n개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
 		map.put("list", reportDao.admRlistCode(vo));
 		map.put("page", page);
 		System.out.println("============" + reportDao.admRlistCode(vo));
-		
-		//count
+
+		// count
 
 		return map;
-	}
-
-	// =====================end Review=========================
-
-	/*
-	 * // ===========QnA==================
-	 * 
-	 * @RequestMapping("/admQna") public String admQnaTable() { return
-	 * "admin/board/admQna"; }
-	 * 
-	 * @RequestMapping("admQlistCode")
-	 * 
-	 * @ResponseBody public HashMap<String,Object> admQna(QnaVO vo, Criteria cri){
-	 * int total = qnaDAO.admQlistCodeCount(vo); PagingVO page = new PagingVO(cri,
-	 * total); HashMap map = new HashMap(); vo.setVo(page);
-	 * 
-	 * map.put("list", reviewDao.admQlistCode(vo)); map.put("page",page);
-	 * System.out.println("============"+vo);
-	 * 
-	 * return "map"; }
-	 */
-	// ============== end QnA==================
-
-	// === 신고====
-	// 신고관리 페이지 이동
-	@RequestMapping("/admReport")
-	public String reportList() {
-		return "admin/board/admReport";
-	}
-
-	// == 신고 조건 별 검색 : 날짜 / 후기 / qna / ... ==
-
-	// 1 qna 글 리스트 조회
-	@RequestMapping("/admQnaList")
-	@ResponseBody
-	public List<ReportVO> admQnaList() {
-		return reportDao.admQnaList();
-	}
-
-	// 2 후기 글 리스트 조회
-	@RequestMapping("/admReviewList")
-	@ResponseBody
-	public List<ReportVO> admReviewList() {
-		return reportDao.admReviewList();
-	}
-
-	// 3 신고 코드(유형) 별 리스트 조회
-	@RequestMapping("/admReportPart")
-	@ResponseBody
-	public List<ReportVO> admReportPart(@RequestParam("code") int code) {
-		return reportDao.admReportPart(code);
-	}
-
-	// 4 신고 처리 별 리스트 조회
-	@RequestMapping(value = "/admReportRepor")
-	@ResponseBody
-	public List<ReportVO> admReportRepor(@RequestParam("repor") int repor) {
-		return reportDao.admReportRepor(repor);
-	}
-
-	// 4 신고 모달 단건 조회 : QnA
-	@RequestMapping(value = "/admReportOneQna")
-	@ResponseBody
-	public List<ReportVO> admReportOneQna(@RequestParam("rep_no") int repno) {
-		System.out.println(repno);
-		System.out.println(reportDao.admReportOneQna(repno));
-		return reportDao.admReportOneQna(repno);
 	}
 
 	// 신고 모달 단건 조회 : Review
@@ -214,36 +151,107 @@ public class AdminController {
 		return reportDao.admReportOneReview(rep_no);
 	}
 
+	// =====================end Review=========================
+
+	// ===========QnA==================
+
+	@RequestMapping("/admQna")
+	public String admQnaTable() {
+		return "admin/board/admQna";
+	}
+
+	@RequestMapping("/admQlistCode")
+	@ResponseBody
+	public HashMap<String, Object> admQna(ReportVO vo, Criteria cri) {
+		int total = reportDao.admQlistCodeCount(vo);
+		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9); // n개씩 출력
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+
+		map.put("list", reportDao.admQlistCode(vo));
+		map.put("page", page);
+		System.out.println("============" + vo);
+
+		return map;
+	}
+
+	@RequestMapping(value = "/admReportOneQna")
+	@ResponseBody
+	public List<ReportVO> admReportOneQna(@RequestParam("rep_no") int repno) {
+		System.out.println(repno);
+		System.out.println(reportDao.admReportOneQna(repno));
+		return reportDao.admReportOneQna(repno);
+	}
+
+	// ============== end QnA==================
+
+	// === 신고====
+	// 신고관리 페이지 이동
+
+	@RequestMapping("/admReport")
+	public String reportList() {
+		return "admin/board/admReport";
+	}
+
+	/*
+	 * @RequestMapping("/admQnaList")
+	 * 
+	 * @ResponseBody public List<ReportVO> admQnaList() { return
+	 * reportDao.admQnaList(); }
+	 * 
+	 * // 2 후기 글 리스트 조회
+	 * 
+	 * @RequestMapping("/admReviewList")
+	 * 
+	 * @ResponseBody public List<ReportVO> admReviewList() { return
+	 * reportDao.admReviewList(); }
+	 * 
+	 * // 3 신고 코드(유형) 별 리스트 조회
+	 * 
+	 * @RequestMapping("/admReportPart")
+	 * 
+	 * @ResponseBody public List<ReportVO> admReportPart(@RequestParam("code") int
+	 * code) { return reportDao.admReportPart(code); }
+	 * 
+	 * // 4 신고 처리 별 리스트 조회
+	 * 
+	 * @RequestMapping(value = "/admReportRepor")
+	 * 
+	 * @ResponseBody public List<ReportVO> admReportRepor(@RequestParam("repor") int
+	 * repor) { return reportDao.admReportRepor(repor); }
+	 */
+
 	// 신고 처리
 	@RequestMapping(value = "/admReportUpdate")
 	@ResponseBody
 	public String admReportUpdate(@RequestParam("rep_no") int rep_no, @RequestParam("state") String state,
-		@RequestParam("repor") int repor,ReportVO vo) {
+			@RequestParam("repor") int repor, ReportVO vo) {
 		System.out.println("repor의 값" + repor);
 		System.out.println("rep_no의 값" + rep_no);
 		System.out.println("state의 값" + state);
-		
-		vo =  reportDao.admReSearch(rep_no); //신고 처리할 애가 member 인지 p_member인지 조회 id,role		
-		System.out.println("vo는======="+vo);
 
-		if(repor == 701 ) { //신고 미처리
-			
+		vo = reportDao.admReSearch(rep_no); // 신고 처리할 애가 member 인지 p_member인지 조회 id,role
+		System.out.println("vo는=======" + vo);
+
+		if (repor == 701) { // 신고 미처리
+
 			return "admin/board/adminReport";
-			
-		}else if(repor == 702) { //신고기각처리
-			
-			reportDao.admReportUpdate(rep_no, repor, state); //신고 처리 update
-			//관련 회원에게 메시지 보내기
-			
-		} else if(repor == 703) { //신고 승인 처리
-			
-			reportDao.admReportUpdate(rep_no, repor, state); //신고 처리 update
-			reportDao.admReSearchUpdate(vo); //신고카운트 업데이트
-			
+
+		} else if (repor == 702) { // 신고기각처리
+
+			reportDao.admReportUpdate(rep_no, repor, state); // 신고 처리 update
+			// 관련 회원에게 메시지 보내기
+
+		} else if (repor == 703) { // 신고 승인 처리
+
+			reportDao.admReportUpdate(rep_no, repor, state); // 신고 처리 update
+			reportDao.admReSearchUpdate(vo); // 신고카운트 업데이트
+
 		}
-		
+
 		return "admin/board/adminReport";
-		
+
 	}
 
 	// 신고 날짜 검색 : admReportDate

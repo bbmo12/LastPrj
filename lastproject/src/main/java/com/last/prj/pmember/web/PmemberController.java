@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
@@ -118,7 +119,7 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -164,6 +165,7 @@ public class PmemberController {
 		for(int i=0; i < price.getPriceVOList().size(); i++) {
 			pmemDao.insertService(price.getPriceVOList().get(i));
 		}
+		redirectAttr.addFlashAttribute("update","수정실패");
 
 		// 비밀번호 암호화
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
@@ -195,12 +197,19 @@ public class PmemberController {
 	
 	//일반회원 후기작성
 	@RequestMapping("serviceReviewInsert")
-	@ResponseBody
-	public int serviceReview(ReviewVO review, ReservationVO vo) {
+	public String serviceReview(HttpServletRequest request, ReservationVO vo, ReviewVO review, List<MultipartFile> multiFileList1) {
+		System.out.println("=== file: " + multiFileList1);
+		System.out.println("=== review : "+review);
+		System.out.println("=== vo : "+vo);
+		//System.out.println("====review : "+content + rating + r_no);
+		//System.out.println("====multiFileList1 : "+ multiFileList1);
+		int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+		System.out.println("f_part = " + f_part);
+		review.setF_part(f_part);
 		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
 		
-		return 1;
+		return "redirect:/reservationSelect";
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")

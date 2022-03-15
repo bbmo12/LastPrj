@@ -24,7 +24,11 @@ public class ReservationVO {
 	private String m_id;
 	private int r_check;
 	
+	private int rev_no;			//후기순번
+	private String content;		//후기내용
+	private String rating;		//평점
 	
+	private int fPart;			//첨부파일
 	
 	 
 	

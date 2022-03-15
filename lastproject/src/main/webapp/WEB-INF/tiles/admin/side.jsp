@@ -19,11 +19,13 @@
 						관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="admPmember">파트너회원
 						관리</a></li>
-				<li class="nav-item"><a class="nav-link" href="admReview">후기
+				<!-- <li class="nav-item"><a class="nav-link" href="admReview">후기
 						관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="admQna">QnA
 						관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="admReport">신고
+						관리</a></li> -->
+				<li class="nav-item"><a class="nav-link" href="admService">서비스
 						관리</a></li>
 			</ul>
 		</div></li>
@@ -52,44 +54,28 @@
 		href="http://www.bootstrapdash.com/demo/connect-plus-free/jquery/documentation/documentation.html"
 		target="_blank"> <span class="icon-bg"> <i
 				class="mdi mdi-file-document-box menu-icon"></i>
-		</span> <span class="menu-title">Documentation</span>
+		</span> <span class="menu-title"></span>
 	</a></li>
-	<!-- <li class="nav-item sidebar-user-actions">
-			<div class="user-details">
-				<div class="d-flex justify-content-between align-items-center">
-					<div>
-						<div class="d-flex align-items-center">
-							<div class="sidebar-profile-img">
-								<img src="resources/assets123/images/faces/face28.png" alt="image">
-							</div>
-							<div class="sidebar-profile-text">
-								<p class="mb-1">Henry Klein</p>
-							</div>
-						</div>
-					</div>
-					<div class="badge badge-danger">3</div>
-				</div>
-			</div>
-		</li> -->
+
 	<li class="nav-item sidebar-user-actions">
 		<div class="sidebar-user-menu">
 			<a href="#" class="nav-link"><i
-				class="mdi mdi-settings menu-icon"></i> <span class="menu-title">Settings</span>
+				class="mdi mdi-settings menu-icon"></i> <span class="menu-title"></span>
 			</a>
 		</div>
 	</li>
 	<li class="nav-item sidebar-user-actions">
 		<div class="sidebar-user-menu">
 			<a href="#" class="nav-link"><i
-				class="mdi mdi-speedometer menu-icon"></i> <span class="menu-title">Take
-					Tour</span></a>
+				class="mdi mdi-speedometer menu-icon"></i> <span class="menu-title">
+					</span></a>
 		</div>
 	</li>
 	<li class="nav-item sidebar-user-actions">
 		<div class="sidebar-user-menu">
 			<a href="adminLogout.do" class="nav-link"><i
-				class="mdi mdi-logout menu-icon"></i> <span class="menu-title">Log
-					Out</span></a>
+				class="mdi mdi-logout menu-icon"></i> <span class="menu-title">
+					</span></a>
 		</div>
 	</li>
 </ul>

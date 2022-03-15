@@ -45,7 +45,7 @@
 						name="pageNum" value="1"> FROM : <input type="text"
 						id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
 						type="text" id="toDate" name="toDate">
-					<!-- <button type="button" id="btnSearch">검 색</button> -->
+									
 				</form>
 			</div>
 			<div class="template-demo">
@@ -56,9 +56,9 @@
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					id="trainer" data-code="101">훈련사</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="groomer" data-code="102">미용사</button>
+					id="groomer" data-code="103">미용사</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="petsitter" data-code="103">펫시터</button>
+					id="petsitter" data-code="102">펫시터</button>
 			</div>
 			<!-- 조건 검색한 리스트에서 검색 -->
 			<div>
@@ -73,7 +73,7 @@
 					<div class="card">
 						<div class="card-body">
 							<h4 class="card-title">차트</h4>
-							<p class="card-description" id="mainCount">
+							<p class="card-description mainCount" id="mainCount">
 								총 회원 수 :
 								<code id="a"></code>
 								<br> 수의사 수 :
@@ -163,16 +163,8 @@
 			</div>
 		</div>
 	</div>
-	<!-- end 파트너 회원 단건 조회 Modal -->
-
-	<!-- 해당 파트너 회원한테 메시지 보내기 Modal -->
-
-	<!-- end 해당 파트너 회원한테 메시지 보내기 Modal -->
-
-	<bod> </bod>
-
+	
 	<script>
-		
 		
 		$(function() {
 			// title='상세정보를 보시려면 이름을 클릭하세요..'
@@ -281,10 +273,7 @@
 					}
 				},
 			
-			});
-			
-			
-			
+			});			
 		}
 		// ===============end Main chart 그리기=====================
 
@@ -294,9 +283,9 @@
 		// =================회원 단건 조회 Modal===================
 		
 			function show() {
-				 var p_id = $(event.target).parent().next().text();
-			console.log(p_id); 
-			//var p_id = 'kim1@a.com';
+				/*  var p_id = $(event.target).parent().next().text();
+			console.log(p_id); */ 
+			var p_id = 'kim1@a.com';
 			//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
 			 $.ajax({
 				url : 'admPmemberOne',
@@ -393,6 +382,7 @@
 		//===========리스트 ajax 호출==========
 		function pagingList() {
 			var str = $('#admDateForm').serialize();
+			console.log(str);
 			$.ajax({
 				url : 'admPlistCode',
 				method : 'post',
@@ -402,15 +392,25 @@
 					console.log(result.list);
 					console.log("리절트페이지는 : " + result.page);
 					console.log(result.chart);
-					if(result.chart.length != 0){
-						viewChart(result.chart);
-					}else{
-						 $("#myChart").remove();
-						 $(".myChart").append("<h4>데이터가 없습니다.</h4>");
-					}
 					
-					viewPmemberList(result.list);
-					viewPage(result.page);
+					if(result.chart == ''){
+						 alert('차트를 그릴 데이터가 없습니다!!');
+						 $("#mainChart").remove();
+						 $(".mainCount").find('code').empty();
+					}else {
+						viewChart(result.chart);
+					};
+
+					if(result.list == ''){
+						alert('데이터가 없습니다!!');
+						$("#myTable").empty();
+						$("#pagination").empty();
+						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
+					}else {
+						viewPmemberList(result.list);
+						viewPage(result.page);
+						
+					};
 				}
 			});
 		}//===========end  리스트 ajax 호출==========

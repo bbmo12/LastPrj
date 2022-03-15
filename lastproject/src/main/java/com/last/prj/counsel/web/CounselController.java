@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.counsel.service.CounselMapper;
 import com.last.prj.counsel.service.CounselService;
@@ -24,6 +25,7 @@ import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
+import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.security.CustomUser;
 
 @Controller
@@ -92,9 +94,8 @@ public class CounselController {
 	@RequestMapping(value = "/csDetail", method = RequestMethod.GET)
 	public String csDetail(@RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id,
 			@RequestParam("pet_no") int pet_no, @RequestParam("c_no") int c_no, Model model, Principal principal) {
-		
+	
 		if (principal != null) {
-
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 			if (userDetails.getRole() == "일반회원") {
@@ -106,7 +107,6 @@ public class CounselController {
 
 			}
 		}
-
 		model.addAttribute("mInfo", memDao.memberOne(m_id));
 		model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
 		model.addAttribute("petInfo", petDAO.petOne(pet_no));
@@ -199,4 +199,13 @@ public class CounselController {
 
 		return "mypage/csDetail";
 	}
+	
+	
+	/*
+	 * @RequestMapping("counselReviewInsert") public String
+	 * counselReviewInsert(HttpServletRequest request, ReviewVO review, CounselVO
+	 * vo) {
+	 * 
+	 * return ; }
+	 */
 }

@@ -371,10 +371,12 @@
 												+ "</li><li>게시글 내용 : "
 												+ res[0].q_content
 												+ "</li></ul>");
+								/* 
 								$(".modal-footer").append(
 										"<a href='qnaDetail?q_no="
 												+ res[0].q_no
-												+ "'>해당 게시글로 이동</a>");
+												+ "'>해당 게시글로 이동</a>"); */
+								$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
 							},
 							error : function(er) {
@@ -385,11 +387,22 @@
 				$("#myModal").modal('show');
 			}//end Modal 신고 단건
 		}// end Show function
+		
+		//=============상세보기 페이지 새 창 열어서  :  권한 없어서 못가는 거 같은데
+		function goDetail(e) {
+			var q_no = $(e).data('value');
+			console.log("q_no : " +q_no);
+			var url = `qnaDetail?q_no=\${q_no}`;
+			console.log("url :"+url);
+			window.open(url);
+			
+		}//=============end window.open()
 
 		//모달 내용 초기화
 		$('#myModal').on('hidden.bs.modal', function(e) {
 			$(this).find('ul').empty();
 			$(this).find('form')[0].reset();
+			$(this).find('#goDetail').remove();
 
 		})//END 모달 내용 초기화
 

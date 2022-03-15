@@ -41,8 +41,13 @@ public interface ReportService {
 	public int pmemReport(Criteria cri);//파트너마이페이지 신고내역
 	public List<ReportVO> pmemReportList(Criteria cri);
 
+	//신고 Review
 	public int admRlistCodeCount(ReportVO vo);
 	public List<ReportVO> admRlistCode(ReportVO vo);
+	
+	//신고 QnA 조회
+			public int admQlistCodeCount(ReportVO vo);
+			public List<ReportVO> admQlistCode(ReportVO vo);
 
 	//리서치 업데이트를 위한
 			public ReportVO admReSearch(int rep_no);

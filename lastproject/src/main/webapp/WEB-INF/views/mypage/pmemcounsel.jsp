@@ -131,10 +131,10 @@ body {
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container" style="max-width: 1200px;">
+		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
 								src="resources/upload/${pmember.picture}" style="width: 210px"
@@ -150,30 +150,28 @@ body {
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
 								</a></li>
-								<li><a href="preservationSelect"
-									class="d-flex justify-content-between">
+								<li><a href="reservationSetting" class="d-flex justify-content-between">
+										<p>예약일정 설정</p>
+								</a></li>
+								<li><a href="preservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 								</a></li>
-								<li><a href="pMemDiaList"
-									class="d-flex justify-content-between">
+								<li><a href="pMemDiaList" class="d-flex justify-content-between">
 										<p>진료 내역</p>
 								</a></li>
-								<li><a href="pMembenefit"
-									class="d-flex justify-content-between">
+								<li><a href="pMembenefit" class="d-flex justify-content-between">
 										<p>결제 내역</p>
 								</a></li>
-								<li><a href="pmemcounsel"
-									class="d-flex justify-content-between">
+								<li><a href="pmemcounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
 								</a></li>
-								<li><a href="pmemreport"
-									class="d-flex justify-content-between">
+								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>

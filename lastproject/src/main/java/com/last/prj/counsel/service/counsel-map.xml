@@ -10,9 +10,9 @@
 	<select id="pmemCounselList" resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-				FROM (SELECT P.NAME AS p_name, C.M_ID, C.CONTENT, C.W_DATE, C.CODE, C.C_NO, P.pet_no
+				FROM (SELECT P.NAME AS p_name, C.M_ID, C.P_ID, C.CONTENT, C.W_DATE, C.CODE, C.C_NO, P.PET_NO
 						FROM PET P, MEMBER M, COUNSEL C
-					 WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND c.P_ID= #{p_id} AND c.p_no = 0 ORDER BY C_NO) A)
+					 WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND C.P_ID= #{p_id} AND C.P_NO = 0 ORDER BY C_NO) A)
 				WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1 AND
 				(#{pageNum})*#{amount}
 	</select>
@@ -22,7 +22,7 @@
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
 		FROM (SELECT P.NAME AS
-		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name,
+		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name, C.R_CHECK,
 		C.W_DATE, P.pet_no,
 		C.CODE, CO.CONTENT AS
 		co_content, c.p_id, c.m_id,

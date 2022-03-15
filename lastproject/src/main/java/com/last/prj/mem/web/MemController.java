@@ -10,15 +10,8 @@ import java.net.URL;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
 
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +19,11 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,13 +32,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.last.prj.ffile.web.FfileUtil;
-import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PetcareVO;
@@ -50,6 +45,7 @@ import com.last.prj.mem.service.PmemVO;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.TimeVO;
 import com.last.prj.security.CustomUser;
+import com.last.prj.security.CustomUserDetailService;
 
 @Controller
 public class MemController {
@@ -66,6 +62,9 @@ public class MemController {
 	@Autowired
 	ServletContext sc;
 
+	@Autowired
+	CustomUserDetailService cusd;
+	
 	// 회원탈퇴 페이지로 이동
 	@RequestMapping("mdeleteForm")
 	public String mdeleteForm(Principal principal) {
@@ -535,6 +534,7 @@ public class MemController {
 			userInfo.put("accessToken", access_Token);
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
+		
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -552,22 +552,9 @@ public class MemController {
 
 	// 카카오 연동정보 조회
 	@RequestMapping(value = "/dologin", produces = "application/json; charset=utf8")
-	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Principal principal, Model model,MemVO member)
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, HttpSession session, HttpServletRequest request,  Model model,MemVO member)
 			throws Exception {
-		// 세션 가져오기
-				// 로그인 전에도 실행되는 부분이라 null체크
-				String id = "";
-				if(principal != null) {
 					
-					CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-					
-					if(userDetails.getRole() == "일반회원") {
-						//System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
-						//System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
-						id = userDetails.getMember().getM_id();
-
-					}
-				}
 				
 		System.out.println("#########" + code);
 		String access_Token = getAccessToken(code);
@@ -581,11 +568,22 @@ public class MemController {
 		System.out.println(userInfo);
 
 		if (memDao.idCheck(userInfo.get("email").toString())) {
-
-			model.addAttribute("memberinfo",memDao.memberOne(userInfo.get("email").toString()));
-			memDao.memberOne(userInfo.get("email").toString());
-			System.out.println("여기-------------------------------------------");
-			System.out.println(memDao.memberOne(userInfo.get("email").toString()));
+			String m_id = userInfo.get("email").toString();
+			
+			System.out.println("===========================여기======================================================");
+			System.out.println(m_id); 
+			UserDetails kakaovo = (UserDetails)cusd.loadUserByUsername(m_id);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(kakaovo, kakaovo.getPassword(), kakaovo.getAuthorities());
+			SecurityContext securityContext = SecurityContextHolder.getContext();
+			securityContext.setAuthentication(authentication);
+			session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+			/*
+			 * model.addAttribute("memberinfo",memDao.memberOne(userInfo.get("email").
+			 * toString())); memDao.memberOne(userInfo.get("email").toString());
+			 * System.out.println("여기-------------------------------------------");
+			 * System.out.println(memDao.memberOne(userInfo.get("email").toString()));
+			 */
 			
 			return "redirect:home"; // 본인 원하는 경로 설정
 			
@@ -597,6 +595,8 @@ public class MemController {
 			String name = userInfo.get("nickname").toString();
 			member.setM_id(m_id);
 			member.setName(name);
+			member.setPassword("1234");
+			/* member.setPassword(password); */
 			memDao.memberInsert(member);
 			return "redirect:home"; // 본인 원하는 경로 설정
 		}
