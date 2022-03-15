@@ -2,6 +2,7 @@ package com.last.prj.pmember.web;
 
 import java.io.File;
 import java.security.Principal;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 
 import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
