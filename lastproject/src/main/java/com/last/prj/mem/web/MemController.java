@@ -544,7 +544,7 @@ public class MemController {
 
 	@RequestMapping("/geturi.do")
 	@ResponseBody
-	public String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+	public String getKakaoAuthUrl(HttpServletRequest request)  throws Exception {
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=47ef13464842c3a22235787a9d64e6fc"
 				+ "&redirect_uri=http://localhost/prj/dologin" + "&response_type=code";
 		return reqUrl;
@@ -552,7 +552,7 @@ public class MemController {
 
 	// 카카오 연동정보 조회
 	@RequestMapping(value = "/dologin", produces = "application/json; charset=utf8")
-	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Principal principal, Model model)
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Principal principal, Model model,MemVO member)
 			throws Exception {
 		// 세션 가져오기
 				// 로그인 전에도 실행되는 부분이라 null체크
@@ -586,15 +586,19 @@ public class MemController {
 			memDao.memberOne(userInfo.get("email").toString());
 			System.out.println("여기-------------------------------------------");
 			System.out.println(memDao.memberOne(userInfo.get("email").toString()));
+			
 			return "redirect:home"; // 본인 원하는 경로 설정
-			
-			
 			
 			
 			
 		} else {
 			model.addAttribute("userInfo",userInfo);
-			return "member/joinForm"; // 본인 원하는 경로 설정
+			String m_id= userInfo.get("email").toString();
+			String name = userInfo.get("nickname").toString();
+			member.setM_id(m_id);
+			member.setName(name);
+			memDao.memberInsert(member);
+			return "redirect:home"; // 본인 원하는 경로 설정
 		}
 	}
 
