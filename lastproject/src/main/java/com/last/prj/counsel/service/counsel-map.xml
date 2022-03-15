@@ -47,7 +47,7 @@
 		SELECT COUNT(*) AS TOTAL
 		 FROM COUNSEL
 		WHERE P_ID = #{p_id}
-		`AND p_no=0
+		AND p_no=0
 	</select>
 
 	<select id="counselList" resultType="com.last.prj.counsel.service.CounselVO">

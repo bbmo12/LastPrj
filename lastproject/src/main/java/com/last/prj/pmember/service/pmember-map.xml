@@ -113,7 +113,8 @@
 	  			<if test="career != null"> CAREER = #{career},</if> 
 	  			<if test="speciality != null"> SPECIALITY = #{speciality},</if>
 				<if test="picture != null">PICTURE = #{picture},</if>
-				<if test="pfile != null">PFILE = #{pfile}</if>		
+				<if test="pfile != null">PFILE = #{pfile}</if>	
+	
 			</set>
 		WHERE P_ID = #{p_id}
 	</update> 
