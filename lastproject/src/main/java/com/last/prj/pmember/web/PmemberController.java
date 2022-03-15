@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
@@ -195,11 +196,12 @@ public class PmemberController {
 	
 	//일반회원 후기작성
 	@RequestMapping("serviceReviewInsert")
-	@ResponseBody
-	public int serviceReview(ReviewVO review, List<MultipartFile> multiFileList1, ReservationVO vo) {
-		System.out.println("review : "+review);
-		System.out.println("vo : "+ vo);
-		System.out.println("multiFileList1 : "+ multiFileList1);
+	public int serviceReview(ReservationVO vo, ReviewVO review, List<MultipartFile> multiFileList1) {
+		System.out.println("=== file: " + multiFileList1);
+		System.out.println("=== review : "+review);
+		System.out.println("=== vo : "+vo);
+		//System.out.println("====review : "+content + rating + r_no);
+		//System.out.println("====multiFileList1 : "+ multiFileList1);
 		
 		//reservationDao.updatecode(vo);
 		//reviewDao.servicereview(review);

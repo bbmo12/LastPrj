@@ -207,9 +207,9 @@
 
 					<span id="dvalue"><input type="hidden" id="date_value"></span>
 					<br><span id="tvalue"><input type="hidden" id="time_value"></span><br>
-					<input type="text" id="rating" name="rating" value="res.rating" readonly="readonly"
+					<input type="text" id="read_rating" name="read_rating" value="res.rating" readonly="readonly"
 						style="font-size: 15px; border: none;"><br>
-						<input name="content" id="content">
+						<input name="read_content" id="read_content">
 						<select class="animalNo"><option value="" disabled selected>펫 번호(이름)</option>
 						<c:forEach items="${petList}" var="pet">
 							<option value="${pet.pet_no }">${pet.pet_no }(${pet.name })</option>
@@ -243,21 +243,23 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			<form action="serviceReviewInsert" method="post" enctype="multipart/form-data">
 				<!-- modal 몸통 -->
 				<div class="modal-body">
-
+	
 			<div align="center">
 				<h3 align="center">후기를 남겨주세요!</h3>
 				<div class="star-rating">
-					<input type="radio" id="5-stars" name="rating" value="5" /> <label
-						for="5-stars" class="star">&#9733;</label> <input type="radio"
-						id="4-stars" name="rating" value="4" /> <label for="4-stars"
-						class="star">&#9733;</label> <input type="radio" id="3-stars"
-						name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
-					<input type="radio" id="2-stars" name="rating" value="2" /> <label
-						for="2-stars" class="star">&#9733;</label> <input type="radio"
-						id="1-stars" name="rating" value="1" /> <label for="1-stars"
-						class="star">&#9733;</label>
+					<input type="radio" id="5-stars" name="rating" value="5" />
+					<label for="5-stars" class="star">&#9733;</label>
+					<input type="radio" id="4-stars" name="rating" value="4" />
+					<label for="4-stars" class="star">&#9733;</label>
+					<input type="radio" id="3-stars" name="rating" value="3" />
+					<label for="3-stars" class="star">&#9733;</label>
+					<input type="radio" id="2-stars" name="rating" value="2" />
+					<label for="2-stars" class="star">&#9733;</label>
+					<input type="radio" id="1-stars" name="rating" value="1" />
+					<label for="1-stars" class="star">&#9733;</label>
 				</div>
 			</div>
 			<div class="form-group">
@@ -275,18 +277,20 @@
 					
 					<div class="form-group" style="margin-top: -10px;">
 						<label>후기사진</label><br>
-						<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList1" multiple="multiple">
+						<input class="file-upload-browse btn btn-primary" type="file" id="multiFileList1" name="multiFileList1" multiple="multiple">
 						<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
 						<div id="ffile1"></div>
 					</div>
 				</div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">		
-			<input id="rev_no" name="rev_no" value="">
-			<button type="button" onclick="serviceReview()">작성</button>
+			<input id="r_no" name="r_no" value="">
+			<button type="submit">작성</button>
+			<!-- onclick="serviceReview()" -->
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-						
+					
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -341,6 +345,7 @@
 	<script type="text/javascript">
 	function addFile1() {
 		var input = $('<input>').attr({
+			'id': 'multiFileList1',
 			'class': 'file-upload-browse btn btn-primary',
 			'name': 'multiFileList1',
 			'type': 'file'
@@ -549,11 +554,12 @@
 	function serviceReview(){
 		
 		var content = $("#content").val();
-		var rating = $("input[name=rating]").val();
+		var rating = $("input[name=rating]:checked").val();
 		var rev_no = $("#rev_no").val();
-		var multiFileList1 = $("input[name=multiFileList1]").val();
+		var multiFileList1 = $("multiFileList1").val();
 		console.log("별점")
 		console.log(rating)
+		
 		$.ajax({
 			url: "serviceReviewInsert",
 			enctype: 'multipart/form-data',
@@ -562,7 +568,7 @@
 				'rating' : rating,
 				'r_no': rev_no,
 				'content': content,
-				'multiFileList1' : multiFileList1
+				'multiFileList1': multiFileList1
 				},
 			processData: false,
 			contentType: false,
