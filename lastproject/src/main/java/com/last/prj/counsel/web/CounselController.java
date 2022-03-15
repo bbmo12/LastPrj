@@ -92,9 +92,8 @@ public class CounselController {
 	@RequestMapping(value = "/csDetail", method = RequestMethod.GET)
 	public String csDetail(@RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id,
 			@RequestParam("pet_no") int pet_no, @RequestParam("c_no") int c_no, Model model, Principal principal) {
-		
+	
 		if (principal != null) {
-
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 			if (userDetails.getRole() == "일반회원") {
@@ -106,7 +105,6 @@ public class CounselController {
 
 			}
 		}
-
 		model.addAttribute("mInfo", memDao.memberOne(m_id));
 		model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
 		model.addAttribute("petInfo", petDAO.petOne(pet_no));
