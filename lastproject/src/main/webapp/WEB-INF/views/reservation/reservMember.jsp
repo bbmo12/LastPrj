@@ -108,6 +108,9 @@
 					 	<c:if test="${pet.code eq 510 }">
 					 		<option value = "401" >여우</option>
 					 	</c:if>
+					 	<c:if test="${pet.code eq 511 }">
+					 		<option value = "401" >거미</option>
+					 	</c:if>
 					 </c:forEach>
 		   		 </select>
 		   		 

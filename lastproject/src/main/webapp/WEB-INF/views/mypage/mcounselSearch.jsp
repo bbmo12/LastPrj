@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <!DOCTYPE html>
 <html>
@@ -109,6 +110,11 @@
 									</tr>
 								</thead>
 								<tbody>
+									<c:if test="${ fn:length(mycounsel) == 0  }">
+										<tr>
+											<td colspan="6" align="center">조회된 결과가 없습니다.</td>
+										</tr>
+									</c:if>
 									<c:forEach items="${mycounsel }" var="mycounsel">
 										<tr onclick="location.href='csDetail?p_id=${mycounsel.p_id }&m_id=${mycounsel.m_id }&pet_no=${mycounsel.pet_no }&c_no=${mycounsel.c_no}'">
 											<td>${mycounsel.p_name }</td>
