@@ -13,7 +13,32 @@
 #my_section {
 	padding: 50px;
 }
+.star-rating {
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 1.5em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 5em;
+}
 
+.star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	color: #ccc;
+	cursor: pointer;
+}
+
+.star-rating :checked ~ label {
+	color: #f90;
+}
+
+.star-rating label:hover, .star-rating label:hover ~ label {
+	color: #fc0;
+}
 .card-text {
 	display: inline-block;
 	width: 200px;
@@ -118,6 +143,7 @@
 									</c:if>
 									<c:forEach items="${mycounsel }" var="mycounsel">
 										<tr>
+										<td><input type="hidden" id="c_no" name="c_no" value="${mycounsel.c_no}">${mycounsel.c_no } </td>
 											<td>${mycounsel.p_name }</td>
 											<td class="card-text">${mycounsel.content}</td>
 											<td>${mycounsel.pm_name }</td>
@@ -128,7 +154,9 @@
 												<c:when test="${mycounsel.code eq 303 }">
 													<c:choose>
 														<c:when test="${ mycounsel.r_check eq 0}">
-															<td><button type="button" onclick=reviewWrith(event)> 리뷰 작성</button></td>
+															<td><button id="reviewWriteBtn" type="button"
+																	class="btn btn-secondary" data-toggle="modal"
+																	data-target="#reviewWriteModal">리뷰쓰기</button></td>
 														</c:when>
 														<c:otherwise>
 															<td><button type="button" onclick="revieRead('${mycounsel.c_no}')" data-toggle="modal" > 리뷰보기</button></td>
@@ -150,6 +178,81 @@
 		</div>
 		<my:nav jsFunc="go_page" page="${page}" />
 	</section>
+
+<!-- 리뷰작성 모달창 -->
+	<!-- Modal -->
+	<div class="modal fade" id="reviewWriteModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="counselReviewInsert" method="post"
+					enctype="multipart/form-data">
+					<!-- modal 몸통 -->
+					<div class="modal-body">
+
+						<div align="center">
+							<h3 align="center">후기를 남겨주세요!</h3>
+							<div class="star-rating">
+								<input type="radio" id="5-stars" name="rating" value="5" /> <label
+									for="5-stars" class="star">&#9733;</label> <input type="radio"
+									id="4-stars" name="rating" value="4" /> <label for="4-stars"
+									class="star">&#9733;</label> <input type="radio" id="3-stars"
+									name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
+								<input type="radio" id="2-stars" name="rating" value="2" /> <label
+									for="2-stars" class="star">&#9733;</label> <input type="radio"
+									id="1-stars" name="rating" value="1" /> <label for="1-stars"
+									class="star">&#9733;</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword4">후기내용</label>
+							<textarea class="form-control" id="content" name="content"
+								placeholder="후기내용" rows="4" cols="80"></textarea>
+						</div>
+
+					</div>
+					<!-- modal 하단 버튼 -->
+					<div class="modal-footer">
+						<input type="hidden" id="insert_c_no" name="c_no" value="">
+						<button type="submit">작성</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!-- 후기작성 모달창 -->
+	<script type="text/javascript">
+	
+	$("#reviewWriteBtn").click(function(e){
+		var c_no = $(event.target).parent().parent().children().first().text();
+   		console.log(c_no);
+   	 $("#insert_c_no").val(c_no);
+	});
+	
+   </script>
+   
+  
+	
+ 
+
+
+
+
+
 
 	<script type="text/javascript">
 		function go_page(p) {

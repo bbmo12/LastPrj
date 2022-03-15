@@ -285,4 +285,11 @@ public class ReservationController {
 		  return reservationDao.reviewWrithForm(r_no);
 	  }
 	 
+	  
+	  @RequestMapping("rnoreview")
+	  @ResponseBody
+	  public ReservationVO rnoreview(int r_no) {
+		  return reservationDao.rnoreview(r_no);
+	  }
+	  
 }

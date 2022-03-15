@@ -2,90 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.reserv.service.ReservationMapper">
 	<!-- 일반 예약조회 -->
-	<select id="reservationSelect" 
-	 resultType="com.last.prj.reserv.service.ReservationVO" 
-	 parameterType="com.last.prj.reserv.service.ReservationVO">
-		SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS PCONTENT, R.REFUSE, R.CODE,R.R_NO
-		FROM  P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C, F_CODE FC
-		WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE AND P.M_ID = #{m_id}
-		ORDER BY R.R_NO 
+	<select id="reservationSelect"
+		resultType="com.last.prj.reserv.service.ReservationVO"
+		parameterType="com.last.prj.reserv.service.ReservationVO">
+		SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS
+		TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS
+		PCONTENT, R.REFUSE, R.CODE,R.R_NO
+		FROM P_MEMBER PM, SERVICE S,
+		RESERVATION R, PET P, F_CODE C, F_CODE FC
+		WHERE PM.P_ID = R.P_ID AND
+		S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE =
+		FC.CODE AND P.M_ID = #{m_id}
+		ORDER BY R.R_NO
 	</select>
 	<!-- 예약전체조회 -->
-	<select id="reservationSelectList" resultType="com.last.prj.reserv.service.ReservationVO">
+	<select id="reservationSelectList"
+		resultType="com.last.prj.reserv.service.ReservationVO">
 		SELECT * FROM RESERVATION
 	</select>
-	
+
 	<!-- 페이징(일반회원 예약조회) -->
-	<select id="reservationPageList" resultType="com.last.prj.reserv.service.ReservationVO">
-		   SELECT *
-      			FROM ( SELECT ROWNUM RN, A.*
-     				   FROM (SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS PCONTENT, R.REFUSE,R.CODE, R.R_CHECK
-					   FROM  P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C, F_CODE FC
-					   WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND C.CODE = R.CODE AND P.CODE = FC.CODE AND P.M_ID = #{m_id}
-       				  ) A)
-      	WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+	<select id="reservationPageList"
+		resultType="com.last.prj.reserv.service.ReservationVO">
+		SELECT *
+		FROM ( SELECT ROWNUM RN, A.*
+		FROM (SELECT R.R_NO ,PM.NAME,R.R_DATE ,S.STARTDATE,R.TIME AS
+		TIME,R.CONTENT AS RCONTENT ,C.CONTENT AS RCCONTENT,FC.CONTENT AS
+		PCONTENT, R.REFUSE,R.CODE, R.R_CHECK
+		FROM P_MEMBER PM, SERVICE S, RESERVATION R, PET P, F_CODE C, F_CODE FC
+		WHERE PM.P_ID = R.P_ID AND S.R_NO=R.R_NO AND P.PET_NO = R.PET_NO AND
+		C.CODE = R.CODE AND P.CODE = FC.CODE AND P.M_ID = #{m_id}
+		) A)
+		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
-	
-	<select id="reservPage" resultType="int" parameterType="com.last.prj.reserv.service.ReservationVO">		
-       SELECT COUNT(*) FROM RESERVATION R ,PET P
-       WHERE R.PET_NO = P.PET_NO
-       GROUP BY P.M_ID 
-       HAVING P.M_ID=#{m_id}
+
+	<select id="reservPage" resultType="int"
+		parameterType="com.last.prj.reserv.service.ReservationVO">
+		SELECT COUNT(*) FROM RESERVATION R ,PET P
+		WHERE R.PET_NO = P.PET_NO
+		GROUP BY P.M_ID
+		HAVING P.M_ID=#{m_id}
 	</select>
-	
-	
-	
-	
+
+
+
+
 	<!-- 예약하기 등록 -->
-	<insert id="reservInsert" parameterType="com.last.prj.reserv.service.ReservationVO">
-		<selectKey keyProperty="r_no" resultType="int" order="BEFORE">
-			 SELECT NVL(MAX(R_NO) +1 , 1) AS R_NO FROM RESERVATION
+	<insert id="reservInsert"
+		parameterType="com.last.prj.reserv.service.ReservationVO">
+		<selectKey keyProperty="r_no" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(R_NO) +1 , 1) AS R_NO FROM RESERVATION
 		</selectKey>
 		INSERT INTO RESERVATION (R_NO,R_DATE,CONTENT,CODE,PET_NO,TIME,P_ID)
-		VALUES (#{r_no},#{r_date},#{rcontent},#{r_code},#{pet_no},#{time},#{p_id})
+		VALUES
+		(#{r_no},#{r_date},#{rcontent},#{r_code},#{pet_no},#{time},#{p_id})
 	</insert>
-	
+
 	<!-- 파트너회원 예약신청 승인 -->
 	<update id="okUpdate" parameterType="int">
-		UPDATE 	RESERVATION 
-		SET 	CODE = 402
-		WHERE 	R_NO = #{rno}
-	 </update>
-	 <!-- 파트너회원 예약신청 거절 -->
-	 <update id="noUpdate" >
-		UPDATE 	RESERVATION 
-		SET 	REFUSE = #{refuse},
-				CODE   = 403
-		WHERE 	R_NO   = #{rno}
-	 </update>
-	 <!-- 파트너회원 결제완료 후 -->
-	 <update id="payUpdate" parameterType="int">
-		UPDATE 	RESERVATION 
-		SET 	CODE = 404
-		WHERE 	R_NO = #{rno}
-	 </update>
-	 <!-- 파트너회원 진료작성 후 -->
-	 <update id="diaCodeUpdate" parameterType="int">
-		UPDATE 	RESERVATION 
-		SET 	CODE = 405
-		WHERE 	R_NO = #{rno}
-	 </update>
+		UPDATE RESERVATION
+		SET CODE = 402
+		WHERE R_NO = #{rno}
+	</update>
+	<!-- 파트너회원 예약신청 거절 -->
+	<update id="noUpdate">
+		UPDATE RESERVATION
+		SET REFUSE = #{refuse},
+		CODE = 403
+		WHERE R_NO = #{rno}
+	</update>
+	<!-- 파트너회원 결제완료 후 -->
+	<update id="payUpdate" parameterType="int">
+		UPDATE RESERVATION
+		SET CODE = 404
+		WHERE R_NO = #{rno}
+	</update>
+	<!-- 파트너회원 진료작성 후 -->
+	<update id="diaCodeUpdate" parameterType="int">
+		UPDATE RESERVATION
+		SET CODE = 405
+		WHERE R_NO = #{rno}
+	</update>
 
 	<!-- 리뷰 작성 폼 -->
-	<select id="reviewWrithForm" parameterType="com.last.prj.reserv.service.ReservationVO" resultType="com.last.prj.reserv.service.ReservationVO" >
-		SELECT R.R_NO, P.NAME AS NAME FROM RESERVATION R, P_MEMBER P
-		WHERE R.P_ID = P.P_ID AND R_NO = #{r_no}
+	<select id="reviewWrithForm"
+		parameterType="com.last.prj.reserv.service.ReservationVO"
+		resultType="com.last.prj.reserv.service.ReservationVO">
+		SELECT R.R_NO,
+		P.NAME AS NAME FROM RESERVATION R, P_MEMBER P
+		WHERE R.P_ID = P.P_ID AND
+		R_NO = #{r_no}
 	</select>
-	
+
 	<!-- 리뷰 작성 후 코드 변경 -->
-	<update id="updatecode" parameterType="com.last.prj.reserv.service.ReservationVO">
-	update reservation
-	<set>r_check = 1,
-	</set>
-       where r_no = #{r_no}
+	<update id="updatecode"
+		parameterType="com.last.prj.reserv.service.ReservationVO">
+		update reservation
+		<set>r_check = 1,
+		</set>
+		where r_no = #{r_no}
 	</update>
-	
-	
-	
+
+	<select id="rnoreview" parameterType="int"
+		resultType="com.last.prj.reserv.service.ReservationVO">
+		SELECT content, rating
+		FROM REVIEW
+		WHERE R_NO = #{r_no}
+
+	</select>
+
+
 </mapper>
