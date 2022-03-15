@@ -75,49 +75,51 @@
 				 <span id="dvalue">  <input type ="hidden" id="date_value" ></span> <br>
 				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
 				 <span> 예약내용(증상)   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
-	 	   		 <select class="animalType">
+				 <input type="hidden" id = "AutoCode" >
+				 
+	 	   		 <%-- <select class="animalType" >
 					 <option value="" disabled selected>품종선택</option>
 					 <c:forEach items="${petCode }" var="pet">
 					 	<c:if test="${pet.code eq 501  }">
-					 		<option value = "401" >개</option>
+					 		<option id="dog" value = "401" >개</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 502 }">
-					 		<option value = "401" >고양이</option>
+					 		<option id="cat" value = "401" >고양이</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 503 }">
-					 		<option value = "401" >조류</option>
+					 		<option id="bird" value = "401" >조류</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 504 }">
-					 		<option value = "401" >파충류</option>
+					 		<option id="reptile" value = "401" >파충류</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 505 }">
-					 		<option value = "401" >어류</option>
+					 		<option id="fish" value = "401" >어류</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 506 }">
-					 		<option value = "401" >토끼</option>
+					 		<option id="rabit" value = "401" >토끼</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 507 }">
-					 		<option value = "401" >돼지</option>
+					 		<option id="pig" value = "401" >돼지</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 508 }">
-					 		<option value = "401" >햄스터</option>
+					 		<option id="hamster" value = "401" >햄스터</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 509 }">
-					 		<option value = "401" >미어캣</option>
+					 		<option id="meerkat" value = "401" >미어캣</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 510 }">
-					 		<option value = "401" >여우</option>
+					 		<option id="fox" value = "401" >여우</option>
 					 	</c:if>
 					 	<c:if test="${pet.code eq 511 }">
-					 		<option value = "401" >거미</option>
+					 		<option id="spider" value = "401" >거미</option>
 					 	</c:if>
 					 </c:forEach>
-		   		 </select>
+		   		 </select> --%>
 		   		 
 		   		 <select class="animalNo" onchange="NoSelection(event)">
 		   		 	<option value="" disabled selected  >펫 번호(이름)</option>
 					 <c:forEach items="${petList}" var="pet">
-		   		 			<option value="${pet.pet_no }"> ${pet.pet_no }(${pet.name })</option>
+		   		 			<option value="${pet.pet_no }"> <%-- ${pet.pet_no } --%>${pet.name }</option>
 		   		 	   </c:forEach>
 		   		 </select>
 		   		 </form>
@@ -383,8 +385,42 @@ function changeSelection(event){
 }
 
 function NoSelection(event){
-	console.log($(event.target).val());
+	var pet_no = $(event.target).val();
+	console.log(pet_no);
+	$.ajax({
+		url : "autoCode",
+		method : "POST",
+		data : {"pet_no" : pet_no},
+		success : function(res){
+			$("#AutoCode").val(res);
+			console.log($("#AutoCode").val());
+			/* if(res == 501){
+				$("#dog").prop("selected", true);
+			}else if (res == 502){
+				$("#cat").prop("selected", true);
+			}else if (res == 503){
+				$("#bird").prop("selected", true);
+			}else if (res== 504){
+				$("#reptile").prop("selected", true);
+			}else if (res == 505){
+				$("#fish").prop("selected", true);
+			}else if (res == 506){
+				$("#rabit").prop("selected", true);
+			}else if (res == 507){
+				$("#pig").prop("selected", true);
+			}else if (res == 508){
+				$("#hamster").prop("selected", true);
+			}else if (res == 509){
+				$("#meerkat").prop("selected", true);
+			}else if (res == 510){
+				$("#fox").prop("selected", true);
+			}else if (res == 511){
+				$("#spider").prop("selected", true);
+			} */
+		}
+	})
 }
+
 //모달창 값 보내기
 $("#sendReserv").on('click',function(){
 	//모달창 예약일자
@@ -428,8 +464,12 @@ $("#sendReserv").on('click',function(){
 })
 $('#exampleModal').on('hidden.bs.modal', function(e) {
          $(this).find('form')[0].reset();
+         $(".current").text("펫번호(이름)");
+         
          
 })
+
+
 
  
  </script>

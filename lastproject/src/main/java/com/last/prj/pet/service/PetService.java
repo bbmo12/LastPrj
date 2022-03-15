@@ -33,4 +33,7 @@ public interface PetService {
 	//반려동물 삭제
 	int mypetDelete(@Param("pet_no") int pet_no);
 	
+	//파라미터 : 펫번호  리턴 : 펫코드(품종)
+	int AutoCode(int pet_no);
+	
 }

@@ -114,7 +114,7 @@
 							<button type="button"
 								class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" data-code="" id="block_chain" >블록체인진료기록</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="104" id="block_chain" >블록체인진료기록</button>
 
 						</div>
 						
@@ -155,7 +155,19 @@
 	
 	// ===================viewPmemberList : 받아온 데이터로 List만드는 함수==========================
 	 let viewPmemberList = function (result) {
+		$(".table").empty();
+		$("#blockChain").empty();
 		$("#myTable").empty();
+		$(".table").append(`<thead>
+							<tr>
+								<th>반려동물 이름</th>
+								<th>파트너회원이름</th>
+								<th>진단명</th>
+								<th>날짜</th>
+							</tr>
+						</thead>
+						<tbody id="myTable">
+						</tbody>`)
 		$.each(result,function(i) {
 			console.log(result[i])
 				$("#myTable").append("<tr><td>"
@@ -192,6 +204,7 @@
 				//contentType : 'application/json',
 				success : function(result) {
 					console.log("리절트리스트는 :"+result.list);
+					console.log(result.list);
 					console.log("리절트페이지는 : " + result.page);
 					if(result.list == ''){
 						$("#myTable").empty();
@@ -280,8 +293,21 @@
 			.call()
 	          .then(function(result)
 	        		  {
-	        	  		
 	        	  		console.log(result);
+	        	  		$(".table").append(`
+	        	  				<thead>
+									<tr>
+										<th>반려동물 이름</th>
+										<th>파트너회원이름</th>
+										<th>진단명</th>
+										<th>날짜</th>
+									</tr>
+								</thead>
+								<tbody id="myTable">
+								<c:forEach items="`+result+`" var="result">
+								<tr><td></td></tr>
+								</c:forEach>
+								</tbody>`);
 	        		  })
 			
 		}

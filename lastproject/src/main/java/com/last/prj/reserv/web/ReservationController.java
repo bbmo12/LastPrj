@@ -292,4 +292,10 @@ public class ReservationController {
 		  return reservationDao.rnoreview(r_no);
 	  }
 	  
+	  @PostMapping("autoCode")
+	  @ResponseBody
+	  public int autoCode(@RequestParam("pet_no")int pet_no){
+		  return petDAO.AutoCode(pet_no);
+	  }
+	  
 }

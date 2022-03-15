@@ -27,5 +27,10 @@ public interface PetMapper {
 	int mypetupdate(PetVO pet);
 	int updatecode(ReservationVO vo);
 	int mypetDelete(@Param("pet_no") int pet_no);
+	
+	//파라미터 : 펫번호  리턴 : 펫코드(품종)
+	int AutoCode(int pet_no);
+		
+	
 
 }
