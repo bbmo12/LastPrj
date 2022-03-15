@@ -256,7 +256,7 @@
 		$("#block_chain").on('click',function(event){
 			$(".table").empty();
 			$("#blockChain").append(`전자지갑 주소 : <input type ="text" id = "address"> <br><br>
-									 예약번호 입력 : <input type ="text"> id ="r_no" <button type="button">조회</button>
+									 예약번호 입력 : <input type ="text" id ="r_no">  <button type="button">조회</button>
 									 `);
 			
 			
