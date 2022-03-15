@@ -12,7 +12,7 @@ public interface PreservationlistMapper {
 	
 	//페이징 (파트너예약조회)
 	List<PreservationVO> preservationPageList(Criteria cri);
-	int preservPage(Criteria cri);
+	Integer preservPage(Criteria cri);
 	
 	
 }
