@@ -284,7 +284,7 @@
 				</div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">		
-			<input id="r_no" name="r_no" value="">
+			<input id="insert_r_no" name="r_no" value="">
 			<button type="submit">작성</button>
 			<!-- onclick="serviceReview()" -->
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -415,13 +415,13 @@
 	$("#reviewWriteBtn").click(function(e){
 		var r_no = $(event.target).parent().parent().children().first().text();
    		console.log(r_no);
-   	 $("#rev_no").val(r_no);
+   	 $("#insert_r_no").val(r_no);
 	});
 	
 	
    	function reviewadd(e){
-   		var r_no = $(event.target).parent().parent().children().first().text();
-   		console.log(r_no);
+   		//var r_no = $(event.target).parent().parent().children().first().text();
+   		//console.log(r_no);
 
    		/* var name = $("#name").val() */
    		/*$.ajax({

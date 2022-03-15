@@ -196,17 +196,19 @@ public class PmemberController {
 	
 	//일반회원 후기작성
 	@RequestMapping("serviceReviewInsert")
-	public int serviceReview(ReservationVO vo, ReviewVO review, List<MultipartFile> multiFileList1) {
+	public String serviceReview(HttpServletRequest request, ReservationVO vo, ReviewVO review, List<MultipartFile> multiFileList1) {
 		System.out.println("=== file: " + multiFileList1);
 		System.out.println("=== review : "+review);
 		System.out.println("=== vo : "+vo);
 		//System.out.println("====review : "+content + rating + r_no);
 		//System.out.println("====multiFileList1 : "+ multiFileList1);
+		int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+		System.out.println("f_part = " + f_part);
+		review.setF_part(f_part);
+		reservationDao.updatecode(vo);
+		reviewDao.servicereview(review);
 		
-		//reservationDao.updatecode(vo);
-		//reviewDao.servicereview(review);
-		
-		return 1;
+		return "redirect:/reservationSelect";
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")
