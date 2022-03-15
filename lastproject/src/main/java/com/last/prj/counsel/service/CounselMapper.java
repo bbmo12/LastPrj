@@ -18,7 +18,7 @@ public interface CounselMapper {
 	public int counselPage(Criteria cri);// 상담내역 total
 
 	// 페이징
-	int myCounselPage(Criteria cri);
+	Integer myCounselPage(Criteria cri);
 
 	List<CounselVO> myCounselList(Criteria cri);
 

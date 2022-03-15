@@ -81,9 +81,7 @@ public class ReservationController {
 	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response, Principal principal) throws Exception {
 		
 			if(principal != null) {
-			
 				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-				
 				if(userDetails.getRole() == "일반회원") {
 					String m_id = userDetails.getMember().getM_id();
 					System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
@@ -126,8 +124,6 @@ public class ReservationController {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
-				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
-				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
 				model.addAttribute("p_id",userDetails.getPmember().getP_id());
 				return "reservation/resvSetting";
 			}

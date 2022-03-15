@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 
@@ -202,6 +203,11 @@ body {
 													</tr>
 												</thead>
 												<tbody style="text-align: center">
+													<c:if test="${ fn:length(pmemcounsel) == 0  }">
+														<tr>
+															<td colspan="5" align="center">조회된 결과가 없습니다.</td>
+														</tr>
+													</c:if>
 													<c:forEach items="${pmemcounsel }" var="counsel">
 														<tr onclick="location.href='csDetail?p_id=${counsel.p_id }&m_id=${counsel.m_id }&pet_no=${counsel.pet_no }&c_no=${counsel.c_no}'">
 															<td>${counsel.p_name }</td>
