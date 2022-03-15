@@ -53,6 +53,8 @@ public class PmemberVO {
 	private int ch;
 	private String data;
 	private String key;
+	private String tt;
+	private String oo;
 	
 
 }

@@ -37,6 +37,17 @@ public class AdminController {
 
 	@Autowired
 	private MemService memDao;
+	
+	
+	@RequestMapping("/goChart")
+	@ResponseBody
+	public List<PmemberVO> goChart() {
+		
+		return pMemberDao.admgoChart();
+		
+		
+	}
+	
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -44,6 +55,7 @@ public class AdminController {
 		int pmemCount = pMemberDao.pmemCount();
 		int memCount = memDao.memCount();
 		int petCount = petDAO.petCount();
+		//String pmemDateList = pMemberDao.pmemDateList();
 
 		model.addAttribute("pmemCount", pmemCount);
 		model.addAttribute("memCount", memCount);
