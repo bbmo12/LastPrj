@@ -147,6 +147,7 @@ public class ReservationController {
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 				cri.setM_id(m_id);
 				cri.setAmount(5);
+
 				if(mapper.reservPage(cri)!=null) {
 				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
 					model.addAttribute("page", paging);// 페이징 수
