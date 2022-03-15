@@ -91,13 +91,13 @@
 
 			<!-- 검색 -->
 			<div>
-				<form id="frm" action="" method="post">
+				<form id="frm" action="" method="post" onsubmit="return false"
+					onkeypress="eventkey();">
 					<select id="search" name="search">
 						<option value="all" selected="selected">전 체</option>
 						<option value="title">제 목</option>
 						<option value="content">내 용</option>
-					</select> <input type="text" id="data" name="data" size="20"
-						onkeypress="eventkey()">&nbsp;
+					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="button" onclick="searchData()">검 색</button>
 				</form>
 			</div>

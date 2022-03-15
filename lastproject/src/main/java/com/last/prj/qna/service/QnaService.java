@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 
+import com.last.prj.report.service.ReportVO;
+
 public interface QnaService {
 
 	// 질문글 전체 갯수
@@ -57,4 +59,5 @@ public interface QnaService {
 	
 	// 최근 질문글
 	List<QnaVO> qnaRecent();
+
 }

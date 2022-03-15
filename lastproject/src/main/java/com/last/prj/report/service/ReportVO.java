@@ -31,7 +31,7 @@ public class ReportVO {
 	private String f_content; 		//신고 코드 유형
 
 	private String part;            //신고당한 게시글 유형
-	private int repor; 				//신고 처리 code : 701 : 신고대기 / 702 : 신고기각 / 703 : 신고승인
+	private Integer repor; 				//신고 처리 code : 701 : 신고대기 / 702 : 신고기각 / 703 : 신고승인
 	private String p_name;
 	private String q_content; 		//신고 당한 QnA 내역 
 	private String state;           //신고 처리 사유
@@ -47,5 +47,7 @@ public class ReportVO {
 
 	private String id;
 	private Integer role;
+	private String key;
+	private String data;
 
 }

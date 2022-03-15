@@ -50,5 +50,9 @@ public class PmemberVO {
 	private String fromDate;
 	private String toDate;
 	private int to;
-	private int ch;	
+	private int ch;
+	private String data;
+	private String key;
+	
+
 }

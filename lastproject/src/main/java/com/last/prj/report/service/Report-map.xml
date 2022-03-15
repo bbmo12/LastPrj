@@ -178,6 +178,51 @@
 		</if>
 
 	</select>
+	
+	<!--관리자 리뷰 QnA 페이징 처리된 유형 별 조회 -->
+	<select id="admQlistCode"
+		parameterType="com.last.prj.report.service.ReportVO"
+		resultType="com.last.prj.report.service.ReportVO">
+		SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (SELECT F.CONTENT AS
+		F_CONTENT, Q.CONTENT AS Q_CONTENT, R.REPORTER,
+		R.REPORTED,Q.Q_NO,R.REP_NO,R.REPOR, R.W_DATE, R.CONTENT
+		FROM REPORT
+		R, F_CODE F, QNA Q
+		WHERE R.CODE = F.CODE AND R.Q_NO = Q.Q_NO
+		<if test="code != null ">
+			AND R.CODE = #{code}
+		</if>
+		<if test="repor != null ">
+			AND R.REPOR = #{repor}
+		</if>
+		<if test="key == 'all'">AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if
+			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		ORDER BY R.Q_NO ASC
+<![CDATA[ 
+        ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
+        ]]>
+	</select>
+	<select id="admQlistCodeCount"
+		parameterType="com.last.prj.report.service.ReportVO" resultType="int">
+		SELECT COUNT(*)
+		FROM QNA Q, REPORT R
+		WHERE Q.Q_NO = R.Q_NO
+		<if test="code != null">
+			AND R.CODE = #{code}
+		</if>
+		<if test="repor != null ">
+			AND R.REPOR = #{repor}
+		</if>
+		<if test="key == 'all'">AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%' AND Q.CONTENT LIKE '%'|| #{data} ||'%'</if>
+		<if
+			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+
+	</select>
 
 
 	<!-- 리서치 업데이트를 위한 -->
