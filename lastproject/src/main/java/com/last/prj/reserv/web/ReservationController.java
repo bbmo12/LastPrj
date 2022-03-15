@@ -150,10 +150,10 @@ public class ReservationController {
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 				cri.setM_id(m_id);
 				cri.setAmount(5);
-				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+				//PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
 				
 				model.addAttribute("member",memDao.memberSearch(m_id));
-				model.addAttribute("page", paging);// 페이징 수
+				//model.addAttribute("page", paging);// 페이징 수
 				model.addAttribute("m_id",m_id);
 				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
 				
