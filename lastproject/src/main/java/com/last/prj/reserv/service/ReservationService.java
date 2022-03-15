@@ -41,4 +41,7 @@ public interface ReservationService {
 	
 	//리뷰작성후 코드 변경
 	int updatecode(ReservationVO vo);
+	
+	//리뷰 조회
+	ReservationVO rnoreview(@Param("r_no") int r_no);
 }

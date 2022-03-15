@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.counsel.service.CounselMapper;
 import com.last.prj.counsel.service.CounselService;
@@ -24,6 +25,7 @@ import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
+import com.last.prj.pmember.service.ReviewVO;
 import com.last.prj.security.CustomUser;
 
 @Controller
@@ -199,4 +201,13 @@ public class CounselController {
 
 		return "mypage/csDetail";
 	}
+	
+	
+	/*
+	 * @RequestMapping("counselReviewInsert") public String
+	 * counselReviewInsert(HttpServletRequest request, ReviewVO review, CounselVO
+	 * vo) {
+	 * 
+	 * return ; }
+	 */
 }
