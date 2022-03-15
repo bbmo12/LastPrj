@@ -45,7 +45,7 @@
 						name="pageNum" value="1"> FROM : <input type="text"
 						id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
 						type="text" id="toDate" name="toDate">
-									
+
 				</form>
 			</div>
 			<div class="template-demo">
@@ -69,33 +69,60 @@
 
 
 			<div class="row">
+
 				<div class="col-lg-6 grid-margin stretch-card">
+
 					<div class="card">
 						<div class="card-body">
-							<h4 class="card-title">차트</h4>
-							<p class="card-description mainCount" id="mainCount">
-								총 회원 수 :
-								<code id="a"></code>
-								<br> 수의사 수 :
-								<code id="b"></code>
-								훈련사 수 :
-								<code id="c"></code>
-								미용사 수 :
-								<code id="d"></code>
-								펫시터 수 :
-								<code id="e"></code>
-							</p>
+							<div class="card-title">
+								<h4>차트</h4>
+								<button type="button" class="btn btn-link btn-rounded btn-fw"
+									id="partChart" onclick="mainChart()">파트너 쉽 통계</button>
+								<button type="button" class="btn btn-link btn-rounded btn-fw"
+									id="dateChart" onclick="partChart()">기간 가입자 수</button>
+							</div>
+							<div id="mainC" style="display:;">
+								<p class="card-description mainCount" id="mainCount">
+									총 회원 수 :
+									<code id="a"></code>
+									<br> 수의사 수 :
+									<code id="b"></code>
+									훈련사 수 :
+									<code id="c"></code>
+									미용사 수 :
+									<code id="d"></code>
+									펫시터 수 :
+									<code id="e"></code>
+								</p>
 
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title mainChart">파트너 회원 통계</h4>
-									<canvas id="mainChart" style="height: 250px"></canvas>
+								<div class="card">
+									<div class="card-body">
+										<h4 class="card-title mainChart">파트너 회원 통계</h4>
+										<canvas id="mainChart" style="height: 250px"></canvas>
+									</div>
 								</div>
 							</div>
-
+							<div class="card" id="partC" style="display: none;">
+								<div class="card-body">
+									<h4 class="card-title">기간별 파트너 회원 chart</h4>
+								<p class="card-description mainCount" id="mainCount">
+									총 회원 수 :
+									<code id="a">96</code>
+									<br> 2022-02 :
+									<code id="b">22명</code>
+									2022-03 :
+									<code id="b">74명</code>
+									
+								</p>
+								
+									<canvas id="priceChart" style="height: 250px"></canvas>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				<!-- qwe 끝 -->
+
 				<div class="col-lg-6 grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
@@ -163,8 +190,63 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
+	
+	function mainChart() {
+		 $('#partC').hide();
+		$('#mainC').show();
+
+	}
+	
+	function partChart() {
+		
+			 $('#mainC').hide();
+			 $('#partC').show();
+
+		 
+				tt = [];
+				oo = [];
+				$.ajax({
+					url : 'goChart',
+					method : 'get',
+					success : function(res) {
+						console.log(res[0].tt);
+						$.each(res, function (i) {
+							tt.push(res[i].tt);
+							oo.push(res[i].oo);
+							
+							
+						})
+						console.log(tt);
+						const aaa = document.getElementById('priceChart').getContext('2d');
+						const priceChart = new Chart(aaa, {
+							type : 'line',
+							data : {
+								labels : tt,
+								datasets : [ {
+									label : '파트너 회원',
+									data : oo,
+									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 159, 64, 0.2)',
+											],
+									borderColor : [ 'rgba(255, 99, 132, 1)',
+											'rgba(255, 159, 64, 1)' ],
+									borderWidth : 1
+								} ]
+							},
+							options : {
+								scales : {
+									y : {
+										beginAtZero : true
+									}
+								}
+							}
+						});
+						} //success
+
+					}) // ajax
+			} 
 		
 		$(function() {
 			// title='상세정보를 보시려면 이름을 클릭하세요..'

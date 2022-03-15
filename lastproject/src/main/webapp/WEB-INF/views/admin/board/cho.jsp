@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
-	
+<!-- <script
+	src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> -->
+
 <style>
 .tab-content {
 	border: 0px solid rgba(151, 151, 151, 0.3);
@@ -28,16 +29,15 @@
 	<div class="content-wrapper">
 		<div class="row" id="proBanner">
 			<div class="col-12">
-				<span class="d-flex align-items-center purchase-popup"> 관리자님
-					반갑습니다 <a href="home" target="_blank"
+				<span class="d-flex align-items-center purchase-popup"> 서비스 관리 페이지입니다. 
+				<a href="home" target="_blank"
 					class="btn ml-auto download-button">메인 홈으로..</a> <a href="main"
-					target="_blank" class="btn purchase-button">관리자 홈으로..</a> <i
-					class="mdi mdi-close" id="bannerClose"></i>
+					target="_blank" class="btn purchase-button">관리자 홈으로..</a> 
 				</span>
 			</div>
 		</div>
 		<div class="d-xl-flex justify-content-between align-items-start">
-			<h2 class="text-dark font-weight-bold mb-2">관리자</h2>
+			<h2 class="text-dark font-weight-bold mb-2">서비스 페이지</h2>
 			<div
 				class="d-sm-flex justify-content-xl-between align-items-center mb-2">
 				<div class="btn-group bg-white p-3" role="group"
@@ -45,7 +45,7 @@
 					<button type="button"
 						class="btn btn-link text-light py-0 border-right">7 Days</button>
 					<button type="button"
-						class="btn btn-link text-dark py-0 border-right">1 Month</button>
+						class="btn btn-link text-light py-0 border-right">1 Month</button>
 					<button type="button" class="btn btn-link text-light py-0">3
 						Month</button>
 				</div>
@@ -109,7 +109,7 @@
 											<td>
 												<div class="progress">
 													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 25%" aria-valuenow="10" aria-valuemin="0"
+														style="width: 75%" aria-valuenow="50" aria-valuemin="0"
 														aria-valuemax="100"></div>
 												</div>
 											</td>
@@ -276,7 +276,7 @@
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">던킨 chart</h4>
+										<h4 class="card-title">유형 별 신고 상황 chart</h4>
 										<canvas id="dunkinChart" style="height: 250px"></canvas>
 									</div>
 								</div>
@@ -284,7 +284,7 @@
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">추로스 chart</h4>
+										<h4 class="card-title">기간 별 chart</h4>
 										<canvas id="myChart" style="height: 250px"></canvas>
 									</div>
 								</div>
@@ -379,13 +379,11 @@
 		
 		
 		
-		//var labels = result.length;[ '1월', '2월', '3월','4월','5월','6월','7월','8월','9월','10월','11월','12월' ]
-		const labels = Utils.months({count: 7});
 		const aaa = document.getElementById('priceChart').getContext('2d');
 		const priceChart = new Chart(aaa, {
 			type : 'line',
 			data : {
-				labels : labels,
+				labels : [ '파트너회원 수', '일반회원 수', '펫 마릿수' ],
 				datasets : [ {
 					label : '# of Votes',
 					data : [ '${pmemCount}', '${memCount}', '${petCount}' ],

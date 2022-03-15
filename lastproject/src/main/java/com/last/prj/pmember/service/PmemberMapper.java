@@ -35,7 +35,7 @@ public interface PmemberMapper {
 	public PmemberVO PmemberOne(String p_id);
 	public int admPlistCodeCount(PmemberVO vo);
 	public List<PmemberVO> admPlistChart(PmemberVO vo);
-	
+	public List<PmemberVO> admgoChart();
 
 }
 

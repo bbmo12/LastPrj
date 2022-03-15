@@ -151,6 +151,13 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admPlistChart(vo);
 	}
 
+	@Override
+	public List<PmemberVO> admgoChart() {
+		return map.admgoChart();
+	}
+
+
+
 	
 
 }

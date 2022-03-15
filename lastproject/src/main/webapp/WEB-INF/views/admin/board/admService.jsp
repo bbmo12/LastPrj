@@ -8,6 +8,17 @@
 </head>
 <!-- <script
 	src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script> -->
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+	integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 .tab-content {
 	border: 0px solid rgba(151, 151, 151, 0.3);
@@ -28,16 +39,15 @@
 	<div class="content-wrapper">
 		<div class="row" id="proBanner">
 			<div class="col-12">
-				<span class="d-flex align-items-center purchase-popup"> 관리자님
-					반갑습니다 <a href="home" target="_blank"
+				<span class="d-flex align-items-center purchase-popup"> 회원 관리
+					페이지입니다. <a href="home" target="_blank"
 					class="btn ml-auto download-button">메인 홈으로..</a> <a href="main"
-					target="_blank" class="btn purchase-button">관리자 홈으로..</a> <i
-					class="mdi mdi-close" id="bannerClose"></i>
+					target="_blank" class="btn purchase-button">관리자 홈으로..</a>
 				</span>
 			</div>
 		</div>
 		<div class="d-xl-flex justify-content-between align-items-start">
-			<h2 class="text-dark font-weight-bold mb-2">관리자</h2>
+			<h2 class="text-dark font-weight-bold mb-2">파트너 회원 페이지</h2>
 			<div
 				class="d-sm-flex justify-content-xl-between align-items-center mb-2">
 				<div class="btn-group bg-white p-3" role="group"
@@ -45,7 +55,7 @@
 					<button type="button"
 						class="btn btn-link text-light py-0 border-right">7 Days</button>
 					<button type="button"
-						class="btn btn-link text-dark py-0 border-right">1 Month</button>
+						class="btn btn-link text-light py-0 border-right">1 Month</button>
 					<button type="button" class="btn btn-link text-light py-0">3
 						Month</button>
 				</div>
@@ -71,18 +81,19 @@
 		<div class="row">
 			<div class="col">
 				<ul class="nav nav-tabs tab-transparent">
+
 					<li class="nav-item"><a class="nav-link active"
-						data-toggle="tab" href="#qwe">파트너</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab"
-						href="#asd">일반</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						data-toggle="tab" href="#asd">회원목록</a></li>
+					<li class="nav-item"><a class="nav-link " data-toggle="tab"
 						href="#zxc">차트</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab"
+						href="#qwe">파트너쉽 신청처리</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="tab"
 						href="#aaa">할일</a></li>
 				</ul>
 
 				<div class="tab-content">
-					<div class="tab-pane fade show active" id="qwe">
+					<div class="tab-pane fade " id="qwe">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title"></h4>
@@ -109,7 +120,7 @@
 											<td>
 												<div class="progress">
 													<div class="progress-bar bg-success" role="progressbar"
-														style="width: 25%" aria-valuenow="10" aria-valuemin="0"
+														style="width: 75%" aria-valuenow="50" aria-valuemin="0"
 														aria-valuemax="100"></div>
 												</div>
 											</td>
@@ -211,30 +222,51 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="asd">
+					<div class="tab-pane fade show active" id="asd">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title">Hoverable Table</h4>
-								<p class="card-description">
-									Add class
-									<code>.table-hover</code>
-								</p>
+								<div class="template-demo">
+									<p>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="doctor"
+											data-code="">전체</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="doctor"
+											data-code="100">수의사</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="trainer"
+											data-code="101">훈련사</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="groomer"
+											data-code="103">미용사</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="petsitter"
+											data-code="102">펫시터</button>
+									<form id="admDateForm">
+										<input type="hidden" name="code"> <input type="hidden"
+											name="pageNum" value="1"> FROM : <input type="text"
+											id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
+											type="text" id="toDate" name="toDate">
+									</form>
+									</p>
+								</div>
 								<table class="table table-hover">
 									<thead>
 										<tr>
-											<th>User</th>
-											<th>Product</th>
-											<th>Sale</th>
-											<th>Status</th>
+											<th>이름</th>
+											<th>아이디</th>
+											<th>가입일</th>
+											<th>파트너쉽</th>
+											<th>가입일</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td>Jacob</td>
 											<td>Photoshop</td>
-											<td class="text-danger">28.76% <i
-												class="mdi mdi-arrow-down"></i></td>
+											<td></td>
 											<td><label class="badge badge-danger">Pending</label></td>
+											<td>20220303</td>
 										</tr>
 										<tr>
 											<td>Messsy</td>
@@ -276,7 +308,7 @@
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">던킨 chart</h4>
+										<h4 class="card-title">유형 별 신고 상황 chart</h4>
 										<canvas id="dunkinChart" style="height: 250px"></canvas>
 									</div>
 								</div>
@@ -284,7 +316,7 @@
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">추로스 chart</h4>
+										<h4 class="card-title">기간 별 chart</h4>
 										<canvas id="myChart" style="height: 250px"></canvas>
 									</div>
 								</div>
@@ -296,7 +328,7 @@
 							<div class="col-lg-6 grid-margin stretch-card">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title">총 매출 chart</h4>
+										<h4 class="card-title">기간별 파트너 회원 chart</h4>
 										<canvas id="priceChart" style="height: 250px"></canvas>
 									</div>
 								</div>
@@ -317,6 +349,52 @@
 	</div>
 
 	<script>
+		function name() {
+
+			tt = [];
+			oo = [];
+			$.ajax({
+				url : 'goChart',
+				method : 'get',
+				success : function(res) {
+					console.log(res[0].tt);
+					$.each(res, function (i) {
+						tt.push(res[i].tt);
+						oo.push(res[i].oo);
+						
+						
+					})
+					console.log(tt);
+					const aaa = document.getElementById('priceChart').getContext('2d');
+					const priceChart = new Chart(aaa, {
+						type : 'line',
+						data : {
+							labels : tt,
+							datasets : [ {
+								label : '파트너 회원',
+								data : oo,
+								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+										'rgba(255, 159, 64, 0.2)',
+										],
+								borderColor : [ 'rgba(255, 99, 132, 1)',
+										'rgba(255, 159, 64, 1)' ],
+								borderWidth : 1
+							} ]
+						},
+						options : {
+							scales : {
+								y : {
+									beginAtZero : true
+								}
+							}
+						}
+					});
+					} //success
+
+				}) // ajax
+			}
+		name();
+
 		/* 	$("#chart").on("click", function() {
 				
 				$.ajax({
@@ -375,37 +453,9 @@
 				}
 			}
 		});
+
 		
-		
-		
-		
-		const aaa = document.getElementById('priceChart').getContext('2d');
-		const priceChart = new Chart(aaa, {
-			type : 'line',
-			data : {
-				labels : [ '파트너회원 수', '일반회원 수', '펫 마릿수' ],
-				datasets : [ {
-					label : '# of Votes',
-					data : [ '${pmemCount}', '${memCount}', '${petCount}' ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-							'rgba(255, 159, 64, 0.2)',
-							'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255, 99, 132, 1)',
-							'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
-					borderWidth : 1
-				} ]
-			},
-			options : {
-				scales : {
-					y : {
-						beginAtZero : true
-					}
-				}
-			}
-		});
-		
-		
-		
+
 		const bbb = document.getElementById('registerChart').getContext('2d');
 		const registerChart = new Chart(bbb, {
 			type : 'line',
@@ -430,9 +480,6 @@
 				}
 			}
 		});
-		
-		
-		
 	</script>
 </body>
 </html>
