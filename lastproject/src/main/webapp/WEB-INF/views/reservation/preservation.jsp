@@ -216,7 +216,6 @@
 					},
 					error : function(error){
 						alert("거절사유 작성중 오류발생");
-						location.reload();
 					}
 				})
 				alert("해당 예약신청을 거절하셨습니다.");
@@ -254,7 +253,6 @@
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				          .send({from: account, gas:3000000})
 				          .then(function(result){console.log("블록체인 체크 : " + result);})
-						
 					}
 				}); 
 		});

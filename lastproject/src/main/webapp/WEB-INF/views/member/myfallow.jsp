@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +81,9 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 				<div class="row" id="data-container">
+				<c:if test="${fn:length(follow)==0 }">
+					팔로우가 없습니다.
+				</c:if>
 				<c:forEach items="${follow }" var="follow">
 					<div class="col-lg-3 col-sm-6">
 						<div class="single-doctor mb-3 mb-lg-0">
