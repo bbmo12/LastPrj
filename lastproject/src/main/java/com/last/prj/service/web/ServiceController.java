@@ -4,25 +4,21 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pet.service.PetService;
-import com.last.prj.pet.service.PetVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.security.CustomUser;
+import com.last.prj.service.service.ServiceMapper;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
 
@@ -37,6 +33,8 @@ public class ServiceController {
 	private PmemberService pMemberDao;
 	@Autowired
 	private PetService petDAO;
+	@Autowired
+	private ServiceMapper mapper;
 	
 	@Autowired
 	private ReservationService reservationDao;
@@ -84,14 +82,18 @@ public class ServiceController {
 	
 	//파트너회원 내 수익조회
 	@RequestMapping("pMembenefit")
-	public String pMembenefit(Model model,Principal principal,ServiceVO vo) {
+	public String pMembenefit(Model model,Principal principal,ServiceVO vo, Criteria cri) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
 				String p_id = userDetails.getPmember().getP_id();
 				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
-				List<ServiceVO> list = serviceDao.pMembenefit(p_id);
+				cri.setAmount(5);
+				cri.setP_id(p_id);
+				PagingVO paging = new PagingVO(cri, mapper.pMembenefitTotal(cri));
+				model.addAttribute("page", paging);
+				List<ServiceVO> list = serviceDao.pMembenefit(cri);
 				model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));		
 				model.addAttribute("pMembenefit",list);
 				model.addAttribute("totalPrice",serviceDao.totalPrice(p_id));

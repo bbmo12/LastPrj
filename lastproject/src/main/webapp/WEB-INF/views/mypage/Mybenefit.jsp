@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
@@ -16,26 +15,14 @@
 		padding: 50px;
 	}
 
-	body {
-		background-color: #f9f9fa
-	}
-
 	.flex {
 		-webkit-box-flex: 1;
 		-ms-flex: 1 1 auto;
 		flex: 1 1 auto
 	}
 
-
 	.padding {
 		padding: 5rem
-	}
-
-	.card {
-		box-shadow: none;
-		-webkit-box-shadow: none;
-		-moz-box-shadow: none;
-		-ms-box-shadow: none
 	}
 
 	.pl-3,
@@ -43,51 +30,9 @@
 		padding-left: 1rem !important
 	}
 
-	.card {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		min-width: 0;
-		word-wrap: break-word;
-		background-color: #fff;
-		background-clip: border-box;
-		border: 1px solid #d2d2dc;
-		border-radius: 0
-	}
-
-	.card .card-title {
-		color: #000000;
-		margin-bottom: 0.625rem;
-		text-transform: capitalize;
-		font-size: 0.875rem;
-		font-weight: 500
-	}
-
-	.card .card-description {
-		margin-bottom: .875rem;
-		font-weight: 400;
-		color: #76838f
-	}
-
-	.card-text {
-		display: inline-block;
-		width: 200px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.table-responsive {
-		display: block;
-		width: 100%;
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-		-ms-overflow-style: -ms-autohiding-scrollbar
-	}
-
 	.table th {
 		font-size: 20px;
-		font-weight: bold;
+		font-weight: 500;
 	}
 
 	.table {
@@ -95,6 +40,11 @@
 		max-width: 100%;
 		margin-bottom: 1rem;
 		background-color: transparent
+	}
+
+	.table-striped tbody tr:nth-of-type(odd) {
+		background-color: #f9f9fd;
+
 	}
 
 	.table td {
@@ -106,7 +56,7 @@
 		font-size: 12px;
 		line-height: 1;
 		padding: .375rem .5625rem;
-		font-weight: normal
+		font-weight: normal;
 	}
 
 	.badge-info {
@@ -179,50 +129,62 @@
 						<div align="center">
 							<h1> ${pmember.name }님의 수익내역</h1>
 						</div>
-						<div class="page-content page-container" id="page-content" style="margin-top: 20px;">
-							<div class="row container d-flex justify-content-center">
-								<div class="card" style="width: 100%">
-									<div class="card-body" style="padding: 25px;">
-										<div class="table-responsive" style="width: 100%">
-											<table id="htmltable" class="table">
-												<thead>
-													<tr style="text-align: center;">
-														<th>서비스시작일</th>
-														<th>서비스상태</th>
-														<th>서비스내용</th>
-														<th>회원이름</th>
-														<th>금액</th>
-													</tr>
-												</thead>
-												<tbody style="text-align: center">
-													<c:forEach items="${pMembenefit }" var="benefit">
-														<tr>
-															<td>${benefit.startdate }</td>
-															<c:if test="${benefit.enddate eq null }">
-																<td><label class="badge badge-warning">서비스 진행중</label></td>
-															</c:if>
-															<c:if test="${benefit.enddate ne null }">
-																<td>${benefit.enddate}&nbsp;<label class="badge badge-success">종료</label></td>
-															</c:if>
-															<td>${benefit.content }</td>
-															<td>${benefit.m_id } </td>
-															<td>${benefit.price }</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-wrap">
+								<form action="pMembenefit" name="goform">
+								<input type="hidden" name="pageNum" value="1">
+									<table class="table table-striped">
+										<thead>
+											<tr style="text-align: center;">
+												<th>서비스시작일</th>
+												<th>서비스상태</th>
+												<th>서비스내용</th>
+												<th>회원이름</th>
+												<th>금액</th>
+											</tr>
+										</thead>
+										<tbody style="text-align: center">
+											<c:if test="${ fn:length(pMembenefit) == 0  }">
+                                                    <tr>
+                                                        <td colspan="6" align="center">조회된 결과가 없습니다.</td>
+                                                    </tr>
+                                              </c:if>
+											<c:forEach items="${pMembenefit }" var="benefit">
+												<tr>
+													<td>${benefit.startdate }</td>
+													<c:if test="${benefit.enddate eq null }">
+														<td><label class="badge badge-warning">서비스 진행중</label></td>
+													</c:if>
+													<c:if test="${benefit.enddate ne null }">
+														<td>${benefit.enddate}&nbsp;<label class="badge badge-success">종료</label></td>
+													</c:if>
+													<td>${benefit.content }</td>
+													<td>${benefit.m_id } </td>
+													<td>${benefit.price }</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									</form>
+									<my:nav jsFunc="go_page" page="${page}" />
+									<c:if test="${ fn:length(pMembenefit) != 0  }">
 											<h4 align="center">총 수익은 ${totalPrice.total_price }원 입니다.</h4>
-										</div>
-									</div>
+									</c:if>								
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script>
+		function go_page(p) {
+			goform.pageNum.value = p;
+			goform.submit();
+		}
+	</script>
 </body>
 
 </html>

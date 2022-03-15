@@ -213,20 +213,17 @@ public class PmemberController {
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")
-
 	public String mdeleteForm(HttpServletRequest request,Principal principal,Model model) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
 				String p_id = userDetails.getPmember().getP_id();
 				model.addAttribute("p_id",p_id);
+				model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); 
 				return "mypage/pmemDeleteForm";
-				
 			}
 		}
 		return null;
-
-
 	}
 	
 	//일반회원 회원탈퇴

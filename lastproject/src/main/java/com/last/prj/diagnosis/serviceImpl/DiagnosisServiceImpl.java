@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.last.prj.diagnosis.service.DiagnosisMapper;
 import com.last.prj.diagnosis.service.DiagnosisService;
 import com.last.prj.diagnosis.service.DiagnosisVO;
+import com.last.prj.pmember.service.Criteria;
 
 @Repository("diaDao")
 public class DiagnosisServiceImpl implements DiagnosisService {
@@ -26,14 +27,19 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 	}
 
 	@Override
-	public List<DiagnosisVO> pMemDiaList(String p_id) {
-		return map.pMemDiaList(p_id);
+	public List<DiagnosisVO> pMemDiaList(Criteria cri) {
+		return map.pMemDiaList(cri);
 	}
+
+	@Override
+	public int pMemDiaTotal(Criteria cri) {
+		return map.pMemDiaTotal(cri);
+	}
+
 
 	@Override
 	public List<DiagnosisVO> diaList() {
 		return map.diaList();
 	}
-
 
 }

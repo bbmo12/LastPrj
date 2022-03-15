@@ -85,25 +85,33 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="pmemberMyPage"
-									class="d-flex justify-content-between">
+								<li><a href="pmemberMyPage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="reservationSetting" class="d-flex justify-content-between">
+										<p>예약일정 설정</p>
+									</a></li>
+								<li><a href="preservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="pMemDiaList" class="d-flex justify-content-between">
+										<p>진료 내역</p>
+									</a></li>
+								<li><a href="pMembenefit" class="d-flex justify-content-between">
+										<p>결제 내역</p>
+									</a></li>
+								<li><a href="pmemcounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
-								</a></li>
+									</a></li>
 							</ul>
 						</aside>
 					</div>

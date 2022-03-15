@@ -1,5 +1,8 @@
 package com.last.prj.diagnosis.service;
 
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
+
 import lombok.Data;
 
 @Data
@@ -16,5 +19,7 @@ public class DiagnosisVO {
 	private String p_id;
 	
 	private String m_id;
-	
+	private PagingVO vo;
+	private Criteria cri;
+	private String total;
 }
