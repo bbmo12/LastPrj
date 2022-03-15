@@ -33,17 +33,27 @@
 <body>
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">파트너회원</h4>
-			<p class="card-description">
-				관리
-				<code>조건 별 검색</code>
-			</p>
+			<h4 class="card-title">후기 페이지</h4>
+			<div class="btn-group bg-white p-3" role="group"
+				aria-label="Basic example">
+				<button type="button"
+					class="btn btn-link text-dark py-0 border-right"
+					onclick="location.href = 'admService' ">
+					<code>Service page</code>
+				</button>
+				<button type="button"
+					class="btn btn-link text-dark py-0 border-right"
+					onclick="location.href = 'admQna' ">
+					<code>QnA page</code>
+				</button>
+			</div>
 			<div>
 				<form id="admDateForm">
-					<input type="hidden" name="code"> <input type="hidden"
-						name="pageNum" value="1"> FROM : <input type="text"
-						id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
-						type="text" id="toDate" name="toDate">
+					<input type="hidden" name="code"><input type="hidden"
+						name="repor"> <input type="hidden" name="pageNum"
+						value="1"> FROM : <input type="text" id="fromDate"
+						name="fromDate">&nbsp;&nbsp; TO : <input type="text"
+						id="toDate" name="toDate">
 					<!-- <button type="button" id="btnSearch">검 색</button> -->
 				</form>
 			</div>
@@ -52,14 +62,20 @@
 					data-code="">전체</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					data-code="601">불법 광고 및 홍보</button>
-					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-						data-code="602">음란물/선정성 콘텐츠</button>
-					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-						data-code="603">욕설,비속어,모욕</button>
-					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-						data-code="604">사생활 침해</button>
-					<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-						data-code="605">게시물 도배</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="602">음란물/선정성 콘텐츠</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="603">욕설,비속어,모욕</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="604">사생활 침해</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="605">게시물 도배</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="" data-repor="701">미처리</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="" data-repor="702">기각처리</button>
+				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
+					data-code="" data-repor="703">승인처리</button>
 			</div>
 			<div>
 				<input class="form-control" id="myInput" type="text"
@@ -68,12 +84,12 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<!-- <th>사진</th> -->
-						<th>이름</th>
-						<th>아이디</th>
-						<th>신고건수</th>
-						<th>가입날짜</th>
-						<th>파트너쉽</th>
+					<th>신고자</th>
+						<th>신고 당한 사람</th>
+						<th>신고일</th>
+						<th>신고 내역</th>
+						<th>신고 유형</th>
+						<th>처리 상태</th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
@@ -83,52 +99,48 @@
 			<div id="pagination"></div>
 		</div>
 	</div>
-	
-				<!-- Modal 창 -->
-			<div class="modal fade" id="myModal" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">신고내역</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
+	<!-- Modal 창 -->
+	<div class="modal fade" id="myModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">신고내역</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
-							<ul id="repo">
-								<!-- 신고 내역 -->
-							</ul>
+					<ul id="repo">
+						<!-- 신고 내역 -->
+					</ul>
 
-							<!-- 신고 처리 Form 태그 -->
-							<form id="form">
-								<div class="form-group">
-									<label for="amdReportOption">처리유형</label> <select class="repor"
-										id="repor" name="repor">
-										<option value="701" selected>미처리</option>
-										<option value="702">기각</option>
-										<option value="703">승인</option>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="message-text" class="col-form-label">처리사유</label>
-									<textarea class="state" id="state" name="state"></textarea>
-								</div>
-							</form>
+					<!-- 신고 처리 Form 태그 -->
+					<form id="form">
+						<div class="form-group">
+							<label for="amdReportOption">처리유형</label> <select class="repor"
+								id="repor" name="repor">
+								<option value="701" selected>미처리</option>
+								<option value="702">기각</option>
+								<option value="703">승인</option>
+							</select>
 						</div>
-						<div class="modal-footer">
-							<button type="button" id="admReportUpdate" name="admReportUpdate"
-								class="btn btn-primary">확 인</button>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">처리사유</label>
+							<textarea class="state" id="state" name="state"></textarea>
 						</div>
-					</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="admReportUpdate" name="admReportUpdate"
+						class="btn btn-primary">확 인</button>
 				</div>
 			</div>
-			<!--end Modal 창 -->
-	
-	
-	
+		</div>
+	</div>
+	<!--end Modal 창 -->
 	<script>	
 		//검색 함수
 		$(function() {
@@ -258,6 +270,8 @@
 												+ "</li><li>게시글 내용 : "
 												+ res[0].rev_content
 												+ "</li></ul>");
+								$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetail(this)' >상세페이지로..</button>");
+								
 							},
 							error : function(er) {
 								alert('오류가 났음. 개발자 호츌');
@@ -271,6 +285,8 @@
 		$('#myModal').on('hidden.bs.modal', function(e) {
 			$(this).find('ul').empty();
 			$(this).find('form')[0].reset();
+			$(this).find('#goDetail').remove();
+			
 
 		})//END 모달 내용 초기화
 
@@ -312,8 +328,11 @@
 		//===================리스트 호출 버튼==================
 		$(".codep").on('click', function() {
 			var code = $(this).data('code');
+			var repor = $(this).data('repor');
 			console.log(code);
+			console.log(repor);
 			$('#admDateForm')[0].code.value = code
+			$('#admDateForm')[0].repor.value = repor
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
 			
@@ -330,11 +349,27 @@
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
-					console.log(result.list);
-					viewReviewList(result.list);
-					viewPage(result.page);
-				}
-			});
+		               
+		               console.log(result.list);
+		               console.log("리절트페이지는 : " + result.page);
+		               console.log(result.chart);
+		               if(result.chart.length === 0 ){
+		                   $("#myChart").remove();
+		                   $(".myChart").append("<h4>데이터가 없습니다.</h4>");
+		               }else {
+		                  viewChart(result.chart);
+		               }
+		               if(result.page.length === 0){
+		                  $("#myTable").empty();
+		                  $("#myTable").append("<h4>데이터가 없습니다.</h4>");
+		               }else {
+		                  viewPmemberList(result.list);
+		                  viewPage(result.page);
+		               }
+		                  
+		            }
+
+			});//end ajax
 		}//===========end  리스트 ajax 호출==========
 			
 		//===========페이징 처리==========
