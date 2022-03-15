@@ -47,7 +47,6 @@ public class CounselController {
 	private CounselMapper mapper;
 
 	@RequestMapping("/mycounsel")
-
 	public String mycounsel(Model model, Principal principal, CounselVO counsel, Criteria cri) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -201,11 +200,5 @@ public class CounselController {
 	}
 	
 	
-	/*
-	 * @RequestMapping("counselReviewInsert") public String
-	 * counselReviewInsert(HttpServletRequest request, ReviewVO review, CounselVO
-	 * vo) {
-	 * 
-	 * return ; }
-	 */
+	 
 }

@@ -3,6 +3,9 @@ package com.last.prj.pmember.service;
 import java.util.List;
 
 
+
+
+
 public interface ReviewMapper {
 	
 	public List<ReviewVO> admReviewList();
@@ -12,4 +15,6 @@ public interface ReviewMapper {
 
 	//후기 조회
 	public ReviewVO reviewSearch(ReviewVO r_no);
+	
+	int counselreview(ReviewVO review);
 }
