@@ -90,31 +90,27 @@
 		WHERE R.P_ID = #{p_id}
 	</select>
 	<!-- 페이징번호 , 검색 가능 -->
-	<select id="memberPageList"
-		resultType="com.last.prj.pmember.service.PmemberVO">
+	<select id="memberPageList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
-		FROM ( SELECT ROWNUM RN, A.*
-		FROM (SELECT P_ID, NAME, PICTURE, CODE
-		FROM P_MEMBER
-		WHERE CODE = #{code}
-		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>
-		) A)
-		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+				FROM ( SELECT ROWNUM RN, A.*
+					   FROM (SELECT P_ID, NAME, PICTURE, CODE
+							 FROM P_MEMBER
+		        WHERE CODE = #{code}
+		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>) A)
+			WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
 	<!--총 회원 -->
 	<select id="memberPage" resultType="int">
 		SELECT COUNT(*) AS total
-		FROM P_MEMBER
+			FROM P_MEMBER
 		WHERE CODE = #{code}
 		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>
 	</select>
 
 	<!-- 파트너정보수정 -->
-	<update id="pmemberUpdate"
-		parameterType="com.last.prj.pmember.service.PmemberVO">
+	<update id="pmemberUpdate" parameterType="com.last.prj.pmember.service.PmemberVO">
 		UPDATE P_MEMBER
-
 		<set>
 			<if test="name != null">NAME = #{name},</if>
 			<if test="password != null">PASSWORD = #{password},</if>

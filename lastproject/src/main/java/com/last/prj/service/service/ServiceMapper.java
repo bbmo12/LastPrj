@@ -10,7 +10,8 @@ public interface ServiceMapper {
 
 	public List<ServiceVO> myPetServiceList(String m_id); // 일반회원 결제내역 조회
 	
-	public List<ServiceVO> pMembenefit(String p_id); //파트너회원 내 수익 조회
+	public List<ServiceVO> pMembenefit(Criteria cri); //파트너회원 내 수익 조회
+	public int pMembenefitTotal(Criteria cri);
 	
 	public int ServiceUpdate(int r_no);//진료작성 후 서비스종료일 입력
 	

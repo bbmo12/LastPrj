@@ -18,106 +18,59 @@
 
 </head>
 <style>
-    #my_section {
-        padding: 50px;
-    }
-
-    body {
-        background-color: #f9f9fa
-    }
-
-    .flex {
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto
-    }
-
-   
-    .padding {
-        padding: 5rem
-    }
-
-    .card {
-        box-shadow: none;
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        -ms-box-shadow: none
-    }
-
-    .pl-3,
-    .px-3 {
-        padding-left: 1rem !important
-    }
-
-    .card {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-        word-wrap: break-word;
-        background-color: #fff;
-        background-clip: border-box;
-        border: 1px solid #d2d2dc;
-        border-radius: 0
-    }
-
-    .card .card-title {
-        color: #000000;
-        margin-bottom: 0.625rem;
-        text-transform: capitalize;
-        font-size: 0.875rem;
-        font-weight: 500
-    }
-
-    .card .card-description {
-        margin-bottom: .875rem;
-        font-weight: 400;
-        color: #76838f
-    }
-    
-    .card-text {
-		display: inline-block;
-		width: 200px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	#my_section {
+		padding: 50px;
 	}
 
-    .table-responsive {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        -ms-overflow-style: -ms-autohiding-scrollbar
-    }
+	.flex {
+		-webkit-box-flex: 1;
+		-ms-flex: 1 1 auto;
+		flex: 1 1 auto
+	}
 
-    .table th {
-        font-size: 20px;
-        font-weight: bold;
-    }
+	.padding {
+		padding: 5rem
+	}
 
-    .table {
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 1rem;
-        background-color: transparent
-    }
+	.pl-3,
+	.px-3 {
+		padding-left: 1rem !important
+	}
 
-    .table td {
-        font-size: 16px;
-        padding: .875rem 0.9375rem
-    }
+	.table th {
+		font-size: 20px;
+		font-weight: 500;
+	}
 
-    .badge {
-        font-size: 12px;
-        line-height: 1;
-        padding: .375rem .5625rem;
-        font-weight: normal
-    }
-    .badge-info{
-        background-color: cornflowerblue;
-        border: none;
-    }
+	.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		background-color: transparent
+	}
+	
+	.table-striped tbody tr:nth-of-type(odd) {
+  		background-color: #f9f9fd;
+ 
+ 	}
+
+	.table td {
+		font-size: 16px;
+		padding: .875rem 0.9375rem
+	}
+
+	.badge {
+		font-size: 12px;
+		line-height: 1;
+		padding: .375rem .5625rem;
+		font-weight: normal;
+	}
+
+	.badge-info {
+		background-color: cornflowerblue;
+		border: none;
+	}
+	
     .badge-pay{
 		background-color: #38a4ff;
 		color: #fff;
@@ -159,6 +112,9 @@
 								<li><a href="preservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 									</a></li>
+								<li><a href="pMemDiaList" class="d-flex justify-content-between">
+										<p>진료 내역</p>
+									</a></li>	
 								<li><a href="pMembenefit" class="d-flex justify-content-between">
 										<p>결제 내역</p>
 									</a></li>
@@ -183,50 +139,50 @@
 						<div align="center">
 							<h1>${pmember.name }님의 예약내역조회</h1>
 						</div>
-						<div class="page-content page-container" id="page-content" style="margin-top: 20px;">
-							<div class="row container d-flex justify-content-center">
-								<div class="card" style="width: 100%">
-									<div class="card-body" style="padding: 25px;">
-										<div class="table-responsive">
-											<form action="preservationSelect" name="goform" id="goform">
-												<input type="hidden" name="pageNum" value="1">
-												<table id="htmltable" class="table">
-													<thead>
-														<tr style="text-align: center;">
-															<th>예약번호</th>
-															<th>예약신청일자</th>
-															<th>예약시간</th>
-															<th>예약자 이름</th>
-															<th>품종</th>
-															<th>증상</th>
-															<th>승인여부</th>
-														</tr>
-													</thead>
-													<tbody style="text-align: center">
-														<c:forEach items="${preservation }" var="pres">
-															<tr>
-																<td>
-																<input class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
-																<td>${pres.r_date}</td>
-																<td>${pres.startdate }&nbsp; ${pres.time }</td>
-																<td>${pres.m_id }</td>
-																<td>${pres.pcontent }
-																<td>${pres.rcontent }</td>
-																<td>											    
-																   <input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }																                                                          																						
-																</td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-											</form>
-										</div>
-									</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="table-wrap">
+									<form action="preservationSelect" name="goform" id="goform">
+										<input type="hidden" name="pageNum" value="1">
+										<table class="table table-striped">
+											<thead>
+												<tr style="text-align: center;">
+													<th>예약번호</th>
+													<th>예약신청일자</th>
+													<th>예약시간</th>
+													<th>예약자 이름</th>
+													<th>품종</th>
+													<th>증상</th>
+													<th>승인여부</th>
+												</tr>
+											</thead>
+											<tbody style="text-align: center">
+												<c:if test="${ fn:length(preservation) == 0  }">
+                                                    <tr>
+                                                        <td colspan="6" align="center">조회된 결과가 없습니다.</td>
+                                                    </tr>
+                                                </c:if>
+												<c:forEach items="${preservation }" var="pres">
+													<tr>
+														<td>
+															<input class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
+														<td>${pres.r_date}</td>
+														<td>${pres.startdate }&nbsp; ${pres.time }</td>
+														<td>${pres.m_id }</td>
+														<td>${pres.pcontent }
+														<td>${pres.rcontent }</td>
+														<td>
+															<input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</form>
+									<my:nav jsFunc="go_page" page="${page}" />
 								</div>
 							</div>
 						</div>
-						<my:nav jsFunc="go_page" page="${page}" />
-
 					</div>
 				</div>
 			</div>

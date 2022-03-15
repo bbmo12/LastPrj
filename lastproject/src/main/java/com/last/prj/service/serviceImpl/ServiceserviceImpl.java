@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.pmember.service.Criteria;
 import com.last.prj.service.service.ServiceMapper;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
@@ -26,8 +27,13 @@ public class ServiceserviceImpl implements ServiceService {
 	}
 
 	@Override
-	public List<ServiceVO> pMembenefit(String p_id) {
-		return map.pMembenefit(p_id);
+	public List<ServiceVO> pMembenefit(Criteria cri) {
+		return map.pMembenefit(cri);
+	}
+
+	@Override
+	public int pMembenefitTotal(Criteria cri) {
+		return map.pMembenefitTotal(cri);
 	}
 
 	@Override
@@ -61,10 +67,5 @@ public class ServiceserviceImpl implements ServiceService {
 		// TODO Auto-generated method stub
 		return map.petProtoColSearch(key, data, m_id);
 	}
-
-
-
-
-
 	
 }
