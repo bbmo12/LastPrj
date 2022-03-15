@@ -57,6 +57,11 @@ public class PetServiceImpl implements PetService{
 		return map.mypetDelete(pet_no);
 	}
 
+	@Override
+	public int AutoCode(int pet_no) {
+		return map.AutoCode(pet_no);
+	}
+
 
 
 }

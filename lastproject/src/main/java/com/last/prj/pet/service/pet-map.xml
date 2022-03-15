@@ -73,4 +73,10 @@
 		PET_NO = #{pet_no}
 	</delete>
 	
+	<!-- 파라미터 : 펫번호  리턴 : 펫코드값(품종)  -->
+	<select id="AutoCode" parameterType="int" resultType="int">
+		SELECT CODE FROM PET
+		WHERE PET_NO = #{pet_no}
+	</select>
+	
 </mapper>
