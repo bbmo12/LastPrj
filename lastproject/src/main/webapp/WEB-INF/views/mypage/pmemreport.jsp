@@ -128,10 +128,10 @@
         </div>
     </section>
     <section id="my_section">
-       <div class="container" style="max-width: 1200px;">
+       <div class="container" style="max-width: 1350px;">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="blog_right_sidebar">
+                    <div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
                                 style="width: 210px" alt="">
@@ -145,6 +145,9 @@
                                 <li><a href="pmemberMyPage" class="d-flex justify-content-between">
                                         <p>내 프로필</p>
                                     </a></li>
+                                <li><a href="reservationSetting" class="d-flex justify-content-between">
+										<p>예약일정 설정</p>
+									</a></li>
                                 <li><a href="preservationSelect" class="d-flex justify-content-between">
                                         <p>예약 내역</p>
                                     </a></li>

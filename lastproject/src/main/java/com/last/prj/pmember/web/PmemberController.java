@@ -2,7 +2,6 @@ package com.last.prj.pmember.web;
 
 import java.io.File;
 import java.security.Principal;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -18,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 
 import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
@@ -119,7 +120,7 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -165,6 +166,7 @@ public class PmemberController {
 		for(int i=0; i < price.getPriceVOList().size(); i++) {
 			pmemDao.insertService(price.getPriceVOList().get(i));
 		}
+		redirectAttr.addFlashAttribute("update","수정실패");
 
 		// 비밀번호 암호화
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
