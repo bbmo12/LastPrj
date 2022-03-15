@@ -162,7 +162,7 @@ form {
 				<br>
 
 				<div class="mb-3">
-					<textarea class="ckeditor4" id="content" name="content" required></textarea>
+					<textarea class="ckeditor4" id="content" name="content" required="required"></textarea>
 					<script>
 						CKEDITOR.replace('content', ckeditor_config);
 					</script>
@@ -279,6 +279,14 @@ form {
 
 		/*li 태그를 input 태그로 바꿔 넘기기 용이하게...*/
 		function tagInput() {
+			
+			var content = $('#content').val();
+			if(content == null){
+				alert('내용을 입력하세요');
+				return false;
+				
+			}
+			
 			var tValue = document
 					.querySelectorAll("li.tag-item span:first-child");
 

@@ -81,9 +81,7 @@ public class BoardController {
 	// 게시글 수정 
 	@RequestMapping(value="/boardUpdate")
 	public String boardUpdate(BoardVO board, Model model) {
-		
 		boardDao.boardUpdate(board);
-		
 		return "redirect:boardTables";
 
 	}

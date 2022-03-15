@@ -17,8 +17,9 @@
 <link rel="stylesheet"  href="resources/assets123/css/style.css">
 <link rel="shortcut icon" href="resources/assets123/images/favicon.png" />
 
-	<script src="resources/assets123/js/chart.js"></script>
-	<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1"></script>
+	<!--  <script src="resources/assets123/js/chart.js"></script> -->
+	<!--<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script> -->
 	<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
 	<script	src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
 	<script src="resources/assets123/js/off-canvas.js"></script>

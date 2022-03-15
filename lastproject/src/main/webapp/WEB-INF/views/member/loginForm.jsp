@@ -39,12 +39,7 @@
 					<div class="brand">
 						<img src="resources/login/logo.jpg" alt="logo">
 					</div>
-					<div class="options">
-						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular"
-							style="width: 200px; margin-top: 8px;">일반회원</button>
-						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner"
-							style="width: 200px;">파트너회원</button>
-					</div>
+					
 					<div class="card fat" style="margin-top: -35px;">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
@@ -64,7 +59,7 @@
 									</div>
 									<div class="form-group">
 										<label for="password">Password
-											<a href="forgot.html" class="float-right">
+											<a href="pwdSearchForm" class="float-right">
 												비밀번호찾기
 											</a>
 										</label>
@@ -81,12 +76,12 @@
 									</div>
 									<div class="form-group m-0">
 										<a href="javascript:void(0)">
-											<img alt="" src="resources/upload/kakaologin.png" onclick="kakaoLogin();"
+											<img alt="" src="resources/upload/kakaoo.png" onclick="kakaoLogin();"
 												style="width: 298px; height: 50px; margin-top: 10px;">
 										</a>
 									</div>
 									<div class="mt-4 text-center">
-										계정이 없으신가요?<a href="joinForm" class="text-primary">회원가입</a>
+										계정이 없으신가요?<a href="join" class="text-primary">회원가입</a>
 									</div>
 								</form>
 							</div>
@@ -100,95 +95,12 @@
 	<script src="resources/login/my-login.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript">
-		function mlogin() {
 
-			$('#partner').toggle();
-			$("#test").empty();
-			var loginForm = `
-				<form class="my-login-validation" action="login" method="post">
-				<div class="form-group">
-					<label for="email">E-Mail Address
-						<a href="memberIdSearchForm" class="float-right">
-							아이디찾기
-						</a>
-					</label>
-					<input type="email" id="id" name="id" class="form-control" value="" required autofocus>
-					<div class="invalid-feedback">
-						Email is invalid
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="password">Password
-						<a href="forgot.html" class="float-right">
-							비밀번호찾기
-						</a>
-					</label>
-					<input id="password" name="password" type="password" class="form-control"
-						name="password" required data-eye>
-					<div class="invalid-feedback">
-						Password is required
-					</div>
-				</div>
-				<div class="form-group m-0">
-					<button type="submit" class="btn btn-primary btn-block">
-						Login
-					</button>
-				</div>
-				<div class="form-group m-0">
-				<a href="javascript:void(0)">
-					<img alt="" src="resources/upload/kakaologin.png"onclick="kakaoLogin();" style="width: 298px; height: 50px; margin-top: 10px;">
-				</a>
-				</div>
-				<div class="mt-4 text-center">
-					계정이 없으신가요?<a href="joinForm" class="text-primary">회원가입</a>
-				</div>
-			</form>`
-			$("#test").append(loginForm);
-		}
-		function plogin() {
-			$('#regular').toggle();
-			$("#test").empty();
-			var loginForm = `
-				<form class="my-login-validation" action="plogin" method="post">
-				<div class="form-group">
-					<label for="email">E-Mail Address
-						<a href="memberIdSearchForm" class="float-right">
-							아이디찾기
-						</a>
-					</label>
-					<input type="email" id="id" name="id" class="form-control" value="" required autofocus>
-					<div class="invalid-feedback">
-						Email is invalid
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="password">Password
-						<a href="forgot.html" class="float-right">
-							비밀번호찾기
-						</a>
-					</label>
-					<input id="password" name="password" type="password" class="form-control"
-						name="password" required data-eye>
-					<div class="invalid-feedback">
-						Password is required
-					</div>
-				</div>
-				<div class="form-group m-0">
-					<button type="submit" class="btn btn-primary btn-block">
-						Login
-					</button>
-				</div>
-				<div class="form-group m-0">
-				<a href="javascript:void(0)">
-					<img alt="" src="resources/upload/kakaologin.png"onclick="kakaoLogin();" style="width: 298px; height: 50px; margin-top: 10px;">
-				</a>
-				</div>
-				<div class="mt-4 text-center">
-					계정이 없으신가요?<a href="joinForm" class="text-primary">회원가입</a>
-				</div>
-			</form>`
-			$("#test").append(loginForm);
-		}
+	
+	var result = '${resultMsg1}';
+	if(result === 'result1'){
+		alert("임시 비밀번호가 발급되었습니다. 메일을 확인해주세요.");
+	}
 		function login() {
 			$.ajax({
 				url: 'geturi.do',

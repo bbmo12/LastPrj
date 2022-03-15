@@ -45,6 +45,7 @@ public class CounselController {
 	private CounselMapper mapper;
 
 	@RequestMapping("/mycounsel")
+
 	public String mycounsel(Model model, Principal principal, CounselVO counsel, Criteria cri) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -67,6 +68,7 @@ public class CounselController {
 
 	// 파트너회원 상담내역
 	@RequestMapping("/pmemcounsel")
+
 	public String pmemcounsel(Model model, Principal principal, Criteria cri) {
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -89,7 +91,21 @@ public class CounselController {
 
 	@RequestMapping(value = "/csDetail", method = RequestMethod.GET)
 	public String csDetail(@RequestParam("p_id") String p_id, @RequestParam("m_id") String m_id,
-			@RequestParam("pet_no") int pet_no, @RequestParam("c_no") int c_no, Model model) {
+			@RequestParam("pet_no") int pet_no, @RequestParam("c_no") int c_no, Model model, Principal principal) {
+		
+		if (principal != null) {
+
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (userDetails.getRole() == "일반회원") {
+				String mId = userDetails.getMember().getM_id();
+				model.addAttribute("mId", mId);
+			} else if (userDetails.getRole() == "파트너회원") {
+				String pId = userDetails.getPmember().getP_id();
+				model.addAttribute("pId", pId);
+
+			}
+		}
 
 		model.addAttribute("mInfo", memDao.memberOne(m_id));
 		model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
@@ -103,56 +119,72 @@ public class CounselController {
 
 	// 기존 채팅방 존재 여부 확인 후 새로운 상담글 폼으로 이동 + p_id 정보 + m_id별 펫정보 받아감.
 	@RequestMapping(value = "/EnterCs")
-	public String EnterCs(@RequestParam("m_id") String m_id, @RequestParam("p_id") String p_id, HttpServletRequest request, HttpServletResponse response, Model model, CounselVO counsel, Criteria cri)
-			throws Exception {
-		
-		/*
-		 * String mId = (String) session.getAttribute("mId");
-		 * 
-		 * if(mId == null) { //로그인 여부 체크
-		 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out_writer =
-		 * response.getWriter();
-		 * out_writer.println("<script>alert('먼저 로그인하세요.');</script>");
-		 * out_writer.flush();
-		 * 
-		 * return "member/loginForm";
-		 */
-		if(counselDao.isExist(m_id, p_id) > 0 ){
-			//기존 상담 여부 체크
+	public String EnterCs(@RequestParam("p_id") String p_id, Principal principal, HttpServletRequest request,
+			HttpServletResponse response, Model model, CounselVO counsel, Criteria cri) throws Exception {
+
+		String mId = "";
+
+		if (principal != null) {
+
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (userDetails.getRole() == "일반회원") {
+				mId = userDetails.getMember().getM_id();
+				model.addAttribute("mId", mId);
+			}
+		}
+
+		if (counselDao.isExist(mId, p_id) > 0) {
+			// 기존 상담 여부 체크
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out_writer = response.getWriter();
-			out_writer.println("<script>alert('이미 진행 중인 상담이 있습니다. 상담 내역 페이지에서 확인하세요.');</script>");
+			out_writer.println("<script>alert('이미 진행 중인 상담이 있습니다. 상담 내역 페이지에서 확인하세요.');"
+					+ "location.href='mycounsel';</script>");
 			out_writer.flush();
-			
-			return "pmemcounsel";
-		
+
+			return null;
+
 		} else {
-			//새로운 상담 폼으로 이동
-			model.addAttribute("petList", petDAO.petmemberList(m_id));
+			// 새로운 상담 폼으로 이동
+			model.addAttribute("petList", petDAO.petmemberList(mId));
 			model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
+
 			return "counsel/newCsForm";
 		}
 	}
-		
 
 	// 새로운 상담 등록
 	@PostMapping("/newCs")
-	public String newCs(HttpServletRequest request, CounselVO cs) throws Exception {
-
+	public String newCs(HttpServletRequest request, CounselVO cs, HttpServletResponse response, Model model) throws Exception {
+		
 		counselDao.newCs(cs);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out_writer = response.getWriter();
+		out_writer.println("<script>alert('상담이 등록되었습니다.');"
+				+ "location.href='mycounsel';</script>");
+		out_writer.flush();
 
-		return "pmemcounsel";
+
+		return null;
 	}
 
 	// 메시지 ajax
-	@RequestMapping(value = "/newCsAns", method = {RequestMethod.POST, RequestMethod.GET})
-	public String newAns(@RequestParam("p_no") int p_no, Principal principal, HttpServletRequest request, CounselVO cs, HttpSession session) throws Exception {
+	@RequestMapping(value = "/newCsAns", method = { RequestMethod.POST, RequestMethod.GET })
+	public String newAns(@RequestParam("p_no") int p_no, Principal principal, Model model, HttpServletRequest request, CounselVO cs) throws Exception {
 
-		CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userDetails.getPmember().getP_id();
-		
-		if (id != null) {
-			counselDao.codeUpd(p_no);
+		if (principal != null) {
+
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (userDetails.getRole() == "일반회원") {
+				String mId = userDetails.getMember().getM_id();
+				model.addAttribute("mId", mId);
+			} else if (userDetails.getRole() == "파트너회원") {
+				String pId = userDetails.getPmember().getP_id();
+				model.addAttribute("pId", pId);
+				counselDao.codeUpd(p_no);
+			}
 		}
 		counselDao.newCsAns(cs);
 
@@ -160,11 +192,11 @@ public class CounselController {
 	}
 
 	// 상담 종료 ajax
-	@RequestMapping(value="/CodeUdt", method=RequestMethod.GET)
-	public String CodeUdt(@RequestParam("p_no") int p_no, Model model) throws Exception{
-		
+	@RequestMapping(value = "/CodeUdt", method = RequestMethod.GET)
+	public String CodeUdt(@RequestParam("p_no") int p_no, Model model) throws Exception {
+
 		counselDao.CodeUdt(p_no);
-		
+
 		return "mypage/csDetail";
 	}
 }

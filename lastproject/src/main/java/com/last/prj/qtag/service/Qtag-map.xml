@@ -21,7 +21,7 @@
 		MERGE
 		INTO q_tag a
 		USING dual
-		ON (TRIM(a.t_name) = TRIM(#{t_name}))
+		ON (a.t_name = TRIM(#{t_name}))
 		WHEN NOT MATCHED THEN
 		INSERT
 		(a.t_name)

@@ -48,10 +48,9 @@ public class HomeController {
 			
 		CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		id = userDetails.getMember().getM_id();
-		
+		}
 		model.addAttribute("noticeList", noticeDao.noticeSelectList(id));
 		
-		}
 		return noticeDao.noticeSelectList(id);
 	}
 	

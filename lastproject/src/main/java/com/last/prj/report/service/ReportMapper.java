@@ -42,5 +42,9 @@ public interface ReportMapper {
 		
 		public int pmemReport(Criteria cri);//파트너마이페이지 신고내역
 		public List<ReportVO> pmemReportList(Criteria cri);
-
+		
+		//리서치 업데이트를 위한
+		public ReportVO admReSearch(int rep_no);
+		//회원의 신고 카운트 업데이트
+		public int admReSearchUpdate(ReportVO vo);
 }

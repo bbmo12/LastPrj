@@ -188,9 +188,8 @@
 	</update>
 
 	<!-- 질문글 삭제 (2) : 답변이 없는 게시물은 완전히 delete -->
-	<delete id="qDeleteTwo" parameterType="int">
-		DELETE FROM qna WHERE q_no
-		= #{q_no}
+	<delete id="qDeleteTwo" parameterType="com.last.prj.qna.service.QnaVO">
+		DELETE FROM qna WHERE q_no= #{q_no}
 	</delete>
 
 	<!-- 답변글 수정 -->

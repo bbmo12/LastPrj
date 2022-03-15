@@ -20,7 +20,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
 	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 .container-fluid {
 	width: 100%;
@@ -66,62 +65,22 @@
 					placeholder="Search.."> <br>
 			</div>
 			<!-- end 조건 검색한 리스트에서 검색 -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<!-- <th>사진</th> -->
+						<th>이름</th>
+						<th>아이디</th>
+						<th>신고건수</th>
+						<th>가입날짜</th>
+						<th>파트너쉽</th>
+					</tr>
+				</thead>
+				<tbody id="myTable">
 
-
-			<div class="row">
-				<div class="col-lg-6 grid-margin stretch-card">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">차트</h4>
-							<p class="card-description" id="mainCount">
-								총 회원 수 :
-								<code id="a"></code>
-								<br> 수의사 수 :
-								<code id="b"></code>
-								훈련사 수 :
-								<code id="c"></code>
-								미용사 수 :
-								<code id="d"></code>
-								펫시터 수 :
-								<code id="e"></code>
-							</p>
-
-							<div class="card">
-								<div class="card-body">
-									<h4 class="card-title mainChart">파트너 회원 통계</h4>
-									<canvas id="mainChart" style="height: 250px"></canvas>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 grid-margin stretch-card">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">파트너 회원 목록</h4>
-							<p class="card-description">
-								목록
-								<code id="pa">.동적으로...</code>
-							</p>
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>이름</th>
-										<th>아이디</th>
-										<th>가입일</th>
-										<th>파트너쉽</th>
-									</tr>
-								</thead>
-								<tbody id="myTable">
-
-								</tbody>
-							</table>
-							<div id="pagination"></div>
-						</div>
-					</div>
-				</div>
-			</div>
+				</tbody>
+			</table>
+			<div id="pagination"></div>
 		</div>
 	</div>
 
@@ -145,7 +104,7 @@
 					<!-- chart.js -->
 					<div class="card">
 						<div class="card-body">
-							<h4 class="card-title myChart">추로스 chart</h4>
+							<h4 class="card-title">추로스 chart</h4>
 							<canvas id="myChart" style="height: 50px"></canvas>
 						</div>
 					</div>
@@ -169,29 +128,11 @@
 
 	<!-- end 해당 파트너 회원한테 메시지 보내기 Modal -->
 
-	<bod> </bod>
-
 	<script>
 		
-		
+		//검색 함수
 		$(function() {
-			// title='상세정보를 보시려면 이름을 클릭하세요..'
-			var title_;
-			$("tr").hover(function(e){
-				$('tr').attr( 'title', '상세정보를 보시려면 이름을 클릭하세요..' );
-				title_ = $(this).attr("title");
-				$("bod").append("<div id='ti'></div>");
-				$("#ti").css("width","100px");
-				$("#ti").text(title_);
-			}, function() {													// <a> hover 시 : mouseLeave
-
-				$(this).attr("title", title_);				// title 속성 반환
-				$("#ti").remove();										// div#tip 삭제
-
-			});
-			
-			
-			//검색 함수
+		
 			$("#myInput").on("keyup",function() {
 						var value = $(this).val().toLowerCase();
 
@@ -206,24 +147,7 @@
 		
 		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
-			console.log(result.f_content);
 			$("#myTable").empty();
-			
-			/* 	목록에 전체 / 수의사 이런거 표시할려고 ㅠㅠ
-				$("#pa").html('');
-				if(result[0].code == null){
-					$("#pa").html('전체');
-				}else if(result[0].f_content == '훈련사'){
-					$("#pa").html('훈련사');
-				}else if(result[0].f_content == '미용사'){
-					$("#pa").html('미용사');
-				}else if(result[0].f_content == '펫시터'){
-					$("#pa").html('펫시터');
-				}else if(result[0].f_content == '수의사'){
-					$("#pa").html('수의사');
-				}
-	 			*/
-			
 			console.log("result는: " + result);
 
 			$.each(result,function(i) {
@@ -233,70 +157,29 @@
 														+ "</a></td><td>"
 														+ result[i].p_id
 														+ "</td><td>"
+														+ "<div class='progress'>"
+														+ "<div class='progress-bar bg-success' role='progressbar' style='width:"
+														+ result[i].c_report
+														+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
+														+ "</div></div>"
+														+ "</td><td>"
 														+ result[i].startdate
 														+ "</td><td>"
 														+ result[i].f_content
 														+ "</td></tr>" );
 							}) // end each.
-		}
-		//=====================  end리스트 만드는 함수 ====================
-		
+							
 			
-		// ===============Main chart 그리기=====================	
-		let viewChart = function (result) {
-				 console.log(result[0].ch);
-				 $("#a").html(result[0].to);
-				 $("#b").html(result[0].ch);
-				 $("#c").html(result[1].ch);
-				 $("#d").html(result[2].ch);
-				 $("#e").html(result[3].ch);
-		
-		//Chart 초기화 : detroy API 안먹힘 거지같네
-		 $("#mainChart").remove();
-		 $(".mainChart").append("<canvas id='mainChart'></canvas>");
-			
-			
-			
-		    const ctx = document.getElementById('mainChart').getContext('2d');
-			const mainChart = new Chart(ctx, {			
-				type : 'bar',
-				data : {
-					labels : [ '수의사', '훈련사','미용사','펫시터' ],
-					datasets : [ {
-						label : '파트너쉽',
-						data : [ result[0].ch, result[1].ch, result[2].ch,result[3].ch ],
-						backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)','rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)' ],
-						borderColor : [ 'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)','rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)' ],
-						borderWidth : 1
-					} ]
-				},
-				options : {
-					
-					scales : {
-						y : {
-							beginAtZero : true
-						}
-					}
-				},
-			
-			});
-			
-			
-			
-		}
-		// ===============end Main chart 그리기=====================
 
-		
+		}//=====================  end리스트 만드는 함수 ====================
 
 			
 		// =================회원 단건 조회 Modal===================
 		
 			function show() {
-				 var p_id = $(event.target).parent().next().text();
-			console.log(p_id); 
-			//var p_id = 'kim1@a.com';
+				/* var p_id = $(event.target).parent().next().text();
+			console.log(p_id); */
+			var p_id = 'kim1@a.com';
 			//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
 			 $.ajax({
 				url : 'admPmemberOne',
@@ -315,16 +198,10 @@
 											+ "</li><li>"
 											+ res.list.p_info
 							    			+"</li></ul>");
-					$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetail(this)' >상세페이지로..</button>");
+					$(".modal-footer").append("<button type='button' data-value="+res.list.p_id+" onclick='goDetail(this)' >상세페이지로..</button>");
 					//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
 					
 					//=========================Modal의 Chart 그리기
-					
-					//Chart 초기화 : detroy API 안먹힘 거지같네
-					 $("#myChart").remove();
-					 $(".myChart").append("<canvas id='myChart'></canvas>");
-					
-					
 					const ctx = document.getElementById('myChart').getContext('2d');
 					const myChart = new Chart(ctx, {
 						type : 'bar',
@@ -376,7 +253,7 @@
 		//모달 내용 초기화
 		$('#myModal').on('hidden.bs.modal', function(e) {
 			$(this).find('ul').empty();
-			$(this).find('#goDetail').remove();
+			$(this).find('a').remove();
 		})//END 모달 내용 초기화
 		
 			
@@ -399,16 +276,8 @@
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
-					console.log(result.list);
+					console.log("리절트리스트는 :"+result.list);
 					console.log("리절트페이지는 : " + result.page);
-					console.log(result.chart);
-					if(result.chart.length != 0){
-						viewChart(result.chart);
-					}else{
-						 $("#myChart").remove();
-						 $(".myChart").append("<h4>데이터가 없습니다.</h4>");
-					}
-					
 					viewPmemberList(result.list);
 					viewPage(result.page);
 				}

@@ -10,8 +10,15 @@ import java.net.URL;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,11 +35,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.last.prj.ffile.web.FfileUtil;
+import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PetcareVO;
@@ -100,7 +109,8 @@ public class MemController {
 				
 			}
 		}
-		memDao.memberDelete(m_id);
+		memDao.memberDelete(m_id); //업데이트 이름, end date 빼고 다 널 시킴
+		
 
 		session.invalidate();
 		return "redirect:home";
@@ -133,6 +143,14 @@ public class MemController {
 				e.printStackTrace();
 			}
 		}
+		
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = member.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		member.setPassword(pwd);
+		
+		
 		memDao.memberUpdate(member);
 		return "redirect:memberMypage";
 	}
@@ -248,7 +266,103 @@ public class MemController {
 	public String memberIdSearch(@RequestParam("name") String name, @RequestParam("tel") String tel) {
 		return memDao.memberIdSearch(name, tel);
 	}
+	
+	@RequestMapping("/pwdSearchForm") // 일반회원 아이디찾기 폼으로 이동
+	public String pwdSearchForm() {
+		return "member/pwdSearchForm";
+	}
+	
+	/*
+	// 이메일 인증, 비밀번호찾기
+	@RequestMapping("/searchPassword")
+	   public String searchPassword(@RequestParam("id") String uid, Model model, RedirectAttributes re) {
+	      LoginVO login = memDao.searchPwd(uid);
+	      MemVO mem = new MemVO();
+	      PmemVO pmem = new PmemVO();
+	      
+	      if (login != null) {
+	         String email = login.getId();
+	         String pw = "";
+	         for (int i = 0; i < 6; i++) {
+	            pw += (char) ((Math.random() * 26) + 97);
+	         }
+	        
+	         char type = login.getUser_type();
+	         
+	         if(type == 'M') {
+	        	 mem.setM_id(email);
+	        	 
+	        	// 비밀번호 암호화
+	     		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+	     		String new_pw = encoder.encode(pw);
+	     		
+	        	 mem.setPassword(new_pw);
+	        	 memDao.memberPwdUpdate(mem);
+	        	 
+	         } else if(type == 'P') {
+	        	 pmem.setP_id(email);
+	        	 
+	        	// 비밀번호 암호화
+		     	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		     	String new_pw = encoder.encode(pw);
+	        	 
+	        	 pmem.setPassword(new_pw);
+	        	 pmemDao.pmemberPwdUpdate(pmem);
+	         }
+	        
+	         try {
+	            // int index = username.indexOf("@");
+	            // int indexPw = password.indexOf(",");
+	            String id = "nuriyy433";// id
+	            String pwd = "";// 비번 입력해야됨
+	            String host = "smtp.gmail.com";
+	            // 네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
+	            // 네이버 이메일 비밀번호를 기재합니다.
+	            int port = 465;
+	            // 메일 내용
+	            // 메일을 발송할 이메일 주소를 기재해 줍니다.
+	            Properties props = System.getProperties();
+	            props.put("mail.smtp.host", host);
+	            props.put("mail.smtp.port", port);
+	            props.put("mail.smtp.auth", "true");
+	            props.put("mail.smtp.ssl.enable", "true");
+	            props.put("mail.smtp.ssl.trust", host);
+	            props.put("mail.debug", "true");
+	            /*
+	             * System.out.println(password); System.out.println(username.substring(0,
+	             * index));
+	             */
+	      /*     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 
+	               // String un=username.substring(0, index);
+	               // String pw=password.substring(0,indexPw);
+	               protected PasswordAuthentication getPasswordAuthentication() {
+	                  return new PasswordAuthentication(id, pwd);
+	               }
+	            });
+	            session.setDebug(true);
+	            // for debug
+	            Message mimeMessage = new MimeMessage(session);
+	            mimeMessage.setFrom(new InternetAddress(id + "@gmail.com"));// 보내는사람 주소
+	            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));// 받는사람 주소
+	            mimeMessage.setSubject("임시비밀번호 발급");
+	            mimeMessage.setText(email + "님의 임시비밀번호는" + pw + "입니다");
+	            Transport.send(mimeMessage);
+
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
+	         
+	         re.addFlashAttribute("resultMsg1", "result1");
+	         return "redirect:/loginForm";
+	      } else {
+	    	  re.addFlashAttribute("resultMsg2", "result2");
+	         return "redirect:/pwdSearchForm";
+	      }
+
+	   }
+	*/
+	
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
@@ -430,7 +544,7 @@ public class MemController {
 
 	@RequestMapping("/geturi.do")
 	@ResponseBody
-	public String getKakaoAuthUrl(HttpServletRequest request) throws Exception {
+	public String getKakaoAuthUrl(HttpServletRequest request)  throws Exception {
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=47ef13464842c3a22235787a9d64e6fc"
 				+ "&redirect_uri=http://localhost/prj/dologin" + "&response_type=code";
 		return reqUrl;
@@ -438,27 +552,53 @@ public class MemController {
 
 	// 카카오 연동정보 조회
 	@RequestMapping(value = "/dologin", produces = "application/json; charset=utf8")
-	public String oauthKakao(@RequestParam(value = "code", required = false) String code, HttpSession session)
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Principal principal, Model model,MemVO member)
 			throws Exception {
+		// 세션 가져오기
+				// 로그인 전에도 실행되는 부분이라 null체크
+				String id = "";
+				if(principal != null) {
+					
+					CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+					
+					if(userDetails.getRole() == "일반회원") {
+						//System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+						//System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+						id = userDetails.getMember().getM_id();
+
+					}
+				}
+				
 		System.out.println("#########" + code);
 		String access_Token = getAccessToken(code);
 		System.out.println("###access_Token#### : " + access_Token);
 
 		HashMap<String, Object> userInfo = getUserInfo(access_Token);
+		System.out.println("------------------------------------------------------------");
 		System.out.println("###access_Token#### : " + access_Token);
 		System.out.println("###userInfo#### : " + userInfo.get("email"));
 		System.out.println("###nickname#### : " + userInfo.get("nickname"));
 		System.out.println(userInfo);
 
 		if (memDao.idCheck(userInfo.get("email").toString())) {
-			session.setAttribute("memberinfo", memDao.memberOne(userInfo.get("email").toString()));
+
+			model.addAttribute("memberinfo",memDao.memberOne(userInfo.get("email").toString()));
 			memDao.memberOne(userInfo.get("email").toString());
 			System.out.println("여기-------------------------------------------");
 			System.out.println(memDao.memberOne(userInfo.get("email").toString()));
+			
 			return "redirect:home"; // 본인 원하는 경로 설정
+			
+			
+			
 		} else {
-			session.setAttribute("userInfo", userInfo);
-			return "member/joinForm"; // 본인 원하는 경로 설정
+			model.addAttribute("userInfo",userInfo);
+			String m_id= userInfo.get("email").toString();
+			String name = userInfo.get("nickname").toString();
+			member.setM_id(m_id);
+			member.setName(name);
+			memDao.memberInsert(member);
+			return "redirect:home"; // 본인 원하는 경로 설정
 		}
 	}
 

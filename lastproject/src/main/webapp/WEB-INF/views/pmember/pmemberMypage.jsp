@@ -185,6 +185,12 @@
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+	if(${update} != "" )
+		{
+		alert('수정완료');
+		}
+	</script>
 </body>
 
 </html>

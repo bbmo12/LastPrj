@@ -40,10 +40,12 @@ public class ReportVO {
 	private String fromDate;        //신고 날짜 검색
 	private String toDate;			//신고 날짜 검색
 
-	
+	//페이징 처리
 	private PagingVO vo;
 	private Criteria cri;
 	private String total;
 
+	private String id;
+	private Integer role;
 
 }

@@ -9,6 +9,7 @@
 	</select>
 	<!-- 팔로우 -->
 	<insert id="followInsert" parameterType="com.last.prj.fallow.service.FollowVO">
+
 			<selectKey keyProperty="follow_no" resultType="int" order="BEFORE">
 					SELECT NVL(MAX(FOLLOW_NO)+1,1) AS FOLLOW_NO FROM FOLLOW
 			</selectKey>

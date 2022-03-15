@@ -330,7 +330,7 @@
 
 
 	<!-- 후기작성 모달창 -->
-<!-- 	<script type="text/javascript">
+ 	<script type="text/javascript">
    	function reviewadd(wow){
    		var r_no = wow
    		/* var name = $("#name").val() */
@@ -357,7 +357,7 @@
    	       }) 
    	    } 
    
-   </script> -->
+   </script> 
 
 
 	<script>

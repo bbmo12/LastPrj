@@ -28,11 +28,8 @@ public class AdminController {
 	@Autowired
 	private PmemberService pMemberDao;
 
-
-
 	@Autowired
 	private ReportService reportDao;
-
 
 	@Autowired
 	private PetService petDAO;
@@ -57,7 +54,20 @@ public class AdminController {
 
 		return "admin/main/main";
 	}
-
+	
+	// =========일반 회원============
+	@RequestMapping("/admMember")
+	public String admMemberTable() {
+		return "admin/board/admMember";
+	}
+	
+	
+	
+	// ==========end 일반 회원==========
+	
+	
+	
+	
 	// ======= 파트너 회원 =============
 
 	// 파트너회원 처음에 갈 때
@@ -69,18 +79,23 @@ public class AdminController {
 	// 파트너 code별
 	@RequestMapping("/admPlistCode")
 	@ResponseBody
-	public HashMap<String, Object> admPlistCode(PmemberVO vo,Criteria cri) {
+	public HashMap<String, Object> admPlistCode(PmemberVO vo, Criteria cri) {
 		int total = pMemberDao.admPlistCodeCount(vo);
+		System.out.println("total은~"+total);
 		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(7); //5개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
-
+		
+		//메인 파트너쉽 별 명 수
+		System.out.println("차트~"+pMemberDao.admPlistChart(vo));
+		
+		if(pMemberDao.admPlistChart(vo) != null ) {	
+			map.put("chart", pMemberDao.admPlistChart(vo));	
+		}
+		
 		System.out.println(pMemberDao.admPlistCode(vo));
 		
-		map.put("list", pMemberDao
-				.admPlistCode(vo));
-
-
 		map.put("list", pMemberDao.admPlistCode(vo));
 
 		map.put("page", page);
@@ -88,20 +103,19 @@ public class AdminController {
 		System.out.println("=============================" + pMemberDao.admPlistCode(vo));
 		return map;
 	}
-	
-	//파트너 회원 단건 조회 Modal
+
+	// 파트너 회원 단건 조회 Modal
 	@RequestMapping("/admPmemberOne")
 	@ResponseBody
-	public HashMap<String, Object> admPmemberOne(@RequestParam("p_id")String p_id){
+	public HashMap<String, Object> admPmemberOne(@RequestParam("p_id") String p_id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("list", pMemberDao.getPmemberinfo(p_id));		
+
+		map.put("list", pMemberDao.getPmemberinfo(p_id));
 		return map;
 	}
 
 	// =========end 파트너 회원 조회==============
 
-	
 	// =====================Review=========================
 	@RequestMapping("/admReview")
 	public String admReviewTable() {
@@ -109,17 +123,20 @@ public class AdminController {
 	}
 
 	@RequestMapping("/admRlistCode")
-	@ResponseBody public HashMap<String,Object> admReview(ReportVO vo, Criteria cri){ 
-	  int total = reportDao.admRlistCodeCount(vo); 
-	  PagingVO page = new PagingVO(cri, total); 
-	  HashMap<String, Object> map = new HashMap<String, Object>();
-	  vo.setVo(page);
-	  map.put("list", reportDao.admRlistCode(vo)); 
-	  map.put("page",page);
-	  System.out.println("============"+reportDao.admRlistCode(vo));
-	  
-	  return map; 
-	  }
+	@ResponseBody
+	public HashMap<String, Object> admReview(ReportVO vo, Criteria cri) {
+		int total = reportDao.admRlistCodeCount(vo);
+		PagingVO page = new PagingVO(cri, total);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+		map.put("list", reportDao.admRlistCode(vo));
+		map.put("page", page);
+		System.out.println("============" + reportDao.admRlistCode(vo));
+		
+		//count
+
+		return map;
+	}
 
 	// =====================end Review=========================
 
@@ -197,17 +214,36 @@ public class AdminController {
 		return reportDao.admReportOneReview(rep_no);
 	}
 
-	// ?. 신고 처리
+	// 신고 처리
 	@RequestMapping(value = "/admReportUpdate")
 	@ResponseBody
 	public String admReportUpdate(@RequestParam("rep_no") int rep_no, @RequestParam("state") String state,
-			@RequestParam("repor") int repor) {
+		@RequestParam("repor") int repor,ReportVO vo) {
 		System.out.println("repor의 값" + repor);
 		System.out.println("rep_no의 값" + rep_no);
 		System.out.println("state의 값" + state);
-		reportDao.admReportUpdate(rep_no, repor, state);
+		
+		vo =  reportDao.admReSearch(rep_no); //신고 처리할 애가 member 인지 p_member인지 조회 id,role		
+		System.out.println("vo는======="+vo);
 
+		if(repor == 701 ) { //신고 미처리
+			
+			return "admin/board/adminReport";
+			
+		}else if(repor == 702) { //신고기각처리
+			
+			reportDao.admReportUpdate(rep_no, repor, state); //신고 처리 update
+			//관련 회원에게 메시지 보내기
+			
+		} else if(repor == 703) { //신고 승인 처리
+			
+			reportDao.admReportUpdate(rep_no, repor, state); //신고 처리 update
+			reportDao.admReSearchUpdate(vo); //신고카운트 업데이트
+			
+		}
+		
 		return "admin/board/adminReport";
+		
 	}
 
 	// 신고 날짜 검색 : admReportDate

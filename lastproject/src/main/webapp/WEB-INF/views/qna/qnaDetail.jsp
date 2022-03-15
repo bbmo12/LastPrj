@@ -713,7 +713,8 @@ ul.tagList li {
 			if(confirm('정말 삭제하시겠습니까?')){
 				
 			if(count > 0){
-			$.ajax({
+				location.href='qDeleteOne?q_no='+no;
+			/* $.ajax({
 				method : "POST",
 				url : "qDeleteOne",
 				data : {
@@ -726,10 +727,10 @@ ul.tagList li {
 				error : function(){
 					alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.')
 				}
-			})
+			}) */
 			}
 			else {
-				$.ajax({
+				/* $.ajax({
 					method : "POST",
 					url : "qDeleteTwo",
 					data : {
@@ -743,7 +744,9 @@ ul.tagList li {
 					error : function(){
 						alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.')
 					}
-				})
+				}) */
+				
+				location.href='qDeleteTwo?q_no='+no;
 			}
 		}	
 	 }
@@ -845,6 +848,7 @@ ul.tagList li {
 						},
 						success : function() {
 							alert('성공적으로 삭제되었습니다.');
+							location.reload();
 						},
 						error : function() {
 							alert('오류가 발생했습니다. 재시도하거나 관리자에게 문의하세요.');

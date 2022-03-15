@@ -7,10 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
-
+ -->
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -172,118 +172,109 @@ ul.petSct li {
 	</article>
 
 	<script>
-		var pet = "${qnaDetail.pet_no}";
-		console.log(pet);
+	
+	/*태그 처리*/
+	$(document).ready(function() {
 
-		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked",
-				true);
+						var tag = {};
+						var counter = 0;
 
-		/*태그 처리*/
-		$(document)
-				.ready(
-						function() {
+						//json 값으로 변환된 기존 태그를 가져온다
+						var list = ${prevTag};
 
-							var tag = {};
-							var counter = 0;
+						
+						//태그 등록
+						for (i = 0; i < list.length; i++) {
+							console.log(list[i].t_name);
 
-							//json 값으로 변환된 기존 태그를 가져온다
-							var list = ${prevTag};
+							var tagValue = list[i].t_name;
+							counter = i;
 
-							//태그 등록
-							for (i = 0; i < list.length; i++) {
-								console.log(list[i].t_name);
+							$("#tag-list").append("<li class='tag-item'>"
+													+ "<span>"
+													+ tagValue
+													+ "</span>"
+													+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
+							addTag(tagValue);
+						}
 
-								var tagValue = list[i].t_name;
-								counter = i;
+						// 태그를 추가한다.
+						function addTag(value) {
+							tag[counter] = value; // 태그를 Object 안에 추가
+							counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+						}
 
-								$("#tag-list")
-										.append(
-												"<li class='tag-item'>"
-														+ "<span>"
-														+ tagValue
-														+ "</span>"
-														+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
-								addTag(tagValue);
-							}
+						// 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+						function marginTag() {
+							return Object.values(tag).filter(
+									function(word) {
+										return word !== "";
+									});
+						}
 
-							// 태그를 추가한다.
-							function addTag(value) {
-								tag[counter] = value; // 태그를 Object 안에 추가
-								counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
-							}
+						$("#tag").on("keyup", function(e) {
+											var self = $(this);
+											console.log("keypress");
 
-							// 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
-							function marginTag() {
-								return Object.values(tag).filter(
-										function(word) {
-											return word !== "";
-										});
-							}
+											// input 에 focus -> 엔터 및 스페이스바 입력시 구동
+											if (e.keyCode == 32) {
 
-							$("#tag")
-									.on(
-											"keyup",
-											function(e) {
-												var self = $(this);
-												console.log("keypress");
+												var tagValue = self.val(); // 값 가져오기
 
-												// input 에 focus -> 엔터 및 스페이스바 입력시 구동
-												if (e.keyCode == 32) {
+												// 값이 없으면 동작 안 함.
+												if (tagValue !== "") {
 
-													var tagValue = self.val(); // 값 가져오기
+													// 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+													var result = Object
+															.values(tag)
+															.filter(
+																	function(word) {
+																		return word === tagValue;
+																	})
 
-													// 값이 없으면 동작 안 함.
-													if (tagValue !== "") {
-
-														// 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
-														var result = Object
-																.values(tag)
-																.filter(
-																		function(
-																				word) {
-																			return word === tagValue;
-																		})
-
-														// 태그 중복 검사
-														if (result.length == 0) {
-															$("#tag-list")
-																	.append(
-																			"<li class='tag-item'>"
-																					+ "<span>"
-																					+ tagValue
-																					+ "</span>"
-																					+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
-															addTag(tagValue);
-															self.val("");
-														} else {
-															alert("이미 등록한 태그입니다.");
-														}
+													// 태그 중복 검사
+													if (result.length == 0) {
+														$("#tag-list")
+																.append(
+																		"<li class='tag-item'>"
+																				+ "<span>"
+																				+ tagValue
+																				+ "</span>"
+																				+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
+														addTag(tagValue);
+														self.val("");
+													} else {
+														alert("이미 등록한 태그입니다.");
 													}
-													e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
 												}
-											});
+												e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+											}
+										});
 
-							// 삭제 버튼
-							// 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
-							$(document).on("click", ".del-btn", function(e) {
-								var index = $(this).attr("idx");
-								tag[index] = "";
-								$(this).parent().remove();
-							});
-						})
+						// 삭제 버튼
+						// 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
+						$(document).on("click", ".del-btn", function(e) {
+							var index = $(this).attr("idx");
+							tag[index] = "";
+							$(this).parent().remove();
+						});
+					})
 
-		/*li 태그를 input 태그로 바꿔 넘기기 용이하게...*/
-		function tagInput() {
-			var tValue = document
-					.querySelectorAll("li.tag-item span:first-child");
+	/*li 태그를 input 태그로 바꿔 넘기기 용이하게...*/
+	function tagInput() {
+		var tValue = document.querySelectorAll("li.tag-item span:first-child");
 
-			for (var i = 0; i < tValue.length; i++) {
-				var tags = `<input type="hidden" name="nTags[\${i}].t_name" value="\${tValue[i].innerHTML}">`;
-				$('#qmForm').append(tags);
-			}
+		for (var i = 0; i < tValue.length; i++) {
+			var tags = `<input type="hidden" name="nTags[\${i}].t_name" value="\${tValue[i].innerHTML}">`;
+			$('#qmForm').append(tags);
 		}
+	}
+	
+	var pet = "${qnaDetail.pet_no}";
+	console.log(pet);
+
+	$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked", true);
+
 	</script>
-
-
 </body>
 </html>
