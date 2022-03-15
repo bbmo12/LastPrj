@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 
@@ -359,7 +360,7 @@
 		function plusTime() {
 			var select = document.getElementById('select-one');
 			var form = document.getElementById('form-time');
-			var eleCount = form.childElementCount; /* div갯수 구하기 */
+			var eleCount = ${fn:length(time)}//form.childElementCount; /* div갯수 구하기 */		
 			var formValue = Number(document.getElementById(eleCount-1).value)+1;
 			form.innerHTML += `		
 					<div>

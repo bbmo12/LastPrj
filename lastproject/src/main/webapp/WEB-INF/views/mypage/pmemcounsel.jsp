@@ -168,10 +168,10 @@ body {
 								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>

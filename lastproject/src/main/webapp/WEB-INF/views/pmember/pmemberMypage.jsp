@@ -83,10 +83,10 @@
 								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 									</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 									</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
 									</a></li>
 							</ul>
@@ -94,7 +94,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="margin-left: 20px;">
+					<div class="single-post row" style="margin-left: 40px;">
 						<div class="col-lg-9 col-md-9 blog_details" id="formMain">
 							<div class="form-group">
 								<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>	
