@@ -21,6 +21,13 @@
 		WHERE R_NO = #{r_no}
 	</select>
 	
-
-
+	<insert id="counselreview" parameterType="com.last.prj.pmember.service.ReviewVO">
+		<selectKey keyProperty="rev_no" resultType="int" order="BEFORE" >
+			SELECT NVL(MAX(REV_NO)+ 1, 1) AS REV_NO FROM REVIEW
+		</selectKey>
+		INSERT INTO REVIEW(REV_NO, CONTENT, RATING, C_NO) VALUES
+		(#{rev_no}, #{content},#{rating},#{c_no})
+	</insert>
+		
+	
 </mapper>

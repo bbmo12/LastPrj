@@ -2,6 +2,7 @@ package com.last.prj.pmember.service;
 
 import java.util.List;
 
+
 public interface ReviewService {
 
 	public List<ReviewVO> admReviewList();
@@ -11,5 +12,8 @@ public interface ReviewService {
 
 	//후기 조회
 	public ReviewVO reviewSearch(ReviewVO r_no);
+	
+	
+	int counselreview(ReviewVO review);
 	
 }

@@ -41,4 +41,6 @@ public interface CounselMapper {
 	Integer isExist(@Param("m_id") String m_id, @Param("p_id") String p_id);
 
 	int codeUpd(int p_no);
+	
+	int updateCode(CounselVO vo);
 }

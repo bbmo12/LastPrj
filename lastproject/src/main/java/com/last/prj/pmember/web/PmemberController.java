@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.last.prj.counsel.service.CounselService;
+import com.last.prj.counsel.service.CounselVO;
 import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PmemService;
@@ -48,6 +50,9 @@ public class PmemberController {
 	private ReviewService reviewDao;
 	@Autowired
 	private ReservationService reservationDao;
+	
+	@Autowired
+	private CounselService counselDao;
 	
 	@Autowired
 	private ServletContext sc;
@@ -257,6 +262,15 @@ public class PmemberController {
 	@ResponseBody
 	public ReviewVO reviewSearch(ReviewVO r_no) {
 		return reviewDao.reviewSearch(r_no);
+	}
+	
+	@RequestMapping("counselReviewInsert")
+	public String counselReviewInsert(ReviewVO review, CounselVO counsel) {
+		
+		counselDao.updateCode(counsel);
+		reviewDao.counselreview(review);
+		
+		return "redirect:mycounsel";
 	}
 	
 }

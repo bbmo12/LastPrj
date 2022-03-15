@@ -87,5 +87,10 @@ public class CounselServiceImpl implements CounselService {
 	public int codeUpd(int p_no) {
 		// TODO Auto-generated method stub
 		return map.codeUpd(p_no);
+	}
+
+	@Override
+	public int updateCode(CounselVO vo) {
+		return map.updateCode(vo);
 	}	
 }
