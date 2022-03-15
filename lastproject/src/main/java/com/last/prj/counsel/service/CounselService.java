@@ -41,4 +41,7 @@ public interface CounselService {
 
 	int codeUpd(int p_no);
 
+	int updateCode(CounselVO vo);
+		
+	
 }

@@ -119,5 +119,13 @@
 		WHERE c_no=#{c_no}
 	</select>
 
+	
+	<update id="updateCode" parameterType="com.last.prj.counsel.service.CounselVO">
+		UPDATE counsel
+		<set>
+			r_check = 1
+		</set>
+		where c_no = #{c_no}
+	</update>
 
 </mapper>
