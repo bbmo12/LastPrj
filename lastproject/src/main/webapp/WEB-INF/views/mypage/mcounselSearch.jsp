@@ -105,20 +105,29 @@
 										<th>파트너회원이름</th>
 										<th>상태</th>
 										<th>작성일</th>
+										<th>상담내용보기</th>
 										<th>후기</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${mycounsel }" var="mycounsel">
-										<tr onclick="location.href='csDetail?p_id=${mycounsel.p_id }&m_id=${mycounsel.m_id }&pet_no=${mycounsel.pet_no }&c_no=${mycounsel.c_no}'">
+										<tr>
 											<td>${mycounsel.p_name }</td>
 											<td class="card-text">${mycounsel.content}</td>
 											<td>${mycounsel.pm_name }</td>
 											<td>${mycounsel.co_content }</td>
 											<td>${mycounsel.w_date }</td>
+											<td><button type="button" onclick="location.href='csDetail?p_id=${mycounsel.p_id }&m_id=${mycounsel.m_id }&pet_no=${mycounsel.pet_no }&c_no=${mycounsel.c_no}'">상담내용보기</button> </td>
 											<c:choose>
 												<c:when test="${mycounsel.code eq 303 }">
-													<td><button>성공</button></td>
+													<c:choose>
+														<c:when test="${ mycounsel.r_check eq 0}">
+															<td><button type="button" onclick=reviewWrith(event)> 리뷰 작성</button></td>
+														</c:when>
+														<c:otherwise>
+															<td><button type="button" onclick="revieRead('${mycounsel.c_no}')" data-toggle="modal" > 리뷰보기</button></td>
+														</c:otherwise>
+													</c:choose>
 												</c:when>
 												<c:otherwise>
 													<td><button>실패</button></td>

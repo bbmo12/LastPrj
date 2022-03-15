@@ -22,7 +22,7 @@
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
 		FROM (SELECT P.NAME AS
-		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name,
+		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name, C.R_CHECK,
 		C.W_DATE, P.pet_no,
 		C.CODE, CO.CONTENT AS
 		co_content, c.p_id, c.m_id,
