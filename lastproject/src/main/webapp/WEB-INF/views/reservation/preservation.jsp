@@ -11,8 +11,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
-   <script src="template/js/diaLog.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script> 
+<script src="template/js/diaLog.js"></script>
 </head>
 <body>	
 <br><br><br><br><section class="banner-area other-page">
@@ -251,8 +251,8 @@
 						alert("작성완료");
 						diaWebAlert(m_id);   		//예약번호,진단명,진단결과,증상,작성일자,회원아이디,파트너회원아이디
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
-				          .send({from: account, gas:3000000})
-				          .then(function(result){console.log("블록체인 체크 : " + result);})
+				         .send({from: account, gas:3000000})
+				         .then(function(result){console.log("블록체인 체크 : " + result);})
 					}
 				}); 
 		});

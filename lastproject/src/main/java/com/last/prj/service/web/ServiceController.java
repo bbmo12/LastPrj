@@ -21,6 +21,7 @@ import com.last.prj.pet.service.PetVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
+import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.security.CustomUser;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
@@ -37,6 +38,9 @@ public class ServiceController {
 	@Autowired
 	private PetService petDAO;
 	
+	@Autowired
+	private ReservationService reservationDao;
+	
 	
 	@RequestMapping("/protocol")
 	public String protocol(Model model,Principal principal) {
@@ -50,7 +54,7 @@ public class ServiceController {
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 				model.addAttribute("member", memDao.memberSearch(m_id));
 				model.addAttribute("service", serviceDao.myPetServiceList(m_id));
-				
+				model.addAttribute("reservation",reservationDao.reservationSelect(m_id));
 				System.out.println("프로토콜");
 				System.out.println(serviceDao.myPetServiceList(m_id));
 				return "mypage/petprotocol";

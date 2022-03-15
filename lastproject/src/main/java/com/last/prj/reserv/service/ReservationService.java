@@ -10,6 +10,7 @@ public interface ReservationService {
 	List<ReservationVO> reservationSelectList();
 	
 	List<ReservationVO> reservationSelect (ReservationVO vo);
+	List<ReservationVO> reservationSelect (String m_id);
 	
 	//예약승인
 	int okUpdate(int res);
