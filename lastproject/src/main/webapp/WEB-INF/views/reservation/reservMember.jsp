@@ -114,8 +114,8 @@
 					 </c:forEach>
 		   		 </select>
 		   		 
-		   		 <select class="animalNo">
-		   		 	<option value="" disabled selected>펫 번호(이름)</option>
+		   		 <select class="animalNo" onchange="NoSelection(event)">
+		   		 	<option value="" disabled selected  >펫 번호(이름)</option>
 					 <c:forEach items="${petList}" var="pet">
 		   		 			<option value="${pet.pet_no }"> ${pet.pet_no }(${pet.name })</option>
 		   		 	   </c:forEach>
@@ -380,6 +380,10 @@ function changeSelection(event){
 			}
 		}
 	})
+}
+
+function NoSelection(event){
+	console.log($(event.target).val());
 }
 //모달창 값 보내기
 $("#sendReserv").on('click',function(){

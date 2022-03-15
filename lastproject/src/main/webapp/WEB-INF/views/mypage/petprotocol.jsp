@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
+<script src="template/js/diaLog.js"></script>
 </head>
 <style>
 #my_section {
@@ -111,7 +114,7 @@
 							<button type="button"
 								class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" id="block_chain" >블록체인진료기록</button>
+								class="btn btn-link btn-rounded btn-fw codep" data-code="" id="block_chain" >블록체인진료기록</button>
 
 						</div>
 						
@@ -255,13 +258,33 @@
 		// ==============================블록체인 ===============================================
 		$("#block_chain").on('click',function(event){
 			$(".table").empty();
-			$("#blockChain").append(`전자지갑 주소 : <input type ="text" id = "address"> <br><br>
-									 예약번호 입력 : <input type ="text" id ="r_no">  <button type="button">조회</button>
-									 `);
+			$("#blockChain").empty();
+			$("#blockChain").append(`예약번호 입력 :  <select class="reservNo" onchange="reservNo(event)">
+													<option value="" disabled selected>예약번호</option>
+													 	<c:forEach items="${reservation }" var="res">
+													 		<option value="${res.r_no}">${res.r_no}</option>
+													 	</c:forEach>`);
+													/* <input type ="text" id ="r_no">  <button type='button' onclick="myFunction()">조회</button>`); */
+		});
+		function myFunction(){
+			var r_no = $("#r_no").val();
+			console.log(r_no);
+			diaLog.methods.diaLogSearch(r_no)
+			.call()
+	          .then(function(result){console.log(result);})
+		}
+		
+		function reservNo(event){
+			var r_no = $(".reservNo option:selected").val();
+			diaLog.methods.diaLogSearch(r_no)
+			.call()
+	          .then(function(result)
+	        		  {
+	        	  		
+	        	  		console.log(result);
+	        		  })
 			
-			
-		});	
-			
+		}
 	</script>
 </body>
 </html>
