@@ -2,14 +2,15 @@ package com.last.prj.pmember.web;
 
 import java.io.File;
 import java.security.Principal;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PriceVO;
@@ -41,15 +44,16 @@ public class PmemberController {
 	private PmemberMapper mapper;
 	@Autowired
 	private PmemService pmemDao;
-
+	@Autowired
+	private ReviewService reviewDao;
 	@Autowired
 	private ReservationService reservationDao;
 	
 	@Autowired
-	ServletContext sc;
-	
+	private ServletContext sc;
 	@Autowired
-	private ReviewService reviewDao;
+	private FfileUtil ffileutil;
+
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
@@ -115,7 +119,7 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -147,9 +151,9 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		pMemberDao.deleteTimeId(time);//시간삭제
 		
 		pMemberDao.pmemberUpdate(pmember);
+		pMemberDao.deleteTimeId(time);//시간삭제
 		//시간 추가
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
 			if(time.getTimeVOList().get(i).getO_no() != 0){
@@ -161,6 +165,13 @@ public class PmemberController {
 		for(int i=0; i < price.getPriceVOList().size(); i++) {
 			pmemDao.insertService(price.getPriceVOList().get(i));
 		}
+		redirectAttr.addFlashAttribute("update","수정실패");
+
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = pmember.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		pmember.setPassword(pwd);
 
 		return "redirect:/pmemberMyPage";
 	}
@@ -186,12 +197,19 @@ public class PmemberController {
 	
 	//일반회원 후기작성
 	@RequestMapping("serviceReviewInsert")
-	@ResponseBody
-	public int serviceReview(ReviewVO review, ReservationVO vo) {
+	public String serviceReview(HttpServletRequest request, ReservationVO vo, ReviewVO review, List<MultipartFile> multiFileList1) {
+		System.out.println("=== file: " + multiFileList1);
+		System.out.println("=== review : "+review);
+		System.out.println("=== vo : "+vo);
+		//System.out.println("====review : "+content + rating + r_no);
+		//System.out.println("====multiFileList1 : "+ multiFileList1);
+		int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+		System.out.println("f_part = " + f_part);
+		review.setF_part(f_part);
 		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
 		
-		return 1;
+		return "redirect:/reservationSelect";
 	}
 	//회원탈퇴 페이지로 이동
 	@RequestMapping("pmdeleteForm")
