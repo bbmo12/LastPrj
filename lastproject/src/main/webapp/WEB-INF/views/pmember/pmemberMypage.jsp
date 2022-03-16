@@ -107,11 +107,6 @@
 									readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">비밀번호&nbsp;:&nbsp;</h3>
-								<input type="password" style="border: none" id="password" name="password"
-									value="${pmember.password}" readonly>
-							</div>
-							<div class="form-group">
 								<h3 style="font-weight: bolder;">전화번호&nbsp;:&nbsp;</h3>
 								<input style="border: none" id="tel" name="tel" value="${pmember.tel}" readonly>
 							</div>

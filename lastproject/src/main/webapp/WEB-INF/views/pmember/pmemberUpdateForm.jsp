@@ -124,7 +124,7 @@
 							<div class="col-lg-9 col-md-9 blog_details" id="main-form">
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">이름</h3>
-									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}">
+									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" required>
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">아이디</h3>
@@ -133,12 +133,12 @@
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">비밀번호</h3>
-									<input type="password" id="password" name="password" class="form-control" value="${pmember.password }"
+									<input type="password" id="password" name="password" class="form-control" value=""
 										style="width: 350px;" placeholder="영문자+숫자+특수문자 조합으로 8이상입력">
 								</div>
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
-									<input type="password" id="password1" name="password1"class="form-control" value="${pmember.password }"
+									<input type="password" id="password1" name="password1"class="form-control" value=""
 										style="width: 350px;" required>
 								</div>
 								<div class="form-group">
