@@ -107,9 +107,9 @@
 
 	<select id="rnoreview" parameterType="int"
 		resultType="com.last.prj.reserv.service.ReservationVO">
-		SELECT content, rating
-		FROM REVIEW
-		WHERE R_NO = #{r_no}
+		SELECT CONTENT, RATING 
+		FROM REVIEW R
+		WHERE R.R_NO = #{r_no}
 
 	</select>
 

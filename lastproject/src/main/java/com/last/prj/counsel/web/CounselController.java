@@ -199,6 +199,6 @@ public class CounselController {
 		return "mypage/csDetail";
 	}
 	
-	
+
 	 
 }
