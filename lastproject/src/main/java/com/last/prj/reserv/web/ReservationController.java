@@ -240,22 +240,26 @@ public class ReservationController {
 	  //예약등록
 	  @PostMapping("/reservinsert")
 	  @ResponseBody
-	  public int reservInsert(ReservationVO vo,ReservCountVO co,ServiceVO so,PmemberVO po) {
+	  public int reservInsert(@RequestParam("p_id")String p_id,ReservationVO vo,ReservCountVO co,ServiceVO so,PmemberVO po) {
+		  vo.setR_code("401");
 		  
 		  int price = 20000;
 		  String content;
 		  String enddate = "임시";
 		  reservationDao.reservInsert(vo);
 		  
+		  
+		  //해당 아이디 코드번호 조회
+		  int p_code = pMemberDao.pMemCode(p_id);
 		  //예약날짜 , 시간값
 		  co.setReserv_date(vo.getR_date());
 		  co.setReserv_time(vo.getTime());
-		  System.out.println("코드출력 : " + so.getCode());
-		  if(so.getCode()==100) {
+		  
+		  if(p_code==100) {
 			  content="진료";
-		  }else if(so.getCode()==101){
+		  }else if(p_code==101){
 			  content="훈련";
-		  }else if(so.getCode()==102) {
+		  }else if(p_code==102) {
 			  content ="미용";
 		  }else {
 			  content="펫시팅";
@@ -267,6 +271,7 @@ public class ReservationController {
 		  so.setContent(content);
 		  so.setPrice(price);
 		  so.setEnddate(enddate);
+		  so.setCode(p_code);
 		  serviceDao.ServiceInsert(so);
 		  reservCountDao.reservCountInsert(co);
 		  return 1;
