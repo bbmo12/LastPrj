@@ -45,4 +45,7 @@ public interface ReservationService {
 	
 	//리뷰 조회
 	ReservationVO rnoreview(@Param("r_no") int r_no);
+	
+	//파일조회
+	List<ReviewVO> readpicture(@Param("r_no") int r_no);
 }

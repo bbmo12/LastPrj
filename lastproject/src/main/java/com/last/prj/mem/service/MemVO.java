@@ -22,6 +22,8 @@ public class MemVO {
 	private String pfile;		//첨부파일
 	
 	private int m_role; // 권한
+	
+	private String id; //아이디중복조회 확인
 	private List<AuthVO> authList;
 }
 	

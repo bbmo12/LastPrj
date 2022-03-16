@@ -9,6 +9,7 @@ import com.last.prj.pmember.service.Criteria;
 import com.last.prj.reserv.service.ReservationMapper;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
+import com.last.prj.reserv.service.ReviewVO;
 
 @Repository("reservationDao")
 public class ReservationServiceImpl implements ReservationService{
@@ -81,6 +82,11 @@ public class ReservationServiceImpl implements ReservationService{
 	public ReservationVO rnoreview(int r_no) {
 		return map.rnoreview(r_no);
 
+	}
+	@Override
+	public List<ReviewVO> readpicture(int r_no) {
+
+		return map.readpicture(r_no);
 	}
 
 
