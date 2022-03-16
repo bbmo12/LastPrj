@@ -27,7 +27,7 @@
 						<c:forEach var="pmember" items="${pmember}">
 							<div class="single-slide">
 								<div class="slide-img">
-									<img src="resources/upload/${pmember.picture }" alt=""
+									<img src="resources/upload/${pmember.picture }" onerror="this.src='resources/upload/pet.PNG'"
 										style="width: 300px; height: 250px;" class="img-fluid">
 									<div class="hover-state">
 										<a href="pmemberDetail?id=${pmember.p_id }"><i class="fa fa-user-o"></i></a>

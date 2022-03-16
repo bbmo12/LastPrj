@@ -47,7 +47,7 @@
 					<div class="col-lg-3 col-sm-6">
 						<div class="single-doctor mb-4 mb-lg-0">
 							<div class="doctor-img">
-								<img src="resources/upload/${pmember.picture }" alt="등록된 사진이 없습니다." class="img-fluid"
+								<img src="resources/upload/${pmember.picture }" onerror="this.src='resources/upload/pet.PNG'" class="img-fluid"
 									style="width: 300px; height: 200px;">
 							</div>
 							<div class="content-area">

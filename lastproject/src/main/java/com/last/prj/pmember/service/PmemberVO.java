@@ -37,6 +37,7 @@ public class PmemberVO {
 	private int p_image;			
 	private String picture;
 	private String pfile;
+	private int p_role;
 	
 	private String w_write;
 	private int f_part;
