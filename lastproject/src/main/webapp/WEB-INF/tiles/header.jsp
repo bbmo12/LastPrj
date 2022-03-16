@@ -35,6 +35,10 @@
 		font-weight: 300;
 		font-size: 10px;
 	}
+	
+	#noticeCheck{
+		font-size:30px;
+	}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
@@ -70,7 +74,8 @@
 									</div>
 								</div>
 								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-									<h6 class="preview-subject font-weight-normal mb-1"></h6>\${result[i].n_from}
+								
+									<span>\${result[i].n_from}<button style="margin-left: 50px; font-size:15px;">X</button></span>
 									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
 								</div>
 							</a>
@@ -81,7 +86,7 @@
 			});
 		}
 	});
-
+			/* <h6 class="preview-subject font-weight-normal mb-1">\${result[i].n_from}</h6> */
 	// toast생성 및 추가
 	function onMessage(evt) {
 		var data = evt.data;

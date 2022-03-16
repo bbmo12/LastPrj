@@ -282,15 +282,34 @@
 	<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
 	function addFile1() {
+		var filediv = $('<div>').attr({
+			'id' : 'filediv'
+		});
+		
 		var input = $('<input>').attr({
 			'id': 'multiFileList1',
 			'class': 'file-upload-browse btn btn-primary',
 			'name': 'multiFileList1',
 			'type': 'file'
 		}).css('margin-top', '3px');
-		$('#ffile1').append(input);
+		
+		var btn = $('<button>').attr({
+			'onclick' : 'deleteFile(event)',
+			'type' : 'button',
+			'class' : 'btn btn-primary btn-sm',
+			'id':'deleteBtn',
+			'style': 'margin-left:5px'
+		}).text('-');
+		
+		filediv.append(input);
+		filediv.append(btn);
+		$('#ffile1').append(filediv);
 	}
 	
+	function deleteFile(event){
+		var e = event.target.parentElement;
+		e.remove();
+	}
    </script>
 
 
@@ -300,18 +319,30 @@
 	function reviewread(e){
 		var r_no = e;
 		$("#content").empty();
-		  $(".star-rating").empty();
+		$(".star-rating").empty();
+		$("#image").empty();
+		
 		  $.ajax({
 				url: 'rnoreview',
 				method: 'post',
 				data : {'r_no' : r_no},
 				success : function(result){
-					console.log(result.content)
+					
+					for(var i = 0; i < result.fileList.length; i++){
+						
+						var imgsrc = 'resources/upload/'+result.fileList[i].picture;
+						var img = $('<img>').attr({
+									'src': imgsrc,
+									'alt': "등록된 사진이 없습니다."
+									});
+						var div = $('<div>');
+						div.append(img);
+						$('#image').append(div);
+					}
 					var content = result.content;
 					var rating = result.rating;
 					$('.star-rating').raty({ readOnly: true, score:rating,  path: "resources/star",width: 200});
 					$('#content').append(content);
-				
 				}
 	 		})
 	}

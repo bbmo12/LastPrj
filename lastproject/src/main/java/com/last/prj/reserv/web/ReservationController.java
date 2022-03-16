@@ -295,11 +295,11 @@ public class ReservationController {
 	  
 	  @RequestMapping("rnoreview")
 	  @ResponseBody
-	  public ReservationVO rnoreview(int r_no, Model model,ReviewVO review) {
+	  public ReviewVO rnoreview(int r_no, Model model,ReviewVO review) {
 		  System.out.println("요호호호호홍");
 		  
 			
-			  model.addAttribute("picture", reservationDao.readpicture(r_no));
+		  model.addAttribute("picture", reservationDao.readpicture(r_no));
 			 
 		  System.out.println(reservationDao.readpicture(r_no));
 		  return reservationDao.rnoreview(r_no);
