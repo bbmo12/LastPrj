@@ -114,7 +114,7 @@
 							<button type="button"
 								class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
 							<button type="button"
-								class="btn btn-link btn-rounded btn-fw codep" data-code="104" id="block_chain" >블록체인진료기록</button>
+								class="btn btn-link btn-rounded btn-fw codep" id="block_chain" >블록체인진료기록</button>
 
 						</div>
 						
@@ -156,7 +156,7 @@
 	// ===================viewPmemberList : 받아온 데이터로 List만드는 함수==========================
 	 let viewPmemberList = function (result) {
 		$(".table").empty();
-		$("#blockChain").empty();
+		
 		$("#myTable").empty();
 		$(".table").append(`<thead>
 							<tr>
@@ -195,6 +195,8 @@
 	});
 	
 		function pagingList() {
+			
+			$("#blockChain").empty();
 			var str = $('#admDateForm').serialize();
 			console.log(str);
 			$.ajax({
@@ -207,11 +209,20 @@
 					console.log(result.list);
 					console.log("리절트페이지는 : " + result.page);
 					if(result.list == ''){
+						$(".table").empty();
+						$(".table").append(`<thead>
+								<tr>
+									<th>반려동물 이름</th>
+									<th>파트너회원이름</th>
+									<th>진단명</th>
+									<th>날짜</th>
+								</tr>
+							</thead>
+							<tbody id="myTable">
+							</tbody>`)
 						$("#myTable").empty();
 						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
-						
-						/* $(".table").empty();
-						$(".table").append(`<h4>데이터가 없습니다</h4>`); */
+						// $(".table").empty();
 						
 					}else {
 						viewPmemberList(result.list);
@@ -272,7 +283,7 @@
 		$("#block_chain").on('click',function(event){
 			$(".table").empty();
 			$("#blockChain").empty();
-			$("#blockChain").append(`예약번호 입력 :  <select class="reservNo" onchange="reservNo(event)">
+			$("#blockChain").append(`예약번호 입력 :  <select class="reservNo" onchange="reservNo(event)" size="1">
 													<option value="" disabled selected>예약번호</option>
 													 	<c:forEach items="${reservation }" var="res">
 													 		<option value="${res.r_no}">${res.r_no}</option>
@@ -284,7 +295,7 @@
 			console.log(r_no);
 			diaLog.methods.diaLogSearch(r_no)
 			.call()
-	          .then(function(result){console.log(result);})
+	        .then(function(result){console.log(result);})
 		}
 		
 		function reservNo(event){
@@ -294,20 +305,46 @@
 	          .then(function(result)
 	        		  {
 	        	  		console.log(result);
-	        	  		$(".table").append(`
-	        	  				<thead>
-									<tr>
-										<th>반려동물 이름</th>
-										<th>파트너회원이름</th>
-										<th>진단명</th>
-										<th>날짜</th>
-									</tr>
-								</thead>
-								<tbody id="myTable">
-								<c:forEach items="`+result+`" var="result">
-								<tr><td></td></tr>
-								</c:forEach>
-								</tbody>`);
+	        	  		
+	        	  		if(result.d_name == ''){
+	        	  			$(".table").empty();
+	        	  			$(".table").append(`
+		        	  				<thead>
+										<tr>
+											<th>진단</th>
+											<th>처방</th>
+											<th>증상</th>
+											<th>진료작성일</th>
+											<th>회원아이디</th>
+										</tr>
+									</thead>
+									<tbody id="myTable">
+										<tr>
+											<td colspan ="5" align="center">해당 블록체인이 없습니다</td>
+										</tr>
+									</tbody>`);
+	        	  		}else{
+	        	  			$(".table").empty();
+		        	  		$(".table").append(`
+		        	  				<thead>
+										<tr>
+											<th>진단</th>
+											<th>처방</th>
+											<th>증상</th>
+											<th>진료작성일</th>
+											<th>회원아이디</th>
+										</tr>
+									</thead>
+									<tbody id="myTable">
+										<tr>
+											<td>`+result.d_name+`</td>
+											<td>`+result.result+`</td>
+											<td>`+result.symptom+`</td>
+											<td>`+result.w_date+`</td>
+											<td>`+result.m_id+`</td>
+										</tr>
+									</tbody>`);
+	        	  		}
 	        		  })
 			
 		}

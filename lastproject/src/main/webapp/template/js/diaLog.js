@@ -18,7 +18,7 @@
                  return
              }
              if(accs.length ===0){
-                 alert("Couldn't get any accounts!")
+                // alert("Couldn't get any accounts!")
                  return
              }
              account = accs[0];
