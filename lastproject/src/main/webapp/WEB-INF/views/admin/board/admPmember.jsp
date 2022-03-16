@@ -39,27 +39,6 @@
 				관리
 				<code>조건 별 검색</code>
 			</p>
-			<div>
-				<form id="admDateForm">
-					<input type="hidden" name="code"> <input type="hidden"
-						name="pageNum" value="1"> FROM : <input type="text"
-						id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
-						type="text" id="toDate" name="toDate">
-
-				</form>
-			</div>
-			<div class="template-demo">
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="doctor" data-code="">전체</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="doctor" data-code="100">수의사</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="trainer" data-code="101">훈련사</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="groomer" data-code="103">미용사</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					id="petsitter" data-code="102">펫시터</button>
-			</div>
 			<!-- 조건 검색한 리스트에서 검색 -->
 			<div>
 				<input class="form-control" id="myInput" type="text"
@@ -105,16 +84,16 @@
 							<div class="card" id="partC" style="display: none;">
 								<div class="card-body">
 									<h4 class="card-title">기간별 파트너 회원 chart</h4>
-								<p class="card-description mainCount" id="mainCount">
-									총 회원 수 :
-									<code id="a">96</code>
-									<br> 2022-02 :
-									<code id="b">22명</code>
-									2022-03 :
-									<code id="b">74명</code>
-									
-								</p>
-								
+									<p class="card-description mainCount" id="mainCount">
+										총 회원 수 :
+										<code id="a">96</code>
+										<br> 2022-02 :
+										<code id="b">22명</code>
+										2022-03 :
+										<code id="b">74명</code>
+
+									</p>
+
 									<canvas id="priceChart" style="height: 250px"></canvas>
 								</div>
 							</div>
@@ -123,14 +102,33 @@
 				</div>
 				<!-- qwe 끝 -->
 
-				<div class="col-lg-6 grid-margin stretch-card">
+				<div class="col-lg-6 grid-margin stretch-card partner">
 					<div class="card">
 						<div class="card-body">
 							<h4 class="card-title">파트너 회원 목록</h4>
-							<p class="card-description">
-								목록
-								<code id="pa">.동적으로...</code>
-							</p>
+							<p>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="doctor"
+											data-code="">전체</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="doctor"
+											data-code="100">수의사</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="trainer"
+											data-code="101">훈련사</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="groomer"
+											data-code="103">미용사</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codep" id="petsitter"
+											data-code="102">펫시터</button>
+									<form id="admDateForm">
+										<input type="hidden" name="code"> <input type="hidden"
+											name="pageNum" value="1"> FROM : <input type="text"
+											id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
+											type="text" id="toDate" name="toDate">
+									</form>
+									</p>
 							<table class="table table-hover">
 								<thead>
 									<tr>
@@ -193,6 +191,13 @@
 
 	<script>
 	
+	$(".btn-link").on("click", function(e) {
+		$(this).closeast('.partner').find('.btn-acitve').removeClass('btn-active');
+		$(this).addClass('btn-active');
+	})
+	
+	
+	// ============================차트 부분 : 기간 별 차트 그리기============================ 
 	function mainChart() {
 		 $('#partC').hide();
 		$('#mainC').show();
@@ -247,9 +252,13 @@
 
 					}) // ajax
 			} 
+	// ============================end 차트 부분 : 기간 별 차트 그리기============================ 
+		
 		
 		$(function() {
 			// title='상세정보를 보시려면 이름을 클릭하세요..'
+			
+			//Tooltip
 			var title_;
 			$("tr").hover(function(e){
 				$('tr').attr( 'title', '상세정보를 보시려면 이름을 클릭하세요..' );
@@ -260,13 +269,13 @@
 			}, function() {													// <a> hover 시 : mouseLeave
 
 				$(this).attr("title", title_);				// title 속성 반환
-				$("#ti").remove();										// div#tip 삭제
+				$("#ti").remove();							// div#tip 삭제
 
-			});
+			});//end Tooltip
 			
 			
-			//검색 함수
-			$("#myInput").on("keyup",function() {
+					//검색 함수
+					$("#myInput").on("keyup",function() {
 						var value = $(this).val().toLowerCase();
 
 						$("#myTable tr").filter(
@@ -275,8 +284,8 @@
 											$(this).text().toLowerCase()
 													.indexOf(value) > -1)
 								});
-					});
-		});// end 검색함수
+					});//end 검색함수
+			});
 		
 		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
@@ -465,12 +474,14 @@
 		function pagingList() {
 			var str = $('#admDateForm').serialize();
 			console.log(str);
+			
 			$.ajax({
 				url : 'admPlistCode',
 				method : 'post',
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
+					
 					console.log(result.list);
 					console.log("리절트페이지는 : " + result.page);
 					console.log(result.chart);
@@ -513,7 +524,7 @@
 				</li>`
 			}
 				for ( var i=page.startPage ; i <=  page.endPage; i++){
-					nav += `<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
+					nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
 								href="javascript:goPage(\${i})" class="page-link">\${i }</a>
 								</li>`
 				}
@@ -542,7 +553,7 @@
 		//======================end 페이징 처리=================
 
 		
-		// =============날짜 검색 ==============
+		// ==================================날짜 검색 ==============================
         $("#datepicker").datepicker({
             dateFormat: 'yy-mm-dd',
             prevText: '이전 달',
@@ -595,7 +606,8 @@
             
             
 	    	pagingList();
-        });// =============end 날짜 검색 ==============
+        });
+     // ==================================날짜 검색 ============================== 끝!!
 	</script>
 </body>
 
