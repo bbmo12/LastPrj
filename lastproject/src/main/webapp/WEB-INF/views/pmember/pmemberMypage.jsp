@@ -190,7 +190,7 @@
 	</section>
 	<script>
 	if("${update}" != "" ){
-		Swal.fire('일반회원이 아닙니다.');
+		Swal.fire('회원정보가<br>수정되었습니다.');
 	}
 	</script>
 </body>

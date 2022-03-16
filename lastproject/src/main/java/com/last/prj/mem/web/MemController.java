@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -263,11 +264,13 @@ public class MemController {
 	@RequestMapping("/memberIdSearch") // 일반회원 아이디 찾기
 	@ResponseBody
 	public String memberIdSearch(@RequestParam("name") String name, @RequestParam("tel") String tel) {
+		System.out.println("여기뜨나요?" + memDao.memberIdSearch(name, tel));
 		return memDao.memberIdSearch(name, tel);
 	}
 	
 	@RequestMapping("/pwdSearchForm") // 일반회원 아이디찾기 폼으로 이동
 	public String pwdSearchForm() {
+		
 		return "member/pwdSearchForm";
 	}
 	
@@ -363,7 +366,7 @@ public class MemController {
 	*/
 	
 	@RequestMapping("/mjoin") // 일반회원 회원가입
-	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model) {
+	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
@@ -391,6 +394,7 @@ public class MemController {
 		member.setPassword(pwd);
 
 		memDao.memberInsert(member);
+		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		return "redirect:home";
 	}
 
@@ -477,8 +481,8 @@ public class MemController {
 	// 아이디 중복체크
 	@PostMapping("ajaxIsIdCheck")
 	@ResponseBody
-	public boolean ajaxIsIdCheck(String m_id) {
-		return memDao.isIdCheck(m_id);
+	public boolean ajaxIsIdCheck(String id) {
+		return memDao.isIdCheck(id);
 	}
 
 	@PostMapping("pajaxIsIdCheck")

@@ -33,6 +33,7 @@ import com.last.prj.reserv.service.ReservCountVO;
 import com.last.prj.reserv.service.ReservationMapper;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.reserv.service.ReservationVO;
+import com.last.prj.reserv.service.ReviewVO;
 import com.last.prj.security.CustomUser;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
@@ -74,6 +75,7 @@ public class ReservationController {
 	@Autowired
 	private PayService payDao;
 	
+
 	
 	
 	//일반회원 예약페이지
@@ -293,7 +295,13 @@ public class ReservationController {
 	  
 	  @RequestMapping("rnoreview")
 	  @ResponseBody
-	  public ReservationVO rnoreview(int r_no) {
+	  public ReservationVO rnoreview(int r_no, Model model,ReviewVO review) {
+		  System.out.println("요호호호호홍");
+		  
+			
+			  model.addAttribute("picture", reservationDao.readpicture(r_no));
+			 
+		  System.out.println(reservationDao.readpicture(r_no));
 		  return reservationDao.rnoreview(r_no);
 	  }
 	  

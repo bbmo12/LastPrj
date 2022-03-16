@@ -86,10 +86,12 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<a href="EnterCs?p_id=${pmemdetail.p_id}">
 								<button class="btn btn-primary">상담하기</button></a>
-							<form action="reservMember" name="reservForm" method="POST">
-								<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
-								<button type="submit" class="btn btn-primary">예약하기</button>
-							</form>
+							<c:if test="${pmemdetail.p_role ne 4}">
+								<form action="reservMember" name="reservForm" method="POST">
+									<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
+									<button type="submit" class="btn btn-primary">예약하기</button>
+								</form>
+							</c:if>
 						</aside>
 					</div>
 				</div>

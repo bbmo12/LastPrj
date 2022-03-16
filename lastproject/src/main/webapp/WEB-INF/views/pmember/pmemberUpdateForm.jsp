@@ -10,52 +10,54 @@
 <title>Insert title here</title>
 </head>
 <style>
-#my_section {
-	padding: 50px;
-}
+	#my_section {
+		padding: 50px;
+	}
 
-#main-form h3, input {
-	display: inline-block;
-}
+	#main-form h3,
+	input {
+		display: inline-block;
+	}
 
-#addDiv, #addService {
-	margin-left: 36em;
-	margin-top: -5px;
-}
+	#addDiv,
+	#addService {
+		margin-left: 36em;
+		margin-top: -5px;
+	}
 
-#select-one {
-	margin-top: -20px;
-}
+	#select-one {
+		margin-top: -20px;
+	}
 
-.form-control {
-	padding: 5px;
-	width: 250px;
-	display: inline-block;
-}
+	.form-control {
+		padding: 5px;
+		width: 250px;
+		display: inline-block;
+	}
 
-.service-info {
-	display: inline-grid;
-}
+	.service-info {
+		display: inline-grid;
+	}
 
-.service-info input {
-	width: 100px;
-}
+	.service-info input {
+		width: 100px;
+	}
 
-#p-info {
-	margin-left: 6em;
-	margin-top: -20px;
-}
+	#p-info {
+		margin-left: 6em;
+		margin-top: -20px;
+	}
 
-.delete-button {
-	float: right;
-	margin-top: 25px;
-	margin-right: 100px;
-	width: 62px;
-}
+	.delete-button {
+		float: right;
+		margin-top: 25px;
+		margin-right: 100px;
+		width: 62px;
+	}
 
-#p_info {
-	border: 1px solid rgba(151, 151, 151, 0.3);
-}
+	#p_info {
+		border: 1px solid rgba(151, 151, 151, 0.3);
+	}
 </style>
 
 <body>
@@ -118,7 +120,7 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
-						<form action="pmemberUpdate" enctype="multipart/form-data" name="updatePage" method="post" onsubmit="return checkForm()">
+						<form action="pmemberUpdate" enctype="multipart/form-data" id="f" name="updatePage" method="post" onsubmit="return checkForm()">
 							<div class="col-lg-9 col-md-9 blog_details" id="main-form">
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">이름</h3>
@@ -279,146 +281,155 @@
 			</div>
 		</div>
 	</section>
+
 	<script>	
+
 		function addFile1() {
 			var input = $('<input>').attr({
 				'class': 'file-upload-browse btn btn-primary',
 				'name': 'multiFileList1',
 				'type': 'file'
-			}).css({'margin-top': '3px',
-				     'display': 'block'});
+			}).css({
+				'margin-top': '3px',
+				'display': 'block'
+			});
 			$('#ffile1').append(input);
 		}
+
 		function addFile2() {
 			var input = $('<input>').attr({
 				'class': 'file-upload-browse btn btn-primary',
 				'name': 'multiFileList2',
 				'type': 'file'
-			}).css({'margin-top': '3px',
-			        'display': 'block'});
+			}).css({
+				'margin-top': '3px',
+				'display': 'block'
+			});
 			$('#ffile2').append(input);
 		}
 
-		/* 시간삭제 */ 
+		/* 시간삭제 */
 		function deleteTime(o_no) {
 			var o_no = o_no;
 			var target = event.target.parentElement.parentElement;
 			$.ajax({
-		        type: 'POST',
-		        url: 'deleteTime',
-		        data: {
-		            "o_no":  o_no,
-		        },
-		        success: function(result){  
-		        	target.remove();
-		        	
-		        }
-		    });
+				type: 'POST',
+				url: 'deleteTime',
+				data: {
+					"o_no": o_no,
+				},
+				success: function (result) {
+					console.log(result);
+					target.remove();
+				}
+			});
 		}
 		/* 서비스삭제  */
-		 function deleteService(price_no) {
-			 var price_no = price_no;
-			 var target = event.target.parentElement.parentElement;
-			  $.ajax({
-			        type: 'POST',
-			        url: 'deleteService',
-			        data: {
-			            "price_no":  price_no,
-			        },
-			        success: function(result){  
-			        	target.remove();		        	
-			        }
-			    });
+		function deleteService(price_no) {
+			var price_no = price_no;
+			var target = event.target.parentElement.parentElement;
+			$.ajax({
+				type: 'POST',
+				url: 'deleteService',
+				data: {
+					"price_no": price_no,
+				},
+				success: function (result) {
+					target.remove();
+				}
+			});
 		}
-		 
+		var countService=0;
 		function plusService() {
-		var select = document.getElementById('plus-div');
-		var div = document.getElementById('add-div');
-		var eleCount = div.childElementCount;
-		var formValue = Number(document.getElementById("service"+(eleCount-1)).value)+1;
-		div.innerHTML +=`
-		<div class="form-group" style="margin-bottom: 10px;">
-			<input type="hidden" name="priceVOList[\${eleCount}].price_no" value=\${formValue} id="service\${eleCount}">
-			<div class="service-info">
-				<label for="name">서비스명</label>
-				<input id="title" name="priceVOList[\${eleCount}].title" value="" type="text" class="form-control">
-			</div>
-			<div class="service-info">
-				<label>금 액</label>
-				<input type="text" class="form-control" id="price" name="priceVOList[\${eleCount}].price" value="">
-			</div>
-			<div style="display: inline-grid;">
-				<label>서비스안내</label>
-				<textarea class="form-control" id="content" name="priceVOList[\${eleCount}].content" rows="2" cols="50"
-					style="height: 45px;"></textarea>
-			</div><br>
-			<input type="hidden"name="priceVOList[\${eleCount}].p_id" value="${pmember.p_id}">
-		</div>`;
-		select.append(div);
-
+			countService++;
+			var select = document.getElementById('plus-div');
+			var div = document.getElementById('add-div');
+			var eleCount = ${fn:length(price)};
+			var formValue = Number(document.getElementById("service" + (eleCount-1)).value);
+			var tagData =$(`<div class="form-group" style="margin-bottom: 10px;">
+					<input type="hidden" name="priceVOList[\${eleCount+countService}].price_no" value="\${formValue+countService}" id="service\${eleCount+countService}">
+					<div class="service-info">
+						<label for="name">서비스명</label>
+						<input id="title" name="priceVOList[\${eleCount+countService}].title" value="" type="text" class="form-control">
+					</div>
+					<div class="service-info">
+						<label>금 액</label>
+						<input type="text" class="form-control" id="price" name="priceVOList[\${eleCount+countService}].price" value="">
+					</div>
+					<div style="display: inline-grid;">
+						<label>서비스안내</label>
+						<textarea class="form-control" id="content" name="priceVOList[\${eleCount+countService}].content" rows="2" cols="50"
+							style="height: 45px;"></textarea>
+					</div><br>
+					<input type="hidden"name="priceVOList[\${eleCount+countService}].p_id" value="${pmember.p_id}">
+				</div>`);
+			$('#add-div').append(tagData);
+			select.append(div);
 		}
 		
+		var count=0;
 		function plusTime() {
+			count++;
 			var select = document.getElementById('select-one');
 			var form = document.getElementById('form-time');
-			var eleCount = ${fn:length(time)}//form.childElementCount; /* div갯수 구하기 */		
-			var formValue = Number(document.getElementById(eleCount-1).value)+1;
-			form.innerHTML += `		
-					<div>
-					<input type="hidden" name="timeVOList[\${eleCount}].o_no" value=\${formValue} id=\${eleCount}> 
-					<select class="selectday" name="timeVOList[\${eleCount}].w_day">
-					<option value='' selected>요일선택</option>
-					<option value='월'>월</option>
-					<option value='화'>화</option>
-					<option value='수'>수</option>
-					<option value='목'>목</option>
-					<option value='금'>금</option>
-					<option value='토'>토</option>
-					<option value='일'>일</option>
-				</select>																	
-				<select class="selectday" name="timeVOList[\${eleCount}].starttime">
-					<option value='' selected>오픈시간</option>
-					<option value='9:00'>9:00</option>
-					<option value='9:30'>9:30</option>
-					<option value='10:30'>10:30</option>
-					<option value='11:00'>11:00</option>
-					<option value='12:00'>12:00</option>
-					<option value='12:30'>12:30</option>				
-				</select>																					
-				<select class="selectday" name="timeVOList[\${eleCount}].endtime">
-					<option value='' selected>마감시간</option>
-					<option value='13:00'>13:00</option>
-					<option value='13:30'>13:30</option>
-					<option value='14:00'>14:00</option>
-					<option value='14:30'>14:30</option>
-					<option value='15:00'>15:00</option>
-					<option value='15:30'>15:30</option>
-					<option value='16:00'>16:00</option>
-					<option value='16:30'>16:30</option>
-					<option value='17:00'>17:00</option>
-					<option value='17:30'>17:30</option>
-					<option value='18:00'>18:00</option>
-					<option value='18:30'>18:30</option>
-					<option value='19:00'>19:00</option>
-					<option value='19:30'>19:30</option>
-					<option value='20:00'>20:00</option>
-					<option value='20:30'>20:30</option>
-					<option value='21:00'>21:00</option>				
-				</select>
-				<input type="text" id="n_content" name="timeVOList[\${eleCount}].n_content" class="form-control" value=""><br>
-				<input type="hidden" name="timeVOList[\${eleCount}].p_id" value="${pmember.p_id}">
-				</div>`;
+			var eleCount = ${fn:length(time)};//form.childElementCount; // /* div갯수 구하기 */
+			var formValue = Number(document.getElementById(eleCount - 1).value);
+			var tagData = 	
+				$(`		<div>
+						<input type="hidden" name="timeVOList[\${eleCount+count}].o_no" value="\${formValue+count}" id="\${eleCount+count}"> 
+						<select class="selectday\${eleCount}" name="timeVOList[\${eleCount+count}].w_day">
+						<option value='' selected>요일선택</option>
+						<option value='월'>월</option>
+						<option value='화'>화</option>
+						<option value='수'>수</option>
+						<option value='목'>목</option>
+						<option value='금'>금</option>
+						<option value='토'>토</option>
+						<option value='일'>일</option>
+					</select>																	
+					<select class="selectday\${eleCount+count}" name="timeVOList[\${eleCount+count}].starttime">
+						<option value='' selected>오픈시간</option>
+						<option value='9:00'>9:00</option>
+						<option value='9:30'>9:30</option>
+						<option value='10:30'>10:30</option>
+						<option value='11:00'>11:00</option>
+						<option value='12:00'>12:00</option>
+						<option value='12:30'>12:30</option>				
+					</select>																					
+					<select class="selectday\${eleCount+count}" name="timeVOList[\${eleCount+count}].endtime">
+						<option value='' selected>마감시간</option>
+						<option value='13:00'>13:00</option>
+						<option value='13:30'>13:30</option>
+						<option value='14:00'>14:00</option>
+						<option value='14:30'>14:30</option>
+						<option value='15:00'>15:00</option>
+						<option value='15:30'>15:30</option>
+						<option value='16:00'>16:00</option>
+						<option value='16:30'>16:30</option>
+						<option value='17:00'>17:00</option>
+						<option value='17:30'>17:30</option>
+						<option value='18:00'>18:00</option>
+						<option value='18:30'>18:30</option>
+						<option value='19:00'>19:00</option>
+						<option value='19:30'>19:30</option>
+						<option value='20:00'>20:00</option>
+						<option value='20:30'>20:30</option>
+						<option value='21:00'>21:00</option>				
+					</select>
+					<input type="text" id="n_content" name="timeVOList[\${eleCount+count}].n_content" class="form-control" value=""><br>
+					<input type="hidden" name="timeVOList[\${eleCount+count}].p_id" value="${pmember.p_id}">
+					</div>`);
+			$('#form-time').append(tagData);
 			select.append(form);
 			$('select').niceSelect();
 		}
-		
-		 function checkForm() {
+
+		function checkForm() {
 			if (updatePage.name.value == "") {
 				alert("이름을 입력하세요.");
 				updatePage.name.focus();
 				return false;
-			}
-			else if (updatePage.password.value == "") {
+			} else if (updatePage.password.value == "") {
 				alert("비밀번호 입력하세요.");
 				updatePage.password.focus();
 				return false;
@@ -440,20 +451,25 @@
 				alert("전화번호를 입력해주세요.");
 				updatePage.tel.focus();
 				return false;
-			}
-			else if (updatePage.w_name.value == "") {
+			} else if (updatePage.w_name.value == "") {
 				alert("사업장 이름을 입력주세요.");
 				updatePage.w_name.focus();
 				return false;
-			}
-			else if (updatePage.w_address.value == "" && updatePage.w_d_address.value == "") {
+			} else if (updatePage.w_address.value == "" && updatePage.w_d_address.value == "") {
 				alert("사업장 주소를 입력주세요.");
 				updatePage.w_address.focus();
 				return false;
-			} else{
+			} else {
 				return true;
 			}
-			
+
+		}
+
+		function test() {
+			var formData = new FormData(document.getElementById('f'));
+			for (var pair of formData.entries()) {
+				console.log(pair[0] + ', ' + pair[1]);
+			}
 		}
 	</script>
 </body>

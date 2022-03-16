@@ -157,13 +157,14 @@
 												<c:when test="${res.code eq 405 }">
 													<c:choose>
 														<c:when test="${res.r_check eq 0 }">
-															<td><button id="reviewWriteBtn" type="button"
+															<td><button type="button" 
+															onclick='reviewadd("${res.r_no}");'
 																	class="btn btn-secondary" data-toggle="modal"
 																	data-target="#reviewWriteModal">리뷰쓰기</button></td>
 
 														</c:when>
 														<c:otherwise>
-															<td><button id="reviewReadBtn" type="button"
+															<td><button onclick='reviewread("${res.r_no}");' type="button"
 																	class="btn btn-secondary" data-toggle="modal"
 																	data-target="#exampleModal1">리뷰보기</button></td>
 														</c:otherwise>
@@ -203,9 +204,8 @@
 				<!-- modal 몸통 -->
 				<div class="modal-body">
 					<div id="content"></div>
-					<div id="rating"></div>	
-				
-				</div>
+					<div class="star-rating"></div>
+					<div id="image"></div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -216,7 +216,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 
 <!-- 리뷰작성 모달창 -->
 	<!-- Modal -->
@@ -296,24 +296,26 @@
 
 	<!--리뷰 보는 모달창  -->
 	<script type="text/javascript">
-  $("#reviewReadBtn").click(function(e){
-	  var r_no = $(event.target).parent().parent().children().first().text();
- 		console.log(r_no);
- 		$.ajax({
-			url: 'rnoreview',
-			method: 'post',
-			data : {'r_no' : r_no},
-			success : function(result){
-				console.log(result.content)
-				var content = result.content;
-				var rating = result.rating;
-				$('#content').append(content);
-				$('#rating').append(rating);
-				
-			}
- 		})
 	
-  }) 
+	function reviewread(e){
+		var r_no = e;
+		$("#content").empty();
+		  $(".star-rating").empty();
+		  $.ajax({
+				url: 'rnoreview',
+				method: 'post',
+				data : {'r_no' : r_no},
+				success : function(result){
+					console.log(result.content)
+					var content = result.content;
+					var rating = result.rating;
+					$('.star-rating').raty({ readOnly: true, score:rating,  path: "resources/star",width: 200});
+					$('#content').append(content);
+				
+				}
+	 		})
+	}
+  
    </script>
 
 
@@ -321,11 +323,16 @@
 	<!-- 후기작성 모달창 -->
 	<script type="text/javascript">
 	
-	$("#reviewWriteBtn").click(function(e){
-		var r_no = $(event.target).parent().parent().children().first().text();
-   		console.log(r_no);
-   	 $("#insert_r_no").val(r_no);
-	});
+	function reviewadd(e) {
+		console.log(e);
+		$("#content").empty();
+		  
+		var r_no = e;
+ 		console.log(r_no);
+ 	 $("#insert_r_no").val(r_no);
+	}
+	
+	
 	
    </script>
 

@@ -47,9 +47,7 @@
 	text-overflow: ellipsis;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+
 <body>
 	<section class="banner-area other-page">
 		<div class="container">
@@ -131,6 +129,7 @@
 										<th>파트너회원이름</th>
 										<th>상태</th>
 										<th>작성일</th>
+										<th>상담신청일</th>
 										<th>상담내용보기</th>
 										<th>후기</th>
 									</tr>
@@ -154,12 +153,14 @@
 												<c:when test="${mycounsel.code eq 303 }">
 													<c:choose>
 														<c:when test="${ mycounsel.r_check eq 0}">
-															<td><button id="reviewWriteBtn" type="button"
-																	class="btn btn-secondary" data-toggle="modal"
+															<td><button  type="button"
+																	class="btn btn-secondary" data-toggle="modal" onclick='reviewadd("${mycounsel.c_no}");'
 																	data-target="#reviewWriteModal">리뷰쓰기</button></td>
 														</c:when>
 														<c:otherwise>
-															<td><button type="button" onclick="revieRead('${mycounsel.c_no}')" data-toggle="modal" > 리뷰보기</button></td>
+															<td><button  type="button"
+																	class="btn btn-secondary" data-toggle="modal" onclick='reviewread("${mycounsel.c_no}");'
+																	data-target="#exampleModal1">리뷰보기</button></td>
 														</c:otherwise>
 													</c:choose>
 												</c:when>
@@ -178,6 +179,44 @@
 		</div>
 		<my:nav jsFunc="go_page" page="${page}" />
 	</section>
+
+
+  <!-- Modal -->
+	<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body">
+					<div id="content"></div>
+					<div class="star-rating">
+						
+							
+						
+					</div>
+				</div>
+				<!-- modal 하단 버튼 -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">취소</button>
+					<button id="sendReserv" name="sendReserv" type="button"
+						class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  
+  
+  
+
 
 <!-- 리뷰작성 모달창 -->
 	<!-- Modal -->
@@ -234,20 +273,78 @@
 
 
 
+
+
+<!--리뷰 보는 모달창  -->
+	<script type="text/javascript">
+/* 	
+	$(function() {
+		$('#example').barrating('set', 2);
+	   
+	   }); */
+	   
+	   function reviewread(e){
+		   var c_no = e;
+			  $("#content").empty();
+			  $(".star-rating").empty();
+			  
+			  $.ajax({
+					url: 'cnoreview',
+					method: 'post',
+					data : {'c_no' : c_no},
+					success : function(result){
+						
+						console.log(result.content)
+						var content = result.content;
+						var rating = result.rating;
+					
+				
+						console.log(rating);
+					
+						$('.star-rating').raty({ readOnly: true, score:rating,  path: "resources/star",width: 200});
+						
+						
+						$('#content').append(content);
+					
+						
+					}
+		 		})
+	   }
+	   
+	  
+  </script>
+
+
+
+
 <!-- 후기작성 모달창 -->
 	<script type="text/javascript">
-	
-	$("#reviewWriteBtn").click(function(e){
-		var c_no = $(event.target).parent().parent().children().first().text();
-   		console.log(c_no);
+	function reviewadd(e){
+	console.log(e);
+		var c_no = e;
+		$("#content").empty();
+		  $("#rating").empty();
    	 $("#insert_c_no").val(c_no);
-	});
+	}
 	
    </script>
    
-  
-	
- 
+   
+   <!-- 별점조회 -->
+<!--    <script type="text/javascript">
+  //별점
+		$(function () {
+			$('.star').each(function (index, item) {
+				$(this).raty({
+					score: $(this).find('.rating').val(),
+					path: "resources/star",
+					width: 200,
+					readOnly: true
+				});
+			})
+		});
+		</script>
+  -->
 
 
 

@@ -28,7 +28,7 @@ public class ReservationVO {
 	private String content;		//후기내용
 	private String rating;		//평점
 	
-	private int fPart;			//첨부파일
+	private int f_part;			//첨부파일
 	
 	 
 	

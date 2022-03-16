@@ -235,6 +235,7 @@
 								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
 									</a></li>
+									
 							</ul>
 						</aside>
 					</div>

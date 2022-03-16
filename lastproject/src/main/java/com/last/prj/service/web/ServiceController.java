@@ -89,7 +89,7 @@ public class ServiceController {
 				String p_id = userDetails.getPmember().getP_id();
 				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
-				cri.setAmount(5);
+				cri.setAmount(10);
 				cri.setP_id(p_id);
 				PagingVO paging = new PagingVO(cri, mapper.pMembenefitTotal(cri));
 				model.addAttribute("page", paging);

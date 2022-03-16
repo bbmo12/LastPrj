@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -124,8 +125,10 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
+
     public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price,
     		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request) {
+
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -138,6 +141,7 @@ public class PmemberController {
 		System.out.println("=== file2: " + multiFileList2);
 		
 		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
+
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
@@ -161,11 +165,12 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		
+
 		// 비밀번호 암호화
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 		String inputPwd = pmember.getPassword();
 		String pwd = encoder.encode(inputPwd);
+
 		pmember.setPassword(pwd);
 		
 		if(multiFileList1.isEmpty() && multiFileList1.size() > 0) {
@@ -191,7 +196,9 @@ public class PmemberController {
 		pmemDao.deleteServiceId(price);//서비스 삭제
 		//서비스 추가
 		for(int i=0; i < price.getPriceVOList().size(); i++) {
-			pmemDao.insertService(price.getPriceVOList().get(i));
+			if(price.getPriceVOList().get(i).getPrice_no() !=0) {
+				pmemDao.insertService(price.getPriceVOList().get(i));
+			}	
 		}
 		redirectAttr.addFlashAttribute("update","수정실패");
 
@@ -207,8 +214,11 @@ public class PmemberController {
 	//시간삭제 
 	@RequestMapping("deleteTime")
 	@ResponseBody
-	public int deleteTime(TimeVO time) {
-		return pMemberDao.deleteTime(time);
+	public List<TimeVO> deleteTime(TimeVO time) {
+		UserDetails userdetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		time.setP_id(userdetails.getUsername());
+		pMemberDao.deleteTime(time);
+		return pMemberDao.getTime(userdetails.getUsername());
 	}
 	
 	@RequestMapping("pmemberBest")//베스트순위출력
@@ -286,6 +296,16 @@ public class PmemberController {
 		
 		return "redirect:mycounsel";
 	}
+	
+	
+	
+	@RequestMapping("cnoreview")
+	@ResponseBody
+	public ReviewVO cnoreview(int c_no) {
+
+		return reviewDao.cnoreview(c_no);
+	}
+	
 	
 }
 

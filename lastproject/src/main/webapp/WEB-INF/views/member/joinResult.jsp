@@ -17,7 +17,7 @@
                   <img src="resources/assets123/images/logo-dark.svg">
                 </div> -->
 							<div align="center">
-							회원가입이 완료되었습니다.
+				
 							</div>
 						</div>
 					</div>
@@ -27,6 +27,8 @@
 		<!-- content-wrapper ends -->
 	</div>
 	<!-- page-body-wrapper ends -->
-	
+	<script>
+	Swal.fire('회원가입이<br>완료되었습니다.');
+	</script>
 </body>
 </html>

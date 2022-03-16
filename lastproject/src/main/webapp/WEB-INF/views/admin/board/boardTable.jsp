@@ -42,7 +42,16 @@
 	<!-- this page js -->
 	<script src="resources/table/js/datatable-checkbox-init.js"></script>
 	<script src="resources/table/js/datatables.min.js"></script>
-<style> 
+<style>
+.card-text {
+   display: inline-block;
+   width: 300px;
+   /* white-space: nowrap; */
+   overflow: hidden;
+   text-overflow: ellipsis;
+    padding:0 5px;
+   align : center;
+}
 .container-fluid {
 		width:100%;
 		padding-right: 0px;
@@ -92,9 +101,8 @@
 												<tr>
 													<td align="center">${boards.b_no }</td>
 													
-													<td align="center"><a
-														href="boardUpdateForm?b_no=${boards.b_no }">${boards.title }</a></td>
-													<td align="center">${boards.content }</td>
+													<td align="center">${boards.title }</td>
+													<td class="card-text">${boards.content }</td>
 													<td align="center">${boards.writer }</td>
 													<td align="center">${boards.w_date }</td>
 													<td>

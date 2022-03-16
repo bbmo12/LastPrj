@@ -21,6 +21,15 @@
 	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+.card-text {
+   display: inline-block;
+   width: 300px;
+   /* white-space: nowrap; */
+   overflow: hidden;
+   text-overflow: ellipsis;
+    padding:0 5px;
+   align : center;
+}
 .container-fluid {
 	width: 100%;
 	padding-right: 0px;
@@ -178,12 +187,12 @@
 															+ result[i].reported
 															+ "</td><td>"
 															+ result[i].w_date
-															+ "</td><td>"
+															+ "</td><td class='card-text'>"
 															+ result[i].content
-															+ "</td><td id='content'>"
+															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td><td>"
-															+ "<button id='reportModal' type='button' class='btn btn-secondary' onclick='show("
+															+ "<button id='reportModal' type='button' class='btn btn-danger btn-icon-text	' onclick='show("
 															+ result[i].rep_no
 															+ ")' value="
 															+ result[i].rep_no
@@ -201,14 +210,14 @@
 															+ result[i].reported
 															+ "</td><td>"
 															+ result[i].w_date
-															+ "</td><td>"
+															+ "</td><td class='card-text'>"
 															+ result[i].content
-															+ "</td><td id='content'>"
+															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button id='cancelModal' type='button' onclick='show("
+															+ "<td><button  type='button' onclick='show("
 															+ result[i].rep_no
-															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#cancelModal'> "
+															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'> "
 															+ "기각처리</td></button></tr>");
 								} else {
 
@@ -220,14 +229,14 @@
 															+ result[i].reported
 															+ "</td><td>"
 															+ result[i].w_date
-															+ "</td><td>"
+															+ "</td><td class='card-text'>"
 															+ result[i].content
-															+ "</td><td id='content'>"
+															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button id='permitModal' type='button' class='btn btn-secondary' onclick='show("
+															+ "<td><button  type='button' class='btn btn-success' onclick='show("
 															+ result[i].rep_no
-															+ ")'  data-toggle='modal' data-target='#permitModal'>"
+															+ ")'  data-toggle='modal' data-target='#exampleModal'>"
 															+ "승인처리</td></button></tr>");
 								}
 								;
@@ -236,42 +245,65 @@
 		//==============================end 리스트 만드는 함수 : viewReviewList============================
 		
 		
-		// Modal 미처리 신고 : Review
+		// ============================Modal 처리 : Review=========================================
 		function show(st) {
 			console.log("st는 :"+st);
 				$
 						.ajax({
-							url : 'admReportOneReview',
+							url : 'admReportOneQna',
 							method : 'post',
 							data : {
 								"rep_no" : st
 							},
 							success : function(res) {
 								console.log(res[0].state);
-								if (res == '')
-									alert('해당 데이터가 없습니다');
+								if (res == '') alert('해당 데이터가 없습니다');
 
-								console.log("rep_no 는 " +res[0].rep_no);
+								if(res[0].repor != 701  ){ //state 값이 있을 떄 + repor 가 선택 되어 있을 때 : 기각처리 / 승인처리 
+									$("form").append("<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+									$("#repo").append(
+											"<li>신고유형 : " + res[0].f_content
+													+ "</li><li>신고날짜 : "
+													+ res[0].w_date
+													+ "</li><li>신고자 : "
+													+ res[0].reporter
+													+ "</li><li>신고당한 : "
+													+ res[0].reported
+													+ "</li><li>신고사유 : "
+													+ res[0].content
+													+ "</li><li>게시글 내용 : "
+													+  res[0].rev_content
+													+ "</li><li>신고처리 상태 : "
+													+ (res[0].repor == 702 ? '기각처리' : '승인처리')
+													+ "</li><li>해당처리 사유 : "
+													+ res[0].state
+													+ "</li>");
+									
+									$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
-								$("form")
-										.append(
-												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
 
-								$("#repo").append(
-										"<ul><li>신고유형 : " + res[0].f_content
-												+ "</li><li>신고날짜 : "
-												+ res[0].w_date
-												+ "</li><li>신고자 : "
-												+ res[0].reporter
-												+ "</li><li>신고당한 : "
-												+ res[0].reported
-												+ "</li><li>신고사유 : "
-												+ res[0].content
-												+ "</li><li>게시글 내용 : "
-												+ res[0].rev_content
-												+ "</li></ul>");
-								$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetail(this)' >상세페이지로..</button>");
-								
+									
+								}else {   //미처리 state + repor 가 값이 담겨져 있지 않을 떄
+
+									$("form")
+											.append(
+													"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+
+									$("#repo").append(
+											"<li>신고유형 : " + res[0].f_content
+													+ "</li><li>신고날짜 : "
+													+ res[0].w_date
+													+ "</li><li>신고자 : "
+													+ res[0].reporter
+													+ "</li><li>신고당한 : "
+													+ res[0].reported
+													+ "</li><li>신고사유 : "
+													+ res[0].content
+													+ "</li><li>게시글 내용 : "
+													+  res[0].rev_content
+													+ "</li>");
+									$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetail(this)' >상세페이지로..</button>");
+								}
 							},
 							error : function(er) {
 								alert('오류가 났음. 개발자 호츌');
@@ -279,7 +311,8 @@
 						})// end ajax
 						$("#myModal").modal('show');
 			
-		}// end Show function Modal 신고 단건
+		}
+		// ==================================Modal 처리 : Review=========================================끝
 
 		//모달 내용 초기화
 		$('#myModal').on('hidden.bs.modal', function(e) {

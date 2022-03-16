@@ -22,7 +22,7 @@ public interface MemMapper {
 	//아이디 중복체크
 	boolean idCheck(String m_id);
 	
-	boolean isIdCheck(String m_id);
+	boolean isIdCheck(String id);
 	
 	//일반 회원 수
 	int memCount();

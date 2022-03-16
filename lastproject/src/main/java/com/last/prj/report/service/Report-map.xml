@@ -191,7 +191,8 @@
 		<if test="repor != null ">
 			AND R.REPOR = #{repor}
 		</if>
-		<if test="key == 'all'">AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != '' and data != null and data != ''">
+		    AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
@@ -212,7 +213,8 @@
 		<if test="repor != null ">
 			AND R.REPOR = #{repor}
 		</if>
-		<if test="key == 'all'">AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%' AND Q.CONTENT LIKE '%'|| #{data} ||'%'</if>
+		<if test="key != null and key != '' and data != null and data != ''">
+		    AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}

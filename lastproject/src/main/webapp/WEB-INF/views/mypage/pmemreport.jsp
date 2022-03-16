@@ -139,7 +139,7 @@
                             <h1>신고내역조회</h1>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="margin: 20px 0 0 -6px;">
                                 <div class="table-wrap">
                                     <form action="pmemreport" name="goform">
                                         <input type="hidden" name="pageNum" value="1">
