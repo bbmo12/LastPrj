@@ -294,6 +294,8 @@ public class ReservationController {
 	  @RequestMapping("rnoreview")
 	  @ResponseBody
 	  public ReservationVO rnoreview(int r_no) {
+		  System.out.println("요호호호호홍");
+		  System.out.println(reservationDao.rnoreview(r_no));
 		  return reservationDao.rnoreview(r_no);
 	  }
 	  

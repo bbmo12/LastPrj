@@ -29,5 +29,11 @@
 		(#{rev_no}, #{content},#{rating},#{c_no})
 	</insert>
 		
+	<select id="cnoreview" parameterType="int" resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT CONTENT, RATING
+		FROM REVIEW
+		WHERE C_NO = #{c_no}
+		
+	</select>
 	
 </mapper>

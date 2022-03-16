@@ -36,4 +36,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return map.counselreview(review);
 	}
 
+	@Override
+	public ReviewVO cnoreview(int c_no) {
+		return map.cnoreview(c_no);
+	}
+
 }
