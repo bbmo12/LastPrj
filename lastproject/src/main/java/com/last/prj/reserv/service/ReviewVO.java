@@ -1,5 +1,7 @@
 package com.last.prj.reserv.service;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -10,4 +12,8 @@ public class ReviewVO {
 	private int c_no;			//상담순번
 	private int r_no;			//예약순번
 	private int fPart;			//첨부파일
+	
+	private String picture; //사진
+	
+
 }

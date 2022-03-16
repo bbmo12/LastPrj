@@ -279,8 +279,7 @@ public class PmemberController {
 	@RequestMapping("cnoreview")
 	@ResponseBody
 	public ReviewVO cnoreview(int c_no) {
-		System.out.println("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ");
-		System.out.println(c_no);
+
 		return reviewDao.cnoreview(c_no);
 	}
 	

@@ -306,7 +306,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
 						url: "ajaxIsIdCheck",
 						type: "post",
 						data: {
-							"m_id": id
+							"id": id
 						},
 						success: function (result) {
 							var b = (result === true); // 넘어온 값을 boolean 타입으로 변경 false = 0 true = 1

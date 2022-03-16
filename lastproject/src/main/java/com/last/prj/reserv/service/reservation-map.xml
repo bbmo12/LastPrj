@@ -113,5 +113,10 @@
 
 	</select>
 
+	<select id="readpicture" parameterType="int" resultType="com.last.prj.reserv.service.ReviewVO">
+		SELECT PICTURE FROM F_FILE F, REVIEW R
+			WHERE F.F_PART = r.f_part and r_no= #{r_no}
+	
+	</select>
 
 </mapper>

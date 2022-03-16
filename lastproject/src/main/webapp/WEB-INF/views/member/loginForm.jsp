@@ -101,7 +101,7 @@
 	if(result === 'result1'){
 		alert("임시 비밀번호가 발급되었습니다. 메일을 확인해주세요.");
 	}
-		function login() {
+		/* function login() {
 			$.ajax({
 				url: 'geturi.do',
 				type: 'get',
@@ -111,7 +111,7 @@
 					location.href = res;
 				}
 			});
-		}
+		} */
 	</script>
 	<script>
 		//카카오로그인
