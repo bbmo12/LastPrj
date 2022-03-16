@@ -74,7 +74,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="col-lg-12 col-md-12 blog_details" style="margin-left: 30px;">
+					<div class="col-lg-12 col-md-12 blog_details" style="margin: 20px; 0  0 -6px;">
 						<form class="forms-sample" action="pmdelete" method="post">
 							<h4>회원탈퇴하시겠습니까?</h4>
 							<button type="submit" class="btn btn-primary mr-2">네</button>
