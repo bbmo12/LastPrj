@@ -281,15 +281,8 @@
 			</div>
 		</div>
 	</section>
-	<script>
-	
-		function addFile() {
-			var input = $('<input>').attr({
-				'name': 'multiFileList',
-				'type': 'file'
-			});
-			$('#ffile').append(input);
-		}
+
+	<script>	
 
 		function addFile1() {
 			var input = $('<input>').attr({

@@ -6,6 +6,8 @@
 <html>
 
 <head>
+
+
   <meta charset="UTF-8">
   <!-- Required Meta Tags -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,12 +70,21 @@
   <script src="resources/assets/js/vendor/jquery.raty.js"></script>
   <script src="resources/assets/js/vendor/bootbox.min.js"></script> 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+ <style type="text/css">
+ @font-face {
+    font-family: 'HSSaemaul-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/HSSaemaul-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ </style>
  
   <!-- 별점 css -->
   <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="resources/reviewstar/fontawesome-stars.css">
   <script src="resources/reviewstar/jquery.barrating.min.js"></script>
- 
+
 </head>
 
 <body>
