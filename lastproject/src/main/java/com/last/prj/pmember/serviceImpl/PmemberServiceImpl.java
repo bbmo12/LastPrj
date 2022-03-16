@@ -156,6 +156,11 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admgoChart();
 	}
 
+	@Override
+	public int pMemCode(String p_id) {
+		return map.pMemCode(p_id);
+	}
+
 
 
 	

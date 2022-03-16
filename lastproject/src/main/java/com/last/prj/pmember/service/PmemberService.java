@@ -28,6 +28,8 @@ public interface PmemberService {
     public int pmemberNullUpdate(String p_id); //파트너회원 탈퇴시 모든정보 null
 
     public int pmemberJoinCancel(String p_id); //파트너회원폼2~3 입력중 취소시 데이터삭제
+    
+    int pMemCode(String p_id);//파트너회원코드(예약컨트롤러)
 	
 
 	//관리자

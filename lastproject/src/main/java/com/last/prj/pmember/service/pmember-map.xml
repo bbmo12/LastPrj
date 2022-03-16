@@ -343,6 +343,8 @@
 			TO_CHAR(startdate, 'yyyy-mm')
 		</select>
 	
-	
+		<select id="pMemCode" resultType="int" parameterType="String" >
+			SELECT CODE FROM P_MEMBER WHERE P_ID = #{p_id}
+		</select>
 
 </mapper>

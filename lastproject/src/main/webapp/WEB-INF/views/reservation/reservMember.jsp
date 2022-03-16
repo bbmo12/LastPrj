@@ -449,8 +449,8 @@ $("#sendReserv").on('click',function(){
 				"rcontent" : r_content,
 				"r_code" : animalType,
 				"pet_no" : pet_no,
-				"p_id" : p_id,
-				"code" : code},
+				"p_id" : p_id
+				},
 		success : function(res){
 			console.log(res);
 			alert("예약신청이 완료되었습니다.");
