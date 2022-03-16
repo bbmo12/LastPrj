@@ -124,7 +124,8 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price,
+    		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request) {
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -132,6 +133,10 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
+		
+		System.out.println("=== file1: " + multiFileList1);
+		System.out.println("=== file2: " + multiFileList2);
+		
 		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
@@ -157,8 +162,26 @@ public class PmemberController {
 			}
 		}
 		
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = pmember.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		pmember.setPassword(pwd);
+		
+		if(multiFileList1.isEmpty() && multiFileList1.size() > 0) {
+			int f_part1 = ffileutil.multiFileUpload(multiFileList1, request);
+			pmember.setP_license(f_part1);
+		}
+		
+		if(multiFileList2.isEmpty() && multiFileList2.size() > 0) {
+			int f_part2 = ffileutil.multiFileUpload(multiFileList2, request);
+			pmember.setP_image(f_part2);
+		}
+		
+		
 		pMemberDao.pmemberUpdate(pmember);
 		pMemberDao.deleteTimeId(time);//시간삭제
+		
 		//시간 추가
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
 			if(time.getTimeVOList().get(i).getO_no() != 0){
@@ -171,12 +194,6 @@ public class PmemberController {
 			pmemDao.insertService(price.getPriceVOList().get(i));
 		}
 		redirectAttr.addFlashAttribute("update","수정실패");
-
-		// 비밀번호 암호화
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
-		String inputPwd = pmember.getPassword();
-		String pwd = encoder.encode(inputPwd);
-		pmember.setPassword(pwd);
 
 		return "redirect:/pmemberMyPage";
 	}
