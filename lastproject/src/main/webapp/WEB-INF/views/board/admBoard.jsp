@@ -56,15 +56,13 @@
 }
 </style>
 </head>
-
-
 <body>
 	<section class="department-area section-padding4">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
 					<div class="section-top text-center">
-						<h2>자주 묻는 질문</h2>
+						<h2>공지사항</h2>
 						<p>반려동물을 사랑하는 마음은 물론, 반려동물 관련 자격증 또는 전문 지식을 갖춘 분들이 활동하고 있습니다.
 							반려동물과 보호자님 모두의 행복한 동행을 위해 든든한 파트너가 되어드립니다.</p>
 					</div>
@@ -101,15 +99,7 @@
 					<button type="button" onclick="searchData()">검 색</button>
 				</form>
 			</div>
-
-
-
-			<%-- <my:nav jsFunc="go_page" page="${page}"/> --%>
 	</section>
-
-	<!-- 페이징 해야함 -->
-	<!-- 관리자가  -->
-
 </body>
 <script>
 	// enter 키 : 이상함
@@ -165,15 +155,6 @@
 
 	
 	
-	/* 페이징 처리...
-	function go_page(p) {
-		goform.pageNum.value=p;
-		goform.submit();
-		
-	}
-	w_address.addEventListener('click', function () {
-		event.target.select();
-	}) */
 </script>
 
 </html>

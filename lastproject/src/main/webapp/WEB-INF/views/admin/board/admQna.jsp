@@ -21,12 +21,25 @@
 	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+.card-text {
+	display: inline-block;
+	width: 300px;
+	/* white-space: nowrap; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 5px;
+	align: center;
+}
+
 .container-fluid {
 	width: 100%;
 	padding-right: 0px;
 	padding-left: 0px;
 	margin-right: auto;
 	margin-left: auto;
+}
+button {
+	width: 90px !important;
 }
 </style>
 </head>
@@ -55,9 +68,10 @@
 						name="repor"> <input type="hidden" name="pageNum"
 						value="1"> FROM : <input type="text" id="fromDate"
 						name="fromDate">&nbsp;&nbsp; TO : <input type="text"
-						id="toDate" name="toDate"> 
-						<select id="key" name="key">
-						<option value="all" selected="selected">전 체</option>
+						id="toDate" name="toDate"> <select id="key" name="key">
+						<option value="" selected="selected">전 체</option>
+						<option value="reporter" >신고자</option>
+						<option value="reported" >신고당한사람</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="submit" onclick="pagingList();">검 색</button>
 					<!-- <button type="button" id="btnSearch">검 색</button> -->
@@ -121,43 +135,38 @@
 				</div>
 				<div class="modal-body">
 
-					<ul id="repo">
+					<ul id="repo" class="list-star">
 						<!-- 신고 내역 -->
 					</ul>
 
 					<!-- 신고 처리 Form 태그 -->
-					<form id="form">
-						<div class="form-group">
-							<label for="amdReportOption">처리유형</label> <select class="repor"
-								id="repor" name="repor">
-								<option value="701" selected>미처리</option>
-								<option value="702">기각</option>
-								<option value="703">승인</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label for="message-text" class="col-form-label">처리사유</label>
-							<textarea class="state" id="state" name="state"></textarea>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" id="admReportUpdate" name="admReportUpdate"
-						class="btn btn-primary">확 인</button>
+					
+
+						<form id="form" style="display: none;">
+							<div class="form-group">
+								<label for="amdReportOption">처리유형</label> <select class="repor"
+									id="repor" name="repor">
+									<option value="701" selected>미처리</option>
+									<option value="702">기각</option>
+									<option value="703">승인</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="col-form-label">처리사유</label>
+								<textarea class="state" id="state" name="state"></textarea>
+							</div>
+						</form>
+					<div class="modal-footer">
+						<button type="button" id="admReportUpdate" name="admReportUpdate"
+							class="btn btn-primary">확 인</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--end Modal 창 -->
 	<script>
-	//======================enter 키===================
-	function eventkey() {
-		if (event.keyCode == 13) {
-			pagingList();
-		} else {
-			return false;
-		}
-	}//====================end enter 키================
+	
 	
 		//검색 함수
 		$(function() {
@@ -175,7 +184,16 @@
 					});
 		});// end 검색함수
 		
-		// ===================== 리스트 만드는 함수 ====================
+		// ========================================================== 리스트 만드는 함수 ==================================================================== 테이블
+		
+		//======================enter 키===================
+		function eventkey() {
+			if (event.keyCode == 13) {
+				pagingList();
+			} else {
+				return false;
+			}
+		}//====================end enter 키================
 		
 		let viewReviewList = function(result) {
 			$("#myTable").empty();
@@ -194,12 +212,12 @@
 															+ result[i].reported
 															+ "</td><td>"
 															+ result[i].w_date
-															+ "</td><td>"
+															+ "</td><td class='card-text'>"
 															+ result[i].content
-															+ "</td><td id='content'>"
+															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td><td>"
-															+ "<button id='reportModal' type='button' class='btn btn-secondary' onclick='show("
+															+ "<button id='reportModal' type='button' class='btn btn-danger btn-icon-text' onclick='show("
 															+ result[i].rep_no
 															+ ")' value="
 															+ result[i].rep_no
@@ -217,14 +235,14 @@
 															+ result[i].reported
 															+ "</td><td>"
 															+ result[i].w_date
-															+ "</td><td>"
+															+ "</td><td class='card-text'>"
 															+ result[i].content
-															+ "</td><td id='content'>"
+															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button id='cancelModal' type='button' onclick='show("
+															+ "<td><button  type='button' onclick='show("
 															+ result[i].rep_no
-															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#cancelModal'> "
+															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'> "
 															+ "기각처리</td></button></tr>");
 								} else {
 
@@ -236,20 +254,20 @@
 															+ result[i].reported
 															+ "</td><td>"
 															+ result[i].w_date
-															+ "</td><td>"
+															+ "</td><td class='card-text'>"
 															+ result[i].content
-															+ "</td><td id='content'>"
+															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button id='permitModal' type='button' class='btn btn-secondary' onclick='show("
+															+ "<td><button  type='button' class='btn btn-success' onclick='show("
 															+ result[i].rep_no
-															+ ")'  data-toggle='modal' data-target='#permitModal'>"
+															+ ")'  data-toggle='modal' data-target='#exampleModal'>"
 															+ "승인처리</td></button></tr>");
 								}
 								;
 							});
 		}
-		//==============================end 리스트 만드는 함수 : viewReviewList============================
+		//===================================================================end 리스트 만드는 함수 : viewReviewList============================================ 끝!
 		
 		
 		// Modal 미처리 신고 : Review
@@ -264,29 +282,57 @@
 							},
 							success : function(res) {
 								console.log(res[0].state);
-								if (res == '')
-									alert('해당 데이터가 없습니다');
+								if (res == '') alert('해당 데이터가 없습니다');
 
-								console.log("rep_no 는 " +res[0].rep_no);
+								if(res[0].repor != 701  ){ //state 값이 있을 떄 + repor 가 선택 되어 있을 때 : 기각처리 / 승인처리 
+									
+	
+									//$("form").append("<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+									$("#repo").append(
+											"<li>신고유형 : " + res[0].f_content
+													+ "</li><li>신고날짜 : "
+													+ res[0].w_date
+													+ "</li><li>신고자 : "
+													+ res[0].reporter
+													+ "</li><li>신고당한 : "
+													+ res[0].reported
+													+ "</li><li>신고사유 : "
+													+ res[0].content
+													+ "</li><li>게시글 내용 : "
+													+ res[0].q_content
+													+ "</li><li>신고처리 상태 : "
+													+ (res[0].repor == 702 ? '기각처리' : '승인처리')
+													+ "</li><li>해당처리 사유 : "
+													+ (res[0].state == 'null' ? '없음' : res[0].state )
+													+ "</li>");
+									
+									$(".modal-footer").append("<button class='btn btn-link' type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
-								$("form")
-										.append(
-												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+									
+								}else {   //미처리 state + repor 가 값이 담겨져 있지 않을 떄
+									$('#form').show();
+									$("form")
+											.append(
+													"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
 
-								$("#repo").append(
-										"<ul><li>신고유형 : " + res[0].f_content
-												+ "</li><li>신고날짜 : "
-												+ res[0].w_date
-												+ "</li><li>신고자 : "
-												+ res[0].reporter
-												+ "</li><li>신고당한 : "
-												+ res[0].reported
-												+ "</li><li>신고사유 : "
-												+ res[0].content
-												+ "</li><li>게시글 내용 : "
-												+ res[0].q_content
-												+ "</li></ul>");
-								$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
+									$("#repo").append(
+											"<li>신고유형 : " + res[0].f_content
+													+ "</li><li>신고날짜 : "
+													+ res[0].w_date
+													+ "</li><li>신고자 : "
+													+ res[0].reporter
+													+ "</li><li>신고당한 : "
+													+ res[0].reported
+													+ "</li><li>신고사유 : "
+													+ res[0].content
+													+ "</li><li>게시글 내용 : "
+													+ res[0].q_content
+													+ "</li>");
+									$(".modal-footer").append("<button type='button' class='btn btn-link' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
+								}
+								
+						console.log("rep_no 는 " +res[0].rep_no);
+
 							},
 							error : function(er) {
 								alert('오류가 났음. 개발자 호츌');
@@ -294,9 +340,10 @@
 						})// end ajax
 						$("#myModal").modal('show');
 			
-		}// end Show function Modal 신고 단건
+		}
+		// end Show function Modal 신고 단건 ======끝!
 		
-		//=============상세보기 페이지 새 창 열어서  :  권한 없어서 못가는 거 같은데
+		//=============상세보기 페이지 새 창==============
 		function goDetail(e) {
 			var q_no = $(e).data('value');
 			console.log("q_no : " +q_no);
@@ -304,17 +351,19 @@
 			console.log("url :"+url);
 			window.open(url);
 			
-		}//=============end window.open()
+		}
+		//=============상세보기 페이지 새 창============== 끝!
 
-		//모달 내용 초기화
+		//모달 내용 끌 떄 초기화
 		$('#myModal').on('hidden.bs.modal', function(e) {
+			$('#form').hide();
 			$(this).find('ul').empty();
 			$(this).find('form')[0].reset();
 			$(this).find('#goDetail').remove();
 
 		})//END 모달 내용 초기화
 
-		//신고처리 : admReportUpdate
+		//===========신고처리 : admReportUpdate==========
 		$("#admReportUpdate").on("click", function(e) {
 			var str = $('#form').serialize();
 			console.log("str의 값"+str);
@@ -324,16 +373,14 @@
 			console.log("state : "+state);
 			var repor = $("#repor").val();
 			console.log("repor : "+repor);
-
-			var flag = confirm("신고처리 하시겠습니까?");
-			if (flag == true) {
+			
 				$.ajax({
 					url : 'admReportUpdate',
 					method : 'post',
 					data : {
-						"rep_no" : rep_no,
-						"state" : state,
-						"repor" : repor
+						"rep_no" : $("#rep_no").val(),
+						"state" : $("#state").val(),
+						"repor" : $("#repor").val()
 					},
 					success : function(result) {
 						alert("신고 처리가 성공적으로 완료되었습니다");
@@ -345,8 +392,9 @@
 
 					}
 				}) //end Ajax
-			}//end If
-		})//end 신고 처리
+			
+		})
+		//===========신고처리 : admReportUpdate========== 끝!
 			
 			
 		//===================리스트 호출 버튼==================
@@ -360,7 +408,7 @@
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
 			
-		});//===================end 리스트 호출 버튼================== 
+		});//===================end 리스트 호출 버튼================== 끝!
 		
 		
 		//===========리스트 ajax 호출==========
@@ -385,9 +433,9 @@
 					};
 				}
 			});
-		}//===========end  리스트 ajax 호출==========
+		}//===========end  리스트 ajax 호출========== 끝!
 			
-		//===========페이징 처리==========
+		//==============================페이징 처리==========================
 		function viewPage(page) {
 			console.log("얘로 페이지를 만든다!"+page);
 			
@@ -403,7 +451,7 @@
 				</li>`
 			}
 				for ( var i=page.startPage ; i <=  page.endPage; i++){
-					nav += `<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
+					nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
 								href="javascript:goPage(\${i})" class="page-link">\${i }</a>
 								</li>`
 				}
@@ -427,7 +475,7 @@
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
-		//===========end 페이징 처리==========
+		//=============================end 페이징 처리============================= 끝!
 
 		
 		// =============날짜 검색 ==============
@@ -483,7 +531,8 @@
             
             
 	    	pagingList();
-        });// =============end 날짜 검색 ==============
+        });// =============end 날짜 검색 ============== 끝!
+        
 	</script>
 </body>
 
