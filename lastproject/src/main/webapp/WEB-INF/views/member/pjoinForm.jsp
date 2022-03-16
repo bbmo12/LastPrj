@@ -141,7 +141,7 @@
 	</script>
 	<body class="my-login-page">
 			<div class="container">
-				<div class="row justify-content-md-center" style="margin-top: 7em; height: 1000px;">
+				<div class="row justify-content-md-center" style="margin-top: 7em; height: 1100px;">
 					<div class="card-wrapper" style="width: 650px;">
 						<div class="brand">
 							<img src="resources/login/logo.jpg" alt="logo">
@@ -192,12 +192,13 @@
 										</div>
 									</div>
 									<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="agree" id="agree" class="custom-control-input">
-										<label for="agree" id="agree" class="custom-control-label"><a href="#" data-toggle="modal" data-target="#exampleModal">개인정보수집동의</a></label>
-										
-									</div>
-								</div>
+										<div class="custom-checkbox custom-control">
+											<input type="checkbox" name="agree" id="agree"class="custom-control-input" required=""> 
+											<label for="agree" class="custom-control-label">
+											<a href="#"data-toggle="modal" data-target="#exampleModal">개인정보수집동의</a></label>
+										<div class="invalid-feedback">You must agree with ourTerms and Conditions</div>
+										</div>
+									</div>							
 									<button type="submit" class="btn btn-primary mr-2"style="width: 100px;">다음</button>
 									<button class="btn btn-light" onclick="location.href='home'" style="width: 100px;">취소</button>
 									<div class="mt-4 text-center">이미 아이디가 있으신가요? <a href="loginForm">로그인</a>

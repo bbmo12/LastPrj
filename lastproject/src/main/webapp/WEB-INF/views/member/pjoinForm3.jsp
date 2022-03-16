@@ -13,7 +13,7 @@
 
 <body class="my-login-page">
 	<div class="container">
-		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1250px;">
+		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1500px;">
 			<div class="card-wrapper" style="width: 650px;">
 				<div class="brand">
 					<img src="resources/login/logo.jpg" alt="logo">

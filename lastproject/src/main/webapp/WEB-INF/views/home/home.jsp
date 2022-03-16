@@ -383,6 +383,10 @@ h1{
 		})
 	});
     </script>
-  
+    	<script>
+	if("${insert}" != "" ){
+		Swal.fire('회원가입이<br>완료되었습니다.');
+	}
+	</script>
 </body>
 </html>
