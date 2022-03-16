@@ -156,7 +156,7 @@
 													<th>승인여부</th>
 												</tr>
 											</thead>
-											<tbody style="text-align: center">
+											<tbody align="center">
 												<c:if test="${ fn:length(preservation) == 0  }">
                                                     <tr>
                                                         <td colspan="6" align="center">조회된 결과가 없습니다.</td>
@@ -164,8 +164,7 @@
                                                 </c:if>
 												<c:forEach items="${preservation }" var="pres">
 													<tr>
-														<td>
-															<input class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
+														<td><input class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
 														<td>${pres.r_date}</td>
 														<td>${pres.startdate }&nbsp; ${pres.time }</td>
 														<td>${pres.m_id }</td>
