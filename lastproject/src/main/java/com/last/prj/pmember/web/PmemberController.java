@@ -157,7 +157,11 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
-		
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = pmember.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		pmember.setPassword(pwd);		
 		pMemberDao.pmemberUpdate(pmember);
 		pMemberDao.deleteTimeId(time);//시간삭제
 		//시간 추가
@@ -174,12 +178,6 @@ public class PmemberController {
 			}	
 		}
 		redirectAttr.addFlashAttribute("update","수정실패");
-
-		// 비밀번호 암호화
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
-		String inputPwd = pmember.getPassword();
-		String pwd = encoder.encode(inputPwd);
-		pmember.setPassword(pwd);
 
 		return "redirect:/pmemberMyPage";
 	}

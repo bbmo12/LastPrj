@@ -124,9 +124,7 @@
 			<if test="speciality != null"> SPECIALITY = #{speciality},</if>
 			<if test="picture != null">PICTURE = #{picture},</if>
 			<if test="pfile != null">PFILE = #{pfile}</if>
-
-			</set>
-	
+		</set>
 		WHERE P_ID = #{p_id}
 	</update>
 	<!-- 수정시 otime 삭제후 insert -->
