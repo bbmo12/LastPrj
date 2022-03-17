@@ -86,7 +86,38 @@ public class PmemberController {
 
 		return "pmember/memberDetail";
 	}
+	@RequestMapping("confirmPass")
+	public String pass(Principal principal,Model model) {
+		String p_id = "0";
+		if (principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (userDetails.getRole() == "파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
+		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id));
+		return "pmember/confirmPass";
+	}
+	
+	@RequestMapping("confirmPasscheck")
+	@ResponseBody
+	public String confirmPass(Principal principal, PmemberVO pmember) {
+		String p_id = "0";
+		if (principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (userDetails.getRole() == "파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+				pmember.setP_id(p_id);
+			}
+		}
+		if (pMemberDao.passCheck(pmember) != null) { 
+			
+			return "success";
+		} else 
+			System.out.println("아ㅏ아아ㅏ아아ㅏㅇ"+pMemberDao.passCheck(pmember));
+			return "error";
 
+	}
 	// 파트너 마이페이지
 	@RequestMapping("pmemberMyPage")
 	public String mypage(Model model, Principal principal) {
@@ -125,7 +156,13 @@ public class PmemberController {
 	
 	//마이페이지수정  
 	@PostMapping("pmemberUpdate")
-    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr, PmemberVO pmember,TimeVO time, PriceVO price, Model model, Principal principal) {
+
+    public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price,
+    		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request) {
+
+		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
+		multiFileList2 = FfileUtil.getMultiFileList(multiFileList2);
+		
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -133,7 +170,12 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
-		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+price.toString());
+		System.out.println("=== file : " + file);
+		System.out.println("=== file1: " + multiFileList1);
+		System.out.println("=== file2: " + multiFileList2);
+		
+		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
+
     	String originalFileName = file.getOriginalFilename();
 		String webPath = "/resources/upload";
 		String realPath = sc.getRealPath(webPath);
@@ -157,13 +199,27 @@ public class PmemberController {
 				e.printStackTrace();
 			}
 		}
+
 		// 비밀번호 암호화
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 		String inputPwd = pmember.getPassword();
 		String pwd = encoder.encode(inputPwd);
-		pmember.setPassword(pwd);		
+
+		pmember.setPassword(pwd);
+		
+		if(multiFileList1.size() > 0) {
+			int f_part1 = ffileutil.multiFileUpload(multiFileList1, request);
+			pmember.setP_license(f_part1);
+		}
+		
+		if(multiFileList2.size() > 0) {
+			int f_part2 = ffileutil.multiFileUpload(multiFileList2, request);
+			pmember.setP_image(f_part2);
+		}
+		
 		pMemberDao.pmemberUpdate(pmember);
 		pMemberDao.deleteTimeId(time);//시간삭제
+		
 		//시간 추가
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
 			if(time.getTimeVOList().get(i).getO_no() != 0){
@@ -212,11 +268,22 @@ public class PmemberController {
 		System.out.println("=== vo : "+vo);
 		//System.out.println("====review : "+content + rating + r_no);
 		//System.out.println("====multiFileList1 : "+ multiFileList1);
-		int f_part = ffileutil.multiFileUpload(multiFileList1, request);
-		System.out.println("f_part = " + f_part);
-		review.setF_part(f_part);
-		reservationDao.updatecode(vo);
+
+		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
+		/*
+		if(multiFileList1 != null) {
+			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+			System.out.println("===f_part = " + f_part);
+			review.setF_part(f_part);
+		}
+		*/
+		if(multiFileList1.size() > 0) {
+			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+			review.setF_part(f_part);
+		}
+		
 		reviewDao.servicereview(review);
+		reservationDao.updatecode(vo);
 		
 		return "redirect:/reservationSelect";
 	}

@@ -148,7 +148,7 @@ public class ReservationController {
 				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 				cri.setM_id(m_id);
-				cri.setAmount(5);
+				cri.setAmount(10);
 
 				if(mapper.reservPage(cri)!=null) {
 				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
@@ -295,11 +295,11 @@ public class ReservationController {
 	  
 	  @RequestMapping("rnoreview")
 	  @ResponseBody
-	  public ReservationVO rnoreview(int r_no, Model model,ReviewVO review) {
+	  public ReviewVO rnoreview(int r_no, Model model,ReviewVO review) {
 		  System.out.println("요호호호호홍");
 		  
 			
-			  model.addAttribute("picture", reservationDao.readpicture(r_no));
+		  model.addAttribute("picture", reservationDao.readpicture(r_no));
 			 
 		  System.out.println(reservationDao.readpicture(r_no));
 		  return reservationDao.rnoreview(r_no);

@@ -103,7 +103,9 @@ h1{
 #banner_content{
 	color: white;
 }
-
+	.swal2-content{
+		display: none;
+	}
 
 </style>
 	<br><br><br><br><br>

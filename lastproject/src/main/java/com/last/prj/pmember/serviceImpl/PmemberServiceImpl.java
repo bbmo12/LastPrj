@@ -161,8 +161,8 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.pMemCode(p_id);
 	}
 
-
-
-	
-
+	@Override
+	public PmemberVO passCheck(PmemberVO pmember) {
+		return map.passCheck(pmember);
+	}
 }

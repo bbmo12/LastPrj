@@ -32,7 +32,9 @@
 	#formMain .form-group{
 		margin-bottom: 5px;
 	}
-	
+	.swal2-content{
+		display: none;
+	}
 </style>
 
 <body>
@@ -107,11 +109,6 @@
 									readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">비밀번호&nbsp;:&nbsp;</h3>
-								<input type="password" style="border: none" id="password" name="password"
-									value="${pmember.password}" readonly>
-							</div>
-							<div class="form-group">
 								<h3 style="font-weight: bolder;">전화번호&nbsp;:&nbsp;</h3>
 								<input style="border: none" id="tel" name="tel" value="${pmember.tel}" readonly>
 							</div>
@@ -181,7 +178,7 @@
 									<img src="resources/upload/${plicense.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 									</c:forEach>
 							</div>			
-							<button type="button" onclick="location.href='pmemberUpdateForm'" class="genric-btn info radius">내정보 수정</button>
+							<button type="button" onclick="location.href='confirmPass'" class="genric-btn info radius">내정보 수정</button>
 						</div>
 					</div>
 				</div>

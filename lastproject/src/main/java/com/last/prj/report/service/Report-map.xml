@@ -101,11 +101,21 @@
 	<!-- 일반회원 신고내역 전체조회 -->
 	<select id="myReportList" parameterType="String"
 		resultType="com.last.prj.report.service.ReportVO">
-		SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, C.CONTENT
-		AS f_content
+		SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
 		FROM REPORT R, F_CODE C, P_MEMBER P
 		WHERE R.CODE=C.CODE AND
 		R.REPORTED=P.P_ID AND REPORTER = #{m_id}
+
+
+		union
+
+
+		SELECT m.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
+		FROM
+		REPORT R, F_CODE C, member m
+		WHERE R.CODE=C.CODE AND
+		R.REPORTED=m.m_ID
+		AND REPORTER = #{m_id}
 	</select>
 
 	<!-- 신고 날짜 별 검색 -->
@@ -122,18 +132,19 @@
 	<select id="pmemReport" resultType="int"
 		parameterType="com.last.prj.report.service.ReportVO">
 		SELECT COUNT(*) AS TOTAL
-			FROM REPORT
+		FROM REPORT
 		WHERE REPORTER = #{reporter}
 	</select>
 
 	<select id="pmemReportList"
 		resultType="com.last.prj.report.service.ReportVO">
 		SELECT *
-			FROM ( SELECT ROWNUM RN, A.*
-				   FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR, STATE
+		FROM ( SELECT ROWNUM RN, A.*
+				FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR, STATE
 						FROM REPORT
-					  WHERE REPORTER = #{reporter} ) A)
-		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+				WHERE REPORTER = #{reporter} ) A)
+		WHERE RN BETWEEN
+		(#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
 
@@ -174,7 +185,7 @@
 		</if>
 
 	</select>
-	
+
 	<!--관리자 리뷰 QnA 페이징 처리된 유형 별 조회 -->
 	<select id="admQlistCode"
 		parameterType="com.last.prj.report.service.ReportVO"
@@ -183,7 +194,8 @@
 		F_CONTENT, Q.CONTENT AS Q_CONTENT, R.REPORTER,
 		R.REPORTED,Q.Q_NO,R.REP_NO,R.REPOR, R.W_DATE, R.CONTENT
 		FROM REPORT
-		R, F_CODE F, QNA Q
+		R,
+		F_CODE F, QNA Q
 		WHERE R.CODE = F.CODE AND R.Q_NO = Q.Q_NO
 		<if test="code != null ">
 			AND R.CODE = #{code}
@@ -191,8 +203,9 @@
 		<if test="repor != null ">
 			AND R.REPOR = #{repor}
 		</if>
-		<if test="key != null and key != '' and data != null and data != ''">
-		    AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
+		<if
+			test="key != null and key != '' and data != null and data != ''">
+			AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
@@ -213,8 +226,9 @@
 		<if test="repor != null ">
 			AND R.REPOR = #{repor}
 		</if>
-		<if test="key != null and key != '' and data != null and data != ''">
-		    AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
+		<if
+			test="key != null and key != '' and data != null and data != ''">
+			AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
@@ -239,7 +253,8 @@
 	</select>
 
 	<!-- 신고건수 업데이트 -->
-	<update id="admReSearchUpdate" parameterType="com.last.prj.report.service.ReportVO">
+	<update id="admReSearchUpdate"
+		parameterType="com.last.prj.report.service.ReportVO">
 		<choose>
 			<when test='role == "1"'>
 				UPDATE MEMBER

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 
@@ -59,7 +60,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${pmemdetail.picture }"
-								style="width: 210px;" alt="등록된 사진이 없습니다.">
+								style="width: 210px;" onerror="this.src='resources/upload/pet.PNG'">
 							<div class="br"></div>
 							<h2 style=" margin: 0 40px -10px 0;">${pmemdetail.name}</h2>
 							<sec:authorize access="hasRole('MEMBER')">		
@@ -98,12 +99,15 @@
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
 						<div class="col-lg-12">
-							<div class="quotes" style="margin-bottom: 0px;">
+							<div class="quotes" style="margin-bottom: 0px; font-style: normal;">
 								<h3>자기소개</h3>
 								${pmemdetail.p_info}
 							</div>
 							<h3 style="font-weight: bold; margin: 15px 0 0 20px;">경력·자격</h3>
 							<div class="container">
+							 <c:if test="${ fn:length(pimage) == 0  && fn:length(plicense) == 0 }">
+						 	 <h3 align="center">등록된 사진이 없습니다.</h3>                                                  
+                         	</c:if>
 								<div class="row" style="margin-top: 20px;">
 									<c:forEach items="${pimage}" var="image">
 										<div class="col-xl-4 col-lg-3">
@@ -161,8 +165,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="comments-area" style="width: 850px;">
+					<div class="comments-area" style="width: 839px;">
 						<h3>고객후기</h3>
+						 <c:if test="${ fn:length(counsel) == 0  && fn:length(service) == 0 }">
+						 	 <h3 align="center">등록된 후기가 없습니다.</h3>                                                  
+                         </c:if>
 						<c:forEach items="${counsel }" var="counsel">
 							<div class="comment-list">
 								<div class="single-comment justify-content-between d-flex">
@@ -262,7 +269,7 @@
 							cancelButtonText: '닫기',
 						}).then(result => { // 만약 Promise리턴을 받으면, 
 							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
-								Swal.fire('추천이 취소되었습니다.')
+								Swal.fire('추천이 취소되었습니다.');
 							}
 						});
 					}

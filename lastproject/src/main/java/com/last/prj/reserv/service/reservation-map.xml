@@ -105,12 +105,24 @@
 		where r_no = #{r_no}
 	</update>
 
-	<select id="rnoreview" parameterType="int"
-		resultType="com.last.prj.reserv.service.ReservationVO">
-		SELECT CONTENT, RATING 
-		FROM REVIEW R
-		WHERE R.R_NO = #{r_no}
+	<resultMap type="com.last.prj.reserv.service.ReviewVO"
+		id="ReviewRead">
+		<result column="rev_no" property="rev_no" />
+		<result column="content" property="content" />
+		<result column="rating" property="rating" />
+		<collection property="fileList" resultMap="ffileVO" />
+	</resultMap>
+	<resultMap type="com.last.prj.pmember.service.FfileVO"
+		id="ffileVO">
+		<result column="picture" property="picture" />
+	</resultMap>
 
+	<select id="rnoreview" parameterType="int"
+		resultMap="ReviewRead">
+		SELECT r.CONTENT, r.RATING, f.picture
+		FROM REVIEW r left join f_file f
+		on r.f_part = f.f_part
+		where R_NO = #{r_no}
 	</select>
 
 	<select id="readpicture" parameterType="int" resultType="com.last.prj.reserv.service.ReviewVO">
