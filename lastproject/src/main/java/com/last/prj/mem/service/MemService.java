@@ -1,6 +1,10 @@
 package com.last.prj.mem.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.last.prj.pmember.service.PmemberVO;
 
 public interface MemService {
 	
@@ -59,4 +63,6 @@ public interface MemService {
 	
 	int memdelete();
 
+	public List<MemVO> admMlistCode(MemVO vo); 
+	public int adMmemCount(); 
 }
