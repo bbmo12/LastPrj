@@ -114,7 +114,7 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
-	public List<PmemberVO> admMlistCode(PmemberVO vo) {
+	public List<MemVO> admMlistCode(MemVO vo) {
 		return map.admMlistCode(vo);
 	}
 

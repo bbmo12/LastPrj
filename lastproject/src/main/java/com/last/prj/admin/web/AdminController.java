@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.pet.service.PetService;
+import com.last.prj.pet.service.PetVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
@@ -38,19 +39,14 @@ public class AdminController {
 
 	@Autowired
 	private MemService memDao;
-	
-	
-	
-	
+
 	@RequestMapping("/goChart")
 	@ResponseBody
 	public List<PmemberVO> goChart() {
-		
+
 		return pMemberDao.admgoChart();
-		
-		
+
 	}
-	
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -58,7 +54,7 @@ public class AdminController {
 		int pmemCount = pMemberDao.pmemCount();
 		int memCount = memDao.memCount();
 		int petCount = petDAO.petCount();
-		//String pmemDateList = pMemberDao.pmemDateList();
+		// String pmemDateList = pMemberDao.pmemDateList();
 
 		model.addAttribute("pmemCount", pmemCount);
 		model.addAttribute("memCount", memCount);
@@ -71,33 +67,40 @@ public class AdminController {
 		return "admin/main/main";
 	}
 
-	// =========일반 회원============
+	// =========일반 회원==========================
 	@RequestMapping("/admMember")
 	public String admMemberTable() {
 		return "admin/board/admMember";
 	}
+
+	@RequestMapping("/admMlistCode")
+	@ResponseBody
+	public HashMap<String, Object> admMlistCode(MemVO vo, Criteria cri) {
+		System.out.println("VO가 뭔데 대체" + vo);
+		int total = memDao.adMmemCount();
+		System.out.println("total은~" + total);
+		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9);
+		// n개씩 출력
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+
+		map.put("list", memDao.admMlistCode(vo));
+		map.put("page", page);
+		System.out.println("=============================" + vo);
+		System.out.println("=============================" + memDao.admMlistCode(vo));
+		return map;
+
+	}
 	
 	/*
-	 * @RequestMapping("/admMlistCode")
+	 * @RequestMapping("/admChart")
 	 * 
-	 * @ResponseBody public HashMap<String, Object> admMlistCode(MemVO vo, Criteria
-	 * cri){ int total = memDao.admMlistCode(vo); System.out.println("total은~" +
-	 * total); PagingVO page = new PagingVO(cri, total); page.setAmount(9); // n개씩
-	 * 출력 HashMap<String, Object> map = new HashMap<String, Object>();
-	 * vo.setVo(page);
+	 * @ResponseBody public HashMap<String, Object> admChart(MemVO vp, PetVO vv){
 	 * 
-	 * map.put("list", memDao.admMlistCode(vo)); map.put("page", page);
-	 * System.out.println("=============================" + vo);
-	 * System.out.println("=============================" +
-	 * pMemberDao.admPlistCode(vo)); return map;
-	 * 
+	 * return map; 
 	 * }
 	 */
-	
-	
-	
-	
-	
 
 	// ==========end 일반 회원==========
 
@@ -149,12 +152,11 @@ public class AdminController {
 
 	// =========end 파트너 회원 조회==============
 
-	
 	@RequestMapping("/admService")
 	public String admService() {
 		return "admin/board/admService";
 	}
-	
+
 	// =====================Review=========================
 	@RequestMapping("/admReview")
 	public String admReviewTable() {
@@ -164,7 +166,7 @@ public class AdminController {
 	@RequestMapping("/admRlistCode")
 	@ResponseBody
 	public HashMap<String, Object> admReview(ReportVO vo, Criteria cri) {
-		System.out.println("vo는~~~~~~~"+vo);
+		System.out.println("vo는~~~~~~~" + vo);
 		int total = reportDao.admRlistCodeCount(vo);
 		PagingVO page = new PagingVO(cri, total);
 		page.setAmount(9); // n개씩 출력

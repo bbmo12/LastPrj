@@ -3,7 +3,13 @@ package com.last.prj.mem.service;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
+
 import lombok.Data;
+
+
 
 
 
@@ -14,6 +20,7 @@ public class MemVO {
 	private String password;	//비밀번호
 	private String name;		//이름
 	private String tel;			//회원전화번호
+	@JsonFormat(pattern =  "yyyy-MM-dd")
 	private Date startDate;		//가입일
 	private Date endDate;		//탈퇴일
 	private int cReport;		//신고당한횟수
@@ -30,6 +37,14 @@ public class MemVO {
 	private String petN;
 	private String key;
 	private String pets;
+	private String data;
+	private Integer pet_no;
+	private String fromDate;
+	private String toDate;
+	private PagingVO vo;
+	private Criteria cri;
+	private String total;
+	private String code;
 }
 	
 

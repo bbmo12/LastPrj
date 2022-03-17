@@ -56,49 +56,42 @@
 							<div class="card-title">
 								<h4>차트</h4>
 								<button type="button" class="btn btn-link btn-rounded btn-fw"
-									id="partChart" onclick="mainChart()">기간 가입자 수</button>
+									id="partChart" onclick="partChart()">기간 가입자 수</button>
 								<button type="button" class="btn btn-link btn-rounded btn-fw"
-									id="dateChart" onclick="partChart()">펫 보유자, 미보유자 비율</button>
-								<button type="button" class="btn btn-link btn-rounded btn-fw"
-									id="dateChart" onclick="partChart()">펫 품종별 비율</button>
+									id="dateChart" onclick="petChart()">펫 품종별 비율</button>
+
 							</div>
-							<div id="mainC" style="display:;">
-								<p class="card-description mainCount" id="mainCount">
-									총 회원 수 :
+							<div id="petC" style="display: none;">
+								<p class="card-description mainCount" id="petCount">
+									총 마리 수 :
 									<code id="a"></code>
-									<br> 수의사 수 :
-									<code id="b"></code>
-									훈련사 수 :
-									<code id="c"></code>
-									미용사 수 :
-									<code id="d"></code>
-									펫시터 수 :
-									<code id="e"></code>
+									<br>
 								</p>
 
 								<div class="card">
 									<div class="card-body">
-										<h4 class="card-title mainChart">일반 회원 통계</h4>
-										<canvas id="mainChart" style="height: 250px"></canvas>
+										<h4 class="card-title petChart">펫 품종별 비율</h4>
+										<canvas id="petChart" style="height: 250px"></canvas>
 									</div>
 								</div>
 							</div>
-							<div class="card" id="partC" style="display: none;">
+
+
+							<div class="card" id="partC" style="display:;">
 								<div class="card-body">
-									<h4 class="card-title">기간별 파트너 회원 chart</h4>
-									<p class="card-description mainCount" id="mainCount">
+									<h4 class="card-title">일반 회원 기간 별 가입자 수</h4>
+									<p class="card-description partCount" id="partCount">
 										총 회원 수 :
 										<code id="a">96</code>
 										<br> 2022-02 :
 										<code id="b">22명</code>
 										2022-03 :
 										<code id="b">74명</code>
-
 									</p>
-
-									<canvas id="priceChart" style="height: 250px"></canvas>
+									<canvas id="partChart" style="height: 250px"></canvas>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -110,22 +103,29 @@
 							<h4 class="card-title">일반회원 목록</h4>
 							<p>
 								<button type="button"
-									class="btn btn-link btn-rounded btn-fw codep" id="doctor"
+									class="btn btn-link btn-rounded btn-fw codep" id="key"
 									data-code="">전체</button>
 								<button type="button"
-									class="btn btn-link btn-rounded btn-fw codep" id="pet"
+									class="btn btn-link btn-rounded btn-fw codep" id="petY"
 									data-code="petY">펫 보유</button>
 								<button type="button"
-									class="btn btn-link btn-rounded btn-fw codep" id="petNo"
+									class="btn btn-link btn-rounded btn-fw codep" id="petN"
 									data-code="petN">펫 미보유</button>
 								<button type="button"
-									class="btn btn-link btn-rounded btn-fw codep" id="pet"
+									class="btn btn-link btn-rounded btn-fw codep" id="pets"
 									data-code="pets">펫 목록</button>
-							<form id="admDateForm">
+							<form id="admDateForm" onsubmit="return false"
+					onkeypress="eventkey();">
 								<input type="hidden" name="code"> <input type="hidden"
 									name="pageNum" value="1"> FROM : <input type="text"
 									id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
-									type="text" id="toDate" name="toDate">
+									type="text" id="toDate" name="toDate"> <select id="key"
+									name="key">
+									<option value="" selected="selected">전 체</option>
+									<option value="name">이름</option>
+									<option value="m_id">아이디</option>
+								</select> <input type="text" id="data" name="data" size="20">&nbsp;
+								<button type="submit" onclick="pagingList();">검 색</button>
 							</form>
 							</p>
 							<table class="table table-hover">
@@ -155,7 +155,7 @@
 
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title">해당 파트너 회원</h4>
+					<h4 class="modal-title">해당 일반 회원</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<!-- Modal body -->
@@ -197,7 +197,11 @@
 	function mainChart() {
 		 $('#partC').hide();
 		$('#mainC').show();
-
+		$.ajax({
+			url : 'ma'
+		})
+		
+		
 	}
 	
 	function partChart() {
@@ -209,8 +213,8 @@
 				tt = [];
 				oo = [];
 				$.ajax({
-					url : 'goChart',
-					method : 'get',
+					url : '',
+					method : 'partChart',
 					success : function(res) {
 						console.log(res[0].tt);
 						$.each(res, function (i) {
@@ -220,8 +224,8 @@
 							
 						})
 						console.log(tt);
-						const aaa = document.getElementById('priceChart').getContext('2d');
-						const priceChart = new Chart(aaa, {
+						const aaa = document.getElementById('partChart').getContext('2d');
+						const partChart = new Chart(aaa, {
 							type : 'line',
 							data : {
 								labels : tt,
@@ -317,6 +321,7 @@
 		//===================리스트 호출 버튼==================
 		$(".codep").on('click', function() {
 			var code = $(this).data('code');
+			console.log(code);
 			$('#admDateForm')[0].code.value = code
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
@@ -330,23 +335,11 @@
 			console.log(str);
 			
 			$.ajax({
-				url : 'admPlistCode',
+				url : 'admMlistCode',
 				method : 'post',
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
-					
-					console.log(result.list);
-					console.log("리절트페이지는 : " + result.page);
-					console.log(result.chart);
-					
-					if(result.chart == ''){
-						 alert('차트를 그릴 데이터가 없습니다!!');
-						 $("#mainChart").remove();
-						 $(".mainCount").find('code').empty();
-					}else {
-						viewChart(result.chart);
-					};
 
 					if(result.list == ''){
 						alert('데이터가 없습니다!!');
@@ -358,6 +351,9 @@
 						viewPage(result.page);
 						
 					};
+				},error : function () {
+					alert('아 노답..');
+					
 				}
 			});
 		}//===========end  리스트 ajax 호출==========
@@ -365,7 +361,6 @@
 		//==================페이징 처리===================
 		function viewPage(page) {
 			console.log("page는 :"+page);
-			
 			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">`
 			if(page.prev) {
@@ -408,9 +403,7 @@
 			 
 		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
-			console.log(result.f_content);
-			$("#myTable").empty();
-			
+			$("#myTable").empty();		
 			/* 	목록에 전체 / 수의사 이런거 표시할려고 ㅠㅠ
 				$("#pa").html('');
 				if(result[0].code == null){
@@ -425,19 +418,18 @@
 					$("#pa").html('수의사');
 				}
 	 			*/
-			
-			console.log("result는: " + result);
-
 			$.each(result,function(i) {
+				console.log(result[i].pet_no)
+				console.log(result[i].startdate)
 						$("#myTable").append(
 														"<tr><td><a onclick='show()'>"														
-														+ result[i].m_name
+														+ result[i].name
 														+ "</a></td><td>"
 														+ result[i].m_id
 														+ "</td><td>"
 														+ result[i].startdate
 														+ "</td><td>"
-														+ (result[i].pet_no === null ? '미보유' : '보유' )
+														+ (result[i].pet_no == null ? '미보유' : '보유' )
 														+ "</td></tr>" );
 							}) // end each.
 		}
@@ -454,10 +446,10 @@
 			function show() {
 				var m_id = $(event.target).parent().next().text();
 				console.log(p_id);  
-			var p_id = 'kim1@a.com';
+			
 			//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
 			 $.ajax({
-				url : 'admPmemberOne',
+				url : 'admMemberOne',
 				method : 'post',
 				data : {'p_id' : p_id },
 				success : function (res) {					

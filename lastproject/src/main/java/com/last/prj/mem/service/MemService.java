@@ -63,7 +63,6 @@ public interface MemService {
 	
 	int memdelete();
 
-	public List<PmemberVO> admMlistCode(PmemberVO vo); //파트너쉽 별 리스트
-	public int adMmemCount(); //파트너 회원 수
-
+	public List<MemVO> admMlistCode(MemVO vo); 
+	public int adMmemCount(); 
 }
