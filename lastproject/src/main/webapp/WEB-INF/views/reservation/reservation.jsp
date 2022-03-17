@@ -357,14 +357,13 @@
 			$.ajax({
 				url: 'rnoreview',
 				method: 'post',
-				data: {
-					'r_no': r_no
-				},
-				success: function (result) {
-
-					for (var i = 0; i < result.fileList.length; i++) {
-
-						var imgsrc = 'resources/upload/' + result.fileList[i].picture;
+				data : {'r_no' : r_no},
+				success : function(result){
+					console.log(result);
+					
+					for(var i = 0; i < result.fileList.length; i++){
+						
+						var imgsrc = 'resources/upload/'+result.fileList[i].picture;
 						var img = $('<img>').attr({
 							'src': imgsrc,
 							'alt': "등록된 사진이 없습니다."
@@ -373,6 +372,7 @@
 						div.append(img);
 						$('#image').append(div);
 					}
+					
 					var content = result.content;
 					var rating = result.rating;
 					$('.star-rating').raty({

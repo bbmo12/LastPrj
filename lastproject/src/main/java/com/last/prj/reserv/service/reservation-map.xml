@@ -120,8 +120,9 @@
 	<select id="rnoreview" parameterType="int"
 		resultMap="ReviewRead">
 		SELECT r.CONTENT, r.RATING, f.picture
-		FROM REVIEW r, f_file f
-		WHERE r.f_part = f.f_part and R_NO = #{r_no}
+		FROM REVIEW r left join f_file f
+		on r.f_part = f.f_part
+		where R_NO = #{r_no}
 	</select>
 
 	<select id="readpicture" parameterType="int" resultType="com.last.prj.reserv.service.ReviewVO">

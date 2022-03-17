@@ -234,9 +234,13 @@ public class PmemberController {
 		System.out.println("=== vo : "+vo);
 		//System.out.println("====review : "+content + rating + r_no);
 		//System.out.println("====multiFileList1 : "+ multiFileList1);
-		int f_part = ffileutil.multiFileUpload(multiFileList1, request);
-		System.out.println("f_part = " + f_part);
-		review.setF_part(f_part);
+		
+		if(multiFileList1.size() > 0) {
+			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+			System.out.println("===f_part = " + f_part);
+			review.setF_part(f_part);
+		}
+		
 		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
 		
