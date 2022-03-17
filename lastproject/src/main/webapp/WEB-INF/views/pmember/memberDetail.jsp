@@ -105,6 +105,9 @@
 							</div>
 							<h3 style="font-weight: bold; margin: 15px 0 0 20px;">경력·자격</h3>
 							<div class="container">
+							 <c:if test="${ fn:length(pimage) == 0  && fn:length(plicense) == 0 }">
+						 	 <h3 align="center">등록된 사진이 없습니다.</h3>                                                  
+                         	</c:if>
 								<div class="row" style="margin-top: 20px;">
 									<c:forEach items="${pimage}" var="image">
 										<div class="col-xl-4 col-lg-3">
@@ -162,9 +165,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="comments-area" style="width: 850px;">
+					<div class="comments-area" style="width: 839px;">
 						<h3>고객후기</h3>
-						 <c:if test="${ fn:length(counsel) == 0  }">
+						 <c:if test="${ fn:length(counsel) == 0  && fn:length(service) == 0 }">
 						 	 <h3 align="center">등록된 후기가 없습니다.</h3>                                                  
                          </c:if>
 						<c:forEach items="${counsel }" var="counsel">
