@@ -129,6 +129,9 @@ public class PmemberController {
     public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price,
     		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request) {
 
+		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
+		multiFileList2 = FfileUtil.getMultiFileList(multiFileList2);
+		
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -136,7 +139,7 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
-		
+		System.out.println("=== file : " + file);
 		System.out.println("=== file1: " + multiFileList1);
 		System.out.println("=== file2: " + multiFileList2);
 		
@@ -173,12 +176,12 @@ public class PmemberController {
 
 		pmember.setPassword(pwd);
 		
-		if(multiFileList1.isEmpty() && multiFileList1.size() > 0) {
+		if(multiFileList1.size() > 0) {
 			int f_part1 = ffileutil.multiFileUpload(multiFileList1, request);
 			pmember.setP_license(f_part1);
 		}
 		
-		if(multiFileList2.isEmpty() && multiFileList2.size() > 0) {
+		if(multiFileList2.size() > 0) {
 			int f_part2 = ffileutil.multiFileUpload(multiFileList2, request);
 			pmember.setP_image(f_part2);
 		}
@@ -234,10 +237,16 @@ public class PmemberController {
 		System.out.println("=== vo : "+vo);
 		//System.out.println("====review : "+content + rating + r_no);
 		//System.out.println("====multiFileList1 : "+ multiFileList1);
-		
-		if(multiFileList1.size() > 0) {
+		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
+		/*
+		if(multiFileList1 != null) {
 			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
 			System.out.println("===f_part = " + f_part);
+			review.setF_part(f_part);
+		}
+		*/
+		if(multiFileList1.size() > 0) {
+			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
 			review.setF_part(f_part);
 		}
 		

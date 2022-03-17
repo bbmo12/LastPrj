@@ -211,7 +211,8 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"
 										href="#" data-toggle="dropdown">
-										<i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span>
+										<i class="mdi mdi-bell-outline"></i> <span class="count-symbol bg-danger"></span>
+										<!-- <i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span> -->
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">
@@ -239,6 +240,7 @@
 							<li><a href="testPage">Contact</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							<li><a href="main">관리자</a></li>
+							<li><a href="logout">로그아웃</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
