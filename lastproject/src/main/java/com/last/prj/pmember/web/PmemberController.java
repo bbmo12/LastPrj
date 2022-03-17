@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,28 +96,25 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
-		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id));
+		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id));
 		return "pmember/confirmPass";
 	}
 	
 	@RequestMapping("confirmPasscheck")
 	@ResponseBody
-	public String confirmPass(Principal principal, PmemberVO pmember) {
+	public int confirmPass(Principal principal, Model model, PmemberVO pmember) {
 		String p_id = "0";
 		if (principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (userDetails.getRole() == "파트너회원") {
 				p_id = userDetails.getPmember().getP_id();
-				pmember.setP_id(p_id);
 			}
 		}
-		if (pMemberDao.passCheck(pmember) != null) { 
-			
-			return "success";
+		String pmemberPw = pMemberDao.passCheck(pmember.getP_id());
+		if (pmember == null || !BCrypt.checkpw(pmember.getPassword(), pmemberPw)) { 		
+			return 0;	
 		} else 
-			System.out.println("아ㅏ아아ㅏ아아ㅏㅇ"+pMemberDao.passCheck(pmember));
-			return "error";
-
+			return 1;
 	}
 	// 파트너 마이페이지
 	@RequestMapping("pmemberMyPage")
