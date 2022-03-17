@@ -293,9 +293,13 @@
 						</div>
 
 						<div class="form-group" style="margin-top: -10px;">
-							<label>후기사진</label><br> <input class="file-upload-browse btn btn-primary" type="file"
-								id="multiFileList1" name="multiFileList1" multiple="multiple">
-							<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
+
+							<label>후기사진</label><br> 
+							<input
+								class="file-upload-browse btn btn-primary" type="file"
+								id="multiFileList1" name="multiFileList1" multiple="multiple"> 
+							<button type="button" class="btn btn-primary btn-sm"
+								onclick="addFile1()">+</button>
 							<div id="ffile1"></div>
 						</div>
 					</div>
