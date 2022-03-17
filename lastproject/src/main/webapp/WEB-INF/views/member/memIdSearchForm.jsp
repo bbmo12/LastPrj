@@ -55,7 +55,7 @@
                               </button>
                            </div>
                            <div class="form-group m-0">
-                              <button type="submit" class="btn btn-primary btn-block">
+                              <button type="button" class="btn btn-primary btn-block" onClick="location.href='pwdSearchForm'">
                                  비밀번호찾기
                               </button>
                            </div>

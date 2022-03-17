@@ -24,14 +24,15 @@
 		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 휴대폰 번호 정규식
 		var phoneJ = /^01([016789])([0-9]{3,4})([0-9]{4})$/;
-
+		// 이메일 정규표현식
+		var emailJ = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 		var birthJ = false;
 		var address = $('#mem_detailaddress');
 
 		$(document).ready(function () {
 			/* 아이디 중복체크 */
 			$('form').on('submit', function () {
-				var inval_Arr = new Array(5).fill(false);
+				var inval_Arr = new Array(6).fill(false);
 				if ($('#idCheck').val() === 'NO') {
 					alert("아이디 중복체크를 해주세요.");
 					inval_Arr[0] = false;
@@ -58,16 +59,29 @@
 					alert('이름을 확인하세요.');
 					return false;
 				}
-
+				
+				
 				// 휴대폰번호 정규식
 				if (phoneJ.test($('#tel').val())) {
 					console.log(phoneJ.test($('#tel').val()));
-					inval_Arr[4] = true;
+					inval_Arr[3] = true;
 				} else {
-					inval_Arr[4] = false;
+					inval_Arr[3] = false;
 					alert('휴대폰 번호를 확인하세요.');
 					return false;
 				}
+				
+
+				//이메일 정규표현식
+				 if (emailJ.test($('#m_id').val())){
+					inval_Arr[4] = true;
+				} else {
+					inval_Arr[4] = false;
+					alert('이메일을 확인하세요.');
+					return false;
+				} 
+				
+				
 				return true;
 			});
 
@@ -102,6 +116,19 @@
 					$('#name_check').css('color', 'red');
 				}
 			});
+			
+			//이메일 유효성검사
+			$("#m_id").blur(function () {
+				if (emailJ.test($(this).val())) {
+					console.log(emailJ.test($(this).val()));
+					$("#m_id_check").text('');
+				} else {
+					$('#m_id_check').text('이메일형식으로 입력하세요.');
+					$('#m_id_check').css('color', 'red');
+				}
+			});
+			
+			
 			// 휴대전화
 			$('#tel').blur(function () {
 				if (phoneJ.test($(this).val())) {
@@ -130,29 +157,15 @@
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="name">이름</label>
-									<c:choose>
-										<c:when test="${ userInfo.nickname ne null}">
-									<input id="name" name="name" type="text" class="form-control"  value="${userInfo.nickname }" required autofocus readonly="readonly">
-									</c:when>
-									<c:otherwise>
 									<input id="name" name="name" type="text" class="form-control"  required autofocus>
-									</c:otherwise>
-									</c:choose>
 									<div id="name_check"></div>
 								</div>
 								<div class="form-group">
 									<label for="email">E-Mail 아이디</label>
-									<c:choose>
-										<c:when test="${ userInfo.email ne null}">
-										<input id="m_id" name="m_id" type="email" class="form-control" value="${userInfo.email}" style="width: 450px;" required readonly="readonly">
-										</c:when>
-										<c:otherwise>
 										<input id="m_id" name="m_id" type="email" class="form-control" value="" style="width: 450px;">
-										</c:otherwise>
-									</c:choose>
-									<button type="button" class="btn btn-primary mr-2" onclick="isIdCheck()" id="idCheck" value="NO"
-									style="margin: -55px 0 0 29em;">중복체크</button>
+									<button type="button" class="btn btn-primary mr-2" onclick="isIdCheck()" id="idCheck" value="NO" style="margin: -55px 0 0 29em;">중복체크</button>
 									<div id="id_check"></div>
+									<div id ="m_id_check"></div>
 								</div>
 								<div class="form-group">
 									<label for="password">비밀번호</label>
@@ -188,7 +201,7 @@
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary mr-2">회원가입</button>
-								<button class="btn btn-light" style="width: 100px;">취소</button>
+								<button type="button" class="btn btn-primary mr-2" style="width: 100px;" onclick="history.back()" >취소</button>
 								<div class="mt-4 text-center">이미 아이디가 있으신가요? <a href="loginForm">로그인</a>
 								</div>
 							</form>

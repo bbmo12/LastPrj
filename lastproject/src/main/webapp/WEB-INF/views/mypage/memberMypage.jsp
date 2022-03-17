@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +33,7 @@
 		margin-bottom: 5px;
 	}
 </style>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script> -->
+
 <body>
 	<section class="banner-area other-page">
 		<div class="container">
@@ -129,6 +129,32 @@
 								class="genric-btn info radius">내정보 수정</button>
 						</div>
 					</div>
+					<div class="row" id="data-container">
+						<c:if test="${ fn:length(pets) == 0  }">
+								<span>조회된 결과가 없습니다.</span>>
+						</c:if>
+						<c:forEach items="${pets }" var="pet">
+							<div class="col-lg-3 col-sm-6">
+								<div class="single-doctor mb-3 mb-lg-0">
+									<div class="doctor-img">
+										<img src="resources/upload/${pet.picture }" alt=""
+											class="img-fluid" style="width: 195px; height: 200px;">
+									</div>
+									<div class="content-area">
+										<div class="doctor-name text-center">
+											<a href="petDetail?pet_no=${pet.pet_no}">
+												<h3>${pet.name }</h3>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+						
+					</div>
+					<form action="mypetAddForm" method="post">
+					<button type="submit">반려등물 등록</button>
+					</form>
 				</div>
 
 			</div>

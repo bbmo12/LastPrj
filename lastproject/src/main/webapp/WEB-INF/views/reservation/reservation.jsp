@@ -156,7 +156,7 @@
 											<c:choose>
 												<c:when test="${res.code eq 405 }">
 													<c:choose>
-														<c:when test="${res.r_check eq 0 }">
+														<c:when test= "${res.r_check eq 0 }">
 															<td><button type="button" 
 															onclick='reviewadd("${res.r_no}");'
 																	class="btn btn-secondary" data-toggle="modal"
