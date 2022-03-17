@@ -121,11 +121,12 @@
 									<table class="table table-striped">
 										<thead>
 											<tr style="text-align: center;">
-												<th>파트너회원이름</th>
+												<th>신고회원</th>
 												<th>신고내용</th>
-												<th>신고일</th>
-												<th>분류</th>
-												<th>신고결과</th>
+												<th>신고날짜</th>
+												<th>신고유형</th>
+												<th>처리상태</th>
+												<th>기각사유</th>
 											</tr>
 										</thead>
 										<tbody style="text-align: center">
@@ -139,8 +140,60 @@
 													<td>${report.p_name }</td>
 													<td class="card-text">${report.content}</td>
 													<td>${report.w_date } </td>
-													<td>${report.f_content }</td>
-													<td>${report.f_content }</td>
+													<td> 
+                                                        <c:if test="${report.code eq 601}">
+                                                                불법 광고 및 홍보
+                                                        </c:if>
+                                                        <c:if test="${report.code eq 602}">
+                                                                음란물/선정성 콘텐츠
+                                                        </c:if>
+                                                        <c:if test="${report.code eq 603}">
+                                                                욕설/비속어/모욕
+                                                        </c:if>
+                                                        <c:if test="${report.code eq 604}">
+                                                                사생활침해
+                                                        </c:if>
+                                                        <c:if test="${report.code eq 605}">
+                                                                게시물 도배
+                                                        </c:if>
+                                                    </td>
+                                                    <td>
+                                                            <c:if test="${report.repor eq 701}">
+                                                                <label class="badge badge-info">신고대기</label>
+                                                            </c:if>
+                                                            <c:if test="${report.repor eq 702}">
+                                                                <label class="badge badge-danger">신고기각</label>
+                                                            </c:if>
+                                                            <c:if test="${report.repor eq 703}">
+                                                                <label class="badge badge-success">신고승인</label>
+                                                            </c:if>
+                                                     </td>
+													<td>
+													<c:if test="${report.repor eq 702}">
+															<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
+																style="border: none;">사유확인</button>
+															<!-- Modal -->
+															<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+																aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-centered" role="document">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h3 class="modal-title" id="exampleModalLongTitle">신고기각사유</h3>
+																			<button type="button" class="close"
+																				data-dismiss="modal" aria-label="Close">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																		</div>
+																		<div class="modal-body">${report.state }</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-primary"
+																				data-dismiss="modal">확 인</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</c:if>
+													</td>
 												</tr>
 											</c:forEach>
 										</tbody>

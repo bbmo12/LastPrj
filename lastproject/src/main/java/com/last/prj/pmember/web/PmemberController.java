@@ -86,7 +86,27 @@ public class PmemberController {
 
 		return "pmember/memberDetail";
 	}
+	@RequestMapping("confirmPass")
+	public String pass() {
+		return "pmember/confirmPass";
+	}
+	
+	@RequestMapping("confirmPassCheck")
+	@ResponseBody
+	public String confirmPass(Principal principal, PmemberVO pmember) {
+		String p_id = "0";
+		if (principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (userDetails.getRole() == "파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
+		if (pMemberDao.passCheck(pmember) != null) {
+			return "success";
+		} else
+			return "error";
 
+	}
 	// 파트너 마이페이지
 	@RequestMapping("pmemberMyPage")
 	public String mypage(Model model, Principal principal) {
