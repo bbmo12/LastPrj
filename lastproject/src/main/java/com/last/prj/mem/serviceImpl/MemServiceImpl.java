@@ -1,6 +1,8 @@
 package com.last.prj.mem.serviceImpl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +13,7 @@ import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PetcareVO;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.TimeVO;
+import com.last.prj.pmember.service.PmemberVO;
 
 
 @Repository("memDao")
@@ -108,6 +111,16 @@ public class MemServiceImpl implements MemService {
 
 	public int memdelete() {
 		return map.memdelete();
+	}
+
+	@Override
+	public List<PmemberVO> admMlistCode(PmemberVO vo) {
+		return map.admMlistCode(vo);
+	}
+
+	@Override
+	public int adMmemCount() {
+		return map.adMmemCount();
 	}
 
 

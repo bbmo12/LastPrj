@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.last.prj.mem.service.MemService;
+import com.last.prj.mem.service.MemVO;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
@@ -37,6 +38,8 @@ public class AdminController {
 
 	@Autowired
 	private MemService memDao;
+	
+	
 	
 	
 	@RequestMapping("/goChart")
@@ -73,6 +76,28 @@ public class AdminController {
 	public String admMemberTable() {
 		return "admin/board/admMember";
 	}
+	
+	/*
+	 * @RequestMapping("/admMlistCode")
+	 * 
+	 * @ResponseBody public HashMap<String, Object> admMlistCode(MemVO vo, Criteria
+	 * cri){ int total = memDao.admMlistCode(vo); System.out.println("total은~" +
+	 * total); PagingVO page = new PagingVO(cri, total); page.setAmount(9); // n개씩
+	 * 출력 HashMap<String, Object> map = new HashMap<String, Object>();
+	 * vo.setVo(page);
+	 * 
+	 * map.put("list", memDao.admMlistCode(vo)); map.put("page", page);
+	 * System.out.println("=============================" + vo);
+	 * System.out.println("=============================" +
+	 * pMemberDao.admPlistCode(vo)); return map;
+	 * 
+	 * }
+	 */
+	
+	
+	
+	
+	
 
 	// ==========end 일반 회원==========
 

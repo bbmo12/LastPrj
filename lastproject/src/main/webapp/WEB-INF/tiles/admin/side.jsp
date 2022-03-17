@@ -19,6 +19,8 @@
 						관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="admPmember">파트너회원
 						관리</a></li>
+				<li class="nav-item"><a class="nav-link" href="admMember">일반회원
+						관리</a></li>
 				<!-- <li class="nav-item"><a class="nav-link" href="admReview">후기
 						관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="admQna">QnA
@@ -27,6 +29,7 @@
 						관리</a></li> -->
 				<li class="nav-item"><a class="nav-link" href="admService">서비스
 						관리</a></li>
+				
 			</ul>
 		</div></li>
 

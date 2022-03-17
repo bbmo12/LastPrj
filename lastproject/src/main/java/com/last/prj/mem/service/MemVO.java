@@ -25,6 +25,11 @@ public class MemVO {
 	
 	private String id; //아이디중복조회 확인
 	private List<AuthVO> authList;
+	
+	private String petY;
+	private String petN;
+	private String key;
+	private String pets;
 }
 	
 

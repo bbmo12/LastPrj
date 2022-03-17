@@ -199,6 +199,14 @@
 		</set>
 		where m_id = #{m_id}
 	</update>
+	
+	<select id="admMlistCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+		SELECT B.*
+		FROM ( SELECT A.* , ROWNUM RN
+		FROM (select m.m_id, m.name, m.startdate,pet_no from member m, pet p where m.m_id = p.m_id(+)
+		<if test="key != '' "></if>
+		<![CDATA[  ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+	</select>
 
 
 </mapper>

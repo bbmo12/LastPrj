@@ -1,6 +1,10 @@
 package com.last.prj.mem.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
+import com.last.prj.pmember.service.PmemberVO;
 
 public interface MemService {
 	
@@ -58,5 +62,8 @@ public interface MemService {
 
 	
 	int memdelete();
+
+	public List<PmemberVO> admMlistCode(PmemberVO vo); //파트너쉽 별 리스트
+	public int adMmemCount(); //파트너 회원 수
 
 }

@@ -40,10 +40,10 @@
 				<code>조건 별 검색</code>
 			</p>
 			<!-- 조건 검색한 리스트에서 검색 -->
-			<div>
+		<!-- 	<div>
 				<input class="form-control" id="myInput" type="text"
 					placeholder="Search.."> <br>
-			</div>
+			</div> -->
 			<!-- end 조건 검색한 리스트에서 검색 -->
 
 
