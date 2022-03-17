@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.pmember.service.PmemberMapper">
 
+	<select id="passCheck" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT * FROM P_MEMBER
+		WHERE P_ID = #{p_id}
+		<if test="password != null">
+			AND PASSWORD = #{password}
+		</if>
+	</select>
+	
 	<select id="getPmemberinfo" parameterType="String"
 		resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT * FROM P_MEMBER WHERE P_ID = #{p_id}
