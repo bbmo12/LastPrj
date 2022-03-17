@@ -327,6 +327,7 @@
 				method: 'post',
 				data : {'r_no' : r_no},
 				success : function(result){
+					console.log(result);
 					
 					for(var i = 0; i < result.fileList.length; i++){
 						
@@ -339,6 +340,7 @@
 						div.append(img);
 						$('#image').append(div);
 					}
+					
 					var content = result.content;
 					var rating = result.rating;
 					$('.star-rating').raty({ readOnly: true, score:rating,  path: "resources/star",width: 200});
