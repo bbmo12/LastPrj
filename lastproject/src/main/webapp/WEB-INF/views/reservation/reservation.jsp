@@ -228,18 +228,15 @@
 										</tbody>
 									</table>
 									<div class="blog_right_sidebar" id="sidebar">
-										<form id="admDateForm" onsubmit="return false"
-											onkeypress="eventkey();" onclick="pagingList();">
-											<input type="hidden" name="code"> <input
-												type="hidden" name="pageNum" value="1">
-											<aside class="single_sidebar_widget search_widget"
-												style="display: flex;">
+										<form id="admDateForm" onsubmit="return false"	onkeypress="eventkey();" onclick="pagingList();">
+											<input type="hidden" name="code">
+											<input	type="hidden" name="pageNum" value="1">
+											<aside class="single_sidebar_widget search_widget"	style="display: flex;">
 												<select id="key" name="key">
 													<option value="all" selected="selected">전 체</option>
 												</select>
 												<div class="input-group">
-													<input type="text" class="form-control" id="data"
-														name="data"> <span class="input-group-btn">
+													<input type="text" class="form-control" id="data"	name="data"> <span class="input-group-btn">
 														<button class="btn btn-default" type="submit">
 															<i class="fa fa-search"></i>
 														</button>
@@ -569,10 +566,10 @@
 		})
 		
 	}
-		function go_page(p){
+		/* function go_page(p){
 			goform.pageNum.value=p;
 	    	goform.submit();
-		}
+		} */
 	</script>
 
 
@@ -592,7 +589,6 @@
 			$("#myTable").empty();
 			
 			$.each(result, function (i) {
-
 				console.log(result[i])
 				$("#myTable").append("<tr><td>" +
 					result[i].r_no +
@@ -666,8 +662,6 @@
 					} else {
 						viewPmemberList(result.list);
 						viewPage(result.page);
-
-
 					}
 
 				}
@@ -797,10 +791,5 @@
 				})
 		}
 	</script>
-	
-	
-
-	
 </body>
-
 </html>

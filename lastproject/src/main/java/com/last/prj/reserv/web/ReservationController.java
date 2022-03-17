@@ -140,17 +140,12 @@ public class ReservationController {
 	@RequestMapping("/reservationSelect")
 	@ResponseBody
 	public HashMap<String, Object> ReservationSelect(ReservationVO vo, Criteria cri,Principal principal) {
-		
-		if(principal != null) {
-			
-			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
 			 if(principal != null) {
-					CustomUser userDetails1 = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-					if(userDetails1.getRole() == "일반회원") {
-						String m_id = userDetails1.getMember().getM_id();
-						System.out.println("====유저디테일 mid : " + userDetails1.getMember().getM_id());
-						System.out.println("====유저디테일 mname : " + userDetails1.getMember().getName());
+					CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+					if(userDetails.getRole() == "일반회원") {
+						String m_id = userDetails.getMember().getM_id();
+						System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+						System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 						vo.setM_id(m_id);
 						System.out.println(vo);
 						int total = reservationDao.reservPage(vo);
@@ -169,7 +164,7 @@ public class ReservationController {
 						return map;
 					}
 				  }
-		}
+		
 		return null;
 	}
 

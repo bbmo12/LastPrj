@@ -22,7 +22,7 @@
 	</select>
 
 	<!-- 페이징(일반회원 예약조회) -->
-	<select id="reservationPageList"
+	<select id="reservationPageList" parameterType="com.last.prj.reserv.service.ReservationVO"
 		resultType="com.last.prj.reserv.service.ReservationVO">
 		SELECT * FROM ( SELECT A.* , ROWNUM RN FROM (
 		SELECT R.R_NO
@@ -43,21 +43,28 @@
 		 R.PET_NO AND
 		 C.CODE = R.CODE AND P.CODE =
 		 FC.CODE
-		 <if test="code !=null">AND pm.code = #{code}  </if> AND P.M_ID
-		 = #{m_id}) A)
-		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
-		AND (#{pageNum})*#{amount}
+		 <if test="code !=null">AND pm.code = #{code}  </if>
+		 <if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
+		  AND P.M_ID
+		 = #{m_id} <![CDATA[
+		 
+		 )A) 
+		WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1	AND (#{vo.pageNum})*#{vo.amount}
+		  ]]>
 	 
 	 
 	</select>
 
 	<select id="reservPage" resultType="int"
 		parameterType="com.last.prj.reserv.service.ReservationVO">
-		SELECT COUNT(*) FROM RESERVATION R ,PET P
+		SELECT COUNT(*)
+		FROM RESERVATION R ,PET P, P_MEMBER PM
 		WHERE R.PET_NO
-		= P.PET_NO
-		GROUP BY P.M_ID
-		HAVING P.M_ID=#{m_id}
+		= P.PET_NO AND R.P_ID =PM.P_ID
+		
+		AND P.M_ID = #{m_id}
+		<if test="code !=null">AND pm.code = #{code}  </if>
+		 <if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
 	</select>
 
 
@@ -147,8 +154,7 @@
 	<select id="readpicture" parameterType="int"
 		resultType="com.last.prj.reserv.service.ReviewVO">
 		SELECT PICTURE FROM F_FILE F, REVIEW R
-		WHERE F.F_PART =
-		r.f_part and r_no= #{r_no}
+		WHERE F.F_PART = r.f_part and r_no= #{r_no}
 
 	</select>
 

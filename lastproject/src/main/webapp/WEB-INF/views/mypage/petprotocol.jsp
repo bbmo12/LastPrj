@@ -296,8 +296,6 @@
 					} else {
 						viewPmemberList(result.list);
 						viewPage(result.page);
-
-
 					}
 
 				}

@@ -1,8 +1,6 @@
 package com.last.prj.reserv.service;
 
 
-
-
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 
