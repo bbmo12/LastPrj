@@ -274,7 +274,7 @@
 									<div id="ffile2"></div>
 								</div>
 								<button type="submit" class="genric-btn info radius">수정완료</button>
-								<button type="button" class="btn btn-secondary btn-lg" onclick="history.back()">취소</button>
+								<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='pmemberMyPage'">취소</button>
 							</div>
 						</form>
 					</div>

@@ -162,7 +162,7 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
-	public PmemberVO passCheck(PmemberVO pmember) {
-		return map.passCheck(pmember);
+	public String passCheck(String p_id) {
+		return map.passCheck(p_id);
 	}
 }

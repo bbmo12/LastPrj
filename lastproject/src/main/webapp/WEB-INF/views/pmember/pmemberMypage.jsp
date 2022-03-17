@@ -7,8 +7,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+
+	<script src="https://kit.fontawesome.com/eeeb65bbd1.js" crossorigin="anonymous"></script>
 </head>
 <style>
+	
 	#my_section {
 		padding: 50px;
 	}
@@ -99,40 +102,48 @@
 					<div class="single-post row" style="margin-left: 40px;">
 						<div class="col-lg-9 col-md-9 blog_details" id="formMain">
 							<div class="form-group">
+							<i class="fa-solid fa-user"></i>
 								<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>	
 								<input type="text" style="border: none" id="name" name="name" value="${pmember.name}"
 									readonly>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-address-card"></i>
 								<h3 style="font-weight: bolder;">아이디&nbsp;:&nbsp;</h3>
 								<input type="email" style="border: none" id="p_id" name="p_id" value="${pmember.p_id}"
 									readonly>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-mobile-screen"></i>
 								<h3 style="font-weight: bolder;">전화번호&nbsp;:&nbsp;</h3>
 								<input style="border: none" id="tel" name="tel" value="${pmember.tel}" readonly>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-building"></i>
 								<h3 style="font-weight: bolder;">사업장 이름&nbsp;:&nbsp;</h3>
 								<input style="border: none" id="w_name" name="w_name" value="${pmember.w_name}"
 									readonly>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-map-location-dot"></i>
 								<h3 style="font-weight: bolder;">사업장 주소&nbsp;:&nbsp;</h3>
 								<textarea style="border: none; overflow: hidden; margin-bottom: -8px;" id="address" name="address" readonly cols="50"
 									rows="1">${pmember.w_address}  ${pmember.w_d_address }</textarea>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-square-phone"></i>
 								<h3 style="font-weight: bolder;">사업장 전화번호&nbsp;:&nbsp;</h3>
 								<input type="text" style="border: none" id="w_tel" name="w_tel" value="${pmember.w_tel}"
 									readonly>
 							</div>					
 							<div class="form-group">
+								<i class="fa-solid fa-star"></i>
 								<h3 style="font-weight: bolder;">경력&nbsp;:&nbsp;</h3>
 								<input type="text" style="border: none" id="career" name="career"
 									value="${pmember.career}" readonly>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-award"></i>
 								<h3 style="font-weight: bolder;">전문분야&nbsp;:&nbsp;</h3>
 								<input type="text" style="border: none" id="speciality" name="speciality"
 									value="${pmember.speciality}" readonly>
@@ -140,6 +151,7 @@
 							<div class="form-group" style="width: 800px;">
 							  <div class="row" id="middle">
 									<div class="col-6" style="padding-left: 10px;">
+									<i class="fa-solid fa-calendar-days"></i>
 									<h3>운영시간</h3><br>
 										<c:forEach items="${time }" var="time">
 											<div class="doctor-text text-center" style="margin-top: -10px;">
@@ -150,6 +162,7 @@
 										</c:forEach>
 									</div>
 									<div class="col-6">
+										<i class="fa-solid fa-clipboard-list"></i>
 										<h3>서비스정보</h3><br>
 										<c:forEach items="${price }" var="price">
 											<div class="doctor-text text-center" style="height: 22px; margin-top: -10px;">
@@ -161,11 +174,13 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-street-view"></i>
 								<h3 style="font-weight: bolder;">자기 소개</h3>
 								<textarea style="border: none; overflow: hidden;" id="p_info" name="p_info" readonly cols="100"
 									rows="3">${pmember.p_info}</textarea>
 							</div>
 							<div class="form-group">
+								<i class="fa-solid fa-images"></i>
 								<h3 style="font-weight: bolder;">활동사진</h3><br>
 								<c:forEach items="${pimage}" var="image">
 								<img src="resources/upload/${image.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
@@ -173,6 +188,7 @@
 								
 							</div>
 							<div class="form-group">
+								<i class="fa fa-file-image-o"></i>
 								<h3 style="font-weight: bolder;">자격증</h3><br>
 									<c:forEach items="${plicense}" var="plicense">
 									<img src="resources/upload/${plicense.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
@@ -181,7 +197,7 @@
 							<button type="button" onclick="location.href='confirmPass'" class="genric-btn info radius">내정보 수정</button>
 						</div>
 					</div>
-				</div>
+				</div>		
 			</div>
 		</div>
 	</section>
