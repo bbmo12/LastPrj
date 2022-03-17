@@ -191,7 +191,6 @@ opacity
 }
 
 .sf-arrows .sf-with-ul:after {
-	content: "\f107";
 	position: absolute;
 	right: 15px;
 	font-family: FontAwesome;
@@ -200,7 +199,6 @@ opacity
 }
 
 .sf-arrows ul .sf-with-ul:after {
-	content: "\f105"
 }
 
 #nav-menu-container {

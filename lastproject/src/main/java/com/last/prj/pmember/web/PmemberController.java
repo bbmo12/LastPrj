@@ -237,6 +237,7 @@ public class PmemberController {
 		System.out.println("=== vo : "+vo);
 		//System.out.println("====review : "+content + rating + r_no);
 		//System.out.println("====multiFileList1 : "+ multiFileList1);
+
 		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
 		/*
 		if(multiFileList1 != null) {
@@ -250,8 +251,8 @@ public class PmemberController {
 			review.setF_part(f_part);
 		}
 		
-		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
+		reservationDao.updatecode(vo);
 		
 		return "redirect:/reservationSelect";
 	}

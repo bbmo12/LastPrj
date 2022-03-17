@@ -45,6 +45,7 @@ import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PmemVO;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.mem.service.TimeVO;
+import com.last.prj.pet.service.PetService;
 import com.last.prj.security.CustomUser;
 import com.last.prj.security.CustomUserDetailService;
 
@@ -60,6 +61,9 @@ public class MemController {
 	@Autowired
 	private FfileUtil ffileutil;
 
+	@Autowired
+	private PetService petDAO;
+	
 	@Autowired
 	ServletContext sc;
 
@@ -198,6 +202,7 @@ public class MemController {
 				
 			}
 		}
+		model.addAttribute("pets", petDAO.petmemberList(m_id));
 		model.addAttribute("member", memDao.memberSearch(m_id));
 		return "mypage/memberMypage";
 	}
@@ -220,36 +225,14 @@ public class MemController {
 		return "member/loginForm";
 	}
 
-	/*
-	 * @RequestMapping("/login") // 일반회원로그인창 public String loginForm(MemVO member,
-	 * HttpSession session) { member = memDao.memberSelect(member);
-	 * 
-	 * if (member != null) { session.setAttribute("member", member);
-	 * session.setAttribute("mId", member.getM_id());
-	 * session.setAttribute("password", member.getPassword());
-	 * 
-	 * LoginVO login = new LoginVO(); login.setId(member.getM_id());
-	 * session.setAttribute("loginInfo", login); } else { return "member/loginForm";
-	 * } return "redirect:home"; }
-	 */
+	
 	@RequestMapping("/logout") // 로그아웃
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:home";
 	}
 
-	/*
-	 * @RequestMapping("/plogin") // 파트너회원 로그인 public String plogin(PmemVO pmember,
-	 * HttpSession session) { pmember = pmemDao.pmemberSelect(pmember);
-	 * 
-	 * if (pmember != null) { session.setAttribute("pmember", pmember);
-	 * session.setAttribute("pId", pmember.getP_id());
-	 * session.setAttribute("password", pmember.getPassword()); LoginVO login = new
-	 * LoginVO(); login.setId(pmember.getP_id()); session.setAttribute("loginInfo",
-	 * login); } else { return "member/loginForm"; }
-	 * 
-	 * return "redirect:home"; }
-	 */
+	
 	@RequestMapping("/memberIdSearchForm") // 일반회원 아이디찾기 폼으로 이동
 	public String memberIdSearchForm() {
 		return "member/memIdSearchForm";
