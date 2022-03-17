@@ -14,7 +14,7 @@ public class ReservationVO {
 	private String r_date;
 	private String startdate;
 	private String time;
-	private int code; //코드번호
+	private Integer code; //코드번호
 	private String r_code;
 	private String rcontent; //예약내용
 	private String rccontent; //예약승인코드
