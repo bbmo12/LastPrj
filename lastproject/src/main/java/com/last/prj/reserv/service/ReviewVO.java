@@ -2,6 +2,8 @@ package com.last.prj.reserv.service;
 
 import java.util.List;
 
+import com.last.prj.pmember.service.FfileVO;
+
 import lombok.Data;
 
 @Data
@@ -14,6 +16,6 @@ public class ReviewVO {
 	private int fPart;			//첨부파일
 	
 	private String picture; //사진
-	
+	private List<FfileVO> fileList; //리뷰뽑기
 
 }

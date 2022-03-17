@@ -183,7 +183,6 @@ public class PmemberController {
 			pmember.setP_image(f_part2);
 		}
 		
-		
 		pMemberDao.pmemberUpdate(pmember);
 		pMemberDao.deleteTimeId(time);//시간삭제
 		
