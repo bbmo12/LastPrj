@@ -52,12 +52,12 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 
-	public int reservPage(Criteria cri) {
-		return map.reservPage(cri);
+	public int reservPage(ReservationVO vo) {
+		return map.reservPage(vo);
 	}
 	@Override
-	public List<ReservationVO> reservationPageList(Criteria cri) {
-		return map.reservationPageList(cri);
+	public List<ReservationVO> reservationPageList(ReservationVO vo) {
+		return map.reservationPageList(vo);
 	}
 	@Override
 	public List<ReservationVO> preservationPageList(Criteria cri) {

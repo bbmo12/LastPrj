@@ -260,6 +260,322 @@
 			</div>
 		</div>
 	</section>
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body">
+					<div id="content"></div>
+					<div class="star-rating"></div>
+					<div id="image"></div>
+				<!-- modal 하단 버튼 -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">취소</button>
+					<button id="sendReserv" name="sendReserv" type="button"
+						class="btn btn-primary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 리뷰작성 모달창 -->
+	<!-- Modal -->
+	<div class="modal fade" id="reviewWriteModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="serviceReviewInsert" method="post"
+					enctype="multipart/form-data">
+					<!-- modal 몸통 -->
+					<div class="modal-body">
+
+						<div align="center">
+							<h3 align="center">후기를 남겨주세요!</h3>
+							<div class="star-rating">
+								<input type="radio" id="5-stars" name="rating" value="5" /> <label
+									for="5-stars" class="star">&#9733;</label> <input type="radio"
+									id="4-stars" name="rating" value="4" /> <label for="4-stars"
+									class="star">&#9733;</label> <input type="radio" id="3-stars"
+									name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
+								<input type="radio" id="2-stars" name="rating" value="2" /> <label
+									for="2-stars" class="star">&#9733;</label> <input type="radio"
+									id="1-stars" name="rating" value="1" /> <label for="1-stars"
+									class="star">&#9733;</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword4">후기내용</label>
+							<textarea class="form-control" id="content" name="content"
+								placeholder="후기내용" rows="4" cols="80"></textarea>
+						</div>
+
+						<div class="form-group" style="margin-top: -10px;">
+							<label>후기사진</label><br> <input
+								class="file-upload-browse btn btn-primary" type="file"
+								id="multiFileList1" name="multiFileList1" multiple="multiple">
+							<button type="button" class="btn btn-primary btn-sm"
+								onclick="addFile1()">+</button>
+							<div id="ffile1"></div>
+						</div>
+					</div>
+					<!-- modal 하단 버튼 -->
+					<div class="modal-footer">
+						<input type="hidden" id="insert_r_no" name="r_no" value="">
+						<button type="submit">작성</button>
+						<!-- onclick="serviceReview()" -->
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- 리뷰 작성 모달창 -->
+	<script type="text/javascript">
+	function addFile1() {
+		var filediv = $('<div>').attr({
+			'id' : 'filediv'
+		});
+		
+		var input = $('<input>').attr({
+			'id': 'multiFileList1',
+			'class': 'file-upload-browse btn btn-primary',
+			'name': 'multiFileList1',
+			'type': 'file'
+		}).css('margin-top', '3px');
+		
+		var btn = $('<button>').attr({
+			'onclick' : 'deleteFile(event)',
+			'type' : 'button',
+			'class' : 'btn btn-primary btn-sm',
+			'id':'deleteBtn',
+			'style': 'margin-left:5px'
+		}).text('-');
+		
+		filediv.append(input);
+		filediv.append(btn);
+		$('#ffile1').append(filediv);
+	}
+	
+	function deleteFile(event){
+		var e = event.target.parentElement;
+		e.remove();
+	}
+   </script>
+
+
+	<!--리뷰 보는 모달창  -->
+	<script type="text/javascript">
+	
+	function reviewread(e){
+		var r_no = e;
+		$("#content").empty();
+		$(".star-rating").empty();
+		$("#image").empty();
+		
+		  $.ajax({
+				url: 'rnoreview',
+				method: 'post',
+				data : {'r_no' : r_no},
+				success : function(result){
+					console.log(result);
+					
+					for(var i = 0; i < result.fileList.length; i++){
+						
+						var imgsrc = 'resources/upload/'+result.fileList[i].picture;
+						var img = $('<img>').attr({
+									'src': imgsrc,
+									'alt': "등록된 사진이 없습니다."
+									});
+						var div = $('<div>');
+						div.append(img);
+						$('#image').append(div);
+					}
+					
+					var content = result.content;
+					var rating = result.rating;
+					$('.star-rating').raty({ readOnly: true, score:rating,  path: "resources/star",width: 200});
+					$('#content').append(content);
+				}
+	 		})
+	}
+  
+   </script>
+
+
+
+	<!-- 후기작성 모달창 -->
+	<script type="text/javascript">
+	
+	function reviewadd(e) {
+		console.log(e);
+		$("#content").empty();
+		  
+		var r_no = e;
+ 		console.log(r_no);
+ 	 $("#insert_r_no").val(r_no);
+	}
+	
+	
+	
+   </script>
+
+
+
+	<script>
+		//table td값만
+		var val = $(".in_code").parent();
+		console.log(val);
+		console.log(val.length);
+		for (var i = 0; i < val.length; i++) {
+			//예약결과코드 분류
+			if (val[i].innerText == '결제가능') {
+				console.log(val[i]);
+				val[i].classList.add("code");
+				$(".code").empty();
+				var check = $(".code").append(
+						`<button type ="button" class="payBtn">결제하기</button>`);
+
+			} else if (val[i].innerText == '승인거절') {
+				val[i].classList.add("refuse");
+			} else if (val[i].innerText == '결제완료') {
+				val[i].classList.add("complete");
+				$(".complete").empty();
+				var check = $(".complete").append(`<span>예약완료</span>`);
+			} //else if문
+		} //for문
+		
+		$(".payBtn").on('click', function() {
+			var rno = $(this).parent().parent().children().first().text();
+			console.log($(this).parent().parent().children().first().text());
+			var m_id = "${m_id }";
+			var pay;
+			
+			$.ajax({
+				url : 'servicePay',
+				method : 'POST',
+				data : {'r_no' : rno },
+				async : false,
+				success : function(result){
+					console.log(result);
+					pay = result.price;
+					//p_id = result.p_id;
+					var IMP = window.IMP; // 생략가능
+					IMP.init('imp48272965');
+					// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+					// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+					IMP.request_pay({
+						pg: 'kakao',
+						pay_method: 'card',
+						merchant_uid: 'merchant_' + new Date().getTime(),
+						name: result.content + "예약",
+						// 결제창에서 보여질 이름
+						// name: '주문명 : ${auction.a_title}',
+						// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+						amount: result.price,
+						// amount: ${bid.b_bid},
+						// 가격 
+						buyer_name: m_id,
+						// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+						// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+						buyer_postcode: '123-456',
+					}, function (rsp) {
+						console.log(rsp);
+						if (rsp.success) {
+							var msg = '결제가 완료되었습니다.';
+							msg += '결제 금액 : ' + rsp.paid_amount;
+							location.reload();
+							// success.submit();
+							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+						} else {
+							var msg = '결제에 실패하였습니다.';
+							msg += '에러내용 : ' + rsp.error_msg;
+						}
+						alert(msg);
+					});
+				}
+			});
+			
+			
+			
+			console.log(pay+"원");
+				//결제 완료 후 결제 내역 등록
+				$.ajax({
+				url : 'payupdate',
+				method : 'post',
+				data : {
+					'r_no' : rno,
+					'm_id': m_id,
+					'price': pay
+				},
+				success : function(result) {
+				},
+				error : function(error) {
+					alert("결제실패")
+				}
+			}) 
+		})
+	</script>
+	<!-- 리뷰작성 -->
+	<script type="text/javascript">
+	function serviceReview(){
+		
+		var content = $("#content").val();
+		var rating = $("input[name=rating]:checked").val();
+		var rev_no = $("#rev_no").val();
+		var multiFileList1 = $("multiFileList1").val();
+		console.log("별점")
+		console.log(rating)
+		
+		$.ajax({
+			url: "serviceReviewInsert",
+			enctype: 'multipart/form-data',
+			type: "post",
+			data : {
+				'rating' : rating,
+				'r_no': rev_no,
+				'content': content,
+				'multiFileList1': multiFileList1
+				},
+			processData: false,
+			contentType: false,
+			cache: false,
+			success : function(result){
+				alert("ggod")
+				location.reload();
+				
+			}
+			
+		})
+		
+	}
+		function go_page(p){
+			goform.pageNum.value=p;
+	    	goform.submit();
+		}
+	</script>
+
+
 	<script type="text/javascript">
 		//======================enter 키===================
 		function eventkey() {
@@ -318,7 +634,7 @@
 			var str = $('#admDateForm').serialize();
 			console.log(str);
 			$.ajax({
-				url: 'PetServiceList',
+				url: 'reservationSelect',
 				method: 'post',
 				data: str,
 				//contentType : 'application/json',

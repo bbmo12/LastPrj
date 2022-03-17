@@ -3,6 +3,9 @@ package com.last.prj.reserv.service;
 
 
 
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
+
 import lombok.Data;
 
 			//예약
@@ -30,6 +33,11 @@ public class ReservationVO {
 	
 	private int f_part;			//첨부파일
 	
+	private PagingVO vo;
+	private Criteria cri;
+	private String total;
+	private String key;
+	private String data;
 	 
 	
 }
