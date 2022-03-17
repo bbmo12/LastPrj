@@ -8,9 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
 <script src="template/js/diaLog.js"></script>
@@ -21,25 +19,17 @@
 }
 
 .card-text {
-	display: inline-block;
-	width: 200px;
+	width:250px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-
-.flex {
-	-webkit-box-flex: 1;
-	-ms-flex: 1 1 auto;
-	flex: 1 1 auto
+.card-day{
+	width:250px;
 }
 
 .padding {
 	padding: 5rem
-}
-
-.pl-3, .px-3 {
-	padding-left: 1rem !important;
 }
 
 .table th {
@@ -151,7 +141,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px;">
+					style="position: relative; top: 20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 							<h1>My pet Info</h1>
@@ -248,7 +238,7 @@
 					result[i].pm_name +
 					"</td><td class='card-text'>" +
 					result[i].content +
-					"</td><td>" +
+					"</td><td class='card-day'>" +
 					result[i].startdate +
 					"</td></tr>"
 				);
