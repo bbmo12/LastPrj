@@ -8,7 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
 <script src="template/js/diaLog.js"></script>
@@ -19,17 +21,25 @@
 }
 
 .card-text {
-	width:250px;
+	display: inline-block;
+	width: 200px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.card-day{
-	width:250px;
+
+.flex {
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto
 }
 
 .padding {
 	padding: 5rem
+}
+
+.pl-3, .px-3 {
+	padding-left: 1rem !important;
 }
 
 .table th {
@@ -141,7 +151,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list"
-					style="position: relative; top: 20px;">
+					style="position: relative; top: -20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 							<h1>My pet Info</h1>
@@ -238,7 +248,7 @@
 					result[i].pm_name +
 					"</td><td class='card-text'>" +
 					result[i].content +
-					"</td><td class='card-day'>" +
+					"</td><td>" +
 					result[i].startdate +
 					"</td></tr>"
 				);
@@ -293,7 +303,36 @@
 
 					}
 
-				}
+				}, beforeSend: function () {
+		              var width = 0;
+		              var height = 0;
+		              var left = 0;
+		              var top = 0;
+
+		              width = 50;
+		              height = 50;
+
+
+		              top = ( $(window).height() - height ) / 2 + $(window).scrollTop();
+		              left = ( $(window).width() - width ) / 2 + $(window).scrollLeft();
+
+		 
+
+		              if($("#div_ajax_load_image").length != 0) {
+		                     $("#div_ajax_load_image").css({
+		                            "top": top+"px",
+		                            "left": left+"px"
+		                     });
+		                     $("#div_ajax_load_image").show();
+		              }
+		              else {
+		                     $('body').append(
+		                    		 			'<div id="div_ajax_load_image" style="position:absolute; top:' + top + 'px; left:' + left + 'px; width:' + width + 'px; height:' + height + 'px; z-index:9999; background:#f0f0f0; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; "><img src="resources/assets/images/Loading.gif" style="width:250px; height:250px;"></div>');
+		              }
+
+		       }, complete: function () {
+		                     $("#div_ajax_load_image").hide();
+		       }
 			});
 		} // end paginList()
 

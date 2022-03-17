@@ -237,8 +237,6 @@
 					<div id="content"></div>
 					<div class="star-rating">
 
-
-
 					</div>
 				</div>
 				<!-- modal 하단 버튼 -->
@@ -290,7 +288,6 @@
 							<textarea class="form-control" id="content" name="content" placeholder="후기내용" rows="4"
 								cols="80"></textarea>
 						</div>
-
 					</div>
 					<!-- modal 하단 버튼 -->
 					<div class="modal-footer">
@@ -328,8 +325,6 @@
 					console.log(result.content)
 					var content = result.content;
 					var rating = result.rating;
-
-
 					console.log(rating);
 
 					$('.star-rating').raty({
@@ -338,11 +333,7 @@
 						path: "resources/star",
 						width: 200
 					});
-
-
 					$('#content').append(content);
-
-
 				}
 			})
 		}
@@ -380,7 +371,6 @@
 			goform.submit();
 		}
 	</script>
-
 </body>
 
 </html>
