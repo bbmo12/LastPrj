@@ -54,7 +54,7 @@
 					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;" >
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"
+								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>

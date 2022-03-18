@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -39,7 +41,10 @@
 					<div class="brand">
 						<img src="resources/login/logo.jpg" alt="logo">
 					</div>
-					
+					<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+					 	<script>alert("아이디, 비밀번호를 확인하세요.");</script>
+						<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+					</c:if>
 					<div class="card fat" style="margin-top: -35px;">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
