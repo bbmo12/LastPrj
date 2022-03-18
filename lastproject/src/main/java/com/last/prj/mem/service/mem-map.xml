@@ -201,6 +201,34 @@
 		</set>
 		where m_id = #{m_id}
 	</update>
+	
+	<select id="admMlistCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+		SELECT B.*
+		FROM ( SELECT A.* , ROWNUM RN
+		FROM (select m.m_id, m.name, m.startdate, p.pet_no from member m LEFT OUTER JOIN pet p ON m.m_id = p.m_id
+		WHERE
+		<if	test=" key != null and key != '' and data != null and data != '' ">
+			UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
+		<if test="code != ''  and code = 'petY'">AND p.pet_no is not null </if>
+		<if test="code != ''  and code = 'petN'">AND p.pet_no is null </if>
+		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		<![CDATA[ ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+	</select>
+	
+	<select id="adMmemCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
+		SELECT COUNT(*) FROM (
+		SELECT M.M_ID, M.NAME, M.STARTDATE, P.PET_NO FROM MEMBER M  LEFT OUTER JOIN PET P ON M.M_ID = P.M_ID
+		WHERE
+		<if	test=" key != null and key != '' and data != null and data != '' ">
+			UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
+		<if test="code != '' and code = 'petY'">AND p.pet_no is not null </if>
+		<if test="code != '' and code = 'petN'">AND p.pet_no is null </if>
+		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>)
+	</select>
 
 
 </mapper>

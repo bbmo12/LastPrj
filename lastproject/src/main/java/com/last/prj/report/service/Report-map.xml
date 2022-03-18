@@ -101,8 +101,7 @@
 	<!-- 일반회원 신고내역 전체조회 -->
 	<select id="myReportList" parameterType="String"
 		resultType="com.last.prj.report.service.ReportVO">
-		SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, C.CONTENT
-		AS f_content
+		SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
 		FROM REPORT R, F_CODE C, P_MEMBER P
 		WHERE R.CODE=C.CODE AND
 		R.REPORTED=P.P_ID AND REPORTER = #{m_id}
@@ -111,7 +110,7 @@
 		union
 
 
-		SELECT m.NAME AS p_name , R. CONTENT, R.W_DATE, C.CONTENT AS f_content
+		SELECT m.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
 		FROM
 		REPORT R, F_CODE C, member m
 		WHERE R.CODE=C.CODE AND
@@ -141,9 +140,9 @@
 		resultType="com.last.prj.report.service.ReportVO">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-		FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR, STATE
-		FROM REPORT
-		WHERE REPORTER = #{reporter} ) A)
+				FROM (SELECT W_DATE , CONTENT, REPORTED, CODE, REPOR, STATE
+						FROM REPORT
+				WHERE REPORTER = #{reporter} ) A)
 		WHERE RN BETWEEN
 		(#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}

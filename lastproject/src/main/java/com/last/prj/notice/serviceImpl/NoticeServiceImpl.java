@@ -25,4 +25,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return map.noticeSelectList(m_id);
 	}
 
+	@Override
+	public int noticeUpdate(int notice_no) {
+		return map.noticeUpdate(notice_no);
+	}
+
 }

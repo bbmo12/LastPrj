@@ -140,8 +140,7 @@ button {
 					</ul>
 
 					<!-- 신고 처리 Form 태그 -->
-					
-
+				
 						<form id="form" style="display: none;">
 							<div class="form-group">
 								<label for="amdReportOption">처리유형</label> <select class="repor"

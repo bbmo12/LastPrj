@@ -269,7 +269,7 @@
 							cancelButtonText: '닫기',
 						}).then(result => { // 만약 Promise리턴을 받으면, 
 							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
-								Swal.fire('추천이 취소되었습니다.')
+								Swal.fire('추천이 취소되었습니다.');
 							}
 						});
 					}

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,7 +87,35 @@ public class PmemberController {
 
 		return "pmember/memberDetail";
 	}
-
+	@RequestMapping("confirmPass")
+	public String pass(Principal principal,Model model) {
+		String p_id = "0";
+		if (principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (userDetails.getRole() == "파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
+		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id));
+		return "pmember/confirmPass";
+	}
+	
+	@RequestMapping("confirmPasscheck")
+	@ResponseBody
+	public int confirmPass(Principal principal, Model model, PmemberVO pmember) {
+		String p_id = "0";
+		if (principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (userDetails.getRole() == "파트너회원") {
+				p_id = userDetails.getPmember().getP_id();
+			}
+		}
+		String pmemberPw = pMemberDao.passCheck(pmember.getP_id());
+		if (pmember == null || !BCrypt.checkpw(pmember.getPassword(), pmemberPw)) { 		
+			return 0;	
+		} else 
+			return 1;
+	}
 	// 파트너 마이페이지
 	@RequestMapping("pmemberMyPage")
 	public String mypage(Model model, Principal principal) {
@@ -129,6 +158,9 @@ public class PmemberController {
     public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price,
     		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request) {
 
+		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
+		multiFileList2 = FfileUtil.getMultiFileList(multiFileList2);
+		
 		String p_id = "0";
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -136,7 +168,7 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
-		
+		System.out.println("=== file : " + file);
 		System.out.println("=== file1: " + multiFileList1);
 		System.out.println("=== file2: " + multiFileList2);
 		
@@ -173,12 +205,12 @@ public class PmemberController {
 
 		pmember.setPassword(pwd);
 		
-		if(multiFileList1.isEmpty() && multiFileList1.size() > 0) {
+		if(multiFileList1.size() > 0) {
 			int f_part1 = ffileutil.multiFileUpload(multiFileList1, request);
 			pmember.setP_license(f_part1);
 		}
 		
-		if(multiFileList2.isEmpty() && multiFileList2.size() > 0) {
+		if(multiFileList2.size() > 0) {
 			int f_part2 = ffileutil.multiFileUpload(multiFileList2, request);
 			pmember.setP_image(f_part2);
 		}
@@ -234,15 +266,22 @@ public class PmemberController {
 		System.out.println("=== vo : "+vo);
 		//System.out.println("====review : "+content + rating + r_no);
 		//System.out.println("====multiFileList1 : "+ multiFileList1);
-		
-		if(multiFileList1.size() > 0) {
+
+		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
+		/*
+		if(multiFileList1 != null) {
 			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
 			System.out.println("===f_part = " + f_part);
 			review.setF_part(f_part);
 		}
+		*/
+		if(multiFileList1.size() > 0) {
+			int f_part = ffileutil.multiFileUpload(multiFileList1, request);
+			review.setF_part(f_part);
+		}
 		
-		reservationDao.updatecode(vo);
 		reviewDao.servicereview(review);
+		reservationDao.updatecode(vo);
 		
 		return "redirect:/reservationSelect";
 	}

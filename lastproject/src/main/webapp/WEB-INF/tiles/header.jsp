@@ -75,11 +75,13 @@
 								</div>
 								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
 								
-									<span>\${result[i].n_from}<button style="margin-left: 50px; font-size:15px;">X</button></span>
+									<span>\${result[i].n_from}<button style="margin-left: 50px; font-size:15px;"
+									onclick="javascript:noticeCheck(\${result[i].notice_no}); deleteAlerm(event);">X</button></span>
 									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
+									<p>\${result[i].notice_no}</p>
 								</div>
 							</a>
-						<div class="dropdown-divider"></div>`;
+						<div id="notice_divider" class="dropdown-divider"></div>`;
 						$('#noticeli').append(alarm);
 					}
 				}
@@ -108,6 +110,35 @@
 			"hideMethod": "fadeOut"
 		}
 		toastr.info(data);
+	}
+			
+	function noticeCheck(notice_no) {
+		console.log("체크");
+		console.log(notice_no);
+		$.ajax({
+			url: "noticeCheck",
+			type: "post",
+			data:{
+				notice_no : notice_no
+			},
+			success: function (result) {
+				//console.log(result);
+				
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+		
+	}
+	
+	function deleteAlerm(event) {
+		var e = event.target.parentElement.parentElement.parentElement;
+		var divider = $('#notice_divider');
+		//console.log(divider);
+		//console.log(e);
+		e.remove();
+		divider.remove();
 	}
 </script>
 
@@ -211,7 +242,8 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"
 										href="#" data-toggle="dropdown">
-										<i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span>
+										<i class="mdi mdi-bell-outline"></i> <span class="count-symbol bg-danger"></span>
+										<!-- <i class="fa-solid fa-bell"></i><span class="count-symbol bg-danger"></span> -->
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">
@@ -239,6 +271,7 @@
 							<li><a href="testPage">Contact</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
 							<li><a href="main">관리자</a></li>
+							<li><a href="logout">로그아웃</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
