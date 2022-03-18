@@ -19,7 +19,7 @@
 
 .card-text {
 	display: inline-block;
-	width: 200px;
+	width: 540px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -96,7 +96,7 @@
 						style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" style="width: 210px"
+								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'" style="width: 210px"
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
@@ -108,10 +108,6 @@
 								<li><a href="memberMypage"
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
-								</a></li>
-								<li><a href="petmemberForm"
-									class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
 								</a></li>
 								<li><a href="protocol"
 									class="d-flex justify-content-between">
@@ -150,8 +146,8 @@
 				<div class="col-lg-9 posts-list"
 					style="position: relative; top: -20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<div align="center">
-							<h1>My pet Info</h1>
+					<div align="center">
+						<br><h1>${member.name }님의 반려동물 진료기록</h1><br>
 						</div>
 						<div class="row">
 							<div class="col-md-12" style="margin: 20px 0 0 -6px;">
@@ -169,7 +165,7 @@
 									<button type="button"
 										class="btn btn-link btn-rounded btn-fw codep" id="block_chain">블록체인진료기록</button>
 									<div id='blockChain'></div>
-									<table class="table table-striped" style="margin-top: 25px;">
+									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
 										<thead>
 											<tr>
 												<th>반려동물 이름</th>

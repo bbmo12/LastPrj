@@ -18,7 +18,6 @@ public interface CounselService {
 
 	// 페이징
 	int myCounselPage(Criteria cri);
-
 	List<CounselVO> myCounselList(Criteria cri);
 
 	// 상담 상세 조회

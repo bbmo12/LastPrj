@@ -17,7 +17,9 @@ public interface ReportMapper {
 	public List<ReportVO> reportList();
 	
 	//일반사용자 신고내역 조회
-	public List<ReportVO> myReportList(String m_id);
+	public List<ReportVO> myReportList(Criteria cri);
+	public int memReport(Criteria cri);//파트너마이페이지 신고내역
+	
 	
 		//qna에 대한 신고리스트
 		public List<ReportVO> admQnaList();

@@ -99,23 +99,28 @@
 	</select>
 
 	<!-- 일반회원 신고내역 전체조회 -->
-	<select id="myReportList" parameterType="String"
+	<select id="myReportList" 
 		resultType="com.last.prj.report.service.ReportVO">
-		SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
+		SELECT * FROM
+			(
+				SELECT ROWNUM RN, A.* FROM
+				(SELECT P.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
 		FROM REPORT R, F_CODE C, P_MEMBER P
 		WHERE R.CODE=C.CODE AND
-		R.REPORTED=P.P_ID AND REPORTER = #{m_id}
-
+		R.REPORTED=P.P_ID AND REPORTER = #{reporter}
 
 		union
-
 
 		SELECT m.NAME AS p_name , R. CONTENT, R.W_DATE, R.STATE, R.REPOR,R.CODE
 		FROM
 		REPORT R, F_CODE C, member m
 		WHERE R.CODE=C.CODE AND
 		R.REPORTED=m.m_ID
-		AND REPORTER = #{m_id}
+		AND REPORTER = #{reporter})
+		A)
+		WHERE RN BETWEEN
+		(#{pageNum}-1)*#{amount}+1
+		AND (#{pageNum})*#{amount}
 	</select>
 
 	<!-- 신고 날짜 별 검색 -->
@@ -127,6 +132,13 @@
 		WHERE
 		F.CODE=R.CODE AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
 	</select>
+	
+	<select id = "memReport" resultType="int" parameterType="com.last.prj.report.service.ReportVO">
+		select count(*)
+		from report
+		where reporter = #{reporter}
+	</select>
+
 
 	<!-- 파트너마이페이지 신고내역 -->
 	<select id="pmemReport" resultType="int"

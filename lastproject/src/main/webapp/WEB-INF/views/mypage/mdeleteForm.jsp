@@ -54,9 +54,6 @@
 									class="d-flex justify-content-between">
 										<p>반려동물 프로필</p>
 								</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
-										<p>반려동물 진료기록</p>
-								</a></li>
 								<li><a href="reservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
 								</a></li>

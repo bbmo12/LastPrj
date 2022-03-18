@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
@@ -67,7 +68,7 @@
 					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
 
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${member.picture}"
+							<img class="author_img rounded-circle" src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"
 								style="width: 210px" alt="">
 							<div class="br"></div>
 							<h4> ${member.name }</h4>
@@ -78,9 +79,6 @@
 							<ul class="list cat-list">
 								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-									</a></li>
-								<li><a href="petmemberForm" class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
 									</a></li>
 								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
@@ -118,7 +116,7 @@
 						<div class="row">
 							<div class="col-md-12" style="margin: 20px 0 0 -6px;">
 								<div class="table-wrap">
-									<table class="table table-striped">
+									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
 										<thead>
 											<tr style="text-align: center;">
 												<th>신고회원</th>
@@ -132,9 +130,9 @@
 										<tbody style="text-align: center">
 											<c:if test="${ fn:length(report) == 0  }">
 												<tr>
-													<td colspan="5" align="center">조회된 결과가 없습니다.</td>
+													<td colspan="6" align="center">조회된 결과가 없습니다.</td>
 												</tr>
-											</c:if>
+											</c:if> 
 											<c:forEach items="${report }" var="report">
 												<tr>
 													<td>${report.p_name }</td>
@@ -198,6 +196,7 @@
 											</c:forEach>
 										</tbody>
 									</table>
+									<my:nav jsFunc="go_page" page="${page}" />
 								</div>
 							</div>
 						</div>
