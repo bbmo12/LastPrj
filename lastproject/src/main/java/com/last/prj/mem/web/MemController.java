@@ -460,7 +460,7 @@ public class MemController {
 	      }
 	   }
 	
-	
+	/*
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
@@ -476,6 +476,40 @@ public class MemController {
 			
 			uploadPath += File.separator + saveFileName;
 			File saveFile = new File(uploadPath);
+			try {
+				file.transferTo(saveFile);
+				member.setPicture(originalFileName);
+				member.setPfile(saveFileName);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = member.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		member.setPassword(pwd);
+
+		memDao.memberInsert(member);
+		redirectAttr.addFlashAttribute("insert","회원가입실패");
+		return "redirect:home";
+	}*/
+	
+	
+	@RequestMapping("/mjoin") // 일반회원 회원가입
+	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
+		String originalFileName = file.getOriginalFilename();
+		String webPath = "/resources/upload";
+		String realPath = sc.getRealPath(webPath);
+		File savePath = new File(realPath);
+		if (!savePath.exists())
+			savePath.mkdirs();
+		realPath += File.separator + originalFileName;
+		File saveFile = new File(realPath);
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
