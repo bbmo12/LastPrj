@@ -27,7 +27,7 @@
 						관리</a></li>
 				<li class="nav-item"><a class="nav-link" href="admReport">신고
 						관리</a></li> -->
-				<li class="nav-item"><a class="nav-link" href="admService">서비스
+				<li class="nav-item"><a class="nav-link" href="admQna">신고
 						관리</a></li>
 				
 			</ul>

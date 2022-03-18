@@ -35,5 +35,8 @@ public interface PetService {
 	
 	//파라미터 : 펫번호  리턴 : 펫코드(품종)
 	int AutoCode(int pet_no);
+
+	//펫 품종 별 차트 그리기
+	List<PetVO> amdPetChart();
 	
 }

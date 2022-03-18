@@ -19,4 +19,10 @@ public class PetVO {
 	
 
 	private String c_content;
+	
+	//차트 그리기
+	private String oo;
+	private String tt;
+	private String f_content;
+	private String ch;
 }

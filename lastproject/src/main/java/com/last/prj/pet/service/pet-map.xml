@@ -79,4 +79,9 @@
 		WHERE PET_NO = #{pet_no}
 	</select>
 	
+	<select id="amdPetChart" resultType="com.last.prj.pet.service.PetVO">
+		<!-- SELECT COUNT(*)as tt ,F.CONTENT AS oo FROM PET P, F_CODE F WHERE P.CODE = F.CODE GROUP BY F.CONTENT -->
+		SELECT COUNT(PET_NO)AS TT,(SELECT COUNT(*) FROM PET)AS CH, F.CONTENT AS OO FROM PET P, F_CODE F WHERE P.CODE=F.CODE GROUP BY F.CONTENT
+	</select>
+	
 </mapper>
