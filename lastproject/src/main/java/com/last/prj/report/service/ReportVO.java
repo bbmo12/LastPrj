@@ -46,6 +46,7 @@ public class ReportVO {
 	private String total;
 
 	private String id;
+	private String m_id;
 	private Integer role;
 	private String key;
 	private String data;

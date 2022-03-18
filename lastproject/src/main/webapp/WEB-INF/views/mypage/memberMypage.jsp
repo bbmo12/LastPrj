@@ -68,10 +68,6 @@
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
 								</a></li>
-								<li><a href="petmemberForm"
-									class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
-								</a></li>
 								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
 								</a></li>
@@ -104,40 +100,46 @@
 
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row" style="margin-left: 40px;">
-						<div class="col-lg-9 col-md-9 blog_details" id="formMain">
+						<div class="col-lg-12 col-md-12 blog_details" id="formMain">
+						<div align="center">
+						<br><h1>${member.name }님의 정보조회</h1><br>
+						</div>
 							<div class="form-group">
+							<i class="fa-solid fa-user"></i>
 								<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>
 								<input type="text" style="border: none" id="name" name="name"
 									value="${member.name}" readonly>
 							</div>
 							<div class="form-group">
+							<i class="fa-solid fa-address-card"></i>
 								<h3 style="font-weight: bolder;">아이디&nbsp;:&nbsp;</h3>
 								<input type="email" style="border: none" id="m_id" name="m_id"
 									value="${member.m_id}" readonly>
 							</div>
 							<div class="form-group">
-								<h3 style="font-weight: bolder;">비밀번호&nbsp;:&nbsp;</h3>
-								<input type="password" style="border: none" id="name"
-									name="password" readonly>
-							</div>
-							<div class="form-group">
+							<i class="fa-solid fa-mobile-screen"></i>
 								<h3 style="font-weight: bolder;">전화번호&nbsp;:&nbsp;</h3>
 								<input type="text" style="border: none" id="tel" name="tel"
 									value="${member.tel}" readonly>
 							</div>
-							<button type="button" onclick="location.href='memberUpdateForm'"
+							<div align="right">
+							<button type="button" onclick="location.href='mconfirmPass'"
 								class="genric-btn info radius">내정보 수정</button>
+								</div>
 						</div>
 					</div>
+					<div align="center">
+							<br><h1>${member.name }님의 반려동물조회</h1><br>
+						</div>
 					<div class="row" id="data-container">
 						<c:if test="${ fn:length(pets) == 0  }">
 								<span>조회된 결과가 없습니다.</span>>
 						</c:if>
 						<c:forEach items="${pets }" var="pet">
-							<div class="col-lg-3 col-sm-6">
+							<div class="col-lg-3 col-sm-6" style="margin-left: 40px;">
 								<div class="single-doctor mb-3 mb-lg-0">
 									<div class="doctor-img">
-										<img src="resources/upload/${pet.picture }" alt=""
+										<img src="resources/upload/${pet.picture }" onerror ="this.src='resources/upload/cat.jpg'" alt=""
 											class="img-fluid" style="width: 195px; height: 200px;">
 									</div>
 									<div class="content-area">
@@ -152,9 +154,11 @@
 						</c:forEach>
 						
 					</div>
+					<div align="right">
 					<form action="mypetAddForm" method="post">
-					<button type="submit">반려등물 등록</button>
+					<button type="submit" class="genric-btn info radius">반려등물 등록</button>
 					</form>
+					</div>
 				</div>
 
 			</div>

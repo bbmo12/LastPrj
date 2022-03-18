@@ -9,9 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.fallow.service.FollowMapper;
 import com.last.prj.fallow.service.FollowService;
 import com.last.prj.fallow.service.FollowVO;
 import com.last.prj.mem.service.MemService;
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.security.CustomUser;
 
 @Controller
@@ -21,15 +24,24 @@ public class FollowController {
 	private FollowService followDao;
 	@Autowired
 	private MemService memDao;
+	@Autowired
+	private FollowMapper mapper;
 	
 	@RequestMapping("/myfallow")
-	public String myfallow(Model model, Principal principal) {
+	public String myfallow(Model model, Principal principal, Criteria cri, FollowVO follow) {
+		cri.setAmount(12);
+		String m_id = "0";
+		
+		
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "일반회원") {
-				String m_id = userDetails.getMember().getM_id();
-				model.addAttribute("follow",followDao.myFollowSearch(m_id));
+				m_id = userDetails.getMember().getM_id();
+				cri.setM_id(m_id);
+				PagingVO paging = new PagingVO(cri, mapper.FollowPage(cri));
+				model.addAttribute("follow",followDao.myFollowSearch(cri));
 				model.addAttribute("member",memDao.memberOne(m_id));
+				model.addAttribute("page", paging);
 				return "member/myfallow";
 			}
 		}

@@ -123,6 +123,16 @@ public class MemServiceImpl implements MemService {
 		return map.adMmemCount();
 	}
 
+	@Override
+	public MemVO getmemberinfo(String m_id) {
+		return map.getmemberinfo(m_id);
+	}
+
+	@Override
+	public String passCheck(String m_id) {
+		return map.passCheck(m_id);
+	}
+
 
 
 }

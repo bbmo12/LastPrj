@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags/"  prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +33,7 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${member.picture}"
+							<img class="author_img rounded-circle" src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"
 								style="width: 210px" alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
@@ -44,9 +45,6 @@
 							<ul class="list cat-list">
 								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-									</a></li>
-								<li><a href="petmemberForm" class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
 									</a></li>
 								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
@@ -77,6 +75,9 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
+					<div align="center">
+						<br><h1>${member.name }님의 팔로우</h1><br>
+						</div>
 					<div class="row" id="data-container">
 						<c:if test="${fn:length(follow)==0 }">
 							팔로우가 없습니다.
@@ -85,12 +86,12 @@
 							<div class="col-lg-3 col-sm-6">
 								<div class="single-doctor mb-3 mb-lg-0">
 									<div class="doctor-img">
-										<img src="resources/upload/${follow.picture }" alt="" class="img-fluid"
+										<img src="resources/upload/${follow.picture }" alt="" class="img-fluid" onerror ="this.src='resources/upload/cat.jpg'"
 											style="width: 195px; height: 200px;">
 									</div>
 									<div class="content-area">
 										<div class="doctor-name text-center">
-											<a href="pmemberDetail?id=${follow.p_id}">
+											<a href="pmemberDetail?id=${follow.p_id}" > 
 												<h3>${follow.p_id }</h3>
 											</a>
 										</div>
@@ -99,6 +100,7 @@
 							</div>
 						</c:forEach>
 					</div>
+					<my:nav jsFunc="go_page" page="${page}" />
 				</div>
 			</div>
 		</div>

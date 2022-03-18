@@ -4,9 +4,6 @@ package com.last.prj.report.web;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +16,7 @@ import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.report.service.ReportMapper;
 import com.last.prj.report.service.ReportService;
+import com.last.prj.report.service.ReportVO;
 import com.last.prj.security.CustomUser;
 
 @Controller
@@ -46,16 +44,20 @@ public class ReportController {
 	
 	//일반회원 신고내역 조회
 	@RequestMapping("/myreport")
-	public String myreport(Model model, Principal principal) {
+	public String myreport(Model model, Principal principal, ReportVO report, Criteria cri) {
 		if(principal != null) {
-			
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
 			if(userDetails.getRole() == "일반회원") {
 				String m_id = userDetails.getMember().getM_id();
-				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 m_id : " + userDetails.getMember().getM_id());
+				cri.setReporter(m_id);
+				cri.setAmount(10);
+			
+				PagingVO paging = new PagingVO(cri, mapper.memReport(cri));
+				model.addAttribute("page",paging);
 				model.addAttribute("member",memDao.memberSearch(m_id));
-				model.addAttribute("report", reportDao.myReportList(m_id));
+				model.addAttribute("report", reportDao.myReportList(cri));
+			
 				return "mypage/mreport";
 			}
 		}
