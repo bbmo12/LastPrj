@@ -228,7 +228,7 @@
 								<li class="menu-has-children"><a href="#">마이페이지</a>
 									<ul>
 										<li><a href="memberMypage">내 프로필</a></li>
-										<li><a href="petmemberForm">반려동물 프로필</a></li>
+										<!-- <li><a href="petmemberForm">반려동물 프로필</a></li> -->
 										<li><a href="protocol">반려동물 진료기록</a></li>
 										<li><a href="reservationSelect">예약 내역</a></li>
 										<li><a href="myPay">결제 내역</a></li>

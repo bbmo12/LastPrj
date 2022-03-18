@@ -2,6 +2,7 @@ package com.last.prj.reserv.web;
 
 import java.io.PrintWriter;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,8 @@ import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
+import com.last.prj.reserv.service.PreservationVO;
+import com.last.prj.reserv.service.PreservationlistMapper;
 import com.last.prj.reserv.service.PreservationlistService;
 import com.last.prj.reserv.service.ReservCountService;
 import com.last.prj.reserv.service.ReservCountVO;
@@ -37,8 +40,6 @@ import com.last.prj.reserv.service.ReviewVO;
 import com.last.prj.security.CustomUser;
 import com.last.prj.service.service.ServiceService;
 import com.last.prj.service.service.ServiceVO;
-import com.last.prj.reserv.service.PreservationVO;
-import com.last.prj.reserv.service.PreservationlistMapper;
 
 @Controller
 public class ReservationController {
@@ -76,6 +77,37 @@ public class ReservationController {
 	private PayService payDao;
 	
 
+	
+	// 일반 예약조회
+	@RequestMapping("/reservationSelect")
+	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri,Principal principal) {
+		
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				String m_id = userDetails.getMember().getM_id();
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				cri.setM_id(m_id);
+				cri.setAmount(10);
+
+				if(mapper.reservPage(cri)!=0) {
+				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+					model.addAttribute("page", paging);// 페이징 수
+				}
+				model.addAttribute("member",memDao.memberSearch(m_id));
+				model.addAttribute("m_id",m_id);
+				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
+				
+				vo.setM_id(m_id);
+				return "reservation/reservation";
+			}
+		}
+		return "reservation/reservation";
+	}
+	
 	
 	
 	//일반회원 예약페이지
@@ -135,34 +167,36 @@ public class ReservationController {
 	}
 	
 	
-	// 일반 예약조회
-	@RequestMapping("/reservationSelect")
-	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri,Principal principal) {
+	// 일반회원 내 예약조회(ajax)
+	@RequestMapping("/reservationSelect1")
+	@ResponseBody
+	public HashMap<String, Object> reservationSelect1(ReservationVO vo, Criteria cri,Principal principal) {
+			 if(principal != null) {
+					CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+					if(userDetails.getRole() == "일반회원") {
+						String m_id = userDetails.getMember().getM_id();
+						System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+						System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+						vo.setM_id(m_id);
+						System.out.println(vo);
+						int total = reservationDao.reservPage1(vo);
+						
+						PagingVO page = new PagingVO(cri,total);
+						HashMap map = new HashMap();
+						vo.setVo(page);
+						
+						
+						map.put("list", reservationDao.reservationPageList1(vo));
+						map.put("page",page);
+						
+						System.out.println("============================="+vo);
+						
+						
+						return map;
+					}
+				  }
 		
-		if(principal != null) {
-			
-			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
-			if(userDetails.getRole() == "일반회원") {
-				String m_id = userDetails.getMember().getM_id();
-				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
-				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
-				cri.setM_id(m_id);
-				cri.setAmount(10);
-
-				if(mapper.reservPage(cri)!=null) {
-				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
-					model.addAttribute("page", paging);// 페이징 수
-				}
-				model.addAttribute("member",memDao.memberSearch(m_id));
-				model.addAttribute("m_id",m_id);
-				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
-				
-				vo.setM_id(m_id);
-				return "reservation/reservation";
-			}
-		}
-		return "reservation/reservation";
+		return null;
 	}
 
 	// 파트너 예약조회
