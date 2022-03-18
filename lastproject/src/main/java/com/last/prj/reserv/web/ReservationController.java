@@ -78,6 +78,37 @@ public class ReservationController {
 	
 
 	
+	// 일반 예약조회
+	@RequestMapping("/reservationSelect")
+	public String nReservationSelect(Model model, ReservationVO vo,HttpServletRequest request,Criteria cri,Principal principal) {
+		
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				String m_id = userDetails.getMember().getM_id();
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				cri.setM_id(m_id);
+				cri.setAmount(10);
+
+				if(mapper.reservPage(cri)!=0) {
+				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+					model.addAttribute("page", paging);// 페이징 수
+				}
+				model.addAttribute("member",memDao.memberSearch(m_id));
+				model.addAttribute("m_id",m_id);
+				model.addAttribute("reservation", mapper.reservationPageList(cri));// 페이징 리스트
+				
+				vo.setM_id(m_id);
+				return "reservation/reservation";
+			}
+		}
+		return "reservation/reservation";
+	}
+	
+	
 	
 	//일반회원 예약페이지
 	@RequestMapping("/reservMember")
@@ -136,10 +167,10 @@ public class ReservationController {
 	}
 	
 	
-	// 일반회원 내 예약조회
-	@RequestMapping("/reservationSelect")
+	// 일반회원 내 예약조회(ajax)
+	@RequestMapping("/reservationSelect1")
 	@ResponseBody
-	public HashMap<String, Object> ReservationSelect(ReservationVO vo, Criteria cri,Principal principal) {
+	public HashMap<String, Object> reservationSelect1(ReservationVO vo, Criteria cri,Principal principal) {
 			 if(principal != null) {
 					CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 					if(userDetails.getRole() == "일반회원") {
@@ -148,14 +179,14 @@ public class ReservationController {
 						System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 						vo.setM_id(m_id);
 						System.out.println(vo);
-						int total = reservationDao.reservPage(vo);
+						int total = reservationDao.reservPage1(vo);
 						
 						PagingVO page = new PagingVO(cri,total);
 						HashMap map = new HashMap();
 						vo.setVo(page);
 						
 						
-						map.put("list", reservationDao.reservationPageList(vo));
+						map.put("list", reservationDao.reservationPageList1(vo));
 						map.put("page",page);
 						
 						System.out.println("============================="+vo);

@@ -32,9 +32,9 @@ public interface ReservationMapper {
 	ReservationVO reviewWrithForm(@Param("r_no") int r_no);
 
 	//페이징 (일반예약조회)
-	List<ReservationVO> reservationPageList(ReservationVO vo);
+	List<ReservationVO> reservationPageList1(ReservationVO vo);
 	
-	int reservPage(ReservationVO vo);
+	int reservPage1(ReservationVO vo);
 	
 	int updatecode(ReservationVO vo);
 
@@ -43,6 +43,10 @@ public interface ReservationMapper {
 	
 	//파일조회
 	List<ReviewVO> readpicture(@Param("r_no") int r_no);
+	
+	//페이징
+		int reservPage(Criteria cri);
+		List<ReservationVO> reservationPageList(Criteria cri);
 	
 	
 }

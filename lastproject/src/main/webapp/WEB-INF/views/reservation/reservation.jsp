@@ -14,69 +14,68 @@
 <script src="template/js/diaLog.js"></script>
 </head>
 <style>
-#my_section {
-	padding: 50px;
-}
-
-.card-text {
-	display: inline-block;
-	width: 200px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.flex {
-	-webkit-box-flex: 1;
-	-ms-flex: 1 1 auto;
-	flex: 1 1 auto
-}
-
-.padding {
-	padding: 5rem
-}
-
-.pl-3, .px-3 {
-	padding-left: 1rem !important;
-}
-
-.table th {
-	font-size: 20px;
-	font-weight: 500;
-	text-align: center;
-}
-
-.table {
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 1rem;
-	background-color: transparent;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-	background-color: #f9f9fd;
-}
-
-.table td {
-	font-size: 16px;
-	padding: .875rem 0.9375rem;
-	text-align: center;
-}
-
-#sidebar {
-	width: 500px;
-	float: none;
-	margin-left: 12em;
-	background-color: #fff;
-	border: none;
-}
-
-.codep {
-	padding: 0px;
-	width: 150px;
-	height: 50px;
-	font-size: 18px;
-}
+	#my_section {
+		padding: 50px;
+	}
+	.padding {
+		padding: 5rem
+	}
+	.pl-3,
+	.px-3 {
+		padding-left: 1rem !important
+	}
+	.table th {
+		font-size: 20px;
+		font-weight: 500;
+	}
+	.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		background-color: transparent
+	}
+	
+	.table-striped tbody tr:nth-of-type(odd) {
+  		background-color: #f9f9fd;
+ 	}
+	.table td {
+		font-size: 16px;
+		padding: .875rem 0.9375rem
+	}
+	.badge {
+		font-size: 12px;
+		line-height: 1;
+		padding: .375rem .5625rem;
+		font-weight: normal;
+	}
+	.star-rating {
+		display: flex;
+		flex-direction: row-reverse;
+		font-size: 1.5em;
+		justify-content: space-around;
+		padding: 0 .2em;
+		text-align: center;
+		width: 5em;
+	}
+	.star-rating input {
+		display: none;
+	}
+	.star-rating label {
+		color: #ccc;
+		cursor: pointer;
+	}
+	.star-rating :checked~label {
+		color: #f90;
+	}
+	.star-rating label:hover,
+	.star-rating label:hover~label {
+		color: #fc0;
+	}
+	 .badge-pay{
+		background-color: #38a4ff;
+		color: #fff;
+    }
+	
 </style>
 
 <body>
@@ -590,24 +589,66 @@
 			
 			$.each(result, function (i) {
 				console.log(result[i])
-				$("#myTable").append("<tr><td>" +
-					result[i].r_no +
-					"</td><td>" +
-					result[i].name +
-					"</td><td class='card-text'>" +
-					result[i].r_date +
-					"</td><td>" +
-					result[i].time +
-					"</td><td>" +
-					result[i].rcontent +
-					"</td><td>"+
-					result[i].pcotent +
-					"</td><td><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
-					+result[i].rccontent +
-					"</td><td>" +
-					result[i].refuse +
-					"</td></tr>"
-				);
+				
+				var choicedTag = "<tr><td>" +
+				result[i].r_no +
+				"</td><td>" +
+				result[i].name +
+				"</td><td class='card-text'>" +
+				result[i].r_date +
+				"</td><td>" +
+				result[i].time +
+				"</td><td>" +
+				result[i].rcontent +
+				"</td><td>"+
+				result[i].pcontent +
+				"</td><td><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
+				+result[i].rccontent +
+				"</td><td>" 
+				if(result[i] != 'null'){
+				result[i].refuse }+
+				"</td>";
+				
+				if(result[i].code == 405){
+					if(result[i].r_check == 0){
+						choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-secondary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰쓰기</button></td></tr>";
+					}else{
+						choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰보기</button></td></tr>";
+					}
+				}else{
+					choicedTag += '<td><button>실패</button></td></tr>';
+				}
+				$("#myTable").append(choicedTag);
+				
+				/*
+					<c:choose>
+					<c:when test="${result[i].code eq 405 }">
+					<c:choose>
+						<c:when test= "${result[i].r_check eq 0 }">
+							<td><button type="button" 
+							onclick='reviewadd("${result[i].r_no}");'
+									class="btn btn-secondary" data-toggle="modal"
+									data-target="#reviewWriteModal">리뷰쓰기</button></td>
+
+						</c:when>
+						<c:otherwise>
+							<td><button onclick='reviewread("${result[i].r_no}");' type="button"
+									class="btn btn-secondary" data-toggle="modal"
+									data-target="#exampleModal1">리뷰보기</button></td>
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+				<c:otherwise>
+					<td>
+						<button>실패</button>
+					</td>
+				</c:otherwise>
+			</c:choose>`+
+					
+					
+					
+					"</tr>"
+				);*/
 				
 				
 			}) // end each.
@@ -630,7 +671,7 @@
 			var str = $('#admDateForm').serialize();
 			console.log(str);
 			$.ajax({
-				url: 'reservationSelect',
+				url: 'reservationSelect1',
 				method: 'post',
 				data: str,
 				//contentType : 'application/json',
