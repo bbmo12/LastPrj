@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +25,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.last.prj.counsel.service.CounselService;
 import com.last.prj.counsel.service.CounselVO;
+import com.last.prj.fallow.service.FollowService;
+import com.last.prj.fallow.service.FollowVO;
 import com.last.prj.ffile.web.FfileUtil;
+import com.last.prj.likehit.service.LikehitService;
+import com.last.prj.likehit.service.LikehitVO;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PriceVO;
@@ -52,10 +57,12 @@ public class PmemberController {
 	private ReviewService reviewDao;
 	@Autowired
 	private ReservationService reservationDao;
-	
+	@Autowired 
+	private LikehitService likehitDao;
 	@Autowired
 	private CounselService counselDao;
-	
+	@Autowired
+	private FollowService followDao;
 	@Autowired
 	private ServletContext sc;
 	@Autowired
@@ -74,7 +81,20 @@ public class PmemberController {
 
 	// 상세페이지
 	@RequestMapping("/pmemberDetail")
-	public String pmemberDetail(@RequestParam("id") String p_id, Model model, PriceVO price) {	
+	public String pmemberDetail(@RequestParam("id") String p_id, Model model, PriceVO price,Principal principal,LikehitVO hit,FollowVO follow) {
+		String m_id = "0";
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "일반회원") {
+				m_id  =userDetails.getMember().getM_id();
+				hit.setP_id(p_id);
+				hit.setM_id(m_id);
+				model.addAttribute("like",likehitDao.likeCheck(hit));
+				follow.setM_id(m_id);
+				follow.setP_id(p_id);
+				model.addAttribute("follow",followDao.followCheck(follow));
+			}
+		}		
 		// 파트너 정보
 		model.addAttribute("pmemdetail", pMemberDao.getPmemberinfo(p_id)); // pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));// otime
@@ -84,7 +104,7 @@ public class PmemberController {
 		// 후기
 		model.addAttribute("counsel", pMemberDao.getCounselReview(p_id));
 		model.addAttribute("service", pMemberDao.getServiceReview(p_id));
-
+	
 		return "pmember/memberDetail";
 	}
 	@RequestMapping("confirmPass")
@@ -294,6 +314,7 @@ public class PmemberController {
 				String p_id = userDetails.getPmember().getP_id();
 				model.addAttribute("p_id",p_id);
 				model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); 
+				
 				return "mypage/pmemDeleteForm";
 			}
 		}
@@ -302,13 +323,15 @@ public class PmemberController {
 	
 	//일반회원 회원탈퇴
 	@RequestMapping("pmdelete")
-	public String mdelete(HttpServletRequest request, MemVO member,Principal principal) {
+	public String mdelete(HttpServletRequest request, MemVO member,Principal principal, RedirectAttributes redirectAttr,HttpSession session) {
 
 		if(principal != null) {
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if(userDetails.getRole() == "파트너회원") {
 				String p_id = userDetails.getPmember().getP_id();
 				pMemberDao.pmemberNullUpdate(p_id);
+				session.invalidate();
+				redirectAttr.addFlashAttribute("delete","정보를다시확인해주세요.");
 				return  "redirect:home";
 			}
 		}

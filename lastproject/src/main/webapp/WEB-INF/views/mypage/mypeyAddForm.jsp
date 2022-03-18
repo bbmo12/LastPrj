@@ -29,7 +29,7 @@
 		// 이름 정규식
 		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
 		// 몸무게
-		var weightJ = /^\d{1,3}$/;
+		var weightJ =^[0-9]{1,3}$/;
 		
 		
 		$(document).ready(function () {
@@ -120,7 +120,7 @@
 
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" style="width: 210px"
+								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
@@ -133,10 +133,6 @@
 															<li><a href="memberMypage"
 									class="d-flex justify-content-between">
 										<p>내 프로필</p>
-								</a></li>
-								<li><a href="petmemberForm"
-									class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
 								</a></li>
 								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
@@ -173,30 +169,24 @@
 						<div class="col-lg-12">
 							<div class="feature-img">
 								<img class="img-fluid"
-									src="resources/assets/images/blog-details/feature-img1.jpg"
+									src="resources/assets/images/blog-details/feature-img1.jpg" onerror ="this.src='resources/upload/cat.jpg'" 
 									alt="">
 							</div>
 						</div>
 						<form action="mypatadd" method="post" enctype="multipart/form-data">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
-								<h5>
-									<strong>이름</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>
 								<input type="text" id="name" name="name">
 						<div id="name_check"></div>
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>생년월일</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">생년월일&nbsp;:&nbsp;</h3>
 								<input type="text" id="birth" name="birth">
 								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>성별</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">성별&nbsp;:&nbsp;</h3>
 								<!-- 1이면 여자, 2이면 남자  -->
 								<label>여자<input type="radio" id="gender" name="gender"
 									value="1"><span class="checkmark"></span></label>&emsp; <label>남자<input
@@ -204,16 +194,12 @@
 									class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>몸무게</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">몸무게&nbsp;:&nbsp;</h3>
 								<input type="text" id="weight" name="weight">
 								<div id="weight_check"></div>
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>품종</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">품종&nbsp;:&nbsp;</h3>
 								<label>개<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
 								<label>고양이<input type="radio" id="code" name="code" value="502"><span class="checkmark"></span></label>&emsp;
 								<label>조류<input type="radio" id="code" name="code" value="503"><span class="checkmark"></span></label>&emsp;
@@ -227,15 +213,11 @@
 								<label>거미<input	 type="radio" id="code" name="code" value="511"><span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>반려동물사진</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">반려동물 사진&nbsp;:&nbsp;</h3>
 								<input type="file" id="file" name="file">
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>반려동물 설명</strong>
-								</h5>
+									<h3 style="font-weight: bolder;">반려동물 설명&nbsp;:&nbsp;</h3>
 								<textarea class="form-control" id="n_content" name="n_content"
 									rows="4" cols="130"></textarea>
 							</div>

@@ -9,7 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-<!-- <script	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script
@@ -20,7 +19,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
 	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <style>
 .container-fluid {
 	width: 100%;
@@ -56,22 +55,30 @@
 							<div class="card-title">
 								<h4>차트</h4>
 								<button type="button" class="btn btn-link btn-rounded btn-fw"
-									id="partChart" onclick="partChart()">기간 가입자 수</button>
+									id="partChart" onclick="partChart();">기간 가입자 수</button>
 								<button type="button" class="btn btn-link btn-rounded btn-fw"
-									id="dateChart" onclick="petChart()">펫 품종별 비율</button>
+									id="dateChart" onclick="petChart();">펫 품종별 비율</button>
 
 							</div>
 							<div id="petC" style="display: none;">
-								<p class="card-description mainCount" id="petCount">
-									총 마리 수 :
-									<code id="a"></code>
-									<br>
-								</p>
 
 								<div class="card">
+
 									<div class="card-body">
-										<h4 class="card-title petChart">펫 품종별 비율</h4>
-										<canvas id="petChart" style="height: 250px"></canvas>
+
+										<p class="card-description mainCount" id="petCount">
+										<h4 class="card-title">펫 품종별 비율</h4>
+										<p class="card-description mainCount" id="petCount">
+											<code id="a"></code>
+											<br>
+											<code id="1"></code>
+											<code id="2"></code>
+											<code id="3"></code>
+											<code id="4"></code>
+										</p>
+										<div class="admPetChart">
+											<canvas id="admPetChart" style="height: 250px"></canvas>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -79,16 +86,13 @@
 
 							<div class="card" id="partC" style="display:;">
 								<div class="card-body">
-									<h4 class="card-title">일반 회원 기간 별 가입자 수</h4>
-									<p class="card-description partCount" id="partCount">
-										총 회원 수 :
-										<code id="a">96</code>
-										<br> 2022-02 :
-										<code id="b">22명</code>
-										2022-03 :
-										<code id="b">74명</code>
+									<p class="card-description mainCount" id="petCount">
+										<code id="a"></code>
+										<br>
+									<div id="b"></div>
 									</p>
-									<canvas id="partChart" style="height: 250px"></canvas>
+									<h4 class="card-title admMemChart">일반 회원 기간 별 가입자 수</h4>
+									<canvas id="admMemChart" style="height: 250px"></canvas>
 								</div>
 							</div>
 
@@ -107,25 +111,26 @@
 									data-code="">전체</button>
 								<button type="button"
 									class="btn btn-link btn-rounded btn-fw codep" id="petY"
-									data-code="petY">펫 보유</button>
+									data-code="100">펫 보유</button>
 								<button type="button"
 									class="btn btn-link btn-rounded btn-fw codep" id="petN"
-									data-code="petN">펫 미보유</button>
+									data-code="101">펫 미보유</button>
 								<button type="button"
 									class="btn btn-link btn-rounded btn-fw codep" id="pets"
 									data-code="pets">펫 목록</button>
 							<form id="admDateForm" onsubmit="return false"
-					onkeypress="eventkey();">
+								onkeypress="eventkey();">
 								<input type="hidden" name="code"> <input type="hidden"
 									name="pageNum" value="1"> FROM : <input type="text"
 									id="fromDate" name="fromDate">&nbsp;&nbsp; TO : <input
-									type="text" id="toDate" name="toDate"> <select id="key"
-									name="key">
-									<option value="" selected="selected">전 체</option>
+									type="text" id="toDate" name="toDate"> <br>
+									<select id="key" name="key">
+									<option value="" selected>전 체</option>
 									<option value="name">이름</option>
 									<option value="m_id">아이디</option>
 								</select> <input type="text" id="data" name="data" size="20">&nbsp;
 								<button type="submit" onclick="pagingList();">검 색</button>
+								<input type="reset">
 							</form>
 							</p>
 							<table class="table table-hover">
@@ -160,9 +165,7 @@
 				</div>
 				<!-- Modal body -->
 				<div class="modal-body">
-
 					<div class='mem-body'></div>
-
 					<!-- chart.js -->
 					<div class="card">
 						<div class="card-body">
@@ -171,66 +174,56 @@
 						</div>
 					</div>
 					<!--end chart.js -->
-
 				</div>
-
 				<!-- Modal footer -->
 				<div class="modal-footer">
 
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
-
 			</div>
 		</div>
 	</div>
 
 	<script>
 	
-/* 	$(".btn-link").on("click", function(e) {
-		$(this).closeast('.partner').find('.btn-acitve').removeClass('btn-active');
-		$(this).addClass('btn-active');
-	}) */
-	
+	//======================enter 키===================
+	function eventkey() {
+		if (event.keyCode == 13) {
+			pagingList();
+		} else {
+			return false;
+		}
+	}//====================end enter 키================
 	
 	// ============================차트 부분 : 기간 별 차트 그리기============================ 
-	function mainChart() {
-		 $('#partC').hide();
-		$('#mainC').show();
-		$.ajax({
-			url : 'ma'
-		})
-		
-		
-	}
-	
-	function partChart() {
-		
-			 $('#mainC').hide();
-			 $('#partC').show();
 
-		 
-				tt = [];
+	function partChart() { //일반 회원 기간 별 차트 그리기
+			 $('#petC').hide();
+			 $('#partC').show();
+			 $("#admPetChart").remove();
+			 $(".admPetChart").append("<canvas id='admPetChart'></canvas>");
+			
+			 tt = [];
 				oo = [];
 				$.ajax({
-					url : '',
-					method : 'partChart',
+					url : 'admMemChart',
+					method : 'get',
 					success : function(res) {
 						console.log(res[0].tt);
 						$.each(res, function (i) {
 							tt.push(res[i].tt);
-							oo.push(res[i].oo);
-							
-							
+							oo.push(res[i].oo);				
 						})
 						console.log(tt);
-						const aaa = document.getElementById('partChart').getContext('2d');
-						const partChart = new Chart(aaa, {
+						
+						const ctx = document.getElementById('admMemChart').getContext('2d');
+						const admMemChart = new Chart(ctx, {
 							type : 'line',
 							data : {
 								labels : tt,
 								datasets : [ {
-									label : '파트너 회원',
+									label : '일반 회원',
 									data : oo,
 									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 											'rgba(255, 159, 64, 0.2)',
@@ -251,52 +244,70 @@
 						} //success
 
 					}) // ajax
-			} 
-	
-			// ===============Main chart 그리기=====================	
-			let viewChart = function (result) {
-					 console.log(result[0].ch);
-					 $("#a").html(result[0].to);
-					 $("#b").html(result[0].ch);
-					 $("#c").html(result[1].ch);
-					 $("#d").html(result[2].ch);
-					 $("#e").html(result[3].ch);
+
+			} //
+			partChart();
 			
-			//Chart 초기화 : detroy API 안먹힘 거지같네
-			 $("#mainChart").remove();
-			 $(".mainChart").append("<canvas id='mainChart'></canvas>");
+			
+	
+	function petChart() {// 품 종별 Bar 차트 그리기
+		 $('#partC').hide();
+		$('#petC').show();
+		 $("#admMemChart").remove();
+		 $(".admMemChart").append("<canvas id='admMemChart'></canvas>");
+		
+		tt=[];
+		oo=[];
 				
+		var total;
+		$.ajax({
+			url : 'amdPetChart',
+			method : 'get',
+			success : function(res) {
+				$.each(res, function (i) {
+					tt.push(res[i].tt);
+					oo.push(res[i].oo);				
+					$("#i").html(res[i].oo+"의 마리수 :" + res[i].tt);
+					
+				});
+				 console.log(res[0].ch);
+				 $("#a").html("총 마리수 : "+res[0].ch);
+				 
+				 
+				/*  <code id="1"></code> */
 				
-				
-			    const ctx = document.getElementById('mainChart').getContext('2d');
-				const mainChart = new Chart(ctx, {			
+			 	const txc = document.getElementById('admPetChart').getContext('2d');
+				const admPetChart = new Chart(txc, {
 					type : 'bar',
 					data : {
-						labels : [ '수의사', '훈련사','미용사','펫시터' ],
+						labels : oo,
 						datasets : [ {
-							label : '파트너쉽',
-							data : [ result[0].ch, result[1].ch, result[2].ch,result[3].ch ],
+							label : '# of Votes',
+							data : tt,
 							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)','rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)' ],
-							borderColor : [ 'rgba(255, 99, 132, 0.2)',
-								'rgba(54, 162, 235, 0.2)','rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)' ],
-							borderWidth : 1
+								'rgba(255, 159, 64, 0.2)',
+								'rgba(255, 159, 64, 0.2)' ],
+						borderColor : [ 'rgba(255, 99, 132, 1)',
+								'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
+						borderWidth : 1
 						} ]
 					},
 					options : {
-						
 						scales : {
 							y : {
 								beginAtZero : true
 							}
 						}
-					},
-				
-				});			
+					}
+				}); 
 			}
-			// ===============end Main chart 그리기=====================
-	// ============================end 차트 부분 : 기간 별 차트 그리기============================ 
-		
+		})
+
+	}
+	
+	
+	// 품 종별 Bar 차트 그리기 end
+
 		
 		$(function() {
 				// title='상세정보를 보시려면 이름을 클릭하세요..'
@@ -404,41 +415,23 @@
 		// ===================== 리스트 만드는 함수 ====================
 		let viewPmemberList = function(result) {
 			$("#myTable").empty();		
-			/* 	목록에 전체 / 수의사 이런거 표시할려고 ㅠㅠ
-				$("#pa").html('');
-				if(result[0].code == null){
-					$("#pa").html('전체');
-				}else if(result[0].f_content == '훈련사'){
-					$("#pa").html('훈련사');
-				}else if(result[0].f_content == '미용사'){
-					$("#pa").html('미용사');
-				}else if(result[0].f_content == '펫시터'){
-					$("#pa").html('펫시터');
-				}else if(result[0].f_content == '수의사'){
-					$("#pa").html('수의사');
-				}
-	 			*/
+
 			$.each(result,function(i) {
 				console.log(result[i].pet_no)
-				console.log(result[i].startdate)
+				console.log(result[i].startDate)
 						$("#myTable").append(
 														"<tr><td><a onclick='show()'>"														
 														+ result[i].name
 														+ "</a></td><td>"
 														+ result[i].m_id
 														+ "</td><td>"
-														+ result[i].startdate
+														+ result[i].startDate
 														+ "</td><td>"
 														+ (result[i].pet_no == null ? '미보유' : '보유' )
 														+ "</td></tr>" );
 							}) // end each.
 		}
 		//=====================  end리스트 만드는 함수 ====================
-		
-			
-		
-
-		
 
 			
 		// =================회원 단건 조회 Modal===================
@@ -469,37 +462,6 @@
 					//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
 					
 					//=========================Modal의 Chart 그리기
-					
-					//Chart 초기화 : detroy API 안먹힘 거지같네
-					 $("#myChart").remove();
-					 $(".myChart").append("<canvas id='myChart'></canvas>");
-					
-					
-					const ctx = document.getElementById('myChart').getContext('2d');
-					const myChart = new Chart(ctx, {
-						type : 'bar',
-						data : {
-							labels : [ '신고 당한 수', '추천 수','서비스 제공 수','총매출','팔로워 수' ],
-							datasets : [ {
-								label : '# of Votes',
-								data : [ res.list.c_report, '8', '1' ],
-								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-										'rgba(255, 159, 64, 0.2)',
-										'rgba(255, 159, 64, 0.2)' ],
-								borderColor : [ 'rgba(255, 99, 132, 1)',
-										'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
-								borderWidth : 1
-							} ]
-						},
-						options : {
-							scales : {
-								y : {
-									beginAtZero : true
-								}
-							}
-						}
-					});
-					//========================end Modal의 Chart 그리기
 					
 				}
 			}); //end Modal에 띄어줄 단건조회 ajax

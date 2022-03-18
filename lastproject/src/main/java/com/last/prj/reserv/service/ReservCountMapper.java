@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ReservCountMapper {
 	List<ReservCountVO> reservCountList();
 	
-	ReservCountVO reservCountSelect(ReservCountVO vo);
+	List<ReservCountVO> reservCountSelect(ReservCountVO vo);
 	
 	int reservCountInsert(ReservCountVO no);
 	

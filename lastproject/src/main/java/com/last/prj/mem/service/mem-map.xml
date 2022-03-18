@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.mem.service.MemMapper">
+	
+	<select id="passCheck" parameterType="com.last.prj.mem.service.MemVO" resultType="String">
+		SELECT PASSWORD
+		FROM MEMBER
+		WHERE M_ID = #{m_id}
+	</select>
+
 
 	<!-- 일반회원 상세조회 -->
 	<select id="memberSearch" parameterType="String"
@@ -205,30 +212,69 @@
 	<select id="admMlistCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
 		SELECT B.*
 		FROM ( SELECT A.* , ROWNUM RN
-		FROM (select m.m_id, m.name, m.startdate, p.pet_no from member m LEFT OUTER JOIN pet p ON m.m_id = p.m_id
-		WHERE
-		<if	test=" key != null and key != '' and data != null and data != '' ">
-			UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
-		<if test="code != ''  and code = 'petY'">AND p.pet_no is not null </if>
-		<if test="code != ''  and code = 'petN'">AND p.pet_no is null </if>
+		FROM (SELECT M.M_ID, M.NAME, M.STARTDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)		
+		<if	test="key !=null and key !='' and data !=null and data !='' ">
+			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
+		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
 		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>
-		<![CDATA[ ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+		<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
 	</select>
 	
 	<select id="adMmemCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
 		SELECT COUNT(*) FROM (
-		SELECT M.M_ID, M.NAME, M.STARTDATE, P.PET_NO FROM MEMBER M  LEFT OUTER JOIN PET P ON M.M_ID = P.M_ID
-		WHERE
-		<if	test=" key != null and key != '' and data != null and data != '' ">
-			UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
-		<if test="code != '' and code = 'petY'">AND p.pet_no is not null </if>
-		<if test="code != '' and code = 'petN'">AND p.pet_no is null </if>
-		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+		SELECT M.M_ID, M.NAME, M.STARTDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)
+		<if	test="key != null and key !='' and data != null and data != '' ">
+			AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="code != '' and code == '100'">AND p.pet_no is not null </if>
+		<if test="code != '' and code == '101'">AND p.pet_no is null </if>
+		<if	test="fromDate !=null and fromDate !='' and toDate !=null and toDate !='' ">
 			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>)
 	</select>
+	
+	<!--기간 별 차트 그리기  -->
+		<select id="admMemChart" resultType="com.last.prj.mem.service.MemVO">
+			SELECT 
+			    TO_CHAR(startdate, 'yyyy-mm')as tt,
+			    COUNT(*)as oo
+			FROM member
+			GROUP BY 
+			TO_CHAR(startdate, 'yyyy-mm')
+		</select>
+	
+		<select id="pMemCode" resultType="int" parameterType="String" >
+			SELECT CODE FROM P_MEMBER WHERE P_ID = #{p_id}
+		</select>
+		
+		
+		<select id="admMemReporCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+				SELECT B.*
+				FROM ( SELECT A.* , ROWNUM RN
+				FROM (SELECT M.M_ID, M.NAME,M.C_REPORT AS cReport, M.STARTDATE,M.M_ROLE, R.CONTENT AS F_CONTENT, R.CODE FROM MEMBER M, REPORT R WHERE M.M_ID = R.REPORTED
+				<if test="code != null and code != '' ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+				<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+		</select>
+		<select id="admMemReportCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
+			SELECT COUNT(*) FROM (SELECT M.M_ID, M.NAME,M.C_REPORT AS cReport, M.STARTDATE,M.M_ROLE, R.CONTENT AS F_CONTENT, R.CODE FROM MEMBER M, REPORT R WHERE M.M_ID = R.REPORTED
+				<if test="code != null ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>)
+		</select>
 
-
+	<select id="getmemberinfo" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
+		SELECT * FROM MEMBER WHERE M_ID = #{m_id}
+	</select>
 </mapper>

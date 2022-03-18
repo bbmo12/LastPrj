@@ -1,7 +1,8 @@
 package com.last.prj.reserv.service;
 
 
-
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
 
 import lombok.Data;
 
@@ -13,7 +14,7 @@ public class ReservationVO {
 	private String r_date;
 	private String startdate;
 	private String time;
-	private int code; //코드번호
+	private Integer code; //코드번호
 	private String r_code;
 	private String rcontent; //예약내용
 	private String rccontent; //예약승인코드
@@ -30,6 +31,11 @@ public class ReservationVO {
 	
 	private int f_part;			//첨부파일
 	
+	private PagingVO vo;
+	private Criteria cri;
+	private String total;
+	private String key;
+	private String data;
 	 
 	
 }

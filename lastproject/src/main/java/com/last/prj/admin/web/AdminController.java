@@ -43,9 +43,7 @@ public class AdminController {
 	@RequestMapping("/goChart")
 	@ResponseBody
 	public List<PmemberVO> goChart() {
-
 		return pMemberDao.admgoChart();
-
 	}
 
 	@RequestMapping("/main")
@@ -67,7 +65,7 @@ public class AdminController {
 		return "admin/main/main";
 	}
 
-	// =========일반 회원==========================
+	// ============================일반 회원==========================
 	@RequestMapping("/admMember")
 	public String admMemberTable() {
 		return "admin/board/admMember";
@@ -87,22 +85,25 @@ public class AdminController {
 
 		map.put("list", memDao.admMlistCode(vo));
 		map.put("page", page);
-		System.out.println("=============================" + vo);
-		System.out.println("=============================" + memDao.admMlistCode(vo));
 		return map;
 
 	}
 	
-	/*
-	 * @RequestMapping("/admChart")
-	 * 
-	 * @ResponseBody public HashMap<String, Object> admChart(MemVO vp, PetVO vv){
-	 * 
-	 * return map; 
-	 * }
-	 */
+	  @RequestMapping("/admMemChart")
+	  @ResponseBody public List<MemVO>admMemChart(){
+	  return memDao.admMemChart(); 
+	  }
+	  //select count(*),f.content from pet p, f_code f where p.code = f.code group by f.content;
+	  @RequestMapping("/amdPetChart")
+	  @ResponseBody
+	  public List<PetVO> amdPetChart(){  
+		  return petDAO.amdPetChart();
+		  
+	  }
+	  
+	 
 
-	// ==========end 일반 회원==========
+	// ==========================end 일반 회원=======================
 
 	// ======= 파트너 회원 =============
 
@@ -307,5 +308,60 @@ public class AdminController {
 
 		return list;
 	}
+	
+	//일반회원 신고 제재 대상
+	@RequestMapping("/admMemRepor")
+	public String admMemRepor() {
+		return "admin/board/admMemRepor";
+	}
+	
+	//일반회원 신고 제재 대상 리스트 출력
+	@RequestMapping("/admMemReporList")
+	@ResponseBody
+	public HashMap<String, Object> admMemReporList(MemVO vo, Criteria cri){
+		System.out.println("VO가 뭔데 대체" + vo);
+		int total = memDao.admMemReportCount();
+		System.out.println("total은~" + total);
+		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9);
+		// n개씩 출력
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+
+		map.put("list", memDao.admMemReporCode(vo));
+		map.put("page", page);
+		return map;
+	}
+	
+	
+	//파트너회원 신고 제재 대상
+	@RequestMapping("/admPmemRepor")
+	public String admPmemRepor() {
+		return "admin/board/admPmemRepor";
+	}
+
+	//admPmemReporList
+	//파트너회원 신고 제재 대상 리스트 출력
+	@RequestMapping("/admPmemReporList")
+	@ResponseBody
+	public HashMap<String,Object> admPmemReporList(PmemberVO vo, Criteria cri){
+		System.out.println("VO가 뭔데 대체" + vo);
+		int total = pMemberDao.admPmemReportCount();
+		System.out.println("total은~" + total);
+		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9);
+		// n개씩 출력
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+
+		map.put("list", pMemberDao.admPmemReporList(vo));
+		map.put("page", page);
+		return map;
+	}
+	
+	
+	
+	
+	
 
 }

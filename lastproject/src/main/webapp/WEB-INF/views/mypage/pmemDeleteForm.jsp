@@ -10,10 +10,35 @@
 <style>
 	#my_section {
 		padding: 50px;
+	}	
+	#confirm{
+		width: 110px;
+		height: 60px;
+		margin: 15px 0 0 200px;
+		font-size: 30px;
 	}
+	
+	#logreg-forms{
+		width: 500px;
+		height: 350px;
+    	background: #fff;
+  		box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
+	}
+	.head {
+  		color: #fff;
+  		font-size: 34px;
+  		font-weight: bold;
+  		height: 100px;
+  		padding: 30px 0;
+  		text-align: center;
+  		text-transform: uppercase;
+  		background: #0062ff;
+	}
+	.forms-sample{
+		margin: 65px 0 0 120px;	
+	}
+
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 
 <body>
 	<section class="banner-area other-page">
@@ -73,14 +98,18 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list">
-					<div class="col-lg-12 col-md-12 blog_details" style="margin: 20px; 0  0 -6px;">
-						<form class="forms-sample" action="pmdelete" method="post">
-							<h4>회원탈퇴하시겠습니까?</h4>
-							<button type="submit" class="btn btn-primary mr-2">네</button>
-							<button type="button" class="btn btn-primary mr-2"
+				<div class="col-lg-9 posts-list" style="margin-top: 15em;">
+					<div class="col-lg-12 col-md-12 blog_details" style="margin-left: 10em;">
+						<div id="logreg-forms">
+							<div class="form-group">
+							  <div class="head">탈퇴하시겠습니까?</div>
+							  	<form class="forms-sample" action="pmdelete" method="post">						
+								<button type="submit" id="confirm" class="btn btn-primary m-2">네</button>
+								<button type="button" id="confirm" class="btn btn-primary m-2"
 								onclick="location.href='home'">아니요</button>
-						</form>
+								</form>        
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

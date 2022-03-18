@@ -46,7 +46,7 @@
 <body>
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">QnA 페이지</h4>
+			<h4 class="card-title">파트너 회원 페이지</h4>
 			<div class="btn-group bg-white p-3" role="group"
 				aria-label="Basic example">
 				<button type="button"
@@ -70,22 +70,27 @@
 					<code>파트너회원 페이지</code>
 				</button>
 			</div>
-
 			<div>
+				검색조건
 				<form id="admDateForm" onsubmit="return false"
 					onkeypress="eventkey();">
-					<input type="hidden" name="code"> <input type="hidden"
-						name="repor"> <input type="hidden" name="pageNum"
-						value="1"> FROM : <input type="text" id="fromDate"
-						name="fromDate">&nbsp;&nbsp; TO : <input type="text"
-						id="toDate" name="toDate"> &nbsp;&nbsp;<select id="key" name="key">
-						<option value="" selected="selected">전 체</option>
-						<option value="reporter" >신고자</option>
-						<option value="reported" >신고당한사람</option>
+					<input type="hidden" name="code"><input type="hidden"
+						name="pageNum" value="1"> FROM : <input type="text"
+						id="fromDate" name="fromDate" class="mdi mdi-calendar mr-1">&nbsp;&nbsp;
+					TO : <input type="text" id="toDate" name="toDate"
+						class="mdi mdi-calendar mr-1"> &nbsp;&nbsp;<select
+						id="key" name="key">
+						<option value="" selected>전 체</option>
+						<option value="p_id">아이디</option>
+						<option value="name">이름</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
-					<button type="submit" onclick="pagingList();">검 색</button>
-					<input type="reset">
-					<!-- <button type="button" id="btnSearch">검 색</button> -->
+					<button type="submit" onclick="pagingList();"
+						class="btn btn-outline-primary btn-icon-text">
+						<i class="mdi mdi-file-check btn-icon-prepend"></i>검 색
+					</button>
+					<button type="button" class="btn btn-warning btn-icon-text">
+						<i class="mdi mdi-reload btn-icon-prepend"></i> 초기화
+					</button>
 				</form>
 			</div>
 			<div class="template-demo">
@@ -101,37 +106,49 @@
 					data-code="604" data-repor="">사생활 침해</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					data-code="605" data-repor="">게시물 도배</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="" data-repor="701">미처리</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="" data-repor="702">기각처리</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="" data-repor="703">승인처리</button>
 			</div>
-			<!-- <div>
-				<input class="form-control" id="myInput" type="text"
-					placeholder="Search.."> <br>
-			</div> -->
+			<br> <br>
+			<h4>제재 대상 파트너 회원</h4>
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<!-- <th>사진</th> -->
-						<th>신고자</th>
-						<th>신고 당한 사람</th>
-						<th>신고일</th>
-						<th>신고 내역</th>
+						<th>이름</th>
+						<th>아이디</th>
+						<th>신고 건수</th>
+						<th>가입날짜</th>
+						<th>신고 사유</th>
 						<th>신고 유형</th>
+						<th>처리 사유</th>
 						<th>처리 상태</th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
-
 				</tbody>
 			</table>
 			<div id="pagination"></div>
+			<br> <br>
+			<h4>신고 제재 중인 파트너 회원</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<!-- <th>사진</th> -->
+						<th>이름</th>
+						<th>아이디</th>
+						<th>신고 건수</th>
+						<th>가입날짜</th>
+						<th>신고 사유</th>
+						<th>신고 유형</th>
+						<th>처리 사유</th>
+						<th>처리 상태</th>
+					</tr>
+				</thead>
+				<tbody id="myTableTwo">
+				</tbody>
+			</table>
+			<div id="paginationTwo"></div>
 		</div>
 	</div>
-
 	<!-- Modal 창 -->
 	<div class="modal fade" id="myModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -151,21 +168,21 @@
 					</ul>
 
 					<!-- 신고 처리 Form 태그 -->
-				
-						<form id="form" style="display: none;">
-							<div class="form-group">
-								<label for="amdReportOption">처리유형</label> <select class="repor"
-									id="repor" name="repor">
-									<option value="701" selected>미처리</option>
-									<option value="702">기각</option>
-									<option value="703">승인</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="message-text" class="col-form-label">처리사유</label>
-								<textarea class="state" id="state" name="state"></textarea>
-							</div>
-						</form>
+
+					<form id="form" style="display: none;">
+						<div class="form-group">
+							<label for="amdReportOption">처리유형</label> <select class="repor"
+								id="repor" name="repor">
+								<option value="701" selected>미처리</option>
+								<option value="702">기각</option>
+								<option value="703">승인</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label">처리사유</label>
+							<textarea class="state" id="state" name="state"></textarea>
+						</div>
+					</form>
 					<div class="modal-footer">
 						<button type="button" id="admReportUpdate" name="admReportUpdate"
 							class="btn btn-primary">확 인</button>
@@ -175,25 +192,26 @@
 		</div>
 	</div>
 	<!--end Modal 창 -->
-	<script>
+	<script>		
 	
-	
-		//검색 함수
-		$(function() {
-			$("#myInput").on(
-					"keyup",
-					function() {
-						var value = $(this).val().toLowerCase();
-
-						$("#myTable tr").filter(
-								function() {
-									$(this).toggle(
-											$(this).text().toLowerCase()
-													.indexOf(value) > -1)
-								});
-					});
-		});// end 검색함수
+	// form 태그 리셋 버튼
+	$('.btn-icon-text').on('click',function(e){
+		$('#admDateForm')[0].reset();
 		
+	}) // form 태그 리셋 버튼 end
+	
+	$('.btn-icon-text').on('click',function(e){
+		alert('검색하시겠습니까?');
+		console.log($('.code').val())
+	/* 	var str = $('#admDateForm').serialize();
+		console.log(str); */
+		 if($('.code').val() === '' && $('#fromDate').val() === '' && $('#toDate').val() === '' && $('#key').val() === '' &&  $('#data').val() === '' && str.pageNum === 1 ){
+			alert("검색값이 없습니다.");
+			return false;
+		} 
+	});
+	
+	
 		// ========================================================== 리스트 만드는 함수 ==================================================================== 테이블
 		
 		//======================enter 키===================
@@ -203,82 +221,66 @@
 			} else {
 				return false;
 			}
-		}//====================end enter 키================
+		}//====================end enter 키================cReport viewMemberList
 		
-		let viewReviewList = function(result) {
+		let viewMemberList = function(result) {
 			$("#myTable").empty();
 			console.log(result);
 
-			$
-					.each(
-							result,
-							function(i) {
-								if (result[i].repor === 701) {
-									$("#myTable")
-											.append(
-													"<tr><td>"
-															+ result[i].reporter
-															+ "</td><td>"
-															+ result[i].reported
-															+ "</td><td>"
-															+ result[i].w_date
-															+ "</td><td class='card-text'>"
-															+ result[i].content
-															+ "</td><td>"
-															+ result[i].f_content
-															+ "</td><td>"
-															+ "<button id='reportModal' type='button' class='btn btn-danger btn-icon-text' onclick='show("
-															+ result[i].rep_no
-															+ ")' value="
-															+ result[i].rep_no
-															+ " data-toggle='modal'  data-target='#exampleModal"
-															+ result[i].rep_no
-															+ "'>"
-															+ "미처리</td></button></tr>");
-								} else if (result[i].repor === 702) {
-
-									$("#myTable")
-											.append(
-													"<tr><td>"
-															+ result[i].reporter
-															+ "</td><td>"
-															+ result[i].reported
-															+ "</td><td>"
-															+ result[i].w_date
-															+ "</td><td class='card-text'>"
-															+ result[i].content
-															+ "</td><td>"
-															+ result[i].f_content
-															+ "</td>"
-															+ "<td><button  type='button' onclick='show("
-															+ result[i].rep_no
-															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'> "
-															+ "기각처리</td></button></tr>");
-								} else {
-
-									$("#myTable")
-											.append(
-													"<tr><td>"
-															+ result[i].reporter
-															+ "</td><td>"
-															+ result[i].reported
-															+ "</td><td>"
-															+ result[i].w_date
-															+ "</td><td class='card-text'>"
-															+ result[i].content
-															+ "</td><td>"
-															+ result[i].f_content
-															+ "</td>"
-															+ "<td><button  type='button' class='btn btn-success' onclick='show("
-															+ result[i].rep_no
-															+ ")'  data-toggle='modal' data-target='#exampleModal'>"
-															+ "승인처리</td></button></tr>");
-								}
-								;
-							});
-		}
-		//===================================================================end 리스트 만드는 함수 : viewReviewList============================================ 끝!
-		
+			$.each(result,function(i) {
+				console.log(result[i].state);
+				if(result[i].p_role == 2) {
+					
+				
+						$("#myTable").append(
+														"<tr><td><a onclick='show()'>"														
+														+ result[i].name
+														+ "</a></td><td>"
+														+ result[i].p_id
+														+ "</td><td>"
+														+ "<div class='progress'>"
+														+ "<div class='progress-bar bg-success' role='progressbar' style='width:"
+														+ result[i].c_report
+														+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
+														+ "</div></div>"
+														+ "</td><td>"
+														+ result[i].startdate
+														+ "</td><td>"
+														+ result[i].f_content
+														+"</td><td>"
+														+ result[i].content
+														+"</td><td>"
+														+ result[i].state
+														+"</td><td>"
+														+ (result[i].p_role == 2 ? '제재 대상' : '제재 중')
+														+ "</td></tr>" );
+				}else{
+					$("#myTableTwo").append(
+							"<tr><td><a onclick='show()'>"														
+							+ result[i].name
+							+ "</a></td><td>"
+							+ result[i].p_id
+							+ "</td><td>"
+							+ "<div class='progress'>"
+							+ "<div class='progress-bar bg-success' role='progressbar' style='width:"
+							+ result[i].c_report
+							+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
+							+ "</div></div>"
+							+ "</td><td>"
+							+ result[i].startdate
+							+ "</td><td>"
+							+ result[i].f_content
+							+"</td><td>"
+							+ result[i].content
+							+"</td><td>"
+							+ result[i].state
+							+"</td><td>"
+							+ (result[i].p_role == 2 ? '제재 대상' : '제재 중')
+							+ "</td></tr>" );
+				}
+		}) // end each.
+}//=====================  end리스트 만드는 함수 ====================
+		//===================================================================end 리스트 만드는 함수 : viewMemberList============================================ 끝!
 		
 		// Modal 미처리 신고 : Review
 		function show(st) {
@@ -318,7 +320,6 @@
 									
 									$(".modal-footer").append("<button class='btn btn-link' type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
-									
 								}else {   //미처리 state + repor 가 값이 담겨져 있지 않을 떄
 									$('#form').show();
 									$("form")
@@ -410,15 +411,13 @@
 		//===================리스트 호출 버튼==================
 		$(".codep").on('click', function() {
 			var code = $(this).data('code');
-			var repor = $(this).data('repor');
 			console.log(code);
-			console.log(repor);
 			$('#admDateForm')[0].code.value = code
-			$('#admDateForm')[0].repor.value = repor
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
 			
-		});//===================end 리스트 호출 버튼================== 끝!
+		}); 
+		//===================end 리스트 호출 버튼================== 끝!
 		
 		
 		//===========리스트 ajax 호출==========
@@ -426,10 +425,9 @@
 			var str = $('#admDateForm').serialize();
 			console.log(str);
 			$.ajax({
-				url : 'admQlistCode',
+				url : 'admPmemReporList',
 				method : 'post',
 				data :str,
-				//contentType : 'application/json',
 				success : function(result) {
 					if(result.list == ''){
 						alert('데이터가 없습니다!!');
@@ -437,7 +435,7 @@
 						$("#pagination").empty();
 						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
 					}else {
-						viewReviewList(result.list);
+						viewMemberList(result.list);
 						viewPage(result.page);
 						
 					};

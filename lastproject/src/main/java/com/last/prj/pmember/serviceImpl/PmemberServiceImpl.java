@@ -169,5 +169,14 @@ public class PmemberServiceImpl implements PmemberService{
 	@Override
 	public List<ReviewVO> ServiceReviewRecent() {
 		return map.ServiceReviewRecent();
+
+	public int admPmemReportCount() {
+		return map.admPmemReportCount();
+	}
+
+	@Override
+	public List<PmemberVO> admPmemReporList(PmemberVO vo) {
+		return map.admPmemReporList(vo);
+
 	}
 }
