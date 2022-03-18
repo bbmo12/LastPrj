@@ -242,7 +242,8 @@
 							</ul>
 						</aside>
 					</div>
-					</c:if>				
+					</c:if>	
+					<c:if test="${pId ne null }">
 					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${pInfo.picture}"
@@ -285,6 +286,7 @@
 							</ul>
 						</aside>
 					</div>
+					</c:if>
 				</div>
 				<div class="col-lg-9 posts-list"
 					style="position: relative; width: 100%; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
@@ -292,7 +294,7 @@
 						<div>
 							<div style="margin-bottom: 20px;">
 								<c:if test="${mId ne null }">
-									<h2 style="text-align: center;">
+									<h2 style="padding-left: 35px;">
 										<span>
 											<img style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
 												class="profile" src="resources/upload/${pInfo.picture }"
