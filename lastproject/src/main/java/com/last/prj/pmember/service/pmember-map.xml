@@ -275,6 +275,29 @@
 		ON F.F_PART = RE.F_PART
 		ORDER BY RE.REV_NO DESC
 	</select>
+	
+	<select id="ServiceReviewRecent" resultMap="servieceReview"
+		resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT *
+		FROM
+		(SELECT RE.REV_NO,
+		RE.CONTENT,
+		RE.RATING,
+		M.M_ID,
+		M.PICTURE,
+		F.PICTURE AS PHOTO
+		FROM REVIEW RE LEFT JOIN RESERVATION R
+		ON RE.R_NO = R.R_NO
+		LEFT JOIN PET P
+		ON R.PET_NO = P.PET_NO
+		LEFT JOIN MEMBER M
+		ON P.M_ID = M.M_ID
+		LEFT JOIN F_FILE F
+		ON F.F_PART = RE.F_PART
+		ORDER BY RE.REV_NO DESC
+		)
+<![CDATA[WHERE ROWNUM <= 6]]>
+	</select>
 
 	<select id="bestLikeList"
 		resultType="com.last.prj.pmember.service.PmemberVO">

@@ -45,5 +45,5 @@ public interface PmemberService {
 	public PmemberVO PmemberOne(String p_id);
 	
 	
-
+	public List<ReviewVO> ServiceReviewRecent();
 }

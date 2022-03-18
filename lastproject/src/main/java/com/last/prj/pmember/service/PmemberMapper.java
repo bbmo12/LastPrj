@@ -35,12 +35,17 @@ public interface PmemberMapper {
 	public int admPlistCodeCount(PmemberVO vo);
 	public List<PmemberVO> admPlistChart(PmemberVO vo);
 	public List<PmemberVO> admgoChart();
+
+	
+	public List<ReviewVO> ServiceReviewRecent();
+
 	public int admPmemReportCount();
 	public List<PmemberVO> admPmemReporList(PmemberVO vo);
 		
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);
 	
+
 
 }
 

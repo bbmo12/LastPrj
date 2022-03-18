@@ -117,7 +117,7 @@ form {
 			style="margin-bottom: 50px; margin-top: 50px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
 			<h2 style="margin-top: 50px;">새로운 질문 작성하기</h2>
 			<form name="qForm" id="qForm" action="qForm" method="post"
-				onsubmit="tagInput();">
+				onsubmit="return tagInput();">
 
 				<%-- <input type="hidden" id="writer" name="writer" value="writer"
 					value="${mId }"> --%>
@@ -273,10 +273,9 @@ form {
 		function tagInput() {
 			
 			var content = $('#content').val();
-			if(content == null){
+			if(content == ""){
 				alert('내용을 입력하세요');
 				return false;
-				
 			}
 			
 			var tValue = document
