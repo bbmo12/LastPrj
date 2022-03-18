@@ -34,31 +34,30 @@ public class PetController {
 	ServletContext sc;
 	
 	
-	@RequestMapping("/petmemberForm")
-	public String petmemberForm(Model model,Principal principal) {
-		String m_id = "0";
-		if(principal != null) {
-			
-			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			
-			if(userDetails.getRole() == "일반회원") {
-				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
-				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
-				m_id =userDetails.getMember().getM_id();
-				
-			}else if(userDetails.getRole() == "파트너회원") {
-				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
-				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
-			}else if(userDetails.getRole() =="관리자") {
-				
-			}
-			
-		}		
-		model.addAttribute("pets", petDAO.petmemberList(m_id));
-		model.addAttribute("member",memDao.memberSearch(m_id));
-		System.out.println(petDAO.petmemberList(m_id));
-		return "mypage/mpetprofile";
-	}
+	/*
+	 * @RequestMapping("/petmemberForm") public String petmemberForm(Model
+	 * model,Principal principal) { String m_id = "0"; if(principal != null) {
+	 * 
+	 * CustomUser userDetails = (CustomUser)
+	 * SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	 * 
+	 * if(userDetails.getRole() == "일반회원") { System.out.println("====유저디테일 mid : " +
+	 * userDetails.getMember().getM_id()); System.out.println("====유저디테일 mname : " +
+	 * userDetails.getMember().getName()); m_id =userDetails.getMember().getM_id();
+	 * 
+	 * }else if(userDetails.getRole() == "파트너회원") {
+	 * System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+	 * System.out.println("====유저디테일 pname : " +
+	 * userDetails.getPmember().getName()); }else if(userDetails.getRole() =="관리자")
+	 * {
+	 * 
+	 * }
+	 * 
+	 * } model.addAttribute("pets", petDAO.petmemberList(m_id));
+	 * model.addAttribute("member",memDao.memberSearch(m_id));
+	 * System.out.println(petDAO.petmemberList(m_id)); return "mypage/mpetprofile";
+	 * }
+	 */
 	
 	@RequestMapping("/petDetail") //펫 상세페이지
 	public String petDetail(@RequestParam("pet_no") int pet_no, Model model, Principal principal) {
