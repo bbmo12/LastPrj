@@ -468,13 +468,6 @@ $('#exampleModal').on('hidden.bs.modal', function(e) {
          
          
 })
-
-
-
- 
  </script>
-
-
-
 </body>
 </html>
