@@ -11,11 +11,11 @@
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
 <style>
-	body {
-		background-image: url("${pageContext.request.contextPath}/resources/upload/jjan.gif");
+	body{
+	
+		background-image: url("${pageContext.request.contextPath}/resources/upload/back2.png");
 		background-size: cover;
 		background-repeat: no-repeat;
-		background-color: #fff;
 	}
 
 	.options {

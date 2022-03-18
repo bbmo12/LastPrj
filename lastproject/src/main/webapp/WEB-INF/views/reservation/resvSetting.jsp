@@ -338,12 +338,6 @@ calendar.on('beforeDeleteSchedule', scheduleData => {
 	});
 
  });
-
-
-
  </script>
-
-
-
 </body>
 </html>

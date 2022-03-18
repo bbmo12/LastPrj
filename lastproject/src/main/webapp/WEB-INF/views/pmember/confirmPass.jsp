@@ -12,20 +12,20 @@
 	}
 	#password{
 		height: 70px;
-    	width: 500px;
+    	width: 250px;
     	padding: 0px;
     	font-size: 24px;
     	margin-left: -3px;
 	}
 	#confirm{
-		width: 500px;
+		width: 110px;
 		height: 60px;
-		margin: 15px 0 0 150px;
+		margin: 15px 0 0 200px;
 		font-size: 30px;
 	}
 	
 	#logreg-forms{
-		width: 800px;
+		width: 500px;
 		height: 350px;
     	background: #fff;
   		box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
@@ -110,11 +110,11 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list" style="margin-top: 15em;">
-					<div class="col-lg-12 col-md-12 blog_details">
+					<div class="col-lg-12 col-md-12 blog_details" style="margin-left: 10em;">
 						<div id="logreg-forms">
 							<div class="form-group">
 							  <div class="head">비밀번호 확인</div>        
-								<div class="input-group-prepend" style="margin:40px 0 0 8em;">
+								<div class="input-group-prepend" style="margin:55px 0 0 6em;">
 									<span class="input-group-text bg-white px-4 border-md border-right-0"
 										style="height: 70px;"> 
 										<i class="fa fa-lock text-muted"></i>
@@ -150,7 +150,7 @@
 					if (data == 1) {
 						location.href = 'pmemberUpdateForm'
 					} else {
-						Swal.fire('비밀번호를 다시 확인해주세요.');
+						Swal.fire('비밀번호를<br>다시 확인해주세요.');
 					}
 				},
 				error : function() {
