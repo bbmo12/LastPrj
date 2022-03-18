@@ -65,7 +65,6 @@ public interface MemService {
 
 	public List<MemVO> admMlistCode(MemVO vo); 
 
-	public int adMmemCount();
 
 	List<MemVO> admMemChart();
 
