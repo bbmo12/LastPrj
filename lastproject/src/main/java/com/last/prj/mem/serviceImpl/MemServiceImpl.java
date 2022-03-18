@@ -123,6 +123,21 @@ public class MemServiceImpl implements MemService {
 		return map.adMmemCount();
 	}
 
+	@Override
+	public List<MemVO> admMemChart() {
+		return map.admMemChart();
+	}
+
+	@Override
+	public List<MemVO> admMemReporCode(MemVO vo) {
+		return map.admMemReporCode(vo);
+	}
+
+	@Override
+	public int admMemReportCount() {
+		return map.admMemReportCount();
+	}
+
 
 
 }

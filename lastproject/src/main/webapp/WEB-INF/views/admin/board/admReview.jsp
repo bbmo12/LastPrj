@@ -40,22 +40,33 @@
 </style>
 </head>
 <body>
-	<div class="card">
+	<<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">후기 페이지</h4>
+			<h4 class="card-title">QnA 페이지</h4>
 			<div class="btn-group bg-white p-3" role="group"
 				aria-label="Basic example">
 				<button type="button"
 					class="btn btn-link text-dark py-0 border-right"
-					onclick="location.href = 'admService' ">
-					<code>Service page</code>
+					onclick="location.href = 'admQna' ">
+					<code>QnA 페이지</code>
 				</button>
 				<button type="button"
 					class="btn btn-link text-dark py-0 border-right"
-					onclick="location.href = 'admQna' ">
-					<code>QnA page</code>
+					onclick="location.href = 'admReview' ">
+					<code>후기 페이지</code>
+				</button>
+				<button type="button"
+					class="btn btn-link text-dark py-0 border-right"
+					onclick="location.href = 'admMemRepor' ">
+					<code>일반회원 페이지</code>
+				</button>
+				<button type="button"
+					class="btn btn-link text-dark py-0 border-right"
+					onclick="location.href = 'admPmemRepor' ">
+					<code>파트너회원 페이지</code>
 				</button>
 			</div>
+
 			<div>
 				<form id="admDateForm">
 					<input type="hidden" name="code"><input type="hidden"

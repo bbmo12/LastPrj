@@ -56,6 +56,7 @@ public class PmemberVO {
 	private String key;
 	private String tt;
 	private String oo;
-	
+	private String content;
+	private String state;
 
 }

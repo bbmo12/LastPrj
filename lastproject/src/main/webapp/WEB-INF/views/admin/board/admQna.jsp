@@ -38,26 +38,36 @@
 	margin-right: auto;
 	margin-left: auto;
 }
-button {
+/* button {
 	width: 90px !important;
-}
+} */
 </style>
 </head>
 <body>
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">자유게시판 페이지</h4>
+			<h4 class="card-title">QnA 페이지</h4>
 			<div class="btn-group bg-white p-3" role="group"
 				aria-label="Basic example">
 				<button type="button"
 					class="btn btn-link text-dark py-0 border-right"
-					onclick="location.href = 'admService' ">
-					<code>Service page</code>
+					onclick="location.href = 'admQna' ">
+					<code>QnA 페이지</code>
 				</button>
 				<button type="button"
 					class="btn btn-link text-dark py-0 border-right"
 					onclick="location.href = 'admReview' ">
-					<code>Reivew page</code>
+					<code>후기 페이지</code>
+				</button>
+				<button type="button"
+					class="btn btn-link text-dark py-0 border-right"
+					onclick="location.href = 'admMemRepor' ">
+					<code>일반회원 페이지</code>
+				</button>
+				<button type="button"
+					class="btn btn-link text-dark py-0 border-right"
+					onclick="location.href = 'admPmemRepor' ">
+					<code>파트너회원 페이지</code>
 				</button>
 			</div>
 
@@ -68,12 +78,13 @@ button {
 						name="repor"> <input type="hidden" name="pageNum"
 						value="1"> FROM : <input type="text" id="fromDate"
 						name="fromDate">&nbsp;&nbsp; TO : <input type="text"
-						id="toDate" name="toDate"> <select id="key" name="key">
+						id="toDate" name="toDate"> &nbsp;&nbsp;<select id="key" name="key">
 						<option value="" selected="selected">전 체</option>
 						<option value="reporter" >신고자</option>
 						<option value="reported" >신고당한사람</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="submit" onclick="pagingList();">검 색</button>
+					<input type="reset">
 					<!-- <button type="button" id="btnSearch">검 색</button> -->
 				</form>
 			</div>
@@ -97,10 +108,10 @@ button {
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					data-code="" data-repor="703">승인처리</button>
 			</div>
-			<div>
+			<!-- <div>
 				<input class="form-control" id="myInput" type="text"
 					placeholder="Search.."> <br>
-			</div>
+			</div> -->
 			<table class="table table-striped">
 				<thead>
 					<tr>
