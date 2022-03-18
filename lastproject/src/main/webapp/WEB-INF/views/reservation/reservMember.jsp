@@ -48,12 +48,20 @@
     
     </div>
 
-    <div id="calendar" style ="width: 40%; display: inline-block;"></div>
+    <div id="calendar" style ="width: 35%; display: inline-block;"></div>
     <div style="width: 20px; height: 600px; display: inline-block;" ></div>
   
-  <div id="tableDiv" style ="width: 40%; height : 600px; display: inline-block;">  
-	<table class="table" >
+  <div id="tableDiv" style ="width: 45%; height : 600px; display: inline-block;">  
+	<table class="table" style="width : 95%;" >
+		<thead>
+             <tr>
+                <th>예약가능일자</th>
+                <th>예약시간</th>
+                <th>예약가능여부</th>
+             </tr>
+          </thead>
 	</table>
+	
 </div>
 	
 					<!-- Modal -->
@@ -76,45 +84,6 @@
 				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
 				 <span> 예약내용(증상)   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
 				 <input type="hidden" id = "AutoCode" >
-				 
-	 	   		 <%-- <select class="animalType" >
-					 <option value="" disabled selected>품종선택</option>
-					 <c:forEach items="${petCode }" var="pet">
-					 	<c:if test="${pet.code eq 501  }">
-					 		<option id="dog" value = "401" >개</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 502 }">
-					 		<option id="cat" value = "401" >고양이</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 503 }">
-					 		<option id="bird" value = "401" >조류</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 504 }">
-					 		<option id="reptile" value = "401" >파충류</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 505 }">
-					 		<option id="fish" value = "401" >어류</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 506 }">
-					 		<option id="rabit" value = "401" >토끼</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 507 }">
-					 		<option id="pig" value = "401" >돼지</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 508 }">
-					 		<option id="hamster" value = "401" >햄스터</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 509 }">
-					 		<option id="meerkat" value = "401" >미어캣</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 510 }">
-					 		<option id="fox" value = "401" >여우</option>
-					 	</c:if>
-					 	<c:if test="${pet.code eq 511 }">
-					 		<option id="spider" value = "401" >거미</option>
-					 	</c:if>
-					 </c:forEach>
-		   		 </select> --%>
 		   		 
 		   		 <select class="animalNo" onchange="NoSelection(event)">
 		   		 	<option value="" disabled selected  >펫 번호(이름)</option>
@@ -218,7 +187,7 @@ $(document).ready(function(){
 		});
 	}
 	
-	//예약설정조회
+	//예약조회
 	function revList(){
 		p_id = "${pmember.p_id}";
 		console.log(p_id);
@@ -277,7 +246,8 @@ $(document).ready(function(){
 		
 		var title = event.schedule.title;
 		if ( title=='예약불가'){
-			$(".table").empty();
+			$(".table tbody").empty();
+			$("#reservModal").empty();
 		}else{
 			var id = event.schedule.id;
 			console.log(id);
@@ -286,13 +256,13 @@ $(document).ready(function(){
 				method : 'POST',
 				data : {"id" :id},
 				success : function(res){
-					p_id = res[0].p_id;
-					console.log(p_id);
+					p_id = res.schedule.p_id;
+					console.log("dddddddddddddddd",res.timeList);
 					$(".table").empty();
 					var i=0;
-					var $thead,$tbody,tdval;
-					var len = res[0].c_end.replaceAll('-','')-res[0].c_start.replaceAll('-','')+1;
-					var split = res[0].c_start.split('-');
+					var $tbody,tdval;
+					var len = res.schedule.c_end.replaceAll('-','')-res.schedule.c_start.replaceAll('-','')+1;
+					var split = res.schedule.c_start.split('-');
 	
 					var sp2 = split[2]
 					var ab = String(parseInt(split[2]));
@@ -307,52 +277,37 @@ $(document).ready(function(){
 			                  console.log(ex.toString().length);
 			                  tdval = split[0]+'-'+split[1]+'-';
 			               }
-			               $thead = `
-			                  <thead>
-			                     <tr>
-			                        <th>예약가능일자</th>
-			                        <th>예약시간</th>
-			                        <th>예약가능여부</th>
-			                     </tr>
-			                  </thead>`;
+			              
 			               $tbody =` 
 			                  <tbody>
 			                        <tr>
 			                           <td class="tdvalCheck">`+tdval+ex+`</td>
-											<td>
-												<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-													<option value="">예약시간</option>
-													<option value="09시">09:00~10:00</option>
-													<option value="10시">10:00~11:00</option>
-													<option value="11시">11:00~12:00</option>
-													<option value="14시">14:00~15:00</option>
-													<option value="15시">15:00~16:00</option>
-													<option value="16시">16:00~17:00</option>
-													<option value="17시">17:00~18:00</option>
-												</select>
-											</td>
-										 <td></td>
+										<td>
+											<input type="radio" name="selectTime" value="09시">09:00~10:00
+											<input type="radio" name="selectTime" value="10시">10:00~11:00
+											<input type="radio" name="selectTime" value="11시">11:00~12:00
+											<input type="radio" name="selectTime" value="14시">14:00~15:00
+											<input type="radio" name="selectTime" value="15시">15:00~16:00
+											<input type="radio" name="selectTime" value="16시">16:00~17:00
+											<input type="radio" name="selectTime" value="17시">17:00~18:00
+										</td>
+									
 									</tr>
+									
 							</tbody> `;
-							console.log(split[0]+'-'+parseInt(split[1])+"-"+ex);
-							console.log(nowDate);
 							if(nowDate == split[0]+'-'+parseInt(split[1])+"-"+ex){
-								console.log("되나?");
 								if(parseInt(nowTime) <= 9){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-																<option value="">예약시간</option>
-																<option value="10시">10:00~11:00</option>
-																<option value="11시">11:00~12:00</option>
-																<option value="14시">14:00~15:00</option>
-																<option value="15시">15:00~16:00</option>
-																<option value="16시">16:00~17:00</option>
-																<option value="17시">17:00~18:00</option>
-															</select>
+															<input type="radio" name="selectTime" value="10시">10:00~11:00
+															<input type="radio" name="selectTime" value="11시">11:00~12:00
+															<input type="radio" name="selectTime" value="14시">14:00~15:00
+															<input type="radio" name="selectTime" value="15시">15:00~16:00
+															<input type="radio" name="selectTime" value="16시">16:00~17:00
+															<input type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
 													 <td></td>
 												</tr>
@@ -363,14 +318,11 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-																<option value="">예약시간</option>
-																<option value="11시">11:00~12:00</option>
-																<option value="14시">14:00~15:00</option>
-																<option value="15시">15:00~16:00</option>
-																<option value="16시">16:00~17:00</option>
-																<option value="17시">17:00~18:00</option>
-															</select>
+																<input type="radio" name="selectTime" value="11시">11:00~12:00
+																<input type="radio" name="selectTime" value="14시">14:00~15:00
+																<input type="radio" name="selectTime" value="15시">15:00~16:00
+																<input type="radio" name="selectTime" value="16시">16:00~17:00
+																<input type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
 													 <td></td>
 												</tr>
@@ -381,13 +333,10 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-																<option value="">예약시간</option>
-																<option value="14시">14:00~15:00</option>
-																<option value="15시">15:00~16:00</option>
-																<option value="16시">16:00~17:00</option>
-																<option value="17시">17:00~18:00</option>
-															</select>
+																<input type="radio" name="selectTime" value="14시">14:00~15:00
+																<input type="radio" name="selectTime" value="15시">15:00~16:00
+																<input type="radio" name="selectTime" value="16시">16:00~17:00
+																<input type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
 													 <td></td>
 												</tr>
@@ -398,12 +347,9 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-																<option value="">예약시간</option>
-																<option value="15시">15:00~16:00</option>
-																<option value="16시">16:00~17:00</option>
-																<option value="17시">17:00~18:00</option>
-															</select>
+																<input type="radio" name="selectTime"  value="15시">15:00~16:00
+																<input type="radio" name="selectTime"  value="16시">16:00~17:00
+																<input type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
 													 <td></td>
 												</tr>
@@ -414,11 +360,8 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-																<option value="">예약시간</option>
-																<option value="16시">16:00~17:00</option>
-																<option value="17시">17:00~18:00</option>
-															</select>
+																<input type="radio" name="selectTime"  value="16시">16:00~17:00
+																<input type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
 													 <td></td>
 												</tr>
@@ -429,10 +372,7 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
-																<option value="">예약시간</option>
-																<option value="17시">17:00~18:00</option>
-															</select>
+															<input type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
 													 <td></td>
 												</tr>
@@ -440,9 +380,12 @@ $(document).ready(function(){
 								}
 							}
 						$(".table").append($tbody);
-						
-									}
-					$(".table").append($thead);
+						}
+						$("#tableDiv").append(`<button id="reservModal" type="button" class="btn btn-secondary"
+							  	data-toggle="modal" data-target="#exampleModal">예약</button>`);
+						for(var i=0; i<res.timeList.length;i++){
+							$('.tdvalCheck:contains("'+res.timeList[i].reserv_date+'")').parent().find("[value='"+res.timeList[i].reserv_time+"']").attr('disabled',true)
+						}
 				}//ajax success 부분
 			})
 		}
@@ -481,8 +424,6 @@ $(document).ready(function(){
 
 //옵션값 설정 후 예약가능/불가 출력
 function changeSelection(event){
-	console.log($(event.target).val());
-	//var reserv_date = $(".selectTime").parent().prev().text();
 	var reserv_time = $(event.target).val();
 	var tdvalue = $(event.target).parent().prev().text();
 	var p_id = "${pmember.p_id}";
@@ -501,7 +442,7 @@ function changeSelection(event){
 			}else{
 				$(".selectTime").parent().next().text('');
 				$(event.target).parent().next().append(`<button id="reservModal" type="button" class="btn btn-secondary"
-														  data-toggle="modal" data-target="#exampleModal">예약가능</button>`);
+					  	data-toggle="modal" data-target="#exampleModal">예약</button>`);
 			}
 		}
 	})
@@ -517,29 +458,6 @@ function NoSelection(event){
 		success : function(res){
 			$("#AutoCode").val(res);
 			console.log($("#AutoCode").val());
-			/* if(res == 501){
-				$("#dog").prop("selected", true);
-			}else if (res == 502){
-				$("#cat").prop("selected", true);
-			}else if (res == 503){
-				$("#bird").prop("selected", true);
-			}else if (res== 504){
-				$("#reptile").prop("selected", true);
-			}else if (res == 505){
-				$("#fish").prop("selected", true);
-			}else if (res == 506){
-				$("#rabit").prop("selected", true);
-			}else if (res == 507){
-				$("#pig").prop("selected", true);
-			}else if (res == 508){
-				$("#hamster").prop("selected", true);
-			}else if (res == 509){
-				$("#meerkat").prop("selected", true);
-			}else if (res == 510){
-				$("#fox").prop("selected", true);
-			}else if (res == 511){
-				$("#spider").prop("selected", true);
-			} */
 		}
 	})
 }

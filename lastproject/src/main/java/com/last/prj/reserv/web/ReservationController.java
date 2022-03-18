@@ -92,9 +92,9 @@ public class ReservationController {
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
 				cri.setM_id(m_id);
 				cri.setAmount(10);
-
-				if(mapper.reservPage(cri)!=0) {
-				PagingVO paging = new PagingVO(cri, mapper.reservPage(cri));
+				int d =mapper.reservPage(cri);
+				if( d !=0 ) {
+					PagingVO paging = new PagingVO(cri, d);
 					model.addAttribute("page", paging);// 페이징 수
 				}
 				model.addAttribute("member",memDao.memberSearch(m_id));
@@ -266,13 +266,17 @@ public class ReservationController {
 		  payDao.payInsert(po);
 		  return "ok";
 	  }
-	  //예약된 날짜/시간 체크
-	  @PostMapping("/reservcount")
-	  @ResponseBody
-	  public ReservCountVO reservCountSelect(ReservCountVO vo) {
-		  System.out.println("====================================예약 체크" + reservCountDao.reservCountSelect(vo));
-		  return reservCountDao.reservCountSelect(vo);
-	  }
+
+		/*
+		 * //예약된 날짜/시간 체크
+		 * 
+		 * @PostMapping("/reservcount")
+		 * 
+		 * @ResponseBody public ReservCountVO reservCountSelect(ReservCountVO vo) {
+		 * System.out.println("====================================예약 체크" +
+		 * reservCountDao.reservCountSelect(vo)); return
+		 * reservCountDao.reservCountSelect(vo); }
+		 */
 	  //예약등록
 	  @PostMapping("/reservinsert")
 	  @ResponseBody
