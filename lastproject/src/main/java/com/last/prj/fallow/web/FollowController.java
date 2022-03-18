@@ -37,7 +37,7 @@ public class FollowController {
 	}
 	@RequestMapping("insertFollow")
 	@ResponseBody
-	public int insertFollow(FollowVO follow, Principal principal, Model model) {
+	public int insertFollow(FollowVO follow, Principal principal) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -53,8 +53,7 @@ public class FollowController {
 				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
 			}else if(userDetails.getRole() =="관리자") {
 				
-			}
-			
+			}		
 		}	
 		follow.setM_id(m_id);
 		int followCheck = followDao.followCheck(follow);

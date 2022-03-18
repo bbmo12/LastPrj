@@ -7,13 +7,36 @@
 <title>Insert title here</title>
 </head>
 <style>
-#my_section {
-	padding: 50px;
-}
+	#my_section {
+		padding: 50px;
+	}
+	#confirm{
+		width: 110px;
+		height: 60px;
+		margin: 15px 0 0 200px;
+		font-size: 30px;
+	}
+	
+	#logreg-forms{
+		width: 500px;
+		height: 350px;
+    	background: #fff;
+  		box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
+	}
+	.head {
+  		color: #fff;
+  		font-size: 34px;
+  		font-weight: bold;
+  		height: 100px;
+  		padding: 30px 0;
+  		text-align: center;
+  		text-transform: uppercase;
+  		background: #0062ff;
+	}
+	.forms-sample{
+		margin: 65px 0 0 120px;	
+	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 <body>
 	<section class="banner-area other-page">
 		<div class="container">
@@ -28,21 +51,18 @@
 	</section>
 
 	<section id="my_section">
-		<div class="container">
+		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="blog_right_sidebar">
-
+					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;" >
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
 								src="resources/upload/${member.picture}" style="width: 210px"
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
-
 							<div class="br"></div>
 						</aside>
-
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
@@ -83,16 +103,22 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list">
-					<div class="col-lg-12 col-md-12 blog_details">
-						<form class="forms-sample" action="mdelete" method="post">
-							<h4>회원탈퇴하시겠습니까?</h4>
-							<button type="submit" class="btn btn-primary mr-2" >네</button>
-							<button type="button" class="btn btn-primary mr-2" onclick="location.href='home'">아니요</button>
-						</form>
+				<div class="col-lg-9 posts-list" style="margin-top: 15em;">
+					<div class="col-lg-12 col-md-12 blog_details" style="margin-left: 10em;">
+						<div id="logreg-forms">
+							<div class="form-group">
+							  <div class="head">탈퇴하시겠습니까?</div>
+							  	<form class="forms-sample" action="mdelete" method="post">						
+								<button type="submit" id="confirm" class="btn btn-primary m-2">네</button>
+								<button type="button" id="confirm" class="btn btn-primary m-2"
+								onclick="location.href='home'">아니요</button>
+								</form>        
+							</div>
+						</div>
 					</div>
-				</div>
+				</div>				
 			</div>
+		</div>
 	</section>
 </body>
 </html>

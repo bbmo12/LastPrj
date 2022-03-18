@@ -197,6 +197,52 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
+					<c:if test="${mId ne null }">
+						<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
+						<aside class="single_sidebar_widget author_widget">
+							<img class="author_img rounded-circle" src="resources/upload/${mInfo.picture}"
+								style="width: 210px" alt="">
+							<div class="br"></div>
+							<h4> ${mInfo.name }</h4>
+							<div class="br"></div>
+						</aside>
+						<aside class="single_sidebar_widget post_category_widget">
+							<h4 class="widget_title">My menu</h4>
+							<ul class="list cat-list">
+								<li><a href="memberMypage" class="d-flex justify-content-between">
+										<p>내 프로필</p>
+									</a></li>
+								<li><a href="petmemberForm" class="d-flex justify-content-between">
+										<p>반려동물 프로필</p>
+									</a></li>
+								<li><a href="protocol" class="d-flex justify-content-between">
+										<p>반려동물 진료기록</p>
+									</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between">
+										<p>예약 내역</p>
+									</a></li>
+								<li><a href="myPay" class="d-flex justify-content-between">
+										<p>결제 내역</p>
+									</a></li>
+								<li><a href="mycounsel" class="d-flex justify-content-between">
+										<p>상담 내역</p>
+									</a></li>
+								<li><a href="myreport" class="d-flex justify-content-between">
+										<p>신고 내역</p>
+									</a></li>
+								<li><a href="myfallow" class="d-flex justify-content-between">
+										<p>팔로우</p>
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between">
+										<p>로그아웃</p>
+									</a></li>
+								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+										<p>회원탈퇴</p>
+									</a></li>
+							</ul>
+						</aside>
+					</div>
+					</c:if>				
 					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${pInfo.picture}"

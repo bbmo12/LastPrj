@@ -93,9 +93,9 @@ public class MemController {
 	}
 
 	// 일반회원 회원탈퇴
-	// 이부
+	// 이부 
 	@RequestMapping("mdelete")
-	public String mdelete( Principal principal, MemVO member,HttpSession session) {
+	public String mdelete( Principal principal, MemVO member,HttpSession session,RedirectAttributes redirectAttr) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -114,8 +114,7 @@ public class MemController {
 			}
 		}
 		memDao.memberDelete(m_id); //업데이트 이름, end date 빼고 다 널 시킴
-		
-
+		redirectAttr.addFlashAttribute("delete","정보를다시확인해주세요.");
 		session.invalidate();
 		return "redirect:home";
 	}
