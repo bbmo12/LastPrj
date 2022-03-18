@@ -140,10 +140,14 @@
 
 $(document).ready(function(){
 	
-	let today = new Date();
+	var today = new Date();
 	var day = today.toLocaleDateString().substr(5,6).split('.');
 	var month = parseInt(day[0]); 
 	var year = today.toLocaleDateString().substr(0,4);
+	var hours = today.getHours();
+	
+	var nowDate = year+"-"+month+"-"+parseInt(day[1]);
+	var nowTime = hours+"시"
 	
 	$("#renderRange").text(year+'년'+month+'월');
 	revList();
@@ -259,6 +263,18 @@ $(document).ready(function(){
 
 	//일정 클릭 후 해당예약일자 테이블 표출
 	calendar.on('clickSchedule', function(event) {
+		var today = new Date();
+		var day = today.toLocaleDateString().substr(5,6).split('.');
+		var month = parseInt(day[0]); 
+		var year = today.toLocaleDateString().substr(0,4);
+		var hours = today.getHours();
+		var nowDate = year+"-"+month+"-"+parseInt(day[1]);
+		var nowTime = hours+"시"
+		
+		console.log("현재시간"+nowTime);
+		
+		
+		
 		var title = event.schedule.title;
 		if ( title=='예약불가'){
 			$(".table").empty();
@@ -303,21 +319,128 @@ $(document).ready(function(){
 			                  <tbody>
 			                        <tr>
 			                           <td class="tdvalCheck">`+tdval+ex+`</td>
-											<td><select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+											<td>
+												<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
 													<option value="">예약시간</option>
 													<option value="09시">09:00~10:00</option>
 													<option value="10시">10:00~11:00</option>
 													<option value="11시">11:00~12:00</option>
-													<option value="2시">14:00~15:00</option>
-													<option value="3시">15:00~16:00</option>
-													<option value="4시">16:00~17:00</option>
-													<option value="5시">17:00~18:00</option>
+													<option value="14시">14:00~15:00</option>
+													<option value="15시">15:00~16:00</option>
+													<option value="16시">16:00~17:00</option>
+													<option value="17시">17:00~18:00</option>
 												</select>
 											</td>
 										 <td></td>
 									</tr>
 							</tbody> `;
+							console.log(split[0]+'-'+parseInt(split[1])+"-"+ex);
+							console.log(nowDate);
+							if(nowDate == split[0]+'-'+parseInt(split[1])+"-"+ex){
+								console.log("되나?");
+								if(parseInt(nowTime) <= 9){
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           <td class="tdvalCheck">`+tdval+ex+`</td>
+														<td>
+															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+																<option value="">예약시간</option>
+																<option value="10시">10:00~11:00</option>
+																<option value="11시">11:00~12:00</option>
+																<option value="14시">14:00~15:00</option>
+																<option value="15시">15:00~16:00</option>
+																<option value="16시">16:00~17:00</option>
+																<option value="17시">17:00~18:00</option>
+															</select>
+														</td>
+													 <td></td>
+												</tr>
+										</tbody> `;
+								}else if (parseInt(nowTime) <= 10){
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           <td class="tdvalCheck">`+tdval+ex+`</td>
+														<td>
+															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+																<option value="">예약시간</option>
+																<option value="11시">11:00~12:00</option>
+																<option value="14시">14:00~15:00</option>
+																<option value="15시">15:00~16:00</option>
+																<option value="16시">16:00~17:00</option>
+																<option value="17시">17:00~18:00</option>
+															</select>
+														</td>
+													 <td></td>
+												</tr>
+										</tbody> `;
+								}else if (parseInt(nowTime) <= 12){
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           <td class="tdvalCheck">`+tdval+ex+`</td>
+														<td>
+															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+																<option value="">예약시간</option>
+																<option value="14시">14:00~15:00</option>
+																<option value="15시">15:00~16:00</option>
+																<option value="16시">16:00~17:00</option>
+																<option value="17시">17:00~18:00</option>
+															</select>
+														</td>
+													 <td></td>
+												</tr>
+										</tbody> `;
+								}else if (parseInt(nowTime) <= 14){
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           <td class="tdvalCheck">`+tdval+ex+`</td>
+														<td>
+															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+																<option value="">예약시간</option>
+																<option value="15시">15:00~16:00</option>
+																<option value="16시">16:00~17:00</option>
+																<option value="17시">17:00~18:00</option>
+															</select>
+														</td>
+													 <td></td>
+												</tr>
+										</tbody> `;
+								}else if (parseInt(nowTime) <= 15){
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           <td class="tdvalCheck">`+tdval+ex+`</td>
+														<td>
+															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+																<option value="">예약시간</option>
+																<option value="16시">16:00~17:00</option>
+																<option value="17시">17:00~18:00</option>
+															</select>
+														</td>
+													 <td></td>
+												</tr>
+										</tbody> `;
+								}else {
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           <td class="tdvalCheck">`+tdval+ex+`</td>
+														<td>
+															<select class="selectTime" name="예약시간" onchange="changeSelection(event)">
+																<option value="">예약시간</option>
+																<option value="17시">17:00~18:00</option>
+															</select>
+														</td>
+													 <td></td>
+												</tr>
+										</tbody> `;
+								}
+							}
 						$(".table").append($tbody);
+						
 									}
 					$(".table").append($thead);
 				}//ajax success 부분
@@ -373,7 +496,7 @@ function changeSelection(event){
 				"p_id" : p_id},
 		success : function(res){
 			//console.log(event.target);
-			if(res.reserv_date != null && res.reserv_time != null){
+			if((res.reserv_date != null && res.reserv_time != null)){
 				$(event.target).parent().next().text('예약불가');
 			}else{
 				$(".selectTime").parent().next().text('');
@@ -465,9 +588,8 @@ $("#sendReserv").on('click',function(){
 $('#exampleModal').on('hidden.bs.modal', function(e) {
          $(this).find('form')[0].reset();
          $(".current").text("펫번호(이름)");
-         
-         
 })
+
  </script>
 </body>
 </html>
