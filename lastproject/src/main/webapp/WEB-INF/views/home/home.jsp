@@ -123,7 +123,7 @@ h1{
                     <a href="preservationSelect" class="genric-btn info circle arrow">파트너회원예약조회</a>
                     <a href="reservationSetting" class="genric-btn info circle arrow">파트너회원예약설정</a> -->
                     <br>
-                    <a href="reservMember" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a>
+                    <!-- <a href="reservMember" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a> -->
                     
                 </div>
             </div>
@@ -217,7 +217,7 @@ h1{
                                 	<c:when test="${best.code eq 102 }"><p id="best_rcom">펫시터</p></c:when>
                                 	<c:otherwise><p id="best_rcom">미용사</p></c:otherwise>
                                 </c:choose>        
-                                <a href="pmemberDetail?id=${best.p_id}" class="genric-btn info-border circle" style="text-decoration: none;">이 파트너회원에게 예약하기</a>
+                                <a href="pmemberDetail?id=${best.p_id}" class="btn btn-outline-primary btn-rounded btn-fw" style="text-decoration: none;">이 파트너회원에게 예약하기</a>
                             </div>
                         </div>
                        </c:forEach>
@@ -295,7 +295,7 @@ h1{
                 <div class="col-lg-4 col-sm-6">
                     <div class="single-doctor mb-4 mb-sm-0">
                         <div class="content-area" style="margin-bottom:20px;">
-                            <div class="doctor-text text-center">
+                            <div class="doctor-text text-center" style="height:250px">
                             <div id="profile">
                             	<img class="profile_img" src="resources/upload/${review.picture }" onError="this.style.display='none'" alt=''>
                             </div>
@@ -352,8 +352,8 @@ h1{
             <c:forEach items="${qnaRecent }" var="recent">
                 <div class="col-lg-4 col-md-6">
                 <div class="single-news mt-5 mt-md-0">
-	                <div class="card">
-					  <div id="qSection" class="card-body">
+	                
+					  <div id="qSection" class="card-body" style="height:250px; margin-bottom:20px; background-color:white;">
 					    <span style="color:#4C4C4C; font-size:20px;">
 					    <i class="fa-solid fa-q fa-lg" style="color: dodgerblue; margin-right: 20px;"></i>
 					    ${recent.title }</span>
@@ -361,13 +361,14 @@ h1{
 					    <p class="card-text">${recent.content}</p>
 					    <a href="qnaDetail?q_no=${recent.q_no }" class="news-btn">자세히보기 <i class="fa fa-long-arrow-right"></i></a>
 					  </div>
-					</div>
+					
                    </div>
                    </div>
                    </c:forEach>
                    <div style="float: none; margin: 0 auto;">
                    <br>
-                   <a href="qnaMain" class="genric-btn info circle" style="text-decoration: none;">더 많은 질문 보러가기</a>
+                   <a href="qnaMain" class="btn btn-primary btn-rounded btn-fw" style="text-decoration: none;">더 많은 질문 보러가기</a>
+                   <br><br><br><br><br><br><br><br>
                    </div>
             </div>
         </div>

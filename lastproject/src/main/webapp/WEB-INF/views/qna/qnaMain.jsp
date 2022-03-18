@@ -195,7 +195,7 @@
 															</li>
 														</c:if>
 													</ul>
-												</c:forEach>
+												</c:forEach>+
 											</div>
 											<!-- 상세조회 페이지 이동 -->
 											<a class="genric-btn info-border radius" href="qnaDetail?q_no=${list.q_no }"

@@ -34,7 +34,7 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home(Model model, HttpServletRequest request) {
 		model.addAttribute("bestList", pMemberDao.bestLikeList());
-		model.addAttribute("serviceReviewList", pMemberDao.ServiceReviewList());
+		model.addAttribute("serviceReviewList", pMemberDao.ServiceReviewRecent());
 		model.addAttribute("qnaRecent", qnaDAO.qnaRecent());
 		
 		return "home/home";

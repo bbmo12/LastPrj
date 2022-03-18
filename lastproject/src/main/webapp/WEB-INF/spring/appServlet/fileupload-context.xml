@@ -13,4 +13,9 @@
       <constructor-arg value=" C:/Users/admin/git/LastPrj/src/main/webapp/resources/img/"/>
 
    </bean> -->
+   
+   <bean id="uploadPath" class="java.lang.String">
+   		<constructor-arg value="/home/ubuntu/apache-tomcat-9.0.60/webapps/upload"></constructor-arg>
+   		<!-- <constructor-arg value="/home/ubuntu/apache-tomcat-9.0.60/webapps/upload"></constructor-arg> -->
+   </bean>
 </beans>

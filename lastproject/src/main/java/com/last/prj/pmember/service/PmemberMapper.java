@@ -38,7 +38,8 @@ public interface PmemberMapper {
 	public int admPlistCodeCount(PmemberVO vo);
 	public List<PmemberVO> admPlistChart(PmemberVO vo);
 	public List<PmemberVO> admgoChart();
-
+	
+	public List<ReviewVO> ServiceReviewRecent();
 }
 
 
