@@ -395,6 +395,7 @@ h1{
 	if("${delete}" != "" ){
 		Swal.fire('탈퇴되었습니다.');
 	}
+	</script>
 
 </body>
 </html>
