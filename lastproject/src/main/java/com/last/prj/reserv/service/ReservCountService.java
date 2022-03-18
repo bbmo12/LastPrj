@@ -8,7 +8,7 @@ public interface ReservCountService {
 	
 	List<ReservCountVO> reservCountList();
 	
-	ReservCountVO reservCountSelect(ReservCountVO vo);
+	List<ReservCountVO> reservCountSelect(ReservCountVO vo);
 	
 	int reservCountInsert(ReservCountVO no);
 	

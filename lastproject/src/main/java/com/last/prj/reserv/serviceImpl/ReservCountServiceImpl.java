@@ -25,7 +25,7 @@ public class ReservCountServiceImpl implements ReservCountService {
 	}
 
 	@Override
-	public ReservCountVO reservCountSelect(ReservCountVO vo) {
+	public List<ReservCountVO> reservCountSelect(ReservCountVO vo) {
 		return map.reservCountSelect(vo);
 	}
 
