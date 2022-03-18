@@ -90,7 +90,7 @@ public class MemController {
 	}
 
 	// 일반회원 회원탈퇴
-	// 이부 
+
 	@RequestMapping("mdelete")
 	public String mdelete( Principal principal, MemVO member,HttpSession session,RedirectAttributes redirectAttr) {
 		String m_id = "0";

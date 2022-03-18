@@ -36,8 +36,7 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 
 <body>
 <script>
-		//자격증번호 정규식
-		var noJ = /^\d{3}-\d{2}-\d{5}$/;
+		
 		//모든 공백 체크 정규식
 		var empJ = /\s/g;
 		//아이디 정규식
@@ -76,15 +75,6 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 					inval_Arr[1] = true;
 				}
 				
-				
-				// 자격증 정규식
-				if (noJ.test($('#no').val())) {
-					inval_Arr[5] = true;
-				} else {
-					inval_Arr[5] = false;
-					alert('자격증 번호를 확인하세요.');
-					return false;
-				}
 				
 				// 이름 정규식
 				if (nameJ.test($('#name').val())) {
@@ -139,16 +129,7 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 			});
 			
 			
-			//자격증번호 요휴성
-			$("#no").blur(function () {
-				if (noJ.test($(this).val())) {
-					console.log(noJ.test($(this).val()));
-					$("#no_check").text('');
-				} else {
-					$('#no_check').text('111-11-11111 형식으로 입력하세요');
-					$('#no_check').css('color', 'red');
-				}
-			});
+
 			
 			// 휴대전화
 			$('#tel').blur(function () {
