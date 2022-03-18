@@ -33,14 +33,13 @@ public class LikehitController {
 			}
 		}
 		hit.setM_id(m_id);
-		
 		int likeCheck = likehitDao.likeCheck(hit);
 		if(likeCheck == 0) {
 			pMemberDao.updateLike(p_id);
-			likehitDao.insertLike(hit);
+			likehitDao.insertLike(hit);//팔로우
 		} else if(likeCheck == 1) {
 			pMemberDao.updateCancel(p_id);
-			likehitDao.deleteLike(hit);
+			likehitDao.deleteLike(hit);//언팔
 		}
 		return likeCheck;
 	}
