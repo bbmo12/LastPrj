@@ -1,7 +1,9 @@
 package com.last.prj.calendar.web;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -86,9 +88,14 @@ public class CalendarController {
 	//일반회원 예약하기
 	@PostMapping("revSetUpdateSelect")
 	@ResponseBody
-	public List<CalendarVO> revSetUpdateSelect(@RequestParam("id")int id,CalendarVO cal) {
-		System.out.println(CalendarDao.revSetUpdateSelect(id));
-		System.out.println(id);
-		return CalendarDao.revSetUpdateSelect(id);
+	public Map<String,Object> revSetUpdateSelect(@RequestParam("id")int id,ReservCountVO vo) {
+		Map<String,Object> map = new HashMap<>();
+		CalendarVO cal = CalendarDao.revSetUpdateSelect(id);
+		map.put("schedule",cal);
+		vo.setStart_date(cal.getC_start());
+		vo.setEnd_date(cal.getC_end());
+		vo.setP_id(cal.getP_id());
+		map.put("timeList", reservCountDao.reservCountSelect(vo));
+		return map;
 	}
 }

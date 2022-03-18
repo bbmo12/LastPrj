@@ -60,4 +60,7 @@ public interface MemMapper {
 	public List<MemVO> admMemReporCode(MemVO vo);
 	public int admMemReportCount(); 
 
+	public MemVO getmemberinfo(String m_id);//member 정보
+	
+	public String passCheck(String m_id);
 }

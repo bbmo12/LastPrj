@@ -15,8 +15,9 @@ public interface CalendarService {
 	
 	//파트너회원 예약일정 수정
 	int revSetUpdate(CalendarVO cal);
+	
 	//파트너회원 예약일정 단건조회
-	List<CalendarVO> revSetUpdateSelect(int id);
+	CalendarVO revSetUpdateSelect(int id);
 	
 	//파트너회원 예약일정 삭제
 	int revSetDelete(CalendarVO cal);

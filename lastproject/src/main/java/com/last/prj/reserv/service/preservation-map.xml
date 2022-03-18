@@ -21,10 +21,9 @@
 		AND (#{pageNum})*#{amount}
 	</select>
 	<select id="preservPage" resultType="int" parameterType="com.last.prj.reserv.service.PreservationVO">		
-       SELECT COUNT(*) FROM RESERVATION R ,PET P
-       WHERE R.PET_NO = P.PET_NO
-       GROUP BY R.P_ID 
-       HAVING R.P_ID=#{p_id}
+       SELECT COUNT(*) FROM RESERVATION R,SERVICE S, F_CODE 
+			C, F_CODE RC,PET P WHERE R.R_NO = S.R_NO AND C.CODE = P.CODE AND RC.CODE=R.CODE AND R.PET_NO=P.PET_NO 
+			AND R.P_ID = #{p_id}
 	</select>
 	
 </mapper>

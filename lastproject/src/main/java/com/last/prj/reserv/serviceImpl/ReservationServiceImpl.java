@@ -52,12 +52,12 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 
-	public int reservPage(Criteria cri) {
-		return map.reservPage(cri);
+	public int reservPage1(ReservationVO vo) {
+		return map.reservPage1(vo);
 	}
 	@Override
-	public List<ReservationVO> reservationPageList(Criteria cri) {
-		return map.reservationPageList(cri);
+	public List<ReservationVO> reservationPageList1(ReservationVO vo) {
+		return map.reservationPageList1(vo);
 	}
 	@Override
 	public List<ReservationVO> preservationPageList(Criteria cri) {
@@ -87,6 +87,16 @@ public class ReservationServiceImpl implements ReservationService{
 	public List<ReviewVO> readpicture(int r_no) {
 
 		return map.readpicture(r_no);
+	}
+	@Override
+	public int reservPage(Criteria cri) {
+		// TODO Auto-generated method stub
+		return map.reservPage(cri);
+	}
+	@Override
+	public List<ReservationVO> reservationPageList(Criteria cri) {
+		// 
+		return map.reservationPageList(cri);
 	}
 
 
