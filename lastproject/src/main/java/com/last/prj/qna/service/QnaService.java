@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.ui.Model;
 
+import com.last.prj.pmember.service.Criteria;
 import com.last.prj.report.service.ReportVO;
 
 public interface QnaService {

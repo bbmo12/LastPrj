@@ -246,7 +246,7 @@ br.clear {
 									<ul>
 										<li><div class="radioImg">
 												<img class="petSelection" src="resources/qna/가위표.png">
-											</div> <input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
+											</div> <input type="radio" id="pet_no" name="pet_no" value="" checked="checked">&nbsp;
 											<label>없음/비공개</label></li>
 
 										<c:forEach items="${petList }" var="pet">
