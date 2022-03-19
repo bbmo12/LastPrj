@@ -8,7 +8,23 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
+<style>
+	.btn-fw{
+		height: 55px;
+   		padding-top: 15px;
+    	font-size: 20px;
+    	background-color: #0062ff;
+ 		color:#FFF;
+	}
+	
+	.btn-fw:hover {
+		color: #0062ff;
+		background: #fff;
+		border: 1px solid #0062ff;
+	}
 
+
+</style>
 <body>
 	<section class="department-area section-padding4" style="padding: 130px 0 130px;">
 		<div class="container">
@@ -50,7 +66,6 @@
 										<h3>미용사</h3>
 										<h2>${pmember.name }</h2>
 									</c:if>
-									<p style="font-size: 18px;">${pmember.n_content }</p>
 								</div>
 							</div>
 						</c:forEach>
@@ -77,12 +92,7 @@
 				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
 				비대면 상담 / 방문 훈련 예약 <br>우리 아이 성향 맞춤 솔루션을 받아보세요!
 			</h3>
-			<a href="pmemberList?code=101">
-				<div
-					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
-					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">훈련사</p>
-				</div>
-			</a>
+			<a href="pmemberList?code=101"class="btn btn-outline-primary btn-rounded btn-fw">훈련사</a>
 		</div>
 	</div>
 	<div style="display: flex; justify-content: space-between; padding: 50px 400px 0px 550px">
@@ -90,19 +100,12 @@
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				반려동물의<br>건강 관리!
 			</h1>
-			<h3
-				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+			<h3 style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
 				인증 된 수의사<br>안심하고 반려동물을 맡겨보세요!
 			</h3>
-			<a href="pmemberList?code=100">
-				<div
-					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
-					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">수의사</p>
-				</div>
-			</a>
+			<a href="pmemberList?code=100" class="btn btn-outline-primary btn-rounded btn-fw">수의사</a>
 		</div>
-		<img src="resources/upload/dod.png"
-			style="width: 400px; height: 450px; border-radius: 2px;  margin-right: 10em;">
+		<img src="resources/upload/dod.png" style="width: 400px; height: 450px; border-radius: 2px;  margin-right: 10em;">
 	</div>
 	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 50px">
 		<img src="resources/upload/dogg.png" style="width: 400px; height: 450px; border-radius: 2px">
@@ -110,16 +113,10 @@
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				믿고 맡기는<br>전문 펫시터!
 			</h1>
-			<h3
-				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+			<h3 style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
 				언제 어디서든<br>안심하고 펫시터를 불러보세요!
 			</h3>
-			<a href="pmemberList?code=102">
-				<div
-					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
-					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">펫시터</p>
-				</div>
-			</a>
+			<a href="pmemberList?code=102" class="btn btn-outline-primary btn-rounded btn-fw">펫시터</a>
 		</div>
 	</div>
 	<div style="display: flex; justify-content: space-between; padding: 50px 400px 0px 550px">
@@ -127,19 +124,12 @@
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				우리아이<br>전담 그루머
 			</h1>
-			<h3
-				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+			<h3 style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
 				전담 그루머가 운영하는<br>트렌디한 미용 샵 지역별로 찾아보세요!
 			</h3>
-			<a href="pmemberList?code=103">
-				<div
-					style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
-					<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">미용사</p>
-				</div>
-			</a>
+			<a href="pmemberList?code=103"class="btn btn-outline-primary btn-rounded btn-fw">미용사</a>
 		</div>
-		<img src="resources/upload/ddog.png"
-			style="width: 400px; height: 450px; border-radius: 2px; margin-right: 10em;">
+		<img src="resources/upload/ddog.png" style="width: 400px; height: 450px; border-radius: 2px; margin-right: 10em;">
 	</div>
 	<div
 		style="display: flex; align-items: center; flex-direction: column; justify-content: center; height: 500px; background: #FFFFFF">
@@ -153,12 +143,7 @@
 						무료 상담!<br>OPEN Q&amp;A!</h2>
 					<h3 style="font-size: 17px; font-weight: 400; color: #333333; margin-top: 20px; line-height: 27px">
 						궁금한 점이 있거나, 사전 상담이 필요하다면<br>Q&amp;A에 질문 글을 올려보세요!</h3>
-					<a href="qnaMain">
-						<div
-							style="margin-top: 45px; display: flex; justify-content: center; align-items: center; width: 170px; height: 59px; background-color: #38a4ff; border-radius: 38px; cursor: pointer; z-index: 10">
-							<p style="font-size: 18px; font-weight: 600; color: white; margin-top: 15px;">질문하기</p>
-						</div>
-					</a>
+					<a href="qnaMain" class="btn btn-outline-primary btn-rounded btn-fw">질문하기</a>
 				</div>
 			</div>
 		</div>
