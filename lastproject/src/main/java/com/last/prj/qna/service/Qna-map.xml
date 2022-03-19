@@ -55,8 +55,10 @@
 
 	<!-- 총 개시글 수 출력 -->
 	<select id="getTotal" resultType="int">
-		SELECT COUNT(*) AS total FROM qna
-		WHERE p_no = 0
+		SELECT COUNT(*) AS total 
+		FROM qna q LEFT OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE q.p_no = 0
 		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
@@ -78,7 +80,7 @@
 		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
-		ORDER BY w_date DESC) A)
+		ORDER BY q.q_no DESC) A)
 		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>

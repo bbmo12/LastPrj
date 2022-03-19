@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.last.prj.qna.service.Criteria;
 import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaTagVO;
@@ -17,17 +16,6 @@ public class QnaServiceImpl implements QnaService {
 	@Autowired
 	private QnaMapper map;
 
-	@Override
-	public int getTotal(Criteria cri) {
-		// TODO Auto-generated method stub
-		return map.getTotal(cri);
-	}
-	
-	@Override
-	public List<QnaVO> qnaList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return map.qnaList(cri);
-	}
 	
 	@Override
 	public List<QnaVO> qnaBest() {
@@ -119,6 +107,18 @@ public class QnaServiceImpl implements QnaService {
 	public List<QnaVO> qnaRecent() {
 		// TODO Auto-generated method stub
 		return map.qnaRecent();
+	}
+
+	@Override
+	public int getTotal(com.last.prj.pmember.service.Criteria cri) {
+		// TODO Auto-generated method stub
+		return map.getTotal(cri);
+	}
+
+	@Override
+	public List<QnaVO> qnaList(com.last.prj.pmember.service.Criteria cri) {
+		// TODO Auto-generated method stub
+		return map.qnaList(cri);
 	}
 
 

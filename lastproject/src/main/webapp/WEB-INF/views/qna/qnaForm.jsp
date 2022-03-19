@@ -135,7 +135,7 @@ form {
 					<ul class="petSct">
 						<li><div class="radioImg">
 								<img class="petSelection" src="resources/qna/가위표.png">
-							</div> <input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
+							</div> <input type="radio" id="pet_no" name="pet_no" value="" checked="checked">&nbsp;
 							<label>없음/비공개</label></li>
 
 						<c:forEach items="${petList }" var="pet">
@@ -272,9 +272,10 @@ form {
 		/*li 태그를 input 태그로 바꿔 넘기기 용이하게...*/
 		function tagInput() {
 			
-			var content = $('#content').val();
-			if(content == ""){
+			var content = CKEDITOR.instances.content.getData()
+			if(content == "" || content.length == 0){
 				alert('내용을 입력하세요');
+				CKEDITOR.instances.content.focus();
 				return false;
 			}
 			
