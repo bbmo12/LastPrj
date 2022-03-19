@@ -119,7 +119,7 @@
 								<button type="button" id="confirm" class="btn btn-primary"
 									onclick="confirmPass()" style="margin-left: 4em;">탈퇴하기</button>
 								<button type="button" id="confirm" class="btn btn-primary"
-									onclick="location.href='home'">아니요</button>
+									onclick="location.href='memberMypage'">아니요</button>
 							</div>
 						</div>
 					</div>

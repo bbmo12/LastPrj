@@ -2,18 +2,37 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <style>
-#my_section {
-	padding: 50px;
-}
+	#my_section {
+		padding: 50px;
+	}
+
+	#update-button {
+		color: #fff;
+		background: #0062ff;
+		border: 1px solid transparent;
+	}
+
+	#update-button:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#cancel{
+		width: 113px;
+    	height: 42px;
+    	padding: 0 30px;
+    	font-size: .8em;
+    	text-align: center;
+    	font-weight: 500;
+	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+
 <body>
 	<script>
 		//모든 공백 체크 정규식
@@ -63,8 +82,8 @@
 					alert('이름을 확인하세요.');
 					return false;
 				}
-				
-				
+
+
 				// 휴대폰번호 정규식
 				if (phoneJ.test($('#tel').val())) {
 					console.log(phoneJ.test($('#tel').val()));
@@ -74,18 +93,14 @@
 					alert('휴대폰 번호를 확인하세요.');
 					return false;
 				}
-				
-
 				//이메일 정규표현식
-				 if (emailJ.test($('#m_id').val())){
+				if (emailJ.test($('#m_id').val())) {
 					inval_Arr[4] = true;
 				} else {
 					inval_Arr[4] = false;
 					alert('이메일을 확인하세요.');
 					return false;
-				} 
-				
-				
+				}
 				return true;
 			});
 
@@ -120,7 +135,7 @@
 					$('#name_check').css('color', 'red');
 				}
 			});
-			
+
 			//이메일 유효성검사
 			$("#m_id").blur(function () {
 				if (emailJ.test($(this).val())) {
@@ -131,8 +146,8 @@
 					$('#m_id_check').css('color', 'red');
 				}
 			});
-			
-			
+
+
 			// 휴대전화
 			$('#tel').blur(function () {
 				if (phoneJ.test($(this).val())) {
@@ -152,82 +167,71 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<h1>MyPage</h1>
-					<a href="index.html">Home</a> <span>|</span> <a
-						href="blog-details.html">MyPage</a>
+					<a href="home">Home</a> <span>|</span> <a href="memberMypage">MyPage</a>
 				</div>
 			</div>
 		</div>
 	</section>
-
 	<section id="my_section">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
-
 						<aside class="single_sidebar_widget author_widget">
-							
+							<img class="author_img rounded-circle" src="resources/upload/${member.picture}"
+								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
-
 							<div class="br"></div>
 						</aside>
-
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-															<li><a href="memberMypage"
-									class="d-flex justify-content-between">
+								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-								</a></li>
+									</a></li>
 								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
-								</a></li>
+									</a></li>
 								<li><a href="reservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
-								</a></li>
+									</a></li>
 								<li><a href="myPay" class="d-flex justify-content-between">
 										<p>결제 내역</p>
-								</a></li>
+									</a></li>
 								<li><a href="mycounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
-								</a></li>
+									</a></li>
 								<li><a href="myreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
-								</a></li>
+									</a></li>
 								<li><a href="myfallow" class="d-flex justify-content-between">
 										<p>팔로우</p>
-								</a></li>
+									</a></li>
 								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
-								</a></li>
+									</a></li>
 								<li><a href="mdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
-								</a></li>
+									</a></li>
 							</ul>
-
 						</aside>
 					</div>
 				</div>
-
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
 						<div class="col-lg-12">
 							<div class="feature-img">
-								<img class="img-fluid"
-									src="resources/assets/images/blog-details/feature-img1.jpg"
-									alt="">
+								<img class="img-fluid" src="resources/assets/images/blog-details/feature-img1.jpg"alt="">
 							</div>
 						</div>
 						<form action="memberUpdate" enctype="multipart/form-data" method="post">
 							<div class="col-lg-12 col-md-12 blog_details">
 								<div class="form-group">
 									<label for="name">이름</label>
-									<input type="text"  id="name" name="name"
-										value="${member.name}">
-										<div id="name_check"></div>
+									<input type="text" id="name" name="name" value="${member.name}">
+									<div id="name_check"></div>
 								</div>
-
 								<div class="form-group">
 									<label for="email">E-Mail 아이디</label>
 									<input type="email" style="border: none" id="m_id" name="m_id"
@@ -240,43 +244,42 @@
 								</div>
 								<div class="form-group">
 									<label for="password">비밀번호 재확인</label>
-									<input type="password"  id="password1"	name="password1">
+									<input type="password" id="password1" name="password1">
 									<div id="pw1_check"></div>
 								</div>
 								<div class="form-group">
 									<label for="tel">전화번호&nbsp;휴대폰 번호('-'없이 번호만 입력해주세요)</label>
-									<input type="text"  id="tel" name="tel"
-										value="${member.tel}" >
-										<div id="tel_check"></div>
+									<input type="text" id="tel" name="tel" value="${member.tel}">
+									<div id="tel_check"></div>
 								</div>
 								<div class="form-group">
 									<label>프로필 사진</label>
 									<div class="input-group col-xs-12">
-										<input class="file-upload-browse btn btn-primary" type="file"
-											id="file" name="file">
+										<input class="file-upload-browse btn btn-primary" type="file" id="file"
+											name="file">
 									</div>
 								</div>
-								<button type="submit" onclick="location.href='memberUpdateForm'"
+								<button type="submit" onclick="location.href='memberUpdateForm'" id="update-button"
 									class="genric-btn info radius">수정 완료</button>
-
+								<button type="button" id="cancel" class="btn btn-secondary btn-lg" 
+								onclick="location.href='memberMypage'">취소</button>
 							</div>
 						</form>
-
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</section>
 	<script>
 		function addFile() {
 			var input = $('<input>').attr({
-				'name' : 'multiFileList',
-				'type' : 'file'
+				'name': 'multiFileList',
+				'type': 'file'
 			});
 
 			$('#ffile').append(input);
 		}
 	</script>
 </body>
+
 </html>

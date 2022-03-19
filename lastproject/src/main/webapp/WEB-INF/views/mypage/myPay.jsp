@@ -113,7 +113,7 @@
 						<div class="row">
 							<div class="col-md-12" style="margin: 20px 0 0 -6px;">
 								<div class="table-wrap">
-									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
+									<table class="table table-striped" style="margin-top: 25px;">
 										<thead>
 											<tr style="text-align: center;">
 												<th>반려동물</th>
