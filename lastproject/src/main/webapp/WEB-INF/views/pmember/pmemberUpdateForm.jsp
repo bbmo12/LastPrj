@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 <style>
 	#my_section {
@@ -33,6 +34,19 @@
 		border: 1px solid #0062ff;
 		background: #fff;
 	}
+	#price-insert,
+	#time-insert{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	
+	#price-insert:hover,
+	#time-insert:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
 
 	#select-one {
 		margin-top: -20px;
@@ -42,6 +56,7 @@
 		padding: 5px;
 		width: 250px;
 		display: inline-block;
+		border-radius: 20px;
 	}
 
 	.service-info {
@@ -53,7 +68,7 @@
 	}
 
 	#p-info {
-		margin-left: 6em;
+		margin-left: 9em;
 		margin-top: -20px;
 	}
 
@@ -99,6 +114,16 @@
 		background: #fff;
 	}
 	
+	input:focus,
+	textarea:focus{ 
+		border: 3px solid;
+	}
+	
+	#content{
+		height: 45px;
+    	padding: 12px;
+   		width: 275px;
+	}
 </style>
 
 <body>
@@ -118,9 +143,8 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle"
-								src="resources/upload/${pmember.picture}" style="width: 210px"
-								alt="">
+							<img class="author_img rounded-circle" src="resources/upload/${pmember.picture}" 
+							style="width: 210px" onerror="this.src='resources/upload/pet.PNG'">
 							<div class="br"></div>
 							<h4>${pmember.name }</h4>
 							<div class="br"></div>
@@ -159,61 +183,74 @@
 						</aside>
 					</div>
 				</div>
+		
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
 						<form action="pmemberUpdate" enctype="multipart/form-data" id="f" name="updatePage" method="post" onsubmit="return checkForm()">
 							<div class="col-lg-9 col-md-9 blog_details" id="main-form">
 								<div class="form-group">
+									<i class="fas fa-user"></i>
 									<h3 style="font-weight: bolder;">이름</h3>
 									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" required>
 								</div>
 								<div class="form-group">
+									<i class="fas fa-id-card"></i>
 									<h3 style="font-weight: bolder;">아이디</h3>
 									<input type="email" style="border: none" id="p_id" name="p_id"
 										class="form-control" value="${pmember.p_id}" readonly>
 								</div>
 								<div class="form-group">
+									<i class="fa fa-unlock-alt"></i>
 									<h3 style="font-weight: bolder;">비밀번호</h3>
 									<input type="password" id="password" name="password" class="form-control" value=""
 										style="width: 350px;" placeholder="영문자+숫자+특수문자 조합으로 8이상입력">
 								</div>
 								<div class="form-group">
+									<i class="fa fa-unlock-alt"></i>
 									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
 									<input type="password" id="password1" name="password1"class="form-control" value=""
 										style="width: 350px;" required>
 								</div>
-								<div class="form-group">
+								<div class="form-group">	
+									<i class="fa-solid fa-mobile-screen"></i>
 									<h3 style="font-weight: bolder;">전화번호</h3>
 									<input type="tel" id="tel" name="tel" class="form-control" value="${pmember.tel}" placeholder="숫자만 입력하세요." maxlength="13">
 								</div>
 								<div class="form-group">
+									<i class="fa-solid fa-building"></i>
 									<h3 style="font-weight: bolder;">사업장 이름</h3>
 									<input type="text" id="w_name" name="w_name"class="form-control" value="${pmember.w_name}">
 								</div>
 								<div class="form-group">
+									<i class="fa-solid fa-map-location-dot"></i>
 									<h3 style="font-weight: bolder;">사업장 주소</h3>
 									<input type="text" id="w_address" name="w_address"class="form-control" value="${pmember.w_address}"> 
 									<input type="text" id="w_d_address" name="w_d_address" class="form-control"value="${pmember.w_d_address }">								
 									<button class="btn btn-primary mr-2" type="button" onclick="findAddr()" id="member_post" name="member_post">주소찾기</button>								
 								</div>				
 								<div class="form-group" style="margin-top:-15px;">
+									<i class="fa-solid fa-square-phone"></i>
 									<h3 style="font-weight: bolder;">사업장 전화번호</h3>
 									<input type="tel" id="w_tel" name="w_tel" class="form-control" value="${pmember.w_tel}" maxlength="13"
 										placeholder="숫자만 입력하세요.">
 								</div>
 								<div class="form-group">
+									<i class="fa-solid fa-street-view"></i>
 									<h3 style="font-weight: bolder;">자기소개</h3>
 									<textarea id="p_info" name="p_info" cols="100" rows="3">${pmember.p_info}</textarea>
 								</div>
 								<div class="form-group">
+									<i class="fa-solid fa-star"></i>
 									<h3 style="font-weight: bolder;">경력</h3>
 									<input type="text" id="career" name="career" class="form-control" value="${pmember.career}">
 								</div>
 								<div class="form-group">
+									<i class="fa-solid fa-award"></i>
 									<h3 style="font-weight: bolder;">전문분야</h3>
 									<input type="text" id="speciality" name="speciality"class="form-control" value="${pmember.speciality}">
 								</div>
 								<div class="form-group">
+									<i class="fa-solid fa-calendar-days"></i>
 									<h3 style="font-weight: bolder;">운영시간</h3>
 								</div>
 								<div id="select-one">
@@ -261,7 +298,7 @@
 												</select> 
 												<input type="text" id="n_content" name="timeVOList[${status.index}].n_content" class="form-control" value="${timeList.n_content}">
 												<div style="display: inline-block; width:62px;">
-													<button class="genric-btn info-border circle" type="button"onclick="deleteTime('${timeList.o_no}')">X</button>
+													<button class="genric-btn info-border circle" id="time-insert" type="button"onclick="deleteTime('${timeList.o_no}')">X</button>
 												</div><br> 
 												<input type="hidden"name="timeVOList[${status.index}].p_id" value="${pmember.p_id}">
 											</div>
@@ -269,6 +306,7 @@
 									</div>
 								</div>
 								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>
+								<i class="fa-solid fa-clipboard-list"></i>
 								<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3><br>
 								<div id="plus-div">  
 									<div id="add-div">
@@ -285,10 +323,10 @@
 												</div>
 												<div style="display: inline-grid;">
 													<label>서비스안내</label>
-													<textarea class="form-control" id="content" name="priceVOList[${status.index }].content" rows="2"cols="50" style="height: 45px;">${price.content }</textarea>
+													<textarea class="form-control" id="content" name="priceVOList[${status.index }].content" rows="2"cols="50">${price.content }</textarea>
 												</div>
 												<div class="delete-button">
-													<button class="genric-btn info-border circle" type="button" onclick="deleteService('${price.price_no}')">X</button>
+													<button class="genric-btn info-border circle" id="price-insert" type="button" onclick="deleteService('${price.price_no}')">X</button>
 												</div><br> 
 												<input type="hidden"name="priceVOList[${status.index }].p_id" value="${pmember.p_id}">
 											</div>
@@ -298,17 +336,20 @@
 								<button type="button" class="genric-btn info radius"id="addService" onclick="plusService()">서비스추가</button>
 								<p id="p-info">서비스를 더 추가 하시러면 서비스 추가 버튼을 눌러주세요.</p>
 								<div class="form-group">
+									<i class="far fa-id-badge"></i>
 									<h3 style="font-weight: bolder;">프로필 사진</h3>
 									<div class="input-group col-xs-12">
 										<input class="file-upload-browse btn btn-primary" type="file"id="file" name="file">
 									</div>
 								</div>
+									<i class="fa fa-file-image-o"></i>
 									<h3 style="font-weight: bolder;">자격증</h3>
 								<div class="form-group">
 									<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList1" multiple="multiple">
 									<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
 									<div id="ffile1"></div>
 								</div>
+									<i class="fa-solid fa-images"></i>
 									<h3 style="font-weight: bolder;">활동사진</h3>
 								<div class="form-group">
 									<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList2" multiple="multiple">
