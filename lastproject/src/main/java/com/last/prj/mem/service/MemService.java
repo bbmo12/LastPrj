@@ -78,5 +78,8 @@ public interface MemService {
 	
 	public String passCheck(String m_id);
 	
-
+	int countCounsel(String m_id);
+	int countReview1(String m_id);
+	int countReview2(String m_id);
+	int countReservation(String m_id);	
 }

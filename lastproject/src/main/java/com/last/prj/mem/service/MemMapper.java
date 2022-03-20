@@ -63,4 +63,9 @@ public interface MemMapper {
 	public MemVO getmemberinfo(String m_id);//member 정보
 	
 	public String passCheck(String m_id);
+	
+	int countCounsel(String m_id);
+	int countReview1(String m_id);
+	int countReview2(String m_id);
+	int countReservation(String m_id);	
 }
