@@ -15,4 +15,5 @@ public class NoticeVO {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date w_date;
 	private int r_check;
+	private String name;
 }

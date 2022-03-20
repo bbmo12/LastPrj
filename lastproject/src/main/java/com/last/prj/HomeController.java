@@ -5,7 +5,6 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -135,6 +134,7 @@ public class HomeController {
 		}
 		model.addAttribute("pets", petDAO.petmemberList(m_id));
 		model.addAttribute("member", memDao.memberSearch(m_id));
+		model.addAttribute("notices", noticeDao.noticeSelectList2(m_id));
 		
 		return "mypage/mainMypage";
 	}

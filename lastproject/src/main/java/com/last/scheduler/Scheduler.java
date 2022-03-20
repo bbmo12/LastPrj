@@ -1,9 +1,16 @@
 package com.last.scheduler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,7 +19,8 @@ import org.springframework.stereotype.Component;
 
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.PmemService;
-
+import com.last.prj.notice.service.NoticeService;
+import com.last.prj.notice.service.NoticeVO;
 import com.last.prj.calendar.service.CalendarMapper;
 
 @Component
@@ -26,6 +34,9 @@ public class Scheduler {
 	private MemService memDao;
 	@Autowired
 	private PmemService pmemDao;
+	
+	@Autowired
+	private NoticeService noticeDao;
 	
 	// 초 분 시 일 월 요일 순서
 	@Scheduled(cron = "0 0 12 * * *" )
@@ -73,5 +84,24 @@ public class Scheduler {
 				System.out.println("현재날짜 : "+now);
 				
 		}
-	
+		
+		//@Scheduled(cron = "0 0/1 * * * ?" )
+		
+		@Scheduled(cron = "0 0 0 * * ?" )
+		public void noticeCheck() throws ParseException {
+			
+			List<String> no = noticeDao.noticeCheck();
+			//List<Map<String, Object>> listMap = no; 
+			//String num = no.get(0);
+			//System.out.println("no=====" + no);
+			//System.out.println("num=====" + num);
+			//System.out.println(no.size());
+			
+			for(int i = 0; i < no.size(); i++) {
+				noticeDao.noticeDelete(no.get(i));
+				System.out.println(i+"번째");
+			}
+			
+			System.out.println("삭제완료!!");
+		}
 }

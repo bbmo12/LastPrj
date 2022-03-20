@@ -32,20 +32,30 @@
 	}
 	
 	.card-header{
-		background: white;
-		font-size: 1.0rem;
-	 font-family: 'NanumBarunGothic';
-	 font-style: normal;
+	background: white;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
  	font-weight: 400;
+ 	color: black;
 	}
 	
 	.card-footer{
 	background: white;
-		font-size: 1.0rem;
-	 font-family: 'NanumBarunGothic';
-	 font-style: normal;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
  	font-weight: 400;
 	}
+	
+	#notice_footer{
+	text-align: center;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 400;
+	}
+ 	
 	.card_notice{
 	font-size: 0.8rem;
 	 font-family: 'NanumBarunGothic';
@@ -63,51 +73,44 @@
 	margin: 0 auto;
 }
 
+.pet_img{
+	object-fit: cover;
+	object-position:top;
+	border-radius:50%;
+	width: 100px !important;
+	height: 100px !important;
+	float: none;
+	margin-bottom: 5px;
+}
+
 .widget_title{
 	background: #0062ff !important;
 }
 
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 400;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
-}
-
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 700;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.ttf') format('truetype')
-}
-
-@font-face {
- font-family: 'NanumBarunGothic';
- font-style: normal;
- font-weight: 300;
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
- src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.ttf') format('truetype');
-}
-
-.nanumbarungothic * {
- font-family: 'NanumBarunGothic', sans-serif;
-}
-
 #cardTitle{
-	 font-size: 1.25rem;
-	 font-family: 'NanumBarunGothic';
-	 font-style: normal;
+	font-size: 1.25rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
  	font-weight: 700;
 }
 
 #myinfo{
 	font-size: 0.8rem;
-	 font-family: 'NanumBarunGothic';
-	 font-style: normal;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
  	font-weight: 300;
 }
+
+#pet_img2{
+	display: inline-block;
+	text-align: center;
+	margin-right: 15px;
+	font-size: 0.8rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 400;
+}
+
 </style>
 
 <body>
@@ -130,8 +133,7 @@
 				<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img"
-								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"
-								alt="">
+								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
 							<br><br>
 							<h4>${member.name }님</h4>
 							<div class="br"></div>
@@ -183,8 +185,13 @@
 								<div class="col-lg-4 col-md-4">
 								<br><br>
 									<div class="card" style="border-left: 0.25rem solid #0062ff !important;">
-										<div class="card-body text-center" style="padding:25px">
-										<h5 id="cardTitle">내 예약 수</h5>
+										<div class="card-body text-center" style="padding:20px">
+										<div style="margin-right: 20px;">
+										<span class="fa-stack fa-lg" style="margin-right: 10px;"> 
+										<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i> 
+										<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
+										</span><span id="cardTitle">내 예약 횟수</span>
+										</div>
 										<h3>3</h3>
 										</div>
 									</div>
@@ -192,8 +199,13 @@
 								<div class="col-lg-4 col-md-4">
 								<br><br>
 									<div class="card" style="border-left: 0.25rem solid #36b9cc !important;">
-										<div class="card-body text-center" style="padding:25px">
-										<h5 id="cardTitle">내 상담 수</h5>
+										<div class="card-body text-center" style="padding:20px;">
+										<div style="margin-right: 20px;">
+										<span class="fa-stack fa-lg" style="margin-right: 10px;"> 
+										<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i> 
+										<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
+										</span><span id="cardTitle">내 상담 횟수</span>
+										</div>
 										<h3>3</h3>
 										</div>
 									</div>
@@ -201,8 +213,13 @@
 								<div class="col-lg-4 col-md-4">
 								<br><br>
 									<div class="card" style="border-left: 0.25rem solid #f6c23e !important;">
-										<div class="card-body text-center" style="padding:25px">
-										<h5 id="cardTitle">내 리뷰 수</h5>
+										<div class="card-body text-center" style="padding:20px">
+										<div style="margin-right: 20px;">
+										<span class="fa-stack fa-lg" style="margin-right: 10px;"> 
+										<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i> 
+										<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
+										</span><span id="cardTitle">내 리뷰 횟수</span>
+										</div>
 										<h3>3</h3>
 										</div>
 									</div>
@@ -212,29 +229,25 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header">
-									<i class="mdi mdi-bell-outline"></i> 내 알림 목록
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내 알림 목록
 								</div>
 								<div class="card-body card_notice" style="padding:15px">
-									<div id="notice">
-										<span class="fa-stack fa-lg"> 
-										<i class="fa fa-circle fa-stack-2x" style="color: #44ce42"></i> 
-										<i class="fa fa-calendar-day fa-stack-1x fa-inverse"></i>
-										</span> 
-										<span>김선생</span>&nbsp;&nbsp;&nbsp;<span class="text-gray ellipsis mb-0">예약이 완료되었습니다.</span>
-										&nbsp;&nbsp;&nbsp;<span>2022-03-01</span>
-										<hr>
-									</div>
-									<div id="notice">
-										<span class="fa-stack fa-lg"> 
-										<i class="fa fa-circle fa-stack-2x" style="color: #44ce42"></i> 
-										<i class="fa fa-calendar-day fa-stack-1x fa-inverse"></i>
-										</span> 
-										<span>김선생</span>&nbsp;&nbsp;&nbsp;<span class="text-gray ellipsis mb-0">예약이 완료되었습니다.</span>
-										&nbsp;&nbsp;&nbsp;<span>2022-03-01</span>
-										<hr>
-									</div>
+									<c:if test="${ fn:length(notices) == 0  }">
+											<div align="center">조회된 결과가 없습니다.</div>
+									</c:if>
+									<c:forEach items="${notices}" var="noti">
+										<div id="notice">
+											<span class="fa-stack fa-lg"> 
+											<i class="fa fa-circle fa-stack-2x" style="color: #44ce42"></i> 
+											<i class="fa fa-calendar-day fa-stack-1x fa-inverse"></i>
+											</span> 
+											<span>${noti.name}</span>&nbsp;&nbsp;&nbsp;<span class="text-gray ellipsis mb-0">${noti.content}</span>
+											&nbsp;&nbsp;&nbsp;<span>${noti.w_date}</span>
+											<hr>
+										</div>
+									</c:forEach>
 								</div>
-								<div class="card-footer">
+								<div id="notice_footer">
 								<p>수신일로부터 7일이 지난 알림은 자동 삭제됩니다.</p>
 								</div>
 							</div>
@@ -243,10 +256,20 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header">
-									<i class="mdi mdi-bell-outline"></i> 내 반려동물
+									<i class="fa-solid fa-paw"></i> 내 반려동물
 								</div>
 								<div class="card-body" style="padding:15px">
-								
+									<c:if test="${ fn:length(pets) == 0  }">
+										<div align="center">조회된 결과가 없습니다.</div>
+									</c:if>
+									<c:forEach items="${pets }" var="pet">
+										<div id="pet_img2">
+											<img class="pet_img" src="resources/upload/${pet.picture }"
+												onerror="this.src='resources/upload/cat.jpg'" alt="">
+												<br>
+											<a href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
+										</div>
+									</c:forEach>
 								</div>
 								<div class="card-footer">
 								<span style="color:#0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물 추가</span>
