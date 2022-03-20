@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.board.service.BoardService;
+import com.last.prj.board.service.BoardVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.pet.service.PetService;
@@ -40,6 +42,64 @@ public class AdminController {
 	@Autowired
 	private MemService memDao;
 
+	@Autowired
+	private BoardService boardDao;
+	
+	
+	//adminPage
+	@RequestMapping("/adminPage")
+	public String adminPage(Model model) {
+		List<BoardVO> list = boardDao.boardSelectList();
+		System.out.println(list);
+		model.addAttribute("boardList", list);
+		//펫 마리수
+		//회원 수
+		//일반 회원 수
+		
+		return "adm/adminPage";
+	}
+	
+	
+	@RequestMapping("/adminBoardPage")
+	public String boardPage(Model model) {
+		List<BoardVO> list = boardDao.boardSelectList();
+		System.out.println(list);
+		model.addAttribute("boardList", list);
+		return "adm/adminBoardPage";
+
+	}
+	
+	
+	@RequestMapping("/adminMemberPage")
+	public String adminMemberPage() {
+		return "adm/adminMemberPage";
+	}
+	
+	
+	@RequestMapping("/adminPmemberPage")
+	public String adminPmemberPage() {
+		return "adm/adminPmemberPage";
+	}
+	
+	
+	
+	@RequestMapping("/adminReportPage")
+	public String adminReportPage() {
+		return "adm/adminReportPage";
+	}
+	
+	
+	@RequestMapping("/adminChartPage")
+	public String adminChartPage() {
+		return "adm/adminChartPage";
+	}
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/goChart")
 	@ResponseBody
 	public List<PmemberVO> goChart() {
@@ -75,7 +135,7 @@ public class AdminController {
 	@ResponseBody
 	public HashMap<String, Object> admMlistCode(MemVO vo, Criteria cri) {
 		System.out.println("VO가 뭔데 대체" + vo);
-		int total = memDao.adMmemCount();
+		int total = memDao.adMmemCount(vo);
 		System.out.println("total은~" + total);
 		PagingVO page = new PagingVO(cri, total);
 		page.setAmount(9);

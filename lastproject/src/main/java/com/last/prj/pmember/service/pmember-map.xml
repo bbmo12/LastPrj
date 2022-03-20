@@ -219,14 +219,14 @@
 		SELECT B.*
 		FROM ( SELECT A.* , ROWNUM RN
 		FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS
-		F_CONTENT, P.TEL AS TEL, P.PICTURE
+		F_CONTENT, P.TEL AS TEL, P.PICTURE, P.ENDDATE
 		FROM P_MEMBER P, F_CODE F
 		WHERE F.CODE = P.CODE
-		<if test="code != null ">
+		<if test="code != null and code != '104'">
 			AND p.code = #{code}
 		</if>
-		<if test="key == 'all'"> AND UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%' AND
-			UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="code != null and code == '104'"> AND P.CODE = 9999</if>
+		<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>
@@ -240,11 +240,11 @@
 		SELECT COUNT(*)
 		FROM P_MEMBER P
 		<where>
-			<if test="code != null ">
+			<if test="code != null and code != '104'">
 				AND P.CODE = #{code}
 			</if>
-			<if test="key == 'all'"> AND UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%' AND
-				UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%' </if>
+			<if test="code != null and code == '104'">AND P.CODE = 9999</if>
+			<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 			<if
 				test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 				AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}

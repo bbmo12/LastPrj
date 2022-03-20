@@ -54,7 +54,7 @@ public interface MemMapper {
 	int memdelete();
 	
 	public List<MemVO> admMlistCode(MemVO vo);
-	public int adMmemCount(); 
+	public int adMmemCount(MemVO vo); 
 	List<MemVO> admMemChart();
 	
 	public List<MemVO> admMemReporCode(MemVO vo);
