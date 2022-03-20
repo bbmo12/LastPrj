@@ -277,4 +277,31 @@
 	<select id="getmemberinfo" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
 		SELECT * FROM MEMBER WHERE M_ID = #{m_id}
 	</select>
+	
+	<select id="countCounsel" resultType="int">
+		select count(*) from counsel where m_id = #{m_id}
+	</select>
+	
+	<select id="countReview1" resultType="int">
+		select count(*) from review w
+		join counsel c
+		on w.c_no = c.c_no
+		where c.m_id = #{m_id}
+	</select>
+	
+	<select id="countReview2" resultType="int">
+		select count(*) from review w
+		join reservation r
+		on w.r_no = r.r_no
+		join pet p
+		on r.pet_no = p.pet_no
+		where p.m_id = #{m_id}
+	</select>
+	
+	<select id="countReservation" resultType="int">
+		select count(*) from reservation r
+		join pet p
+		on r.pet_no = p.pet_no
+		where p.m_id = #{m_id}
+	</select>
 </mapper>

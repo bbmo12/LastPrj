@@ -11,9 +11,10 @@
 </head>
 <style>
 
-.single_sidebar_widget .post_category_widget {
+.no_deco {
 	text-decoration: none !important;
-	font-size : 2rem !important;
+	font-size : 0.8rem !important;
+	color: black;
 }
 	#my_section {
 		padding: 50px;
@@ -80,7 +81,7 @@
 	width: 100px !important;
 	height: 100px !important;
 	float: none;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .widget_title{
@@ -104,11 +105,23 @@
 #pet_img2{
 	display: inline-block;
 	text-align: center;
-	margin-right: 15px;
+	margin-right: 20px;
 	font-size: 0.8rem;
 	font-family: 'NanumBarunGothic';
 	font-style: normal;
  	font-weight: 400;
+}
+
+#Mainname{
+	font-size: 1.5rem !important;
+	font-family: 'NanumBarunGothic'!important;
+	font-style: normal !important;
+ 	font-weight: 700 !important;
+ 	color:gray;
+}
+
+.blog_right_sidebar{
+	background-color: white;
 }
 
 </style>
@@ -135,10 +148,10 @@
 							<img class="partner_img"
 								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
 							<br><br>
-							<h4>${member.name }님</h4>
+							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-							<i class="fa-solid fa-pen"></i>&nbsp;내 정보 수정하기
+							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
 					</div>
@@ -147,31 +160,31 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list nanumbarungothic">
-								<li><a href="memberMypage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
+								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
+								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
 									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between">
+								<li><a href="myPay" class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
 									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
+								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
 									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
+								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
 									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+									</a></li>
+								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
 									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
+								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
 									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
 									</a></li>
 							</ul>
@@ -192,7 +205,7 @@
 										<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
 										</span><span id="cardTitle">내 예약 횟수</span>
 										</div>
-										<h3>3</h3>
+										<h3>${cntR }</h3>
 										</div>
 									</div>
 								</div>
@@ -206,7 +219,7 @@
 										<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
 										</span><span id="cardTitle">내 상담 횟수</span>
 										</div>
-										<h3>3</h3>
+										<h3>${cntC }</h3>
 										</div>
 									</div>
 								</div>
@@ -220,7 +233,7 @@
 										<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
 										</span><span id="cardTitle">내 리뷰 횟수</span>
 										</div>
-										<h3>3</h3>
+										<h3>${cntW }</h3>
 										</div>
 									</div>
 								</div>
@@ -267,12 +280,12 @@
 											<img class="pet_img" src="resources/upload/${pet.picture }"
 												onerror="this.src='resources/upload/cat.jpg'" alt="">
 												<br>
-											<a href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
+											<a class="no_deco" href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
 										</div>
 									</c:forEach>
 								</div>
 								<div class="card-footer">
-								<span style="color:#0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물 추가</span>
+								<a href="mypetAddForm" class="no_deco"><span style="color:#0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물 추가</span></a>
 								</div>
 							</div>
 						</div>

@@ -150,5 +150,25 @@ public class MemServiceImpl implements MemService {
 
 	}
 
+	@Override
+	public int countCounsel(String m_id) {
+		return map.countCounsel(m_id);
+	}
+
+	@Override
+	public int countReview1(String m_id) {
+		return map.countReview1(m_id);
+	}
+
+	@Override
+	public int countReview2(String m_id) {
+		return map.countReview2(m_id);
+	}
+
+	@Override
+	public int countReservation(String m_id) {
+		return map.countReservation(m_id);
+	}
+
 
 }
