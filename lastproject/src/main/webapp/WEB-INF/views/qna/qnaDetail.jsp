@@ -11,7 +11,6 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<style>
-
 		.tagli {
 			margin-right: 5px;
 		}
@@ -138,15 +137,16 @@
 		.modal-content {
 			padding: 50px 30px 30px 30px;
 		}
+
 		#ansBtn,
-		#qna-button{
-			color: #fff; 	
-    		background: #0062ff;
-    		border: 1px solid transparent;	
+		#qna-button {
+			color: #fff;
+			background: #0062ff;
+			border: 1px solid transparent;
 		}
-		
+
 		#ansBtn:hover,
-		#qna-button:hover{
+		#qna-button:hover {
 			color: #0062ff;
 			border: 1px solid #0062ff;
 			background: #fff;
@@ -178,7 +178,6 @@
 			</div>
 		</div>
 	</section>
-
 	<section class="blog_area" style="padding-top: 50px;">
 		<div class="container">
 			<div class="row">
@@ -189,7 +188,8 @@
 							<table>
 								<tr>
 									<td rowspan="2">
-										<i class="fa-solid fa-q fa-5x" style="color: dodgerblue; margin-right: 20px;"></i>
+										<i class="fa-solid fa-q fa-5x"
+											style="color: dodgerblue; margin-right: 20px;"></i>
 									<td style="width: 470px; font-size: 28px; color: black;">${qnaDetail.title }</td>
 									<!-- 글 정보 -->
 									<td rowspan="2">
@@ -207,19 +207,17 @@
 								</tr>
 							</table>
 						</div>
-
 						<!-- 소셜 공유 -->
 						<div class="social">
 							<table>
 								<tr>
-									<td><a id="btnTwitter" class="link-icon twitter"
-											href="javascript:shareTwitter();">
+									<td><a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">
 											<img src="resources/qna/icon-twitter.png"></a></td>
 									<td><a id="btnFacebook" class="link-icon facebook"
 											href="javascript:shareFacebook();">
 											<img src="resources/qna/icon-facebook.png"></a></td>
 									<td><a id="btnKakao" class="link-icon kakao" href="javascript:shareKakao();">
-										<img src="resources/qna/icon-kakao.png"></a></td>
+											<img src="resources/qna/icon-kakao.png"></a></td>
 								</tr>
 							</table>
 						</div>
@@ -248,8 +246,8 @@
 								<div class="petInfo">
 									<table style="color: black">
 										<tr>
-											<td rowspan="3"
-											><img class="profile" src="resources/upload/${qnaDetail.petvo.picture }"
+											<td rowspan="3">
+												<img class="profile" src="resources/upload/${qnaDetail.petvo.picture }"
 													onError="this.src='resources/qna/대체이미지2.png'"></td>
 											<td style="font-weight: bold;">
 												<c:if test="${qnaDetail.petvo.code ==501 }">
@@ -298,16 +296,15 @@
 							</c:if>
 						</div>
 						<!-- 세션 아이디와 글쓴이 일치할 때 수정, 삭제 가능 -->
-						<div style="margin-left: 30em;">
 						<c:if test="${qnaDetail.title ne '[작성자에 의해 삭제된 게시물입니다.]'}">
 							<c:if test="${mId eq qnaDetail.writer }">
 								<a href="qModiForm?q_no=${qnaDetail.q_no }&m_id=${mId}">
-								<button type="button" id="qUpdateBtn" class="btn btn-primary"style="width: 100px;">수정</button></a>
+									<button type="button" id="qUpdateBtn" class="btn btn-primary"
+										style="width: 100px; margin-left: 40em; margin-right: 10px;">수정</button></a>
 								<button type="button" id="qDelBtn" class="btn btn-secondary"
-									onclick="qDelete(${qnaDetail.q_no });"style="width: 100px;">삭제</button>
+									onclick="qDelete(${qnaDetail.q_no });" style="width: 100px;">삭제</button>
 							</c:if>
 						</c:if>
-						</div>
 						<!-- 질문글 신고 trigger -->
 						<c:if test="${ mId ne null || pId ne null}">
 							<c:if test="${mId ne qnaDetail.writer }">
@@ -341,7 +338,7 @@
 										<c:if test="${pId ne null }">
 											<input type="hidden" id="reporter" name="reporter" value="${pId }">
 										</c:if>
-										<input type="hidden" id="q_no" name="q_no" value="${qnaDetail.q_no }"> 
+										<input type="hidden" id="q_no" name="q_no" value="${qnaDetail.q_no }">
 										<input type="hidden" id="reported" name="reported" value="${qnaDetail.writer }">
 										<select class="reportModal" name="code" id="code">
 											<option value="601">불법 홍보/광고</option>
@@ -351,7 +348,7 @@
 											<option value="605">게시물 도배</option>
 										</select> <br> <br>
 										<h4>신고 내용</h4>
-										<textarea id="content" name="content" rows="4" cols="50" required></textarea>
+										<textarea id="content" name="content" rows="4" cols="45" required></textarea>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -368,7 +365,8 @@
 							<c:if test="${ mId ne null || pId ne null}">
 								<c:if test="${mId ne qnaDetail.writer  }">
 									<button type="button" id="ansBtn" class="btn btn-primary btn-lg" data-toggle="modal"
-										data-target=".bd-example-modal-lg" style="margin:-55px 0 0 496px;">이 질문에 답변하기</button>
+										data-target=".bd-example-modal-lg" style="margin:-55px 0 0 496px;">이 질문에
+										답변하기</button>
 								</c:if>
 							</c:if>
 
@@ -483,13 +481,10 @@
 									</table>
 
 									<!-- 이 전문가와 상담 -->
-									<a href="goToPdetail?p_id=${ans.writer}"><button id="pMemPage" type="button"
-											class="btn btn-primary btn-lg">이
-											전문가와 상담하기</button></a>
+									<a href="goToPdetail?p_id=${ans.writer}">
+										<button id="pMemPage" type="button" class="btn btn-primary btn-lg">이 전문가와 상담하기</button></a>
 								</div>
 							</c:if>
-
-
 							<!-- 답변자와 세션 아이디가 같을 때 수정, 삭제 버튼 -->
 							<div class="updateAns" data-no="${ans.q_no }">
 								<c:if test="${mId eq ans.writer || pId eq ans.writer}">
@@ -504,20 +499,19 @@
 									<div class="modal-dialog modal-lg ansUpdate">
 										<div class="modal-content">
 											<h3>답변글 수정하기</h3>
-											<label for="title">제목</label> 
-											<input type="text" class="form-control" id="title" name="title" 
-											value="${ans.title }" required="required" pattern=".{4,100}">
-
+											<label for="title">제목</label>
+											<input type="text" class="form-control" id="title" name="title"
+												value="${ans.title }" required="required" pattern=".{4,100}">
 											<label for="content">내용</label>
-											<textarea class="form-control" rows="15" id="content" name="content">${ans.content }</textarea>
-
+											<textarea class="form-control" rows="15" id="content"
+												name="content">${ans.content }</textarea>
 											<input type="hidden" id="writer" name="writer" value="${ans.writer }">
 											<input type="hidden" id="q_no" name="q_no" value="${ans.q_no }">
-
 											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-												<button type="button" id="updateAns" name="updateAns"class="btn btn-primary"
-												 onclick="updAns(${ans.q_no })">답변수정</button>
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">취소</button>
+												<button type="button" id="updateAns" name="updateAns"
+													class="btn btn-primary" onclick="updAns(${ans.q_no })">답변수정</button>
 											</div>
 										</div>
 									</div>
@@ -528,21 +522,18 @@
 							<!-- 답변글 신고 모달-->
 							<!-- button trigger modal -->
 							<div class="reportAns" data-no="${ans.q_no }" style="margin:10px 0 0 20px;">
-									<c:if test="${ mId ne null || pId ne null}">
-										<c:if test="${mId ne ans.writer}">
-											<c:if test="${pId ne ans.writer}">
-												<button id="reportModal2" type="button" class="btn btn-secondary btn-sm"
-													data-toggle="modal" data-target="#exampleModal2"
-													onclick="transferQno('${ans.q_no }','${ans.writer }');">
-													<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글
-													신고
-												</button>
-											</c:if>
+								<c:if test="${ mId ne null || pId ne null}">
+									<c:if test="${mId ne ans.writer}">
+										<c:if test="${pId ne ans.writer}">
+											<button id="reportModal2" type="button" class="btn btn-secondary btn-sm"
+												data-toggle="modal" data-target="#exampleModal2"
+												onclick="transferQno('${ans.q_no }','${ans.writer }');">
+												<i class="fa-solid fa-triangle-exclamation"></i>&nbsp;게시글
+												신고
+											</button>
 										</c:if>
 									</c:if>
-							
-
-
+								</c:if>
 								<!-- Modal -->
 								<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
 									aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -558,7 +549,7 @@
 												<input type="hidden" id="qNo"> <input type="hidden" id="Awriter">
 											</div>
 											<div class="modal-body">
-												<h4>신고 유형</h4>
+												<h4 style="text-align: left;margin-bottom: 10px;">신고 유형</h4>
 												<input type="hidden" id="reporter" name="reporter" value="${mId }">
 												<select class="reportModal" name="code" id="code">
 													<option value="601">불법 홍보/광고</option>
@@ -566,13 +557,14 @@
 													<option value="603">욕설/명예훼손</option>
 													<option value="604">사생활 침해</option>
 													<option value="605">게시물 도배</option>
-												</select>
-												<h4>신고 내용</h4>
-												<textarea id="content" name="content" rows="4" cols="50" style="width: 405px;" required></textarea>
+												</select><br> <br>
+												<h4 style="text-align: left;margin-bottom: 10px;">신고 내용</h4>
+												<textarea id="content" name="content" rows="4" cols="45"required></textarea>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-												<button id="sendReport2" name="sendReport" type="button" class="btn btn-primary">신고 접수</button>
+												<button id="sendReport2" name="sendReport" type="button"
+													class="btn btn-primary">신고 접수</button>
 											</div>
 										</div>
 									</div>
@@ -582,37 +574,32 @@
 						</div>
 					</c:forEach>
 				</div>
-							
-			<div id="banner" class="col-lg-4" align="right">
-				<div class="blog_right_sidebar">
-					<!-- 배너 광고 -->
-					<aside class="single_sidebar_widget ads_widget">
-						<img class="img-fluid" src="resources/qna/배너1.png" alt=""> <img
-							class="img-fluid" src="resources/qna/배너4.png" alt=""> <img
-							class="img-fluid" src="resources/qna/배너3.png" alt=""> <img
-							class="img-fluid" src="resources/qna/배너5.png" alt="">
-					</aside>
 
-					<!-- 베스트 qna -->
-					<aside class="single_sidebar_widget post_category_widget">
-						<h4 id="bestQna" class="widget">베스트 Q&A</h4>
-						<c:forEach items="${best }" var="best">
-							<ul style="text-align: left;" class="list cat-list">
-								<li style="display: inline-block;"><a
-									href="qnaDetail?q_no=${best.q_no }"
-									class="d-flex justify-content-between"> <i
-										class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
-								</a></li>
-							</ul>
-						</c:forEach>
+				<div id="banner" class="col-lg-4" align="right">
+					<div class="blog_right_sidebar">
+						<!-- 배너 광고 -->
+						<aside class="single_sidebar_widget ads_widget">
+							<img class="img-fluid" src="resources/qna/배너1.png" alt=""> 
+							<img class="img-fluid" src="resources/qna/배너4.png" alt=""> 
+							<img class="img-fluid" src="resources/qna/배너3.png" alt=""> 
+							<img class="img-fluid" src="resources/qna/배너5.png" alt="">
+						</aside>
 
-					</aside>
+						<!-- 베스트 qna -->
+						<aside class="single_sidebar_widget post_category_widget">
+							<h4 id="bestQna" class="widget">베스트 Q&A</h4>
+							<c:forEach items="${best }" var="best">
+								<ul style="text-align: left;" class="list cat-list">
+									<li style="display: inline-block;">
+										<a href="qnaDetail?q_no=${best.q_no }" class="d-flex justify-content-between"> 
+											<i class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
+										</a></li>
+								</ul>
+							</c:forEach>
+						</aside>
+					</div>
 				</div>
 			</div>
-			</div>
-				
-			
-			
 		</div>
 	</section>
 	<!--================Blog Area =================-->

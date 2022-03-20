@@ -12,7 +12,9 @@
 <style>
 	#w_address::placeholder {
 		color: #fff;
+		
 	}
+
 </style>
 
 <body>
