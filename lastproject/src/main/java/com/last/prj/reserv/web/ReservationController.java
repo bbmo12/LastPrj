@@ -286,6 +286,7 @@ public class ReservationController {
 		  int price = 20000;
 		  String content;
 		  String enddate = "임시";
+		  //예약등록
 		  reservationDao.reservInsert(vo);
 		  
 		  
@@ -312,7 +313,9 @@ public class ReservationController {
 		  so.setPrice(price);
 		  so.setEnddate(enddate);
 		  so.setCode(p_code);
+		  //해당서비스등록
 		  serviceDao.ServiceInsert(so);
+		  //예약체크할 값 등록
 		  reservCountDao.reservCountInsert(co);
 		  return 1;
 	  }
