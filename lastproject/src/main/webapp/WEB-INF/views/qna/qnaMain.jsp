@@ -9,137 +9,126 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 
-<style>
-a:link {
-	color: black;
-	text-decoration: none;
-}
+	<style>
+		a:link,
+		a:visited,
+		a:hover {
+			color: black;
+			text-decoration: none;
+		}
 
-a:visited {
-	color: black;
-	text-decoration: none;
-}
+		.tagli {
+			float: left;
+			margin-right: 5px;
+		}
 
-a:hover {
-	color: black;
-	text-decoration: none;
-}
+		.pTag {
+			border: 1px solid gray;
+			font-size: 20px;
+		}
 
-.tagList {
-	list-style: none;
-}
+		.template-btn {
+			float: right;
+		}
 
-.tagli {
-	float: left;
-	margin-right: 5px;
-}
+		.q-btn {
+			align: center;
+			border: none;
+			background-color: white-gray;
+		}
 
-.pTag {
-	border: 1px solid gray;
-	font-size: 20px;
-}
+		.qnaForm,
+		.img-fluid {
+			padding-top: 30px;
+		}
 
-.template-btn {
-	float: right;
-}
+		#searchBox {
+			margin-left: 20px;
+			width: 210px;
+			height: 50px;
+			background-color: #0062ff;
+			border: none;
+			border-radius: 30px;
+			color: white;
+			padding-left: 15px;
+		}
 
-.q-btn {
-	align: center;
-	border: none;
-	background-color: white-gray;
-}
+		.ads_widget {
+			margin-top: 30px;
+		}
 
-.blog_area {
-	padding-top: 100px;
-}
+		#tlist {
+			display: inline-block;
+			color: black;
+		}
 
-.qnaForm, .img-fluid {
-	padding-top: 30px;
-}
+		ul li.tag-item {
+			padding: 4px 8px;
+			background-color: #777;
+			color: #000;
+		}
 
-#searchBox {
-	margin-left: 10px;
-	width: 190px;
-	height: 50px;
-	auto-focus: none;
-	background-color: #38a4ff;
-	border: none;
-	border-radius: 30px;
-	color: white;
-}
+		.tag-item:hover {
+			background-color: #262626;
+			color: #fff;
+		}
 
-.ads_widget {
-	margin-top: 30px;
-}
+		hr {
+			width: 700px;
+			background-color: lightgray;
+			margin-right: 30px;
+		}
 
-#tlist {
-	display: inline-block;
-	color: black;
-}
+		#bInfo {
+			text-align: right;
+			color: #353535;
+			margin-left: 40px;
+		}
 
-ul li.tag-item {
-	padding: 4px 8px;
-	background-color: #777;
-	color: #000;
-}
+		.qnaBody {
+			font-size: 20px;
+			color: black;
+			margin:0 60px 15px 70px;
+			text-align: justify
+		}
 
-.tag-item:hover {
-	background-color: #262626;
-	color: #fff;
-}
+		.searchSelect {
+			color: black;
+			position: relative;
+			top: 50px;
+		}
 
-hr {
-	width: 700px;
-	background-color: lightgray;
-	margin-right: 30px;
-}
+		.widget {
+			background-color: #0062ff;
+			height: 50px;
+			text-align: center;
+			color: white;
+			padding: 15px;
+			margin-bottom: 25px;
+		}
 
-#blogBody {
-	margin-right: 70px;
-}
+		.genric-btn success {
+			font-size: 13px;
+		}
+		
+		#view-button,
+		#qna-button{
+			color: #fff; 	
+    		background: #0062ff;
+    		border: 1px solid transparent;	
+		}
+		
+		#view-button:hover,
+		#qna-button:hover{
+			color: #0062ff;
+			border: 1px solid #0062ff;
+			background: #fff;
+		}
+	</style>
 
-#bInfo {
-	text-align: right;
-	color: #353535;
-}
-
-.qnaBody {
-	font-size: 20px;
-	color: black;
-	margin-left: 70px;
-	margin-top: 30px;
-	margin-bottom: 40px;
-	text-align: justify
-}
-
-.searchSelect {
-	color: black;
-}
-
-.widget {
-	background-color: #38a4ff;
-	height: 50px;
-	text-align: center;
-	font-size: 20px;
-	color: white;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding: 15px;
-}
-
-.genric-btn success {
-	font-size: 13px;
-}
-</style>
-<script
-	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/397860a4e3.js"
-	crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -152,14 +141,13 @@ hr {
 				</div>
 				<sec:authorize access="hasRole('MEMBER')">
 					<div class="qnaForm">
-						<a href="qnaForm"><button type="button"
-								class="genric-btn info circle arrow btn-lg">질문글 작성하기</button></a>
+						<a href="qnaForm" class="genric-btn info circle btn-lg" id="qna-button">질문글작성하기</a>
 					</div>
 				</sec:authorize>
 			</div>
 		</div>
 	</section>
-	<section class="blog_area">
+	<section class="blog_area" style="padding-top: 50px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8">
@@ -167,99 +155,63 @@ hr {
 						<form action="qnaMain" id="goform" name="goform">
 							<input type="hidden" id="pageNum" name="pageNum" value="1">
 							<c:forEach items="${qnaList }" var="list">
-
 								<article class="row blog_item" id="blogBody">
 									<div class="col-lg-12">
 										<div class="blog_post">
-
 											<div class="blog_details">
-
-												
 												<table class="more_list">
 													<tr>
-														<td><i class="fa-solid fa-q fa-4x"
-															style="color: dodgerblue; margin-right: 20px;"></i></td>
+														<td>
+															<i class="fa-solid fa-q fa-4x"
+																style="color: dodgerblue; margin-right: 20px;"></i></td>
 														<td style="width: 450px; font-size: 28px; color: black;">
 															${list.title }</td>
 														<td>
 															<ul id="bInfo" class="blog_meta list">
-																<li>${list.writer }&nbsp;&nbsp;<i
-																	class="fa fa-user-o"></i>
+																<li>${list.writer }&nbsp;&nbsp;
+																	<i class="fa fa-user-o"></i>
 																</li>
-																<li>${list.w_date }&nbsp;&nbsp;<i
-																	class="fa fa-calendar-o"></i></li>
-																<li>${list.hit }Views&nbsp;&nbsp;<i
-																	class="fa fa-eye"></i>
+																<li>${list.w_date }&nbsp;&nbsp;
+																	<i class="fa fa-calendar-o"></i>
 																</li>
-																<li>${list.recnt }Comments&nbsp;&nbsp;<iclass="fafa-comment-o">
-																	</i></li>
+																<li>${list.hit }Views&nbsp;&nbsp;
+																	<i class="fa fa-eye"></i>
+																</li>
+																<li>${list.recnt }Comments&nbsp;&nbsp;
+																	<i class="fafa-comment-o"></i>
+																</li>
 															</ul>
 														</td>
 													</tr>
 												</table>
 												<div class="qnaBody">${list.content }</div>
 												<!-- 태그 목록 -->
-												<div class="tags">
+												<div class="tags" style="margin-left: 50px;">
 													<c:forEach items="${list.tagList }" var="hash">
 														<ul class="tagList">
 															<c:if test="${hash.t_name ne null}">
-																<li class="tagli"><a
-																	href="tagSearch?t_name=${hash.t_name }">
-																		<button class="genric-btn success circle btn-sm">${hash.t_name}</button>
-																</a></li>
+																<li class="tagli">
+																	<a href="tagSearch?t_name=${hash.t_name }">
+																		<button
+																			class="genric-btn success circle btn-sm">${hash.t_name}</button>
+																	</a>
+																</li>
 															</c:if>
 														</ul>
 													</c:forEach>
-
 												</div>
 												<!-- 상세조회 페이지 이동 -->
-												<a class="genric-btn info-border radius"
+												<a class="genric-btn info-border radius" id="view-button"
 													href="qnaDetail?q_no=${list.q_no }"
-													style="float: right; margin-left: 400px;">View More</a>
-
+													style="float: right; margin-right: 32px;">View More</a>
 											</div>
 										</div>
 									</div>
 								</article>
 								<hr size="2" />
-
 							</c:forEach>
 						</form>
 						<my:nav jsFunc="go_page" page="${page}" />
-						<!-- Pagination-->
-						<%-- <form action="qnaMain" name="pageForm" method="post">
-							<div style="display: block; text-align: center;">
-								<nav class="blog-pagination justify-content-center d-flex">
-									<div class="paginationDiv">
-										<ul class="pagination">
-											<!-- 이전페이지 활성화 여부 -->
-											<c:if test="${page.prev }">
-												<li>
-												<a href="qnaMain?pageNum=${page.startPage -1 }&amount=${page.amount}">prev</a></li>
-											</c:if>
-											
-											<!-- 페이지네이션 처리 -->
-											<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }">
-												<li class="${page.pageNum eq num ? 'active' : '' }">
-												<a href="qnaMain?pageNum=${num }&amount=${page.amount}">${num }</a>
-												<a href="#" data-pagenum='${num }'>${num }</a>
-												</li>
-											</c:forEach>
-											
-											<!-- 다음버튼 활성화 여부 -->
-											<c:if test="${page.next }">
-												<li class="page-item">
-												<a href="qnaMain?pageNum=${page.endPage + 1 }&amount=${page.amount}">next</a></li>
-											</c:if>
-										</ul>
-									</div>
-								</nav>
-							</div>
-							<input type="hidden" name="pageNum" value="${page.cri.pageNum }">
-							<input type="hidden" name="amount" value="${page.cri.amount }">
-							<input type="hidden" name="searchType" value="${page.cri.searchType }"> 
-							<input type="hidden" name="searchValue" value="${page.cri.searchValue }">
-						</form>  --%>
 					</div>
 				</div>
 
@@ -267,50 +219,49 @@ hr {
 				<div class="col-lg-4" id="side">
 					<div class="blog_right_sidebar">
 						<!-- 검색 -->
-						<aside class="single_sidebar_widget search_widget">
+						<aside class="single_sidebar_widget search_widget" style="margin-top: -40px;">
 							<form action="qnaMain" method="post">
-								<div class="input-group">
-									<select class="searchSelect" name="searchType">
-										<option value="title"
-											${page.cri.searchType eq 'title' ? 'selected' : '' }>제목
-										</option>
-										<option value="content"
-											${page.cri.searchType eq 'content' ? 'selected' : '' }>내용</option>
-										<option value="writer"
-											${page.cri.searchType eq 'writer' ? 'selected' : '' }>작성자</option>
-									</select> <span><input type="text" id="searchBox"
-										name="searchValue"></span> <span class="input-group-btn">
+								<select class="searchSelect" name="searchType">
+									<option value="title" ${page.cri.searchType eq 'title' ? 'selected' : '' }>제목
+									</option>
+									<option value="content" ${page.cri.searchType eq 'content' ? 'selected' : '' }>
+										내용</option>
+									<option value="writer" ${page.cri.searchType eq 'writer' ? 'selected' : '' }>작성자
+									</option>
+								</select>
+								<div class="input-group" style="width: 230px; margin-left: 71px;">
+									<input type="text" id="searchBox" name="searchValue">
+									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
-											<i style="margin-right: 5px;" class="fa fa-search"></i>
+											<i class="fa fa-search"></i>
 										</button>
 									</span>
 								</div>
 							</form>
-							<!-- /input-group -->
-							<div class="br"></div>
 						</aside>
+						<div class="br"></div>
 						<!-- 베스트 QNA -->
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 id="bestQna" class="widget">베스트 Q&A</h4>
 							<c:forEach items="${best }" var="best">
 								<ul style="text-align: left;" class="list cat-list">
-									<li id="tlist"><a href="qnaDetail?q_no=${best.q_no }"
-										class="d-flex justify-content-between"> <i
-											class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
+									<li id="tlist">
+									<a href="qnaDetail?q_no=${best.q_no }" class="d-flex justify-content-between">
+										<i class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
 									</a></li>
 								</ul>
 							</c:forEach>
-							<div class="br"></div>
 						</aside>
 						<!-- 인기 태그 -->
 						<aside class="single-sidebar-widget">
 							<h4 class="widget">인기 태그</h4>
 							<c:forEach items="${tagList }" var="tagList">
 								<ul>
-									<li class="tagli"><a
-										href="tagSearch?t_name=${tagList.t_name }">
+									<li class="tagli">
+										<a href="tagSearch?t_name=${tagList.t_name }">
 											<button class="genric-btn success-border circle btn-sm">${tagList.t_name}</button>
-									</a></li>
+										</a>
+									</li>
 								</ul>
 							</c:forEach>
 						</aside>
@@ -326,29 +277,8 @@ hr {
 		</div>
 	</section>
 	<script>
-		/* var pagination = document.querySelector(".pagination");
-		pagination.onclick=function(){
-			event.preventDefault();
-			if(event.target.tagName != 'A') return;
-			
-			document.pageForm.pageNum.value = event.target.dataset.pagenum;
-			document.pageForm.submit();
-		}
-		
-		window.onload = function(){
-			if(history.state == '') return;
-		
-		
-		var msg = '<c:out value="${msg}"/>';
-		
-		if(msg != ''){
-			alert(msg);
-			history.replaceState('', null, null);
-			console.log(history.state);
-			}
-		} */
 		/*이미지 숨기기*/
-		$(document).ready(function() {
+		$(document).ready(function () {
 			$('.qnaBody').find('img').css('display', 'none');
 			/* 		$('.qnaBody').find('iframe').css('display', 'none'); */
 		});
