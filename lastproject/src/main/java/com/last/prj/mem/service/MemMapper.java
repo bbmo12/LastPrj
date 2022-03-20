@@ -54,7 +54,7 @@ public interface MemMapper {
 	int memdelete();
 	
 	public List<MemVO> admMlistCode(MemVO vo);
-	public int adMmemCount(); 
+	public int adMmemCount(MemVO vo); 
 	List<MemVO> admMemChart();
 	
 	public List<MemVO> admMemReporCode(MemVO vo);
@@ -63,4 +63,9 @@ public interface MemMapper {
 	public MemVO getmemberinfo(String m_id);//member 정보
 	
 	public String passCheck(String m_id);
+	
+	int countCounsel(String m_id);
+	int countReview1(String m_id);
+	int countReview2(String m_id);
+	int countReservation(String m_id);	
 }

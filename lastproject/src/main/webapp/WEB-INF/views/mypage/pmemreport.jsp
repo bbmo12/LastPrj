@@ -17,12 +17,6 @@
 		padding: 50px;
 	}
 
-	.flex {
-		-webkit-box-flex: 1;
-		-ms-flex: 1 1 auto;
-		flex: 1 1 auto
-	}
-
 	.padding {
 		padding: 5rem
 	}
@@ -94,7 +88,7 @@
                     <div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
                         <aside class="single_sidebar_widget author_widget">
                             <img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
-                                style="width: 210px" alt="">
+                                style="width: 210px" onerror="this.src='resources/upload/pet.PNG'">
                             <div class="br"></div>
                             <h4>${pmember.name }</h4>
                             <div class="br"></div>

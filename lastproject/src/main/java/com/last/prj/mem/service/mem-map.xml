@@ -212,11 +212,12 @@
 	<select id="admMlistCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
 		SELECT B.*
 		FROM ( SELECT A.* , ROWNUM RN
-		FROM (SELECT M.M_ID, M.NAME, M.STARTDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)		
+		FROM (SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)		
 		<if	test="key !=null and key !='' and data !=null and data !='' ">
 			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
 		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
+		<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
 		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>
@@ -225,12 +226,13 @@
 	
 	<select id="adMmemCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
 		SELECT COUNT(*) FROM (
-		SELECT M.M_ID, M.NAME, M.STARTDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)
-		<if	test="key != null and key !='' and data != null and data != '' ">
-			AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
-		<if test="code != '' and code == '100'">AND p.pet_no is not null </if>
-		<if test="code != '' and code == '101'">AND p.pet_no is null </if>
-		<if	test="fromDate !=null and fromDate !='' and toDate !=null and toDate !='' ">
+		SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)
+		<if	test="key !=null and key !='' and data !=null and data !='' ">
+			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
+		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
+		<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>)
 	</select>
@@ -276,5 +278,32 @@
 
 	<select id="getmemberinfo" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
 		SELECT * FROM MEMBER WHERE M_ID = #{m_id}
+	</select>
+	
+	<select id="countCounsel" resultType="int">
+		select count(*) from counsel where m_id = #{m_id}
+	</select>
+	
+	<select id="countReview1" resultType="int">
+		select count(*) from review w
+		join counsel c
+		on w.c_no = c.c_no
+		where c.m_id = #{m_id}
+	</select>
+	
+	<select id="countReview2" resultType="int">
+		select count(*) from review w
+		join reservation r
+		on w.r_no = r.r_no
+		join pet p
+		on r.pet_no = p.pet_no
+		where p.m_id = #{m_id}
+	</select>
+	
+	<select id="countReservation" resultType="int">
+		select count(*) from reservation r
+		join pet p
+		on r.pet_no = p.pet_no
+		where p.m_id = #{m_id}
 	</select>
 </mapper>

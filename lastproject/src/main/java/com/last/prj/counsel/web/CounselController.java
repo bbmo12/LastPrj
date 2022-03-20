@@ -130,6 +130,7 @@ public class CounselController {
 			if (userDetails.getRole() == "일반회원") {
 				mId = userDetails.getMember().getM_id();
 				model.addAttribute("mId", mId);
+				
 			}
 		}
 
@@ -147,7 +148,7 @@ public class CounselController {
 			// 새로운 상담 폼으로 이동
 			model.addAttribute("petList", petDAO.petmemberList(mId));
 			model.addAttribute("pInfo", pMemberDao.PmemberOne(p_id));
-
+			model.addAttribute("mInfo", memDao.memberOne(mId));
 			return "counsel/newCsForm";
 		}
 	}

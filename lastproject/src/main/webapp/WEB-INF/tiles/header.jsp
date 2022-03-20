@@ -25,8 +25,10 @@
 		font-size : 2rem;
 	}
 
-	.p-3.mb-0.text-white.py-4 {
-		background-color: #38a4ff;
+	.notification {
+		text-align: center;
+		font-weight: bolder;
+		padding: 10px;
 	}
 
 	#notice_content {
@@ -38,6 +40,13 @@
 	
 	#noticeCheck{
 		font-size:30px;
+	}
+	
+	#notice_btn{
+		margin-left: 100px;
+		font-size:15px;
+		border: none;
+		background: none;
 	}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
@@ -75,10 +84,9 @@
 								</div>
 								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
 								
-									<span>\${result[i].n_from}<button style="margin-left: 50px; font-size:15px;"
+									<span>\${result[i].name}<button id="notice_btn"
 									onclick="javascript:noticeCheck(\${result[i].notice_no}); deleteAlerm(event);">X</button></span>
 									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
-									<p>\${result[i].notice_no}</p>
 								</div>
 							</a>
 						<div id="notice_divider" class="dropdown-divider"></div>`;
@@ -225,7 +233,7 @@
 							<%-- <c:if test="${mId ne null and pId eq null}"> --%>
 							<!-- 권한이 MEMBER인 사람만 -->
 							<sec:authorize access="hasRole('MEMBER')">
-								<li class="menu-has-children"><a href="#">마이페이지</a>
+								<li class="menu-has-children"><a href="mainMypage">마이페이지</a>
 									<ul>
 										<li><a href="memberMypage">내 프로필</a></li>
 										<!-- <li><a href="petmemberForm">반려동물 프로필</a></li> -->
@@ -247,7 +255,7 @@
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">
-										<h6 class="p-3 mb-0 text-white py-4">Notifications</h6>
+										<h6 class="notification">Notifications</h6>
 										<div class="dropdown-divider"></div>
 										<div id="noticeli"></div>
 										<!-- <a class="dropdown-item preview-item">
@@ -261,9 +269,8 @@
 											<p class="text-gray ellipsis mb-0"></p>
 										</div>
 									</a> -->
-										<div class="dropdown-divider"></div>
-
-										<h6 class="p-3 mb-0 text-center">See all notifications</h6>
+									
+										<a href="mainMypage"><h6 class="p-3 mb-0 text-center">See all notifications</h6></a>
 									</div>
 								</li>
 							<%-- </c:if> --%>

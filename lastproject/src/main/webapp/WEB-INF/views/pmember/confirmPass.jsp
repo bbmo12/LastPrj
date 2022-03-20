@@ -64,7 +64,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
-								style="width: 210px" alt="">
+								style="width: 210px" onerror="this.src='resources/upload/pet.PNG'">
 							<div class="br"></div>
 							<h4>${pmember.name }</h4>
 							<div class="br"></div>
@@ -107,7 +107,7 @@
 					<div class="col-lg-12 col-md-12 blog_details" style="margin-left: 10em;">
 						<div id="logreg-forms">
 							<div class="form-group">
-								<div class="head">비밀번호 확인</div>
+								<div class="head">비밀번호를 입력하세요.</div>
 								<div class="input-group-prepend" style="margin:55px 0 0 6em;">
 									<span class="input-group-text bg-white px-4 border-md border-right-0"
 										style="height: 70px;">

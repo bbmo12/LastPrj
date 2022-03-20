@@ -5,11 +5,11 @@
 <html>
 
 <style>
-ul li {
+.petSelect ul li {
 	list-style-type: none;
 	float: left;
 	margin-left: 20px;
-}
+} 
 
 #my_section {
 	padding: 50px;
@@ -17,98 +17,6 @@ ul li {
 
 body {
 	background-color: #f9f9fa
-}
-
-.flex {
-	-webkit-box-flex: 1;
-	-ms-flex: 1 1 auto;
-	flex: 1 1 auto
-}
-
-@media ( max-width :991.98px) {
-	.padding {
-		padding: 1.5rem
-	}
-}
-
-@media ( max-width :767.98px) {
-	.padding {
-		padding: 1rem
-	}
-}
-
-.padding {
-	padding: 5rem
-}
-
-.card {
-	box-shadow: none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	-ms-box-shadow: none
-}
-
-.pl-3, .px-3 {
-	padding-left: 1rem !important
-}
-
-.card {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-	word-wrap: break-word;
-	background-color: #fff;
-	background-clip: border-box;
-	border: 1px solid #d2d2dc;
-	border-radius: 0
-}
-
-.card .card-title {
-	color: #000000;
-	margin-bottom: 0.625rem;
-	text-transform: capitalize;
-	font-size: 0.875rem;
-	font-weight: 500
-}
-
-.card .card-description {
-	margin-bottom: .875rem;
-	font-weight: 400;
-	color: #76838f
-}
-
-.table-responsive {
-	display: block;
-	width: 100%;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	-ms-overflow-style: -ms-autohiding-scrollbar
-}
-
-.table th {
-	font-size: 20px;
-	font-weight: 500;
-}
-
-.table {
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 1rem;
-	background-color: transparent
-}
-
-.table td {
-	font-size: 16px;
-	padding: .875rem 0.9375rem
-}
-
-.badge {
-	border-radius: 0;
-	font-size: 12px;
-	line-height: 1;
-	padding: .375rem .5625rem;
-	font-weight: normal
 }
 
 .radioImg {
@@ -146,7 +54,7 @@ body {
 
 br.clear {
 	clear: both
-}
+}	
 </style>
 
 <body>
@@ -155,57 +63,53 @@ br.clear {
 			<div class="row">
 				<div class="col-lg-12">
 					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="pmemberMyPage">MyPage</a>
+					<a href="home">Home</a> <span>|</span> <a href="memberMypage">MyPage</a>
 				</div>
 			</div>
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container">
+		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle"
-								src="resources/upload/${pmember.picture}" style="width: 210px"
-								alt="">
+							<img class="author_img rounded-circle" src="resources/upload/${mInfo.picture}"
+								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="">
 							<div class="br"></div>
-							<h4>${pmember.name }</h4>
+							<h4> ${mInfo.name }</h4>
 							<div class="br"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="pmemberMyPage"
-									class="d-flex justify-content-between">
+								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-								</a></li>
-								<li><a href="preservationSelect"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="protocol" class="d-flex justify-content-between">
+										<p>반려동물 진료기록</p>
+									</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
-								</a></li>
-								<li><a href="pMemDiaList"
-									class="d-flex justify-content-between">
-										<p>진료 내역</p>
-								</a></li>
-								<li><a href="pMembenefit"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="myPay" class="d-flex justify-content-between">
 										<p>결제 내역</p>
-								</a></li>
-								<li><a href="pmemcounsel"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="mycounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
-								</a></li>
-								<li><a href="pmemreport"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="myreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="myfallow" class="d-flex justify-content-between">
+										<p>팔로우</p>
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
-								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="mdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
-								</a></li>
+									</a></li>
 							</ul>
 						</aside>
 					</div>
@@ -217,65 +121,60 @@ br.clear {
 							<h2>상담 차트 작성</h2>
 						</div>
 						<div>
-							<form name="newCs" id="newCs" action="newCs" method="post"
-								onsubmit="return fmcheck();">
+							<form name="newCs" id="newCs" action="newCs" method="post" onsubmit="return fmcheck();">
 								<div style="text-align: center; margin-bottom: 20px;">
 									<h3>
-										<span>${pInfo.name }</span>&nbsp;<span><c:if
-												test="${pInfo.code == 100}">
+										<span>${pInfo.name }</span>&nbsp;<span>
+											<c:if test="${pInfo.code == 100}">
 												<c:out value="수의사" />
-											</c:if> <c:if test="${pInfo.code == 101}">
+											</c:if>
+											<c:if test="${pInfo.code == 101}">
 												<c:out value="훈련사" />
-											</c:if> <c:if test="${pInfo.code == 102}">
+											</c:if>
+											<c:if test="${pInfo.code == 102}">
 												<c:out value="펫시터" />
-											</c:if> <c:if test="${pInfo.code == 103}">
+											</c:if>
+											<c:if test="${pInfo.code == 103}">
 												<c:out value="미용사" />
-											</c:if></span>와의 첫 상담을 위한 차트를 작성해주세요.
+											</c:if>
+										</span>와의 첫 상담을 위한 차트를 작성해주세요.
 									</h3>
 								</div>
 
-								<input type="hidden" id="p_id" name="p_id"
-									value="${pInfo.p_id }"> <input type="hidden" id="m_id"
-									name="m_id" value="${mId }"> <input type="hidden"
-									id="sender" name="sender" value="${mId }">
-
+								<input type="hidden" id="p_id" name="p_id" value="${pInfo.p_id }"> 
+								<input type="hidden" id="m_id" name="m_id" value="${mId }"> 
+								<input type="hidden" id="sender" name="sender" value="${mId }">
 								<h3>반려동물 선택</h3>
-								<h4 style="color: gray;'">*상담받고자 하는 반려동물을 선택해주세요.</h4>
-								<div class="petSelect"
-									style="margin-bottom: 50px; margin-top: 50px;">
+								<h4 style="color: gray;">*상담받고자 하는 반려동물을 선택해주세요.</h4>
+								<div class="petSelect">
 									<ul>
-										<li><div class="radioImg">
+										<li>
+											<div class="radioImg">
 												<img class="petSelection" src="resources/qna/가위표.png">
-											</div> <input type="radio" id="pet_no" name="pet_no" value="">&nbsp;
-											<label>없음/비공개</label></li>
-
+											</div> <input type="radio" id="pet_no" name="pet_no" value=""
+												checked="checked">&nbsp;
+											<label>없음/비공개</label>
+										</li>
 										<c:forEach items="${petList }" var="pet">
-
-											<li><div class="radioImg">
-													<img class="petSelection"
-														src="resources/qna/${pet.picture }"
+											<li>
+												<div class="radioImg">
+													<img class="petSelection" src="resources/qna/${pet.picture }"
 														onError="this.src='resources/qna/대체이미지2.png'">
-												</div> <input type="radio" id="pet_no" name="pet_no"
-												value="${pet.pet_no}">&nbsp;${pet.name }</li>
-
+												</div> 
+												<input type="radio" id="pet_no" name="pet_no"value="${pet.pet_no}">&nbsp;${pet.name }
+											</li>
 										</c:forEach>
 									</ul>
 								</div>
-
-								<br class="clear"> <br class="clear"> <br
-									class="clear"> <br class="clear"> <br class="clear">
-
+								<br class="clear"> <br class="clear"> <br class="clear"> <br class="clear"> <br; class="clear">
 								<div style="margin-top: 30px;">
 									<h3>상담 내용</h3>
 									<textarea id="content" name="content" class="form-control"
 										style="width: 100%; height: 500px; margin-bottom: 30px;">*반려동물의 증상, 전문가에게 궁금한 점 등을 자세히 적어주세요.</textarea>
 								</div>
-
-								<div id="btns">
-									<button type="submit" id="submitCs" class="btn btn-primary"
-										style="margin-left: 300px;">상담 시작</button>
-									<button type="button" class="btn btn-secondary"
-										onclick="history.back()">취소</button>
+								<div id="btns" style="margin-left: 21em;">
+									<button type="submit" id="submitCs"  style="width: 100px;" class="btn btn-primary">상담 시작</button>
+									<button type="button" class="btn btn-secondary" style="width: 100px;" onclick="history.back()">취소</button>
 								</div>
 							</form>
 						</div>
@@ -285,6 +184,9 @@ br.clear {
 		</div>
 	</section>
 	<script>
+	content.addEventListener('click', function () {
+			event.target.select();
+		});
 		/* $(function(){
 			$('#submitCs').click(function(){
 				$.ajax({
@@ -319,4 +221,5 @@ br.clear {
 		}
 	</script>
 </body>
+
 </html>

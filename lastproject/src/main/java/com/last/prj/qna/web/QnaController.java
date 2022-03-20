@@ -32,9 +32,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pet.service.PetService;
+import com.last.prj.pmember.service.Criteria;
+import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
-import com.last.prj.qna.service.Criteria;
-import com.last.prj.qna.service.PagingVO;
 import com.last.prj.qna.service.QnaMapper;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.qna.service.QnaVO;
@@ -80,10 +80,12 @@ public class QnaController {
 	@RequestMapping("/qnaMain")
 	public String QnaMain(Criteria cri, Model model) {
 
-		model.addAttribute("page", new PagingVO(cri, mapper.getTotal(cri)));
-		model.addAttribute("qnaList", mapper.qnaList(cri));
+		cri.setAmount(10);
+		
+		model.addAttribute("page", new PagingVO(cri, qnaDAO.getTotal(cri)));
+		model.addAttribute("qnaList", qnaDAO.qnaList(cri));
 		model.addAttribute("tagList", qtagDAO.tagList());
-		model.addAttribute("best", mapper.qnaBest());
+		model.addAttribute("best", qnaDAO.qnaBest());
 
 		return "qna/qnaMain";
 

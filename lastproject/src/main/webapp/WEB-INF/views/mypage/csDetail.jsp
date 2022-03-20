@@ -18,40 +18,6 @@
 		background-color: #f9f9fa
 	}
 
-	.flex {
-		-webkit-box-flex: 1;
-		-ms-flex: 1 1 auto;
-		flex: 1 1 auto
-	}
-
-	@media (max-width :991.98px) {
-		.padding {
-			padding: 1.5rem
-		}
-	}
-
-	@media (max-width :767.98px) {
-		.padding {
-			padding: 1rem
-		}
-	}
-
-	.padding {
-		padding: 5rem
-	}
-
-	.card {
-		box-shadow: none;
-		-webkit-box-shadow: none;
-		-moz-box-shadow: none;
-		-ms-box-shadow: none
-	}
-
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important
-	}
-
 	#leftBubble:after {
 		content: '';
 		position: absolute;
@@ -66,73 +32,34 @@
 		margin-top: -16px;
 		margin-left: -32px;
 	}
-
-	.card {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		min-width: 0;
-		word-wrap: break-word;
-		background-color: #fff;
-		background-clip: border-box;
-		border: 1px solid #d2d2dc;
-		border-radius: 0
-	}
-
-	.card .card-title {
-		color: #000000;
-		margin-bottom: 0.625rem;
-		text-transform: capitalize;
-		font-size: 0.875rem;
-		font-weight: 500
-	}
-
-	.card .card-description {
-		margin-bottom: .875rem;
-		font-weight: 400;
-		color: #76838f
-	}
-
-	.table-responsive {
-		display: block;
-		width: 100%;
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-		-ms-overflow-style: -ms-autohiding-scrollbar
-	}
-
-	.table th {
-		font-size: 20px;
-		font-weight: 500;
-	}
-
-	.table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent
-	}
-
-	.table td {
-		font-size: 16px;
-		padding: .875rem 0.9375rem
-	}
-
-	.badge {
-		border-radius: 0;
-		font-size: 12px;
-		line-height: 1;
-		padding: .375rem .5625rem;
-		font-weight: normal
-	}
-
 	.radioImg {
 		width: 80px;
 		height: 80px;
 		border-radius: 70%;
 		overflow: hidden;
 	}
-
+	
+	#msgSubmit{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;
+    	margin-left : 10px;
+    	width: 175px;
+    	font-size: 20px;
+	}
+	#msgSubmit:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#terminate{
+		float: right; 
+		margin:10px 30px 0 0;
+		width: 175px; 
+		height: 50px;
+		font-size: 20px;
+	}
+	
 	.petSelection {
 		width: 100%;
 		height: 100%;
@@ -180,6 +107,7 @@
 		.mine {
 			float: right;
 		}
+		
 </style>
 
 <body>
@@ -288,8 +216,7 @@
 					</div>
 					</c:if>
 				</div>
-				<div class="col-lg-9 posts-list"
-					style="position: relative; width: 100%; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
+				<div class="col-lg-9 posts-list" style="position: relative; width: 100%; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div>
 							<div style="margin-bottom: 20px;">
@@ -431,13 +358,10 @@
 								</c:forEach>
 							</div>
 							<c:if test="${oneCs.code == '302' || oneCs.code == '301' }">
-								<div style="display : flex">
-									<span>
+								<div style="display : flex; margin-top: -15px;">
 									<input type="text" id="CounselMsg" name="CounselMsg" class="form-control"placeholder="메시지를 입력해주세요"
-											style="width : 570px; height : 50px; margin-left : 30px;"></span>
-									<span>
-									<button type="button" id="msgSubmit" class="genric-btn info-border radius" 
-									name="msgSubmit" style="margin-left : 10px;">전송</button></span>
+											style="width : 640px; height : 50px; margin-left : 30px;">
+									<button type="button" id="msgSubmit" class="genric-btn info-border radius" name="msgSubmit">전송</button>
 								</div>
 							</c:if>
 							<c:if test="${oneCs.code == '303' }">
@@ -456,10 +380,7 @@
 								<input type="hidden" id="sender" name="sender" value="${pId }">
 							</c:if>
 							<c:if test="${oneCs.code == '302' || oneCs.code == '301' }">
-								<div>
-									<button type="button" id="terminate" name="terminate" class="genric-btn success" 
-									style="float: right; margin-right : 30px;">상담종료</button>
-								</div>
+								<button type="button" id="terminate" name="terminate" class="genric-btn success" >상담종료</button>
 							</c:if>
 						</div>
 					</div>

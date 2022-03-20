@@ -146,14 +146,14 @@
 								<div class="table-wrap">
 									<form action="mycounsel" id="goform" name="goform">
 										<input type="hidden" id="pageNum" name="pageNum" value="1">
-										<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
+										<table class="table table-striped" style="margin-top: 25px;">
 											<thead>
 												<tr style="text-align: center;">
-													<th>반려동물</th>
-													<th>증상</th>
-													<th>파트너회원이름</th>
-													<th>상태</th>
-													<th>작성일</th>
+													<th>상담번호</th>
+													<th>반려동물이름</th>
+													<th>상담내용</th>
+													<th>파트너이름</th>
+													<th>상담상태</th>
 													<th>상담신청일</th>
 													<th>상담내용보기</th>
 													<th>후기</th>
@@ -172,7 +172,17 @@
 														<td>${mycounsel.p_name }</td>
 														<td class="card-text">${mycounsel.content}</td>
 														<td>${mycounsel.pm_name }</td>
-														<td>${mycounsel.co_content }</td>
+														<td>
+															<c:if test="${mycounsel.code eq 301}">
+																<label class="badge badge-info">상담요청</label>
+															</c:if> 
+															<c:if test="${mycounsel.code eq 302}">
+																<label class="badge badge-warning">진행중</label>
+															</c:if> 
+															<c:if test="${mycounsel.code eq 303}">
+																<label class="badge badge-success">상담완료</label>
+															</c:if>
+														</td>
 														<td>${mycounsel.w_date }</td>
 														<td><button type="button" class="btn btn-primary" style="background-color: cornflowerblue; border: none;"
 																onclick="location.href='csDetail?p_id=${mycounsel.p_id }&m_id=${mycounsel.m_id }&pet_no=${mycounsel.pet_no }&c_no=${mycounsel.c_no}'">상담내용보기</button>
@@ -300,6 +310,7 @@
 
 	<!--리뷰 보는 모달창  -->
 	<script type="text/javascript">
+console.log(${mycounsel})
 		/* 	
 	$(function() {
 		$('#example').barrating('set', 2);

@@ -19,6 +19,10 @@ public class Criteria {
 	private String w_address;	
 	private String reporter; 	
 	
+	//qna 검색
+	private String searchType;
+	private String searchValue;
+	
 	public Criteria() {
 		this(1, 12);
 	
