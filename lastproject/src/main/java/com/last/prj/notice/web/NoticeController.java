@@ -1,6 +1,7 @@
 package com.last.prj.notice.web;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,4 +70,5 @@ public class NoticeController {
 		
 		return noticeDao.noticeUpdate(notice_no);
 	}
+	
 }
