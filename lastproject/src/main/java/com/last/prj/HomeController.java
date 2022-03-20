@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.last.prj.mem.service.MemService;
 import com.last.prj.notice.service.NoticeService;
 import com.last.prj.notice.service.NoticeVO;
+import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.qna.service.QnaService;
 import com.last.prj.security.CustomUser;
@@ -29,7 +31,15 @@ public class HomeController {
 	@Autowired
 	public PmemberService pMemberDao;
 	
-	@Autowired QnaService qnaDAO;
+	@Autowired
+	public QnaService qnaDAO;
+	
+	@Autowired
+	public PetService petDAO;
+	
+	@Autowired
+	public MemService memDao;
+	
 
 	@RequestMapping("/home")
 	public String home(Model model, HttpServletRequest request) {
@@ -103,6 +113,30 @@ public class HomeController {
 			return pid;
 		}
 		*/
+	}
+	
+	@RequestMapping("/mainMypage")
+	public String mypage(Model model, Principal principal) {
+		String m_id = "0";
+		if(principal != null) {
+			
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+				m_id  =userDetails.getMember().getM_id();
+			}else if(userDetails.getRole() == "파트너회원") {
+				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			}else if(userDetails.getRole() =="관리자") {
+				
+			}
+		}
+		model.addAttribute("pets", petDAO.petmemberList(m_id));
+		model.addAttribute("member", memDao.memberSearch(m_id));
+		
+		return "mypage/mainMypage";
 	}
 	
 }
