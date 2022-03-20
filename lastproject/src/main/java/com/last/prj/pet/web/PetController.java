@@ -4,9 +4,7 @@ import java.io.File;
 import java.security.Principal;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -96,7 +94,7 @@ public class PetController {
 				String m_id =userDetails.getMember().getM_id();
 				
 				model.addAttribute("member",memDao.memberSearch(m_id));
-				return "mypage/mypeyAddForm";
+				return "mypage/mypetUpdateForm";
 				
 			}
 		}
@@ -150,7 +148,7 @@ public class PetController {
 	  model.addAttribute("member",memDao.memberSearch(m_id));
 	  petDAO.mypetInsert(pet);
 	  model.addAttribute("pets", petDAO.petmemberList(m_id));
-	  return "mypage/mpetprofile";
+	  return "mypage/memberMypage";
 	}
 
 	
@@ -233,7 +231,7 @@ public class PetController {
 		model.addAttribute("pets",petDAO.petmemberList(m_id));
 		model.addAttribute("member",memDao.memberSearch(m_id));
 		
-		return "mypage/mpetprofile";
+		return "mypage/memberMypage";
 	}
 	
 	@RequestMapping("mypetDelete")
@@ -260,7 +258,7 @@ public class PetController {
 		
 		 petDAO.mypetDelete(pet_no);
 		 model.addAttribute("pets", petDAO.petmemberList(m_id));
-		 return "mypage/mpetprofile";
+		 return "mypage/memberMypage";
 	}
 	
 	

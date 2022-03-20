@@ -28,8 +28,8 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<ReportVO> myReportList(String m_id) {
-		return map.myReportList(m_id);
+	public List<ReportVO> myReportList(Criteria cri) {
+		return map.myReportList(cri);
 	}
 
 	@Override
@@ -111,6 +111,11 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public List<ReportVO> admQlistCode(ReportVO vo) {
 		return map.admQlistCode(vo);
+	}
+
+	@Override
+	public int memReport(Criteria cri) {
+		return map.memReport(cri);
 	}
 
 

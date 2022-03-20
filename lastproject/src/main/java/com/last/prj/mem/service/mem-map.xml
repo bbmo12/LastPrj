@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.mem.service.MemMapper">
+	
+	<select id="passCheck" parameterType="com.last.prj.mem.service.MemVO" resultType="String">
+		SELECT PASSWORD
+		FROM MEMBER
+		WHERE M_ID = #{m_id}
+	</select>
+
 
 	<!-- 일반회원 상세조회 -->
 	<select id="memberSearch" parameterType="String"
@@ -230,5 +237,7 @@
 		</if>)
 	</select>
 
-
+	<select id="getmemberinfo" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
+		SELECT * FROM MEMBER WHERE M_ID = #{m_id}
+	</select>
 </mapper>

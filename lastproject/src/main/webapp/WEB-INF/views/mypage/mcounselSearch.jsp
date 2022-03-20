@@ -95,7 +95,7 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${member.picture}"
+							<img class="author_img rounded-circle" src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"
 								style="width: 210px" alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
@@ -106,9 +106,6 @@
 							<ul class="list cat-list">
 								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-									</a></li>
-								<li><a href="petmemberForm" class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
 									</a></li>
 								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
@@ -149,7 +146,7 @@
 								<div class="table-wrap">
 									<form action="mycounsel" id="goform" name="goform">
 										<input type="hidden" id="pageNum" name="pageNum" value="1">
-										<table class="table table-striped">
+										<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
 											<thead>
 												<tr style="text-align: center;">
 													<th>반려동물</th>
@@ -203,7 +200,7 @@
 																</c:choose>
 															</c:when>
 															<c:otherwise>
-																<td><button>실패</button></td>
+																<td><button class="btn btn-primary" disabled>리뷰 작성</button></td>
 															</c:otherwise>
 														</c:choose>
 													</tr>

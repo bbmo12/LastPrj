@@ -134,15 +134,7 @@
 								<button type="button" class="btn btn-primary btn-sm" onclick="addFile2()">+</button>
 								<div id="ffile2"></div>
 							</div>
-							<div class="form-group">
-								<div class="custom-checkbox custom-control">
-									<input type="checkbox" name="agree" id="agree" class="custom-control-input" required=""> 
-									<label for="agree" class="custom-control-label">
-										I agree to the <a href="#">Terms and Conditions</a>
-									</label>
-									<div class="invalid-feedback">You must agree with our Terms and Conditions</div>
-								</div>
-							</div>
+							
 							<button type="submit" class="btn btn-primary mr-2" style="width: 100px;">완료</button>
 							<button class="btn btn-light" onclick="cancel()" style="width: 100px;">취소</button>
 						</form>

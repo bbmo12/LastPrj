@@ -23,6 +23,15 @@
 	#addService {
 		margin-left: 36em;
 		margin-top: -5px;
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#addDiv:hover,
+	#addService:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
 	}
 
 	#select-one {
@@ -58,6 +67,38 @@
 	#p_info {
 		border: 1px solid rgba(151, 151, 151, 0.3);
 	}
+	#cancel{
+		width: 113px;
+    	height: 42px;
+    	padding: 0 30px;
+    	font-size: .8em;
+    	text-align: center;
+    	font-weight: 500;
+	}
+	#member_post{
+		width: 100px;
+    	margin-left: 51em;
+    	margin-top: -70px;  	
+    	color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#member_post:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#successUpdate{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#successUpdate:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	
 </style>
 
 <body>
@@ -152,9 +193,10 @@
 								<div class="form-group">
 									<h3 style="font-weight: bolder;">사업장 주소</h3>
 									<input type="text" id="w_address" name="w_address"class="form-control" value="${pmember.w_address}"> 
-									<input type="text" id="w_d_address" name="w_d_address" class="form-control"value="${pmember.w_d_address }">
-								</div>
-								<div class="form-group">
+									<input type="text" id="w_d_address" name="w_d_address" class="form-control"value="${pmember.w_d_address }">								
+									<button class="btn btn-primary mr-2" type="button" onclick="findAddr()" id="member_post" name="member_post">주소찾기</button>								
+								</div>				
+								<div class="form-group" style="margin-top:-15px;">
 									<h3 style="font-weight: bolder;">사업장 전화번호</h3>
 									<input type="tel" id="w_tel" name="w_tel" class="form-control" value="${pmember.w_tel}" maxlength="13"
 										placeholder="숫자만 입력하세요.">
@@ -273,8 +315,9 @@
 									<button type="button" class="btn btn-primary btn-sm"onclick="addFile2()">+</button>
 									<div id="ffile2"></div>
 								</div>
-								<button type="submit" class="genric-btn info radius">수정완료</button>
-								<button type="button" class="btn btn-secondary btn-lg" onclick="location.href='pmemberMyPage'">취소</button>
+								<button type="submit" id="successUpdate"class="genric-btn info radius">수정완료</button>
+								<button type="button" id="cancel" class="btn btn-secondary btn-lg" 
+								onclick="location.href='pmemberMyPage'">취소</button>
 							</div>
 						</form>
 					</div>
@@ -473,6 +516,28 @@
 			}
 		}
 	</script>
+	<script>
+		function findAddr() {
+			new daum.Postcode({
+				oncomplete: function (data) {
+					console.log(data);
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+					var roadAddr = data.roadAddress; // 도로명 주소 변수
+					var jibunAddr = data.jibunAddress; // 지번 주소 변수
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+					document.getElementById('member_post').value = data.zonecode;
+					if (roadAddr !== '') {
+						document.getElementById("w_address").value = roadAddr;
+					} else if (jibunAddr !== '') {
+						document.getElementById("w_address").value = jibunAddr;
+					}
+				}
+			}).open();
+		}
+	</script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 
 </html>

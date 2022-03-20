@@ -3,15 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-
-	<script src="https://kit.fontawesome.com/eeeb65bbd1.js" crossorigin="anonymous"></script>
 </head>
 <style>
-	
 	#my_section {
 		padding: 50px;
 	}
@@ -38,6 +34,17 @@
 	.swal2-content{
 		display: none;
 	}
+	#updateButton{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent	
+	}
+	#updateButton:hover{
+		color: #0062ff;
+    	border: 1px solid #0062ff;
+    	background: #fff;	
+	}
+	
 </style>
 
 <body>
@@ -194,7 +201,7 @@
 									<img src="resources/upload/${plicense.picture}" style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 									</c:forEach>
 							</div>			
-							<button type="button" onclick="location.href='confirmPass'" class="genric-btn info radius">내정보 수정</button>
+							<button type="button" onclick="location.href='confirmPass'" id="updateButton" class="genric-btn info radius">내정보 수정</button>
 						</div>
 					</div>
 				</div>		

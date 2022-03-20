@@ -24,6 +24,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +73,8 @@ public class MemController {
 	
 	// 회원탈퇴 페이지로 이동
 	@RequestMapping("mdeleteForm")
-	public String mdeleteForm(Principal principal) {
+	public String mdeleteForm(Principal principal, Model model) {
+		String m_id = "0";
 		if (principal != null) {
 
 			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -80,22 +82,17 @@ public class MemController {
 			if (userDetails.getRole() == "일반회원") {
 				System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
 				System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
-
-			} else if (userDetails.getRole() == "파트너회원") {
-				System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
-				System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
-			} else if (userDetails.getRole() == "관리자") {
-
+				m_id  =userDetails.getMember().getM_id();
 			}
-
+			model.addAttribute("member", memDao.memberSearch(m_id));
 		}
 		return "mypage/mdeleteForm";
 	}
 
 	// 일반회원 회원탈퇴
-	// 이부
+
 	@RequestMapping("mdelete")
-	public String mdelete( Principal principal, MemVO member,HttpSession session) {
+	public String mdelete( Principal principal, MemVO member,HttpSession session,RedirectAttributes redirectAttr) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -114,8 +111,7 @@ public class MemController {
 			}
 		}
 		memDao.memberDelete(m_id); //업데이트 이름, end date 빼고 다 널 시킴
-		
-
+		redirectAttr.addFlashAttribute("delete","정보를다시확인해주세요.");
 		session.invalidate();
 		return "redirect:home";
 	}
@@ -159,6 +155,39 @@ public class MemController {
 		return "redirect:memberMypage";
 	}
 
+	
+	@RequestMapping("/mconfirmPass")
+	public String mconfirmPass(Principal principal,Model model) {
+		String m_id = "0";
+		if(principal!= null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if(userDetails.getRole() == "일반회원") {
+				m_id  =userDetails.getMember().getM_id();
+				}
+			}
+			model.addAttribute("member",memDao.getmemberinfo(m_id));
+			return "mypage/mconfirmPass";
+	}
+	
+	@RequestMapping("mconfirmPasscheck")
+	@ResponseBody
+	public int confirmPasscheck(Principal principal, Model model, MemVO member) {
+		String m_id = "0";
+		if(principal != null) {
+			CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			
+			if(userDetails.getRole() == "일반회원") {
+				m_id  =userDetails.getMember().getM_id();
+				}
+			}
+		String memberPw = memDao.passCheck(member.getM_id());
+		if(member == null || !BCrypt.checkpw(member.getPassword(), memberPw)) {
+			return 0;
+		} else
+		return 1;
+	}
+	
+	
 	// 내정보 수정페이지로 이동
 	@RequestMapping("/memberUpdateForm")
 	public String memberUpdateFrom(Model model, Principal principal) {

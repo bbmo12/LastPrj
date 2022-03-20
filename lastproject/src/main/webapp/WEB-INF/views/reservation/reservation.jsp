@@ -97,7 +97,7 @@
 						style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" style="width: 210px"
+								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'" style="width: 210px"
 								alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
@@ -152,22 +152,17 @@
 					style="position: relative; top: -20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
-							<h1>My pet Info</h1>
+						<br><h1>${member.name }님의 예약 내역</h1><br>
 						</div>
 						<div class="row">
-							<div class="col-md-12" style="margin: 20px 0 0 -6px;">
+							<div class="col-md-12" style="margin: 20px 0 0 -6px;margin-left: 40px;">
 								<div class="table-wrap">
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codep" data-code="">전체</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codep" data-code="100">진료</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codep" data-code="101">훈련</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codep" data-code="102">미용</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
-									<table class="table table-striped" style="margin-top: 25px;">
+									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="">전체</button>
+									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="100">진료</button>
+									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="101">훈련</button>
+									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="102">미용</button>
+									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
+									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
 										<thead>
 											<tr>
 												<th>예약번호</th>
@@ -182,48 +177,6 @@
 											</tr>
 										</thead>
 										<tbody id="myTable">
-											<%-- <c:if test="${fn:length(reservation) == 0 }">
-										<tr>
-											<td colspan="9" align="center">조회된 결과가 없습니다.</td>
-										</tr>
-									</c:if>
-									<c:forEach items="${reservation }" var="res" varStatus="status">
-										<tr>
-											<td><input class="rno" type="hidden" id="r_no"
-												name="r_no" value="${res.r_no }">${res.r_no }</td>
-											<td>${res.name }</td>
-											<td>${res.r_date}</td>
-											<td>${res.time }</td>
-											<td>${res.rcontent }</td>
-											<td>${res.pcontent }</td>
-											<td><input class="in_code" type="hidden"
-												value="${res.rccontent }"> ${res.rccontent }</td>
-											<td>${res.refuse}</td>
-											<c:choose>
-												<c:when test="${res.code eq 405 }">
-													<c:choose>
-														<c:when test= "${res.r_check eq 0 }">
-															<td><button type="button" 
-															onclick='reviewadd("${res.r_no}");'
-																	class="btn btn-secondary" data-toggle="modal"
-																	data-target="#reviewWriteModal">리뷰쓰기</button></td>
-
-														</c:when>
-														<c:otherwise>
-															<td><button onclick='reviewread("${res.r_no}");' type="button"
-																	class="btn btn-secondary" data-toggle="modal"
-																	data-target="#exampleModal1">리뷰보기</button></td>
-														</c:otherwise>
-													</c:choose>
-												</c:when>
-												<c:otherwise>
-													<td>
-														<button>실패</button>
-													</td>
-												</c:otherwise>
-											</c:choose>
-										</tr>
-									</c:forEach> --%>
 										</tbody>
 									</table>
 									<div class="blog_right_sidebar" id="sidebar">
@@ -269,7 +222,7 @@
 					</button>
 				</div>
 				<!-- modal 몸통 -->
-				<div class="modal-body">
+				<div class="modal-body 1">
 					<div id="content"></div>
 					<div class="star-rating"></div>
 					<div id="image"></div>
@@ -548,7 +501,7 @@
 			enctype: 'multipart/form-data',
 			type: "post",
 			data : {
-				'rating' : rating,
+				'rating' : rating, 
 				'r_no': rev_no,
 				'content': content,
 				'multiFileList1': multiFileList1
@@ -697,7 +650,7 @@
 							<tbody id="myTable">
 							</tbody>`)
 						$("#myTable").empty();
-						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
+						$("#myTable").append("<tr><td colspan='9' align='center'>데이터가 없습니다.</td></tr>");
 						// $(".table").empty();
 
 					} else {
