@@ -119,8 +119,8 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
-	public int adMmemCount() {
-		return map.adMmemCount();
+	public int adMmemCount(MemVO vo) {
+		return map.adMmemCount(vo);
 	}
 
 	@Override

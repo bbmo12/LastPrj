@@ -64,6 +64,7 @@ public interface MemService {
 	int memdelete();
 
 	public List<MemVO> admMlistCode(MemVO vo); 
+	public int adMmemCount(MemVO vo); 
 
 
 	List<MemVO> admMemChart();
@@ -71,7 +72,6 @@ public interface MemService {
 	public List<MemVO> admMemReporCode(MemVO vo);
 	public int admMemReportCount(); 
 
-	public int adMmemCount(); 
 	
 	//
 	public MemVO getmemberinfo(String m_id);//member 정보
