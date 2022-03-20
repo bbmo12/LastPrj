@@ -181,7 +181,8 @@ ul.petSct li {
 
 						//json 값으로 변환된 기존 태그를 가져온다
 						var list = ${prevTag};
-
+						if(list[0].t_name != null){
+							
 						
 						//태그 등록
 						for (i = 0; i < list.length; i++) {
@@ -197,7 +198,7 @@ ul.petSct li {
 													+ "<span class='del-btn' idx='" + counter + "'>&nbsp;x</span></li>");
 							addTag(tagValue);
 						}
-
+						}
 						// 태그를 추가한다.
 						function addTag(value) {
 							tag[counter] = value; // 태그를 Object 안에 추가

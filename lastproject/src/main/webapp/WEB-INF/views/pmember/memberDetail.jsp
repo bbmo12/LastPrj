@@ -262,7 +262,7 @@
 	</section>
 	
 	<script>
-console.log(${like})
+
 		//추천버튼 
 		function likeHit(p_id) {
 			var p_id = p_id;

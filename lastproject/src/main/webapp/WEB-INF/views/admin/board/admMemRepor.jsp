@@ -41,14 +41,14 @@
 /* button {
 	width: 90px !important;
 } */
-</style>
+</style>0
 </head>
 <body>
 	<div class="card">
 		<div class="card-body">
-			<h4 class="card-title">QnA 페이지</h4>
+			<h4 class="card-title">일반회원 페이지</h4>
 			<div class="btn-group bg-white p-3" role="group"
-				aria-label="Basic example">
+				aria-label="Basic example">	
 				<button type="button"
 					class="btn btn-link text-dark py-0 border-right"
 					onclick="location.href = 'admQna' ">
@@ -74,14 +74,13 @@
 			<div>
 				<form id="admDateForm" onsubmit="return false"
 					onkeypress="eventkey();">
-					<input type="hidden" name="code"> <input type="hidden"
-						name="repor"> <input type="hidden" name="pageNum"
+					<input type="hidden" name="code"><input type="hidden" name="pageNum"
 						value="1"> FROM : <input type="text" id="fromDate"
 						name="fromDate">&nbsp;&nbsp; TO : <input type="text"
 						id="toDate" name="toDate"> &nbsp;&nbsp;<select id="key" name="key">
 						<option value="" selected="selected">전 체</option>
-						<option value="reporter" >신고자</option>
-						<option value="reported" >신고당한사람</option>
+						<option value="m_id" >아이디</option>
+						<option value="name" >이름</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="submit" onclick="pagingList();">검 색</button>
 					<input type="reset">
@@ -101,25 +100,17 @@
 					data-code="604" data-repor="">사생활 침해</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					data-code="605" data-repor="">게시물 도배</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="" data-repor="701">미처리</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="" data-repor="702">기각처리</button>
-				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="" data-repor="703">승인처리</button>
 			</div>
-			<!-- <div>
-				<input class="form-control" id="myInput" type="text"
-					placeholder="Search.."> <br>
-			</div> -->
+			<br>
+			<h4>제재 대상 일반회원</h4>
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<!-- <th>사진</th> -->
-						<th>신고자</th>
-						<th>신고 당한 사람</th>
-						<th>신고일</th>
-						<th>신고 내역</th>
+						<th>이름</th>
+						<th>아이디</th>
+						<th>신고건수</th>
+						<th>가입날짜</th>
 						<th>신고 유형</th>
 						<th>처리 상태</th>
 					</tr>
@@ -129,6 +120,24 @@
 				</tbody>
 			</table>
 			<div id="pagination"></div>
+			<h4>신고 제재 중인 일반회원</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<!-- <th>사진</th> -->
+						<th>이름</th>
+						<th>아이디</th>
+						<th>신고 건수</th>
+						<th>제재 일수</th>
+						<th>신고 유형</th>
+						<th>처리 상태</th>
+					</tr>
+				</thead>
+				<tbody id="myTableTwo">
+
+				</tbody>
+			</table>
+			<div id="paginationTwo"></div>
 		</div>
 	</div>
 
@@ -176,8 +185,6 @@
 	</div>
 	<!--end Modal 창 -->
 	<script>
-	
-	
 		//검색 함수
 		$(function() {
 			$("#myInput").on(
@@ -203,81 +210,38 @@
 			} else {
 				return false;
 			}
-		}//====================end enter 키================
+		}//====================end enter 키================cReport viewMemberList
 		
-		let viewReviewList = function(result) {
+		let viewMemberList = function(result) {
 			$("#myTable").empty();
 			console.log(result);
 
-			$
-					.each(
-							result,
-							function(i) {
-								if (result[i].repor === 701) {
-									$("#myTable")
-											.append(
-													"<tr><td>"
-															+ result[i].reporter
-															+ "</td><td>"
-															+ result[i].reported
-															+ "</td><td>"
-															+ result[i].w_date
-															+ "</td><td class='card-text'>"
-															+ result[i].content
-															+ "</td><td>"
-															+ result[i].f_content
-															+ "</td><td>"
-															+ "<button id='reportModal' type='button' class='btn btn-danger btn-icon-text' onclick='show("
-															+ result[i].rep_no
-															+ ")' value="
-															+ result[i].rep_no
-															+ " data-toggle='modal'  data-target='#exampleModal"
-															+ result[i].rep_no
-															+ "'>"
-															+ "미처리</td></button></tr>");
-								} else if (result[i].repor === 702) {
+			$.each(result,function(i) {
+				console.log(result[i].cReport);
+						$("#myTable").append(
+														"<tr><td><a onclick='show()'>"														
+														+ result[i].name
+														+ "</a></td><td>"
+														+ result[i].m_id
+														+ "</td><td>"
+														+ "<div class='progress'>"
+														+ "<div class='progress-bar bg-success' role='progressbar' style='width:"
+														+ result[i].cReport
+														+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
+														+ "</div></div>"
+														+ "</td><td>"
+														+ result[i].startDate
+														+ "</td><td>"
+														+ result[i].f_content
+														+"</td><td>"
+														+ (result[i].m_role == 1 ? 'N' : '제재 중')
+														+ "</td></tr>" );
+							}) // end each.
+							
+			
 
-									$("#myTable")
-											.append(
-													"<tr><td>"
-															+ result[i].reporter
-															+ "</td><td>"
-															+ result[i].reported
-															+ "</td><td>"
-															+ result[i].w_date
-															+ "</td><td class='card-text'>"
-															+ result[i].content
-															+ "</td><td>"
-															+ result[i].f_content
-															+ "</td>"
-															+ "<td><button  type='button' onclick='show("
-															+ result[i].rep_no
-															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'> "
-															+ "기각처리</td></button></tr>");
-								} else {
-
-									$("#myTable")
-											.append(
-													"<tr><td>"
-															+ result[i].reporter
-															+ "</td><td>"
-															+ result[i].reported
-															+ "</td><td>"
-															+ result[i].w_date
-															+ "</td><td class='card-text'>"
-															+ result[i].content
-															+ "</td><td>"
-															+ result[i].f_content
-															+ "</td>"
-															+ "<td><button  type='button' class='btn btn-success' onclick='show("
-															+ result[i].rep_no
-															+ ")'  data-toggle='modal' data-target='#exampleModal'>"
-															+ "승인처리</td></button></tr>");
-								}
-								;
-							});
-		}
-		//===================================================================end 리스트 만드는 함수 : viewReviewList============================================ 끝!
+		}//=====================  end리스트 만드는 함수 ====================
+		//===================================================================end 리스트 만드는 함수 : viewMemberList============================================ 끝!
 		
 		
 		// Modal 미처리 신고 : Review
@@ -410,15 +374,13 @@
 		//===================리스트 호출 버튼==================
 		$(".codep").on('click', function() {
 			var code = $(this).data('code');
-			var repor = $(this).data('repor');
 			console.log(code);
-			console.log(repor);
 			$('#admDateForm')[0].code.value = code
-			$('#admDateForm')[0].repor.value = repor
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
 			
-		});//===================end 리스트 호출 버튼================== 끝!
+		}); 
+		//===================end 리스트 호출 버튼================== 끝!
 		
 		
 		//===========리스트 ajax 호출==========
@@ -426,10 +388,9 @@
 			var str = $('#admDateForm').serialize();
 			console.log(str);
 			$.ajax({
-				url : 'admQlistCode',
+				url : 'admMemReporList',
 				method : 'post',
 				data :str,
-				//contentType : 'application/json',
 				success : function(result) {
 					if(result.list == ''){
 						alert('데이터가 없습니다!!');
@@ -437,7 +398,7 @@
 						$("#pagination").empty();
 						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
 					}else {
-						viewReviewList(result.list);
+						viewMemberList(result.list);
 						viewPage(result.page);
 						
 					};

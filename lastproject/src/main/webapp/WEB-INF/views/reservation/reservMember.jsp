@@ -29,7 +29,9 @@
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div.tui-full-calendar-popup-section.tui-full-calendar-dropdown.tui-full-calendar-close.tui-full-calendar-section-state > button{
 	display: none;
 }
-
+.table td{
+ font-size: 17px;
+}
 
 </style>
 <body>
@@ -48,20 +50,25 @@
     
     </div>
 
-    <div id="calendar" style ="width: 35%; display: inline-block;"></div>
+    <div id="calendar" style ="width: 40%; display: inline-block;"></div>
     <div style="width: 20px; height: 600px; display: inline-block;" ></div>
   
-  <div id="tableDiv" style ="width: 45%; height : 600px; display: inline-block;">  
-	<table class="table" style="width : 95%;" >
+  <div id="tableDiv" style ="height: 608px; display: inline-block;">  
+	<table class="table" style="width : 95%;">
 		<thead>
              <tr>
-                <th>예약가능일자</th>
-                <th>예약시간</th>
-                <th>예약가능여부</th>
+                <th style="width: 100px;">예약가능일자</th>
+                <th style= "width: 670px;" align="left">예약시간</th>
              </tr>
-          </thead>
+        </thead>
+        <tbody>
+        	<tr>
+        		<td colspan="2" align="center"><h3 style="font-weight: bold; ">예약하실 날짜를 선택해주세요</h3></td>
+        	</tr>
+        </tbody>
 	</table>
-	
+	<div id="reservbutton" style = "float: right;">
+	</div>
 </div>
 	
 					<!-- Modal -->
@@ -122,7 +129,6 @@ $(document).ready(function(){
 	revList();
 	
 	var p_id="${pmember.p_id}";
-	console.log("p_id======================"+p_id)
 	//달력 템플릿
 	var templates = {
 		    popupIsAllDay: function() {
@@ -141,7 +147,6 @@ $(document).ready(function(){
 		      var isSameDate = moment(start).isSame(end);
 		      var endFormat = (isSameDate ? '' : 'YYYY.MM.DD ') + 'hh:mm a';
 		      if (isAllDay) {
-		    	  console.log(start);
 		        return moment(start).format('YYYY.MM.DD') + (isSameDate ? '' : ' - ' + moment(end).format('YYYY.MM.DD'));
 		      }
 
@@ -190,7 +195,6 @@ $(document).ready(function(){
 	//예약조회
 	function revList(){
 		p_id = "${pmember.p_id}";
-		console.log(p_id);
 		
 		$("#calendar").empty();
 		CreateCalendar();
@@ -200,7 +204,6 @@ $(document).ready(function(){
 			data : {"p_id" : p_id},
 			dataType : "JSON",
 			success : function(result){
-				console.log(result);
 				for(var i =0;i<result.length;i++){
 					
 				var id = result[i].id;
@@ -240,25 +243,23 @@ $(document).ready(function(){
 		var nowDate = year+"-"+month+"-"+parseInt(day[1]);
 		var nowTime = hours+"시"
 		
-		console.log("현재시간"+nowTime);
 		
 		
 		
 		var title = event.schedule.title;
 		if ( title=='예약불가'){
 			$(".table tbody").empty();
-			$("#reservModal").empty();
+			$("#reservbutton").empty();
 		}else{
 			var id = event.schedule.id;
-			console.log(id);
 			$.ajax({
 				url : 'revSetUpdateSelect',
 				method : 'POST',
 				data : {"id" :id},
 				success : function(res){
 					p_id = res.schedule.p_id;
-					console.log("dddddddddddddddd",res.timeList);
-					$(".table").empty();
+					$(".table tbody").empty();
+					$("#reservbutton").empty();
 					var i=0;
 					var $tbody,tdval;
 					var len = res.schedule.c_end.replaceAll('-','')-res.schedule.c_start.replaceAll('-','')+1;
@@ -269,12 +270,9 @@ $(document).ready(function(){
 					//종료일 - 시작일 +1 로 반복횟수 설정
 					for( i; i<len;i++){
 			               var ex = ((parseInt(sp2))+i);
-			               console.log(ex);
 			               if(ex.toString().length == 1){
-			                  console.log(ex.toString().length);
 			                  tdval = split[0]+'-'+split[1]+'-0';
 			               }else{
-			                  console.log(ex.toString().length);
 			                  tdval = split[0]+'-'+split[1]+'-';
 			               }
 			              
@@ -309,7 +307,6 @@ $(document).ready(function(){
 															<input type="radio" name="selectTime" value="16시">16:00~17:00
 															<input type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
-													 <td></td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 10){
@@ -324,7 +321,6 @@ $(document).ready(function(){
 																<input type="radio" name="selectTime" value="16시">16:00~17:00
 																<input type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
-													 <td></td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 12){
@@ -338,7 +334,6 @@ $(document).ready(function(){
 																<input type="radio" name="selectTime" value="16시">16:00~17:00
 																<input type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
-													 <td></td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 14){
@@ -351,7 +346,6 @@ $(document).ready(function(){
 																<input type="radio" name="selectTime"  value="16시">16:00~17:00
 																<input type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
-													 <td></td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 15){
@@ -363,7 +357,6 @@ $(document).ready(function(){
 																<input type="radio" name="selectTime"  value="16시">16:00~17:00
 																<input type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
-													 <td></td>
 												</tr>
 										</tbody> `;
 								}else {
@@ -374,14 +367,13 @@ $(document).ready(function(){
 														<td>
 															<input type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
-													 <td></td>
 												</tr>
 										</tbody> `;
 								}
 							}
 						$(".table").append($tbody);
 						}
-						$("#tableDiv").append(`<button id="reservModal" type="button" class="btn btn-secondary"
+						$("#reservbutton").append(`<button onclick="reservModal(event)" id="reservModal" type="button" class="btn btn-secondary"
 							  	data-toggle="modal" data-target="#exampleModal">예약</button>`);
 						for(var i=0; i<res.timeList.length;i++){
 							$('.tdvalCheck:contains("'+res.timeList[i].reserv_date+'")').parent().find("[value='"+res.timeList[i].reserv_time+"']").attr('disabled',true)
@@ -426,6 +418,7 @@ $(document).ready(function(){
 function changeSelection(event){
 	var reserv_time = $(event.target).val();
 	var tdvalue = $(event.target).parent().prev().text();
+	console.log("예약시간값",reserv_time,"예약날짜값",tdvalue)
 	var p_id = "${pmember.p_id}";
 	$("#dvalue").text('예약일 : ' + tdvalue);
 	$("#tvalue").text('예약시간 : ' + reserv_time);
@@ -436,7 +429,6 @@ function changeSelection(event){
 				"reserv_time": reserv_time,
 				"p_id" : p_id},
 		success : function(res){
-			//console.log(event.target);
 			if((res.reserv_date != null && res.reserv_time != null)){
 				$(event.target).parent().next().text('예약불가');
 			}else{
@@ -450,24 +442,26 @@ function changeSelection(event){
 
 function NoSelection(event){
 	var pet_no = $(event.target).val();
-	console.log(pet_no);
 	$.ajax({
 		url : "autoCode",
 		method : "POST",
 		data : {"pet_no" : pet_no},
 		success : function(res){
 			$("#AutoCode").val(res);
-			console.log($("#AutoCode").val());
 		}
 	})
 }
 
 //모달창 값 보내기
 $("#sendReserv").on('click',function(){
+	
+	$("#exampleModal").modal('hide');
 	//모달창 예약일자
 	var date_value = $("#dvalue").text().slice(6);
+	console.log ("예약일자",date_value);
 	//모달창 예약시간
 	var time_value = $("#tvalue").text().slice(7);
+	console.log("예약시간",time_value);
 	//모달창 증상
 	var r_content = $("#r_content").val();
 	//모달창 품종코드
@@ -493,9 +487,9 @@ $("#sendReserv").on('click',function(){
 				"p_id" : p_id
 				},
 		success : function(res){
-			console.log(res);
 			alert("예약신청이 완료되었습니다.");
-			$(".table").empty();
+			$(".table tbody").empty();
+			$("#reservbutton").empty();
 			
 		},
 		error : function(){
@@ -507,6 +501,21 @@ $('#exampleModal').on('hidden.bs.modal', function(e) {
          $(this).find('form')[0].reset();
          $(".current").text("펫번호(이름)");
 })
+function reservModal(event){
+	
+	var reserv_time = $('input[name=selectTime]:checked').val();
+	var tdvalue = $('input[name=selectTime]:checked').parent().prev().text();
+	console.log("예약시간값",reserv_time,"예약날짜값",tdvalue)
+	var p_id = "${pmember.p_id}";
+	if(reserv_time =='undefined' || tdvalue ==''){
+		alert("예약시간을 선택해주세요");
+		$("#exampleModal").attr("id","noexam");
+	}else{
+		$("#noexam").attr("id","exampleModal");
+		$("#dvalue").text('예약일 : ' + tdvalue);
+		$("#tvalue").text('예약시간 : ' + reserv_time);
+	}
+}
 
  </script>
 </body>

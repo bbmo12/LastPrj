@@ -62,6 +62,11 @@ public class PetServiceImpl implements PetService{
 		return map.AutoCode(pet_no);
 	}
 
+	@Override
+	public List<PetVO> amdPetChart() {
+		return map.amdPetChart();
+	}
+
 
 
 }

@@ -33,6 +33,7 @@ public class MemVO {
 	private String id; //아이디중복조회 확인
 	private List<AuthVO> authList;
 	
+	private String f_content;
 	private String petY;
 	private String petN;
 	private String key;
@@ -44,7 +45,9 @@ public class MemVO {
 	private PagingVO vo;
 	private Criteria cri;
 	private String total;
-	private String code;
+	private Integer code;
+	private String tt;
+	private String oo; 
 }
 	
 

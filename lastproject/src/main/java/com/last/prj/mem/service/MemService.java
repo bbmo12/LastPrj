@@ -64,6 +64,13 @@ public interface MemService {
 	int memdelete();
 
 	public List<MemVO> admMlistCode(MemVO vo); 
+
+
+	List<MemVO> admMemChart();
+
+	public List<MemVO> admMemReporCode(MemVO vo);
+	public int admMemReportCount(); 
+
 	public int adMmemCount(); 
 	
 	//
@@ -71,4 +78,5 @@ public interface MemService {
 	
 	public String passCheck(String m_id);
 	
+
 }

@@ -124,6 +124,22 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
+
+	public List<MemVO> admMemChart() {
+		return map.admMemChart();
+	}
+
+	@Override
+	public List<MemVO> admMemReporCode(MemVO vo) {
+		return map.admMemReporCode(vo);
+	}
+	
+	@Override
+	public int admMemReportCount() {
+		return map.admMemReportCount();
+	}
+
+	@Override
 	public MemVO getmemberinfo(String m_id) {
 		return map.getmemberinfo(m_id);
 	}
@@ -131,8 +147,8 @@ public class MemServiceImpl implements MemService {
 	@Override
 	public String passCheck(String m_id) {
 		return map.passCheck(m_id);
-	}
 
+	}
 
 
 }

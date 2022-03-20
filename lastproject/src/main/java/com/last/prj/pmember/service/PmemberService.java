@@ -35,12 +35,15 @@ public interface PmemberService {
 	//관리자
  	public List<PmemberVO> admPlistCode(PmemberVO vo); //파트너쉽 별 리스트
 	public int pmemCount(); //파트너 회원 수
-	
-	//id로 정보 조회
-	public PmemberVO PmemberOne(String p_id);
 	public int admPlistCodeCount(PmemberVO vo);
 	public List<PmemberVO> admPlistChart(PmemberVO vo);
 	public List<PmemberVO> admgoChart();
+	public int admPmemReportCount();
+	public List<PmemberVO> admPmemReporList(PmemberVO vo);
 	
-
+	//id로 정보 조회
+	public PmemberVO PmemberOne(String p_id);
+	
+	
+	public List<ReviewVO> ServiceReviewRecent();
 }

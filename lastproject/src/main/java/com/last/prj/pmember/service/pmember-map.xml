@@ -275,6 +275,29 @@
 		ON F.F_PART = RE.F_PART
 		ORDER BY RE.REV_NO DESC
 	</select>
+	
+	<select id="ServiceReviewRecent" resultMap="servieceReview"
+		resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT *
+		FROM
+		(SELECT RE.REV_NO,
+		RE.CONTENT,
+		RE.RATING,
+		M.M_ID,
+		M.PICTURE,
+		F.PICTURE AS PHOTO
+		FROM REVIEW RE LEFT JOIN RESERVATION R
+		ON RE.R_NO = R.R_NO
+		LEFT JOIN PET P
+		ON R.PET_NO = P.PET_NO
+		LEFT JOIN MEMBER M
+		ON P.M_ID = M.M_ID
+		LEFT JOIN F_FILE F
+		ON F.F_PART = RE.F_PART
+		ORDER BY RE.REV_NO DESC
+		)
+<![CDATA[WHERE ROWNUM <= 6]]>
+	</select>
 
 	<select id="bestLikeList"
 		resultType="com.last.prj.pmember.service.PmemberVO">
@@ -337,6 +360,32 @@
 	
 		<select id="pMemCode" resultType="int" parameterType="String" >
 			SELECT CODE FROM P_MEMBER WHERE P_ID = #{p_id}
+		</select>
+		
+		<select id="admPmemReporList" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+				SELECT B.*
+				FROM ( SELECT A.* , ROWNUM RN
+				FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE,P.P_ROLE, R.CONTENT,F.CONTENT AS F_CONTENT, R.STATE FROM P_MEMBER P, REPORT R, F_CODE F WHERE P.P_ID = R.REPORTED AND R.CODE = F.CODE
+				<if test="code != null and code != '' ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+				<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+		
+		</select>
+		<select id="admPmemReportCount" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="int">
+		SELECT COUNT(*) FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE,P.P_ROLE, R.CONTENT,F.CONTENT AS F_CONTENT, R.STATE FROM P_MEMBER P, REPORT R, F_CODE F WHERE P.P_ID = R.REPORTED AND R.CODE = F.CODE
+				<if test="code != null ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>)
+		
 		</select>
 
 </mapper>

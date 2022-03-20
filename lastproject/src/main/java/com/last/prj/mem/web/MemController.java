@@ -10,8 +10,15 @@ import java.net.URL;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +26,9 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -39,6 +49,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.last.prj.ffile.web.FfileUtil;
+import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PetcareVO;
@@ -70,6 +81,12 @@ public class MemController {
 
 	@Autowired
 	CustomUserDetailService cusd;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Autowired
+	private String uploadPath;
 	
 	// 회원탈퇴 페이지로 이동
 	@RequestMapping("mdeleteForm")
@@ -286,7 +303,6 @@ public class MemController {
 		return "member/pwdSearchForm";
 	}
 	
-	/*
 	// 이메일 인증, 비밀번호찾기
 	@RequestMapping("/searchPassword")
 	   public String searchPassword(@RequestParam("id") String uid, Model model, RedirectAttributes re) {
@@ -324,44 +340,20 @@ public class MemController {
 	        	 pmemDao.pmemberPwdUpdate(pmem);
 	         }
 	        
-	         try {
-	            // int index = username.indexOf("@");
-	            // int indexPw = password.indexOf(",");
-	            String id = "nuriyy433";// id
-	            String pwd = "";// 비번 입력해야됨
-	            String host = "smtp.gmail.com";
-	            // 네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
-	            // 네이버 이메일 비밀번호를 기재합니다.
-	            int port = 465;
-	            // 메일 내용
-	            // 메일을 발송할 이메일 주소를 기재해 줍니다.
-	            Properties props = System.getProperties();
-	            props.put("mail.smtp.host", host);
-	            props.put("mail.smtp.port", port);
-	            props.put("mail.smtp.auth", "true");
-	            props.put("mail.smtp.ssl.enable", "true");
-	            props.put("mail.smtp.ssl.trust", host);
-	            props.put("mail.debug", "true");
-	            /*
-	             * System.out.println(password); System.out.println(username.substring(0,
-	             * index));
-	             */
-	      /*     Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	         
+	         String setFrom = "nuriyy433@gmail.com";
+	         String toMail = email;
+	         String title = "[BanBanBan] 임시비밀번호 발급";
+	         String content = email + "님의 임시비밀번호는" + pw + "입니다.";
 
-	               // String un=username.substring(0, index);
-	               // String pw=password.substring(0,indexPw);
-	               protected PasswordAuthentication getPasswordAuthentication() {
-	                  return new PasswordAuthentication(id, pwd);
-	               }
-	            });
-	            session.setDebug(true);
-	            // for debug
-	            Message mimeMessage = new MimeMessage(session);
-	            mimeMessage.setFrom(new InternetAddress(id + "@gmail.com"));// 보내는사람 주소
-	            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));// 받는사람 주소
-	            mimeMessage.setSubject("임시비밀번호 발급");
-	            mimeMessage.setText(email + "님의 임시비밀번호는" + pw + "입니다");
-	            Transport.send(mimeMessage);
+	         try {
+	        	MimeMessage message = mailSender.createMimeMessage();
+	 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+	 			helper.setFrom(setFrom);
+	 			helper.setTo(toMail);
+	 			helper.setSubject(title);
+	 			helper.setText(content,true);
+	 			mailSender.send(message);
 
 	         } catch (Exception e) {
 	            e.printStackTrace();
@@ -373,23 +365,24 @@ public class MemController {
 	    	  re.addFlashAttribute("resultMsg2", "result2");
 	         return "redirect:/pwdSearchForm";
 	      }
-
 	   }
-	*/
 	
+	/* 배포시 path변경
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
-		File savePath = new File(realPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
+		
+		File savePath = new File(uploadPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			
+			uploadPath += File.separator + saveFileName;
+			File saveFile = new File(uploadPath);
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
@@ -409,7 +402,50 @@ public class MemController {
 		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		return "redirect:home";
 	}
+	*/
+	
+	@RequestMapping("/mjoin") // 일반회원 회원가입
+	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
+		String originalFileName = file.getOriginalFilename();
+		String webPath = "/resources/upload";
+		String realPath = sc.getRealPath(webPath);
+		File savePath = new File(realPath);
+		
+		//System.out.println("======realPath : "+ realPath);
+		//System.out.println("======savePath : "+ savePath);
+		if (!savePath.exists())
+			savePath.mkdirs();
+		
+		if (!originalFileName.isEmpty()) {
+			String uuid = UUID.randomUUID().toString();
+			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			realPath += File.separator + saveFileName;
+			File saveFile = new File(realPath);
+			
+			//System.out.println("======saveFileName : "+ saveFileName);
+			//System.out.println("======saveFile : "+ saveFile);
+			//System.out.println("======realPath2 : "+ realPath);
+			
+			try {
+				file.transferTo(saveFile);
+				member.setPicture(originalFileName);
+				member.setPfile(saveFileName);
 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// 비밀번호 암호화
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
+		String inputPwd = member.getPassword();
+		String pwd = encoder.encode(inputPwd);
+		member.setPassword(pwd);
+
+		memDao.memberInsert(member);
+		redirectAttr.addFlashAttribute("insert","회원가입실패");
+		return "redirect:home";
+	}
+	
 	@RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
 	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		String originalFileName = file.getOriginalFilename();
@@ -443,7 +479,7 @@ public class MemController {
 		model.addAttribute("p_id", pmemDao.pmemberSelect(pmember));
 		return "member/pjoinForm2";
 	}
-
+	
 	@RequestMapping("/pjoin_2") // 파트너회원 회원가입 2차
 	public String pjoin_2(PmemVO pmember, Model model) {
 

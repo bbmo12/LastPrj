@@ -165,4 +165,19 @@ public class PmemberServiceImpl implements PmemberService{
 	public String passCheck(String p_id) {
 		return map.passCheck(p_id);
 	}
+
+	@Override
+	public List<ReviewVO> ServiceReviewRecent() {
+		return map.ServiceReviewRecent();
+	}
+
+	public int admPmemReportCount() {
+		return map.admPmemReportCount();
+	}
+
+	@Override
+	public List<PmemberVO> admPmemReporList(PmemberVO vo) {
+		return map.admPmemReporList(vo);
+
+	}
 }
