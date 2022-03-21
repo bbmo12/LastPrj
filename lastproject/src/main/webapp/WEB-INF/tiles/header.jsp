@@ -225,7 +225,7 @@
 							<%-- <c:if test="${mId ne null and pId eq null}"> --%>
 							<!-- 권한이 MEMBER인 사람만 -->
 							<sec:authorize access="hasRole('MEMBER')">
-								<li class="menu-has-children"><a href="#">마이페이지</a>
+								<li class="menu-has-children"><a href="mainMypage">마이페이지</a>
 									<ul>
 										<li><a href="memberMypage">내 프로필</a></li>
 										<!-- <li><a href="petmemberForm">반려동물 프로필</a></li> -->

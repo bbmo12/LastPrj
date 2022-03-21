@@ -106,7 +106,7 @@ ul.petSct li {
 			style="margin-bottom: 50px; margin-top: 50px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
 			<h2 style="margin-top: 50px;">질문글 수정하기</h2>
 			<form name="qmForm" id="qmForm" action="qModify" method="post"
-				onsubmit="tagInput();">
+				onsubmit="return tagInput();">
 
 				<input type="hidden" name="q_no" id="q_no"
 					value="${qnaDetail.q_no }">
@@ -114,7 +114,7 @@ ul.petSct li {
 				<div class="mb-3">
 					<h3>제목</h3> <input type="text"
 						class="form-control" name="title" id="title"
-						placeholder="제목을 입력해 주세요" value="${qnaDetail.title }">
+						placeholder="제목을 입력해 주세요" value="${qnaDetail.title }" required>
 				</div>
 
 				<div class="form-check">
@@ -263,6 +263,14 @@ ul.petSct li {
 
 	/*li 태그를 input 태그로 바꿔 넘기기 용이하게...*/
 	function tagInput() {
+		
+		var content = CKEDITOR.instances.content.getData()
+		if(content == "" || content.length == 0){
+			alert('내용을 입력하세요');
+			CKEDITOR.instances.content.focus();
+			return false;
+		}
+		
 		var tValue = document.querySelectorAll("li.tag-item span:first-child");
 
 		for (var i = 0; i < tValue.length; i++) {
@@ -274,7 +282,13 @@ ul.petSct li {
 	var pet = "${qnaDetail.pet_no}";
 	console.log(pet);
 
-	$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked", true);
+	/* $('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked", true); */
+	
+	if(pet == "" || pet== null){
+		$('input[value=""]').attr("checked", true);
+	} else {
+		$('input:radio[name=pet_no]:input[value=' + pet + ']').attr("checked", true);
+	}
 
 	</script>
 </body>

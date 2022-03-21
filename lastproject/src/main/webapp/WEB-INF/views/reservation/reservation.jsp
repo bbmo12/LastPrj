@@ -71,10 +71,34 @@
 	.star-rating label:hover~label {
 		color: #fc0;
 	}
+	.badge-info {
+		background-color: cornflowerblue;
+		border: none;
+	}
+	
 	 .badge-pay{
 		background-color: #38a4ff;
 		color: #fff;
     }
+    #sidebar {
+		width: 500px;
+		float: none;
+		margin-left: 12em;
+		background-color: #fff;
+		border: none;
+
+	}
+    .codep {
+		color: #0062ff; 
+    	background: #FFF;
+    	border: 1px solid transparent;
+    	font-size: 16px;	
+	}
+	.codep:hover {
+		color: #0062ff;
+    	border: 1px solid #0062ff;
+    	background: #fff;	
+	}
 	
 </style>
 
@@ -106,62 +130,50 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="memberMypage"
-									class="d-flex justify-content-between">
+								<li><a href="memberMypage" class="d-flex justify-content-between">
 										<p>내 프로필</p>
-								</a></li>
-								<li><a href="petmemberForm"
-									class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
-								</a></li>
-								<li><a href="protocol"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="protocol" class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
-								</a></li>
-								<li><a href="reservationSelect"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between">
 										<p>예약 내역</p>
-								</a></li>
+									</a></li>
 								<li><a href="myPay" class="d-flex justify-content-between">
 										<p>결제 내역</p>
-								</a></li>
-								<li><a href="mycounsel"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="mycounsel" class="d-flex justify-content-between">
 										<p>상담 내역</p>
-								</a></li>
-								<li><a href="myreport"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="myreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
-								</a></li>
-								<li><a href="myfallow"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="myfallow" class="d-flex justify-content-between">
 										<p>팔로우</p>
-								</a></li>
+									</a></li>
 								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
-								</a></li>
-								<li><a href="mdeleteForm"
-									class="d-flex justify-content-between">
+									</a></li>
+								<li><a href="mdeleteForm" class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
-								</a></li>
+									</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px;">
+				<div class="col-lg-9 posts-list" style="position: relative; top: 20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 						<br><h1>${member.name }님의 예약 내역</h1><br>
 						</div>
 						<div class="row">
-							<div class="col-md-12" style="margin: 20px 0 0 -6px;margin-left: 40px;">
+							<div class="col-md-12" style="margin: 20px 0 0 -45px;">
 								<div class="table-wrap">
-									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="">전체</button>
-									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="100">진료</button>
-									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="101">훈련</button>
-									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="102">미용</button>
-									<button type="button" class="btn btn-link btn-rounded btn-fw codep" data-code="103">돌봄서비스</button>
+									<button type="button" class="codep" style="margin: 0 50px 0 15em;" data-code="">전체</button>
+									<button type="button" class="codep" style="margin-right: 50px;" data-code="100">진료</button>
+									<button type="button" class="codep" style="margin-right: 50px;" data-code="101">훈련</button>
+									<button type="button" class="codep" style="margin-right: 50px;" data-code="102">미용</button>
+									<button type="button" class="codep" style="margin-right: 50px;" data-code="103">돌봄서비스</button>
 									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
 										<thead>
 											<tr>
@@ -188,7 +200,8 @@
 													<option value="all" selected="selected">전 체</option>
 												</select>
 												<div class="input-group">
-													<input type="text" class="form-control" id="data"	name="data"> <span class="input-group-btn">
+													<input type="text" class="form-control" id="data"name="data"> 
+													<span class="input-group-btn">
 														<button class="btn btn-default" type="submit">
 															<i class="fa fa-search"></i>
 														</button>
@@ -216,8 +229,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -228,10 +240,8 @@
 					<div id="image"></div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">취소</button>
-					<button id="sendReserv" name="sendReserv" type="button"
-						class="btn btn-primary" data-dismiss="modal">확인</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button id="sendReserv" name="sendReserv" type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
 				</div>
 			</div>
 		</div>
@@ -246,8 +256,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -259,15 +268,16 @@
 						<div align="center">
 							<h3 align="center">후기를 남겨주세요!</h3>
 							<div class="star-rating">
-								<input type="radio" id="5-stars" name="rating" value="5" /> <label
-									for="5-stars" class="star">&#9733;</label> <input type="radio"
-									id="4-stars" name="rating" value="4" /> <label for="4-stars"
-									class="star">&#9733;</label> <input type="radio" id="3-stars"
-									name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
-								<input type="radio" id="2-stars" name="rating" value="2" /> <label
-									for="2-stars" class="star">&#9733;</label> <input type="radio"
-									id="1-stars" name="rating" value="1" /> <label for="1-stars"
-									class="star">&#9733;</label>
+								<input type="radio" id="5-stars" name="rating" value="5" /> 
+								<label for="5-stars" class="star">&#9733;</label> 
+								<input type="radio" id="4-stars" name="rating" value="4" /> 
+								<label for="4-stars" class="star">&#9733;</label> 
+								<input type="radio" id="3-stars" name="rating" value="3" /> 
+								<label for="3-stars" class="star">&#9733;</label>
+								<input type="radio" id="2-stars" name="rating" value="2" /> 
+								<label for="2-stars" class="star">&#9733;</label> 
+								<input type="radio" id="1-stars" name="rating" value="1" /> 
+								<label for="1-stars" class="star">&#9733;</label>
 							</div>
 						</div>
 						<div class="form-group">
@@ -277,11 +287,10 @@
 						</div>
 
 						<div class="form-group" style="margin-top: -10px;">
-							<label>후기사진</label><br> <input
-								class="file-upload-browse btn btn-primary" type="file"
+							<label>후기사진</label><br> 
+							<input class="file-upload-browse btn btn-primary" type="file"
 								id="multiFileList1" name="multiFileList1" multiple="multiple">
-							<button type="button" class="btn btn-primary btn-sm"
-								onclick="addFile1()">+</button>
+							<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
 							<div id="ffile1"></div>
 						</div>
 					</div>
@@ -290,16 +299,14 @@
 						<input type="hidden" id="insert_r_no" name="r_no" value="">
 						<button type="submit">작성</button>
 						<!-- onclick="serviceReview()" -->
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">취소</button>
-
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<!-- 리뷰 작성 모달창 -->
+		<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
 	function addFile1() {
 		var filediv = $('<div>').attr({

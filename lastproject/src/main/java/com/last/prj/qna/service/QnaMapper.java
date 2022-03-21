@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.last.prj.pmember.service.Criteria;
+
 public interface QnaMapper {
 
 	//질문글 수
