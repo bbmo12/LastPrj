@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
 <style>
@@ -14,10 +13,6 @@
 	padding: 50px;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-	
 
 	
 <body>
@@ -29,7 +24,7 @@
 		// 이름 정규식
 		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
 		// 몸무게
-		var weightJ =^[0-9]{1,3}$/;
+		var weightJ = /^[0-9]{1,3}$/;
 		
 		
 		$(document).ready(function () {
@@ -95,8 +90,6 @@
 					$('#weight_check').css('color', 'red');
 				}
 			});
-			
-			
 		});
 	</script>
 	
@@ -169,17 +162,17 @@
 						<form action="mypatadd" method="post" enctype="multipart/form-data">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
-								<label for="name">이름</label>
+								<label for="name1">이름</label>
 								<input type="text" id="name" name="name"  class="form-control" required autofocus>
 						<div id="name_check"></div>
 							</div>
 							<div class="form-group">
-									<label for="birth">이름</label>
+									<label for="birth1">생년월일</label>
 								<input type="text" id="birth" name="birth" class="form-control" required autofocus>
 								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
-									<label for="gender">성별</label>
+									<label for="gender1">성별</label>
 								<!-- 1이면 여자, 2이면 남자  -->
 								<label>여자
 									<input type="radio" id="gender" name="gender" value="1">
@@ -190,12 +183,12 @@
 									<span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">몸무게&nbsp;:&nbsp;</h3>
-								<input type="text" id="weight" name="weight">
+								<label for="weight1">비밀번호확인</label>
+								<input type="text" id="weight" name="weight" class="form-control" required autofocus>
 								<div id="weight_check"></div>
 							</div>
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">품종&nbsp;:&nbsp;</h3>
+								<label for="code1">품종</label>
 								<label>개<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
 								<label>고양이<input type="radio" id="code" name="code" value="502"><span class="checkmark"></span></label>&emsp;
 								<label>조류<input type="radio" id="code" name="code" value="503"><span class="checkmark"></span></label>&emsp;
@@ -209,17 +202,16 @@
 								<label>거미<input	 type="radio" id="code" name="code" value="511"><span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">반려동물 사진&nbsp;:&nbsp;</h3>
+								<label for="file1">반려동물 사진</label><br>
 								<input type="file" id="file" name="file">
 							</div>
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">반려동물 설명&nbsp;:&nbsp;</h3>
+								<label for="n_content1">반려동물 설명</label>
 								<textarea class="form-control" id="n_content" name="n_content"
-									rows="4" cols="130"></textarea>
+									rows="10" cols="130"></textarea>
 							</div>
 							<input type="hidden" name="m_id" id="m_id" value="${member.m_id }">
-							<button type="submit" class="genric-btn info radius">반려동물
-								등록</button>
+							<button type="submit" class="genric-btn info radius">반려동물 등록</button>
 						</div>
 						</form>
 					</div>

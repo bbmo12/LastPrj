@@ -15,6 +15,83 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <body>
+<script>
+		//생일 정규식
+		var birthJ = /^\d{8}$/;
+		//모든 공백 체크 정규식
+		var empJ = /\s/g;
+		// 이름 정규식
+		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
+		// 몸무게
+		var weightJ = /^[0-9]{1,3}$/;
+		
+		
+		$(document).ready(function () {
+			/* 아이디 중복체크 */
+			$('form').on('submit', function () {
+				var inval_Arr = new Array(4).fill(false);
+
+				// 생일 정규식
+				if (birthJ.test($('#birth').val())) {
+					inval_Arr[0] = true;
+				} else {
+					inval_Arr[0] = false;
+					alert('생년월일 8자리 입력하세요.');
+					return false;
+				}
+				
+				// 이름 정규식
+				if (nameJ.test($('#name').val())) {
+					inval_Arr[1] = true;
+				} else {
+					inval_Arr[1] = false;
+					alert('이름을 확인하세요.');
+					return false;
+				}
+				// 몸무게 정규식
+				if (weightJ.test($('#weight').val())) {
+					inval_Arr[2] = true;
+				} else {
+					inval_Arr[2] = false;
+					alert('몸무게를 확인하세요.');
+					return false;
+				}
+			});
+				
+				$("#name").blur(function () {
+					if (nameJ.test($(this).val())) {
+						
+						$("#name_check").text('');
+					} else {
+						$('#name_check').text('한글3자리 이내로 입력하세요.');
+						$('#name_check').css('color', 'red');
+					}
+				});
+				
+				
+				$("#birth").blur(function () {
+					if (birthJ.test($(this).val())) {
+					
+						$("#birth_check").text('');
+					} else {
+						$('#birth_check').text('생년월일8자리 입력하세요.');
+						$('#birth_check').css('color', 'red');
+					}
+				});
+				
+
+			$("#weight").blur(function () {
+				if (nameJ.test($(this).val())) {
+					console.log(nameJ.test($(this).val()));
+					$("#weight_check").text('');
+				} else {
+					$('#weight_check').text('3자리 이하 숫자만 입력하세요.');
+					$('#weight_check').css('color', 'red');
+				}
+			});
+		});
+	</script>
+
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -82,20 +159,11 @@
 
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
-						<div class="col-lg-12">
-							<div class="feature-img">
-								<img class="img-fluid"
-									src="resources/assets/images/blog-details/feature-img1.jpg"
-									alt="">
-							</div>
-						</div>
 						<form action="mypetupdate" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
-								<h5>
-									<strong>이름</strong>
-								</h5>
+								<label for="name">이름</label>
 								<input type="text" id="name" name="name" value="${pet.name }">
 							</div>
 							<div class="form-group">
