@@ -15,12 +15,6 @@
 		padding: 50px;
 	}
 
-	.flex {
-		-webkit-box-flex: 1;
-		-ms-flex: 1 1 auto;
-		flex: 1 1 auto
-	}
-
 	.padding {
 		padding: 5rem
 	}
@@ -31,8 +25,12 @@
 	}
 
 	.table th {
-		font-size: 20px;
-		font-weight: 500;
+		text-align: center;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 500 !important;
+		color: black;
 	}
 
 	.table {
@@ -63,17 +61,96 @@
 		background-color: cornflowerblue;
 		border: none;
 	}
+
+	.card-text {
+		display: inline-block;
+		width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
+
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
+
+	.card-body {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+		color: black;
+
+	}
+
+	.card {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem
+	}
+
+	.card-header {
+		background: white;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 400;
+		color: black;
+	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 
 <body>
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="pmemberMyPage">MyPage</a>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br><br><br>
+					<h2></h2>
 				</div>
 			</div>
 		</div>
@@ -82,20 +159,25 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
+					<h2 align="center">MyPage</h2>
+					<br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${pmember.picture}"
-								style="width: 210px" alt="">
+							<img class="partner_img" src="resources/upload/${pmember.picture}"
+								onerror="this.src='resources/upload/pet.PNG'" style="width: 210px; height: 167px;">
+							<br><br>
+							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>
-							<h4> ${pmember.name }</h4>
-							<div class="br"></div>
+							<div id="myinfo">
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="confirmPass">내 정보 수정하기</a>
+							</div>
 						</aside>
+					</div><br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="pmemberMyPage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
+							<ul class="list cat-list nanumbarungothic">
+								<p id="menu_bold">내 활동 내역</p>
 								<li><a href="reservationSetting" class="d-flex justify-content-between">
 										<p>예약일정 설정</p>
 									</a></li>
@@ -114,6 +196,11 @@
 								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 									</a></li>
+								<br><br>
+								<p id="menu_bold">회원 정보 관리</p>
+								<li><a href="confirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+									</a></li>
 								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 									</a></li>
@@ -124,53 +211,61 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list" style="position: relative; top: -20px;">
-					<div class="col-lg-12 col-md-12 blog_details">
-						<div align="center">
-							<h1> ${pmember.name }님의 수익내역</h1>
-						</div>
-						<div class="row">
-							<div class="col-md-12" style="margin: 20px 0 0 -6px;">
-								<div class="table-wrap">
-								<form action="pMembenefit" name="goform">
-								<input type="hidden" name="pageNum" value="1">
-									<table class="table table-striped">
-										<thead>
-											<tr style="text-align: center;">
-												<th>서비스시작일</th>
-												<th>서비스상태</th>
-												<th>서비스내용</th>
-												<th>회원이름</th>
-												<th>금액</th>
-											</tr>
-										</thead>
-										<tbody style="text-align: center">
-											<c:if test="${ fn:length(pMembenefit) == 0  }">
-                                                    <tr>
-                                                        <td colspan="6" align="center">조회된 결과가 없습니다.</td>
-                                                    </tr>
-                                              </c:if>
-											<c:forEach items="${pMembenefit }" var="benefit">
-												<tr>
-													<td>${benefit.startdate }</td>
-													<c:if test="${benefit.enddate eq null }">
-														<td><label class="badge badge-warning">서비스 진행중</label></td>
-													</c:if>
-													<c:if test="${benefit.enddate ne null }">
-														<td>${benefit.enddate}&nbsp;<label class="badge badge-success">종료</label></td>
-													</c:if>
-													<td>${benefit.content }</td>
-													<td>${benefit.m_id } </td>
-													<td>${benefit.price }</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-									</form>
-									<my:nav jsFunc="go_page" page="${page}" />
-									<c:if test="${ fn:length(pMembenefit) != 0  }">
-											<h4 align="center">총 수익은 ${totalPrice.total_price }원 입니다.</h4>
-									</c:if>								
+
+				<div class="col-lg-9 posts-list">
+					<div class="single-post row">
+						<div class="col-lg-12 col-md-12 blog_details">
+							<br><br>
+							<div class="card">
+								<div class="card-header">
+									<div align="left">
+										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp; ${pmember.name }님의 수익내역
+									</div>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="table-wrap" style="width: 920px;">
+											<form action="pMembenefit" name="goform">
+												<input type="hidden" name="pageNum" value="1">
+												<table class="table table-striped">
+													<thead>
+														<tr style="text-align: center;">
+															<th>서비스시작일</th>
+															<th>서비스상태</th>
+															<th>서비스내용</th>
+															<th>회원이름</th>
+															<th>금액</th>
+														</tr>
+													</thead>
+													<tbody style="text-align: center">
+														<c:if test="${ fn:length(pMembenefit) == 0  }">
+															<tr>
+																<td colspan="6" align="center">조회된 결과가 없습니다.</td>
+															</tr>
+														</c:if>
+														<c:forEach items="${pMembenefit }" var="benefit">
+															<tr>
+																<td>${benefit.startdate }</td>
+																<c:if test="${benefit.enddate eq null }">
+																	<td><label class="badge badge-warning">서비스진행중</label></td>
+																</c:if>
+																<c:if test="${benefit.enddate ne null }">
+																	<td>${benefit.enddate}&nbsp;<label class="badge badge-success">종료</label></td>
+																</c:if>
+																<td>${benefit.content }</td>
+																<td>${benefit.m_id } </td>
+																<td>${benefit.price }</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</form>
+											<my:nav jsFunc="go_page" page="${page}" />
+											<c:if test="${ fn:length(pMembenefit) != 0  }">
+												<h4 align="center">총 수익은 ${totalPrice.total_price }원 입니다.</h4>
+											</c:if>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
