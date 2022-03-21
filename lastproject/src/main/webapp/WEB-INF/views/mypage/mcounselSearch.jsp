@@ -33,6 +33,7 @@
 		font-style: normal;
 		font-weight: 500 !important;
 		color: black;
+		padding: 0,14px,0,14px;
 		/* background-color: ghostwhite; */
 	}
 
@@ -51,6 +52,7 @@
 		font-size: 16px;
 		padding: .875rem 0.9375rem;
 		text-align: center;
+		padding: 0,14px,0,14px;
 	}
 	
 	
@@ -189,7 +191,7 @@
 
 	.card-text {
 		display: inline-block;
-		width: 200px;
+		width: 150px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -198,28 +200,8 @@
 	padding: 5rem
 	}
 
-	.table th {
-	font-size: 20px;
-	font-weight: 500;
-	text-align: center;
-	}
+	
 
-	.table {
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 1rem;
-	background-color: transparent;
-	}
-
-	.table-striped tbody tr:nth-of-type(odd) {
-	background-color: #f9f9fd;
-	}
-
-	.table td {
-	font-size: 16px;
-	padding: .875rem 0.9375rem;
-	text-align: center;
-	}
 </style>
 
 <body>
@@ -303,10 +285,10 @@
 					<div class="card-body">
 						<div class="row">
 						<div>
-							<div class="table-wrap" style="width: 994.500px">
+							<div class="table-wrap" style="width: 848.958px">
 									<form action="mycounsel" id="goform" name="goform">
 										<input type="hidden" id="pageNum" name="pageNum" value="1">
-										<table class="table table-striped" style="width: 100%" >
+										<table class="table table-striped" >
 											<thead>
 												<tr style="text-align: center;">
 													<th>상담번호</th>
@@ -344,6 +326,7 @@
 															</c:if>
 														</td>
 														<td>${mycounsel.w_date }</td>
+
 														<td><button type="button" class="btn btn-primary" style="background-color: cornflowerblue; border: none;"
 																onclick="location.href='csDetail?p_id=${mycounsel.p_id }&m_id=${mycounsel.m_id }&pet_no=${mycounsel.pet_no }&c_no=${mycounsel.c_no}'">상담내용보기</button>
 														</td>

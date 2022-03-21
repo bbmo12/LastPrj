@@ -171,7 +171,6 @@
 
 	.form-control {
 		padding: 5px;
-		width: 250px;
 		display: inline-block;
 		border-radius: 20px;
 	}
