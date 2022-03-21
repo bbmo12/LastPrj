@@ -337,17 +337,19 @@
 			
 			if(result[i].code == 405){
 				if(result[i].r_check == 0){
-					choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-secondary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰쓰기</button></td></tr>";
+					choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-primary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰 작성</button></td></tr>";
 				}else{
-					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰보기</button></td></tr>";
+					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");'style='border : 0px;' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰 보기</button></td></tr>";
 				}
 			}else{
-				choicedTag += '<td><button>실패</button></td></tr>';
+				choicedTag += '<td><button class="btn btn-primary" disabled>리뷰 작성</button></td></tr>';
 			}
 			$("#myTable").append(choicedTag);
-			
+			console.log($("#td"+i).text());
 			if($("#td"+i).text()=='진료완료'){
-				$("#td"+i).attr('class','badge badge-pay');
+				
+			}else if ($("#td"+i).text()=='승인거절'){
+				
 			}
 			
 		}) // end each.
@@ -362,11 +364,16 @@
 				var check = $(".code").append(`<button class="badge badge-warning" type ="button" onclick="payBtn(event)">결제하기</button>`);
 			} else if (val[i].innerText == '승인거절') {
 				val[i].classList.add("refuse");
+				$(".refuse").empty();
+				var check = $(".refuse").append(`<span class="badge badge-danger">승인거절</span>`);
 			} else if (val[i].innerText == '결제완료') {
 				val[i].classList.add("complete");
 				$(".complete").empty();
-				var check = $(".complete").append(`<span>예약완료</span>`);
+				var check = $(".complete").append(`<span class="badge badge-warning">결제완료</span>`);
 			}else if (val[i].innerText == '진료완료'){
+				val[i].classList.add("diaCom");
+				$(".diaCom").empty()
+				var check = $(".diaCom").append(`<span class="badge badge-pay">진료완료</span>`);
 			} //else if문
 			
 		} //for문
