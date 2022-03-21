@@ -8,20 +8,196 @@
 	<title>Insert title here</title>
 </head>
 <style>
+.no_deco {
+	text-decoration: none !important;
+	font-size : 0.8rem !important;
+	color: black;
+}
+	#my_section {
+		padding: 50px;
+		background: #f9f9fd;
+	}
+
+	.blog_right_sidebar{
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+		border: 1px solid #e3e6f0;
+    	border-radius: 0.35rem;
+    	float: none !important; margin: 0 auto !important;
+    	background-color: white;
+    	width: 250px;
+	}
+	.card{
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+		border: 1px solid #e3e6f0;
+    	border-radius: 0.35rem
+	}
+	
+	.card-header{
+	background: white;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 400;
+ 	color: black;
+	}
+	
+	.card-footer{
+	background: white;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 400;
+	}
+	
+	#notice_footer{
+	text-align: center;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 400;
+	}
+ 	
+	.card_notice{
+	font-size: 0.8rem;
+	 font-family: 'NanumBarunGothic';
+	 font-style: normal;
+ 	font-weight: 400;
+	}
+	
+	.partner_img{
+	object-fit: cover;
+	object-position:top;
+	border-radius:50%;
+	width: 180px !important;
+	height: 180px !important;
+	float: none;
+	margin: 0 auto;
+}
+
+.pet_img{
+	object-fit: cover;
+	object-position:top;
+	border-radius:50%;
+	width: 100px !important;
+	height: 100px !important;
+	float: none;
+	margin-bottom: 10px;
+}
+
+.widget_title{
+	background: #0062ff !important;
+}
+
+#cardTitle{
+	font-size: 1.25rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 700;
+}
+
+#myinfo{
+	font-size: 0.8rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 300;
+}
+
+#pet_img2{
+	display: inline-block;
+	text-align: center;
+	margin-right: 20px;
+	font-size: 0.8rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 400;
+}
+
+#Mainname{
+	font-size: 1.5rem !important;
+	font-family: 'NanumBarunGothic'!important;
+	font-style: normal !important;
+ 	font-weight: 700 !important;
+ 	color:gray;
+}
+
+#menu_bold{
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 700;
+ 	color: black;
+}
+
 	#my_section {
 		padding: 50px;
 	}
 
-	#update-button {
-		color: #fff;
-		background: #0062ff;
-		border: 1px solid transparent;
+	#main-form h3,
+	input {
+		display: inline-block;
 	}
 
-	#update-button:hover {
+	#addDiv,
+	#addService {
+		margin-left: 36em;
+		margin-top: -5px;
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#addDiv:hover,
+	#addService:hover{
 		color: #0062ff;
 		border: 1px solid #0062ff;
 		background: #fff;
+	}
+	#price-insert,
+	#time-insert{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	
+	#price-insert:hover,
+	#time-insert:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+
+	#select-one {
+		margin-top: -20px;
+	}
+
+	.form-control {
+		padding: 5px;
+		width: 250px;
+		display: inline-block;
+		border-radius: 20px;
+	}
+
+	.service-info {
+		display: inline-grid;
+	}
+
+	.service-info input {
+		width: 100px;
+	}
+
+	#p-info {
+		margin-left: 9em;
+		margin-top: -20px;
+	}
+
+	.delete-button {
+		float: right;
+		margin-top: 25px;
+		margin-right: 100px;
+		width: 62px;
+	}
+
+	#p_info {
+		border: 1px solid rgba(151, 151, 151, 0.3);
 	}
 	#cancel{
 		width: 113px;
@@ -30,6 +206,40 @@
     	font-size: .8em;
     	text-align: center;
     	font-weight: 500;
+	}
+	#member_post{
+		width: 100px;
+    	margin-left: 51em;
+    	margin-top: -70px;  	
+    	color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#member_post:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#successUpdate{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#successUpdate:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	
+	input:focus,
+	textarea:focus{ 
+		border: 3px solid;
+	}
+	
+	#content{
+		height: 45px;
+    	padding: 12px;
+   		width: 275px;
 	}
 </style>
 
@@ -162,56 +372,67 @@
 		});
 	</script>
 
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="memberMypage">MyPage</a>
+				<div class="col-lg-6 offset-lg-3">
+					<div class="section-top text-center">
+						<br><br><br>
+						<h2></h2>
+					</div>
 				</div>
-			</div>
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container">
+		<div class="container"  style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-3" style="padding:0px;">
+				<h2 align="center">정보 수정</h2>
+				<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${member.picture}"
+							<img class="partner_img" src="resources/upload/${member.picture}"
 								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="">
+							<br><br>
+							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
-							<h4>${member.name }</h4>
-							<div class="br"></div>
+							<div id="myinfo">
+							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
+							</div>
 						</aside>
+						</div>
+						<br>
+						
+						<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="memberMypage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
+							<ul class="list cat-list nanumbarungothic">
+							<p id="menu_bold">내 활동 내역</p>
+								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
+								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
 									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between">
+								<li><a href="myPay" class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
 									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
+								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
 									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
+								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
 									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
+								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
 									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
+									<br><br><p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
 									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
 									</a></li>
 							</ul>
@@ -220,36 +441,37 @@
 				</div>
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
-						<div class="col-lg-12">
-							<div class="feature-img">
-								<img class="img-fluid" src="resources/assets/images/blog-details/feature-img1.jpg"alt="">
-							</div>
-						</div>
 						<form action="memberUpdate" enctype="multipart/form-data" method="post">
 							<div class="col-lg-12 col-md-12 blog_details">
 								<div class="form-group">
+								<i class="fas fa-user"></i>
 									<label for="name">이름</label>
-									<input type="text" id="name" name="name" value="${member.name}">
+									<h3 style="font-weight: bolder;">이름</h3>
+									<input type="text" id="name" name="name" class="form-control" value="${member.name}">
 									<div id="name_check"></div>
 								</div>
 								<div class="form-group">
-									<label for="email">E-Mail 아이디</label>
-									<input type="email" style="border: none" id="m_id" name="m_id"
+								<i class="fas fa-id-card"></i>
+									<h3 style="font-weight: bolder;">아이디</h3>
+									<input type="email" style="border: none" id="m_id" name="m_id" class="form-control"
 										value="${member.m_id}" readonly>
 								</div>
 								<div class="form-group">
-									<label for="password">비밀번호</label>
-									<input type="password" id="password" name="password">
+									<i class="fa fa-unlock-alt"></i>
+									<h3 style="font-weight: bolder;">비밀번호</h3>
+									<input type="password" id="password" name="password" class="form-control" >
 									<div id="pw_check"></div>
 								</div>
 								<div class="form-group">
-									<label for="password">비밀번호 재확인</label>
-									<input type="password" id="password1" name="password1">
+									<i class="fa fa-unlock-alt"></i>
+									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
+									<input type="password" id="password1" name="password1" class="form-control" >
 									<div id="pw1_check"></div>
 								</div>
 								<div class="form-group">
-									<label for="tel">전화번호&nbsp;휴대폰 번호('-'없이 번호만 입력해주세요)</label>
-									<input type="text" id="tel" name="tel" value="${member.tel}">
+								<i class="fa-solid fa-mobile-screen"></i>
+								<h3 style="font-weight: bolder;">전화번호('-'없이 번호만 입력해주세요)</h3>
+									<input type="text" id="tel" name="tel" value="${member.tel}" class="form-control">
 									<div id="tel_check"></div>
 								</div>
 								<div class="form-group">
