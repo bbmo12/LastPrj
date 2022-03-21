@@ -236,7 +236,7 @@
 				<!-- modal 몸통 -->
 				<div class="modal-body 1">
 					<div id="content"></div>
-					<div class="star-rating"></div>
+					<div class="star"></div>
 					<div id="image"></div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
@@ -268,7 +268,7 @@
 						<div align="center">
 							<h3 align="center">후기를 남겨주세요!</h3>
 							<div class="star-rating">
-								<input type="radio" id="5-stars" name="rating" value="5" /> 
+								<!-- <input type="radio" id="5-stars" name="rating" value="5" /> 
 								<label for="5-stars" class="star">&#9733;</label> 
 								<input type="radio" id="4-stars" name="rating" value="4" /> 
 								<label for="4-stars" class="star">&#9733;</label> 
@@ -277,8 +277,9 @@
 								<input type="radio" id="2-stars" name="rating" value="2" /> 
 								<label for="2-stars" class="star">&#9733;</label> 
 								<input type="radio" id="1-stars" name="rating" value="1" /> 
-								<label for="1-stars" class="star">&#9733;</label>
+								<label for="1-stars" class="star">&#9733;</label> -->
 							</div>
+							<input id="star2" name="rating" type="hidden">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword4">후기내용</label>
@@ -308,6 +309,16 @@
 
 		<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
+	$(document).ready(function () {
+		$('.star-rating').raty({
+			path: "resources/star"
+			, width: 200
+		  	, click: function(score) {
+		    $('#star2').val(score);
+		  }
+		});
+	});
+	
 	function addFile1() {
 		var filediv = $('<div>').attr({
 			'id' : 'filediv'
@@ -337,6 +348,8 @@
 		var e = event.target.parentElement;
 		e.remove();
 	}
+	
+	
    </script>
 
 
@@ -346,7 +359,7 @@
 	function reviewread(e){
 		var r_no = e;
 		$("#content").empty();
-		$(".star-rating").empty();
+		$(".star").empty();
 		$("#image").empty();
 		
 		  $.ajax({
@@ -370,7 +383,7 @@
 					
 					var content = result.content;
 					var rating = result.rating;
-					$('.star-rating').raty({ readOnly: true, score:rating,  path: "resources/star",width: 200});
+					$('.star').raty({ score:rating, width:200, path: "resources/star", readOnly: true});
 					$('#content').append(content);
 				}
 	 		})
@@ -497,7 +510,7 @@
 	function serviceReview(){
 		
 		var content = $("#content").val();
-		var rating = $("input[name=rating]:checked").val();
+		var rating = $("input[name=rating]").val();
 		var rev_no = $("#rev_no").val();
 		var multiFileList1 = $("multiFileList1").val();
 		console.log("별점")
