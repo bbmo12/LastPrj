@@ -13,6 +13,11 @@
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
 <style>
+.nav-menu a {
+		text-decoration: none;
+		font-family: 'Binggrae-Bold';
+		font-size : 1.5rem;
+	}
 	body{
 	
 		background-image: url("${pageContext.request.contextPath}/resources/upload/back2.png");

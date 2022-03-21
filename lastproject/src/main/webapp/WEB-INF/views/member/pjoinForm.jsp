@@ -10,6 +10,13 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 	<style type="text/css">
+	
+	.nav-menu a {
+		text-decoration: none;
+		font-family: 'Binggrae-Bold';
+		font-size : 1.5rem;
+	}
+	
 	*{margin: 0;padding: 0;box-sizing: border-box}
 body{background-color: #f7f7f7;}
 ul>li{list-style: none}
