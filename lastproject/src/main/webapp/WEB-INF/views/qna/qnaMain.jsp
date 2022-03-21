@@ -24,6 +24,11 @@
 			float: left;
 			margin-right: 5px;
 		}
+		
+		.tagli2{
+			float: left;
+			margin-right: 5px;
+		}
 
 		.pTag {
 			border: 1px solid gray;
@@ -127,6 +132,7 @@
 			border: 1px solid #0062ff;
 			background: #fff;
 		}
+		
 	</style>
 
 </head>
@@ -187,10 +193,10 @@
 												<div class="qnaBody">${list.content }</div>
 												<!-- 태그 목록 -->
 												<div class="tags" style="margin-left: 50px;">
-													<c:forEach items="${list.tagList }" var="hash">
+													<%-- <c:forEach items="${list.tagList }" var="hash">
 														<ul class="tagList">
 															<c:if test="${hash.t_name ne null}">
-																<li class="tagli">
+																<li class="tagli2">
 																	<a href="tagSearch?t_name=${hash.t_name }">
 																		<button
 																			class="genric-btn success circle btn-sm">${hash.t_name}</button>
@@ -198,7 +204,47 @@
 																</li>
 															</c:if>
 														</ul>
-													</c:forEach>
+													</c:forEach> --%>
+													
+													<ul class="tagList">
+															<c:if test="${list.t_name ne null}">
+															<!-- <script>
+																var tag = $('#tag_list').val();
+																console.log(tag);
+																
+																var tagSplit = tag.split(',');
+																console.log(tagSplit);
+																
+																for(var i in tagSplit){
+																	
+																	var li2 = $('.tagli2');
+																	
+																	var a = $('<a>').attr({
+																		'href':'tagSearch?t_name='+tagSplit[i]
+																	});
+																	
+																	var btn = $('<button>').attr({
+																		'class':'genric-btn success circle btn-sm',
+																	});
+																	
+																	btn.text(tagSplit[i]);
+																	a.append(btn);
+																	li2.append(a);
+																	
+																}
+															</script> -->
+																<c:forTokens var="tag" items="${list.t_name}" delims=",">
+															
+															
+																<li class="tagli2">
+																	<a href="tagSearch?t_name=${tag}">
+																		<button
+																			class="genric-btn success circle btn-sm">${tag}</button>
+																	</a>
+																</li>
+																</c:forTokens>
+															</c:if>
+														</ul>
 												</div>
 												<!-- 상세조회 페이지 이동 -->
 												<a class="genric-btn info-border radius" id="view-button"
