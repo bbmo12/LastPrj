@@ -16,6 +16,7 @@
 	}
 
 	.card-text {
+		display: inline-block;
 		width: 200px;
 		white-space: nowrap;
 		overflow: hidden;

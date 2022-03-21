@@ -146,7 +146,7 @@
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3" style="padding:0px;">
+				<div class="col-lg-3">
 				<h2 align="center">MyPage</h2>
 				<br>
 				<div class="blog_right_sidebar">
