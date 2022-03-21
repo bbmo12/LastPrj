@@ -8,127 +8,7 @@
 	<title>Insert title here</title>
 </head>
 <style>
-.no_deco {
-	text-decoration: none !important;
-	font-size : 0.8rem !important;
-	color: black;
-}
-	#my_section {
-		padding: 50px;
-		background: #f9f9fd;
-	}
-
-	.blog_right_sidebar{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
-		border: 1px solid #e3e6f0;
-    	border-radius: 0.35rem;
-    	float: none !important; margin: 0 auto !important;
-    	background-color: white;
-    	width: 250px;
-	}
-	.card{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
-		border: 1px solid #e3e6f0;
-    	border-radius: 0.35rem
-	}
-	
-	.card-header{
-	background: white;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
- 	color: black;
-	}
-	
-	.card-footer{
-	background: white;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
-	}
-	
-	#notice_footer{
-	text-align: center;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
-	}
- 	
-	.card_notice{
-	font-size: 0.8rem;
-	 font-family: 'NanumBarunGothic';
-	 font-style: normal;
- 	font-weight: 400;
-	}
-	
-	.partner_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 180px !important;
-	height: 180px !important;
-	float: none;
-	margin: 0 auto;
-}
-
-.pet_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 100px !important;
-	height: 100px !important;
-	float: none;
-	margin-bottom: 10px;
-}
-
-.widget_title{
-	background: #0062ff !important;
-}
-
-#cardTitle{
-	font-size: 1.25rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
-}
-
-#myinfo{
-	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 300;
-}
-
-#pet_img2{
-	display: inline-block;
-	text-align: center;
-	margin-right: 20px;
-	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
-}
-
-#Mainname{
-	font-size: 1.5rem !important;
-	font-family: 'NanumBarunGothic'!important;
-	font-style: normal !important;
- 	font-weight: 700 !important;
- 	color:gray;
-}
-
-#menu_bold{
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
- 	color: black;
-}
-
-	#my_section {
+#my_section {
 		padding: 50px;
 	}
 
@@ -139,11 +19,11 @@
 
 	#addDiv,
 	#addService {
-		margin-left: 36em;
-		margin-top: -5px;
+		margin: -5px 0 0 35em;
 		color: #fff; 
     	background: #0062ff;
     	border: 1px solid transparent;	
+    	width: 115px;
 	}
 	#addDiv:hover,
 	#addService:hover{
@@ -171,6 +51,7 @@
 
 	.form-control {
 		padding: 5px;
+		width: 250px;
 		display: inline-block;
 		border-radius: 20px;
 	}
@@ -184,19 +65,19 @@
 	}
 
 	#p-info {
-		margin-left: 9em;
+		margin-left: 5em;
 		margin-top: -20px;
 	}
 
 	.delete-button {
 		float: right;
-		margin-top: 25px;
-		margin-right: 100px;
+		margin: 27px 200px 0 0;
 		width: 62px;
 	}
 
 	#p_info {
 		border: 1px solid rgba(151, 151, 151, 0.3);
+		width: 700px;
 	}
 	#cancel{
 		width: 113px;
@@ -208,7 +89,7 @@
 	}
 	#member_post{
 		width: 100px;
-    	margin-left: 51em;
+    	margin-left: 53em;
     	margin-top: -70px;  	
     	color: #fff; 
     	background: #0062ff;
@@ -238,8 +119,68 @@
 	#content{
 		height: 45px;
     	padding: 12px;
-   		width: 275px;
+   		width: 285px;
 	}
+	
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
+
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
+	.card {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		padding: 20px;
+	}
+	i{
+		color: black;
+	}
+	
+
 </style>
 
 <body>
@@ -385,21 +326,20 @@
 		<div class="container"  style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3" style="padding:0px;">
-				<h2 align="center">정보 수정</h2>
+				<h2 align="center">내정보 수정</h2>
 				<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img" src="resources/upload/${member.picture}"
-								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="">
+								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="167px">
 							<br><br>
 							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
-						</div>
-						<br>
+						</div><br>
 						
 						<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
@@ -439,9 +379,12 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row">
+				<div id="main-form"  style="width: 800px;">
+					<div class="card">
+							<div class="card-header">
+								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내정보 수정
+							</div>
 						<form action="memberUpdate" enctype="multipart/form-data" method="post">
-							<div class="col-lg-12 col-md-12 blog_details">
 								<div class="form-group">
 								<i class="fas fa-user"></i>
 									<label for="name"></label>
@@ -473,19 +416,20 @@
 									<input type="text" id="tel" name="tel" value="${member.tel}" class="form-control">
 									<div id="tel_check"></div>
 								</div>
-								<div class="form-group">
-									<label>프로필 사진</label>
-									<div class="input-group col-xs-12">
+								<div class="form-group" style="margin-bottom: 0px;">
+								<i class="fa fa-file-image-o"></i>
+									<h3 style="font-weight: bolder;">프로필 사진</h3>
+									</div>
+									<div class="form-group">
 										<input class="file-upload-browse btn btn-primary" type="file" id="file"
 											name="file">
 									</div>
-								</div>
+									<div align="right">
 								<button type="submit" onclick="location.href='memberUpdateForm'" id="update-button"
-									class="genric-btn info radius">수정 완료</button>
+									class="btn btn-primary"">수정 완료</button>
 								<button type="button" id="cancel" class="btn btn-secondary btn-lg" 
 								onclick="location.href='memberMypage'">취소</button>
-							</div>
-						</form>
+								</div>		</form>
 					</div>
 				</div>
 			</div>
