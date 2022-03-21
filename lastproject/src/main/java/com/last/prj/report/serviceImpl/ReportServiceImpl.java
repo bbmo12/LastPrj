@@ -118,6 +118,11 @@ public class ReportServiceImpl implements ReportService {
 		return map.memReport(cri);
 	}
 
+	@Override
+	public int adminReportTotalCount() {
+		return map.adminReportTotalCount();
+	}
+
 
 
 }

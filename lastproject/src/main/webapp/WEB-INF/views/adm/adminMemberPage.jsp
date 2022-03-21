@@ -151,6 +151,30 @@
 </style>
 
 <body>
+<script>
+	adminCount();
+	function adminCount() {
+		$.ajax({
+			url : 'adminCount',
+			method : 'get',
+			success : function(res) {
+				console.log(res.petCount);
+				console.log(res.pmemCount);
+				console.log(res.memCount);
+				$("#admMemberC").append(res.memCount);
+				$("#admPmemberC").append(res.pmemCount);
+				$("#admPetC").append(res.petCount);
+				
+			},error : function(error) {
+				alert('Count를 불러오는 데 오류가 있습니다')
+				return false;
+				
+			}
+			
+		});
+		
+	}
+</script>
 	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
 			<div class="col-lg-6 offset-lg-3">
@@ -165,7 +189,7 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2>MyPage</h2>
+					<h2><a href="adminPage">MyPage</a></h2><h5>목록 페이지</h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -190,11 +214,7 @@
 								</a></li>
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between">
-										<p>일반회원 목록</p>
-								</a></li>
-								<li><a href="adminPmemberPage"
-									class="d-flex justify-content-between">
-										<p>파트너회원 목록</p>
+										<p>목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
 									class="d-flex justify-content-between">
@@ -224,9 +244,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i>
 													<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">해야할 일 수</span>
+												</span><span id="cardTitle">일반회원 가입자 수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="admMemberC"></h3>
 										</div>
 									</div>
 								</div>
@@ -239,9 +259,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
 													<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle"></span>
+												</span><span id="cardTitle">펫 마릿수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="admPetC"></h3>
 										</div>
 									</div>
 								</div>
@@ -254,9 +274,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
 													<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">새로운 파트너 신청</span>
+												</span><span id="cardTitle">파트너 가입자 수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="admPmemberC"></h3>
 										</div>
 									</div>
 								</div>
@@ -265,7 +285,7 @@
 						<div class="col-lg-12 col-md-12 blog_details ">
 							<div class="card">
 								<div class="card-header que">
-									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;일반 회원 목록
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;일반 회원 목록
 								</div>
 								<div class="card-body anw">
 									<h4 class="card-title"></h4>
@@ -320,36 +340,18 @@
 									</table>
 									<div id="pagination"></div>
 								</div>
-								<div id="notice_footer">
-									<p>회원에게 메시지 보내기..</p>
-								</div>
-							</div>
-						</div>
-
-
-
-
-						<div class="col-lg-12 col-md-12 blog_details">
-							<div class="card">
-								<div class="card-header">
-									<i class="fa-solid fa-paw"></i> 반려동물
-								</div>
-
 								<div class="card-footer">
-									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
-										추가</span>
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게 메시지 보내기</span>
 								</div>
 							</div>
 						</div>
-
-
 
 						<div class="col-lg-12 col-md-12 blog_details ">
 							<div class="card">
 								<div class="card-header que">
-									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;파트너 회원 목록
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;파트너 회원 목록
 								</div>
-								<div class="card-bod anw">
+								<div class="card-body anw">
 									<h4 class="card-title"></h4>
 									<p>
 									<form id="admDateFormP" onsubmit="return false"
@@ -399,7 +401,7 @@
 												<th>이름</th>
 												<th>아이디</th>
 												<th>가입일</th>
-												<th>펫 보유</th>
+												<th>파트너 쉽</th>
 											</tr>
 										</thead>
 										<tbody id="myTableP">
@@ -408,11 +410,27 @@
 									</table>
 									<div id="paginationP"></div>
 								</div>
-								<div id="notice_footer">
-									<p>회원에게 메시지 보내기..</p>
+								<div class="card-footer">
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게 메시지 보내기</span>
 								</div>
 							</div>
 						</div>
+
+
+						<div class="col-lg-12 col-md-12 blog_details">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa-solid fa-paw"></i>반려동물
+								</div>
+
+								<div class="card-footer">
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
+										추가</span>
+								</div>
+							</div>
+						</div>
+
+						
 						<!-- 파트너 회원 단건 조회 Modal -->
 						<div class="modal fade" id="myModal">
 							<div class="modal-dialog modal-xl">
@@ -748,17 +766,18 @@
 			console.log("result는: " + result);
 			$.each(result,function(i) {
 				if(result[i].startdate != null){
+					
+					/* + "<div class='progress'>"
+					+ "<div class='progress-bar bg-success' role='progressbar' style='width:"
+					+ result[i].c_report
+					+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
+					+ "</div></div>"
+					+ "</td><td>" */
 						$("#myTableP").append(
 														"<tr><td><a onclick='showP()'>"														
 														+ result[i].name
 														+ "</a></td><td>"
 														+ result[i].p_id
-														+ "</td><td>"
-														+ "<div class='progress'>"
-														+ "<div class='progress-bar bg-success' role='progressbar' style='width:"
-														+ result[i].c_report
-														+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
-														+ "</div></div>"
 														+ "</td><td>"
 														+ result[i].startdate
 														+ "</td><td>"
@@ -891,7 +910,7 @@
 			<ul class="pagination">`
 			if(page.prev) {
 				nav += `<li class="page-item">
-				<a href="javascript:goPage(\${page.startPage-1})" class="page-link"
+				<a href="javascript:goPageP(\${page.startPage-1})" class="page-link"
 					aria-label="Previous">
 					<span aria-hidden="true">
 						<span class="fa fa-angle-left"></span>
@@ -900,7 +919,7 @@
 			}
 				for ( var i=page.startPage ; i <=  page.endPage; i++){
 					nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
-								href="javascript:goPage(\${i})" class="page-link">\${i }</a>
+								href="javascript:goPageP(\${i})" class="page-link">\${i }</a>
 								</li>`
 				}
 				

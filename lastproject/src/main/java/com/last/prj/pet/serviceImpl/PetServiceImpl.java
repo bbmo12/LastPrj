@@ -67,6 +67,11 @@ public class PetServiceImpl implements PetService{
 		return map.amdPetChart();
 	}
 
+	@Override
+	public List<PetVO> adminPetListCode() {
+		return map.adminPetListCode();
+	}
+
 
 
 }

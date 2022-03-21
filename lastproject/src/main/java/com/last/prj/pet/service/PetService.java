@@ -38,5 +38,6 @@ public interface PetService {
 
 	//펫 품종 별 차트 그리기
 	List<PetVO> amdPetChart();
+	List<PetVO> adminPetListCode();
 	
 }

@@ -130,7 +130,7 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2>MyPage</h2>
+					<h2><a href="adminPage">MyPage</a></h2><h5>신고관리 페이지</h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -155,11 +155,7 @@
 								</a></li>
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between">
-										<p>일반회원 목록</p>
-								</a></li>
-								<li><a href="adminPmemberPage"
-									class="d-flex justify-content-between">
-										<p>파트너회원 목록</p>
+										<p>목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
 									class="d-flex justify-content-between">
@@ -190,9 +186,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i>
 													<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">해야할 일 수</span>
+												</span><span id="cardTitle">총 신고 건수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="adminReportTotalCount"></h3>
 										</div>
 									</div>
 								</div>
@@ -206,9 +202,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
 													<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle"></span>
+												</span><span id="cardTitle">신고 제재 대상 회원</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="reportRepor"></h3>
 										</div>
 									</div>
 								</div>
@@ -222,9 +218,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
 													<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">새로운 파트너 신청</span>
+												</span><span id="cardTitle">신고 제재 중인 회원</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="reportReported"></h3>
 										</div>
 									</div>
 								</div>
@@ -233,7 +229,7 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header">
-									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내 알림 목록
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;신고 제재 처리 중인 회원
 								</div>
 								<div class="card-body card_notice" style="padding: 15px">
 									<c:if test="${ fn:length(notices) == 0  }">
@@ -260,7 +256,7 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header">
-									<i class="fa-solid fa-paw"></i> 내 반려동물
+									<i class="fa-solid fa-paw"></i> 신고 제재 대상 회원
 								</div>
 								<div class="card-body" style="padding: 15px">
 									<c:if test="${ fn:length(pets) == 0  }">
@@ -286,7 +282,20 @@
 		</div>
 	</section>
 	<script>
-			</script>
+	adminReportCount();
+	function adminReportCount() {
+		$.ajax({
+			url : 'adminReportCount',
+			method : 'get',
+			success : function(res) {
+				console.log(res);
+				$("#adminReportTotalCount").append(res.adminReportTotalCount);
+				
+			}
+		})
+	}
+	
+	</script>
 
 </body>
 

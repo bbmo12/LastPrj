@@ -349,13 +349,14 @@
 	</delete>
 	
 		<!--기간 별 차트 그리기  -->
-		<select id="admgoChart" resultType="com.last.prj.pmember.service.PmemberVO">
+		<select id="admPmemChart" resultType="com.last.prj.pmember.service.PmemberVO">
 			SELECT 
-			    TO_CHAR(startdate, 'yyyy-mm')as tt,
-			    COUNT(*)as oo
-			FROM p_member
+			    TO_CHAR(STARTDATE, 'YYYY-MM')AS AA,
+			    COUNT(*)AS BB
+			FROM P_MEMBER
+			WHERE STARTDATE IS NOT NULL
 			GROUP BY 
-			TO_CHAR(startdate, 'yyyy-mm')
+			TO_CHAR(STARTDATE, 'YYYY-MM')
 		</select>
 	
 		<select id="pMemCode" resultType="int" parameterType="String" >
