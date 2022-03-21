@@ -267,7 +267,7 @@
 								<div class="card-header que">
 									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;일반 회원 목록
 								</div>
-								<div class="card-bod anw">
+								<div class="card-body anw">
 									<h4 class="card-title"></h4>
 									<p>
 									<form id="admDateForm" onsubmit="return false"

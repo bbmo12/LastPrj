@@ -277,7 +277,7 @@
 							</sec:authorize>
 							<li><a href="testPage">Contact</a></li>
 							<sec:authorize access="hasRole('ADMIN')">
-							<li><a href="main">관리자</a></li>
+							<li><a href="adminPage">관리자</a></li>
 							<li><a href="logout">로그아웃</a></li>
 							</sec:authorize>
 						</ul>
