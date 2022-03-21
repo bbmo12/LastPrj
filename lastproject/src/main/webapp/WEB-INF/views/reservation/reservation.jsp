@@ -12,6 +12,7 @@
 <script
 	src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
 <script src="template/js/diaLog.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
 	#my_section {
@@ -307,9 +308,72 @@
 		</div>
 	</div>
 
-		<!-- 리뷰 작성 모달창 -->
-	<script type="text/javascript">
 
+	<script>
+	let viewPmemberList = function (result) {
+
+		$("#myTable").empty();
+		
+		$.each(result, function (i) {
+			
+			var choicedTag = "<tr><td>" +
+			result[i].r_no +
+			"</td><td>" +
+			result[i].name +
+			"</td><td class='card-text'>" +
+			result[i].r_date +
+			"</td><td>" +
+			result[i].time +
+			"</td><td>" +
+			result[i].rcontent +
+			"</td><td>"+
+			result[i].pcontent +
+			"</td><td id='td"+[i]+"'><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
+			+result[i].rccontent +
+			"</td><td>" 
+			if(result[i] != 'null'){
+			result[i].refuse }+
+			"</td>";
+			
+			if(result[i].code == 405){
+				if(result[i].r_check == 0){
+					choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-secondary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰쓰기</button></td></tr>";
+				}else{
+					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰보기</button></td></tr>";
+				}
+			}else{
+				choicedTag += '<td><button>실패</button></td></tr>';
+			}
+			$("#myTable").append(choicedTag);
+			
+			if($("#td"+i).text()=='진료완료'){
+				$("#td"+i).attr('class','badge badge-pay');
+			}
+			
+		}) // end each.
+	console.log("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",$(".in_code").parent());
+		var val = $(".in_code").parent();
+		for (var i = 0; i < val.length; i++) {
+			//예약결과코드 분류
+			if (val[i].innerText == '결제가능') {
+				console.log(val[i]);
+				val[i].classList.add("code");
+				$(".code").empty();
+				var check = $(".code").append(`<button class="badge badge-warning" type ="button" onclick="payBtn(event)">결제하기</button>`);
+			} else if (val[i].innerText == '승인거절') {
+				val[i].classList.add("refuse");
+			} else if (val[i].innerText == '결제완료') {
+				val[i].classList.add("complete");
+				$(".complete").empty();
+				var check = $(".complete").append(`<span>예약완료</span>`);
+			}else if (val[i].innerText == '진료완료'){
+			} //else if문
+			
+		} //for문
+	} //=========================end viewPmemberList : 받아온 데이터로 List만드는 함수===============
+	
+
+		<!-- 리뷰 작성 모달창 -->
 	$(document).ready(function () {
 		$('.star-rating').raty({
 			path: "resources/star"
@@ -320,28 +384,8 @@
 		});
 	});
 
-	//table td값만
-	var val = $(".in_code").parent();
-		console.log("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",val);
-	for (var i = 0; i < val.length; i++) {
-		//예약결과코드 분류
-		if (val[i].innerText == '결제가능') {
-			console.log(val[i].innerText());
-			val[i].classList.add("code");
-			$(".code").empty();
-			var check = $(".code").append(
-					`<button type ="button" class="payBtn">결제하기</button>`);
+	
 
-		} else if (val[i].innerText == '승인거절') {
-			val[i].classList.add("refuse");
-		} else if (val[i].innerText == '결제완료') {
-			val[i].classList.add("complete");
-			$(".complete").empty();
-			var check = $(".complete").append(`<span>예약완료</span>`);
-		}else if (val[i].innerText == '진료완료'){
-			
-		} //else if문
-	} //for문
 
 	
 	function addFile1() {
@@ -423,9 +467,10 @@
 
 		
 		
-		$(".payBtn").on('click', function() {
-			var rno = $(this).parent().parent().children().first().text();
+		function payBtn(event) {
+			var rno = $(event.target).parent().parent().children().first().text();
 			var m_id = "${m_id }";
+			console.log(m_id);
 			var pay;
 			
 			$.ajax({
@@ -434,6 +479,7 @@
 				data : {'r_no' : rno },
 				async : false,
 				success : function(result){
+					console.log(result);
 					pay = result.price;
 					//p_id = result.p_id;
 					var IMP = window.IMP; // 생략가능
@@ -459,7 +505,7 @@
 						if (rsp.success) {
 							var msg = '결제가 완료되었습니다.';
 							msg += '결제 금액 : ' + rsp.paid_amount;
-							location.reload();
+							location.onload();
 							// success.submit();
 							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 						} else {
@@ -468,27 +514,27 @@
 						}
 						alert(msg);
 					});
+					payUpdate();
 				}
 			});
-			
-			
-			
 				//결제 완료 후 결제 내역 등록
-				$.ajax({
-				url : 'payupdate',
-				method : 'post',
-				data : {
-					'r_no' : rno,
-					'm_id': m_id,
-					'price': pay
-				},
-				success : function(result) {
-				},
-				error : function(error) {
-					alert("결제실패")
-				}
-			}) 
-		})
+				function payUpdate(){
+					$.ajax({
+					url : 'payupdate',
+					method : 'post',
+					data : {
+						'r_no' : rno,
+						'm_id': m_id,
+						'price': pay
+					},
+					success : function(result) {
+					},
+					error : function(error) {
+						alert("결제실패")
+					}
+				}) 
+			}
+		}
 	<!-- 리뷰작성 -->
 	function serviceReview(){
 		
@@ -535,80 +581,7 @@
 		} //====================end enter 키================
 
 		// ===================viewPmemberList : 받아온 데이터로 List만드는 함수==========================
-		let viewPmemberList = function (result) {
-
-			$("#myTable").empty();
-			
-			$.each(result, function (i) {
-				
-				var choicedTag = "<tr><td>" +
-				result[i].r_no +
-				"</td><td>" +
-				result[i].name +
-				"</td><td class='card-text'>" +
-				result[i].r_date +
-				"</td><td>" +
-				result[i].time +
-				"</td><td>" +
-				result[i].rcontent +
-				"</td><td>"+
-				result[i].pcontent +
-				"</td><td id='td"+[i]+"'><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
-				+result[i].rccontent +
-				"</td><td>" 
-				if(result[i] != 'null'){
-				result[i].refuse }+
-				"</td>";
-				
-				if(result[i].code == 405){
-					if(result[i].r_check == 0){
-						choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-secondary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰쓰기</button></td></tr>";
-					}else{
-						choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰보기</button></td></tr>";
-					}
-				}else{
-					choicedTag += '<td><button>실패</button></td></tr>';
-				}
-				$("#myTable").append(choicedTag);
-				
-				if($("#td"+i).text()=='진료완료'){
-					$("#td"+i).attr('class','badge badge-pay');
-				}
-				/*
-					<c:choose>
-					<c:when test="${result[i].code eq 405 }">
-					<c:choose>
-						<c:when test= "${result[i].r_check eq 0 }">
-							<td><button type="button" 
-							onclick='reviewadd("${result[i].r_no}");'
-									class="btn btn-secondary" data-toggle="modal"
-									data-target="#reviewWriteModal">리뷰쓰기</button></td>
-
-						</c:when>
-						<c:otherwise>
-							<td><button onclick='reviewread("${result[i].r_no}");' type="button"
-									class="btn btn-secondary" data-toggle="modal"
-									data-target="#exampleModal1">리뷰보기</button></td>
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<td>
-						<button>실패</button>
-					</td>
-				</c:otherwise>
-			</c:choose>`+
-					
-					
-					
-					"</tr>"
-				);*/
-				
-				
-			}) // end each.
-		console.log($(".in_code").parent());
-
-		} //=========================end viewPmemberList : 받아온 데이터로 List만드는 함수===============
+		
 
 
 		// ===========================조건 별 검색 + 페이징 처리==============================
@@ -777,6 +750,7 @@
 					}
 				})
 		}
+		
 	</script>
 </body>
 </html>

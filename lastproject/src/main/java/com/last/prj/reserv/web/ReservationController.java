@@ -238,14 +238,12 @@ public class ReservationController {
 	  //파트너회원 예약거절 사유 입력(ajax)
 	  @PostMapping("/noupdate")
 	  @ResponseBody 
-	  public List<PreservationVO> noUpdate(@RequestParam("rno") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request,Principal principal) {
+	  public List<PreservationVO> noUpdate(@RequestParam("r_no") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request,Principal principal) {
 		  if(principal != null) {
 				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 				if(userDetails.getRole() == "파트너회원") {
 					String p_id = userDetails.getPmember().getP_id();
-					System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 					vo.setP_id(p_id);
-					System.out.println(rno);
 					reservationDao.noUpdate(rno,refuse);
 					List<PreservationVO> list = pReservationDao.preservationlist(vo);
 					System.out.println(list);
