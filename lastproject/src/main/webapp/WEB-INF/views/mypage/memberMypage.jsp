@@ -172,7 +172,7 @@
 						</c:forEach>
 					</div>
 					<form action="mypetAddForm" method="post">
-						<button type="submit" class="genric-btn info radius" id="button-insert">반려등물등록</button>
+						<button type="submit" class="genric-btn info radius" id="button-insert">반려동물 등록</button>
 					</form>
 				</div>
 			</div>

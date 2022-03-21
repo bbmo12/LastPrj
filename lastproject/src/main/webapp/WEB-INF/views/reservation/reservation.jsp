@@ -174,7 +174,7 @@
 									<button type="button" class="codep" style="margin-right: 50px;" data-code="101">훈련</button>
 									<button type="button" class="codep" style="margin-right: 50px;" data-code="102">미용</button>
 									<button type="button" class="codep" style="margin-right: 50px;" data-code="103">돌봄서비스</button>
-									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
+									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px; width: 100%">
 										<thead>
 											<tr>
 												<th>예약번호</th>
