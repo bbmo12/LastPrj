@@ -308,6 +308,30 @@
 
 		<!-- 리뷰 작성 모달창 -->
 	<script type="text/javascript">
+	//table td값만
+	var val = $(".in_code").parent();
+		console.log("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",val);
+	for (var i = 0; i < val.length; i++) {
+		//예약결과코드 분류
+		if (val[i].innerText == '결제가능') {
+			console.log(val[i].innerText());
+			val[i].classList.add("code");
+			$(".code").empty();
+			var check = $(".code").append(
+					`<button type ="button" class="payBtn">결제하기</button>`);
+
+		} else if (val[i].innerText == '승인거절') {
+			val[i].classList.add("refuse");
+		} else if (val[i].innerText == '결제완료') {
+			val[i].classList.add("complete");
+			$(".complete").empty();
+			var check = $(".complete").append(`<span>예약완료</span>`);
+		}else if (val[i].innerText == '진료완료'){
+			
+		} //else if문
+	} //for문
+	
+	
 	function addFile1() {
 		var filediv = $('<div>').attr({
 			'id' : 'filediv'
@@ -337,11 +361,9 @@
 		var e = event.target.parentElement;
 		e.remove();
 	}
-   </script>
 
 
 	<!--리뷰 보는 모달창  -->
-	<script type="text/javascript">
 	
 	function reviewread(e){
 		var r_no = e;
@@ -354,7 +376,6 @@
 				method: 'post',
 				data : {'r_no' : r_no},
 				success : function(result){
-					console.log(result);
 					
 					for(var i = 0; i < result.fileList.length; i++){
 						
@@ -376,54 +397,23 @@
 	 		})
 	}
   
-   </script>
 
 
 
 	<!-- 후기작성 모달창 -->
-	<script type="text/javascript">
 	
 	function reviewadd(e) {
-		console.log(e);
 		$("#content").empty();
 		  
 		var r_no = e;
- 		console.log(r_no);
  	 $("#insert_r_no").val(r_no);
 	}
-	
-	
-	
-   </script>
 
 
-
-	<script>
-		//table td값만
-		var val = $(".in_code").parent();
-		console.log(val);
-		console.log(val.length);
-		for (var i = 0; i < val.length; i++) {
-			//예약결과코드 분류
-			if (val[i].innerText == '결제가능') {
-				console.log(val[i]);
-				val[i].classList.add("code");
-				$(".code").empty();
-				var check = $(".code").append(
-						`<button type ="button" class="payBtn">결제하기</button>`);
-
-			} else if (val[i].innerText == '승인거절') {
-				val[i].classList.add("refuse");
-			} else if (val[i].innerText == '결제완료') {
-				val[i].classList.add("complete");
-				$(".complete").empty();
-				var check = $(".complete").append(`<span>예약완료</span>`);
-			} //else if문
-		} //for문
+		
 		
 		$(".payBtn").on('click', function() {
 			var rno = $(this).parent().parent().children().first().text();
-			console.log($(this).parent().parent().children().first().text());
 			var m_id = "${m_id }";
 			var pay;
 			
@@ -433,7 +423,6 @@
 				data : {'r_no' : rno },
 				async : false,
 				success : function(result){
-					console.log(result);
 					pay = result.price;
 					//p_id = result.p_id;
 					var IMP = window.IMP; // 생략가능
@@ -456,7 +445,6 @@
 						// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
 						buyer_postcode: '123-456',
 					}, function (rsp) {
-						console.log(rsp);
 						if (rsp.success) {
 							var msg = '결제가 완료되었습니다.';
 							msg += '결제 금액 : ' + rsp.paid_amount;
@@ -474,7 +462,6 @@
 			
 			
 			
-			console.log(pay+"원");
 				//결제 완료 후 결제 내역 등록
 				$.ajax({
 				url : 'payupdate',
@@ -491,17 +478,13 @@
 				}
 			}) 
 		})
-	</script>
 	<!-- 리뷰작성 -->
-	<script type="text/javascript">
 	function serviceReview(){
 		
 		var content = $("#content").val();
 		var rating = $("input[name=rating]:checked").val();
 		var rev_no = $("#rev_no").val();
 		var multiFileList1 = $("multiFileList1").val();
-		console.log("별점")
-		console.log(rating)
 		
 		$.ajax({
 			url: "serviceReviewInsert",
@@ -529,10 +512,8 @@
 			goform.pageNum.value=p;
 	    	goform.submit();
 		} */
-	</script>
 
 
-	<script type="text/javascript">
 		//======================enter 키===================
 		function eventkey() {
 			if (event.keyCode == 13) {
@@ -548,7 +529,6 @@
 			$("#myTable").empty();
 			
 			$.each(result, function (i) {
-				console.log(result[i])
 				
 				var choicedTag = "<tr><td>" +
 				result[i].r_no +
@@ -562,7 +542,7 @@
 				result[i].rcontent +
 				"</td><td>"+
 				result[i].pcontent +
-				"</td><td><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
+				"</td><td id='td"+[i]+"'><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
 				+result[i].rccontent +
 				"</td><td>" 
 				if(result[i] != 'null'){
@@ -580,6 +560,9 @@
 				}
 				$("#myTable").append(choicedTag);
 				
+				if($("#td"+i).text()=='진료완료'){
+					$("#td"+i).attr('class','badge badge-pay');
+				}
 				/*
 					<c:choose>
 					<c:when test="${result[i].code eq 405 }">
@@ -612,6 +595,7 @@
 				
 				
 			}) // end each.
+		console.log($(".in_code").parent());
 
 		} //=========================end viewPmemberList : 받아온 데이터로 List만드는 함수===============
 
@@ -629,29 +613,25 @@
 
 			$("#blockChain").empty();
 			var str = $('#admDateForm').serialize();
-			console.log(str);
 			$.ajax({
 				url: 'reservationSelect1',
 				method: 'post',
 				data: str,
 				//contentType : 'application/json',
 				success: function (result) {
-					console.log("리절트리스트는 :" + result.list);
-					console.log(result.list);
-					console.log("리절트페이지는 : " + result.page);
 					if (result.list == '') {
 						$(".table").empty();
 						$(".table").append(`<thead>
 								<tr>
-								<th>예약번호</th>
-								<th>수의사 이름</th>
-								<th>예약신청일자</th>
-								<th>예약시간</th>
-								<th>예약내용</th>
-								<th>품종</th>
-								<th>예약여부</th>
-								<th>취소사유</th>
-								<th>후기</th>
+									<th>예약번호</th>
+									<th>수의사 이름</th>
+									<th>예약신청일자</th>
+									<th>예약시간</th>
+									<th>예약내용</th>
+									<th>품종</th>
+									<th>예약여부</th>
+									<th>취소사유</th>
+									<th>후기</th>
 								</tr>
 							</thead>
 							<tbody id="myTable">
@@ -670,7 +650,6 @@
 		} // end paginList()
 
 		function viewPage(page) {
-			console.log("page는 :" + JSON.stringify(page));
 
 			var nav = `<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">`
@@ -705,7 +684,6 @@
 		} // end viewPage(page)
 
 		function goPage(pa) {
-			console.log("pa 는 :" + pa);
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
@@ -727,11 +705,9 @@
 
 		function myFunction() {
 			var r_no = $("#r_no").val();
-			console.log(r_no);
 			diaLog.methods.diaLogSearch(r_no)
 				.call()
 				.then(function (result) {
-					console.log(result);
 				})
 		}
 
@@ -740,22 +716,21 @@
 			diaLog.methods.diaLogSearch(r_no)
 				.call()
 				.then(function (result) {
-					console.log(result);
 
 					if (result.d_name == '') {
 						$(".table").empty();
 						$(".table").append(`
 		        	  				<thead>
 										<tr>
-										<th>예약번호</th>
-										<th>수의사 이름</th>
-										<th>예약신청일자</th>
-										<th>예약시간</th>
-										<th>예약내용</th>
-										<th>품종</th>
-										<th>예약여부</th>
-										<th>취소사유</th>
-										<th>후기</th>
+											<th>예약번호</th>
+											<th>수의사 이름</th>
+											<th>예약신청일자</th>
+											<th>예약시간</th>
+											<th>예약내용</th>
+											<th>품종</th>
+											<th>예약여부</th>
+											<th>취소사유</th>
+											<th>후기</th>
 										</tr>
 									</thead>
 									<tbody id="myTable">
@@ -768,15 +743,15 @@
 						$(".table").append(`
 		        	  				<thead>
 										<tr>
-										<th>예약번호</th>
-										<th>수의사 이름</th>
-										<th>예약신청일자</th>
-										<th>예약시간</th>
-										<th>예약내용</th>
-										<th>품종</th>
-										<th>예약여부</th>
-										<th>취소사유</th>
-										<th>후기</th>
+											<th>예약번호</th>
+											<th>수의사 이름</th>
+											<th>예약신청일자</th>
+											<th>예약시간</th>
+											<th>예약내용</th>
+											<th>품종</th>
+											<th>예약여부</th>
+											<th>취소사유</th>
+											<th>후기</th>
 										</tr>
 									</thead>
 									<tbody id="myTable">
