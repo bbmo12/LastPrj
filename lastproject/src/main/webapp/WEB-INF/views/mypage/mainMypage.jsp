@@ -24,7 +24,10 @@
 	.blog_right_sidebar{
 		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
 		border: 1px solid #e3e6f0;
-    	border-radius: 0.35rem
+    	border-radius: 0.35rem;
+    	float: none !important; margin: 0 auto !important;
+    	background-color: white;
+    	width: 250px;
 	}
 	.card{
 		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
@@ -120,10 +123,13 @@
  	color:gray;
 }
 
-.blog_right_sidebar{
-	background-color: white;
+#menu_bold{
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 700;
+ 	color: black;
 }
-
 </style>
 
 <body>
@@ -140,10 +146,10 @@
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3">
-				<h2>MyPage</h2>
+				<div class="col-lg-3" style="padding:0px;">
+				<h2 align="center">MyPage</h2>
 				<br>
-				<div class="blog_right_sidebar" style="width: 250px;">
+				<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img"
 								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
@@ -156,10 +162,11 @@
 						</aside>
 					</div>
 					<br>
-					<div class="blog_right_sidebar" style="width: 250px;">
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list nanumbarungothic">
+							<p id="menu_bold">내 활동 내역</p>
 								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 									</a></li>
@@ -175,11 +182,12 @@
 								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
 									</a></li>
-								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
-										<p>회원 정보 수정</p>
-									</a></li>
 								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
+									</a></li>
+									<br><br><p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
 									</a></li>
 								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
@@ -192,7 +200,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="margin-left: 40px;">
+					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">

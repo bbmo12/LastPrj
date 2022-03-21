@@ -9,7 +9,7 @@
 			<ul class="pagination">
 				<c:if test="${page.prev }">
 				<li class="page-item">
-					<a href="javascript:${jsFunc}(${page.startPage-1})" class="page-link"
+					<a href="javascript:${jsFunc}(${page.startPage-1})" class="btn btn-outline-secondary"
 						aria-label="Previous">
 						<span aria-hidden="true">
 							<span class="fa fa-angle-left"></span>
@@ -18,12 +18,12 @@
 				</c:if>
 				<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }">
 					<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
-							href="javascript:${jsFunc}(${num})" class="page-link">${num }</a>
+							href="javascript:${jsFunc}(${num})" class="btn btn-outline-secondary">${num }</a>
 					</li>
 				</c:forEach>
 				<c:if test="${page.next }">
 				<li class="page-item"><a href="javascript:${jsFunc}(${page.endPage+1})"
-						class="page-link" aria-label="Next">
+						class="btn btn-outline-secondary" aria-label="Next">
 						<span aria-hidden="true">
 							<span class="fa fa-angle-right"></span>
 						</span></a>
