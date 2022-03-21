@@ -444,7 +444,7 @@
 							<div class="col-lg-12 col-md-12 blog_details">
 								<div class="form-group">
 								<i class="fas fa-user"></i>
-									<label for="name">이름</label>
+									<label for="name"></label>
 									<h3 style="font-weight: bolder;">이름</h3>
 									<input type="text" id="name" name="name" class="form-control" value="${member.name}">
 									<div id="name_check"></div>
