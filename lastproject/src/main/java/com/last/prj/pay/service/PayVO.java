@@ -12,7 +12,7 @@ public class PayVO {
 	private String token;	 //고유아이디
 	
 	private String p_name; //반려동물 이름 
-	
+	private String m_id;
 	private String m_name; //일반회원 이름
 	private String pm_name; //파트너회원이름
 	private String content; //예약내용
