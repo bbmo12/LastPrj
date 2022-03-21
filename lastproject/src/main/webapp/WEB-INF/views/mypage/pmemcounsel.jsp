@@ -16,20 +16,13 @@
 	#my_section {
 		padding: 50px;
 	}
-
-	.flex {
-		-webkit-box-flex: 1;
-		-ms-flex: 1 1 auto;
-		flex: 1 1 auto
-	}
-
-	.padding {
-		padding: 5rem
-	}
-
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important
+	
+	.card-text {
+		display: inline-block;
+		width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.table th {
@@ -137,11 +130,13 @@
 										<table class="table table-striped">
 											<thead>
 												<tr style="text-align: center;">
-													<th>동물이름</th>
-													<th>상담회원</th>
+													<th>상담번호</th>
+													<th>반려동물이름</th>
 													<th>상담내용</th>
+													<th>상담회원</th>
 													<th>상담상태</th>
-													<th>작성일</th>
+													<th>상담신청일</th>
+													<th>상담내용보기</th>
 												</tr>
 											</thead>
 											<tbody style="text-align: center">
@@ -151,10 +146,12 @@
 													</tr>
 												</c:if>
 												<c:forEach items="${pmemcounsel }" var="counsel">
-													<tr onclick="location.href='csDetail?p_id=${counsel.p_id }&m_id=${counsel.m_id }&pet_no=${counsel.pet_no }&c_no=${counsel.c_no}'">
+													<tr>
+														<td><input type="hidden" id="c_no" name="c_no"
+																value="${counsel.c_no}">${counsel.c_no } </td>
 														<td>${counsel.p_name }</td>
+														<td class="card-text">${counsel.content}</td>
 														<td>${counsel.m_id }</td>
-														<td>${counsel.content}</td>
 														<td><c:if test="${counsel.code eq 301}">
 																<label class="badge badge-info">상담요청</label>
 															</c:if> <c:if test="${counsel.code eq 302}">
@@ -163,6 +160,9 @@
 																<label class="badge badge-success">상담완료</label>
 															</c:if></td>
 														<td>${counsel.w_date }</td>
+														<td><button type="button" class="btn btn-primary" style="background-color: cornflowerblue; border: none;"
+																onclick="location.href='csDetail?p_id=${counsel.p_id }&m_id=${counsel.m_id }&pet_no=${counsel.pet_no }&c_no=${counsel.c_no}'">상담내용보기</button>
+														</td>
 													</tr>
 												</c:forEach>
 											</tbody>
