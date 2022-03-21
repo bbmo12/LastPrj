@@ -13,154 +13,6 @@
 		padding: 50px;
 	}
 
-	.card-text {
-		width: 200px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	.padding {
-		padding: 5rem
-	}
-
-	.table th {
-		text-align: center;
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 500 !important;
-		color: black;
-		/* background-color: ghostwhite; */
-	}
-
-	.table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent;
-	}
-
-	.table-striped tbody tr:nth-of-type(odd) {
-		background-color: #f9f9fd;
-	}
-
-	.table td {
-		font-size: 16px;
-		padding: .875rem 0.9375rem;
-		text-align: center;
-	}
-	
-	
-	.no_deco {
-		text-decoration: none !important;
-		font-size : 0.8rem !important;
-		color: black;
-	}
-	
-	#my_section {
-		padding: 50px;
-		background: #f9f9fd;
-	}
-	
-	.blog_right_sidebar{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
-		border: 1px solid #e3e6f0;
-	   	border-radius: 0.35rem;
-	   	float: none !important; margin: 0 auto !important;
-	   	background-color: white;
-	   	width: 250px;
-	}
-	.card{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
-		border: 1px solid #e3e6f0;
-	   	border-radius: 0.35rem
-	}
-	
-	.card-header{
-		background: white;
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 400;
-		color: black;
-	}
-	
-	.card-body{
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 300;
-		color: black;
-		
-	}
-	
-	.card-footer{
-		background: white;
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 400;
-	}
-	
-	.widget_title{
-		background: #0062ff !important;
-	}
-	
-	#cardTitle{
-		font-size: 1.25rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 700;
-	}
-	
-	#myinfo{
-		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 300;
-	}
-	
-	#pet_img2{
-		display: inline-block;
-		text-align: center;
-		margin-right: 20px;
-		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 400;
-	}
-	
-	.partner_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 180px !important;
-	height: 180px !important;
-	float: none;
-	margin: 0 auto;
-}
-	
-	#Mainname{
-		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic'!important;
-		font-style: normal !important;
-	 	font-weight: 700 !important;
-	 	color:gray;
-	}
-	
-	#menu_bold{
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
- 	color: black;
-}
-
-#my_section {
-		padding: 50px;
-	}
-
 	#main-form h3,
 	input {
 		display: inline-block;
@@ -168,11 +20,11 @@
 
 	#addDiv,
 	#addService {
-		margin-left: 36em;
-		margin-top: -5px;
+		margin: -5px 0 0 35em;
 		color: #fff; 
     	background: #0062ff;
     	border: 1px solid transparent;	
+    	width: 115px;
 	}
 	#addDiv:hover,
 	#addService:hover{
@@ -200,6 +52,14 @@
 
 	.form-control {
 		padding: 5px;
+		width: 250px;
+		display: inline-block;
+		border-radius: 20px;
+	}
+
+
+.form-control1 {
+		padding: 5px;
 		display: inline-block;
 		border-radius: 20px;
 	}
@@ -213,19 +73,19 @@
 	}
 
 	#p-info {
-		margin-left: 9em;
+		margin-left: 5em;
 		margin-top: -20px;
 	}
 
 	.delete-button {
 		float: right;
-		margin-top: 25px;
-		margin-right: 100px;
+		margin: 27px 200px 0 0;
 		width: 62px;
 	}
 
 	#p_info {
 		border: 1px solid rgba(151, 151, 151, 0.3);
+		width: 700px;
 	}
 	#cancel{
 		width: 113px;
@@ -237,7 +97,7 @@
 	}
 	#member_post{
 		width: 100px;
-    	margin-left: 51em;
+    	margin-left: 53em;
     	margin-top: -70px;  	
     	color: #fff; 
     	background: #0062ff;
@@ -267,8 +127,68 @@
 	#content{
 		height: 45px;
     	padding: 12px;
-   		width: 275px;
+   		width: 285px;
 	}
+	
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
+
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
+	.card {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		padding: 20px;
+	}
+	i{
+		color: black;
+	}
+	
+	
 </style>
 
 	
@@ -350,33 +270,37 @@
 		});
 	</script>
 	
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="index.html">Home</a> <span>|</span> <a
-						href="blog-details.html">MyPage</a>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br><br><br>
+					<h2></h2>
 				</div>
 			</div>
 		</div>
 	</section>
-
 	<section id="my_section">
-		<div class="container">
+		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
+				<h2 align="center">반려동물 등록</h2>
+						<br>
 					<div class="blog_right_sidebar">
-
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"
+								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"; height="167px" 
 								alt="">
+								<br><br>
 							<div class="br"></div>
-							<h4>${member.name }</h4>
+							<h4 id="Mainname" >${member.name }님</h4>
 							<div class="br"></div>
+							<div id="myinfo">
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="confirmPass">반려동물 등록</a>
+							</div>
 						</aside>
-
+						</div><br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
@@ -415,20 +339,23 @@
 				</div>
 
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row">
+				<div id="main-form"  style="width: 800px;">
+					<div class="card">
 						<form action="mypatadd" method="post" enctype="multipart/form-data">
-						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
+							<i class="fas fa-user"></i>
 								<h3 style="font-weight: bolder;">이름</h3>
 								<input type="text" id="name" name="name"  class="form-control" required autofocus>
 						<div id="name_check"></div>
 							</div>
 							<div class="form-group">
+							<i class="fa fa-birthday-cake"></i>
 									<h3 style="font-weight: bolder;">생년월일</h3>
 								<input type="text" id="birth" name="birth" class="form-control" required autofocus>
 								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
+							<i class="fa fa-transgender"></i>
 									<h3 style="font-weight: bolder;">성별</h3>
 								<!-- 1이면 여자, 2이면 남자  -->
 								<label>여자
@@ -440,11 +367,13 @@
 									<span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
+							<i class="fa fa-balance-scale"></i>
 								<h3 style="font-weight: bolder;">몸무게</h3>
 								<input type="text" id="weight" name="weight" class="form-control" required autofocus>
 								<div id="weight_check"></div>
 							</div>
 							<div class="form-group">
+							<i class="fa fa-wikipedia-w"></i>
 								<h3 style="font-weight: bolder;">품종</h3>
 								<label>개<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
 								<label>고양이<input type="radio" id="code" name="code" value="502"><span class="checkmark"></span></label>&emsp;
@@ -459,19 +388,20 @@
 								<label>거미<input	 type="radio" id="code" name="code" value="511"><span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
+							<i class="fa fa-camera"></i>
 							<h3 style="font-weight: bolder;">반려동물 사진</h3>
 								<div class="input-group col-xs-12">
 								<input class="file-upload-browse btn btn-primary"  type="file" id="file" name="file">
 								</div>
 							</div>
-							<div class="form-group">
+							<i class="fa fa-text-width"></i>
 							<h3 style="font-weight: bolder;">반려동물 설명</h3><br>
-								<textarea class="form-control" id="n_content" name="n_content"
-									rows="10" cols="130"></textarea>
-							</div>
+								<textarea class="form-control1" id="n_content" name="n_content"
+									rows="10" cols="90"></textarea>
+							<div align="right">
 							<input type="hidden" name="m_id" id="m_id" value="${member.m_id }">
-							<button type="submit" class="genric-btn info radius">반려동물 등록</button>
-						</div>
+							<button type="submit" class="btn btn-primary">반려동물 등록</button>
+							</div>
 						</form>
 					</div>
 				</div>

@@ -13,7 +13,13 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/login/my-login.css">
 </head>
-
+<style>
+.nav-menu a {
+		text-decoration: none;
+		font-family: 'Binggrae-Bold';
+		font-size : 1.5rem;
+	}
+</style>
 <body class="my-login-page">
 	<script>
 		//자격증번호 정규식
