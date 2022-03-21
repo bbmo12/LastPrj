@@ -45,7 +45,9 @@
 					 	<script>alert("아이디, 비밀번호를 확인하세요.");</script>
 						<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
 					</c:if>
-					<div class="card fat" style="margin-top: -35px;">
+					<div class="card fat" style="margin-top: -35px;
+					box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+					border: 1px solid #e3e6f0;">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
 							<div id="test">

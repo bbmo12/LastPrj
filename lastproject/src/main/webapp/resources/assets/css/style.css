@@ -813,7 +813,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .specialist-area .single-doctor:hover .doctor-name {
-	background: linear-gradient(to right, #244cfd, #15e4fd)
+	background: #0062ff;
 }
 
 .specialist-area .single-doctor:hover .doctor-name h3, .specialist-area .single-doctor:hover .doctor-name h6
@@ -1244,7 +1244,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .blog_right_sidebar .widget_title {
 	font-size: 18px;
 	line-height: 25px;
-	background: linear-gradient(to right, #244cfd, #15e4fd);
+	background: #0062ff;
 	text-align: center;
 	color: #fff;
 	padding: 8px 0px;
@@ -1261,7 +1261,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 	padding-left: 20px;
 	border-radius: 45px;
 	z-index: 0;
-	background: linear-gradient(to right, #244cfd, #15e4fd)
+	background:#0062ff;
 }
 
 .blog_right_sidebar .search_widget .input-group .form-control:focus {
@@ -1469,7 +1469,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .blog-pagination .page-item.active .page-link {
-	background: linear-gradient(to right, #244cfd, #15e4fd);
+	background: #0062ff;
 	border-color: transparent;
 	color: #fff
 }
@@ -1492,7 +1492,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .blog-pagination .page-link:hover {
 	color: #fff;
 	text-decoration: none;
-	background: linear-gradient(to right, #244cfd, #15e4fd);
+	background: #0062ff;
 	border-color: #eee
 }
 
@@ -1638,7 +1638,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .comments-area .btn-reply:hover {
-	background: linear-gradient(to right, #244cfd, #15e4fd);
+	background: #0062ff;
 	color: #fff !important
 }
 

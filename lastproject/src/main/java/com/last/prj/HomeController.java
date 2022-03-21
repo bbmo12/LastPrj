@@ -5,7 +5,6 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -133,8 +132,17 @@ public class HomeController {
 				
 			}
 		}
+		
+		int cnt = memDao.countReview1(m_id) + memDao.countReview2(m_id);
+		
 		model.addAttribute("pets", petDAO.petmemberList(m_id));
 		model.addAttribute("member", memDao.memberSearch(m_id));
+		model.addAttribute("notices", noticeDao.noticeSelectList2(m_id));
+		
+		model.addAttribute("cntC", memDao.countCounsel(m_id));
+		model.addAttribute("cntW", cnt);
+		model.addAttribute("cntR", memDao.countReservation(m_id));
+		
 		
 		return "mypage/mainMypage";
 	}

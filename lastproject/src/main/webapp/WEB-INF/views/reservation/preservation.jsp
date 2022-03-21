@@ -287,7 +287,7 @@
 					url: 'noupdate',
 					method: 'post',
 					data: {
-						'rno': rno,
+						'r_no': rno,
 						'refuse': refuse
 					},
 					success: function (result) {
@@ -330,6 +330,7 @@
 					success : function(res){
 						alert("작성완료");
 						diaWebAlert(m_id);   		//예약번호,진단명,진단결과,증상,작성일자,회원아이디,파트너회원아이디
+						console.log(account);
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				         .send({from: account, gas:3000000})
 				         .then(function(result){console.log("블록체인 체크 : " + result);})

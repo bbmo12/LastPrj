@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 </head>
 <style>
 	#my_section {
@@ -22,11 +21,11 @@
 
 	#addDiv,
 	#addService {
-		margin-left: 36em;
-		margin-top: -5px;
+		margin: -5px 0 0 35em;
 		color: #fff; 
     	background: #0062ff;
     	border: 1px solid transparent;	
+    	width: 115px;
 	}
 	#addDiv:hover,
 	#addService:hover{
@@ -68,19 +67,19 @@
 	}
 
 	#p-info {
-		margin-left: 9em;
+		margin-left: 5em;
 		margin-top: -20px;
 	}
 
 	.delete-button {
 		float: right;
-		margin-top: 25px;
-		margin-right: 100px;
+		margin: 27px 200px 0 0;
 		width: 62px;
 	}
 
 	#p_info {
 		border: 1px solid rgba(151, 151, 151, 0.3);
+		width: 700px;
 	}
 	#cancel{
 		width: 113px;
@@ -92,7 +91,7 @@
 	}
 	#member_post{
 		width: 100px;
-    	margin-left: 51em;
+    	margin-left: 53em;
     	margin-top: -70px;  	
     	color: #fff; 
     	background: #0062ff;
@@ -122,39 +121,104 @@
 	#content{
 		height: 45px;
     	padding: 12px;
-   		width: 275px;
+   		width: 285px;
 	}
+	
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
+
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
+	.card {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		padding: 20px;
+	}
+	i{
+		color: black;
+	}
+	
+	
 </style>
 
 <body>
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="pmemberMyPage">MyPage</a>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br><br><br>
+					<h2></h2>
 				</div>
 			</div>
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container">
+		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
+					<h2 align="center">MyPage</h2>
+					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${pmember.picture}" 
-							style="width: 210px" onerror="this.src='resources/upload/pet.PNG'">
+							<img class="partner_img" src="resources/upload/${pmember.picture}"
+								onerror="this.src='resources/upload/pet.PNG'"style="width: 210px; height: 167px;">
+							<br><br>
+							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>
-							<h4>${pmember.name }</h4>
-							<div class="br"></div>
+							<div id="myinfo">
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="confirmPass">내 정보 수정하기</a>
+							</div>
 						</aside>
+					</div><br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="pmemberMyPage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
+							<ul class="list cat-list nanumbarungothic">
+								<p id="menu_bold">내 활동 내역</p>
 								<li><a href="reservationSetting" class="d-flex justify-content-between">
 										<p>예약일정 설정</p>
 									</a></li>
@@ -173,6 +237,11 @@
 								<li><a href="pmemreport" class="d-flex justify-content-between">
 										<p>신고 내역</p>
 									</a></li>
+								<br><br>
+								<p id="menu_bold">회원 정보 관리</p>
+								<li><a href="confirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+									</a></li>
 								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 									</a></li>
@@ -185,9 +254,9 @@
 				</div>
 		
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row">
 						<form action="pmemberUpdate" enctype="multipart/form-data" id="f" name="updatePage" method="post" onsubmit="return checkForm()">
-							<div class="col-lg-9 col-md-9 blog_details" id="main-form">
+							<div id="main-form"  style="width: 800px;">
+							<div class="card">
 								<div class="form-group">
 									<i class="fas fa-user"></i>
 									<h3 style="font-weight: bolder;">이름</h3>
@@ -306,8 +375,10 @@
 									</div>
 								</div>
 								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>
-								<i class="fa-solid fa-clipboard-list"></i>
-								<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3><br>
+								<div class="form-group" style="margin-bottom: 0px;">
+									<i class="fa-solid fa-clipboard-list"></i>
+									<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3><br>
+								</div>
 								<div id="plus-div">  
 									<div id="add-div">
 										<c:forEach items="${price }" var="price" varStatus="status">
@@ -333,7 +404,7 @@
 										</c:forEach>
 									</div>
 								</div>
-								<button type="button" class="genric-btn info radius"id="addService" onclick="plusService()">서비스추가</button>
+								<button type="button" class="genric-btn info radius"id="addService" onclick="plusService()" style="width: 126px;">서비스추가</button>
 								<p id="p-info">서비스를 더 추가 하시러면 서비스 추가 버튼을 눌러주세요.</p>
 								<div class="form-group">
 									<i class="far fa-id-badge"></i>
@@ -342,30 +413,36 @@
 										<input class="file-upload-browse btn btn-primary" type="file"id="file" name="file">
 									</div>
 								</div>
+								<div class="form-group" style="margin-bottom: 0px;">
 									<i class="fa fa-file-image-o"></i>
 									<h3 style="font-weight: bolder;">자격증</h3>
+								</div>	
 								<div class="form-group">
 									<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList1" multiple="multiple">
 									<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
 									<div id="ffile1"></div>
 								</div>
+								<div class="form-group" style="margin-bottom: 0px;">
 									<i class="fa-solid fa-images"></i>
 									<h3 style="font-weight: bolder;">활동사진</h3>
+								</div>	
 								<div class="form-group">
 									<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList2" multiple="multiple">
 									<button type="button" class="btn btn-primary btn-sm"onclick="addFile2()">+</button>
 									<div id="ffile2"></div>
 								</div>
+								<div align="right"> 
 								<button type="submit" id="successUpdate"class="genric-btn info radius">수정완료</button>
 								<button type="button" id="cancel" class="btn btn-secondary btn-lg" 
 								onclick="location.href='pmemberMyPage'">취소</button>
+								</div>
+							</div>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
 	<script>	
 

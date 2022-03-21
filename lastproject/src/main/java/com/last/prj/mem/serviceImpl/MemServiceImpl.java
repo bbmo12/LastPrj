@@ -119,8 +119,8 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
-	public int adMmemCount() {
-		return map.adMmemCount();
+	public int adMmemCount(MemVO vo) {
+		return map.adMmemCount(vo);
 	}
 
 	@Override
@@ -148,6 +148,26 @@ public class MemServiceImpl implements MemService {
 	public String passCheck(String m_id) {
 		return map.passCheck(m_id);
 
+	}
+
+	@Override
+	public int countCounsel(String m_id) {
+		return map.countCounsel(m_id);
+	}
+
+	@Override
+	public int countReview1(String m_id) {
+		return map.countReview1(m_id);
+	}
+
+	@Override
+	public int countReview2(String m_id) {
+		return map.countReview2(m_id);
+	}
+
+	@Override
+	public int countReservation(String m_id) {
+		return map.countReservation(m_id);
 	}
 
 
