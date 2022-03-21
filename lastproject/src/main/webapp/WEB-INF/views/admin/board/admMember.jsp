@@ -38,34 +38,18 @@
 				관리
 				<code>조건 별 검색</code>
 			</p>
-			<!-- 조건 검색한 리스트에서 검색 -->
-			<!-- 	<div>
-				<input class="form-control" id="myInput" type="text"
-					placeholder="Search.."> <br>
-			</div> -->
-			<!-- end 조건 검색한 리스트에서 검색 -->
-
-
 			<div class="row">
 
 				<div class="col-lg-6 grid-margin stretch-card">
 
 					<div class="card">
 						<div class="card-body">
-							<div class="card-title">
-								<h4>차트</h4>
-								<button type="button" class="btn btn-link btn-rounded btn-fw"
-									id="partChart" onclick="partChart();">기간 가입자 수</button>
 								<button type="button" class="btn btn-link btn-rounded btn-fw"
 									id="dateChart" onclick="petChart();">펫 품종별 비율</button>
-
 							</div>
 							<div id="petC" style="display: none;">
-
 								<div class="card">
-
 									<div class="card-body">
-
 										<p class="card-description mainCount" id="petCount">
 										<h4 class="card-title">펫 품종별 비율</h4>
 										<p class="card-description mainCount" id="petCount">
