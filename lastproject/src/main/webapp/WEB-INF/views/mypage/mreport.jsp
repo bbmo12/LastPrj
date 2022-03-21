@@ -306,9 +306,9 @@
 																				data-dismiss="modal" aria-label="Close">
 																				<span aria-hidden="true">&times;</span>
 																			</button>
-																		</div>
+																	</div>
 																		<div class="modal-body">${report.state }</div>
-																		<div class="modal-footer">
+																			<div class="modal-footer">
 																			<button type="button" class="btn btn-primary"
 																				data-dismiss="modal">확 인</button>
 																		</div>

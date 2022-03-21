@@ -9,6 +9,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
 <style>
 .single_sidebar_widget .post_category_widget {
 	text-decoration: none !important;
@@ -111,16 +115,63 @@
 	font-style: normal;
 	font-weight: 400;
 }
+
+.que:first-child {
+	
+}
+
+.que {
+	position: relative;
+}
+
+.que::before {
+	display: inline-block;
+}
+
+.que.on>span {
+	
+}
+
+.anw {
+	display: none;
+	overflow: hidden;
+}
+
+.anw::before {
+	display: inline-block;
+}
 </style>
 
 <body>
+<script>
+adminCount();
+function adminCount() {
+	$.ajax({
+		url : 'adminCount',
+		method : 'get',
+		success : function(res) {
+			console.log(res.petCount);
+			console.log(res.pmemCount);
+			console.log(res.memCount);
+			$("#admMemberC").append(res.memCount);
+			$("#admPmemberC").append(res.pmemCount);
+			$("#admPetC").append(res.petCount);
+			
+		},error : function(error) {
+			alert('Count를 불러오는 데 오류가 있습니다')
+			return false;
+			
+		}
+		
+	});
+	
+}
+</script>
 	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
 			<div class="col-lg-6 offset-lg-3">
 				<div class="section-top text-center">
-					<br>
-					<br>
-					<br>
+					<br> <br> <br>
 					<h2></h2>
 				</div>
 			</div>
@@ -181,8 +232,7 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
-									<br>
-									<br>
+									<br> <br>
 									<div class="card"
 										style="border-left: 0.25rem solid #0062ff !important;">
 										<div class="card-body text-center" style="padding: 20px">
@@ -190,15 +240,14 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i>
 													<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">해야할 일 수</span>
+												</span><span id="cardTitle">일반회원 가입자 수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="admMemberC"></h3>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-4">
-									<br>
-									<br>
+									<br> <br>
 									<div class="card"
 										style="border-left: 0.25rem solid #36b9cc !important;">
 										<div class="card-body text-center" style="padding: 20px;">
@@ -206,15 +255,14 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
 													<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle"></span>
+												</span><span id="cardTitle">펫 마릿수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="admPetC"></h3>
 										</div>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-4">
-									<br>
-									<br>
+									<br> <br>
 									<div class="card"
 										style="border-left: 0.25rem solid #f6c23e !important;">
 										<div class="card-body text-center" style="padding: 20px">
@@ -222,9 +270,9 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
 													<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">새로운 파트너 신청</span>
+												</span><span id="cardTitle">파트너회원 가입자 수</span>
 											</div>
-											<h3>3</h3>
+											<h3 id="admPmemberC"></h3>
 										</div>
 									</div>
 								</div>
@@ -232,24 +280,20 @@
 						</div>
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
-								<div class="card-header">
-									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내 알림 목록
+								<div class="card-header que admPartChartA">
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;일반회원 기간 별 가입자 수
 								</div>
-								<div class="card-body card_notice" style="padding: 15px">
-									<c:if test="${ fn:length(notices) == 0  }">
-										<div align="center">조회된 결과가 없습니다.</div>
-									</c:if>
-									<c:forEach items="${notices}" var="noti">
-										<div id="notice">
-											<span class="fa-stack fa-lg"> <i
-												class="fa fa-circle fa-stack-2x" style="color: #44ce42"></i>
-												<i class="fa fa-calendar-day fa-stack-1x fa-inverse"></i>
-											</span> <span>${noti.name}</span>&nbsp;&nbsp;&nbsp;<span
-												class="text-gray ellipsis mb-0">${noti.content}</span>
-											&nbsp;&nbsp;&nbsp;<span>${noti.w_date}</span>
-											<hr>
-										</div>
-									</c:forEach>
+								<div class="card-body card_notice anw" style="padding: 15px">
+									<p class="card-description mainCount" id="petCount">
+										<code id="a"></code>
+										<br>
+									<div id="b"></div>
+									</p>
+									
+									<div class="admPartChart">
+									<h4 class="card-title">일반 회원 기간 별 가입자 수</h4>
+									<canvas id="admPartChart" style="height: 250px"></canvas>
+									</div>
 								</div>
 								<div id="notice_footer">
 									<p>수신일로부터 7일이 지난 알림은 자동 삭제됩니다.</p>
@@ -259,20 +303,23 @@
 
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
-								<div class="card-header">
-									<i class="fa-solid fa-paw"></i> 내 반려동물
+								<div class="card-header que admPetChartA">
+									<i class="fa-solid fa-paw"></i> 반려동물 품종 별 차트
 								</div>
-								<div class="card-body" style="padding: 15px">
-									<c:if test="${ fn:length(pets) == 0  }">
-										<div align="center">조회된 결과가 없습니다.</div>
-									</c:if>
-									<c:forEach items="${pets }" var="pet">
-										<div id="pet_img2">
-											<img class="pet_img" src="resources/upload/${pet.picture }"
-												onerror="this.src='resources/upload/cat.jpg'" alt="">
-											<br> <a href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
-										</div>
-									</c:forEach>
+								<div class="card-body anw" style="padding: 15px">
+									<p class="card-description mainCount" id="petCount">
+									<h4 class="card-title">펫 품종별 비율</h4>
+									<p class="card-description mainCount" id="petCount">
+										<code id="a"></code>
+										<br>
+										<code id="1"></code>
+										<code id="2"></code>
+										<code id="3"></code>
+										<code id="4"></code>
+									</p>
+									<div class="admPetChart">
+										<canvas id="admPetChart" style="height: 250px"></canvas>
+									</div>
 								</div>
 								<div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
@@ -286,7 +333,150 @@
 		</div>
 	</section>
 	<script>
-			</script>
+	
+		/* adminCount();
+		function adminCount() {
+			$.ajax({
+				url : 'adminCount',
+				method : 'get',
+				success : function(res) {
+					console.log(res.petCount);
+					console.log(res.pmemCount);
+					console.log(res.memCount);
+					$("#admMemberC").append(res.memCount);
+					$("#admPmemberC").append(res.pmemCount);
+					$("#admPetC").append(res.petCount);
+					
+				},error : function(error) {
+					alert('Count를 불러오는 데 오류가 있습니다')
+					return false;
+					
+				}
+				
+			});
+			
+		} */
+	
+	
+	
+		// 아코디언 함수
+		$(document).on("click", ".que", function() {
+			$(this).next(".anw").stop().slideToggle(300);
+			$(this).toggleClass('on').siblings().removeClass('on');
+			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		})//end 아코디언 함수
+
+		
+		 $(".admPetChartA").on("click",function(e){
+				$(".admPetChart").append("<canvas id='admPetChart'></canvas>");
+				 $("#admPetChart").remove();
+		
+			 function petChart() {// 품 종별 Bar 차트 그리기
+	
+				tt = [];
+				oo = [];
+	
+				var total;
+				$.ajax({
+					url : 'amdPetChart',
+					method : 'get',
+					success : function(res) {
+						$.each(res, function(i) {
+							tt.push(res[i].tt);
+							oo.push(res[i].oo);
+							$("#i").html(res[i].oo + "의 마리수 :" + res[i].tt);
+	
+						});
+						console.log(res[0].ch);
+						$("#a").html("총 마리수 : " + res[0].ch);
+	
+	
+						const txc = document.getElementById('admPetChart').getContext('2d');
+						const admPetChart = new Chart(txc, {
+							type : 'bar',
+							data : {
+								labels : oo,
+								datasets : [ {
+									label : '# of Votes',
+									data : tt,
+									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 159, 64, 0.2)',
+											'rgba(255, 159, 64, 0.2)' ],
+									borderColor : [ 'rgba(255, 99, 132, 1)',
+											'rgba(255, 159, 64, 1)',
+											'rgba(255, 159, 64, 1)' ],
+									borderWidth : 1
+								} ]
+							},
+							options : {
+								scales : {
+									y : {
+										beginAtZero : true
+									}
+								}
+							}
+						});
+					}
+				})
+	
+			} 
+		 petChart();
+	}); 
+		
+
+		 $(".admPartChartA").on("click",function(e){
+			 
+     		$(".admPartChart").append("<canvas id='admPartChart'></canvas>");
+			$("#admPartChart").remove();
+			function partChart() { //일반 회원 기간 별 차트 그리기
+
+				tt = [];
+				oo = [];
+				$.ajax({
+					url : 'admMemChart',
+					method : 'get',
+					success : function(res) {
+						console.log(res[0].tt);
+						$.each(res, function(i) {
+							tt.push(res[i].tt);
+							oo.push(res[i].oo);
+						})
+						console.log(tt);
+
+						const ctx = document.getElementById('admPartChart')
+								.getContext('2d');
+						const admPartChart = new Chart(ctx, {
+							type : 'line',
+							data : {
+								labels : tt,
+								datasets : [ {
+									label : '일반 회원',
+									data : oo,
+									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 159, 64, 0.2)', ],
+									borderColor : [ 'rgba(255, 99, 132, 1)',
+											'rgba(255, 159, 64, 1)' ],
+									borderWidth : 1
+								} ]
+							},
+							options : {
+								scales : {
+									y : {
+										beginAtZero : true
+									}
+								}
+							}
+						});
+					} //success
+
+				}) // ajax
+
+			} //
+			partChart();
+		});
+		
+		
+	</script>
 
 </body>
 

@@ -94,7 +94,7 @@ public class PetController {
 				String m_id =userDetails.getMember().getM_id();
 				
 				model.addAttribute("member",memDao.memberSearch(m_id));
-				return "mypage/mypetUpdateForm";
+				return "mypage/mypeyAddForm";
 				
 			}
 		}

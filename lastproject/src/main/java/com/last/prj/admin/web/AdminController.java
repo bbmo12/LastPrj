@@ -52,9 +52,7 @@ public class AdminController {
 		List<BoardVO> list = boardDao.boardSelectList();
 		System.out.println(list);
 		model.addAttribute("boardList", list);
-		//펫 마리수
-		//회원 수
-		//일반 회원 수
+		
 		
 		return "adm/adminPage";
 	}
@@ -92,6 +90,26 @@ public class AdminController {
 	@RequestMapping("/adminChartPage")
 	public String adminChartPage() {
 		return "adm/adminChartPage";
+	}
+	
+	@RequestMapping("/adminCount")
+	@ResponseBody
+	public HashMap<String,Object> adminCount(){
+		//펫 마리수
+		//int petCount = petDAO.petCount();
+		//파트너 회원 수
+		int pmemCount = pMemberDao.pmemCount();
+		//일반 회원 수
+		int memCount = memDao.memCount();
+
+		HashMap<String,Object> map = new HashMap();
+		
+		map.put("petCount", petDAO.petCount());
+		map.put("pmemCount", pMemberDao.pmemCount());
+		map.put("memCount", memDao.memCount());
+		
+		
+		return map;
 	}
 	
 	
