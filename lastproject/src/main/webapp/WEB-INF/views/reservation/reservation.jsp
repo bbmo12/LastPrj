@@ -526,6 +526,7 @@
 			});
 				//결제 완료 후 결제 내역 등록
 				function payUpdate(){
+					var m_id = "${m_id}";
 					$.ajax({
 					url : 'payupdate',
 					method : 'post',
