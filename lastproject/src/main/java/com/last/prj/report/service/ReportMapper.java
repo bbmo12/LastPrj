@@ -46,7 +46,9 @@ public interface ReportMapper {
 		//신고 QnA 조회
 		public int admQlistCodeCount(ReportVO vo);
 		public List<ReportVO> admQlistCode(ReportVO vo);
+		int adminReportedCount();
 		int adminReportTotalCount();
+		int adminReporCount();
 		
 		public int pmemReport(Criteria cri);//파트너마이페이지 신고내역
 		public List<ReportVO> pmemReportList(Criteria cri);
