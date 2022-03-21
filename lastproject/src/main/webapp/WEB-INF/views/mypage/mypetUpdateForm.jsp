@@ -228,8 +228,7 @@
 								<textarea class="form-control" id="n_content" name="n_content" rows="4" cols="130"></textarea>
 							</div>
 							 
-							<button type="submit" class="genric-btn info radius">반려동물
-								정보수정</button>
+							<button type="submit"  class="btn btn-primary">반려동물 정보수정</button>
 						</div>
 						</form>
 					</div>
