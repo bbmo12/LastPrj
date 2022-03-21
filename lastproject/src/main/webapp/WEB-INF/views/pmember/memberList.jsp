@@ -46,7 +46,7 @@
 			<div class="row" id="data-container">
 			
 				<c:forEach items="${pageList }" var="pmember">
-					<div class="col-lg-3 col-sm-6">
+					<div class="col-lg-3 col-sm-6" style="margin-bottom: 30px;">
 						<div class="single-doctor mb-4 mb-lg-0">
 							<div class="doctor-img">
 								<img src="resources/upload/${pmember.picture }" onerror="this.src='resources/upload/pet.PNG'" class="img-fluid"
