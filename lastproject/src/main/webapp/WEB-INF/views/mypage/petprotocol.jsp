@@ -31,30 +31,6 @@
 		padding-left: 1rem !important;
 	}
 
-	.table th {
-		width: 280px;
-		font-size: 20px;
-		font-weight: 500;
-		text-align: center;
-	}
-
-	.table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent;
-	}
-
-	.table-striped tbody tr:nth-of-type(odd) {
-		background-color: #f9f9fd;
-	}
-
-	.table td {
-		font-size: 16px;
-		padding: .875rem 0.9375rem;
-		text-align: center;
-	}
-
 	#sidebar {
 		width: 500px;
 		float: none;
@@ -75,70 +51,348 @@
     	background: #fff;	
 	}
 
+	#my_section {
+		padding: 50px;
+	}
+
+	.card-text {
+		width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.padding {
+		padding: 5rem
+	}
+
+	.table th {
+		text-align: center;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 500 !important;
+		color: black;
+		/* background-color: ghostwhite; */
+	}
+
+	.table {
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 1rem;
+		background-color: transparent;
+	}
+
+	.table-striped tbody tr:nth-of-type(odd) {
+		background-color: #f9f9fd;
+	}
+
+	.table td {
+		font-size: 16px;
+		padding: .875rem 0.9375rem;
+		text-align: center;
+	}
+	
+	
+	.no_deco {
+		text-decoration: none !important;
+		font-size : 0.8rem !important;
+		color: black;
+	}
+	
+	#my_section {
+		padding: 50px;
+		background: #f9f9fd;
+	}
+	
+	.blog_right_sidebar{
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+		border: 1px solid #e3e6f0;
+	   	border-radius: 0.35rem;
+	   	float: none !important; margin: 0 auto !important;
+	   	background-color: white;
+	   	width: 250px;
+	}
+	.card{
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+		border: 1px solid #e3e6f0;
+	   	border-radius: 0.35rem
+	}
+	
+	.card-header{
+		background: white;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 400;
+		color: black;
+	}
+	
+	.card-body{
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+		color: black;
+		
+	}
+	
+	.card-footer{
+		background: white;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 400;
+	}
+	
+	.widget_title{
+		background: #0062ff !important;
+	}
+	
+	#cardTitle{
+		font-size: 1.25rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+	 	font-weight: 700;
+	}
+	
+	#myinfo{
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+	 	font-weight: 300;
+	}
+	
+	#pet_img2{
+		display: inline-block;
+		text-align: center;
+		margin-right: 20px;
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+	 	font-weight: 400;
+	}
+	
+	.partner_img{
+	object-fit: cover;
+	object-position:top;
+	border-radius:50%;
+	width: 180px !important;
+	height: 180px !important;
+	float: none;
+	margin: 0 auto;
+}
+	
+	#Mainname{
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic'!important;
+		font-style: normal !important;
+	 	font-weight: 700 !important;
+	 	color:gray;
+	}
+	
+	#menu_bold{
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+ 	font-weight: 700;
+ 	color: black;
+}
+#my_section {
+		padding: 50px;
+	}
+
+	#main-form h3,
+	input {
+		display: inline-block;
+	}
+
+	#addDiv,
+	#addService {
+		margin-left: 36em;
+		margin-top: -5px;
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#addDiv:hover,
+	#addService:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#price-insert,
+	#time-insert{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	
+	#price-insert:hover,
+	#time-insert:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+
+	#select-one {
+		margin-top: -20px;
+	}
+
+	.form-control {
+		padding: 5px;
+		width: 250px;
+		display: inline-block;
+		border-radius: 20px;
+	}
+
+	.service-info {
+		display: inline-grid;
+	}
+
+	.service-info input {
+		width: 100px;
+	}
+
+	#p-info {
+		margin-left: 9em;
+		margin-top: -20px;
+	}
+
+	.delete-button {
+		float: right;
+		margin-top: 25px;
+		margin-right: 100px;
+		width: 62px;
+	}
+
+	#p_info {
+		border: 1px solid rgba(151, 151, 151, 0.3);
+	}
+	#cancel{
+		width: 113px;
+    	height: 42px;
+    	padding: 0 30px;
+    	font-size: .8em;
+    	text-align: center;
+    	font-weight: 500;
+	}
+	#member_post{
+		width: 100px;
+    	margin-left: 51em;
+    	margin-top: -70px;  	
+    	color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#member_post:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#successUpdate{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#successUpdate:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	
+	input:focus,
+	textarea:focus{ 
+		border: 3px solid;
+	}
+	
+	#content{
+		height: 45px;
+    	padding: 12px;
+   		width: 275px;
+	}
 </style>
 
 <body>
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="memberMypage">MyPage</a>
+				<div class="col-lg-6 offset-lg-3">
+					<div class="section-top text-center">
+						<br><br><br>
+						<h2></h2>
+					</div>
 				</div>
-			</div>
 		</div>
 	</section>
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3">
-					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
+				<div class="col-lg-3" style="padding:0px;">
+				<h2 align="center">MyPage</h2>
+				<br>
+				<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${member.picture}"
-								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="">
+							<img class="partner_img"
+								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
+							<br><br>
+							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
-							<h4>${member.name }</h4>
-							<div class="br"></div>
+							<div id="myinfo">
+							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
+							</div>
 						</aside>
+					</div>
+					<br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="memberMypage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
+							<ul class="list cat-list nanumbarungothic">
+							<p id="menu_bold">내 활동 내역</p>
+								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
+								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
 									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between">
+								<li><a href="myPay" class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
 									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
+								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
 									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
+								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
 									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
+								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
 									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
+									<br><br><p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
 									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
 									</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list" style="position: relative; top: 20px;">
+				
+				
+			<div class="col-lg-9 posts-list">
+			<div class="single-post row">
 					<div class="col-lg-12 col-md-12 blog_details">
-						<div align="center">
-							<h1>${member.name }님의 반려동물 진료기록</h1>
+					<br><br>
+					<div class="card">
+					<div class="card-header">
+						<div align="left">
+							<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;반려동물 진료내역
 						</div>
+					</div>
+						<div class="card-body">
 						<div class="row">
 							<div class="col-md-12" style="margin: 20px 0 0 -45px;">
 								<div class="table-wrap">
@@ -149,16 +403,19 @@
 									<button type="button" class="codep" style="margin-right: 30px;" data-code="103">돌봄서비스</button>
 									<button type="button" class="codep" style="margin-right: 30px;" id="block_chain">블록체인진료기록</button>
 									<div id='blockChain'></div>
-									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
+									</div>
+									</div>
+									<div class="table-wrap" style="width: 900px;">
+									<table class="table table-striped">
 										<thead>
-											<tr>
+											<tr style="text-align: center;">
 												<th>반려동물 이름</th>
 												<th>파트너회원이름</th>
 												<th>진단명</th>
 												<th>날짜</th>
 											</tr>
 										</thead>
-										<tbody id="myTable">
+										<tbody id="myTable" style="text-align: center">
 										</tbody>
 									</table>
 									<div class="blog_right_sidebar" id="sidebar">
@@ -187,6 +444,8 @@
 									</div>
 								</div>
 							</div>
+						</div>
+						</div>
 						</div>
 					</div>
 				</div>
