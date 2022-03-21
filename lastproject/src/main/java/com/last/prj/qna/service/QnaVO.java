@@ -28,7 +28,8 @@ public class QnaVO {
 	// Integer로 선언하면 null값을 넣을 수 있다.
 	private Integer pet_no;
 	private List<QnaTagVO> tagList;
-
+	private String t_name;
+	
 	// DB에 없음
 	private String searchType; // 카테고리
 	private String searchValue; // 검색값
