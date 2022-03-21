@@ -14,10 +14,6 @@
 		padding: 50px;
 	}
 
-	body {
-		background-color: #f9f9fa
-	}
-
 	#leftBubble:after {
 		content: '';
 		position: absolute;
@@ -32,91 +28,135 @@
 		margin-top: -16px;
 		margin-left: -32px;
 	}
+
 	.radioImg {
 		width: 80px;
 		height: 80px;
 		border-radius: 70%;
 		overflow: hidden;
 	}
-	
-	#msgSubmit{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;
-    	margin-left : 10px;
-    	width: 175px;
-    	font-size: 20px;
+
+	#msgSubmit {
+		color: #fff;
+		background: #0062ff;
+		border: 1px solid transparent;
+		margin-left: 10px;
+		width: 175px;
+		font-size: 20px;
 	}
-	#msgSubmit:hover{
+
+	#msgSubmit:hover {
 		color: #0062ff;
 		border: 1px solid #0062ff;
 		background: #fff;
 	}
-	#terminate{
-		float: right; 
-		margin:10px 30px 0 0;
-		width: 175px; 
+
+	#terminate {
+		float: right;
+		margin: 10px 37px 0 0;
+		width: 175px;
 		height: 50px;
 		font-size: 20px;
 	}
-	
+
 	.petSelection {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
 
-		ul {
-			padding: 16px 0;
-			list-style: none;
-		}
+	ul {
+		padding: 16px 0;
+		list-style: none;
+	}
 
-		.petSelect {
-			displsy: flex;
-			flex-direction: row;
-		}
+	.petSelect {
+		displsy: flex;
+		flex-direction: row;
+	}
 
-		img {
-			width: 80px;
-			height: 80px;
-			object-fit: cover;
-			border-radius: 70%;
-			overflow: hidden;
-			border: 2px solid rgb(46, 46, 46);
-			margin-right: 5px;
-		}
+	img {
+		width: 80px;
+		height: 80px;
+		object-fit: cover;
+		border-radius: 70%;
+		overflow: hidden;
+		border: 2px solid rgb(46, 46, 46);
+		margin-right: 5px;
+	}
 
-		.petInfo {
-			width: 670px;
-			height: 120px;
-			margin-left: 20px;
-			background: rgb(241, 241, 241);
-			padding: 20px;
-			margin-bottom: 30px;
-		}
+	.petInfo {
+		width: 670px;
+		height: 120px;
+		margin-left: 20px;
+		background: rgb(241, 241, 241);
+		padding: 20px;
+		margin-bottom: 30px;
+	}
 
-		#CounselMsg {
-			width: 800px;
-			height: 300px;
-			border-radius: 10px;
-		}
+	#CounselMsg {
+		width: 800px;
+		height: 300px;
+		border-radius: 10px;
+	}
 
-		.other {
-			float: left;
-		}
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
 
-		.mine {
-			float: right;
-		}
-		
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
 </style>
 
 <body>
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="pmemberMyPage">MyPage</a>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br><br><br>
+					<h2></h2>
 				</div>
 			</div>
 		</div>
@@ -125,98 +165,114 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
+					<h2 align="center">MyPage</h2>
+					<br>
 					<c:if test="${mId ne null }">
-						<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
-						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${mInfo.picture}"
-								style="width: 210px" alt="">
-							<div class="br"></div>
-							<h4> ${mInfo.name }</h4>
-							<div class="br"></div>
-						</aside>
-						<aside class="single_sidebar_widget post_category_widget">
-							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="memberMypage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
-								<li><a href="petmemberForm" class="d-flex justify-content-between">
-										<p>반려동물 프로필</p>
-									</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
-										<p>반려동물 진료기록</p>
-									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
-										<p>예약 내역</p>
-									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between">
-										<p>결제 내역</p>
-									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
-										<p>상담 내역</p>
-									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
-										<p>신고 내역</p>
-									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
-										<p>팔로우</p>
-									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
-										<p>로그아웃</p>
-									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
-										<p>회원탈퇴</p>
-									</a></li>
-							</ul>
-						</aside>
-					</div>
-					</c:if>	
+						<div class="blog_right_sidebar">
+							<aside class="single_sidebar_widget author_widget">
+								<img class="partner_img" src="resources/upload/${mInfo.picture}"
+									onerror="this.src='resources/upload/cat.jpg'" style="width: 210px; height: 167px;">
+								<br><br>
+								<h4 id="Mainname">${mInfo.name }님</h4>
+								<div class="br"></div>
+								<div id="myinfo">
+									<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보수정하기</a>
+								</div>
+							</aside>
+						</div>
+						<br>
+						<div class="blog_right_sidebar">
+							<aside class="single_sidebar_widget post_category_widget">
+								<h4 class="widget_title">My menu</h4>
+								<ul class="list cat-list nanumbarungothic">
+									<p id="menu_bold">내 활동 내역</p>
+									<li><a href="protocol" class="d-flex justify-content-between no_deco">
+											<p>반려동물 진료기록</p>
+										</a></li>
+									<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
+											<p>예약 내역</p>
+										</a></li>
+									<li><a href="myPay" class="d-flex justify-content-between no_deco">
+											<p>결제 내역</p>
+										</a></li>
+									<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
+											<p>상담 내역</p>
+										</a></li>
+									<li><a href="myreport" class="d-flex justify-content-between no_deco">
+											<p>신고 내역</p>
+										</a></li>
+									<li><a href="myfallow" class="d-flex justify-content-between no_deco">
+											<p>팔로우</p>
+										</a></li>
+									<br><br>
+									<p id="menu_bold">회원 정보 관리</p>
+									<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+											<p>회원 정보 수정</p>
+										</a></li>
+									<li><a href="logout" class="d-flex justify-content-between no_deco">
+											<p>로그아웃</p>
+										</a></li>
+									<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
+											<p>회원탈퇴</p>
+										</a></li>
+								</ul>
+							</aside>
+						</div>
+					</c:if>
 					<c:if test="${pId ne null }">
-					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
-						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${pInfo.picture}"
-								style="width: 210px" alt="">
-							<div class="br"></div>
-							<h4>${pInfo.name }</h4>
-							<div class="br"></div>
-						</aside>
-						<aside class="single_sidebar_widget post_category_widget">
-							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="pmemberMyPage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
-								<li><a href="reservationSetting" class="d-flex justify-content-between">
-										<p>예약일정 설정</p>
-									</a></li>
-								<li><a href="preservationSelect" class="d-flex justify-content-between">
-										<p>예약 내역</p>
-									</a></li>
-								<li><a href="pMemDiaList" class="d-flex justify-content-between">
-										<p>진료 내역</p>
-									</a></li>
-								<li><a href="pMembenefit" class="d-flex justify-content-between">
-										<p>결제 내역</p>
-									</a></li>
-								<li><a href="pmemcounsel" class="d-flex justify-content-between">
-										<p>상담 내역</p>
-									</a></li>
-								<li><a href="pmemreport" class="d-flex justify-content-between">
-										<p>신고 내역</p>
-									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
-										<p>로그아웃</p>
-									</a></li>
-								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
-										<p>회원탈퇴</p>
-									</a></li>
-									
-							</ul>
-						</aside>
-					</div>
+						<div class="blog_right_sidebar">
+							<aside class="single_sidebar_widget author_widget">
+								<img class="partner_img" src="resources/upload/${pInfo.picture}"
+									onerror="this.src='resources/upload/pet.PNG'" style="width: 210px; height: 167px;">
+								<br><br>
+								<h4 id="Mainname">${pInfo.name }님</h4>
+								<div class="br"></div>
+								<div id="myinfo">
+									<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="confirmPass">내 정보수정하기</a>
+								</div>
+							</aside>
+						</div><br>
+						<div class="blog_right_sidebar">
+							<aside class="single_sidebar_widget post_category_widget">
+								<h4 class="widget_title">My menu</h4>
+								<ul class="list cat-list nanumbarungothic">
+									<p id="menu_bold">내 활동 내역</p>
+									<li><a href="reservationSetting" class="d-flex justify-content-between">
+											<p>예약일정 설정</p>
+										</a></li>
+									<li><a href="preservationSelect" class="d-flex justify-content-between">
+											<p>예약 내역</p>
+										</a></li>
+									<li><a href="pMemDiaList" class="d-flex justify-content-between">
+											<p>진료 내역</p>
+										</a></li>
+									<li><a href="pMembenefit" class="d-flex justify-content-between">
+											<p>결제 내역</p>
+										</a></li>
+									<li><a href="pmemcounsel" class="d-flex justify-content-between">
+											<p>상담 내역</p>
+										</a></li>
+									<li><a href="pmemreport" class="d-flex justify-content-between">
+											<p>신고 내역</p>
+										</a></li>
+									<br><br>
+									<p id="menu_bold">회원 정보 관리</p>
+									<li><a href="confirmPass" class="d-flex justify-content-between no_deco">
+											<p>회원 정보 수정</p>
+										</a></li>
+									<li><a href="logout" class="d-flex justify-content-between">
+											<p>로그아웃</p>
+										</a></li>
+									<li><a href="pmdeleteForm" class="d-flex justify-content-between">
+											<p>회원탈퇴</p>
+										</a></li>
+								</ul>
+							</aside>
+						</div>
 					</c:if>
 				</div>
-				<div class="col-lg-9 posts-list" style="position: relative; width: 100%; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
+				<div class="col-lg-9 posts-list"
+					style="border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px; margin-top: 71px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div>
 							<div style="margin-bottom: 20px;">
@@ -308,8 +364,7 @@
 							</c:if>
 
 							<!-- 채팅 내용 -->
-							<div id="chatbody"
-								style="border: 1px solid #d3d3d3; background-color: white; margin: 30px; padding: 30px; color: black; height: 600px; border-radius: 5px; overflow: scroll;">
+							<div id="chatbody" style="border: 1px solid #d3d3d3; background-color: white; margin: 30px; padding: 30px; color: black; height: 750px; border-radius: 5px; overflow: auto;">
 								<c:forEach items="${csDetail }" var="detail">
 									<!-- 일반 멤버의 경우 -->
 									<c:if test="${mId ne null }">
@@ -339,8 +394,7 @@
 										<c:if test="${detail.m_id eq detail.sender }">
 											<div class="other">${mInfo.name }</div>
 											<div>
-												<div class="leftBubble"
-													style="background-color: #d1d1d1; padding: 10px; margin-right : 100px; border-radius: 10px; display: inline-block;">
+												<div class="leftBubble" style="background-color: #d1d1d1; padding: 10px; margin-right : 100px; border-radius: 10px; display: inline-block;">
 													${detail.content }</div>
 												<div class="other">${detail.w_date }</div>
 											</div>
@@ -348,8 +402,7 @@
 										<!-- 본인 -->
 										<c:if test="${detail.p_id eq detail.sender }">
 											<div align="right">
-												<div class="mine"
-													style="background-color: #38a4ff; padding: 10px; margin-left : 100px; border-radius: 10px; display: inline-block; color : white;">
+												<div class="mine" style="background-color: #38a4ff; padding: 10px; margin-left : 100px; border-radius: 10px; display: inline-block; color : white;">
 													${detail.content }</div>
 												<div class="mine">${detail.w_date }</div>
 											</div>
@@ -359,8 +412,8 @@
 							</div>
 							<c:if test="${oneCs.code == '302' || oneCs.code == '301' }">
 								<div style="display : flex; margin-top: -15px;">
-									<input type="text" id="CounselMsg" name="CounselMsg" class="form-control"placeholder="메시지를 입력해주세요"
-											style="width : 640px; height : 50px; margin-left : 30px;">
+									<input type="text" id="CounselMsg" name="CounselMsg" class="form-control"
+										placeholder="메시지를 입력해주세요" style="width : 640px; height : 50px; margin-left : 30px;">
 									<button type="button" id="msgSubmit" class="genric-btn info-border radius" name="msgSubmit">전송</button>
 								</div>
 							</c:if>
@@ -369,8 +422,8 @@
 									<p style="font-size: 16px; font-family: sans-serif;">상담이 종료되었습니다.</p>
 								</div>
 							</c:if>
-							<input type="hidden" id="pet_no" name="pet_no" value="${oneCs.pet_no }"> 
-							<input type="hidden" id="p_no" name="p_no" value="${oneCs.c_no }"> 
+							<input type="hidden" id="pet_no" name="pet_no" value="${oneCs.pet_no }">
+							<input type="hidden" id="p_no" name="p_no" value="${oneCs.c_no }">
 							<input type="hidden" id="m_id" name="m_id" value="${oneCs.m_id }">
 							<input type="hidden" id="p_id" name="p_id" value="${oneCs.p_id }">
 							<c:if test="${mId ne null}">
@@ -380,7 +433,8 @@
 								<input type="hidden" id="sender" name="sender" value="${pId }">
 							</c:if>
 							<c:if test="${oneCs.code == '302' || oneCs.code == '301' }">
-								<button type="button" id="terminate" name="terminate" class="genric-btn success" >상담종료</button>
+								<button type="button" id="terminate" name="terminate"
+									class="genric-btn success">상담종료</button>
 							</c:if>
 						</div>
 					</div>
@@ -432,28 +486,39 @@
 			}
 		}
 
-		/*상담 종료*/
+	    /*상담 종료*/
 		$(function () {
 			$("#terminate").click(function () {
-				if (confirm("상담을 종료하면 더 이상 메시지를 보낼 수 없습니다. 정말 종료하시겠습니까?")) {
-					$.ajax({
-						method: "GET",
-						url: "CodeUdt",
-						data: {
-							p_no: $("#p_no").val(),
-						},
-						success: function () {
-							alert('상담이 종료되었습니다.');
-							location.reload();
-						},
-						error: function () {
-							alert('오류가 발생했습니다.');
+				if (Swal.fire({
+						title: "상담을 종료하면 더 이상<br> 메시지를 보낼 수 없습니다. <br>정말 종료하시겠습니까?",
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정 취소
+						cancelButtonColor: '#d33',
+						confirmButtonText: '종료하기', // confirm 버튼 텍스트 지정 
+						cancelButtonText: '닫기',
+					}).then(result => {
+						if (result.isConfirmed) {
+							$.ajax({
+								method: "GET",
+								url: "CodeUdt",
+								data: {
+									p_no: $("#p_no").val(),
+								},
+								success: function () {
+									Swal.fire('상담이 종료되었습니다.');
+									location.reload();
+								},
+								error: function () {
+									Swal.fire('오류가 발생했습니다.');
+								}
+							})
+
 						}
-					})
+
+					})) {
 				}
 			})
 		})
-
 	</script>
 </body>
 
