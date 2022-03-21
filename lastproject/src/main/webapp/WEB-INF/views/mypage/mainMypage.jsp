@@ -10,11 +10,13 @@
 <title>Insert title here</title>
 </head>
 <style>
+
 .no_deco {
 	text-decoration: none !important;
 	font-size: 0.8rem !important;
 	color: black;
 }
+
 
 #my_section {
 	padding: 50px;

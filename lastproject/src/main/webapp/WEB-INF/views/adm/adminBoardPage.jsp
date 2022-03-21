@@ -167,7 +167,7 @@ style>.single_sidebar_widget .post_category_widget {
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2>MyPage</h2>
+					<h2><a href="adminPage">MyPage</a></h2><h5>공지사항 페이지</h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -192,11 +192,7 @@ style>.single_sidebar_widget .post_category_widget {
 								</a></li>
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between">
-										<p>일반회원 목록</p>
-								</a></li>
-								<li><a href="adminPmemberPage"
-									class="d-flex justify-content-between">
-										<p>파트너회원 목록</p>
+										<p>목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
 									class="d-flex justify-content-between">

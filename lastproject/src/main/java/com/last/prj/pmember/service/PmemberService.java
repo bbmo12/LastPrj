@@ -40,10 +40,12 @@ public interface PmemberService {
 	public List<PmemberVO> admgoChart();
 	public int admPmemReportCount();
 	public List<PmemberVO> admPmemReporList(PmemberVO vo);
+	public List<PmemberVO> admPmemChart();
 	
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);
 	
 	
 	public List<ReviewVO> ServiceReviewRecent();
+	
 }

@@ -240,11 +240,12 @@
 	<!--기간 별 차트 그리기  -->
 		<select id="admMemChart" resultType="com.last.prj.mem.service.MemVO">
 			SELECT 
-			    TO_CHAR(startdate, 'yyyy-mm')as tt,
-			    COUNT(*)as oo
-			FROM member
+			    TO_CHAR(STARTDATE, 'YYYY-MM')AS TT,
+			    COUNT(*)AS OO
+			FROM MEMBER
+			WHERE STARTDATE IS NOT NULL
 			GROUP BY 
-			TO_CHAR(startdate, 'yyyy-mm')
+			TO_CHAR(STARTDATE, 'YYYY-MM')
 		</select>
 	
 		<select id="pMemCode" resultType="int" parameterType="String" >

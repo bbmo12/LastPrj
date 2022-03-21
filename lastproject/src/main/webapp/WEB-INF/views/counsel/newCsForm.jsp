@@ -5,65 +5,114 @@
 <html>
 
 <style>
-.petSelect ul li {
-	list-style-type: none;
-	float: left;
-	margin-left: 20px;
-} 
+	.petSelect ul li {
+		list-style-type: none;
+		float: left;
+		margin-left: 20px;
+	}
+	
+	#my_section {
+		padding: 50px;
+	}
 
-#my_section {
-	padding: 50px;
-}
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
 
-body {
-	background-color: #f9f9fa
-}
+	.radioImg {
+		width: 80px;
+		height: 80px;
+		border-radius: 70%;
+		overflow: hidden;
+	}
 
-.radioImg {
-	width: 80px;
-	height: 80px;
-	border-radius: 70%;
-	overflow: hidden;
-}
+	.petSelection {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 
-.petSelection {
-	width: 100%;
-	height: 100%;
-	object-fit: cover; ul { padding : 16px 0;
-	list-style: none;
-}
+	ul {
+		padding: 16px 0;
+		list-style: none;
+	}
 
-.petSelect {
-	displsy: flex;
-	flex-direction: row;
-}
+	.petSelect {
+		displsy: flex;
+		flex-direction: row;
+	}
 
-.newCs {
-	margin-top: 50px;
-	margin-bottom: 50px;
-}
+	.newCs {
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
 
-.btns {
-	margin-left: 400px;
-}
+	.btns {
+		margin-left: 400px;
+	}
 
-#radios {
-	display: flex;
-	flex-direction: row;
-}
+	#radios {
+		display: flex;
+		flex-direction: row;
+	}
 
-br.clear {
-	clear: both
-}	
+	br.clear {
+		clear: both
+	}
+
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
 </style>
 
 <body>
-	<section class="banner-area other-page">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>MyPage</h1>
-					<a href="home">Home</a> <span>|</span> <a href="memberMypage">MyPage</a>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br><br><br>
+					<h2></h2>
 				</div>
 			</div>
 		</div>
@@ -72,50 +121,62 @@ br.clear {
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<div class="blog_right_sidebar" style="margin-left: 40px; width: 300px;">
+					<h2 align="center">MyPage</h2>
+					<br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${mInfo.picture}"
-								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px" alt="">
+							<img class="partner_img" src="resources/upload/${mInfo.picture}"
+								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px; height: 167px;">
+							<br><br>
+							<h4 id="Mainname">${mInfo.name }님</h4>
 							<div class="br"></div>
-							<h4> ${mInfo.name }</h4>
-							<div class="br"></div>
+							<div id="myinfo">
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보수정하기</a>
+							</div>
 						</aside>
+					</div>
+					<br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list">
-								<li><a href="memberMypage" class="d-flex justify-content-between">
-										<p>내 프로필</p>
-									</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
+							<ul class="list cat-list nanumbarungothic">
+								<p id="menu_bold">내 활동 내역</p>
+								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
+								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
 									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between">
+								<li><a href="myPay" class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
 									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
+								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
 									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
+								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
 									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
+								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
 									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
+								<br><br>
+								<p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
 									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
 									</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
+
 				<div class="col-lg-9 posts-list"
-					style="position: relative; top: -20px; border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
+					style="border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 							<h2>상담 차트 작성</h2>
@@ -140,9 +201,8 @@ br.clear {
 										</span>와의 첫 상담을 위한 차트를 작성해주세요.
 									</h3>
 								</div>
-
-								<input type="hidden" id="p_id" name="p_id" value="${pInfo.p_id }"> 
-								<input type="hidden" id="m_id" name="m_id" value="${mId }"> 
+								<input type="hidden" id="p_id" name="p_id" value="${pInfo.p_id }">
+								<input type="hidden" id="m_id" name="m_id" value="${mId }">
 								<input type="hidden" id="sender" name="sender" value="${mId }">
 								<h3>반려동물 선택</h3>
 								<h4 style="color: gray;">*상담받고자 하는 반려동물을 선택해주세요.</h4>
@@ -151,8 +211,7 @@ br.clear {
 										<li>
 											<div class="radioImg">
 												<img class="petSelection" src="resources/qna/가위표.png">
-											</div> <input type="radio" id="pet_no" name="pet_no" value=""
-												checked="checked">&nbsp;
+											</div> <input type="radio" id="pet_no" name="pet_no" value="" checked="checked">&nbsp;
 											<label>없음/비공개</label>
 										</li>
 										<c:forEach items="${petList }" var="pet">
@@ -160,22 +219,23 @@ br.clear {
 												<div class="radioImg">
 													<img class="petSelection" src="resources/qna/${pet.picture }"
 														onError="this.src='resources/qna/대체이미지2.png'">
-												</div> 
+												</div>
 												<input type="radio" id="pet_no" name="pet_no"value="${pet.pet_no}">&nbsp;${pet.name }
 											</li>
 										</c:forEach>
 									</ul>
 								</div>
-								<br class="clear"> <br class="clear"> <br class="clear"> <br class="clear"> <br; class="clear">
-								<div style="margin-top: 30px;">
-									<h3>상담 내용</h3>
-									<textarea id="content" name="content" class="form-control"
-										style="width: 100%; height: 500px; margin-bottom: 30px;">*반려동물의 증상, 전문가에게 궁금한 점 등을 자세히 적어주세요.</textarea>
-								</div>
-								<div id="btns" style="margin-left: 21em;">
-									<button type="submit" id="submitCs"  style="width: 100px;" class="btn btn-primary">상담 시작</button>
-									<button type="button" class="btn btn-secondary" style="width: 100px;" onclick="history.back()">취소</button>
-								</div>
+								<br class="clear"> <br class="clear"> <br class="clear"> <br class="clear">
+								<br; class="clear">
+									<div style="margin-top: 30px;">
+										<h3>상담 내용</h3>
+										<textarea id="content" name="content" class="form-control"
+											style="width: 100%; height: 500px; margin-bottom: 30px;">*반려동물의 증상, 전문가에게 궁금한 점 등을 자세히 적어주세요.</textarea>
+									</div>
+									<div id="btns" style="margin-left: 21em;">
+										<button type="submit" id="submitCs" style="width: 100px;"class="btn btn-primary">상담 시작</button>
+										<button type="button" class="btn btn-secondary" style="width: 100px;"onclick="history.back()">취소</button>
+									</div>
 							</form>
 						</div>
 					</div>
@@ -184,7 +244,7 @@ br.clear {
 		</div>
 	</section>
 	<script>
-	content.addEventListener('click', function () {
+		content.addEventListener('click', function () {
 			event.target.select();
 		});
 		/* $(function(){
@@ -210,12 +270,9 @@ br.clear {
 		}) */
 
 		function fmcheck() {
-
 			var content = $('#content').val();
-
 			if (content == "") {
-				alert('상담 내용이 입력되지 않았습니다.');
-
+				Swal.fire('상담 내용이 입력되지 않았습니다.');
 				return false;
 			}
 		}

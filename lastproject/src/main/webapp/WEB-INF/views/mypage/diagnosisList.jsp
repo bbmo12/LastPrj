@@ -211,7 +211,6 @@
 						</aside>
 					</div>
 				</div>
-
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
@@ -219,7 +218,7 @@
 							<div class="card">
 								<div class="card-header">
 									<div align="left">
-										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;${pmember.name }님의 예약내역
+										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;${pmember.name }님의 진료내역
 									</div>
 								</div>
 								<div class="card-body">

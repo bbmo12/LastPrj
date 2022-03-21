@@ -53,6 +53,17 @@
 		padding: .875rem 0.9375rem;
 		text-align: center;
 	}
+	.badge {
+		font-size: 12px;
+		line-height: 1;
+		padding: .375rem .5625rem;
+		font-weight: normal;
+	}
+
+	.badge-info {
+		background-color: cornflowerblue;
+		border: none;
+	}
 	
 	
 	.no_deco {
@@ -98,23 +109,8 @@
 		
 	}
 	
-	.card-footer{
-		background: white;
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 400;
-	}
-	
 	.widget_title{
 		background: #0062ff !important;
-	}
-	
-	#cardTitle{
-		font-size: 1.25rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 700;
 	}
 	
 	#myinfo{
@@ -124,25 +120,15 @@
 	 	font-weight: 300;
 	}
 	
-	#pet_img2{
-		display: inline-block;
-		text-align: center;
-		margin-right: 20px;
-		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 400;
-	}
-	
 	.partner_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 180px !important;
-	height: 180px !important;
-	float: none;
-	margin: 0 auto;
-}
+		object-fit: cover;
+		object-position:top;
+		border-radius:50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
 	
 	#Mainname{
 		font-size: 1.5rem !important;
@@ -153,12 +139,12 @@
 	}
 	
 	#menu_bold{
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
- 	color: black;
-}
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+ 		font-weight: 700;
+ 		color: black;
+	}
 </style>
 
 <body>
@@ -294,10 +280,10 @@
                                                      </td>
 													<td>
 													<c:if test="${report.repor eq 702}">
-															<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"
+															<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter${report.rep_no }"
 																style="border: none;">사유확인</button>
 															<!-- Modal -->
-															<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+															<div class="modal fade" id="exampleModalCenter${report.rep_no }" tabindex="-1" role="dialog"
 																aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 																<div class="modal-dialog modal-dialog-centered" role="document">
 																	<div class="modal-content">
@@ -334,6 +320,13 @@
 			</div>
 		</div>
 	</section>
+	<script type="text/javascript">
+	$("#exampleModalCenter").on('hidden.bs.modal',function(e){
+		$(this).find('.modal-body').text('');
+	}); 
+	
+	
+	</script>
 </body>
 
 </html>

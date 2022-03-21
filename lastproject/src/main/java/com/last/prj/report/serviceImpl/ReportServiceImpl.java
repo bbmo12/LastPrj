@@ -118,6 +118,21 @@ public class ReportServiceImpl implements ReportService {
 		return map.memReport(cri);
 	}
 
+	@Override
+	public int adminReportedCount() {
+		return map.adminReportedCount();
+	}
+
+	@Override
+	public int adminReportTotalCount() {
+		return map.adminReportTotalCount();
+	}
+
+	@Override
+	public int adminReporCount() {
+		return map.adminReporCount();
+	}
+
 
 
 }

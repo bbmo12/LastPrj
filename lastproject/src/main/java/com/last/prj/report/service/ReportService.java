@@ -55,5 +55,9 @@ public interface ReportService {
 			//회원의 신고 카운트 업데이트
 			public int admReSearchUpdate(ReportVO vo);
 
+			int adminReportedCount();
+			int adminReportTotalCount();
+			int adminReporCount();
+
 	
 }

@@ -84,4 +84,8 @@
 		SELECT COUNT(PET_NO)AS TT,(SELECT COUNT(*) FROM PET)AS CH, F.CONTENT AS OO FROM PET P, F_CODE F WHERE P.CODE=F.CODE GROUP BY F.CONTENT
 	</select>
 	
+	<select id="adminPetListCode" resultType="com.last.prj.qna.service.PetVO">
+		SELECT P.PET_NO, P.NAME, P.BIRTH, P.GENDER, P.M_ID, F.CONTENT, P.N_CONTENT, P.PICTURE FROM PET P ,F_CODE F WHERE P.CODE = F.CODE
+	</select>
+	
 </mapper>

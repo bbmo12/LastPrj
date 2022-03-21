@@ -180,4 +180,9 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.admPmemReporList(vo);
 
 	}
+
+	@Override
+	public List<PmemberVO> admPmemChart() {
+		return map.admPmemChart();
+	}
 }
