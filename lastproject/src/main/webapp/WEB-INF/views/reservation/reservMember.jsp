@@ -21,6 +21,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <style>
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div:nth-child(3) > div{
@@ -30,17 +32,22 @@
 	display: none;
 }
 .table td{
- font-size: 17px;
+ font-size: 13px;
 }
-
+input:disabled {
+  background: black;
+}
+.disabled-radio{
+	text-decoration: line-through;
+}
 </style>
 <body>
 <br><br><br><br><br><br>
  <div id="menu">
       <span id="menu-navi">
-        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+        <!-- <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
           <i class="calendar-icon ic-arrow-line-left" data-action="move-prev">이전</i>
-        </button>
+        </button> -->
         <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
           <span id="renderRange" class="render-range"></span>
         <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
@@ -58,7 +65,7 @@
 		<thead>
              <tr>
                 <th style="width: 100px;">예약가능일자</th>
-                <th style= "width: 670px;" align="left">예약시간</th>
+                <th colspan="10" style= "width: 670px;" align="left">예약시간</th>
              </tr>
         </thead>
         <tbody>
@@ -87,8 +94,8 @@
 			<!-- modal 몸통 -->
 			<div class="modal-body">
 				<form>
-				 <span id="dvalue">  <input type ="hidden" id="date_value" ></span> <br>
-				 <span id="tvalue">  <input type ="hidden" id="time_value"></span> <br>
+				 <span id="dvalue"><input type ="hidden" id="date_value" ></span> <br>
+				 <span id="tvalue"><input type ="hidden" id="time_value"></span> <br>
 				 <span> 예약내용(증상)   : <input type="text" id ="r_content" placeholder="증상 입력" style="font-size: 15px; "></span><br>
 				 <input type="hidden" id = "AutoCode" >
 		   		 
@@ -243,9 +250,6 @@ $(document).ready(function(){
 		var nowDate = year+"-"+month+"-"+parseInt(day[1]);
 		var nowTime = hours+"시"
 		
-		
-		
-		
 		var title = event.schedule.title;
 		if ( title=='예약불가'){
 			$(".table tbody").empty();
@@ -280,16 +284,13 @@ $(document).ready(function(){
 			                  <tbody>
 			                        <tr>
 			                           <td class="tdvalCheck">`+tdval+ex+`</td>
-										<td>
-											<input type="radio" name="selectTime" value="09시">09:00~10:00
-											<input type="radio" name="selectTime" value="10시">10:00~11:00
-											<input type="radio" name="selectTime" value="11시">11:00~12:00
-											<input type="radio" name="selectTime" value="14시">14:00~15:00
-											<input type="radio" name="selectTime" value="15시">15:00~16:00
-											<input type="radio" name="selectTime" value="16시">16:00~17:00
-											<input type="radio" name="selectTime" value="17시">17:00~18:00
-										</td>
-									
+										<td><input  type="radio" name="selectTime" value="09시">09:00~10:00</td>
+										<td><input  type="radio" name="selectTime" value="10시">10:00~11:00</td>
+										<td><input  type="radio" name="selectTime" value="11시">11:00~12:00</td>
+										<td><input  type="radio" name="selectTime" value="14시">14:00~15:00</td>
+										<td><input  type="radio" name="selectTime" value="15시">15:00~16:00</td>
+										<td><input  type="radio" name="selectTime" value="16시">16:00~17:00</td>
+										<td><input  type="radio" name="selectTime" value="17시">17:00~18:00</td>
 									</tr>
 									
 							</tbody> `;
@@ -300,12 +301,12 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<input type="radio" name="selectTime" value="10시">10:00~11:00
-															<input type="radio" name="selectTime" value="11시">11:00~12:00
-															<input type="radio" name="selectTime" value="14시">14:00~15:00
-															<input type="radio" name="selectTime" value="15시">15:00~16:00
-															<input type="radio" name="selectTime" value="16시">16:00~17:00
-															<input type="radio" name="selectTime" value="17시">17:00~18:00
+															<input  type="radio" name="selectTime" value="10시">10:00~11:00
+															<input  type="radio" name="selectTime" value="11시">11:00~12:00
+															<input  type="radio" name="selectTime" value="14시">14:00~15:00
+															<input  type="radio" name="selectTime" value="15시">15:00~16:00
+															<input  type="radio" name="selectTime" value="16시">16:00~17:00
+															<input  type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
 												</tr>
 										</tbody> `;
@@ -315,11 +316,11 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-																<input type="radio" name="selectTime" value="11시">11:00~12:00
-																<input type="radio" name="selectTime" value="14시">14:00~15:00
-																<input type="radio" name="selectTime" value="15시">15:00~16:00
-																<input type="radio" name="selectTime" value="16시">16:00~17:00
-																<input type="radio" name="selectTime" value="17시">17:00~18:00
+																<input  type="radio" name="selectTime" value="11시">11:00~12:00
+																<input  type="radio" name="selectTime" value="14시">14:00~15:00
+																<input  type="radio" name="selectTime" value="15시">15:00~16:00
+																<input  type="radio" name="selectTime" value="16시">16:00~17:00
+																<input  type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
 												</tr>
 										</tbody> `;
@@ -329,10 +330,10 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-																<input type="radio" name="selectTime" value="14시">14:00~15:00
-																<input type="radio" name="selectTime" value="15시">15:00~16:00
-																<input type="radio" name="selectTime" value="16시">16:00~17:00
-																<input type="radio" name="selectTime" value="17시">17:00~18:00
+																<input  type="radio" name="selectTime" value="14시">14:00~15:00
+																<input  type="radio" name="selectTime" value="15시">15:00~16:00
+																<input  type="radio" name="selectTime" value="16시">16:00~17:00
+																<input  type="radio" name="selectTime" value="17시">17:00~18:00
 														</td>
 												</tr>
 										</tbody> `;
@@ -342,9 +343,9 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-																<input type="radio" name="selectTime"  value="15시">15:00~16:00
-																<input type="radio" name="selectTime"  value="16시">16:00~17:00
-																<input type="radio" name="selectTime"  value="17시">17:00~18:00
+																<input  type="radio" name="selectTime"  value="15시">15:00~16:00
+																<input  type="radio" name="selectTime"  value="16시">16:00~17:00
+																<input  type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
 												</tr>
 										</tbody> `;
@@ -354,8 +355,8 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-																<input type="radio" name="selectTime"  value="16시">16:00~17:00
-																<input type="radio" name="selectTime"  value="17시">17:00~18:00
+																<input  type="radio" name="selectTime"  value="16시">16:00~17:00
+																<input  type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
 												</tr>
 										</tbody> `;
@@ -365,7 +366,7 @@ $(document).ready(function(){
 						                        <tr>
 						                           <td class="tdvalCheck">`+tdval+ex+`</td>
 														<td>
-															<input type="radio" name="selectTime"  value="17시">17:00~18:00
+															<input  type="radio" name="selectTime"  value="17시">17:00~18:00
 														</td>
 												</tr>
 										</tbody> `;
@@ -376,7 +377,9 @@ $(document).ready(function(){
 						$("#reservbutton").append(`<button onclick="reservModal(event)" id="reservModal" type="button" class="btn btn-secondary"
 							  	data-toggle="modal" data-target="#exampleModal">예약</button>`);
 						for(var i=0; i<res.timeList.length;i++){
-							$('.tdvalCheck:contains("'+res.timeList[i].reserv_date+'")').parent().find("[value='"+res.timeList[i].reserv_time+"']").attr('disabled',true)
+							$('.tdvalCheck:contains("'+res.timeList[i].reserv_date+'")').parent().find("[value='"+res.timeList[i].reserv_time+"']").attr('disabled',true);
+							$('.tdvalCheck:contains("'+res.timeList[i].reserv_date+'")').parent().find("[disabled='disabled']").parent().attr('class','disabled-radio');
+							
 						}
 				}//ajax success 부분
 			})
@@ -487,7 +490,7 @@ $("#sendReserv").on('click',function(){
 				"p_id" : p_id
 				},
 		success : function(res){
-			alert("예약신청이 완료되었습니다.");
+			toastr.success("예약신청이 완료되었습니다.");
 			$(".table tbody").empty();
 			$("#reservbutton").empty();
 			
@@ -504,11 +507,11 @@ $('#exampleModal').on('hidden.bs.modal', function(e) {
 function reservModal(event){
 	
 	var reserv_time = $('input[name=selectTime]:checked').val();
-	var tdvalue = $('input[name=selectTime]:checked').parent().prev().text();
+	var tdvalue = $('input[name=selectTime]:checked').parent().parent().children().first().text();
 	console.log("예약시간값",reserv_time,"예약날짜값",tdvalue)
 	var p_id = "${pmember.p_id}";
 	if(reserv_time =='undefined' || tdvalue ==''){
-		alert("예약시간을 선택해주세요");
+		toastr.error("예약시간을 선택해주세요");
 		$("#exampleModal").attr("id","noexam");
 	}else{
 		$("#noexam").attr("id","exampleModal");
