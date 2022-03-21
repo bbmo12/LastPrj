@@ -142,12 +142,12 @@
 						<div class="row">
 							<div class="col-md-12" style="margin: 20px 0 0 -45px;">
 								<div class="table-wrap">
-									<button type="button" class="codep" style="margin: 0 50px 0 15em;" data-code="">전체</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="100">진료</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="101">훈련</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="102">미용</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="103">돌봄서비스</button>
-									<button type="button" class="codep" style="margin-right: 50px;" id="block_chain">블록체인진료기록</button>
+									<button type="button" class="codep" style="margin: 0 30px 0 15em;" data-code="">전체</button>
+									<button type="button" class="codep" style="margin-right: 30px;" data-code="100">진료</button>
+									<button type="button" class="codep" style="margin-right: 30px;" data-code="101">훈련</button>
+									<button type="button" class="codep" style="margin-right: 30px;" data-code="102">미용</button>
+									<button type="button" class="codep" style="margin-right: 30px;" data-code="103">돌봄서비스</button>
+									<button type="button" class="codep" style="margin-right: 30px;" id="block_chain">블록체인진료기록</button>
 									<div id='blockChain'></div>
 									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px;">
 										<thead>
