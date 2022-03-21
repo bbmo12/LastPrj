@@ -45,18 +45,31 @@ public class AdminController {
 	@Autowired
 	private BoardService boardDao;
 	
+	
+	//신고 제재 처리 중인 회원
+	
+	//신고 제재 중인 회원
+	
+	//QnA에 대한 신고 목록
+	
+	//Review에 대한 신고 목록
+	
+	
 	//reportPage count
 	@RequestMapping("/adminReportCount")
 	@ResponseBody
 	public HashMap<String,Object> adminReportCount(){
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
+
 		//총 신고 건수
 		map.put("adminReportTotalCount",reportDao.adminReportTotalCount());
-		//신고 제재 대상 회원 건수
-		/*
-		 * map.put("",); //신고 제재 중인 회원 map.put("",);
-		 */
+		
+		//신고 제재 대상 회원 건수		
+		map.put("adminReporCount",reportDao.adminReporCount()); 
+		
+		//신고 제재 중인 회원 
+		map.put("adminReportedCount",reportDao.adminReportedCount()); 
 		
 		return map;
 	}
@@ -97,11 +110,41 @@ public class AdminController {
 	}
 	
 	
+	//=========신고 페이지 시작~
 	
 	@RequestMapping("/adminReportPage")
 	public String adminReportPage() {
 		return "adm/adminReportPage";
 	}
+	
+	
+	@RequestMapping("/admQlistCode")
+	@ResponseBody
+	public HashMap<String, Object> admQna(ReportVO vo, Criteria cri) {
+		int total = reportDao.admQlistCodeCount(vo);
+		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9); // n개씩 출력
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+
+		map.put("list", reportDao.admQlistCode(vo));
+		map.put("page", page);
+		System.out.println("============" + vo);
+
+		return map;
+	}
+
+	@RequestMapping(value = "/admReportOneQna")
+	@ResponseBody
+	public List<ReportVO> admReportOneQna(@RequestParam("rep_no") int repno) {
+		System.out.println(repno);
+		System.out.println(reportDao.admReportOneQna(repno));
+		return reportDao.admReportOneQna(repno);
+	}
+
+	
+	
+	//==============차트 페이지 시작~
 	
 	
 	@RequestMapping("/adminChartPage")
@@ -133,6 +176,10 @@ public class AdminController {
 	
 	
 	
+	
+	
+	
+	//=======================================================================================================================
 	
 	
 	@RequestMapping("/goChart")
@@ -299,30 +346,7 @@ public class AdminController {
 		return "admin/board/admQna";
 	}
 
-	@RequestMapping("/admQlistCode")
-	@ResponseBody
-	public HashMap<String, Object> admQna(ReportVO vo, Criteria cri) {
-		int total = reportDao.admQlistCodeCount(vo);
-		PagingVO page = new PagingVO(cri, total);
-		page.setAmount(9); // n개씩 출력
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		vo.setVo(page);
-
-		map.put("list", reportDao.admQlistCode(vo));
-		map.put("page", page);
-		System.out.println("============" + vo);
-
-		return map;
-	}
-
-	@RequestMapping(value = "/admReportOneQna")
-	@ResponseBody
-	public List<ReportVO> admReportOneQna(@RequestParam("rep_no") int repno) {
-		System.out.println(repno);
-		System.out.println(reportDao.admReportOneQna(repno));
-		return reportDao.admReportOneQna(repno);
-	}
-
+	
 	// ============== end QnA==================
 
 	// === 신고====
@@ -361,7 +385,7 @@ public class AdminController {
 	 * repor) { return reportDao.admReportRepor(repor); }
 	 */
 
-	// 신고 처리
+	// 신고 처리 == 여기서 신고처리 테이블로 인서트 시켜줘야
 	@RequestMapping(value = "/admReportUpdate")
 	@ResponseBody
 	public String admReportUpdate(@RequestParam("rep_no") int rep_no, @RequestParam("state") String state,

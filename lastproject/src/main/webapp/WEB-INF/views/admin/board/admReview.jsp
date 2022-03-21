@@ -22,14 +22,15 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 .card-text {
-   display: inline-block;
-   width: 300px;
-   /* white-space: nowrap; */
-   overflow: hidden;
-   text-overflow: ellipsis;
-    padding:0 5px;
-   align : center;
+	display: inline-block;
+	width: 300px;
+	/* white-space: nowrap; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 5px;
+	align: center;
 }
+
 .container-fluid {
 	width: 100%;
 	padding-right: 0px;
@@ -40,7 +41,8 @@
 </style>
 </head>
 <body>
-	<<div class="card">
+	<
+	<div class="card">
 		<div class="card-body">
 			<h4 class="card-title">QnA 페이지</h4>
 			<div class="btn-group bg-white p-3" role="group"
@@ -68,28 +70,36 @@
 			</div>
 
 			<div>
-				<form id="admDateForm">
-					<input type="hidden" name="code"><input type="hidden"
+				<form id="admDateForm" onsubmit="return false"
+					onkeypress="eventkey();">
+					<input type="hidden" name="code"> <input type="hidden"
 						name="repor"> <input type="hidden" name="pageNum"
 						value="1"> FROM : <input type="text" id="fromDate"
 						name="fromDate">&nbsp;&nbsp; TO : <input type="text"
-						id="toDate" name="toDate">
+						id="toDate" name="toDate"> &nbsp;&nbsp;<select id="key"
+						name="key">
+						<option value="" selected="selected">전 체</option>
+						<option value="reporter">신고자</option>
+						<option value="reported">신고당한사람</option>
+					</select> <input type="text" id="data" name="data" size="20">&nbsp;
+					<button type="submit" onclick="pagingList();">검 색</button>
+					<input type="reset">
 					<!-- <button type="button" id="btnSearch">검 색</button> -->
 				</form>
 			</div>
 			<div class="template-demo">
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="">전체</button>
+					data-code="" data-repor="">전체</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="601">불법 광고 및 홍보</button>
+					data-code="601" data-repor="">불법 광고 및 홍보</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="602">음란물/선정성 콘텐츠</button>
+					data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="603">욕설,비속어,모욕</button>
+					data-code="603" data-repor="">욕설,비속어,모욕</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="604">사생활 침해</button>
+					data-code="604" data-repor="">사생활 침해</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
-					data-code="605">게시물 도배</button>
+					data-code="605" data-repor="">게시물 도배</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
 					data-code="" data-repor="701">미처리</button>
 				<button type="button" class="btn btn-link btn-rounded btn-fw codep"
@@ -104,7 +114,7 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-					<th>신고자</th>
+						<th>신고자</th>
 						<th>신고 당한 사람</th>
 						<th>신고일</th>
 						<th>신고 내역</th>
@@ -180,6 +190,14 @@
 		});// end 검색함수
 		
 		// ===================== 리스트 만드는 함수 ====================
+		//======================enter 키===================
+		function eventkey() {
+			if (event.keyCode == 13) {
+				pagingList();
+			} else {
+				return false;
+			}
+		}//====================end enter 키================
 		
 		let viewReviewList = function(result) {
 			$("#myTable").empty();
@@ -261,7 +279,7 @@
 			console.log("st는 :"+st);
 				$
 						.ajax({
-							url : 'admReportOneQna',
+							url : 'admReportOneReview',
 							method : 'post',
 							data : {
 								"rep_no" : st
@@ -393,28 +411,19 @@
 				data :str,
 				//contentType : 'application/json',
 				success : function(result) {
-		               
-		               console.log(result.list);
-		               console.log("리절트페이지는 : " + result.page);
-		               console.log(result.chart);
-		               if(result.chart.length === 0 ){
-		                   $("#myChart").remove();
-		                   $(".myChart").append("<h4>데이터가 없습니다.</h4>");
-		               }else {
-		                  viewChart(result.chart);
-		               }
-		               if(result.page.length === 0){
-		                  $("#myTable").empty();
-		                  $("#myTable").append("<h4>데이터가 없습니다.</h4>");
-		               }else {
-		                  viewPmemberList(result.list);
-		                  viewPage(result.page);
-		               }
-		                  
-		            }
-
-			});//end ajax
-		}//===========end  리스트 ajax 호출==========
+					if(result.list == ''){
+						alert('데이터가 없습니다!!');
+						$("#myTable").empty();
+						$("#pagination").empty();
+						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
+					}else {
+						viewReviewList(result.list);
+						viewPage(result.page);
+						
+					};
+				}
+			});
+		}//===========end  리스트 ajax 호출========== 끝!
 			
 		//===========페이징 처리==========
 		function viewPage(page) {
