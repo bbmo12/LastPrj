@@ -166,32 +166,28 @@
 
 				<div class="col-lg-9 posts-list">
 					<div class="single-post row">
-						<div class="col-lg-12">
-							<div class="feature-img">
-								<img class="img-fluid"
-									src="resources/assets/images/blog-details/feature-img1.jpg" onerror ="this.src='resources/upload/cat.jpg'" 
-									alt="">
-							</div>
-						</div>
 						<form action="mypatadd" method="post" enctype="multipart/form-data">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>
-								<input type="text" id="name" name="name">
+								<label for="name">이름</label>
+								<input type="text" id="name" name="name"  class="form-control" required autofocus>
 						<div id="name_check"></div>
 							</div>
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">생년월일&nbsp;:&nbsp;</h3>
-								<input type="text" id="birth" name="birth">
+									<label for="birth">이름</label>
+								<input type="text" id="birth" name="birth" class="form-control" required autofocus>
 								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
-									<h3 style="font-weight: bolder;">성별&nbsp;:&nbsp;</h3>
+									<label for="gender">성별</label>
 								<!-- 1이면 여자, 2이면 남자  -->
-								<label>여자<input type="radio" id="gender" name="gender"
-									value="1"><span class="checkmark"></span></label>&emsp; <label>남자<input
-									type="radio" id="gender" name="gender" value="2"><span
-									class="checkmark"></span></label>&emsp;
+								<label>여자
+									<input type="radio" id="gender" name="gender" value="1">
+									<span class="checkmark"></span>
+								</label>&emsp;
+								<label>남자
+									<input type="radio" id="gender" name="gender" value="2">
+									<span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
 									<h3 style="font-weight: bolder;">몸무게&nbsp;:&nbsp;</h3>
