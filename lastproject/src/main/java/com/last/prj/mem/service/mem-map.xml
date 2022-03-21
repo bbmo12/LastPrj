@@ -2,54 +2,309 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.mem.service.MemMapper">
 	
-	<!-- 일반회원 상세조회 -->
-	<select id="memberSearch" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
-	SELECT * FROM MEMBER
-	WHERE M_ID = #{m_id}
+	<select id="passCheck" parameterType="com.last.prj.mem.service.MemVO" resultType="String">
+		SELECT PASSWORD
+		FROM MEMBER
+		WHERE M_ID = #{m_id}
 	</select>
-	
+
+
+	<!-- 일반회원 상세조회 -->
+	<select id="memberSearch" parameterType="String"
+		resultType="com.last.prj.mem.service.MemVO">
+		SELECT * FROM MEMBER
+		WHERE M_ID = #{m_id}
+	</select>
+
 	<!-- 일반회원 로그인 -->
-	<select id="memberSelect" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+	<select id="memberSelect"
+		parameterType="com.last.prj.mem.service.MemVO"
+		resultType="com.last.prj.mem.service.MemVO">
 		select * from member
-		where m_id = #{m_id} 
+		where m_id = #{m_id}
 		<if test="password != null">
 			and password = #{password}
 		</if>
 	</select>
-	
+
 	<!-- 일반회원 아이디 찾기 -->
-	<select id="memberIdSearch" parameterType="String" resultType="String">
-		select * from member
-		where name = #{name}
-		<if test="tel != null">
-			and tel = #{tel}
-		</if>
+	<select id="memberIdSearch" parameterType="String"
+		resultType="String">
+		select m_id AS id
+		from member
+		where name = #{name} and tel = #{tel}
+		
+		union
+
+		select p_id AS id
+		from p_member
+		where name = #{name} and tel = #{tel}
 
 	</select>
-	
+
 	<!-- 아이디로 일반회원 정보 조회 -->
-	<select id="memberOne" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
+	<select id="memberOne" parameterType="String"
+		resultType="com.last.prj.mem.service.MemVO">
 		select * from member
 		where m_id = #{m_id}
 	</select>
-	
+
 	<!-- 일반회원 회원가입 -->
-	<insert id="memberInsert" parameterType="com.last.prj.mem.service.MemVO">
-	INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE, PFILE)
-	VALUES (#{m_id}, #{password}, #{name}, #{tel}, #{picture}, #{pfile})
+	<insert id="memberInsert"
+		parameterType="com.last.prj.mem.service.MemVO">
+		INSERT INTO MEMBER (M_ID,PASSWORD,NAME,TEL,PICTURE,
+		PFILE)
+		VALUES (#{m_id}, #{password}, #{name}, #{tel}, 
+		#{picture},
+		
+		#{pfile})
 	</insert>
-	
-	<!-- 일반회원 정보수정  -->
-	<update id="memberUpdate" parameterType="com.last.prj.mem.service.MemVO">
+
+	<!-- 일반회원 정보수정 -->
+	<update id="memberUpdate"
+		parameterType="com.last.prj.mem.service.MemVO">
 		update member
-			<set>
-				<if test="name != null">name = #{name}, </if>
-				<if test="password != null">password = #{password}, </if>
-				<if test="tel != null">tel = #{tel}, </if>
-				<if test="picture != null">picture = #{picture}, </if>
-				<if test="pfile != null">pfile = #{pfile}, </if>
-			</set>
-			where m_id = #{m_id}
+		<set>
+			<if test="name != null">name = #{name}, </if>
+			<if test="password != null">password = #{password}, </if>
+			<if test="tel != null">tel = #{tel}, </if>
+			<if test="picture != null">picture = #{picture}, </if>
+			<if test="pfile != null">pfile = #{pfile}, </if>
+		</set>
+		where m_id = #{m_id}
+	</update>
+
+
+	<delete id="memdelete">
+		DELETE FROM MEMBER
+		WHERE ENDDATE <![CDATA[ <= SYSDATE-25 ]]>
+	</delete>
+
+
+
+
+
+	<update id="memberDelete" parameterType="String">
+		UPDATE MEMBER
+		<set>
+			PASSWORD = NULL, NAME = NULL, TEL=NULL, STARTDATE=NULL,
+			ENDDATE=SYSDATE, PICTURE=NULL, PFILE=NULL
+		</set>
+		WHERE M_ID = #{m_id}
+	</update>
+
+
+	<!-- 카카오아이디 중복체크 -->
+	<select id="idCheck" resultType="boolean">
+		SELECT COUNT(*)
+		FROM MEMBER WHERE
+		m_id = #{m_id}
+	</select>
+
+	<!-- 회원가입 아이디 중복체크 -->
+	<select id="isIdCheck" parameterType="String"
+		resultType="boolean">
+		select case when count(id) = 1 then 0 else 1 end as id
+		from(
+		select m_id As id
+		from member
+		where m_id = #{id}
+
+		union
+
+		select p_id AS
+		id
+		from p_member
+		where p_id = #{id})
+	</select>
+
+	<!-- 일반회원 수 -->
+	<select id="memCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+
+	<!--서비스 가격 입력 -->
+	<insert id="servicepriceinsert"
+		parameterType="com.last.prj.mem.service.PriceVO">
+		<selectKey keyProperty="price_no" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(PRICE_NO)+1,1) AS PRICE_NO FROM PRICE
+		</selectKey>
+		INSERT INTO PRICE(price_no, price, title, content, p_id)
+		VALUES(#{price_no},#{price},#{title},#{content},#{p_id})
+	</insert>
+
+	<!-- 진료 가능한 동물 -->
+
+	<insert id="petcareinsert"
+		parameterType="com.last.prj.mem.service.PetcareVO">
+		<selectKey keyProperty="care_no" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(CARE_NO)+1,1) AS CARE_NO FROM PETCARE
+		</selectKey>
+		INSERT INTO PETCARE(care_no, p_id, code)
+		VALUES(#{care_no},#{p_id},#{code})
+	</insert>
+
+
+
+
+	<insert id="otimeinsert"
+		parameterType="com.last.prj.mem.service.TimeVO">
+		<selectKey keyProperty="o_no" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
+		</selectKey>
+		insert into o_time(o_no, p_id, w_day, starttime, endtime, n_content)
+		values(#{o_no},#{p_id},#{w_day},#{starttime},#{endtime},#{n_content})
+	</insert>
+
+	<!-- 권한 -->
+	<resultMap type="com.last.prj.mem.service.MemVO"
+		id="memberMap">
+		<id property="m_id" column="m_id" />
+		<result property="password" column="password" />
+		<result property="name" column="name" />
+		<result property="m_role" column="m_role" />
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.last.prj.mem.service.AuthVO"
+		id="authMap">
+		<result property="id" column="id" />
+		<result property="auth" column="auth" />
+	</resultMap>
+
+	<select id="read" resultMap="memberMap">
+		select M_ID, PASSWORD, NAME, AUTH
+		from TBL_AUTH
+		inner join MEMBER on TBL_AUTH.ID = MEMBER.M_ROLE
+		where
+		M_ID = #{username}
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="searchPwd"
+		resultType="com.last.prj.mem.service.LoginVO" parameterType="String">
+		select 'M'
+		as user_type, m.m_id as id, m.password as password
+		from member m
+		where
+		m_id = #{id}
+
+		union all
+
+		select 'P', p.p_id , p.password
+		from p_member p
+		where p_id = #{id}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="memberPwdUpdate"
+		parameterType="com.last.prj.mem.service.MemVO">
+		update member
+		<set>
+			<if test="password != null">password = #{password}, </if>
+		</set>
+		where m_id = #{m_id}
 	</update>
 	
+	<select id="admMlistCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+		SELECT B.*
+		FROM ( SELECT A.* , ROWNUM RN
+		FROM (SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)		
+		<if	test="key !=null and key !='' and data !=null and data !='' ">
+			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
+		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
+		<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+	</select>
+	
+	<select id="adMmemCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
+		SELECT COUNT(*) FROM (
+		SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)
+		<if	test="key !=null and key !='' and data !=null and data !='' ">
+			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
+		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
+		<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>)
+	</select>
+	
+	<!--기간 별 차트 그리기  -->
+		<select id="admMemChart" resultType="com.last.prj.mem.service.MemVO">
+			SELECT 
+			    TO_CHAR(STARTDATE, 'YYYY-MM')AS TT,
+			    COUNT(*)AS OO
+			FROM MEMBER
+			WHERE STARTDATE IS NOT NULL
+			GROUP BY 
+			TO_CHAR(STARTDATE, 'YYYY-MM')
+		</select>
+	
+		<select id="pMemCode" resultType="int" parameterType="String" >
+			SELECT CODE FROM P_MEMBER WHERE P_ID = #{p_id}
+		</select>
+		
+		
+		<select id="admMemReporCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
+				SELECT B.*
+				FROM ( SELECT A.* , ROWNUM RN
+				FROM (SELECT M.M_ID, M.NAME,M.C_REPORT AS cReport, M.STARTDATE,M.M_ROLE, R.CONTENT AS F_CONTENT, R.CODE FROM MEMBER M, REPORT R WHERE M.M_ID = R.REPORTED
+				<if test="code != null and code != '' ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+				<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+		</select>
+		<select id="admMemReportCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
+			SELECT COUNT(*) FROM (SELECT M.M_ID, M.NAME,M.C_REPORT AS cReport, M.STARTDATE,M.M_ROLE, R.CONTENT AS F_CONTENT, R.CODE FROM MEMBER M, REPORT R WHERE M.M_ID = R.REPORTED
+				<if test="code != null ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>)
+		</select>
+
+	<select id="getmemberinfo" parameterType="String" resultType="com.last.prj.mem.service.MemVO">
+		SELECT * FROM MEMBER WHERE M_ID = #{m_id}
+	</select>
+	
+	<select id="countCounsel" resultType="int">
+		select count(*) from counsel where m_id = #{m_id}
+	</select>
+	
+	<select id="countReview1" resultType="int">
+		select count(*) from review w
+		join counsel c
+		on w.c_no = c.c_no
+		where c.m_id = #{m_id}
+	</select>
+	
+	<select id="countReview2" resultType="int">
+		select count(*) from review w
+		join reservation r
+		on w.r_no = r.r_no
+		join pet p
+		on r.pet_no = p.pet_no
+		where p.m_id = #{m_id}
+	</select>
+	
+	<select id="countReservation" resultType="int">
+		select count(*) from reservation r
+		join pet p
+		on r.pet_no = p.pet_no
+		where p.m_id = #{m_id}
+	</select>
 </mapper>

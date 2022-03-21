@@ -11,15 +11,31 @@ import com.last.prj.pmember.service.PmemberMapper;
 import com.last.prj.pmember.service.PmemberService;
 import com.last.prj.pmember.service.PmemberVO;
 import com.last.prj.pmember.service.ReviewVO;
+import com.last.prj.pmember.service.TimeVO;
 
 @Repository("pMemberDao")
 public class PmemberServiceImpl implements PmemberService{
 	
 	@Autowired PmemberMapper map;
+	
+	@Override
+	public PmemberVO getPmemberinfo(String p_id) {
+		return map.getPmemberinfo(p_id);
+	}
 
 	@Override
-	public PmemberVO getMember(String p_id) {
-		return map.getMember(p_id);
+	public List<TimeVO> getTime(String p_id) {
+		return map.getTime(p_id);
+	}
+	
+	@Override
+	public List<FfileVO> getImage(String p_id) {
+		return map.getImage(p_id);
+	}
+
+	@Override
+	public List<FfileVO> getLicense(String p_id) {
+		return map.getLicense(p_id);
 	}
 	
 	@Override
@@ -32,10 +48,6 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.getServiceReview(p_id);
 	}
 
-	@Override
-	public List<FfileVO> getProfile(String m_id) {
-		return map.getProfile(m_id);
-	}
 	@Override
 	public int memberPage(Criteria cri) { 
 		return map.memberPage(cri);
@@ -50,16 +62,38 @@ public class PmemberServiceImpl implements PmemberService{
 	public int pmemberUpdate(PmemberVO pmember) {
 		return map.pmemberUpdate(pmember);
 	}
-	
-	//관리자
+	//운영시간insert
 	@Override
-	public List<PmemberVO> admPlistCode(int code) {
-		return map.admPlistCode(code);
+	public int pmemberTime(TimeVO time) {
+		return map.pmemberTime(time);
 	}
-	//관리자
+	
 	@Override
-	public List<PmemberVO> admPlist() {
-		return map.admPlist();
+	public int updateLike(String p_id) {		
+		return map.updateLike(p_id);
+	}
+	
+	@Override
+	public int updateCancel(String p_id) {
+		return map.updateCancel(p_id);
+	}
+	
+	@Override
+	public List<PmemberVO> bestLike(PmemberVO pmember) {
+		return map.bestLike(pmember);
+	}
+	@Override
+	public int deleteTime(TimeVO time) {
+		return map.deleteTime(time);
+	}
+	@Override
+	public int deleteTimeId(TimeVO time) {
+		return map.deleteTimeId(time);
+	}
+
+	@Override
+	public List<PmemberVO> admPlistCode(PmemberVO vo) {
+		return map.admPlistCode(vo);
 	}
 
 
@@ -70,4 +104,85 @@ public class PmemberServiceImpl implements PmemberService{
 		return map.PmemberOne(p_id);
 	}
 
+
+	@Override
+	public List<ReviewVO> ServiceReviewList() {
+		return map.ServiceReviewList();
+	}
+
+	@Override
+	public List<PmemberVO> bestLikeList() {
+		return map.bestLikeList();
+	}
+
+
+
+	@Override
+	public int pmemCount() {
+		return map.pmemCount();
+	}
+
+
+	@Override
+
+	public int admPlistCodeCount(PmemberVO vo) {
+		return map.admPlistCodeCount(vo);
+	}
+	
+	
+	@Override
+	public int pmemberNullUpdate(String p_id) {
+		return map.pmemberNullUpdate(p_id);
+	}
+
+
+	@Override
+	public int pmemberJoinCancel(String p_id) {
+		return map.pmemberJoinCancel(p_id);
+	}
+
+	@Override
+	public int updateTime(TimeVO time) {
+		return map.updateTime(time);
+	}
+
+	@Override
+	public List<PmemberVO> admPlistChart(PmemberVO vo) {
+		return map.admPlistChart(vo);
+	}
+
+	@Override
+	public List<PmemberVO> admgoChart() {
+		return map.admgoChart();
+	}
+
+	@Override
+	public int pMemCode(String p_id) {
+		return map.pMemCode(p_id);
+	}
+
+	@Override
+	public String passCheck(String p_id) {
+		return map.passCheck(p_id);
+	}
+
+	@Override
+	public List<ReviewVO> ServiceReviewRecent() {
+		return map.ServiceReviewRecent();
+	}
+
+	public int admPmemReportCount() {
+		return map.admPmemReportCount();
+	}
+
+	@Override
+	public List<PmemberVO> admPmemReporList(PmemberVO vo) {
+		return map.admPmemReporList(vo);
+
+	}
+
+	@Override
+	public List<PmemberVO> admPmemChart() {
+		return map.admPmemChart();
+	}
 }

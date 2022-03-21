@@ -1,7 +1,10 @@
 package com.last.prj.pmember.service;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -12,7 +15,9 @@ public class PmemberVO {
 	private String p_id;				//파트너회원아이디
 	private String name;			//이름
 	private String tel;				//전화번호
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startdate;			//가입일
+	@JsonFormat(pattern =  "yyyy-MM-dd")
 	private Date enddate;			//탈퇴일
 	private String password;		//비밀번호
 	private int	c_report;			//신고당한횟수
@@ -26,12 +31,13 @@ public class PmemberVO {
 	private String career;			//대표경력
 	private String speciality;			//전문분야
 	private int rcom;				//추천
-	private int code;				//서비스 구분코드
+	private Integer code;				//서비스 구분코드
 	private int p_profile;			//프로필사진
 	private int p_license;			//경력사진
 	private int p_image;			
 	private String picture;
 	private String pfile;
+	private int p_role;
 	
 	private String w_write;
 	private int f_part;
@@ -42,4 +48,17 @@ public class PmemberVO {
 
 	//관리자
 	private String f_content; //서비스 구분 코드 내용
+	private String fromDate;
+	private String toDate;
+	private int to;
+	private int ch;
+	private String data;
+	private String key;
+	private String tt;
+	private String oo;
+	private String aa;
+	private String bb;
+	private String content;
+	private String state;
+
 }

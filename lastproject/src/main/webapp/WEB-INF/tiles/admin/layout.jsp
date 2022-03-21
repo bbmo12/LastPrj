@@ -8,20 +8,27 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title><tiles:insertAttribute name="title" /></title>
-<link rel="stylesheet"
-	href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
-<link rel="stylesheet"
-	href="resources/assets123/vendors/flag-icon-css/css/flag-icon.min.css">
-<link rel="stylesheet"
-	href="resources/assets123/vendors/css/vendor.bundle.base.css">
-<link rel="stylesheet"
-	href="resources/assets123/vendors/font-awesome/css/font-awesome.min.css" />
-<link rel="stylesheet"
-	href="resources/assets123/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
-<link rel="stylesheet" href="resources/assets123/css/style.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet"	href="resources/assets123/vendors/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet"	href="resources/assets123/vendors/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet"	href="resources/assets123/vendors/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet"	href="resources/assets123/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+<link rel="stylesheet"  href="resources/assets123/css/style.css">
 <link rel="shortcut icon" href="resources/assets123/images/favicon.png" />
 
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1"></script>
+	<!--  <script src="resources/assets123/js/chart.js"></script> -->
+	<!--<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script> -->
+	<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
+	<script	src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
+	<script src="resources/assets123/js/off-canvas.js"></script>
+	<script src="resources/assets123/js/hoverable-collapse.js"></script>
+	<script src="resources/assets123/js/misc.js"></script>
+	<script src="resources/assets123/js/dashboard.js"></script>
+	
+	
+	<title><tiles:insertAttribute name="title" /></title>
 </head>
 <body>
 	<div class="container-scroller">
@@ -86,11 +93,11 @@
 						class="nav-link dropdown-toggle" id="profileDropdown" href="#"
 						data-toggle="dropdown" aria-expanded="false">
 							<div class="nav-profile-img">
-								<img src="resources/assets123/images/faces/face28.png"
+								<img src="resources/upload/c.png"
 									alt="image">
 							</div>
 							<div class="nav-profile-text">
-								<p class="mb-1 text-black">Henry Klein</p>
+								<p class="mb-1 text-black">관리자</p>
 							</div>
 					</a>
 						<div
@@ -98,41 +105,46 @@
 							aria-labelledby="profileDropdown" data-x-placement="bottom-end">
 							<div class="p-3 text-center bg-primary">
 								<img class="img-avatar img-avatar48 img-avatar-thumb"
-									src="resources/assets123/images/faces/face28.png" alt="">
+									src="resources/upload/a.png" alt="">
 							</div>
 							<div class="p-2">
-								<h5 class="dropdown-header text-uppercase pl-2 text-dark">User
-									Options</h5>
+								<h5 class="dropdown-header text-uppercase pl-2 text-dark">관리자 옵션</h5>
+								<a
+									class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#"> 
+									<span>메시지</span> 
+									<span class="p-0"> 
+									<span class="badge badge-primary">3</span> <i class="mdi mdi-email-open-outline ml-1"></i>
+									</span>
+								</a> 
+								<a
+									class="dropdown-item py-1 d-flex align-items-center justify-content-between" href="#"> 
+									<span>프로필</span> <span class="p-0"> <span
+										class="badge badge-success">1</span> <i
+										class="mdi mdi-account-outline ml-1"></i></span>
+								</a> 
 								<a
 									class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-									href="#"> <span>Inbox</span> <span class="p-0"> <span
-										class="badge badge-primary">3</span> <i
-										class="mdi mdi-email-open-outline ml-1"></i>
-								</span>
-								</a> <a
-									class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-									href="#"> <span>Profile</span> <span class="p-0"> <span
-										class="badge badge-success">1</span> <i
-										class="mdi mdi-account-outline ml-1"></i>
-								</span>
-								</a> <a
-									class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-									href="javascript:void(0)"> <span>Settings</span> <i
+									href="javascript:void(0)"> <span>설정</span> <i
 									class="mdi mdi-settings"></i>
 								</a>
 								<div role="separator" class="dropdown-divider"></div>
-								<h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">Actions</h5>
+								<h5 class="dropdown-header text-uppercase  pl-2 text-dark mt-2">접속</h5>
 								<a
 									class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-									href="#"> <span>Lock Account</span> <i
+									href="#"> <span>화면잠금</span> <i
 									class="mdi mdi-lock ml-1"></i>
 								</a> <a
 									class="dropdown-item py-1 d-flex align-items-center justify-content-between"
-									href="#"> <span>Log Out</span> <i
+									href="AmdlogOut"> <span>로그아웃</span> <i
 									class="mdi mdi-logout ml-1"></i>
 								</a>
 							</div>
 						</div></li>
+						
+						
+						<!-- 메시지 알림 기능 보내기 확인하기  -->
+						
+						
 					<li class="nav-item dropdown"><a
 						class="nav-link count-indicator dropdown-toggle"
 						id="messageDropdown" href="#" data-toggle="dropdown"
@@ -142,24 +154,27 @@
 						<div
 							class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 							aria-labelledby="messageDropdown">
-							<h6 class="p-3 mb-0 bg-primary text-white py-4">Messages</h6>
+							<h6 class="p-3 mb-0 bg-primary text-white py-4">Message</h6>
+							
+							<!-- 메일 날라온거 반복문으로 만들영역 -->
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<img src="resources/assets123/images/faces/face4.jpg"
-										alt="image" class="profile-pic">
-								</div>
-								<div
-									class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-									<h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark
-										send you a message</h6>
-									<p class="text-gray mb-0">1 Minutes ago</p>
+								
+								
+								<div class="preview-thumbnail"><img src="resources/upload/c.png"alt="image" class="profile-pic"></div>
+								
+								<div class="preview-item-content d-flex align-items-start flex-column justify-content-center" onclick="location.href='boardUpdateForm?b_no=4';">
+									<h6 class="preview-subject ellipsis mb-1 font-weight-normal">
+									이익뚠 send you a message</h6>
+									<p class="text-gray mb-0">파트너/일반</p>
 								</div>
 							</a>
+							<!-- 이게 섹션 하나 -->
+							
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item preview-item">
 								<div class="preview-thumbnail">
-									<img src="resources/assets123/images/faces/face2.jpg"
+									<img src="resources/upload/gu.png"
 										alt="image" class="profile-pic">
 								</div>
 								<div
@@ -183,8 +198,13 @@
 								</div>
 							</a>
 							<div class="dropdown-divider"></div>
-							<h6 class="p-3 mb-0 text-center">4 new messages</h6>
+							<h6 class="p-3 mb-0 text-center" onclick="location.href='boardTables';">모든 메시지 보기</h6><!-- 메시지 전체 보기 모달 창 -->
+							
 						</div></li>
+						<!-- end 메시지 -->
+						
+						
+						
 					<li class="nav-item dropdown"><a
 						class="nav-link count-indicator dropdown-toggle"
 						id="notificationDropdown" href="#" data-toggle="dropdown"> <i
@@ -194,9 +214,11 @@
 						<div
 							class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 							aria-labelledby="notificationDropdown">
-							<h6 class="p-3 mb-0 bg-primary text-white py-4">Notifications</h6>
+							<h6 class="p-3 mb-0 bg-primary text-white py-4">알림</h6>
+							
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item preview-item">
+								
 								<div class="preview-thumbnail">
 									<div class="preview-icon bg-success">
 										<i class="mdi mdi-calendar"></i>
@@ -204,25 +226,11 @@
 								</div>
 								<div
 									class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-									<h6 class="preview-subject font-weight-normal mb-1">Event
-										today</h6>
-									<p class="text-gray ellipsis mb-0">Just a reminder that you
-										have an event today</p>
+									<h6 class="preview-subject font-weight-normal mb-1">To Do List!</h6>
+									<p class="text-gray ellipsis mb-0">관리자님 오늘 하루의 일과에요!!</p>
 								</div>
 							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<div class="preview-icon bg-warning">
-										<i class="mdi mdi-settings"></i>
-									</div>
-								</div>
-								<div
-									class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-									<h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-									<p class="text-gray ellipsis mb-0">Update dashboard</p>
-								</div>
-							</a>
+							
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item preview-item">
 								<div class="preview-thumbnail">
@@ -230,15 +238,13 @@
 										<i class="mdi mdi-link-variant"></i>
 									</div>
 								</div>
-								<div
-									class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-									<h6 class="preview-subject font-weight-normal mb-1">Launch
-										Admin</h6>
-									<p class="text-gray ellipsis mb-0">New admin wow!</p>
+								<div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+									<h6 class="preview-subject font-weight-normal mb-1">신고!!</h6>
+									<p class="text-gray ellipsis mb-0">새로운 신고!!</p>
 								</div>
 							</a>
 							<div class="dropdown-divider"></div>
-							<h6 class="p-3 mb-0 text-center">See all notifications</h6>
+							<h6 class="p-3 mb-0 text-center">일과 및 신고 모두 보기</h6>
 						</div></li>
 				</ul>
 				<button
@@ -269,14 +275,4 @@
 		<!-- page-body-wrapper ends -->
 	</div>
 </body>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="resources/assets123/vendors/js/vendor.bundle.base.js"></script>
-	<script src="resources/assets123/vendors/chart.js/Chart.min.js"></script>
-	<script
-		src="resources/assets123/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
-	<script src="resources/assets123/js/off-canvas.js"></script>
-	<script src="resources/assets123/js/hoverable-collapse.js"></script>
-	<script src="resources/assets123/js/misc.js"></script>
-
-	<script src="resources/assets123/js/dashboard.js"></script>
 </html>

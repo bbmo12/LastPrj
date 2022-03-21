@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -9,6 +10,7 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 </head>
+<script src="http://code.jquery.com/jquery-3.5.1.js"></script>
 <style>
 #loading {
 	width: 100%;
@@ -36,7 +38,7 @@
 	left: 43%;
 	z-index: 101;
 }
-}
+
 </style>
 <body>
 	<div class="col-12 grid-margin stretch-card">
@@ -55,7 +57,7 @@
 							type="text" class="form-control writer" id="writer"
 							value="세션값으로 관리자" name="writer" required>
 					</div>
-					<div class="form-group">
+					<!-- <div class="form-group">
 						<label for="exampleSelectGender">태그</label> 
 						<select	class="form-control" id="btag" name="btag">
 							<option disabled selected>선택해주세요.</option>
@@ -64,7 +66,7 @@
 							<option value="pettag">펫</option>
 							<option value="stag">서비스</option>
 						</select>
-					</div>
+					</div> -->
 					<div class="form-group">
 						<label for="content">내용</label>
 						<textarea class="form-control" name="content" id="content"
@@ -76,8 +78,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div id="loading" style="margin-left: 0px;">
 		<img src="resources/assets123/images/Spinner-2.gif">
 		<p>변환중입니다..잠시기다려주세요.</p>
@@ -92,6 +92,5 @@
 			});
 		});
 	</script>
-
 </body>
 </html>

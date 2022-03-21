@@ -7,6 +7,32 @@
 	</insert>
 
 	<select id="noticeSelectList" resultType="com.last.prj.notice.service.NoticeVO">
-	select * from notice where n_to = #{m_id}
+	select * from
+	(select n.notice_no, n.content, n.w_date, p.name
+	from notice n
+	join p_member p on n.n_from = p.p_id
+	where n_to = #{m_id} and r_check = 0
+	order by notice_no desc)
+	<![CDATA[WHERE ROWNUM <= 4]]>
 	</select>
+	
+	<select id="noticeSelectList2" resultType="com.last.prj.notice.service.NoticeVO">
+	select n.notice_no, n.content, n.w_date, p.name
+		from notice n
+		join p_member p on n.n_from = p.p_id
+			where n_to = #{m_id}
+				order by notice_no desc
+	</select>
+	
+	<update id="noticeUpdate">
+	update notice set r_check = 1 where notice_no = #{notice_no}
+	</update>
+	
+	<select id="noticeCheck" resultType="String">
+	select notice_no from notice where to_date(w_date, 'yyyy-mm-dd') <![CDATA[<=]]> to_date(sysdate-7, 'yyyy-mm-dd') order by w_date desc
+	</select>
+	
+	<delete id="noticeDelete">
+		delete from notice where notice_no = #{notice_no}
+	</delete>
 </mapper>

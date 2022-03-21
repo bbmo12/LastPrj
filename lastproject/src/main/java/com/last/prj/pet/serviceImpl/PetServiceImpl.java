@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.last.prj.pet.service.PetMapper;
 import com.last.prj.pet.service.PetService;
 import com.last.prj.pet.service.PetVO;
+import com.last.prj.service.service.ServiceVO;
 
 @Repository("petDAO")
 public class PetServiceImpl implements PetService{
@@ -29,6 +30,46 @@ public class PetServiceImpl implements PetService{
 	@Override
 	public PetVO petSearch(int pet_no) {
 		return map.petSearch(pet_no);
+	}
+
+	@Override
+	public int mypetInsert(PetVO pet) {
+		return map.mypetInsert(pet);
+	}
+
+	@Override
+	public List<PetVO> petCodeSearch(String m_id) {
+		return map.petCodeSearch(m_id);
+	}
+
+	@Override
+	public int petCount() {
+		return map.petCount();
+	}
+
+	@Override
+	public int mypetupdate(PetVO pet) {
+		return map.mypetupdate(pet);
+	}
+
+	@Override
+	public int mypetDelete(int pet_no) {
+		return map.mypetDelete(pet_no);
+	}
+
+	@Override
+	public int AutoCode(int pet_no) {
+		return map.AutoCode(pet_no);
+	}
+
+	@Override
+	public List<PetVO> amdPetChart() {
+		return map.amdPetChart();
+	}
+
+	@Override
+	public List<PetVO> adminPetListCode() {
+		return map.adminPetListCode();
 	}
 
 

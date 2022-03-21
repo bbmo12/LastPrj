@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.prj.pet.service.PetMapper">
+
+	<select id="petOne" parameterType="int"
+		resultType="com.last.prj.pet.service.PetVO">
+		SELECT *
+		FROM pet
+		WHERE pet_no = #{pet_no}
+	</select>
+	
+	<!-- 예약 품종코드 조회(중복제거) -->
+	<select id="petCodeSearch" parameterType="String" resultType="com.last.prj.pet.service.PetVO">
+		SELECT DISTINCT code FROM  PET
+		WHERE
+		M_ID = #{m_id}
+	</select>
+	
+
+	<!-- 일반회원 반려동물 조회 -->
+	<select id="petmemberList" parameterType="String"
+		resultType="com.last.prj.pet.service.PetVO">
+		SELECT * FROM PET
+		WHERE
+		M_ID = #{m_id}
+	</select>
+	
+	<!-- 펫 상세정보 조회 -->
+	<select id="petSearch" parameterType="int"
+		resultType="com.last.prj.pet.service.PetVO">
+		SELECT p.pet_no, p.NAME, p.R_CHECK, p.GENDER, p.M_ID, p.BIRTH, c.content AS c_content, p.WEIGHT, p.N_CONTENT, p.PICTURE, p.PFILE
+		FROM PET p, f_code c
+		WHERE P.CODE=C.CODE AND PET_NO = #{pet_no}
+	</select>
+
+	
+	<insert id="mypetInsert" parameterType="com.last.prj.pet.service.PetVO">
+		<selectKey keyProperty="pet_no" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(PET_NO) +1 , 1) AS PET_NO FROM PET
+		</selectKey>
+	
+	INSERT INTO PET (PET_NO, NAME, BIRTH, GENDER, M_ID, CODE, WEIGHT, N_CONTENT, PICTURE, PFILE)
+    VALUES(#{pet_no},#{name},#{birth},#{gender},#{m_id},#{code}, #{weight},#{n_content},#{picture},#{pfile})
+	
+	
+	</insert>
+		
+	
+	<!-- 펫 수 -->
+	<select id="petCount" resultType="int">
+		SELECT COUNT(*) FROM PET
+	</select>
+	
+	
+	<update id="mypetupdate"  parameterType="com.last.prj.pet.service.PetVO">
+		update pet
+		<set>
+			<if test= "name != null">name = #{name},</if>
+			<if test="birth != null">birth = #{birth},</if>
+			<if test="gender != null">gender = #{gender},</if>
+			<if test="weight != null">weight = #{weight},</if>
+			<if test="code != null"> code = #{code},</if>
+			<if test="picture != null"> picture = #{picture},</if>
+			<if test="pfile != null"> pfile = #{pfile},</if>
+		</set>
+		where pet_no = #{pet_no}
+	
+	</update>
+
+
+	<delete id="mypetDelete" parameterType="com.last.prj.pet.service.PetVO">
+		DELETE FROM PET WHERE
+		PET_NO = #{pet_no}
+	</delete>
+	
+	<!-- 파라미터 : 펫번호  리턴 : 펫코드값(품종)  -->
+	<select id="AutoCode" parameterType="int" resultType="int">
+		SELECT CODE FROM PET
+		WHERE PET_NO = #{pet_no}
+	</select>
+	
+	<select id="amdPetChart" resultType="com.last.prj.pet.service.PetVO">
+		<!-- SELECT COUNT(*)as tt ,F.CONTENT AS oo FROM PET P, F_CODE F WHERE P.CODE = F.CODE GROUP BY F.CONTENT -->
+		SELECT COUNT(PET_NO)AS TT,(SELECT COUNT(*) FROM PET)AS CH, F.CONTENT AS OO FROM PET P, F_CODE F WHERE P.CODE=F.CODE GROUP BY F.CONTENT
+	</select>
+	
+	<select id="adminPetListCode" resultType="com.last.prj.qna.service.PetVO">
+		SELECT P.PET_NO, P.NAME, P.BIRTH, P.GENDER, P.M_ID, F.CONTENT, P.N_CONTENT, P.PICTURE FROM PET P ,F_CODE F WHERE P.CODE = F.CODE
+	</select>
+	
+</mapper>

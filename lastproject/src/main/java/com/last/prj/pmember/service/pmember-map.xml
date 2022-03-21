@@ -2,158 +2,391 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.pmember.service.PmemberMapper">
 
-	<resultMap type="com.last.prj.pmember.service.PmemberVO"
-		id="pmembervo">
-		<result column="p_id" property="p_id" />
-		<result column="name" property="name" />
-		<result column="tel" property="tel" />
-		<result column="password" property="password" />
-		<result column="n_content" property="n_content" />
-		<result column="w_name" property="w_name" />
-		<result column="w_address" property="w_address" />
-		<result column="w_tel" property="w_tel" />
-		<result column="p_info" property="p_info" />
-		<result column="w_d_address" property="w_d_address"/>
-		<result column="career" property="career"/>
-        <result column="code" property="code" />
-		<result column="p_license" property="p_license"/>
-		<result column="p_image" property="p_image" />
-		<result column="picture" property="picture" />
-		<collection property="timeList" resultMap="TimeVO" />
-	</resultMap>
-
-	<resultMap type="com.last.prj.pmember.service.TimeVO"
-		id="TimeVO">
-		<result column="w_day" property="w_day" />
-		<result column="starttime" property="starttime" />
-		<result column="endtime" property="endtime" />
-		<result column="n_content" property="n_content" />
-	</resultMap>
-	<!-- 상세페이지 -->
-	<select id="getMember" parameterType="String"
-		resultMap="pmembervo"
+	<select id="passCheck" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="String">
+		SELECT PASSWORD 
+			FROM P_MEMBER
+		WHERE P_ID = #{p_id}
+	</select>
+	
+	<select id="getPmemberinfo" parameterType="String"
 		resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT *
-		FROM P_MEMBER P, O_TIME T
-		WHERE P.P_ID = T.P_ID AND P.P_ID = #{p_id}
+		SELECT * FROM P_MEMBER WHERE P_ID = #{p_id}
 	</select>
-	
+
+	<select id="getTime" parameterType="String"
+		resultType="com.last.prj.pmember.service.TimeVO">
+		SELECT * FROM O_TIME WHERE P_ID = #{p_id} ORDER BY O_NO
+	</select>
+	<!-- 상세페이지 첨부파일 따로가져오기 -->
+	<select id="getImage" parameterType="String"
+		resultType="com.last.prj.pmember.service.FfileVO">
+		SELECT F.PICTURE
+		FROM F_FILE F, P_MEMBER P
+		WHERE P.P_IMAGE = F.F_PART AND P_ID = #{p_id}
+	</select>
+	<select id="getLicense" parameterType="String"
+		resultType="com.last.prj.pmember.service.FfileVO">
+		SELECT F.PICTURE
+		FROM F_FILE F, P_MEMBER P
+		WHERE P.P_LICENSE = F.F_PART AND P_ID = #{p_id}
+	</select>
+
 	<!-- 상담리뷰 -->
-	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="counselReview">
-		<result column="content" property="content"/>
-		<result column="rating" property="rating"/>
-		<result column="m_id" property="m_id"/>
-		<result column="picture" property="picture"/>
-		<collection property="fileList" resultMap="FfileVO" />	
+	<resultMap type="com.last.prj.pmember.service.ReviewVO"
+		id="counselReview">
+		<result column="content" property="content" />
+		<result column="rating" property="rating" />
+		<result column="m_id" property="m_id" />
+		<result column="picture" property="picture" />
+		<collection property="fileList" resultMap="FfileVO" />
 	</resultMap>
-	<resultMap type="com.last.prj.pmember.service.FfileVO" id="FfileVO">
-		<result column="photo" property="photo"/>	
+	<resultMap type="com.last.prj.pmember.service.FfileVO"
+		id="FfileVO">
+		<result column="photo" property="photo" />
 	</resultMap>
-	<select id="getCounselReview" parameterType="String" resultMap="counselReview"
-	resultType="com.last.prj.pmember.service.ReviewVO">
-		SELECT RE.CONTENT, 
-		       RE.RATING, 
-               M.M_ID, 
-               M.PICTURE,
-               F.PICTURE AS PHOTO
-        FROM REVIEW RE LEFT JOIN COUNSEL C  
-                ON RE.C_NO = C.C_NO
-               LEFT JOIN PET P
-                ON C.PET_NO = P.PET_NO 
-               LEFT JOIN MEMBER M
-                ON P.M_ID = M.M_ID 
-               LEFT JOIN F_FILE F
-                ON F.F_PART = RE.F_PART 
-               WHERE C.P_ID = #{p_id}
+	<select id="getCounselReview" parameterType="String"
+		resultMap="counselReview"
+		resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT RE.CONTENT,
+		RE.RATING,
+		M.M_ID,
+		M.PICTURE,
+		F.PICTURE AS PHOTO
+		FROM REVIEW RE LEFT JOIN COUNSEL C
+		ON RE.C_NO = C.C_NO
+		LEFT JOIN PET P
+		ON C.PET_NO = P.PET_NO
+		LEFT JOIN MEMBER M
+		ON P.M_ID = M.M_ID
+		LEFT JOIN F_FILE F
+		ON F.F_PART = RE.F_PART
+		WHERE C.P_ID = #{p_id}
 	</select>
-	
-	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="servieceReview">
-		<result column="content" property="content"/>
-		<result column="rating" property="rating"/>
-		<result column="m_id" property="m_id"/>
-		<result column="picture" property="picture"/>
+
+	<resultMap type="com.last.prj.pmember.service.ReviewVO"
+		id="servieceReview">
+		<result column="rev_no" property="rev_no" />
+		<result column="content" property="content" />
+		<result column="rating" property="rating" />
+		<result column="m_id" property="m_id" />
+		<result column="picture" property="picture" />
 		<collection property="fileList" resultMap="ffileVO" />
 	</resultMap>
-	<resultMap type="com.last.prj.pmember.service.FfileVO" id="ffileVO">
-		<result column="photo" property="photo"/>	
-	</resultMap>		
+	<resultMap type="com.last.prj.pmember.service.FfileVO"
+		id="ffileVO">
+		<result column="photo" property="photo" />
+	</resultMap>
 	<!-- 서비스리뷰 -->
-	<select id="getServiceReview" parameterType="String" resultMap="servieceReview" resultType="com.last.prj.pmember.service.ReviewVO">
-        SELECT RE.CONTENT, 
-			   RE.RATING, 
-			   M.M_ID, 
-			   M.PICTURE,
-               F.PICTURE AS PHOTO
-        FROM REVIEW RE LEFT JOIN RESERVATION R
-			  ON RE.R_NO = R.R_NO
-             LEFT JOIN PET P
-              ON R.PET_NO = P.PET_NO
-			 LEFT JOIN MEMBER  M
-              ON P.M_ID = M.M_ID
-			 LEFT JOIN F_FILE F
-			  ON F.F_PART = RE.F_PART
-             WHERE R.P_ID = #{p_id}
+	<select id="getServiceReview" parameterType="String"
+		resultMap="servieceReview"
+		resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT RE.CONTENT,
+		RE.RATING,
+		M.M_ID,
+		M.PICTURE,
+		F.PICTURE AS PHOTO
+		FROM REVIEW RE LEFT JOIN RESERVATION R
+		ON RE.R_NO = R.R_NO
+		LEFT JOIN PET P
+		ON R.PET_NO = P.PET_NO
+		LEFT JOIN MEMBER M
+		ON P.M_ID = M.M_ID
+		LEFT JOIN F_FILE F
+		ON F.F_PART = RE.F_PART
+		WHERE R.P_ID = #{p_id}
 	</select>
-	<!-- 페이징번호 , 검색 가능-->
+	<!-- 페이징번호 , 검색 가능 -->
 	<select id="memberPageList" resultType="com.last.prj.pmember.service.PmemberVO">
-		   SELECT *
-      			FROM ( SELECT ROWNUM RN, A.*
-     			FROM (SELECT P_ID, NAME, PICTURE, CODE
-      				   FROM P_MEMBER
-       				  WHERE CODE = #{code}
-       				  <if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>		
-       				  ) A)
-      	WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+		SELECT *
+				FROM ( SELECT ROWNUM RN, A.*
+					   FROM (SELECT P_ID, NAME, PICTURE, CODE
+							 FROM P_MEMBER
+		        WHERE CODE = #{code}
+		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>) A)
+			WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
-	<!--총 회원  -->
-	<select id="memberPage" resultType="int">		
-      SELECT COUNT(*) AS total 
-      FROM P_MEMBER
-      WHERE CODE = #{code}
- 	  <if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>		
+	<!--총 회원 -->
+	<select id="memberPage" resultType="int">
+		SELECT COUNT(*) AS total
+			FROM P_MEMBER
+		WHERE CODE = #{code}
+		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>
 	</select>
-	
+
 	<!-- 파트너정보수정 -->
 	<update id="pmemberUpdate" parameterType="com.last.prj.pmember.service.PmemberVO">
 		UPDATE P_MEMBER
-			<set>
-				<if test="name != null">name = #{name}, </if>
-				<if test="password != null">password = #{password}, </if>
-				<if test="tel != null">tel = #{tel}, </if>
-				<if test="w_name != null">w_name = #{w_name},</if>
-	  			<if test="w_address != null"> w_address = #{w_address}, </if>
-	  			<if test="w_d_address != null"> w_d_address = #{w_d_address}, </if>				
-	 		 	<if test="w_tel != null"> w_tel = #{w_tel}, </if>
-	 		 	<if test="n_content != null"> n_content = #{n_content},</if>
-	 			<if test="p_info != null"> p_info = #{p_info}, </if>
-	  			<if test="career != null"> career = #{career}, </if> 
-	  			<if test="speciality != null"> speciality = #{speciality} </if>
-				<if test="picture != null">picture = #{picture}, </if>
-				<if test="pfile != null">pfile = #{pfile}, </if>		
-			</set>
+		<set>
+			<if test="name != null">NAME = #{name},</if>
+			<if test="password != null">PASSWORD = #{password},</if>
+			<if test="tel != null">TEL = #{tel},</if>
+			<if test="w_name != null">W_NAME = #{w_name},</if>
+			<if test="w_address != null"> W_ADDRESS = #{w_address},</if>
+			<if test="w_d_address != null"> W_D_ADDRESS = #{w_d_address},</if>
+			<if test="w_tel != null"> W_TEL = #{w_tel},</if>
+			<if test="p_info != null"> P_INFO = #{p_info},</if>
+			<if test="career != null"> CAREER = #{career},</if>
+			<if test="speciality != null"> SPECIALITY = #{speciality},</if>
+			<if test="picture != null">PICTURE = #{picture},</if>
+			<if test="pfile != null">PFILE = #{pfile},</if>
+			<if test="p_license != null and p_license != 0">P_LICENSE = #{p_license},</if>
+			<if test="p_image != null and p_image != 0">P_IMAGE = #{p_image},</if>
+		</set>
 		WHERE P_ID = #{p_id}
 	</update>
-
-	<!-- 관리자 -->
-	<select id = "admPlistCode" parameterType="int" resultType="com.last.prj.pmember.service.PmemberVO">
-		select p.p_id, p.name,p.c_report, p.startdate, f.content as f_content, p.tel as tel
-		from p_member p, f_code f 
-		where f.code = p.code AND p.code = #{code}
-	</select>
 	
-	<select id="admPlist" resultType="com.last.prj.pmember.service.PmemberVO">
-		SELECT P.P_ID, P.TEL,P.STARTDATE, P.C_REPORT, P.NAME, F.CONTENT as f_content
-		FROM P_MEMBER P , F_CODE F 
-		WHERE F.CODE=P.CODE
-	</select>	
+	<!-- 수정시 otime 삭제후 insert -->
+	<delete id="deleteTime"
+		parameterType="com.last.prj.pmember.service.TimeVO">
+		DELETE FROM O_TIME WHERE O_NO = #{o_no}
+	</delete>
 
-	
+	<delete id="deleteTimeId"
+		parameterType="com.last.prj.pmember.service.TimeVO">
+		DELETE FROM O_TIME WHERE P_ID = #{p_id}
+	</delete>
+
+	<insert id="pmemberTime"
+		parameterType="com.last.prj.pmember.service.TimeVO">
+		<selectKey keyProperty="o_no" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(O_NO)+1,1) AS O_NO FROM O_TIME
+		</selectKey>
+		INSERT INTO O_TIME
+		VALUES(#{o_no}, #{p_id}, #{w_day}, #{starttime}, #{endtime}, #{n_content})
+	</insert>
+	<!-- <update id="updateTime" parameterType="com.last.prj.pmember.service.TimeVO" 
+		> UPDATE O_TIME <set> <if test="w_day != null">W_DAY = #{w_day},</if> <if 
+		test="starttime != null">STARTTIME = #{starttime},</if> <if test="endtime 
+		!= null">ENDTIME = #{endtime},</if> <if test="n_content != null">N_CONTENT 
+		= #{n_content}</if> </set> WHERE O_NO = #{o_no} AND P_ID = #{p_id} </update> -->
+
+	<!-- 추천 -->
+	<update id="updateLike" parameterType="String">
+		UPDATE P_MEMBER SET RCOM =
+		RCOM+1 WHERE P_ID = #{p_id}
+	</update>
+	<!-- 추천취소시 -->
+	<update id="updateCancel" parameterType="String">
+		UPDATE P_MEMBER SET RCOM
+		= RCOM-1 WHERE P_ID = #{p_id}
+	</update>
+
 	<!-- 아이디로 정보 조회 -->
-	<select id="PmemberOne" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
+	<select id="PmemberOne" parameterType="String"
+		resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
 		FROM p_member
 		WHERE p_id = #{p_id}
 	</select>
+
+	<!-- 추천베스트 순위 -->
+	<select id="bestLike"
+		parameterType="com.last.prj.pmember.service.PmemberVO"
+		resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM
+		( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+		FROM P_MEMBER
+		GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+		HAVING RCOM IS NOT NULL
+		ORDER BY RCOM DESC
+		)
+		WHERE ROWNUM<![CDATA[<=4]]>
+	</select>
+
+	<!-- 관리자 -->
+	<!-- chart -->
+	<select id="admPlistChart"
+		parameterType="com.last.prj.pmember.service.PmemberVO"
+		resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT COUNT(CODE)AS CH,CODE,(SELECT COUNT(*) FROM P_MEMBER)AS "TO"
+		FROM P_MEMBER
+		<if
+			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			WHERE STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		GROUP BY CODE
+	</select>
+	
+
+
+	<!-- 파트너쉽 별로 출력 -->
+	<select id="admPlistCode"
+		parameterType="com.last.prj.pmember.service.PmemberVO"
+		resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT B.*
+		FROM ( SELECT A.* , ROWNUM RN
+		FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE, F.CONTENT AS
+		F_CONTENT, P.TEL AS TEL, P.PICTURE, P.ENDDATE
+		FROM P_MEMBER P, F_CODE F
+		WHERE F.CODE = P.CODE
+		<if test="code != null and code != '104'">
+			AND p.code = #{code}
+		</if>
+		<if test="code != null and code == '104'"> AND P.CODE = 9999</if>
+		<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+			AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+		</if>
+		ORDER BY P_ID DESC
+		  <![CDATA[  ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+	</select>
+
+	<select id="admPlistCodeCount"
+		parameterType="com.last.prj.pmember.service.PmemberVO"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM P_MEMBER P
+		<where>
+			<if test="code != null and code != '104'">
+				AND P.CODE = #{code}
+			</if>
+			<if test="code != null and code == '104'">AND P.CODE = 9999</if>
+			<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if
+				test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+				AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+			</if>
+		</where>
+	</select>
+
+	<!-- 파트너 회원 수 -->
+	<select id="pmemCount" resultType="int">
+		SELECT COUNT(*) FROM P_MEMBER
+	</select>
+
+	<select id="ServiceReviewList" resultMap="servieceReview"
+		resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT RE.REV_NO,
+		RE.CONTENT,
+		RE.RATING,
+		M.M_ID,
+		M.PICTURE,
+		F.PICTURE AS PHOTO
+		FROM REVIEW RE LEFT JOIN RESERVATION R
+		ON RE.R_NO = R.R_NO
+		LEFT JOIN PET P
+		ON R.PET_NO = P.PET_NO
+		LEFT JOIN MEMBER M
+		ON P.M_ID = M.M_ID
+		LEFT JOIN F_FILE F
+		ON F.F_PART = RE.F_PART
+		ORDER BY RE.REV_NO DESC
+	</select>
+	
+	<select id="ServiceReviewRecent" resultMap="servieceReview"
+		resultType="com.last.prj.pmember.service.ReviewVO">
+		SELECT *
+		FROM
+		(SELECT RE.REV_NO,
+		RE.CONTENT,
+		RE.RATING,
+		M.M_ID,
+		M.PICTURE,
+		F.PICTURE AS PHOTO
+		FROM REVIEW RE LEFT JOIN RESERVATION R
+		ON RE.R_NO = R.R_NO
+		LEFT JOIN PET P
+		ON R.PET_NO = P.PET_NO
+		LEFT JOIN MEMBER M
+		ON P.M_ID = M.M_ID
+		LEFT JOIN F_FILE F
+		ON F.F_PART = RE.F_PART
+		ORDER BY RE.REV_NO DESC
+		)
+<![CDATA[WHERE ROWNUM <= 6]]>
+	</select>
+
+	<select id="bestLikeList"
+		resultType="com.last.prj.pmember.service.PmemberVO">
+		SELECT *
+		FROM
+		( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+		FROM P_MEMBER
+		GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+		HAVING RCOM IS NOT NULL
+		ORDER BY RCOM DESC
+		)
+		WHERE ROWNUM<![CDATA[<=4]]>
+	</select>
+
+	<!-- 파트너회원 회원탈퇴시 모든정보 NULL로 수정 -->
+
+	<update id="pmemberNullUpdate" parameterType="String">
+		UPDATE
+		P_MEMBER
+		SET NAME = '정보삭제',
+		TEL = '정보삭제',
+		STARTDATE = NULL,
+		ENDDATE =SYSDATE,
+		PASSWORD ='정보삭제',
+		C_REPORT = NULL,
+		N_CONTENT =NULL,
+		W_NAME=NULL,
+		W_ADDRESS ='정보삭제',
+		W_TEL='정보삭제',
+		P_INFO ='정보삭제',
+		W_D_ADDRESS ='정보삭제',
+		BUSINESSNUMBER = NULL,
+		CAREER = '정보삭제',
+		SPECIALITY = '정보삭제',
+		RCOM = NULL,
+		CODE =9999,
+		P_PROFILE=NULL,
+		P_LICENSE=NULL,
+		P_IMAGE=NULL,
+		PICTURE='정보삭제',
+		PFILE='정보삭제'
+		WHERE P_ID = #{p_id}
+	</update>
+	<!-- 회원가입취소시 데이터 삭제 -->
+	<delete id="pmemberJoinCancel" parameterType="String">
+		DELETE
+		FROM P_MEMBER
+		WHERE P_ID = #{p_id}
+	</delete>
+	
+		<!--기간 별 차트 그리기  -->
+		<select id="admPmemChart" resultType="com.last.prj.pmember.service.PmemberVO">
+			SELECT 
+			    TO_CHAR(STARTDATE, 'YYYY-MM')AS AA,
+			    COUNT(*)AS BB
+			FROM P_MEMBER
+			WHERE STARTDATE IS NOT NULL
+			GROUP BY 
+			TO_CHAR(STARTDATE, 'YYYY-MM')
+		</select>
+	
+		<select id="pMemCode" resultType="int" parameterType="String" >
+			SELECT CODE FROM P_MEMBER WHERE P_ID = #{p_id}
+		</select>
+		
+		<select id="admPmemReporList" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="com.last.prj.pmember.service.PmemberVO">
+				SELECT B.*
+				FROM ( SELECT A.* , ROWNUM RN
+				FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE,P.P_ROLE, R.CONTENT,F.CONTENT AS F_CONTENT, R.STATE FROM P_MEMBER P, REPORT R, F_CODE F WHERE P.P_ID = R.REPORTED AND R.CODE = F.CODE
+				<if test="code != null and code != '' ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>
+				<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
+		
+		</select>
+		<select id="admPmemReportCount" parameterType="com.last.prj.pmember.service.PmemberVO" resultType="int">
+		SELECT COUNT(*) FROM (SELECT P.P_ID, P.NAME,P.C_REPORT, P.STARTDATE,P.P_ROLE, R.CONTENT,F.CONTENT AS F_CONTENT, R.STATE FROM P_MEMBER P, REPORT R, F_CODE F WHERE P.P_ID = R.REPORTED AND R.CODE = F.CODE
+				<if test="code != null ">
+				AND R.CODE = #{code}
+				</if>
+				<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+				<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+					AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+				</if>)
+		
+		</select>
 
 </mapper>

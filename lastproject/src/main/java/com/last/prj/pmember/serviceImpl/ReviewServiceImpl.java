@@ -21,4 +21,24 @@ public class ReviewServiceImpl implements ReviewService {
 		return map.admReviewList();
 	}
 
+	@Override
+	public int servicereview(ReviewVO review) {
+		return map.servicereview(review);
+	}
+
+	@Override
+	public ReviewVO reviewSearch(ReviewVO r_no) {
+		return map.reviewSearch(r_no);
+	}
+
+	@Override
+	public int counselreview(ReviewVO review) {
+		return map.counselreview(review);
+	}
+
+	@Override
+	public ReviewVO cnoreview(int c_no) {
+		return map.cnoreview(c_no);
+	}
+
 }

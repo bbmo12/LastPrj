@@ -29,6 +29,19 @@
 <body>
 <br><br><br><br><br><br>
 
+<div id="menu">
+      <span id="menu-navi">
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+          <i class="calendar-icon ic-arrow-line-left" data-action="move-prev">이전</i>
+        </button>
+        <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+          <span id="renderRange" class="render-range"></span>
+        <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+          <i class="calendar-icon ic-arrow-line-right" data-action="move-next">다음</i>
+        </button>
+      </span>
+    
+    </div>
 
 <div id="calendar" style="height: 800px;"></div>
 
@@ -36,9 +49,13 @@
 
 $(document).ready(function(){
 	
+	let today = new Date();
+	var day = today.toLocaleDateString().substr(5,6).split('.');
+	var month = parseInt(day[0]); 
+	var year = today.toLocaleDateString().substr(0,4);
+	
+	$("#renderRange").text(year+'년'+month+'월');
 	revList();
-	
-	
 	
 	var templates = {
 		    popupIsAllDay: function() {
@@ -112,11 +129,14 @@ $(document).ready(function(){
 	}
 	//예약설정조회
 	function revList(){
+		var p_id = "${p_id}";
 		$("#calendar").empty();
 		CreateCalendar();
 		$.ajax({
 			url : "revsetlist",
+			method : "POST",
 			dataType : "JSON",
+			data : {"p_id" : p_id},
 			success : function(result){
 				console.log(result);
 				for(var i =0;i<result.length;i++){
@@ -130,6 +150,8 @@ $(document).ready(function(){
 				var title = result[i].title;
 				var pid = result[i].p_id;
 				var ctime = result[i].c_time;
+				var bgColor = result[i].bgColor;
+				console.log(bgColor);
 				
 					calendar.createSchedules([
 						{
@@ -137,17 +159,14 @@ $(document).ready(function(){
 						    title: title,
 						    start: start,
 						    end: end,
-						    category: category
+						    category: category,
+						    bgColor : bgColor
 						}
 					]);
 				}
 			}
 		});
 	}
-	
- 
- 
- 
 
 	//새 일정 생성이벤트
 	calendar.on('beforeCreateSchedule', scheduleData => {
@@ -173,15 +192,17 @@ $(document).ready(function(){
   var start = new Date(schedule.start._date.getTime() - (schedule.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
   var strStart = start.slice(0,10);
   console.log(start);
-  
-  
+  var flag = confirm("등록하시겠습니까?");
+  var bgColor = "#00CCFF";
+  if(flag == true){
 	$.ajax({
 		url : "revsetinsert",
 		method : "POST",
 		data : {"title": '예약가능',
 			    "c_start": start,
 			    "c_end": end,
-			    "category":'allday'},
+			    "category":'allday',
+			    "bgColor" : bgColor},
 		success : function(res){
 			console.log(res);
 			calendar.createSchedules([
@@ -190,12 +211,17 @@ $(document).ready(function(){
 				    title: res.title,
 				    start: res.c_start,
 				    end: res.c_end,
-				    category: res.category
+				    category: res.category,
+				    bgColor : bgColor
 				}
 			]);
-			alert('해당 예약일정을 등록하셨습니다.');
+			alert('등록이 완료되었습니다.');
 		}
 	})
+  }else{
+	  alert("취소되었습니다.");
+  }
+  
 });
  //일정 수정이벤트
  calendar.on('beforeUpdateSchedule', function(event) {
@@ -239,7 +265,6 @@ $(document).ready(function(){
     /* var strStart = start.slice(0,16);*/
     console.log(changes);
     console.log(start);
-    
 	  $.ajax({
 		url : "revsetupdate",
 		method : "POST",
@@ -261,30 +286,58 @@ $(document).ready(function(){
 //일정 삭제이벤트
 calendar.on('beforeDeleteSchedule', scheduleData => {
 		  const {schedule, start, end} = scheduleData;
-
 		  schedule.start = start;
 		  schedule.end = end;
+		  console.log(start);
+		 var p_id = "${p_id}";
 		  $.ajax({
 			  url : 'revsetdelete',
 			  method : 'POST',
-			  data : {"id" : schedule.id},
+			  data : {"id" : schedule.id,
+				  	  "p_id": p_id},
 			  success : function(res){
-				  console.log(res);
-		  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
-		  		alert("해당 예약설정을 해제하였습니다.");
+				  console.log(res)
+				  if(res == "ok"){
+			  		calendar.deleteSchedule(schedule.id, schedule.calendarId);
+			  		alert("해당 예약설정을 해제하였습니다.");
+				  }else if(res ="no"){
+					  alert("예약건수가 있어 삭제할수 없습니다.");
+				  }
 			  }
 		  })
 	});
  
-
+	//달력 다음버튼 클릭 이벤트
+	$(".ic-arrow-line-left").on('click',function(event){
+		month = month-1;
+		if(month == 0){
+			year = parseInt(year)-1;
+			month = 12;
+		}
+		calendar.prev();
+		$("#renderRange").text(year+'년'+month+'월');
+		
+	});
+		//달력 이전버튼 클릭 이벤트
+	$(".ic-arrow-line-right").on('click',function(event){
+		month = month+1;
+		if(month == 13){
+			year = parseInt(year)+1;
+			month = 1;
+		}
+		calendar.next();
+		$("#renderRange").text(year+'년'+month+'월');
+	});
+	//달력 Today 클릭 이벤트
+	$(".move-today").on('click',function(event){
+		calendar.today();
+ 		day = today.toLocaleDateString().substr(5,6).split('.');
+ 		month = parseInt(day[0]); 
+ 		year = today.toLocaleDateString().substr(0,4);
+ 		$("#renderRange").text(year+'년'+month+'월');
+	});
 
  });
-
-
-
  </script>
-
-
-
 </body>
 </html>

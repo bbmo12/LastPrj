@@ -15,8 +15,8 @@ public class CalendarServiceImpl implements CalendarService{
 	private CalendarMapper map;
 	
 	@Override
-	public List<CalendarVO> revSetList() {
-		return map.revSetList();
+	public List<CalendarVO> revSetList(CalendarVO cal) {
+		return map.revSetList(cal);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public List<CalendarVO> revSetUpdateSelect(int id) {
+	public CalendarVO revSetUpdateSelect(int id) {
 		return map.revSetUpdateSelect(id);
 	}
 

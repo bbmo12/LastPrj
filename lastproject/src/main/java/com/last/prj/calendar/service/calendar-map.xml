@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.last.prj.calendar.service.CalendarMapper">
-	<select id="revSetList" resultType="com.last.prj.calendar.service.CalendarVO">
-		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID
-		FROM calendar
+
+	<select id="revSetList" resultType="com.last.prj.calendar.service.CalendarVO" parameterType="com.last.prj.calendar.service.CalendarVO">
+		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID,BGCOLOR
+		FROM CALENDAR
+		WHERE P_ID = #{p_id}
 	</select>
 	
 	<select id="revSetSelectList" resultType="com.last.prj.calendar.service.CalendarVO">
@@ -17,8 +19,8 @@
 	
 	<select id="revSetUpdateSelect" resultType="com.last.prj.calendar.service.CalendarVO" 
 			parameterType="int">
-		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID, C_CHECK
-		FROM calendar
+		SELECT ID,C_START,C_END, CATEGORY,TITLE, P_ID,BGCOLOR
+		FROM CALENDAR
 		WHERE ID = #{id}
 	</select>
 	
@@ -26,23 +28,35 @@
 		<selectKey keyProperty="id" resultType="int" order="BEFORE">
 			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM CALENDAR
 		</selectKey>
-		INSERT INTO CALENDAR (ID,C_START,C_END,CATEGORY,TITLE)
-		VALUES (#{id},#{c_start},#{c_end},#{category},#{title})
+		INSERT INTO CALENDAR (ID,C_START,C_END,CATEGORY,TITLE,P_ID,bgColor)
+		VALUES (#{id},#{c_start},#{c_end},#{category},#{title},#{p_id},#{bgColor})
 	</insert>
 	
 	<update id="revSetUpdate" parameterType="com.last.prj.calendar.service.CalendarVO">
 		UPDATE CALENDAR
 		<trim prefix="SET" suffixOverrides=",">
-			<if test ="c_start !=null and !c_start.equals('')"> c_start = #{c_start},</if>
-			<if test ="c_end !=null and !c_end.equals('')"> c_end = #{c_end},</if>
-			<if test ="category !=null and !category.equals('')"> category = #{category},</if>
-			<if test ="title !=null and !title.equals('')"> title = #{title},</if>
+			<if test ="c_start !=null and !c_start.equals('')"> C_START = #{c_start},</if>
+			<if test ="c_end !=null and !c_end.equals('')"> C_END = #{c_end},</if>
+			<if test ="category !=null and !category.equals('')"> CATEGORY = #{category},</if>
+			<if test ="title !=null and !title.equals('')"> TITLE = #{title},</if>
+			<if test ="bgColor !=null and !bgColor.equals('')"> BGCOLOR = #{bgColor},</if>
    		</trim>
 		WHERE ID = #{id}
 	</update>
+	
+	<!-- 예약일이 현재날짜보다 낮으면 예약불가 타이틀 변경 -->
+	<update id="yyyy" parameterType="String">
+		UPDATE CALENDAR
+		SET TITLE = #{title}, BGCOLOR = #{bgColor}
+		WHERE <![CDATA[C_END <= TO_CHAR(SYSDATE,'YYYY-MM-DD')]]>
+	</update>
+	
+	
+	
 	
 	<delete id="revSetDelete" parameterType="com.last.prj.calendar.service.CalendarVO">
 		DELETE FROM CALENDAR
 		WHERE ID = #{id}
 	</delete>
+	
 </mapper>

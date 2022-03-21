@@ -1,5 +1,7 @@
 package com.last.prj.mem.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PmemService {
@@ -13,4 +15,23 @@ public interface PmemService {
 	int pmemberInsert1(PmemVO pmember);
 	
 	int pmemberInsert2(PmemVO pmember);
+	
+	int pmemberInsert3(String p_id, int p_license, int p_image);
+	
+	boolean isIdCheck(String p_id);
+	List<PriceVO> getPrice(String p_id);
+	int deleteService(PriceVO price);//no삭제
+	int deleteServiceId(PriceVO price);//id로삭제
+	int insertService(PriceVO price);
+	int updateService(PriceVO price);
+	
+	// security login
+	PmemVO read(String username);
+	
+	// 비밀번호 업데이트
+	int pmemberPwdUpdate(PmemVO pmem);
+
+	int pmemdelete();
+	
+
 }

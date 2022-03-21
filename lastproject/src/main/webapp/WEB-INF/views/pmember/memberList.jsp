@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,9 @@
 <style>
 	#w_address::placeholder {
 		color: #fff;
+		
 	}
+
 </style>
 
 <body>
@@ -41,12 +44,12 @@
 				</div>
 			</div>
 			<div class="row" id="data-container">
-			<input id="pmemberCode" type="hidden" value="${param.code }">
+			
 				<c:forEach items="${pageList }" var="pmember">
 					<div class="col-lg-3 col-sm-6">
 						<div class="single-doctor mb-4 mb-lg-0">
 							<div class="doctor-img">
-								<img src="resources/upload/${pmember.picture }" alt="등록된 사진이 없습니다." class="img-fluid"
+								<img src="resources/upload/${pmember.picture }" onerror="this.src='resources/upload/pet.PNG'" class="img-fluid"
 									style="width: 300px; height: 200px;">
 							</div>
 							<div class="content-area">
@@ -61,12 +64,15 @@
 				</c:forEach>
 			</div>
 		</div>
+		<form action="pmemberList" name="goform">
+		<input id="pmemberCode" type="hidden" name="code" value="${param.code }">
+		<input type="hidden" name="pageNum" value="1"	>	
 		<div class="blog_right_sidebar" style="width: 500px; float: none; margin: 0 auto;">
 			<aside class="single_sidebar_widget search_widget">
 				<div class="input-group">
-					<input type="text" class="form-control" id="w_address" name="w_address" placeholder="지역명을 입력해주세요">
+					<input type="text"  class="form-control" id="w_address" name="w_address" placeholder="지역명을 입력해주세요" value="${param.w_address }">
 					<span class="input-group-btn">
-						<button class="btn btn-default" type="button" onclick="getLocal()">
+						<button class="btn btn-default" type="submit" >
 							<i class="fa fa-search"></i>
 						</button>
 					</span>
@@ -74,77 +80,17 @@
 				<!-- /input-group -->
 			</aside>
 		</div>
-		<nav class="blog-pagination justify-content-center d-flex">
-			<ul class="pagination">
-				<c:if test="${page.prev }">
-				<li class="page-item">
-					<a href="pmemberList?pageNum=${page.startPage-1}&code=${page.cri.code}" class="page-link"
-						aria-label="Previous">
-						<span aria-hidden="true">
-							<span class="fa fa-angle-left"></span>
-						</span></a>
-				</li>
-				</c:if>
-				<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }">
-					<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
-							href="pmemberList?pageNum=${num }&code=${page.cri.code}" class="page-link">${num }</a>
-					</li>
-				</c:forEach>
-				<c:if test="${page.next }">
-				<li class="page-item"><a href="pmemberList?pageNum=${page.endPage+1}&code=${page.cri.code}"
-						class="page-link" aria-label="Next">
-						<span aria-hidden="true">
-							<span class="fa fa-angle-right"></span>
-						</span></a>
-				</li>
-				</c:if>
-			</ul>
-		</nav>
-		<form action="../pmemberList" name="pageForm" method="get">
-			<input type="hidden" name="pageNum" value="${page.cri.pageNum }">
-			<input type="hidden" name="amount" value="${page.cri.amount }">
 		</form>
+	 <my:nav jsFunc="go_page" page="${page}"/> 
 	</section>
 	<script type="text/javascript">
-		function getLocal() {
-			var code = document.getElementById('pmemberCode').value;
-			var local = document.getElementById('w_address').value;
-			$('#w_address').val('');
-			$.ajax({
-				url: 'pmemberLocal',
-				method: 'post',
-				data: {
-					code: code,
-					w_address: local
-				}
-			}).done(function (data) {
-				console.log(data);
-				var container = document.getElementById('mainContainer');
-				var main = document.getElementById('data-container');
-				main.remove();
-				var row = document.createElement('div');
-				row.className = 'row';
-				for (var i = 0; i < data.length; i++) {
-					var content = document.createElement('div');
-					content.className = 'col-lg-3 col-sm-6';
-					content.innerHTML = `<div class="single-doctor mb-4 mb-lg-0">
-								<div class="doctor-img">
-									<img src="resources/upload/\${data[i].picture }" alt="등록된 사진이 없습니다" class="img-fluid">
-								</div>
-								<div class="content-area">
-									<div class="doctor-name text-center">
-										<a href="pmemberDetail?id=\${data[i].p_id}">
-											<h3>\${data[i].name}</h3>
-										</a>
-									</div>
-								</div>
-							</div>`;
-					row.append(content);
-					container.append(row);
-				}
-			});
+	    function go_page(p) {
+	    	goform.pageNum.value=p;
+	    	goform.submit();		
 		}
+	    w_address.addEventListener('click', function () {
+			event.target.select();
+		})
 	</script>
 </body>
-
 </html>

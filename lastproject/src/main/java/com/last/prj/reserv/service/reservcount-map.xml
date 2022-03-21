@@ -6,17 +6,26 @@
 	SELECT * FROM RESERVCOUNT
 </select>
 
-<select id="reservCountSelect" resultType="com.last.prj.reserv.service.ReservCountVO" parameterType="String">
+<select id="reservDelCheck" parameterType="com.last.prj.reserv.service.ReservCountVO" resultType="com.last.prj.reserv.service.ReservCountVO">
 	SELECT * FROM RESERVCOUNT
-	WHERE RESERV_DATE = #{reserv_date}
-	AND   RESERV_TIME = #{reserv_time}
+	WHERE P_ID = #{p_id}
+	AND RESERV_DATE = #{reserv_date}
 </select>
 
+<!-- 예약중복체크 -->
+<select id="reservCountSelect" resultType="com.last.prj.reserv.service.ReservCountVO">
+	SELECT * FROM RESERVCOUNT
+	WHERE RESERV_DATE BETWEEN #{start_date} AND #{end_date}
+	<!-- AND   RESERV_TIME = #{reserv_time} -->
+	AND   P_ID = #{p_id}
+</select>
+<!-- 예약등록체크할 값 등록 -->
 <insert id="reservCountInsert" parameterType="com.last.prj.reserv.service.ReservCountVO">
-	<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			 SELECT NVL(MAX(ID) +1 , 1) AS ID FROM RESERVCOUNT
+	<selectKey keyProperty="reserv_count" resultType="int" order="BEFORE">
+		 SELECT NVL(MAX(RESERV_COUNT) +1 , 1) AS RESERV_COUNT FROM RESERVCOUNT
 	</selectKey>
 	INSERT INTO RESERVCOUNT
-	VALUES (#{no},#{reserv_date},#{reserv_time},#{p_id})
+	VALUES (#{reserv_count},#{reserv_date},#{reserv_time},#{p_id},#{start_date},#{end_date})
 </insert>
+
 </mapper>

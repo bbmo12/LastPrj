@@ -50,18 +50,23 @@
 	</update>
 
 	<!-- 게시글 번호 업데이트 -->
-	<update id="boardIdUpdate" parameterType="int">
+	<!-- <update id="boardIdUpdate" parameterType="int">
 	<![CDATA[
 		UPDATE BAORD SET B_NO = B_NO - 1 
 		WHERE B_NO = #{b_no}
 		]]>
-	</update>
+	</update> -->
 	
 	<!-- 게시글 조회수 업데이트 -->
-	<update id="boardeHitUpdate" parameterType="int">
+	<!-- <update id="boardeHitUpdate" parameterType="int">
 		UPDATE BOARD SET HIT
 		= HIT + 1 WHERE B_NO = #{b_no}
-	</update>
-
-
+	</update> -->
+	
+	<select id="boardSearch" resultType="com.last.prj.board.service.BoardVO">
+		SELECT * FROM BOARD
+		<if test="key == 'all'"> WHERE UPPER(TITLE) LIKE '%'|| UPPER(#{data}) ||'%' AND UPPER(CONTENT) LIKE '%'|| UPPER(#{data}) ||'%' </if>
+		<if test="key == 'title'"> WHERE UPPER(TITLE) LIKE '%'|| #{data} ||'%' </if>
+		<if test="key == 'content'"> WHERE UPPER(CONTENT) LIKE '%'|| #{data} ||'%' </if>
+	</select>
 </mapper>

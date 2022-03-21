@@ -3,6 +3,34 @@
 <mapper namespace="com.last.prj.qna.service.QnaMapper">
 
 	<resultMap type="com.last.prj.qna.service.QnaVO"
+		id="qnaPetTag">
+		<result property="q_no" column="q_no" />
+		<result property="w_date" column="w_date" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="hit" column="hit" />
+		<result property="writer" column="writer" />
+		<result property="p_no" column="p_no" />
+		<result property="f_part" column="f_part" />
+		<result property="pet_no" column="pet_no" />
+		<result property="r_check" column="r_check" />
+
+		<association property="petvo"
+			javaType="com.last.prj.qna.service.PetVO">
+			<id property="pet_no" column="pet_no" />
+			<result property="name" column="name" />
+			<result property="r_check" column="r_check" />
+			<result property="gender" column="gender" />
+			<result property="m_id" column="m_id" />
+			<result property="code" column="code" />
+			<result property="weight" column="weight" />
+			<result property="picture" column="picture" />
+		</association>
+
+		<collection property="tagList" resultMap="tagMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.last.prj.qna.service.QnaVO"
 		id="qnaResult">
 		<id property="q_no" column="q_no" />
 		<result property="w_date" column="w_date" />
@@ -14,6 +42,8 @@
 		<result property="f_part" column="f_part" />
 		<result property="pet_no" column="pet_no" />
 		<result property="r_check" column="r_check" />
+		<result property="recnt" column="recnt" />
+
 		<collection property="tagList" resultMap="tagMap"></collection>
 	</resultMap>
 
@@ -23,45 +53,34 @@
 		<result property="t_name" column="t_name" />
 	</resultMap>
 
-	<!-- qna + p_member <resultMap type="com.last.prj.qna.service.QnaVO" id="pMemInfo"> 
-		<id property="q_no" column="q_no" /> <result property="w_date" column="w_date" 
-		/> <result property="title" column="title" /> <result property="content" 
-		column="content" /> <result property="hit" column="hit" /> <result property="writer" 
-		column="writer" /> <result property="p_no" column="p_no" /> <result property="f_part" 
-		column="f_part" /> <result property="pet_no" column="pet_no" /> <result property="r_check" 
-		column="r_check" /> <association property="pmemVO" javaType="com.last.prj.qna.service.PmemberVO"> 
-		<id column="p_id" property="p_id" /> <result column="name" property="name" 
-		/> <result column="n_content" property="n_content" /> <result column="w_name" 
-		property="w_name" /> <result column="w_address" property="w_address" /> <result 
-		column="w_tel" property="w_tel" /> <result column="p_info" property="p_info" 
-		/> <result column="w_d_address" property="w_d_address" /> <result column="career" 
-		property="career" /> <result column="picture" property="picture" /> </association> 
-		</resultMap> -->
-
 	<!-- 총 개시글 수 출력 -->
 	<select id="getTotal" resultType="int">
-		SELECT COUNT(*) AS total FROM qna
-		WHERE p_no = 0
+		SELECT COUNT(*) AS total 
+		FROM qna q LEFT OUTER JOIN qnatag t
+		ON q.q_no = t.q_no
+		WHERE q.p_no = 0
 		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
 	</select>
 
-	<!-- 질문글 전체 조회 /페이징 -->
+	<!-- 질문글 전체 조회 & 페이징 & 검색 & 글자수 제한 -->
 	<select id="qnaList" resultMap="qnaResult">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-		FROM (SELECT *
-		FROM qna q LEFT
-		OUTER JOIN qnatag t
+		FROM (SELECT t.t_name, q.q_no, q.w_date, q.title, q.hit, q.writer, q.p_no,
+		q.pet_no,(SELECT COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS
+		recnt, CASE WHEN LENGTH(q.content) > 100 THEN SUBSTR
+		(q.content,0,100)||'...' ELSE q.content END AS content
+		FROM qna q LEFT OUTER JOIN qnatag t
 		ON q.q_no = t.q_no
 		WHERE p_no = 0
 		<if test="searchType == 'title'">AND TITLE LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'content'">AND CONTENT LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == 'writer'">AND WRITER LIKE '%'||#{searchValue}||'%'</if>
 		<if test="searchType == null or searchType ==''">AND 1 = 1</if>
-		ORDER BY w_date DESC) A)
+		ORDER BY q.q_no DESC) A)
 		WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
@@ -73,6 +92,7 @@
 		(SELECT *
 		FROM qna
 		WHERE p_no = 0
+		AND NOT title IN ('[작성자에 의해 삭제된 게시물입니다.]')
 		ORDER BY hit DESC
 		)
 		<![CDATA[WHERE ROWNUM <= 7]]>
@@ -80,22 +100,29 @@
 
 	<!-- 태그를 이용한 검색 -->
 	<select id="tagSearch" resultMap="qnaResult">
-		SELECT *
-		FROM qna q LEFT OUTER
-		JOIN qnatag t
+		SELECT t.t_name, q.q_no,
+		q.w_date, q.title, q.hit, q.writer, q.p_no, q.pet_no,(SELECT
+		COUNT(p_no) FROM qna WHERE qna.p_no = q.q_no) AS recnt, CASE WHEN
+		LENGTH(q.content) > 100 THEN SUBSTR
+		(q.content,0,100)||'...' ELSE q.content END AS content
+		FROM qna q LEFT OUTER JOIN qnatag t
 		ON q.q_no = t.q_no
-		WHERE p_no = 0 AND t.t_name = #{t_name}
+		WHERE p_no = 0
+		AND TRIM(t.t_name) = #{t_name}
 		ORDER BY w_date DESC
 	</select>
 
 	<!-- 질문글 개별 조회 -->
-	<select id="qnaDetail" resultMap="qnaResult">
-		SELECT *
-		FROM qna q LEFT OUTER
-		JOIN qnatag t
+	<select id="qnaDetail" resultMap="qnaPetTag">
+		SELECT t.t_name, q.*, p.*
+		FROM
+		qnatag t
+		RIGHT JOIN qna q
 		ON q.q_no = t.q_no
-		WHERE q.q_no =
-		#{q_no}
+		LEFT JOIN pet p
+		ON q.pet_no =
+		p.pet_no
+		WHERE q.q_no = #{q_no}
 	</select>
 
 	<!-- 조회수 증가 -->
@@ -113,24 +140,36 @@
 		ON q.writer =
 		p.p_id
 		WHERE q.p_no = #{p_no}
+		ORDER BY w_date asc
 	</select>
 
 	<!-- 질문글 작성 -->
 	<insert id="newQna"
 		parameterType="com.last.prj.qna.service.QnaVO">
 		INSERT INTO qna (q_no, title, content, hit, writer,
-		p_no, f_part, pet_no, r_check)
-		VALUES (q_seq.nextval, #{title},
-		#{content}, 0, #{writer}, 0, 707, #{pet_no}, #{r_check})
+		p_no, pet_no)
+		VALUES (q_seq.nextval, #{title}, #{content}, 0, #{writer}, 0, #{pet_no})
 	</insert>
+
+	<!-- 질문글 수정 -->
+	<update id="qModify"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		UPDATE qna
+		<set>
+			<if test="title != null">title=#{title}</if>
+			<if test="content != null">content=#{content}</if>
+			<if test="pet_no != null">pet_no=#{pet_no}</if>
+		</set>
+		WHERE q_no=#{q_no}
+	</update>
 
 	<!-- 답변글 작성 -->
 	<insert id="newAns"
 		parameterType="com.last.prj.qna.service.QnaVO">
 		INSERT INTO qna (q_no, title, content, hit, writer,
-		p_no, f_part, r_check)
+		p_no)
 		VALUES (q_seq.nextval, #{title}, #{content}, 0,
-		#{writer}, #{p_no}, 707, 0)
+		#{writer}, #{p_no})
 	</insert>
 
 	<!-- 답변글 갯수 -->
@@ -138,20 +177,31 @@
 		SELECT
 		COUNT(*)
 		FROM qna
-		WHERE p_no = {q_no}
+		WHERE p_no = #{q_no}
 	</select>
 
-	<!-- 질문글 수정 -->
+	<!-- 질문글 삭제 (1) : 답변이 있는 경우 제목과 본문 update & 태그와 펫 정보 delete -->
+	<update id="qDeleteOne"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		UPDATE qna
+		SET title='[작성자에 의해 삭제된 게시물입니다.]',
+		content='작성자에 의해 삭제된 게시물입니다.', pet_no=null
+		WHERE q_no = #{q_no}
+	</update>
 
-
-
-	<!-- 질문글 삭제 -->
-
+	<!-- 질문글 삭제 (2) : 답변이 없는 게시물은 완전히 delete -->
+	<delete id="qDeleteTwo" parameterType="com.last.prj.qna.service.QnaVO">
+		DELETE FROM qna WHERE q_no= #{q_no}
+	</delete>
 
 	<!-- 답변글 수정 -->
-
-
-
+	<update id="ansUpdate"
+		parameterType="com.last.prj.qna.service.QnaVO">
+		UPDATE qna
+		SET title=#{title}, content=#{content}
+		WHERE
+		q_no=#{q_no}
+	</update>
 
 	<!-- 답변글 삭제 -->
 	<delete id="ansDelete" parameterType="int">
@@ -159,15 +209,27 @@
 		= #{q_no}
 	</delete>
 
-
-
 	<!-- 관리자 신고당한 질문글 처리 -->
 	<select id="admQnaList" parameterType="int"
 		resultType="com.last.prj.qna.service.QnaVO">
 		select q.q_no, q.w_date, q.title, q.content, q.writer
-		from qna q, report r
+		from
+		qna q, report r
 		where q.q_no = r.q_no
 		order by q.q_no
 	</select>
 
+	<!-- 최근 qna -->
+	<select id="qnaRecent"
+		resultType="com.last.prj.qna.service.QnaVO">
+		SELECT *
+		FROM
+		(SELECT *
+		FROM qna
+		WHERE p_no = 0
+		AND NOT title IN ('[작성자에 의해 삭제된 게시물입니다.]')
+		ORDER BY q_no DESC
+		)
+		<![CDATA[WHERE ROWNUM <= 6]]>
+	</select>
 </mapper>

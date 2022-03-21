@@ -1,12 +1,19 @@
 package com.last.prj.mem.serviceImpl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.last.prj.mem.service.LoginVO;
 import com.last.prj.mem.service.MemMapper;
 import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
+import com.last.prj.mem.service.PetcareVO;
+import com.last.prj.mem.service.PriceVO;
+import com.last.prj.mem.service.TimeVO;
+import com.last.prj.pmember.service.PmemberVO;
 
 
 @Repository("memDao")
@@ -48,7 +55,120 @@ public class MemServiceImpl implements MemService {
 		return map.memberUpdate(member);
 	}
 
+	@Override
+	public int memberDelete(String m_id) {
+		return map.memberDelete(m_id);
+	}
+
+	@Override
+	public boolean idCheck(String m_id) {
+		return map.idCheck(m_id);
+	}
+
+	@Override
+	public boolean isIdCheck(String m_id) {
+
+		return map.isIdCheck(m_id);
+	}
+
+	@Override
+	public int memCount() {
+		return map.memCount();
+	}
+
+	@Override
+	public int servicepriceinsert(PriceVO price) {
+		return map.servicepriceinsert(price);
+	}
+
+	@Override
+	public int petcareinsert(PetcareVO petcare) {
+		// TODO Auto-generated method stub
+		return map.petcareinsert(petcare);
+	}
+
+	@Override
+	public int otimeinsert(TimeVO time) {
+		return map.otimeinsert(time);
+	}
+
+	@Override
+	public MemVO read(String username) {
+		return map.read(username);
+	}
+
+	@Override
+
+	public LoginVO searchPwd(String id) {
+		return map.searchPwd(id);
+	}
+
+	@Override
+	public int memberPwdUpdate(MemVO mem) {
+		return map.memberPwdUpdate(mem);
+	}
+
+
+	public int memdelete() {
+		return map.memdelete();
+	}
+
+	@Override
+	public List<MemVO> admMlistCode(MemVO vo) {
+		return map.admMlistCode(vo);
+	}
+
+	@Override
+	public int adMmemCount(MemVO vo) {
+		return map.adMmemCount(vo);
+	}
+
+	@Override
+
+	public List<MemVO> admMemChart() {
+		return map.admMemChart();
+	}
+
+	@Override
+	public List<MemVO> admMemReporCode(MemVO vo) {
+		return map.admMemReporCode(vo);
+	}
 	
+	@Override
+	public int admMemReportCount() {
+		return map.admMemReportCount();
+	}
+
+	@Override
+	public MemVO getmemberinfo(String m_id) {
+		return map.getmemberinfo(m_id);
+	}
+
+	@Override
+	public String passCheck(String m_id) {
+		return map.passCheck(m_id);
+
+	}
+
+	@Override
+	public int countCounsel(String m_id) {
+		return map.countCounsel(m_id);
+	}
+
+	@Override
+	public int countReview1(String m_id) {
+		return map.countReview1(m_id);
+	}
+
+	@Override
+	public int countReview2(String m_id) {
+		return map.countReview2(m_id);
+	}
+
+	@Override
+	public int countReservation(String m_id) {
+		return map.countReservation(m_id);
+	}
 
 
 }
