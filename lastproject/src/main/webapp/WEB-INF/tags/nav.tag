@@ -5,7 +5,7 @@
 <c:if test="${empty jsFunc}">
 	<c:set var="jsFunc" value="go_page"></c:set>
 </c:if>
-		<nav class="blog-pagination justify-content-center d-flex">
+		<nav class="blog-pagination justify-content-center d-flex" style="padding-bottom:10px;">
 			<ul class="pagination">
 				<c:if test="${page.prev }">
 				<li class="page-item">
