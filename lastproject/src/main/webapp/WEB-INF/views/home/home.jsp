@@ -41,12 +41,16 @@
 }
 
 #welcome_1{
-	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Binggrae';
 	font-weight: 300;
 }
 
+h1{
+	font-family: 'Binggrae';
+}
+
 h2{
-	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Binggrae';
 	font-weight: 700;
 }
 #profile{
