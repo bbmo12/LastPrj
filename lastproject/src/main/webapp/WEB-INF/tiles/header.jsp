@@ -214,7 +214,7 @@
 							<!-- 권한이 PARTNER인 사람만 -->
 							<sec:authorize access="hasRole('PARTNER')">
 							<%-- <c:if test="${mId eq null and pId ne null}"> --%>
-								<li class="menu-has-children"><a href="#">마이페이지</a>
+								<li class="menu-has-children"><a href="pmemberMyPage">마이페이지</a>
 									<ul>
 										<li><a href="pmemberMyPage">내 프로필</a></li>
 										<li><a href="reservationSetting">예약일정 설정</a></li>
