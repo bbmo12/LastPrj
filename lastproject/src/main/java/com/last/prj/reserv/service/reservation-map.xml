@@ -48,7 +48,7 @@
 	 
 	</select>
 
-	<select id="reservPage1" resultType="int"
+	<select id="reservPage1" resultType="Integer"
 		parameterType="com.last.prj.reserv.service.ReservationVO">
 
 		SELECT COUNT(*) 
@@ -174,7 +174,7 @@
 		AND (#{pageNum})*#{amount}
 	</select>
 
-	<select id="reservPage" resultType="int"
+	<select id="reservPage" resultType="Integer"
 		parameterType="com.last.prj.reserv.service.ReservationVO">
 		SELECT COUNT(*) FROM RESERVATION R ,PET P
 		WHERE R.PET_NO = P.PET_NO

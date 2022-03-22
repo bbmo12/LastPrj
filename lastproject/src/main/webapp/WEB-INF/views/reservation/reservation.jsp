@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -100,10 +101,16 @@
     	border: 1px solid #0062ff;
     	background: #fff;	
 	}
+		.form-control1 {
+		padding: 5px;
+		display: inline-block;
+		border-radius: 20px;
+	}
 	
 </style>
 
 <body>
+
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
@@ -236,8 +243,11 @@
 				</div>
 				<!-- modal 몸통 -->
 				<div class="modal-body 1">
-					<div id="content"></div>
+				<h3>별점</h3>
 					<div class="star"></div>
+					<h3>후기내용</h3>
+					<div id="content"></div>
+					<h3>이미지</h3>
 					<div id="image"></div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
@@ -256,7 +266,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+					<h3 class="modal-title" id="exampleModalLabel">후기를 남겨주세요!</h3>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -266,30 +276,20 @@
 					<!-- modal 몸통 -->
 					<div class="modal-body">
 
-						<div align="center">
-							<h3 align="center">후기를 남겨주세요!</h3>
-							<div class="star-rating">
-								<!-- <input type="radio" id="5-stars" name="rating" value="5" /> 
-								<label for="5-stars" class="star">&#9733;</label> 
-								<input type="radio" id="4-stars" name="rating" value="4" /> 
-								<label for="4-stars" class="star">&#9733;</label> 
-								<input type="radio" id="3-stars" name="rating" value="3" /> 
-								<label for="3-stars" class="star">&#9733;</label>
-								<input type="radio" id="2-stars" name="rating" value="2" /> 
-								<label for="2-stars" class="star">&#9733;</label> 
-								<input type="radio" id="1-stars" name="rating" value="1" /> 
-								<label for="1-stars" class="star">&#9733;</label> -->
-							</div>
+						<div>
+						<h3>별점</h3>
+							<div class="star-rating"></div>
 							<input id="star2" name="rating" type="hidden">
 						</div>
+						<h3>후기내용</h3>
 						<div class="form-group">
-							<label for="exampleInputPassword4">후기내용</label>
-							<textarea class="form-control" id="content" name="content"
-								placeholder="후기내용" rows="4" cols="80"></textarea>
+							
+							<textarea  class="form-control1" id="content" name="content"
+								placeholder="후기내용" rows="4" cols="50"></textarea>
 						</div>
 
 						<div class="form-group" style="margin-top: -10px;">
-							<label>후기사진</label><br> 
+							<h3>후기 사진</h3>
 							<input class="file-upload-browse btn btn-primary" type="file"
 								id="multiFileList1" name="multiFileList1" multiple="multiple">
 							<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
@@ -299,8 +299,7 @@
 					<!-- modal 하단 버튼 -->
 					<div class="modal-footer">
 						<input type="hidden" id="insert_r_no" name="r_no" value="">
-						<button type="submit">작성</button>
-						<!-- onclick="serviceReview()" -->
+						<button type="submit" class="btn btn-primary">작성</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					</div>
 				</form>
@@ -339,7 +338,7 @@
 				if(result[i].r_check == 0){
 					choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-primary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰 작성</button></td></tr>";
 				}else{
-					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");'style='border : 0px;' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰 보기</button></td></tr>";
+					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");'style='border : 0px;' type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal1'>리뷰 보기</button></td></tr>";
 				}
 			}else{
 				choicedTag += '<td><button class="btn btn-primary" disabled>리뷰 작성</button></td></tr>';
@@ -379,6 +378,13 @@
 		} //for문
 	} //=========================end viewPmemberList : 받아온 데이터로 List만드는 함수===============
 	
+	function onerror(obj) {
+		obj.onerror ="";
+		obj.src = "1.png";
+		return true;
+		
+	}
+
 
 		<!-- 리뷰 작성 모달창 -->
 	$(document).ready(function () {
@@ -391,10 +397,6 @@
 		});
 	});
 
-	
-
-
-	
 	function addFile1() {
 		var filediv = $('<div>').attr({
 			'id' : 'filediv'
@@ -441,10 +443,11 @@
 					
 					for(var i = 0; i < result.fileList.length; i++){
 						
-						var imgsrc = 'resources/upload/'+result.fileList[i].picture;
+						var imgsrc =  'resources/upload/'+result.fileList[i].picture; 
 						var img = $('<img>').attr({
 									'src': imgsrc,
-									'alt': "등록된 사진이 없습니다."
+									'onerror': onerror(this)
+									
 									});
 						var div = $('<div>');
 						div.append(img);

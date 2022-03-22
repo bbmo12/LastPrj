@@ -468,21 +468,6 @@
 	</script>
 
 
-	<!-- 별점조회 -->
-	<!--    <script type="text/javascript">
-  //별점
-		$(function () {
-			$('.star').each(function (index, item) {
-				$(this).raty({
-					score: $(this).find('.rating').val(),
-					path: "resources/star",
-					width: 200,
-					readOnly: true
-				});
-			})
-		});
-		</script>
-	-->
 	<script type="text/javascript">
 		function go_page(p) {
 			goform.pageNum.value = p;
