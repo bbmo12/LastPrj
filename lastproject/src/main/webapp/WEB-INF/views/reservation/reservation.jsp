@@ -57,7 +57,7 @@
 	font-weight: normal;
 }
 
-.star-rating {
+/* .star-rating {
 	display: flex;
 	flex-direction: row-reverse;
 	font-size: 1.5em;
@@ -65,7 +65,7 @@
 	padding: 0 .2em;
 	text-align: center;
 	width: 5em;
-}
+} */
 
 .star-rating input {
 	display: none;
