@@ -143,30 +143,7 @@
 </style>
 
 <body>
-<script>
-adminCount();
-function adminCount() {
-	$.ajax({
-		url : 'adminCount',
-		method : 'get',
-		success : function(res) {
-			console.log(res.petCount);
-			console.log(res.pmemCount);
-			console.log(res.memCount);
-			$("#admMemberC").append(res.memCount);
-			$("#admPmemberC").append(res.pmemCount);
-			$("#admPetC").append(res.petCount);
-			
-		},error : function(error) {
-			alert('Count를 불러오는 데 오류가 있습니다')
-			return false;
-			
-		}
-		
-	});
-	
-}
-</script>
+
 	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
 			<div class="col-lg-6 offset-lg-3">
@@ -181,7 +158,7 @@ function adminCount() {
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2>MyPage</h2>
+					<h2><a href="adminPage">MyPage</a></h2><h5>차트 페이지</h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -206,11 +183,7 @@ function adminCount() {
 								</a></li>
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between">
-										<p>일반회원 목록</p>
-								</a></li>
-								<li><a href="adminPmemberPage"
-									class="d-flex justify-content-between">
-										<p>파트너회원 목록</p>
+										<p>목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
 									class="d-flex justify-content-between">
@@ -281,15 +254,9 @@ function adminCount() {
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header que admPartChartA">
-									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;일반회원 기간 별 가입자 수
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;일반회원 기간 별 가입자 수
 								</div>
 								<div class="card-body card_notice anw" style="padding: 15px">
-									<p class="card-description mainCount" id="petCount">
-										<code id="a"></code>
-										<br>
-									<div id="b"></div>
-									</p>
-									
 									<div class="admPartChart">
 									<h4 class="card-title">일반 회원 기간 별 가입자 수</h4>
 									<canvas id="admPartChart" style="height: 250px"></canvas>
@@ -304,7 +271,7 @@ function adminCount() {
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header que admPetChartA">
-									<i class="fa-solid fa-paw"></i> 반려동물 품종 별 차트
+									<i class="fa-solid fa-paw"></i>&nbsp;<i class="fa fa-bar-chart" aria-hidden="true"></i>&nbsp;&nbsp; 반려동물 품종 별 차트
 								</div>
 								<div class="card-body anw" style="padding: 15px">
 									<p class="card-description mainCount" id="petCount">
@@ -312,10 +279,7 @@ function adminCount() {
 									<p class="card-description mainCount" id="petCount">
 										<code id="a"></code>
 										<br>
-										<code id="1"></code>
-										<code id="2"></code>
-										<code id="3"></code>
-										<code id="4"></code>
+										<code id="ip"></code>
 									</p>
 									<div class="admPetChart">
 										<canvas id="admPetChart" style="height: 250px"></canvas>
@@ -377,6 +341,7 @@ function adminCount() {
 				oo = [];
 	
 				var total;
+				ip = [];
 				$.ajax({
 					url : 'amdPetChart',
 					method : 'get',
@@ -384,9 +349,12 @@ function adminCount() {
 						$.each(res, function(i) {
 							tt.push(res[i].tt);
 							oo.push(res[i].oo);
-							$("#i").html(res[i].oo + "의 마리수 :" + res[i].tt);
-	
+							console.log(res[i].oo);
+							ip += ` \${res[i].oo} 마릿 수 : \${res[i].tt}`;
+							
 						});
+						console.log(ip);
+						$("#ip").html(ip);
 						console.log(res[0].ch);
 						$("#a").html("총 마리수 : " + res[0].ch);
 	
@@ -422,8 +390,6 @@ function adminCount() {
 			} 
 		 petChart();
 	}); 
-		
-
 		 $(".admPartChartA").on("click",function(e){
 			 
      		$(".admPartChart").append("<canvas id='admPartChart'></canvas>");
@@ -432,26 +398,49 @@ function adminCount() {
 
 				tt = [];
 				oo = [];
+				aa = [];
+				bb = [];
 				$.ajax({
 					url : 'admMemChart',
 					method : 'get',
 					success : function(res) {
-						console.log(res[0].tt);
-						$.each(res, function(i) {
-							tt.push(res[i].tt);
-							oo.push(res[i].oo);
-						})
-						console.log(tt);
+						console.log(res);
+						console.log(res.memChart[0].tt);
+						console.log(res.memChart[0].oo); 
+						console.log(res.pmemChart[0].aa);
+						console.log(res.pmemChart[0].bb);
+						var pmem = res.pmemChart;
+						var mem = res.memChart;
+						 $.each(pmem,function(i){
+							aa.push(res.pmemChart[i].aa);
+							bb.push(res.pmemChart[i].bb);
+						});
+						 $.each(mem,function(i){
+								tt.push(mem[i].tt);
+								oo.push(mem[i].oo);
+						}); 
+						 
+						 console.log(tt);
+						 console.log(oo);
 
-						const ctx = document.getElementById('admPartChart')
+						 const ctx = document.getElementById('admPartChart')
 								.getContext('2d');
 						const admPartChart = new Chart(ctx, {
 							type : 'line',
 							data : {
-								labels : tt,
+								labels : tt,aa,
 								datasets : [ {
 									label : '일반 회원',
 									data : oo,
+									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+											'rgba(255, 159, 64, 0.2)', ],
+									borderColor : [ 'rgba(255, 99, 132, 1)',
+											'rgba(255, 159, 64, 1)' ],
+									borderWidth : 1
+								} ,
+								 {
+									label : '파트너 회원',
+									data : bb,
 									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 											'rgba(255, 159, 64, 0.2)', ],
 									borderColor : [ 'rgba(255, 99, 132, 1)',
@@ -466,7 +455,7 @@ function adminCount() {
 									}
 								}
 							}
-						});
+						}); 
 					} //success
 
 				}) // ajax

@@ -45,6 +45,22 @@ public class AdminController {
 	@Autowired
 	private BoardService boardDao;
 	
+	//reportPage count
+	@RequestMapping("/adminReportCount")
+	@ResponseBody
+	public HashMap<String,Object> adminReportCount(){
+		
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		//총 신고 건수
+		map.put("adminReportTotalCount",reportDao.adminReportTotalCount());
+		//신고 제재 대상 회원 건수
+		/*
+		 * map.put("",); //신고 제재 중인 회원 map.put("",);
+		 */
+		
+		return map;
+	}
+	
 	
 	//adminPage
 	@RequestMapping("/adminPage")
@@ -55,6 +71,13 @@ public class AdminController {
 		
 		
 		return "adm/adminPage";
+	}
+	
+	//petList
+	@RequestMapping("/adminPetListCode")
+	@ResponseBody
+	public String adminPetListCode(){	
+		return "petDAO.adminPetListCode()";
 	}
 	
 	
@@ -71,12 +94,6 @@ public class AdminController {
 	@RequestMapping("/adminMemberPage")
 	public String adminMemberPage() {
 		return "adm/adminMemberPage";
-	}
-	
-	
-	@RequestMapping("/adminPmemberPage")
-	public String adminPmemberPage() {
-		return "adm/adminPmemberPage";
 	}
 	
 	
@@ -168,10 +185,14 @@ public class AdminController {
 	}
 	
 	  @RequestMapping("/admMemChart")
-	  @ResponseBody public List<MemVO>admMemChart(){
-	  return memDao.admMemChart(); 
+	  @ResponseBody 
+	  public HashMap<String,Object> admMemChart(){
+		  HashMap<String, Object> map = new HashMap();
+		  map.put("memChart", memDao.admMemChart());
+		  map.put("pmemChart", pMemberDao.admPmemChart());
+	  return map; 
 	  }
-	  //select count(*),f.content from pet p, f_code f where p.code = f.code group by f.content;
+	  
 	  @RequestMapping("/amdPetChart")
 	  @ResponseBody
 	  public List<PetVO> amdPetChart(){  

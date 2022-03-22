@@ -10,7 +10,7 @@
 	<select id="pmemCounselList" resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-				FROM (SELECT P.NAME AS p_name, C.M_ID, C.P_ID, C.CONTENT, C.W_DATE, C.CODE, C.C_NO, P.PET_NO
+				FROM (SELECT P.NAME AS p_name, C.M_ID, C.P_ID, C.CONTENT,TO_CHAR(C.W_DATE, 'YYYY-MM-DD') AS w_date, C.CODE, C.C_NO, P.PET_NO
 						FROM PET P, MEMBER M, COUNSEL C
 					 WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND C.P_ID= #{p_id} AND C.P_NO = 0 ORDER BY C_NO) A)
 				WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1 AND
@@ -22,8 +22,7 @@
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
 		FROM (SELECT P.NAME AS
-		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name, C.R_CHECK,
-		TO_CHAR(C.W_DATE, 'YYYY-MM-DD') AS w_date, P.pet_no,
+		p_name, SUBSTR(C.CONTENT,0,20) AS content, PM.NAME AS pm_name, C.R_CHECK, TO_CHAR(C.W_DATE, 'YYYY-MM-DD') AS w_date, P.pet_no,
 		C.CODE, CO.CONTENT AS
 		co_content, c.p_id, c.m_id,
 		c.c_no
@@ -53,7 +52,7 @@
 	<select id="counselList" resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT *
 			FROM ( SELECT ROWNUM RN, A.*
-				FROM (SELECT P.NAME AS p_name, P.M_ID, c.p_id, C.CONTENT, C.W_DATE, C.CODE, C.C_NO
+				FROM (SELECT P.NAME AS p_name, P.M_ID, c.p_id, C.CONTENT, TO_CHAR(C.W_DATE, 'YYYY-MM-DD') AS C.W_DATE, C.CODE, C.C_NO
 						FROM PET P, MEMBER M, COUNSEL C 
 					 WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND P_ID = #{p_id} AND P_NO = 0 ORDER BY C_NO ) A)
 				WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
