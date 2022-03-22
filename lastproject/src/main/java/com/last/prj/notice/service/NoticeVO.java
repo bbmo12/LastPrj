@@ -19,4 +19,5 @@ public class NoticeVO {
 	private Date w_date;
 	private int r_check;
 	private String name;
+	private String notice_code;
 }

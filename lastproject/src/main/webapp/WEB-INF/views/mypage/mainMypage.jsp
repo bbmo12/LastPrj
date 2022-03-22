@@ -335,7 +335,7 @@
 									</c:if>
 									<c:forEach items="${pets }" var="pet">
 										<div id="pet_img2">
-											<img class="pet_img" src="resources/upload/${pet.picture }"
+											<img class="pet_img" src="/upload/${pet.picture }"
 												onerror="this.src='resources/upload/cat.jpg'" alt="">
 											<br> <a class="no_deco"
 												href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
