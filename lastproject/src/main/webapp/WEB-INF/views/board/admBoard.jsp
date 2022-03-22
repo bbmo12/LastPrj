@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
+
 * {
 	box-sizing: border-box;
 }
@@ -92,7 +93,7 @@
 				<form id="frm" action="" method="post" onsubmit="return false"
 					onkeypress="eventkey();">
 					<select id="search" name="search">
-						<option value="all" selected="selected">전 체</option>
+						<option value="all" selected>전 체</option>
 						<option value="title">제 목</option>
 						<option value="content">내 용</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
