@@ -134,10 +134,13 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<ReportVO> adminReporList() {
-		return map.adminReporList();
+	public List<ReportVO> adminReporList(ReportVO vo) {
+		return map.adminReporList(vo);
 	}
 
-
+	@Override
+	public int adminReporListCount(ReportVO vo) {
+		return map.adminReporListCount(vo);
+	}
 
 }
