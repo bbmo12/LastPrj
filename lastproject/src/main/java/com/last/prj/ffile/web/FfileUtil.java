@@ -39,12 +39,12 @@ public class FfileUtil {
 		//String webPath = "/resources/upload";
 		// String realPath = sc.getRealPath(webPath); 이거 안씀
 
-		//String realPath = request.getSession().getServletContext().getRealPath("resources/upload");
+		String realPath = request.getSession().getServletContext().getRealPath("resources/upload");
 		// String root = path + "\\" + "upload"; 이거 안씀
 
-		System.out.printf("realPath: %s\n", uploadPath);
+		System.out.printf("realPath: %s\n", realPath);
 
-		File fileCheck = new File(uploadPath);
+		File fileCheck = new File(realPath);
 
 		if (!fileCheck.exists())
 			fileCheck.mkdirs();

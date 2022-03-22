@@ -81,12 +81,14 @@
 								<c:choose>
 									<c:when test="${like == 0 }">
 										<img alt="" src="resources/upload/nocol.png" id="recommend"
-											onclick="likeHit(`${pmemdetail.p_id}`)"
+											onclick="likeHit1(`${pmemdetail.p_id}`)"
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:when>									
 									<c:otherwise>
 										<img alt="" src="resources/upload/rec.png" id="recommend"
-											onclick="likeHit(`${pmemdetail.p_id}`)" 
+
+											onclick="likeHit2(`${pmemdetail.p_id}`)"
+
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:otherwise>
 								</c:choose>
@@ -264,9 +266,8 @@
 	
 	<script>
 
-		//추천버튼 
-		function likeHit(p_id) {
-			var p_id = p_id;
+		//추천버튼
+		function likeHit1(p_id){
 			$.ajax({
 				type: "POST",
 				url: "pmemberLike",
@@ -274,12 +275,48 @@
 					"p_id": p_id
 				},
 				success: function (likeCheck) {
-					if (likeCheck == 0) {
-						Swal.fire('추천되었습니다:)');
-						 var imgTag = document.getElementById("recommend");
-						 imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후, 
-						  //src 속성값을 수정
-					} 
+			
+				Swal.fire('추천되었습니다:)');
+				var imgTag = document.getElementById("recommend");
+			 	imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 	imgTag.setAttribute("onclick", "likeHit2(`${pmemdetail.p_id}`)");
+			 	
+				},
+				error: function(error){
+					alert(error);
+				}
+			});
+		}
+		
+		function likeHit2(p_id){
+			
+			Swal.fire({
+				title: '추천을 취소시겠습니까?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
+				cancelButtonColor: '#3085d6',
+				confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+				cancelButtonText: '닫기',
+			}).then(result => { // 만약 Promise리턴을 받으면, 
+				if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
+					$.ajax({
+						type: "POST",
+						url: "pmemberLike",
+						data: {
+							"p_id": p_id
+						},
+						success: function (likeCheck) {
+							Swal.fire('추천이 취소되었습니다.');
+							var changeImg = document.getElementById("recommend");
+							changeImg.setAttribute("src", "resources/upload/nocol" + ".png");
+							changeImg.setAttribute("onclick", "likeHit1(`${pmemdetail.p_id}`)");
+						},
+						error: function(error){
+							alert(error);
+						}
+					});
+					
 				}
 			});
 		}
