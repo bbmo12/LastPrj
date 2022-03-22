@@ -24,7 +24,8 @@
 	<selectKey keyProperty="reserv_count" resultType="int" order="BEFORE">
 		 SELECT NVL(MAX(RESERV_COUNT) +1 , 1) AS RESERV_COUNT FROM RESERVCOUNT
 	</selectKey>
-	INSERT INTO RESERVCOUNT
+	
+	INSERT INTO RESERVCOUNT (reserv_count,reserv_date,reserv_time,p_id,start_date,end_date)
 	VALUES (#{reserv_count},#{reserv_date},#{reserv_time},#{p_id},#{start_date},#{end_date})
 </insert>
 
