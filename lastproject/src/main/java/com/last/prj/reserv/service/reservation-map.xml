@@ -139,11 +139,12 @@
 	<resultMap type="com.last.prj.pmember.service.FfileVO"
 		id="ffileVO">
 		<result column="picture" property="picture" />
+		<result column="pfile" property="pfile" />
 	</resultMap>
 
 	<select id="rnoreview" parameterType="int"
 		resultMap="ReviewRead">
-		SELECT r.CONTENT, r.RATING, f.picture
+		SELECT r.CONTENT, r.RATING, f.picture, f.pfile
 		FROM REVIEW r left join
 		f_file f
 		on r.f_part = f.f_part

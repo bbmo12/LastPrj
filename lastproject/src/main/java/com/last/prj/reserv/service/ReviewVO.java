@@ -16,6 +16,7 @@ public class ReviewVO {
 	private int fPart;			//첨부파일
 	
 	private String picture; //사진
+	private String pfile;
 	private List<FfileVO> fileList; //리뷰뽑기
 
 }

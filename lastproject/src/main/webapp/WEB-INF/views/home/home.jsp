@@ -208,7 +208,8 @@ h1{
                     <div class="department-slider owl-carousel">
                     <c:forEach items="${bestList}" var="best">
                         <div class="single-slide">
-                            <div class="single-department item-padding text-center">
+                            <div class="single-department item-padding text-center" style="box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+	border: 1px solid #e3e6f0;">
                             <div id="best_p_profile">
                             	<img class="partner_img" src="resources/upload/${best.picture }" onError="this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
@@ -284,7 +285,7 @@ h1{
     </section> -->
     
     <!-- Specialist Area Starts -->
-    <section class="specialist-area section-padding" style="padding: 50px 0;">
+    <section class="specialist-area section-padding" style="padding: 50px 0; background-color:white;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
@@ -342,7 +343,7 @@ h1{
     <!-- Hotline Area End -->
     
    <!-- News Area Starts -->
-    <section class="specialist-area section-padding" style="padding: 20px 0;">
+    <section class="specialist-area section-padding" style="padding: 20px 0; background-color:white;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
