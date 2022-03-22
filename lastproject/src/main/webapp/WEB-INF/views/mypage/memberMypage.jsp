@@ -141,16 +141,14 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}"
-								onerror="this.src='resources/upload/cat.jpg'"
-								style="width: 210px" alt=""> <br>
+							<img class="partner_img" src="/upload/${member.pfile}"
+								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
 							<br>
-							<h4 id="Mainname">${member.name }</h4>
+							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
 								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="confirmPass">내 정보 확인</a>
+									href="mconfirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
 					</div>
@@ -158,44 +156,45 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list nanumbarungothic">
+							<ul class="list cat-list">
 								<p id="menu_bold">내 활동 내역</p>
-								<li><a href="reservationSetting"
-									class="d-flex justify-content-between">
-										<p>예약일정 설정</p>
+								<li><a href="protocol"
+									class="d-flex justify-content-between no_deco">
+										<p>반려동물 진료기록</p>
 								</a></li>
-								<li><a href="preservationSelect"
-									class="d-flex justify-content-between">
+								<li><a href="reservationSelect"
+									class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
 								</a></li>
-								<li><a href="pMemDiaList"
-									class="d-flex justify-content-between">
-										<p>진료 내역</p>
-								</a></li>
-								<li><a href="pMembenefit"
-									class="d-flex justify-content-between">
+								<li><a href="myPay"
+									class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
 								</a></li>
-								<li><a href="pmemcounsel"
-									class="d-flex justify-content-between">
+								<li><a href="mycounsel"
+									class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
 								</a></li>
-								<li><a href="pmemreport"
-									class="d-flex justify-content-between">
+								<li><a href="myreport"
+									class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
+								</a></li>
+								<li><a href="myfallow"
+									class="d-flex justify-content-between no_deco">
+										<p>팔로우</p>
 								</a></li>
 								<br>
 								<br>
 								<p id="menu_bold">회원 정보 관리</p>
-								<li><a href="confirmPass"
+								<li><a href="mconfirmPass"
 									class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
 								</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
+								<li><a href="logout"
+									class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="pmdeleteForm"
-									class="d-flex justify-content-between">
+								<li><a href="mdeleteForm"
+									class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>
