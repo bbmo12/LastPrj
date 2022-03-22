@@ -183,7 +183,7 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${member.pfile}"
+							<img class="partner_img" src="/upload/${member.pfile}"
 								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
 							<br>
 							<h4 id="Mainname">${member.name }님</h4>
