@@ -25,7 +25,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
 	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-<script src="not-resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
+<script src="resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
  <link href="resources/dist/css/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
  <script src="resources/dist/js/datepicker.js"></script>
 <!-- Air datepicker js -->
