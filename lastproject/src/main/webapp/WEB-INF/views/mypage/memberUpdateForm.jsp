@@ -426,8 +426,8 @@
 									</div>
 									<div align="right">
 								<button type="submit" onclick="location.href='memberUpdateForm'" id="update-button"
-									class="btn btn-primary"">수정 완료</button>
-								<button type="button" id="cancel" class="btn btn-secondary btn-lg" 
+									class="btn btn-primary">수정 완료</button>
+								<button type="button" id="cancel" class="btn btn-secondary" 
 								onclick="location.href='memberMypage'">취소</button>
 								</div>		</form>
 					</div>

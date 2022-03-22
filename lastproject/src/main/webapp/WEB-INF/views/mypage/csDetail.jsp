@@ -59,21 +59,12 @@
 		font-size: 20px;
 	}
 
-	.petSelection {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
+/* 
 	ul {
 		padding: 16px 0;
 		list-style: none;
-	}
+	} */
 
-	.petSelect {
-		displsy: flex;
-		flex-direction: row;
-	}
 
 	img {
 		width: 80px;
@@ -83,15 +74,6 @@
 		overflow: hidden;
 		border: 2px solid rgb(46, 46, 46);
 		margin-right: 5px;
-	}
-
-	.petInfo {
-		width: 670px;
-		height: 120px;
-		margin-left: 20px;
-		background: rgb(241, 241, 241);
-		padding: 20px;
-		margin-bottom: 30px;
 	}
 
 	#CounselMsg {

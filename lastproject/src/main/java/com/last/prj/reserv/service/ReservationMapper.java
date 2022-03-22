@@ -45,8 +45,8 @@ public interface ReservationMapper {
 	List<ReviewVO> readpicture(@Param("r_no") int r_no);
 	
 	//페이징
-		int reservPage(Criteria cri);
-		List<ReservationVO> reservationPageList(Criteria cri);
+	Integer reservPage(Criteria cri);
+	List<ReservationVO> reservationPageList(Criteria cri);
 	
 	
 }
