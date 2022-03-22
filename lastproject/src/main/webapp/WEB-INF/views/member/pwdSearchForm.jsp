@@ -10,20 +10,6 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
-<style>
-   .options {
-      transform: translateY(-35px);
-   }
-
-   .options {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-evenly;
-   }
-</style>
-
 <body class="my-login-page">
    <section class="h-100" id="main">
       <div class="container h-100">

@@ -10,13 +10,7 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
-<style>
-.nav-menu a {
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 1.5rem;
-	}
-</style>
+
 <body class="my-login-page">
 	<div class="container">
 		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1500px;">
