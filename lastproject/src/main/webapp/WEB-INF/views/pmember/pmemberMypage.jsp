@@ -263,7 +263,7 @@
 									<i class="fa-solid fa-street-view"></i>
 									<h3 style="font-weight: bolder;">자기 소개</h3>
 									<textarea style="border: none; overflow: hidden; font-size: 18px;" id="p_info" name="p_info" readonly
-										cols="100" rows="3">${pmember.p_info}</textarea>
+										cols="73" rows="5">${pmember.p_info}</textarea>
 								</div>
 								<div class="form-group">
 									<i class="fa-solid fa-images"></i>

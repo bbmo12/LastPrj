@@ -15,8 +15,18 @@
 
 	<select id="getTime" parameterType="String"
 		resultType="com.last.prj.pmember.service.TimeVO">
-		SELECT * FROM O_TIME WHERE P_ID = #{p_id} ORDER BY O_NO
+		SELECT * 
+			FROM O_TIME 
+		  WHERE P_ID = #{p_id} 
+		    ORDER BY(CASE WHEN w_day ='월' THEN 1
+               			  WHEN w_day='화' THEN 2
+                		  WHEN w_day='수' THEN 3
+                		  WHEN w_day='목' THEN 4
+                		  WHEN w_day='금' THEN 5
+                		  WHEN w_day='토' THEN 6
+                                          ELSE 7 END)
 	</select>
+
 	<!-- 상세페이지 첨부파일 따로가져오기 -->
 	<select id="getImage" parameterType="String"
 		resultType="com.last.prj.pmember.service.FfileVO">
