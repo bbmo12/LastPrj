@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.last.prj.mem.service.MemService;
 import com.last.prj.pet.service.PetService;
@@ -102,7 +103,7 @@ public class PetController {
 	}
 	
 	@RequestMapping("/mypatadd")
-	public String mypatadd(@RequestParam("file") MultipartFile file, PetVO pet, Model model, Principal principal ) {
+	public String mypatadd(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr,PetVO pet, Model model, Principal principal ) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -148,7 +149,8 @@ public class PetController {
 	  model.addAttribute("member",memDao.memberSearch(m_id));
 	  petDAO.mypetInsert(pet);
 	  model.addAttribute("pets", petDAO.petmemberList(m_id));
-	  return "mypage/memberMypage";
+	  redirectAttr.addFlashAttribute("petadd","정보를다시확인해주세요.");
+	  return "redirect:memberMypage";
 	}
 
 	
@@ -184,7 +186,7 @@ public class PetController {
 	
 	//반려동물 정보수정
 	@RequestMapping("mypetupdate")
-	public String mypetupdate(MultipartFile file, PetVO pet, Model model, @RequestParam("pet_no") int pet_no, Principal principal) {
+	public String mypetupdate(MultipartFile file, PetVO pet, Model model, @RequestParam("pet_no") int pet_no, RedirectAttributes redirectAttr, Principal principal) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -230,12 +232,14 @@ public class PetController {
 		model.addAttribute("pet",petDAO.mypetupdate(pet));
 		model.addAttribute("pets",petDAO.petmemberList(m_id));
 		model.addAttribute("member",memDao.memberSearch(m_id));
+		redirectAttr.addFlashAttribute("petupdate","정보를다시확인해주세요.");
 		
-		return "mypage/memberMypage";
+		
+		return "redirect:memberMypage";
 	}
 	
 	@RequestMapping("mypetDelete")
-	public String mypetDelete(Principal principal, @RequestParam("pet_no")int pet_no, Model model) {
+	public String mypetDelete(Principal principal, @RequestParam("pet_no")int pet_no, Model model,RedirectAttributes redirectAttr) {
 		String m_id = "0";
 		if(principal != null) {
 			
@@ -258,7 +262,8 @@ public class PetController {
 		
 		 petDAO.mypetDelete(pet_no);
 		 model.addAttribute("pets", petDAO.petmemberList(m_id));
-		 return "mypage/memberMypage";
+		 redirectAttr.addFlashAttribute("petdelete","정보를다시확인해주세요.");
+		 return "redirect:memberMypage";
 	}
 	
 	

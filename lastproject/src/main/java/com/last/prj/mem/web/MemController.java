@@ -135,7 +135,7 @@ public class MemController {
 
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(MultipartFile file, MemVO member, Model model) {
+	public String memberUpdate(MultipartFile file, RedirectAttributes redirectAttr, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
 		//String webPath = "/resources/upload";
@@ -170,6 +170,7 @@ public class MemController {
 		
 		
 		memDao.memberUpdate(member);
+		redirectAttr.addFlashAttribute("memberupdate","정보를다시확인해주세요.");
 		return "redirect:memberMypage";
 	}
 

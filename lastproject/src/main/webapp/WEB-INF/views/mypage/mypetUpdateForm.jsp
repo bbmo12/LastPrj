@@ -7,13 +7,190 @@
 <title>Insert title here</title>
 </head>
 <style>
-#my_section {
-	padding: 50px;
-}
+	#my_section {
+		padding: 50px;
+	}
+
+	#main-form h3,
+	input {
+		display: inline-block;
+	}
+
+	#addDiv,
+	#addService {
+		margin: -5px 0 0 35em;
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+    	width: 115px;
+	}
+	#addDiv:hover,
+	#addService:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#price-insert,
+	#time-insert{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	
+	#price-insert:hover,
+	#time-insert:hover{
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+
+	#select-one {
+		margin-top: -20px;
+	}
+
+	.form-control {
+		padding: 5px;
+		width: 250px;
+		display: inline-block;
+		border-radius: 20px;
+	}
+
+
+.form-control1 {
+		padding: 5px;
+		display: inline-block;
+		border-radius: 20px;
+	}
+
+	.service-info {
+		display: inline-grid;
+	}
+
+	.service-info input {
+		width: 100px;
+	}
+
+	#p-info {
+		margin-left: 5em;
+		margin-top: -20px;
+	}
+
+	.delete-button {
+		float: right;
+		margin: 27px 200px 0 0;
+		width: 62px;
+	}
+
+	#p_info {
+		border: 1px solid rgba(151, 151, 151, 0.3);
+		width: 700px;
+	}
+	#cancel{
+		width: 113px;
+    	height: 42px;
+    	padding: 0 30px;
+    	font-size: .8em;
+    	text-align: center;
+    	font-weight: 500;
+	}
+	#member_post{
+		width: 100px;
+    	margin-left: 53em;
+    	margin-top: -70px;  	
+    	color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#member_post:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	#successUpdate{
+		color: #fff; 
+    	background: #0062ff;
+    	border: 1px solid transparent;	
+	}
+	#successUpdate:hover {
+		color: #0062ff;
+		border: 1px solid #0062ff;
+		background: #fff;
+	}
+	
+	input:focus,
+	textarea:focus{ 
+		border: 3px solid;
+	}
+	
+	#content{
+		height: 45px;
+    	padding: 12px;
+   		width: 285px;
+	}
+	
+	.no_deco {
+		text-decoration: none !important;
+		font-size: 0.8rem !important;
+		color: black;
+	}
+
+	.blog_right_sidebar {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
+	}
+
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic' !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#myinfo {
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 300;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
+	.card {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+		border: 1px solid #e3e6f0;
+		border-radius: 0.35rem;
+		padding: 20px;
+	}
+	i{
+		color: black;
+	}
+	.form-control1 {
+		padding: 5px;
+		display: inline-block;
+		border-radius: 20px;
+	}
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
 <body>
 <script>
 		//생일 정규식
@@ -90,7 +267,7 @@
 				}
 			});
 		});
-	</script>
+</script>
 
 	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
@@ -174,24 +351,30 @@
 				</div>
 
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row">
+				<div id="main-form"  style="width: 800px;">
+				<div class="card">
+				<div class="card-header">
+								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;반려동물 정보변경
+							</div>
 						<form action="mypetupdate" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="form-group">
-								<label for="name">이름</label>
+							<i class="fas fa-user"></i>
+									<label for="name"></label>
+									<h3 style="font-weight: bolder;">이름</h3>
 								<input type="text" id="name" name="name" value="${pet.name }">
+								<div id="name_check"></div>
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>생년월일</strong>
-								</h5>
+							<i class="fas fa-id-card"></i>
+									<h3 style="font-weight: bolder;">생년월일</h3>
 								<input type="text" id="birth" name="birth" value="${pet.birth }">
+								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>성별</strong>
-								</h5>
+							<i class="fa fa-unlock-alt"></i>
+								<h3 style="font-weight: bolder;">성별</h3>
 								<!-- 1이면 여자, 2이면 남자  -->
 								<label>여자<input type="radio" id="gender" name="gender"
 									value="1"><span class="checkmark"></span></label>&emsp; <label>남자<input
@@ -199,15 +382,11 @@
 									class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>몸무게</strong>
-								</h5>
+								<h3 style="font-weight: bolder;">몸무게</h3>
 								<input type="text" id="weight" name="weight" value="${pet.weight }">
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>품종</strong>
-								</h5>
+								<h3 style="font-weight: bolder;">품종</h3>
 								<label>개<input type="radio" id="code" name="code"
 									value="501"><span class="checkmark"></span></label>&emsp; <label>고양이<input
 									type="radio" id="code" name="code" value="502"><span
@@ -232,19 +411,18 @@
 									class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>반려동물사진</strong>
-								</h5>
-								<input type="file" id="file" name="file">
+								<h3 style="font-weight: bolder;">반려동물 사진</h3><br>
+								<input class="file-upload-browse btn btn-primary" type="file" id="file" name="file">
 							</div>
 							<div class="form-group">
-								<h5>
-									<strong>반려동물 설명</strong>
-								</h5>
-								<textarea class="form-control" id="n_content" name="n_content" rows="4" cols="130"></textarea>
+								<h3 style="font-weight: bolder;">반려동물 설명</h3><br>
+								<textarea class="form-control1" id="n_content" name="n_content" rows="4" cols="50"></textarea>
 							</div>
-							 
+							 <div align="right">
 							<button type="submit"  class="btn btn-primary">반려동물 정보수정</button>
+							<button type="button" id="cancel" class="btn btn-secondary" 
+								onclick="location.href='memberMypage'">취소</button>
+							</div>
 						</div>
 						</form>
 					</div>

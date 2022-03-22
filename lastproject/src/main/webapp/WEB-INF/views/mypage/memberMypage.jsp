@@ -10,6 +10,9 @@
 <title>Insert title here</title>
 </head>
 <style>
+.swal2-content{
+		display: none;
+	}
 #w_address::placeholder {
 	color: #fff;
 }
@@ -280,5 +283,25 @@
 	</section>
 
 </body>
-
+	<script>
+	if("${memberupdate}" != "" ){
+		Swal.fire('개인정보가<br>변경되었습니다.');
+	}
+	</script>
+	<script>
+	if("${petadd}" != "" ){
+		Swal.fire('반려동물이<br>등록되었습니다.');
+	}
+	</script>
+	<script>
+	if("${petupdate}" != "" ){
+		Swal.fire('반려동물정보가<br>수정되었습니다.');
+	}
+	</script>
+	<script>
+	if("${petdelete}" != "" ){
+		Swal.fire('반려동물이<br>삭제되었습니다.');
+	}
+	</script>
+	
 </html>
