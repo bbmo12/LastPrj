@@ -51,9 +51,6 @@
     	background: #fff;	
 	}
 
-	#my_section {
-		padding: 50px;
-	}
 
 	.card-text {
 		width: 200px;
@@ -100,11 +97,6 @@
 		color: black;
 	}
 	
-	#my_section {
-		padding: 50px;
-		background: #f9f9fd;
-	}
-	
 	.blog_right_sidebar{
 		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
 		border: 1px solid #e3e6f0;
@@ -122,7 +114,6 @@
 	.card-header{
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 400;
 		color: black;
@@ -130,7 +121,6 @@
 	
 	.card-body{
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 300;
 		color: black;
@@ -140,7 +130,6 @@
 	.card-footer{
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 400;
 	}
@@ -151,14 +140,12 @@
 	
 	#cardTitle{
 		font-size: 1.25rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 	 	font-weight: 700;
 	}
 	
 	#myinfo{
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 	 	font-weight: 300;
 	}
@@ -168,7 +155,6 @@
 		text-align: center;
 		margin-right: 20px;
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 	 	font-weight: 400;
 	}
@@ -185,7 +171,6 @@
 	
 	#Mainname{
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic'!important;
 		font-style: normal !important;
 	 	font-weight: 700 !important;
 	 	color:gray;
@@ -193,7 +178,6 @@
 	
 	#menu_bold{
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
  	font-weight: 700;
  	color: black;
