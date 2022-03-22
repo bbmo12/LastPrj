@@ -201,7 +201,7 @@
 		// 이름 정규식
 		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
 		// 몸무게
-		var weightJ = /^[0-9]{1,3}$/;
+		var weightJ = /^[0-9]{1,4}$/;
 		
 		
 		$(document).ready(function () {
@@ -259,8 +259,8 @@
 				
 
 			$("#weight").blur(function () {
-				if (nameJ.test($(this).val())) {
-					console.log(nameJ.test($(this).val()));
+				if (weightJ.test($(this).val())) {
+					console.log(weightJ.test($(this).val()));
 					$("#weight_check").text('');
 				} else {
 					$('#weight_check').text('3자리 이하 숫자만 입력하세요.');

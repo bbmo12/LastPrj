@@ -135,7 +135,7 @@ public class MemController {
 
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(MultipartFile file, MemVO member, Model model) {
+	public String memberUpdate(MultipartFile file, RedirectAttributes redirectAttr, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
 		//String webPath = "/resources/upload";
@@ -170,6 +170,7 @@ public class MemController {
 		
 		
 		memDao.memberUpdate(member);
+		redirectAttr.addFlashAttribute("memberupdate","정보를다시확인해주세요.");
 		return "redirect:memberMypage";
 	}
 
@@ -495,7 +496,7 @@ public class MemController {
 
 	@RequestMapping("/pjoin_3") // 파트너회원 회원가입 3차
 	public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1,
-			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PetcareVO petcare) {
+			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PetcareVO petcare, RedirectAttributes redirectAttr) {
 		System.out.println("여기 파트너회원가입 3차");
 		System.out.println("p_id3:" + p_id);
 		System.out.println(petcare);
@@ -508,13 +509,13 @@ public class MemController {
 		System.out.println("p_image = " + p_image);
 		pmemDao.pmemberInsert3(p_id, p_license, p_image); // 파일다중업로드
 		memDao.petcareinsert(petcare);
-
+		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		/*
 		 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
 		 * i++) { memDao.otimeinsert(time); }
 		 */
 
-		return "member/joinResult";
+		return "redirect:home";
 	}
 
 	@RequestMapping("addService")

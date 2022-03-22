@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.last.prj.pmember.service.TimeVO;
 import com.last.prj.report.service.ReportVO;
 
@@ -16,7 +17,8 @@ import lombok.Setter;
 public class QnaVO {
 	// qna vo
 	private int q_no;
-	@DateTimeFormat(pattern = "YY-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date w_date;
 	private String title;
 	private String content;

@@ -18,8 +18,8 @@ public class ReportVO {
 	
 	private int rep_no; 			//신고 번호
 	private String reporter; 		// 신고한 
-	@DateTimeFormat(pattern = "YY-MM-dd")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date w_date; 			//신고한 날짜
 	private String content;			 // 왜 신고 했는 지 
 	private int rev_no; 			//신고당한 review의 번호

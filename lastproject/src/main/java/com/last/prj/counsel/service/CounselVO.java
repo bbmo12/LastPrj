@@ -1,5 +1,11 @@
 package com.last.prj.counsel.service;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -8,7 +14,9 @@ public class CounselVO {
 	
 	private int c_no;		//상담순번
 	private String content;	//상담내용
-	private String w_date;		//작성일자
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	private Date w_date;		//작성일자
 	private String p_id;		//파트너회원아이디
 	private String m_id;
 	private int p_no;

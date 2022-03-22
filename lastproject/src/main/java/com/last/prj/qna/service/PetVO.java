@@ -12,7 +12,6 @@ public class PetVO {
 	private String gender;
 	private String m_id;
 	private String code;
-	private String f_part;
 	private String weight;
 	private String n_content;
 	private String picture;

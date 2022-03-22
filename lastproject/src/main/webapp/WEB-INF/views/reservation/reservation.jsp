@@ -57,7 +57,7 @@
 	font-weight: normal;
 }
 
-.star-rating {
+/* .star-rating {
 	display: flex;
 	flex-direction: row-reverse;
 	font-size: 1.5em;
@@ -65,9 +65,9 @@
 	padding: 0 .2em;
 	text-align: center;
 	width: 5em;
-}
+} */
 
-.star-rating input {
+/* .star-rating input {
 	display: none;
 }
 
@@ -82,7 +82,7 @@
 
 .star-rating label:hover, .star-rating label:hover ~label {
 	color: #fc0;
-}
+} */
 
 .badge-info {
 	background-color: cornflowerblue;
@@ -389,7 +389,6 @@
 			}
 			
 		}) // end each.
-	console.log("여기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ",$(".in_code").parent());
 		var val = $(".in_code").parent();
 		for (var i = 0; i < val.length; i++) {
 			//예약결과코드 분류
@@ -410,6 +409,10 @@
 				val[i].classList.add("diaCom");
 				$(".diaCom").empty()
 				var check = $(".diaCom").append(`<span class="badge badge-pay">진료완료</span>`);
+			}else if(val[i].innerText == '승인대기'){
+				val[i].classList.add("comReady");
+				$(".comReady").empty()
+				var check = $(".comReady").append(`<span class="badge badge-success">승인대기</span>`);
 			} //else if문
 			
 		} //for문
