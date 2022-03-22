@@ -13,28 +13,11 @@
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
 <style>
-.nav-menu a {
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 1.5rem;
-	}
 	body{
 	
 		background-image: url("${pageContext.request.contextPath}/resources/upload/back2.png");
 		background-size: cover;
 		background-repeat: no-repeat;
-	}
-
-	.options {
-		transform: translateY(-35px);
-	}
-
-	.options {
-		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-evenly;
 	}
 </style>
 

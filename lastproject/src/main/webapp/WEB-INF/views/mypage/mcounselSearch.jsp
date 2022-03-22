@@ -163,36 +163,43 @@
 	padding: 5rem
 	}
 
-	
+	.form-control1 {
+		padding: 5px;
+		display: inline-block;
+		border-radius: 20px;
+	}
 
 </style>
 
 <body>
 <section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="section-top text-center">
-						<br><br><br>
-						<h2></h2>
-					</div>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br>
+					<br>
+					<br>
+					<h2></h2>
 				</div>
+			</div>
 		</div>
 	</section>
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3" style="padding:0px;">
-				<h2 align="center">MyPage</h2>
-				<br>
-				<div class="blog_right_sidebar">
+				<div class="col-lg-3">
+					<h2 align="center">MyPage</h2>
+					<br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img"
-								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
-							<br><br>
+							<img class="partner_img" src="/upload/${member.pfile}"
+								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
+							<br>
 							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
+									href="mconfirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
 					</div>
@@ -200,36 +207,47 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list nanumbarungothic">
-							<p id="menu_bold">내 활동 내역</p>
-								<li><a href="protocol" class="d-flex justify-content-between no_deco">
+							<ul class="list cat-list">
+								<p id="menu_bold">내 활동 내역</p>
+								<li><a href="protocol"
+									class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
-									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="reservationSelect"
+									class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
-									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="myPay"
+									class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
-									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="mycounsel"
+									class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
-									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="myreport"
+									class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
-									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="myfallow"
+									class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
-									</a></li>
-									<br><br><p id="menu_bold">회원 정보 관리</p>
-								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<br>
+								<br>
+								<p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass"
+									class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
-									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="logout"
+									class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
-									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="mdeleteForm"
+									class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
-									</a></li>
+								</a></li>
 							</ul>
 						</aside>
 					</div>
@@ -267,7 +285,7 @@
 											<tbody style="text-align: center">
 												<c:if test="${ fn:length(mycounsel) == 0  }">
 													<tr>
-														<td colspan="8" align="center">조회된 결과가 없습니다.</td>
+														<td colspan="10" align="center">조회된 결과가 없습니다.</td>
 													</tr>
 												</c:if>
 												<c:forEach items="${mycounsel }" var="mycounsel">
@@ -299,7 +317,7 @@
 																	<c:when test="${ mycounsel.r_check eq 0}">
 																		<td><button type="button" style="background-color: #38a4ff; border: none;" 
 																				class="btn btn-primary" data-toggle="modal" onclick='reviewadd("${mycounsel.c_no}");'
-																				data-target="#reviewWriteModal">리뷰쓰기</button>
+																				data-target="#reviewWriteModal">리뷰 쓰기</button>
 																		</td>
 																	</c:when>
 																	<c:otherwise>
@@ -310,7 +328,7 @@
 																</c:choose>
 															</c:when>
 															<c:otherwise>
-																<td><button class="btn btn-primary" disabled style="background-color: cornflowerblue; border: none;">리뷰 작성</button></td>
+																<td><button class="btn btn-primary" disabled style="background-color: cornflowerblue; border: none;">리뷰 쓰기</button></td>
 															</c:otherwise>
 														</c:choose>
 													</tr>
@@ -344,10 +362,13 @@
 				</div>
 				<!-- modal 몸통 -->
 				<div class="modal-body">
-					<div id="content"></div>
+				<h3>별점</h3>
 					<div class="star-rating">
-
 					</div>
+					<h3>후기내용</h3>
+					<div id="content"></div>
+
+					
 				</div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
@@ -371,7 +392,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+					<h3 class="modal-title" id="exampleModalLabel">후기를 남겨주세요!</h3>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -379,32 +400,33 @@
 				<form action="counselReviewInsert" method="post" enctype="multipart/form-data">
 					<!-- modal 몸통 -->
 					<div class="modal-body">
-
-						<div align="center">
-							<h3 align="center">후기를 남겨주세요!</h3>
+						<div>
+							<h3>별점</h3>
 							<div class="star-rating">
-								<input type="radio" id="5-stars" name="rating" value="5" /> <label for="5-stars"
-									class="star">&#9733;</label> <input type="radio" id="4-stars" name="rating"
-									value="4" /> <label for="4-stars" class="star">&#9733;</label> <input type="radio"
-									id="3-stars" name="rating" value="3" /> <label for="3-stars"
-									class="star">&#9733;</label>
-								<input type="radio" id="2-stars" name="rating" value="2" /> <label for="2-stars"
-									class="star">&#9733;</label> <input type="radio" id="1-stars" name="rating"
-									value="1" /> <label for="1-stars" class="star">&#9733;</label>
+								<input type="radio" id="5-stars" name="rating" value="5" />
+								<label for="5-stars" class="star">&#9733;</label>
+								<input type="radio" id="4-stars" name="rating"value="4" />
+								<label for="4-stars" class="star">&#9733;</label>
+								<input type="radio"	id="3-stars" name="rating" value="3" />
+								<label for="3-stars"class="star">&#9733;</label>
+								<input type="radio" id="2-stars" name="rating" value="2" />
+								<label for="2-stars" class="star">&#9733;</label> 
+								<input type="radio" id="1-stars" name="rating"	value="1" /> 
+								<label for="1-stars" class="star">&#9733;</label>
 							</div>
 						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword4">후기내용</label>
-							<textarea class="form-control" id="content" name="content" placeholder="후기내용" rows="4"
-								cols="80"></textarea>
+						
+							<h3>후기내용</h3>
+							<div class="form-group">
+							<textarea class="form-control1" id="content" name="content" placeholder="" rows="4"
+								cols="50"></textarea>
 						</div>
 					</div>
 					<!-- modal 하단 버튼 -->
 					<div class="modal-footer">
 						<input type="hidden" id="insert_c_no" name="c_no" value="">
-						<button type="submit">작성</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-
+						<button type="submit" class="btn btn-primary">작성</button>
+						<button type="button"class="btn btn-secondary" data-dismiss="modal">취소</button>
 					</div>
 				</form>
 			</div>
@@ -460,21 +482,6 @@
 	</script>
 
 
-	<!-- 별점조회 -->
-	<!--    <script type="text/javascript">
-  //별점
-		$(function () {
-			$('.star').each(function (index, item) {
-				$(this).raty({
-					score: $(this).find('.rating').val(),
-					path: "resources/star",
-					width: 200,
-					readOnly: true
-				});
-			})
-		});
-		</script>
-	-->
 	<script type="text/javascript">
 		function go_page(p) {
 			goform.pageNum.value = p;

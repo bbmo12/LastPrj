@@ -104,9 +104,9 @@ h1{
 	color: white;
 }
 
-#banner_content{
-	color: white;
-}
+	#banner_content{
+		color: white;
+	}
 	.swal2-content{
 		display: none;
 	}
@@ -210,7 +210,7 @@ h1{
                         <div class="single-slide">
                             <div class="single-department item-padding text-center">
                             <div id="best_p_profile">
-                            	<img class="partner_img" src="resources/upload/${best.picture }" onError="this.style.display='none'" alt=''>
+                            	<img class="partner_img" src="resources/upload/${best.picture }" onError="this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
                             <br>
                                 <p id="best_name">${best.name }</p>
@@ -301,7 +301,7 @@ h1{
                         <div class="content-area" style="margin-bottom:20px;">
                             <div class="doctor-text text-center" style="height:250px">
                             <div id="profile">
-                            	<img class="profile_img" src="resources/upload/${review.picture }" onError="this.style.display='none'" alt=''>
+                            	<img class="profile_img" src="resources/upload/${review.picture }" "this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
                             <div id="review">
 	                            ${review.m_id }
@@ -314,7 +314,7 @@ h1{
                                 <p class="review_text">${review.content }</p>
                                 <c:forEach items="${review.fileList }" var="photo">
 								<div style="margin-top: 10px; display:inline-block;">
-									<img src="resources/upload/${photo.photo }" onError="this.style.display='none'" alt=''
+									<img src="resources/upload/${photo.photo }" "this.src='resources/upload/cat.jpg'" alt=''
 										style="width: 60px; height: 60px;">
 								</div>
 							</c:forEach>

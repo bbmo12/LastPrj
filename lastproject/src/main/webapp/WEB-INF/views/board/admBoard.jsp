@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
+
 * {
 	box-sizing: border-box;
 }
@@ -91,6 +92,7 @@
 			<div class="blog_right_sidebar" id="sidebar">
 				<form id="frm" action="" method="post" onsubmit="return false"
 					onkeypress="eventkey();">
+
 					<aside class="single_sidebar_widget search_widget"
 						style="display: flex;">
 						<select id="search" name="search">
@@ -108,6 +110,14 @@
 							</span>
 						</div>
 					</aside>
+
+					<select id="search" name="search">
+						<option value="all" selected>전 체</option>
+						<option value="title">제 목</option>
+						<option value="content">내 용</option>
+					</select> <input type="text" id="data" name="data" size="20">&nbsp;
+					<button type="button" onclick="searchData()">검 색</button>
+
 				</form>
 			</div>
 	</section>

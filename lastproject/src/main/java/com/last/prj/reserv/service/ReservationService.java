@@ -35,7 +35,7 @@ public interface ReservationService {
 	//페이징 (일반예약조회)
 	List<ReservationVO> reservationPageList1(ReservationVO vo);
 	
-	int reservPage1(ReservationVO vo);
+	Integer reservPage1(ReservationVO vo);
 	
 	//페이징 (파트너예약조회)
 	List<ReservationVO> preservationPageList(Criteria cri);
@@ -52,6 +52,6 @@ public interface ReservationService {
 	List<ReviewVO> readpicture(@Param("r_no") int r_no);
 	
 	//페이징
-		int reservPage(Criteria cri);
+	Integer reservPage(Criteria cri);
 		List<ReservationVO> reservationPageList(Criteria cri);
 }
