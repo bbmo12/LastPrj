@@ -15,6 +15,13 @@
 	font-size: 2rem !important;
 }
 
+.col-lg-3{
+	padding:50px;
+}
+.posts-list {
+margin-top:1.9%;
+}
+
 #my_section {
 	padding: 50px;
 	background: #f9f9fd;
@@ -111,26 +118,39 @@
 	font-style: normal;
 	font-weight: 400;
 }
+h1{
+	color: white;
+}
+
+	#banner_content{
+		color: white;
+	}
+	.swal2-content{
+		display: none;
+	}
+
 </style>
 
 <body>
-	<section class="department-area" style="padding: 30px 0 30px;">
-		<div class="container">
-			<div class="col-lg-6 offset-lg-3">
-				<div class="section-top text-center">
-					<br>
-					<br>
-					<br>
-					<h2></h2>
-				</div>
-			</div>
-		</div>
-	</section>
+<br><br><br><br><br>
+     <!-- Banner Area Starts -->
+    <section class="banner-area">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-10" style="margin-left: 50px;">
+                <br><br><br><br><br>
+                    <h1>관리자 페이지</h1>
+                    <h1>관리자님 반갑습니다.</h1>
+                </div>
+            </div>
+        </div>
+    </section>
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2><a href="adminPage">MyPage</a></h2><h5>메인 페이지</h5>
+					<h5><a href="adminPage">메인 페이지</a></h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -172,8 +192,8 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="margin-left: 40px;">
+				<div class="col-lg-9 posts-list" > 
+					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
