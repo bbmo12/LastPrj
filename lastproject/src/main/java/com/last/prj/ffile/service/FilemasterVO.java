@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class FilemasterVO {
-	private int f_part;
+	private Integer f_part;
 }

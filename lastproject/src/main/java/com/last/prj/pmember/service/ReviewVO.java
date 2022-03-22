@@ -11,7 +11,7 @@ public class ReviewVO {
 	private String content;		//후기내용
 	private String rating;		//평점
 	private int c_no;			//상담순번
-	private int f_part;			//첨부파일
+	private Integer f_part;			//첨부파일
 	private int r_no;			//예약순번
 	private int r_check; 		//후기작성 완료여부
 	
