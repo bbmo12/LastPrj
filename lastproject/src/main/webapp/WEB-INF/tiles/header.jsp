@@ -27,7 +27,7 @@
 	.nav-menu a {
 		text-decoration: none;
 		font-family: 'Binggrae-Bold';
-		font-size : 32px;
+		font-size : 28px;
 	}
 
 	.notification {
@@ -66,6 +66,9 @@
 		border: none;
 		background: none;
 		color: gray;
+	}
+	.sf-arrows .sf-with-ul{
+		padding-right: 0px;
 	}
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>

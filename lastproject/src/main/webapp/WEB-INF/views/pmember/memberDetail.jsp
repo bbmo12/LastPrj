@@ -83,13 +83,14 @@
 										<img alt="" src="resources/upload/nocol.png" id="recommend"
 											onclick="likeHit(`${pmemdetail.p_id}`)"
 											style="cursor: pointer; width: 60px; height: 60px;">
-									</c:when>
+									</c:when>									
 									<c:otherwise>
 										<img alt="" src="resources/upload/rec.png" id="recommend"
-											onclick="likeHit(`${pmemdetail.p_id}`)"
+											onclick="likeHit(`${pmemdetail.p_id}`)" 
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:otherwise>
 								</c:choose>
+								<input type="hidden" id="likeValue"value="${like }">
 							</sec:authorize>
 							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
 									<img alt="" src="resources/upload/upfollow.png" id="follow" onclick="noMember()"
@@ -278,26 +279,11 @@
 						 var imgTag = document.getElementById("recommend");
 						 imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후, 
 						  //src 속성값을 수정
-					} else if (likeCheck == 1) {
-						Swal.fire({
-							title: '추천을 취소시겠습니까?',
-							icon: 'warning',
-							showCancelButton: true,
-							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 
-							cancelButtonColor: '#3085d6',
-							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
-							cancelButtonText: '닫기',
-						}).then(result => { // 만약 Promise리턴을 받으면, 
-							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
-								Swal.fire('추천이 취소되었습니다.');
-								var changeImg = document.getElementById("recommend");
-								changeImg.setAttribute("src", "resources/upload/nocol" + ".png"); 
-							}
-						});
-					}
+					} 
 				}
 			});
 		}
+		
 		//팔로우
 		function follow(p_id) {
 			var p_id = p_id;
@@ -308,26 +294,26 @@
 					"p_id": p_id
 				},
 				success: function (followCheck) {
-					if (followCheck == 1) {
-						 Swal.fire({
-								title: '팔로우를 취소하시겠습니까?',
-								icon: 'warning',
-								showCancelButton: true,
-								confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정 취소
-								cancelButtonColor: '#d33',
-								confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
-								cancelButtonText: '닫기',
-							}).then(result => { // 만약 Promise리턴을 받으면, 
-								if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
-									Swal.fire('팔로우가 취소되었습니다.');
-									var changeImg = document.getElementById("follow");
-									changeImg.setAttribute("src", "resources/upload/upfollow" + ".png"); 						
-								}
-							});
-					} else if (followCheck == 0) {
-						 Swal.fire('팔로우');
+					if (followCheck == 0) {
+						Swal.fire('팔로우');
 						 var imgTag = document.getElementById("follow");
 						 imgTag.setAttribute("src", "resources/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후, 
+					} else if (followCheck == 1) {
+						Swal.fire({
+							title: '팔로우를 취소하시겠습니까?',
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 취소
+							cancelButtonColor: '#3085d6',
+							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+							cancelButtonText: '닫기',
+						}).then(result => { // 만약 Promise리턴을 받으면, 
+							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
+								Swal.fire('팔로우가 취소되었습니다.');
+								var changeImg = document.getElementById("follow");
+								changeImg.setAttribute("src", "resources/upload/upfollow" + ".png"); 						
+							}
+						});
 					}
 				}
 			});
