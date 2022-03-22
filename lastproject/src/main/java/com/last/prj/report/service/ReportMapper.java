@@ -57,4 +57,6 @@ public interface ReportMapper {
 		public ReportVO admReSearch(int rep_no);
 		//회원의 신고 카운트 업데이트
 		public int admReSearchUpdate(ReportVO vo);
+		//신고 제재 대상 회원 리스트 출력
+		public List<ReportVO> adminReporList();
 }

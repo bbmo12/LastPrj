@@ -19,6 +19,6 @@ public class BoardVO {
 	private String writer;
 	@JsonFormat(pattern ="yy-mm-dd")
 	private Date w_date;
-	
+	private String key;	
 
 }
