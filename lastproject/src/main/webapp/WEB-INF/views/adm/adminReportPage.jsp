@@ -149,6 +149,9 @@
 .anw::before {
 	display: inline-block;
 }
+
+
+
 </style>
 
 <body>
@@ -270,20 +273,7 @@
 									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;신고 제재 중인 회원
 								</div>
 								<div class="card-body anw" style="padding: 15px">
-									<c:if test="${ fn:length(notices) == 0  }">
-										<div align="center">조회된 결과가 없습니다.</div>
-									</c:if>
-									<c:forEach items="${notices}" var="noti">
-										<div id="notice">
-											<span class="fa-stack fa-lg"> <i
-												class="fa fa-circle fa-stack-2x" style="color: #44ce42"></i>
-												<i class="fa fa-calendar-day fa-stack-1x fa-inverse"></i>
-											</span> <span>${noti.name}</span>&nbsp;&nbsp;&nbsp;<span
-												class="text-gray ellipsis mb-0">${noti.content}</span>
-											&nbsp;&nbsp;&nbsp;<span>${noti.w_date}</span>
-											<hr>
-										</div>
-									</c:forEach>
+									
 								</div>
 								<div id="notice_footer">
 									<p>수신일로부터 7일이 지난 알림은 자동 삭제됩니다.</p>
@@ -293,23 +283,26 @@
 						<!-- 신고 제재 처리 중인 회원 끝~~!~!~! -->
 
 
-						<!-- 신고 제재 대상  회원 -->
+						<!-- 신고 제재 대상  회원 adminReporList-->
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header que">
 									<i class="fa-solid fa-paw"></i> 신고 제재 대상 회원
 								</div>
 								<div class="card-body anw" style="padding: 15px">
-									<c:if test="${ fn:length(pets) == 0  }">
-										<div align="center">조회된 결과가 없습니다.</div>
-									</c:if>
-									<c:forEach items="${pets }" var="pet">
-										<div id="pet_img2">
-											<img class="pet_img" src="resources/upload/${pet.picture }"
-												onerror="this.src='resources/upload/cat.jpg'" alt="">
-											<br> <a href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
-										</div>
-									</c:forEach>
+									<table class="table table-striped" >
+											<thead>
+												<tr style="text-align: center;">
+													<th>아이디</th>
+													<th>이름</th>
+													<th>신고건수</th>
+													<th>가입날짜</th>
+													<th>보기 및 처리</th>
+												</tr>
+											</thead>
+											<tbody style="text-align: center">
+											
+											</tbody>
 								</div>
 								<div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
@@ -330,8 +323,8 @@
 											name="repor"> <input type="hidden" name="pageNum"
 											value="1"> FROM : <input type="text" id="fromDateQ"
 											name="fromDate">&nbsp;&nbsp; TO : <input type="text"
-											id="toDateQ" name="toDate"> &nbsp;&nbsp;<select
-											id="key" name="key">
+											id="toDateQ" name="toDate"> &nbsp;&nbsp;
+											<select	id="key" name="key">
 											<option value="" selected="selected">전 체</option>
 											<option value="reporter">신고자</option>
 											<option value="reported">신고당한사람</option>
@@ -518,13 +511,16 @@
 
 						<form id="form" style="display: none;">
 							<div class="form-group">
-								<label for="amdReportOption">처리유형</label> <select class="repor"
-									id="repor" name="repor">
+								<label for="amdReportOption">처리유형</label> 
+								<select class="repor" id="repor" name="repor">
 									<option value="701" selected>미처리</option>
 									<option value="702">기각</option>
 									<option value="703">승인</option>
-								</select>
-							</div>
+								</select> 
+								
+								<!-- <div class="nice-select repor" tabindex=""
+								
+							</div> -->
 							<div class="form-group">
 								<label for="message-text" class="col-form-label">처리사유</label>
 								<textarea class="state" id="state" name="state"></textarea>
@@ -608,7 +604,7 @@
 															+ result[i].rep_no
 															+ ")' value="
 															+ result[i].rep_no
-															+ " data-toggle='modal'  data-target='#exampleModalQ"
+															+ " data-toggle='modal'  data-target='#exampleModal"
 															+ result[i].rep_no
 															+ "'>"
 															+ "미처리</td></button></tr>");
@@ -625,7 +621,7 @@
 															+ "</td>"
 															+ "<td><button  type='button' onclick='showQ("
 															+ result[i].rep_no
-															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModalQ'> "
+															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'> "
 															+ "기각처리</td></button></tr>");
 								} else {
 
@@ -640,7 +636,7 @@
 															+ "</td>"
 															+ "<td><button  type='button' class='btn btn-success' onclick='showQ("
 															+ result[i].rep_no
-															+ ")'  data-toggle='modal' data-target='#exampleModalQ'>"
+															+ ")'  data-toggle='modal' data-target='#exampleModal'>"
 															+ "승인처리</td></button></tr>");
 								}
 								;
@@ -685,12 +681,13 @@
 													+ (res[0].state == 'null' ? '없음' : res[0].state )
 													+ "</li>");
 									
-									$(".modal-footer").append("<button class='btn btn-link' type='button' id='goDetailQ' data-value="+res[0].q_no+" onclick='goDetailQ(this)' >상세페이지로..</button>");
+									$(".modal-footer").append("<button class='btn btn-link' type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
 									
 								}else {   //미처리 state + repor 가 값이 담겨져 있지 않을 떄
-									$('#form').show();
+									$('#form').show();									
 									$("#admReportUpdate").show();
+									
 									$("form")
 											.append(
 													"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
@@ -708,7 +705,14 @@
 													+ "</li><li>게시글 내용 : "
 													+ res[0].q_content
 													+ "</li>");
-									$(".modal-footer").append("<button type='button' class='btn btn-link' id='goDetailQ' data-value="+res[0].q_no+" onclick='goDetailQ(this)' >상세페이지로..</button>");
+									$(".modal-footer").append("<button type='button' class='btn btn-link' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
+									$(".list").html('');
+									let html = 
+										`<li data-value="701" class="option selected">미처리</li>
+										<li data-value="701" class="option">기각</li>
+										<li data-value="703" class="option">승인</li>`;	
+									$(".list").append(html);
+									
 								}
 								
 						console.log("rep_no 는 " +res[0].rep_no);
@@ -724,7 +728,7 @@
 		// end Show function Modal 신고 단건 ======끝!
 		
 		//=============상세보기 페이지 새 창==============
-		function goDetailQ(e) {
+		function goDetail(e) {
 			var q_no = $(e).data('value');
 			console.log("q_no : " +q_no);
 			var url = `qnaDetail?q_no=\${q_no}`;
@@ -741,7 +745,7 @@
 			$(this).find('ul').empty();
 			$(this).find('form')[0].reset();
 			$(this).find('#goDetail').remove();
-
+			
 		})//END 모달 내용 초기화
 
 		//===========신고처리 : admReportUpdate==========
@@ -803,7 +807,7 @@
 				//contentType : 'application/json',
 				success : function(result) {
 					if(result.list == ''){
-						alert('데이터가 없습니다!!');
+						
 						$("#myTableQ").empty();
 						$("#paginationQ").empty();
 						$("#myTableQ").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
@@ -945,7 +949,7 @@
 															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td><td>"
-															+ "<button id='reportModal' type='button' class='btn btn-danger btn-icon-text	' onclick='showR("
+															+ "<button id='reportModal' type='button' class='btn btn-danger btn-icon-text' onclick='showR("
 															+ result[i].rep_no
 															+ ")' value="
 															+ result[i].rep_no
@@ -968,7 +972,7 @@
 															+ "</td><td>"
 															+ result[i].f_content
 															+ "</td>"
-															+ "<td><button  type='button' onclick='show("
+															+ "<td><button  type='button' onclick='showR("
 															+ result[i].rep_no
 															+ ")' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal'> "
 															+ "기각처리</td></button></tr>");
@@ -999,7 +1003,7 @@
 		
 		
 		// ============================Modal 처리 : Review=========================================
-		function showR(st) {
+		 function showR(st) {
 			console.log("st는 :"+st);
 				$
 						.ajax({
@@ -1010,7 +1014,6 @@
 							},
 							success : function(res) {
 								console.log(res[0].state);
-								if (res == '') alert('해당 데이터가 없습니다');
 
 								if(res[0].repor != 701  ){ //state 값이 있을 떄 + repor 가 선택 되어 있을 때 : 기각처리 / 승인처리 
 									$("form").append("<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
@@ -1032,7 +1035,7 @@
 													+ res[0].state
 													+ "</li>");
 									
-									$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetailR(this)' >상세페이지로..</button>");
+									$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
 
 									
@@ -1057,6 +1060,11 @@
 													+  res[0].rev_content
 													+ "</li>");
 									$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetailR(this)' >상세페이지로..</button>");
+									let html = 
+										`<li data-value="701" class="option selected">미처리</li>
+										<li data-value="701" class="option">기각</li>
+										<li data-value="703" class="option">승인</li>`;	
+									$(".list").append(html);
 								}
 							},
 							error : function(er) {
@@ -1065,22 +1073,23 @@
 						})// end ajax
 						$("#myModal").modal('show');
 			
-		}
+		} 
 		// ==================================Modal 처리 : Review=========================================끝
 
 		//모달 내용 초기화
-		$('#myModal').on('hidden.bs.modal', function(e) {
+ 		 $('#myModal').on('hidden.bs.modal', function(e) {
 			$('#form').hide();
 			$("#admReportUpdate").hide();
 			$(this).find('ul').empty();
 			$(this).find('form')[0].reset();
-			$(this).find('#goDetail').remove();
+			$(this).find('#goDetail').remove(); 
 			
 
-		})//END 모달 내용 초기화
+		}) 
+		//END 모달 내용 초기화
 
 		//신고처리 : admReportUpdate
-		$("#admReportUpdate").on("click", function(e) {
+		/*  $("#admReportUpdate").on("click", function(e) {
 			var str = $('#form').serialize();
 			console.log("str의 값"+str);
 			var rep_no = $("#rep_no").val();
@@ -1106,12 +1115,12 @@
 						location.reload();
 					},
 					error : function(err) {
-						alert("신고 처리가 성공적으로 실패했습니다. 관리자 호출!");
+						alert("신고 처리가 실패했습니다. 개발자 호출!");
 
 					}
 				}) //end Ajax
 			}//end If
-		})//end 신고 처리
+		}) *///end 신고 처리 
 			
 			
 		//===================리스트 호출 버튼==================
@@ -1139,7 +1148,6 @@
 				//contentType : 'application/json',
 				success : function(result) {
 					if(result.list == ''){
-						alert('데이터가 없습니다!!');
 						$("#myTableR").empty();
 						$("#paginationR").empty();
 						$("#myTableR").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
