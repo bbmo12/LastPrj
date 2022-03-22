@@ -67,7 +67,7 @@
 	width: 5em;
 } */
 
-.star-rating input {
+/* .star-rating input {
 	display: none;
 }
 
@@ -82,7 +82,7 @@
 
 .star-rating label:hover, .star-rating label:hover ~label {
 	color: #fc0;
-}
+} */
 
 .badge-info {
 	background-color: cornflowerblue;

@@ -14,4 +14,5 @@ public class FfileVO {
 	private Integer p_image;	
 	private String photo;
 	
+	
 }
