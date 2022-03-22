@@ -42,7 +42,6 @@ public interface ReportMapper {
 		public int admRlistCodeCount(ReportVO vo);
 		public List<ReportVO> admRlistCode(ReportVO vo);
 		
-		
 		//신고 QnA 조회
 		public int admQlistCodeCount(ReportVO vo);
 		public List<ReportVO> admQlistCode(ReportVO vo);
@@ -58,5 +57,7 @@ public interface ReportMapper {
 		//회원의 신고 카운트 업데이트
 		public int admReSearchUpdate(ReportVO vo);
 		//신고 제재 대상 회원 리스트 출력
-		public List<ReportVO> adminReporList();
+		public List<ReportVO> adminReporList(ReportVO vo);
+		//신고 제재 대상 회원 리스트 출력 건수 조회
+		public int adminReporListCount(ReportVO vo);
 }

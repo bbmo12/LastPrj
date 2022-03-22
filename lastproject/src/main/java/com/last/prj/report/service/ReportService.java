@@ -60,7 +60,9 @@ public interface ReportService {
 			int adminReporCount();
 			
 			//신고 제재 대상 회원 리스트 출력
-			public List<ReportVO> adminReporList();
+			public List<ReportVO> adminReporList(ReportVO vo);
+			//신고 제재 대상 회원 리스트 출력 건수 조회
+			public int adminReporListCount(ReportVO vo);
 
 	
 }

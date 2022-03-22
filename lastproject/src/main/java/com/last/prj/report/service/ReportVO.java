@@ -46,9 +46,14 @@ public class ReportVO {
 	private String total;
 
 	private String id;
+	private String name;
 	private String m_id;
 	private Integer role;
 	private String key;
 	private String data;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date startdate;
+	private int	c_report;			//신고당한횟수
+	
 
 }
