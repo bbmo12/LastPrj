@@ -12,6 +12,7 @@ public class FfileVO {
 	private String p_id;
 	private Integer p_license;			//경력사진
 	private Integer p_image;	
-	private Integer photo;
+	private String photo;
+	
 	
 }
