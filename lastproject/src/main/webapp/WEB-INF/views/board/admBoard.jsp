@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
+
 * {
 	box-sizing: border-box;
 }
@@ -88,15 +89,35 @@
 			</div>
 
 			<!-- 검색 -->
-			<div>
+			<div class="blog_right_sidebar" id="sidebar">
 				<form id="frm" action="" method="post" onsubmit="return false"
 					onkeypress="eventkey();">
+
+					<aside class="single_sidebar_widget search_widget"
+						style="display: flex;">
+						<select id="search" name="search">
+							<option value="all" selected>전 체</option>
+							<option value="title">제 목</option>
+							<option value="content">내 용</option>
+						</select>
+						<div class="input-group">
+							<input type="text" class="form-control" id="data" name="data">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"
+									onclick="searchData()">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</aside>
+
 					<select id="search" name="search">
-						<option value="all" selected="selected">전 체</option>
+						<option value="all" selected>전 체</option>
 						<option value="title">제 목</option>
 						<option value="content">내 용</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="button" onclick="searchData()">검 색</button>
+
 				</form>
 			</div>
 	</section>
@@ -113,6 +134,11 @@
 
 	//검색 데이터 호출
 	function searchData() {
+		var let = $("#search option:selected").val();
+		var le = $("#data").val();
+		console.log(let);
+		console.log(le);
+		
 		$.ajax({
 			url : "admBoardSearch",
 			type : "post",

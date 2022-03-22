@@ -104,9 +104,9 @@ h1{
 	color: white;
 }
 
-#banner_content{
-	color: white;
-}
+	#banner_content{
+		color: white;
+	}
 	.swal2-content{
 		display: none;
 	}

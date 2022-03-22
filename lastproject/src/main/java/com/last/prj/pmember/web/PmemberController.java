@@ -67,7 +67,8 @@ public class PmemberController {
 	private ServletContext sc;
 	@Autowired
 	private FfileUtil ffileutil;
-
+	@Autowired
+	private String uploadPath;
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
@@ -195,20 +196,20 @@ public class PmemberController {
 		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
 
     	String originalFileName = file.getOriginalFilename();
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
 		
-		File savePath = new File(realPath);
+		File savePath = new File(uploadPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
 
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 
+			uploadPath += File.separator + originalFileName;
+			File saveFile = new File(uploadPath);
 			try {
 				file.transferTo(saveFile);
 				pmember.setPicture(originalFileName);

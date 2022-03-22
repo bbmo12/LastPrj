@@ -46,7 +46,9 @@ public interface ReservationMapper {
 	
 	//페이징
 	Integer reservPage(Criteria cri);
-		List<ReservationVO> reservationPageList(Criteria cri);
+
+	List<ReservationVO> reservationPageList(Criteria cri);
+
 	
 	
 }

@@ -53,7 +53,11 @@ public class AdminController {
 	//QnA에 대한 신고 목록
 	
 	//Review에 대한 신고 목록
-	
+	@RequestMapping("/adminReporList")
+	@ResponseBody
+	public List<ReportVO> adminReporList(){
+		return reportDao.adminReporList();
+	}
 	
 	//reportPage count
 	@RequestMapping("/adminReportCount")

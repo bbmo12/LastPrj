@@ -294,4 +294,19 @@
 	</select>
 	
 	
+	
+	<!-- 신고 제재 중인 회원 -->
+	<select id="adminReporList" resultType="com.last.prj.report.service.ReportVO">
+	
+	SELECT M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, R.REP_NO, M.NAME, M.STARTDATE
+		FROM MEMBER M , REPORT R
+		WHERE M.M_ROLE = 1 AND M.M_ID = R.REPORTED 
+		UNION
+		SELECT P.P_ID AS ID, P.P_ROLE AS ROLE,
+		P.C_REPORT, R.REP_NO , P.NAME , P.STARTDATE
+		FROM P_MEMBER P , REPORT R
+		WHERE P.P_ROLE = 2 AND
+		P.P_ID = R.REPORTED
+	</select>
+	
 </mapper>
