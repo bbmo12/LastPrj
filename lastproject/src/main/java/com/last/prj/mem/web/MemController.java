@@ -150,8 +150,8 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			uploadPath += File.separator + originalFileName;
-			File saveFile = new File(uploadPath);
+			String newPath = uploadPath + File.separator + originalFileName;
+			File saveFile = new File(newPath);
 
 			try {
 				file.transferTo(saveFile);
@@ -382,8 +382,8 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			uploadPath += File.separator + saveFileName;
-			File saveFile = new File(uploadPath);
+			String newPath = uploadPath + File.separator + saveFileName;
+			File saveFile = new File(newPath);
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
