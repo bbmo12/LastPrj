@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +12,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
+h1{
+	font-family: 'Binggrae';
+	color: white;
+}
 
+h2{
+	font-family: 'Binggrae';
+	font-weight: 700;
+}
+
+	#banner_content{
+		color: white;
+	}
+	.swal2-content{
+		display: none;
+	}
 * {
 	box-sizing: border-box;
 }
@@ -58,6 +76,24 @@
 </style>
 </head>
 <body>
+	<br><br><br><br><br>
+    <section class="banner-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10" style="margin-left: 50px;">
+                <br><br><br><br><br>
+                    <h1>공지사항</h1>
+					<h3 style="margin-top:5%;">우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
+                   <sec:authorize access="hasRole('ADMIN')">
+					<div class="boardForm">
+						<a href="boardForm" class="genric-btn info circle btn-lg" id="qna-button">공지사항 작성하기</a>
+					</div>
+				</sec:authorize>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
 	<section class="department-area section-padding4">
 		<div class="container">
 			<div class="row">
@@ -120,6 +156,7 @@
 
 				</form>
 			</div>
+		</div>
 	</section>
 </body>
 <script>

@@ -109,6 +109,9 @@
 									<button type="submit" class="btn btn-primary">예약하기</button>
 								</form>
 							</c:if>
+						<%-- 	<c:if test="${counsel.m_id qe  }">
+								<button class="btn btn-primary">신고하기</button></a>
+							</c:if> --%>
 						</aside>
 					</div>
 				</div>
