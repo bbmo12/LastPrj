@@ -3,6 +3,8 @@ package com.last.prj.mem.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
@@ -20,9 +22,11 @@ public class MemVO {
 	private String password;	//비밀번호
 	private String name;		//이름
 	private String tel;			//회원전화번호
-	@JsonFormat(pattern =  "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date startDate;		//가입일
-	@JsonFormat(pattern =  "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date endDate;		//탈퇴일
 	private int cReport;		//신고당한횟수
 
