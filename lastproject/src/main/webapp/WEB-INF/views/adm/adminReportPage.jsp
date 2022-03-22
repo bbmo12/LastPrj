@@ -281,28 +281,13 @@
 						<!-- 신고 제재 대상  회원 adminReporList-->
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
-								<div class="card-header que" onclick="admReporListBtn()">
+								<div class="card-header que " onclick="admReporListBtn()">
 									<i class="fa-solid fa-paw"></i> 신고 제재 대상 회원
 								</div>
-								<div class="card-body anw" style="padding: 15px">
-									<table class="table table-striped adminReporListTable">
-										<thead>
-											<tr style="text-align: center;">
-												<th>아이디</th>
-												<th>이름</th>
-												<th>회원유형</th>
-												<th>신고건수</th>
-												<th>가입날짜</th>
-												<th>보기</th>
-												<th>제재</th>
-											</tr>
-										</thead>
-										<tbody style="text-align: center" id="adminReporListTbody">
-
-										</tbody>
-									</table>
-									<div id="pagination" class="admReporListPaging"></div>
+								<div class="card-body anw admRepoorListDiv" style="padding: 15px">
+								<input type="hidden" value="one" id="admRepoorListInput">
 								</div>
+								
 								<div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
 										추가</span>
@@ -587,15 +572,55 @@
 
 	</section>
 	<script>
-	
+		
 	
 		function admReporListBtn() {
-			/* event.preventDefault()
-			if(event.defaultPrevented){
-			alert('admReporListBtn 입니다');
-			}else {
-					alert('이미 열린창입니다')
-			} */
+			
+			 var input = $("#admRepoorListInput").val();
+			console.log(input); 
+			 
+			
+			if( input === 'one' ){
+				alert('처음 클릭');
+				$("#admRepoorListInput").val('two');
+				console.log($("#admRepoorListInput").val()); //two
+			} else {
+				alert('두 번쨰 클릭');
+				$("#admRepoorListInput").val('');
+				console.log($("#admRepoorListInput").val()); // 빈칸 비워짐
+				$("#admRepoorListInput").val('one');
+				console.log($("#admRepoorListInput").val()); //one
+				$(".admRepoorListDiv").empty();
+			};
+			
+			let htmladmReporList;
+		 	htmladmReporList = `
+				<table class="table table-striped adminReporListTable">
+				<thead>
+					<tr style="text-align: center;">
+						<th>아이디</th>
+						<th>이름</th>
+						<th>회원유형</th>
+						<th>신고건수</th>
+						<th>가입날짜</th>
+						<th>보기</th>
+						<th>제재</th>
+					</tr>
+				</thead>
+				<tbody style="text-align: center" id="adminReporListTbody">
+
+				</tbody>
+			</table>
+			<div id="pagination" class="admReporListPaging"></div>
+		`; 
+		
+		
+		
+		$(".admRepoorListDiv").append(htmladmReporList);
+			
+			
+			
+			
 			$.ajax({
 				url:'adminReporList',
 				method: 'get',
@@ -616,11 +641,12 @@
 					
 				}//end error
 			})
-		};
+			
+		};// 신고 제재 대상 버튼~
 		
-		
-		function viewpagingadminReporList(page) {
-			console.log("얘로 페이지를 만든다!"+page);
+			
+			function viewpagingadminReporList(page) {
+			console.log("얘로 페이지를 만든다!",page);
 			
 			var nav =  `<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">`
@@ -696,6 +722,15 @@
 			
 			
 		}; //end 해당 회원의 역대 신고 목록 출력 모달
+			
+			
+			
+			
+			
+	
+		
+		
+		
 		/* // =================회원 단건 조회 Modal===================
 		
 		function show() {
