@@ -69,12 +69,12 @@
 								<c:choose>
 									<c:when test="${follow == 0 }">
 										<img alt="" src="resources/upload/upfollow.png" id="follow"
-											onclick="follow('${pmemdetail.p_id}')"
+											onclick="follow1('${pmemdetail.p_id}')"
 											style="cursor: pointer; width: 60px; height: 60px; margin-right: 20px;">
 									</c:when>
 									<c:otherwise>
 										<img alt="" src="resources/upload/follow1.png" id="follow"
-											onclick="follow('${pmemdetail.p_id}')"
+											onclick="follow2('${pmemdetail.p_id}')"
 											style="cursor: pointer; width: 60px; height: 60px; margin-right: 20px;">
 									</c:otherwise>
 								</c:choose>
@@ -86,9 +86,7 @@
 									</c:when>									
 									<c:otherwise>
 										<img alt="" src="resources/upload/rec.png" id="recommend"
-
 											onclick="likeHit2(`${pmemdetail.p_id}`)"
-
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:otherwise>
 								</c:choose>
@@ -274,22 +272,19 @@
 				data: {
 					"p_id": p_id
 				},
-				success: function (likeCheck) {
-			
-				Swal.fire('추천되었습니다:)');
-				var imgTag = document.getElementById("recommend");
-			 	imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
-			 	imgTag.setAttribute("onclick", "likeHit2(`${pmemdetail.p_id}`)");
-			 	
+				success: function (likeCheck) {	
+					Swal.fire('추천되었습니다:)');
+					var imgTag = document.getElementById("recommend");
+			 		imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("onclick", "likeHit2(`${pmemdetail.p_id}`)");			 	
 				},
 				error: function(error){
-					alert(error);
+					Swal.fire(error);
 				}
 			});
 		}
 		
 		function likeHit2(p_id){
-			
 			Swal.fire({
 				title: '추천을 취소시겠습니까?',
 				icon: 'warning',
@@ -313,16 +308,15 @@
 							changeImg.setAttribute("onclick", "likeHit1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
-							alert(error);
+							Swal.fire(error);
 						}
-					});
-					
+					});	
 				}
 			});
 		}
 		
 		//팔로우
-		function follow(p_id) {
+		function follow1(p_id) {
 			var p_id = p_id;
 			$.ajax({
 				type: "POST",
@@ -331,31 +325,45 @@
 					"p_id": p_id
 				},
 				success: function (followCheck) {
-					if (followCheck == 0) {
-						Swal.fire('팔로우');
-						 var imgTag = document.getElementById("follow");
-						 imgTag.setAttribute("src", "resources/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후, 
-					} else if (followCheck == 1) {
-						Swal.fire({
-							title: '팔로우를 취소하시겠습니까?',
-							icon: 'warning',
-							showCancelButton: true,
-							confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 취소
-							cancelButtonColor: '#3085d6',
-							confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
-							cancelButtonText: '닫기',
-						}).then(result => { // 만약 Promise리턴을 받으면, 
-							if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면 
-								Swal.fire('팔로우가 취소되었습니다.');
-								var changeImg = document.getElementById("follow");
-								changeImg.setAttribute("src", "resources/upload/upfollow" + ".png"); 						
-							}
-						});
-					}
+					Swal.fire('팔로우');
+					var imgTag = document.getElementById("follow");
+			 		imgTag.setAttribute("src", "resources/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("onclick", "follow2(`${pmemdetail.p_id}`)");	
 				}
 			});
 		}
-
+		
+		function follow2(p_id) {
+			Swal.fire({
+				title: '팔로우를 취소하시겠습니까?',
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#d33', // confrim 버튼 색깔 지정 취소
+				cancelButtonColor: '#3085d6',
+				confirmButtonText: '취소하기', // confirm 버튼 텍스트 지정 
+				cancelButtonText: '닫기',
+			}).then(result => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "POST",
+						url: "insertFollow",
+						data: {
+							"p_id": p_id
+						},
+						success: function (followCheck) {
+							Swal.fire('팔로우가 취소되었습니다.');
+							var changeImg = document.getElementById("follow");
+							changeImg.setAttribute("src", "resources/upload/upfollow" + ".png");
+							changeImg.setAttribute("onclick", "follow1(`${pmemdetail.p_id}`)");
+						},
+						error: function(error){
+							Swal.fire(error);
+						}
+					});
+				}
+			});			
+		}
+		
 		function noMember() {
 			Swal.fire('일반회원이 아닙니다.');
 		}

@@ -54,10 +54,6 @@
 			margin-left: 20px;
 			width: 210px;
 			height: 50px;
-			background-color: #0062ff;
-			border: none;
-			border-radius: 30px;
-			color: white;
 			padding-left: 15px;
 		}
 
@@ -276,7 +272,7 @@
 									</option>
 								</select>
 								<div class="input-group" style="width: 230px; margin-left: 71px;">
-									<input type="text" id="searchBox" name="searchValue">
+									<input type="text" class="form-control" id="searchBox" name="searchValue">
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<i class="fa fa-search"></i>

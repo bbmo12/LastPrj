@@ -61,6 +61,9 @@ ul {
 	padding: 0;
 	list-style: none
 }
+i{
+	color: black;
+}
 
 a:hover, a:focus {
 	text-decoration: none
@@ -1253,15 +1256,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .blog_right_sidebar .search_widget .input-group .form-control {
 	font-size: 14px;
-	line-height: 29px;
-	border: 0px;
-	width: 100%;
-	font-weight: 300;
-	color: #fff;
-	padding-left: 20px;
-	border-radius: 45px;
-	z-index: 0;
-	background:#0062ff;
+    line-height: 29px;
+    width: 100%;
+    font-weight: 300;
+    color: black;
+    padding-left: 20px;
+    border-radius: 45px;
+    z-index: 0;
+    border: 1px #e8e8e8 solid;
 }
 
 .blog_right_sidebar .search_widget .input-group .form-control:focus {
