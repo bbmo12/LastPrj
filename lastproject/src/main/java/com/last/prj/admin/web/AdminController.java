@@ -55,6 +55,22 @@ public class AdminController {
 	//Review에 대한 신고 목록
 	
 	
+	@RequestMapping("/adminReporList")
+	@ResponseBody
+	public HashMap<String, Object> adminReporList(ReportVO vo, Criteria cri){
+		int total = reportDao.adminReporListCount(vo);
+		
+		
+		PagingVO page = new PagingVO(cri, total);
+		//page.setAmount(9);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+		map.put("list", reportDao.adminReporList(vo));
+		map.put("page", page);
+
+		return map;
+	}
+	
 	//reportPage count
 	@RequestMapping("/adminReportCount")
 	@ResponseBody
@@ -123,7 +139,7 @@ public class AdminController {
 	public HashMap<String, Object> admQna(ReportVO vo, Criteria cri) {
 		int total = reportDao.admQlistCodeCount(vo);
 		PagingVO page = new PagingVO(cri, total);
-		page.setAmount(9); // n개씩 출력
+		//page.setAmount(9); // n개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
 
@@ -220,8 +236,7 @@ public class AdminController {
 		int total = memDao.adMmemCount(vo);
 		System.out.println("total은~" + total);
 		PagingVO page = new PagingVO(cri, total);
-		page.setAmount(9);
-		// n개씩 출력
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
 
@@ -266,7 +281,7 @@ public class AdminController {
 		int total = pMemberDao.admPlistCodeCount(vo);
 		System.out.println("total은~" + total);
 		PagingVO page = new PagingVO(cri, total);
-		page.setAmount(9); // n개씩 출력
+		//page.setAmount(9); // n개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
 
@@ -316,7 +331,7 @@ public class AdminController {
 		System.out.println("vo는~~~~~~~" + vo);
 		int total = reportDao.admRlistCodeCount(vo);
 		PagingVO page = new PagingVO(cri, total);
-		page.setAmount(9); // n개씩 출력
+		//page.setAmount(9); // n개씩 출력
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		vo.setVo(page);
 		map.put("list", reportDao.admRlistCode(vo));

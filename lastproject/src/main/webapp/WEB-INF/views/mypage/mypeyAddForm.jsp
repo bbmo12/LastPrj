@@ -201,7 +201,7 @@
 		// 이름 정규식
 		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
 		// 몸무게
-		var weightJ = /^[0-9]{1,3}$/;
+		var weightJ = /^[0-9]{1,4}$/;
 		
 		
 		$(document).ready(function () {
@@ -259,8 +259,8 @@
 				
 
 			$("#weight").blur(function () {
-				if (nameJ.test($(this).val())) {
-					console.log(nameJ.test($(this).val()));
+				if (weightJ.test($(this).val())) {
+					console.log(weightJ.test($(this).val()));
 					$("#weight_check").text('');
 				} else {
 					$('#weight_check').text('3자리 이하 숫자만 입력하세요.');
@@ -274,7 +274,9 @@
 		<div class="container">
 			<div class="col-lg-6 offset-lg-3">
 				<div class="section-top text-center">
-					<br><br><br>
+					<br>
+					<br>
+					<br>
 					<h2></h2>
 				</div>
 			</div>
@@ -284,56 +286,67 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-				<h2 align="center">반려동물 등록</h2>
-						<br>
+					<h2 align="center">MyPage</h2>
+					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'"  style="width: 210px"; height="167px" 
-								alt="">
-								<br><br>
-							<div class="br"></div>
-							<h4 id="Mainname" >${member.name }님</h4>
+							<img class="partner_img" src="/upload/${member.pfile}"
+								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
+							<br>
+							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="confirmPass">반려동물 등록</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
+									href="mconfirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
-						</div><br>
+					</div>
+					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-															<li><a href="memberMypage"
-									class="d-flex justify-content-between">
-										<p>내 프로필</p>
-								</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
+								<p id="menu_bold">내 활동 내역</p>
+								<li><a href="protocol"
+									class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 								</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
+								<li><a href="reservationSelect"
+									class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
 								</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between">
+								<li><a href="myPay"
+									class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
 								</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
+								<li><a href="mycounsel"
+									class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
 								</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
+								<li><a href="myreport"
+									class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
 								</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
+								<li><a href="myfallow"
+									class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
 								</a></li>
-								<li><a href="logout" class="d-flex justify-content-between">
+								<br>
+								<br>
+								<p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass"
+									class="d-flex justify-content-between no_deco">
+										<p>회원 정보 수정</p>
+								</a></li>
+								<li><a href="logout"
+									class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
 								</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+								<li><a href="mdeleteForm"
+									class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
 								</a></li>
 							</ul>
-
 						</aside>
 					</div>
 				</div>

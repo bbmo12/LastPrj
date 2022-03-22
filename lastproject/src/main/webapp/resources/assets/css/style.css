@@ -5,9 +5,24 @@
 @import
 	url("https://fonts.googleapis.com/css?family=Ubuntu:400,500,700");
 
+@font-face {
+    font-family: 'Binggrae-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Binggrae-Bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
 	color: #777;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 15px;
 	font-weight: 400
 }
@@ -60,6 +75,9 @@ ul {
 	margin: 0;
 	padding: 0;
 	list-style: none
+}
+i{
+	color: black;
 }
 
 a:hover, a:focus {
@@ -460,7 +478,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #header.header-scrolled {
-	background: #f9f9fd;
+	background: white;
 	transition: all 0.5s;
 	top: 0
 }
@@ -594,7 +612,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .department-area {
-	background: #f9f9fd
+	background: #fff;
 }
 
 .department-area .single-slide {
@@ -1253,15 +1271,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .blog_right_sidebar .search_widget .input-group .form-control {
 	font-size: 14px;
-	line-height: 29px;
-	border: 0px;
-	width: 100%;
-	font-weight: 300;
-	color: #fff;
-	padding-left: 20px;
-	border-radius: 45px;
-	z-index: 0;
-	background:#0062ff;
+    line-height: 29px;
+    width: 100%;
+    font-weight: 300;
+    color: black;
+    padding-left: 20px;
+    border-radius: 45px;
+    z-index: 0;
+    border: 1px #e8e8e8 solid;
 }
 
 .blog_right_sidebar .search_widget .input-group .form-control:focus {

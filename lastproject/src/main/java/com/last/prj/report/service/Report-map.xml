@@ -223,7 +223,7 @@
 		SELECT COUNT(*)
 		FROM QNA Q, REPORT R
 		WHERE Q.Q_NO = R.Q_NO
-		<if test="code != null">
+		<if test="code != null ">
 			AND R.CODE = #{code}
 		</if>
 		<if test="repor != null ">
@@ -293,5 +293,36 @@
 		SELECT P_ID AS ID FROM P_MEMBER WHERE C_REPORT >= 10)
 	</select>
 	
+	
+	
+	<!-- 신고 제재 대상 회원 -->
+	<select id="adminReporList" resultType="com.last.prj.report.service.ReportVO">
+	SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (
+	SELECT M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, R.REP_NO, M.NAME, M.STARTDATE
+		FROM MEMBER M , REPORT R
+		WHERE M.M_ROLE = 1 AND M.M_ID = R.REPORTED  AND M.C_REPORT >= 10 
+		UNION
+		SELECT P.P_ID AS ID, P.P_ROLE AS ROLE,
+		P.C_REPORT, R.REP_NO , P.NAME , P.STARTDATE
+		FROM P_MEMBER P , REPORT R
+		WHERE P.P_ROLE = 2 AND 
+		P.P_ID = R.REPORTED AND P.C_REPORT >= 10
+		<![CDATA[ 
+        ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
+        ]]>
+	</select>
+	<!-- 신고 제재 중인 회원 -->
+	<select id="adminReporListCount" resultType="int">
+		SELECT COUNT(*) FROM(
+		SELECT M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, R.REP_NO, M.NAME, M.STARTDATE
+		FROM MEMBER M , REPORT R
+		WHERE M.M_ROLE = 1 AND M.M_ID = R.REPORTED AND M.C_REPORT >= 10
+		UNION
+		SELECT P.P_ID AS ID, P.P_ROLE AS ROLE,
+		P.C_REPORT, R.REP_NO , P.NAME , P.STARTDATE
+		FROM P_MEMBER P , REPORT R
+		WHERE P.P_ROLE = 2 AND
+		P.P_ID = R.REPORTED AND P.C_REPORT >= 10)
+	</select>
 	
 </mapper>

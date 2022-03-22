@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,95 +13,113 @@
 <script
 	src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
 <script src="template/js/diaLog.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <style>
-	#my_section {
-		padding: 50px;
-	}
-	.padding {
-		padding: 5rem
-	}
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important
-	}
-	.table th {
-		font-size: 20px;
-		font-weight: 500;
-	}
-	.table {
-		width: 100%;
-		max-width: 100%;
-		margin-bottom: 1rem;
-		background-color: transparent
-	}
-	
-	.table-striped tbody tr:nth-of-type(odd) {
-  		background-color: #f9f9fd;
- 	}
-	.table td {
-		font-size: 16px;
-		padding: .875rem 0.9375rem
-	}
-	.badge {
-		font-size: 12px;
-		line-height: 1;
-		padding: .375rem .5625rem;
-		font-weight: normal;
-	}
-	.star-rating {
-		display: flex;
-		flex-direction: row-reverse;
-		font-size: 1.5em;
-		justify-content: space-around;
-		padding: 0 .2em;
-		text-align: center;
-		width: 5em;
-	}
-	.star-rating input {
-		display: none;
-	}
-	.star-rating label {
-		color: #ccc;
-		cursor: pointer;
-	}
-	.star-rating :checked~label {
-		color: #f90;
-	}
-	.star-rating label:hover,
-	.star-rating label:hover~label {
-		color: #fc0;
-	}
-	.badge-info {
-		background-color: cornflowerblue;
-		border: none;
-	}
-	
-	 .badge-pay{
-		background-color: #38a4ff;
-		color: #fff;
-    }
-    #sidebar {
-		width: 500px;
-		float: none;
-		margin-left: 12em;
-		background-color: #fff;
-		border: none;
+#my_section {
+	padding: 50px;
+}
 
-	}
-    .codep {
-		color: #0062ff; 
-    	background: #FFF;
-    	border: 1px solid transparent;
-    	font-size: 16px;	
-	}
-	.codep:hover {
-		color: #0062ff;
-    	border: 1px solid #0062ff;
-    	background: #fff;	
-	}
-	
+.padding {
+	padding: 5rem
+}
+
+.pl-3, .px-3 {
+	padding-left: 1rem !important
+}
+
+.table th {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 1rem;
+	background-color: transparent
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+	background-color: #f9f9fd;
+}
+
+.table td {
+	font-size: 16px;
+	padding: .875rem 0.9375rem
+}
+
+.badge {
+	font-size: 12px;
+	line-height: 1;
+	padding: .375rem .5625rem;
+	font-weight: normal;
+}
+
+/* .star-rating {
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 1.5em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 5em;
+} */
+
+/* .star-rating input {
+	display: none;
+}
+
+.star-rating label {
+	color: #ccc;
+	cursor: pointer;
+}
+
+.star-rating :checked ~label {
+	color: #f90;
+}
+
+.star-rating label:hover, .star-rating label:hover ~label {
+	color: #fc0;
+} */
+
+.badge-info {
+	background-color: cornflowerblue;
+	border: none;
+}
+
+.badge-pay {
+	background-color: #38a4ff;
+	color: #fff;
+}
+
+#sidebar {
+	width: 500px;
+	float: none;
+	margin-left: 12em;
+	background-color: #fff;
+	border: none;
+}
+
+.codep {
+	color: #0062ff;
+	background: #FFF;
+	border: 1px solid transparent;
+	font-size: 16px;
+}
+
+.codep:hover {
+	color: #0062ff;
+	border: 1px solid #0062ff;
+	background: #fff;
+}
+
+.form-control1 {
+	padding: 5px;
+	display: inline-block;
+	border-radius: 20px;
+}
 </style>
 
 <body>
@@ -122,8 +141,9 @@
 						style="margin-left: 40px; width: 300px;">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle"
-								src="resources/upload/${member.picture}" onerror ="this.src='resources/upload/cat.jpg'" style="width: 210px"
-								alt="">
+								src="resources/upload/${member.picture}"
+								onerror="this.src='resources/upload/cat.jpg'"
+								style="width: 210px" alt="">
 							<div class="br"></div>
 							<h4>${member.name }</h4>
 							<div class="br"></div>
@@ -131,51 +151,67 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
-								<li><a href="memberMypage" class="d-flex justify-content-between">
+								<li><a href="memberMypage"
+									class="d-flex justify-content-between">
 										<p>내 프로필</p>
-									</a></li>
-								<li><a href="protocol" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="protocol"
+									class="d-flex justify-content-between">
 										<p>반려동물 진료기록</p>
-									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="reservationSelect"
+									class="d-flex justify-content-between">
 										<p>예약 내역</p>
-									</a></li>
+								</a></li>
 								<li><a href="myPay" class="d-flex justify-content-between">
 										<p>결제 내역</p>
-									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="mycounsel"
+									class="d-flex justify-content-between">
 										<p>상담 내역</p>
-									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="myreport"
+									class="d-flex justify-content-between">
 										<p>신고 내역</p>
-									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="myfallow"
+									class="d-flex justify-content-between">
 										<p>팔로우</p>
-									</a></li>
+								</a></li>
 								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
-									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="mdeleteForm"
+									class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
-									</a></li>
+								</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list" style="position: relative; top: 20px;">
+				<div class="col-lg-9 posts-list"
+					style="position: relative; top: 20px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
-						<br><h1>${member.name }님의 예약 내역</h1><br>
+							<br>
+							<h1>${member.name }님의예약 내역</h1>
+							<br>
 						</div>
 						<div class="row">
 							<div class="col-md-12" style="margin: 20px 0 0 -45px;">
 								<div class="table-wrap">
-									<button type="button" class="codep" style="margin: 0 50px 0 15em;" data-code="">전체</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="100">진료</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="101">훈련</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="102">미용</button>
-									<button type="button" class="codep" style="margin-right: 50px;" data-code="103">돌봄서비스</button>
-									<table class="table table-striped" style="margin-top: 25px;margin-left: 40px; width: 100%">
+									<button type="button" class="codep"
+										style="margin: 0 50px 0 15em;" data-code="">전체</button>
+									<button type="button" class="codep" style="margin-right: 50px;"
+										data-code="100">진료</button>
+									<button type="button" class="codep" style="margin-right: 50px;"
+										data-code="101">훈련</button>
+									<button type="button" class="codep" style="margin-right: 50px;"
+										data-code="102">미용</button>
+									<button type="button" class="codep" style="margin-right: 50px;"
+										data-code="103">돌봄서비스</button>
+									<table class="table table-striped"
+										style="margin-top: 25px; margin-left: 40px; width: 100%">
 										<thead>
 											<tr>
 												<th>예약번호</th>
@@ -193,16 +229,18 @@
 										</tbody>
 									</table>
 									<div class="blog_right_sidebar" id="sidebar">
-										<form id="admDateForm" onsubmit="return false"	onkeypress="eventkey();" onclick="pagingList();">
-											<input type="hidden" name="code">
-											<input	type="hidden" name="pageNum" value="1">
-											<aside class="single_sidebar_widget search_widget"	style="display: flex;">
+										<form id="admDateForm" onsubmit="return false"
+											onkeypress="eventkey();" onclick="pagingList();">
+											<input type="hidden" name="code"> <input
+												type="hidden" name="pageNum" value="1">
+											<aside class="single_sidebar_widget search_widget"
+												style="display: flex;">
 												<select id="key" name="key">
 													<option value="all" selected="selected">전 체</option>
 												</select>
 												<div class="input-group">
-													<input type="text" class="form-control" id="data"name="data"> 
-													<span class="input-group-btn">
+													<input type="text" class="form-control" id="data"
+														name="data"> <span class="input-group-btn">
 														<button class="btn btn-default" type="submit">
 															<i class="fa fa-search"></i>
 														</button>
@@ -230,34 +268,41 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="modal-title" id="exampleModalLabel">리뷰보기</h3>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<!-- modal 몸통 -->
 				<div class="modal-body 1">
-					<div id="content"></div>
+					<h3>별점</h3>
 					<div class="star"></div>
+					<h3>후기내용</h3>
+					<div id="content"></div>
+					<h3>이미지</h3>
 					<div id="image"></div>
-				<!-- modal 하단 버튼 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button id="sendReserv" name="sendReserv" type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
+					<!-- modal 하단 버튼 -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+						<button id="sendReserv" name="sendReserv" type="button"
+							class="btn btn-primary" data-dismiss="modal">확인</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- 리뷰작성 모달창 -->
+	<!-- 리뷰작성 모달창 -->
 	<!-- Modal -->
 	<div class="modal fade" id="reviewWriteModal" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<h3 class="modal-title" id="exampleModalLabel">후기를 남겨주세요!</h3>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -266,42 +311,33 @@
 					<!-- modal 몸통 -->
 					<div class="modal-body">
 
-						<div align="center">
-							<h3 align="center">후기를 남겨주세요!</h3>
-							<div class="star-rating">
-								<!-- <input type="radio" id="5-stars" name="rating" value="5" /> 
-								<label for="5-stars" class="star">&#9733;</label> 
-								<input type="radio" id="4-stars" name="rating" value="4" /> 
-								<label for="4-stars" class="star">&#9733;</label> 
-								<input type="radio" id="3-stars" name="rating" value="3" /> 
-								<label for="3-stars" class="star">&#9733;</label>
-								<input type="radio" id="2-stars" name="rating" value="2" /> 
-								<label for="2-stars" class="star">&#9733;</label> 
-								<input type="radio" id="1-stars" name="rating" value="1" /> 
-								<label for="1-stars" class="star">&#9733;</label> -->
-							</div>
+						<div>
+							<h3>별점</h3>
+							<div class="star-rating"></div>
 							<input id="star2" name="rating" type="hidden">
 						</div>
+						<h3>후기내용</h3>
 						<div class="form-group">
-							<label for="exampleInputPassword4">후기내용</label>
-							<textarea class="form-control" id="content" name="content"
-								placeholder="후기내용" rows="4" cols="80"></textarea>
+
+							<textarea class="form-control1" id="content" name="content"
+								placeholder="후기내용" rows="4" cols="50"></textarea>
 						</div>
 
 						<div class="form-group" style="margin-top: -10px;">
-							<label>후기사진</label><br> 
+							<h3>후기 사진</h3>
 							<input class="file-upload-browse btn btn-primary" type="file"
 								id="multiFileList1" name="multiFileList1" multiple="multiple">
-							<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
+							<button type="button" class="btn btn-primary btn-sm"
+								onclick="addFile1()">+</button>
 							<div id="ffile1"></div>
 						</div>
 					</div>
 					<!-- modal 하단 버튼 -->
 					<div class="modal-footer">
 						<input type="hidden" id="insert_r_no" name="r_no" value="">
-						<button type="submit">작성</button>
-						<!-- onclick="serviceReview()" -->
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<button type="submit" class="btn btn-primary">작성</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
 					</div>
 				</form>
 			</div>
@@ -339,7 +375,7 @@
 				if(result[i].r_check == 0){
 					choicedTag += "<td><button type='button' onclick='reviewadd("+result[i].r_no+");' class='btn btn-primary' data-toggle='modal' data-target='#reviewWriteModal'>리뷰 작성</button></td></tr>";
 				}else{
-					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");'style='border : 0px;' type='button' class='btn btn-secondary' data-toggle='modal' data-target='#exampleModal1'>리뷰 보기</button></td></tr>";
+					choicedTag += "<td><button onclick='reviewread("+result[i].r_no+");'style='border : 0px;' type='button' class='btn btn-primary' data-toggle='modal' data-target='#exampleModal1'>리뷰 보기</button></td></tr>";
 				}
 			}else{
 				choicedTag += '<td><button class="btn btn-primary" disabled>리뷰 작성</button></td></tr>';
@@ -382,6 +418,13 @@
 		} //for문
 	} //=========================end viewPmemberList : 받아온 데이터로 List만드는 함수===============
 	
+	function onerror(obj) {
+		obj.onerror ="";
+		obj.src = "resources/upload/1.png";
+		return true;
+		
+	}
+
 
 		<!-- 리뷰 작성 모달창 -->
 	$(document).ready(function () {
@@ -394,10 +437,6 @@
 		});
 	});
 
-	
-
-
-	
 	function addFile1() {
 		var filediv = $('<div>').attr({
 			'id' : 'filediv'
@@ -442,18 +481,30 @@
 				data : {'r_no' : r_no},
 				success : function(result){
 					
-					for(var i = 0; i < result.fileList.length; i++){
+					if(result.fileList.length != ''){
+						for(var i = 0; i < result.fileList.length; i++){
 						
-						var imgsrc = 'resources/upload/'+result.fileList[i].picture;
-						var img = $('<img>').attr({
+							var imgsrc = 'resources/upload/'+result.fileList[i].picture;
+							console.log("여기는 imgsrc" , imgsrc)
+									var img = $('<img>').attr({
 									'src': imgsrc,
-									'alt': "등록된 사진이 없습니다."
-									});
+									}).width("168px").height("196px");
+									var div = $('<div>');
+									div.append(img);
+									$('#image').append(div);
+									
+
+							
+						}//for문 끝
+					} else {
+						imgsrc = 'resources/upload/cat.jpg';
+							var img = $('<img>').attr({
+								'src': imgsrc
+							}).width("168px").height("196px");
 						var div = $('<div>');
-						div.append(img);
+								div.append(img);
 						$('#image').append(div);
 					}
-					
 					var content = result.content;
 					var rating = result.rating;
 					$('.star').raty({ score:rating, width:200, path: "resources/star", readOnly: true});

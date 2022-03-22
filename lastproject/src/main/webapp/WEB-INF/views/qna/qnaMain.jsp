@@ -16,7 +16,7 @@
 		a:link,
 		a:visited,
 		a:hover {
-			color: black;
+			
 			text-decoration: none;
 		}
 
@@ -54,10 +54,6 @@
 			margin-left: 20px;
 			width: 210px;
 			height: 50px;
-			background-color: #0062ff;
-			border: none;
-			border-radius: 30px;
-			color: white;
 			padding-left: 15px;
 		}
 
@@ -91,11 +87,12 @@
 			text-align: right;
 			color: #353535;
 			margin-left: 40px;
+			margin-top: 40px;
 		}
 
 		.qnaBody {
 			font-size: 20px;
-			color: black;
+			/* color: black; */
 			margin:0 60px 15px 70px;
 			text-align: justify
 		}
@@ -119,19 +116,26 @@
 			font-size: 13px;
 		}
 		
-		#view-button,
 		#qna-button{
-			color: #fff; 	
-    		background: #0062ff;
-    		border: 1px solid transparent;	
+		color:white;
 		}
 		
-		#view-button:hover,
+		#qna-button:hover{
+		color: white;
+		}
+		
+	/* 	#view-button,
+		#qna-button{
+    		border: 1px solid transparent;
+    		color: #0062ff;
+		} */
+		
+	/* 	#view-button:hover,
 		#qna-button:hover{
 			color: #0062ff;
 			border: 1px solid #0062ff;
 			background: #fff;
-		}
+		} */
 		
 	</style>
 
@@ -147,7 +151,7 @@
 				</div>
 				<sec:authorize access="hasRole('MEMBER')">
 					<div class="qnaForm">
-						<a href="qnaForm" class="genric-btn info circle btn-lg" id="qna-button">질문글작성하기</a>
+						<a href="qnaForm" class="btn btn-primary btn-rounded btn-fw" id="qna-button">질문글작성하기</a>
 					</div>
 				</sec:authorize>
 			</div>
@@ -170,7 +174,7 @@
 														<td>
 															<i class="fa-solid fa-q fa-4x"
 																style="color: dodgerblue; margin-right: 20px;"></i></td>
-														<td style="width: 450px; font-size: 28px; color: black;">
+														<td style="width: 450px; font-size: 25px; color: black;">
 															${list.title }</td>
 														<td>
 															<ul id="bInfo" class="blog_meta list">
@@ -247,7 +251,7 @@
 														</ul>
 												</div>
 												<!-- 상세조회 페이지 이동 -->
-												<a class="genric-btn info-border radius" id="view-button"
+												<a class="btn btn-outline-primary btn-fw" id="view-button"
 													href="qnaDetail?q_no=${list.q_no }"
 													style="float: right; margin-right: 32px;">View More</a>
 											</div>
@@ -276,7 +280,7 @@
 									</option>
 								</select>
 								<div class="input-group" style="width: 230px; margin-left: 71px;">
-									<input type="text" id="searchBox" name="searchValue">
+									<input type="text" class="form-control" id="searchBox" name="searchValue">
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="submit">
 											<i class="fa fa-search"></i>
@@ -293,7 +297,7 @@
 								<ul style="text-align: left;" class="list cat-list">
 									<li id="tlist">
 									<a href="qnaDetail?q_no=${best.q_no }" class="d-flex justify-content-between">
-										<i class="fa-solid fa-q"></i>&nbsp;&nbsp;${best.title}
+										<i class="fa-solid fa-q" style="color:gray;"></i>&nbsp;&nbsp;${best.title}
 									</a></li>
 								</ul>
 							</c:forEach>

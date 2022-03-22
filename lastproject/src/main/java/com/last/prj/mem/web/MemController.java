@@ -135,22 +135,23 @@ public class MemController {
 
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(MultipartFile file, MemVO member, Model model) {
+	public String memberUpdate(MultipartFile file, RedirectAttributes redirectAttr, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
+		File savePath = new File(uploadPath);
 
-		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
 
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			
+			String newPath = uploadPath + File.separator + originalFileName;
+			File saveFile = new File(newPath);
 
 			try {
 				file.transferTo(saveFile);
@@ -169,6 +170,7 @@ public class MemController {
 		
 		
 		memDao.memberUpdate(member);
+		redirectAttr.addFlashAttribute("memberupdate","정보를다시확인해주세요.");
 		return "redirect:memberMypage";
 	}
 
@@ -367,7 +369,7 @@ public class MemController {
 	      }
 	   }
 	
-	/* 배포시 path변경
+	 //배포시 path변경
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
@@ -381,8 +383,8 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			uploadPath += File.separator + saveFileName;
-			File saveFile = new File(uploadPath);
+			String newPath = uploadPath + File.separator + saveFileName;
+			File saveFile = new File(newPath);
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
@@ -402,8 +404,9 @@ public class MemController {
 		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		return "redirect:home";
 	}
-	*/
 	
+	
+	/*
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
@@ -445,21 +448,24 @@ public class MemController {
 		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		return "redirect:home";
 	}
+	*/
 	
 	@RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
 	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		String originalFileName = file.getOriginalFilename();
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
-		File savePath = new File(realPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
+		File savePath = new File(uploadPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			
+			uploadPath += File.separator + originalFileName;
+			File saveFile = new File(uploadPath);
+			
 			try {
 				file.transferTo(saveFile);
 				pmember.setPicture(originalFileName);
@@ -490,7 +496,7 @@ public class MemController {
 
 	@RequestMapping("/pjoin_3") // 파트너회원 회원가입 3차
 	public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1,
-			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PetcareVO petcare) {
+			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PetcareVO petcare, RedirectAttributes redirectAttr) {
 		System.out.println("여기 파트너회원가입 3차");
 		System.out.println("p_id3:" + p_id);
 		System.out.println(petcare);
@@ -503,13 +509,13 @@ public class MemController {
 		System.out.println("p_image = " + p_image);
 		pmemDao.pmemberInsert3(p_id, p_license, p_image); // 파일다중업로드
 		memDao.petcareinsert(petcare);
-
+		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		/*
 		 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
 		 * i++) { memDao.otimeinsert(time); }
 		 */
 
-		return "member/joinResult";
+		return "redirect:home";
 	}
 
 	@RequestMapping("addService")

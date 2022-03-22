@@ -10,19 +10,6 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
-<style>
-   .options {
-      transform: translateY(-35px);
-   }
-
-   .options {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-evenly;
-   }
-</style>
 
 <body class="my-login-page">
    <section class="h-100" id="main">
@@ -80,10 +67,11 @@
                   <span aria-hidden="true">&times;</span>
                </button>
             </div>
-            <div class="modal-body" style="text-align: center;">
-				<div id="id"></div>
+            <div class="modal-body">
+				<div id="member"></div>
             </div>
             <div class="modal-footer">
+            	<div id="footer"></div>
                <button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
             </div>
          </div>
@@ -112,16 +100,14 @@
                "name": name
             },
             success: function (result) {
-               var member = $('#members');
-               member.empty();
-               $('#id').append(result);
-               console.log(result);
-               if (result == "") {
-                  member.append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
+               $('#member').empty();
+               $('#footer').empty();
+               if (result != "") {
+            	   $('#member').append(`<h3>아이디:` + result + `</h3>`);
+                   $('#footer').append(`<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`);
                } else {
-                  member.append(`<h3>` + result + `</h3>` +
-                     `&nbsp;&nbsp;<button type="button" class="btn btn-primary mr-2" onclick="location.href='loginForm'">로그인하러가기</button>`
-                  );
+            	   $('#member').append(`입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.`);
+            	   $('#footer').append(`<button type="button" class="btn btn-primary mr-2" onclick="location.href='join'">회원가입</button>`);
                }
             },
             error: function () {}
