@@ -307,7 +307,7 @@ h1{
                             <div class="doctor-text text-center" style="height:250px; box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 	border: 1px solid #e3e6f0;">
                             <div id="profile">
-                            	<img class="profile_img" src="resources/upload/${review.picture }" "this.src='resources/upload/cat.jpg'" alt=''>
+                            	<img class="profile_img" src="resources/upload/${review.picture }" onerror= "this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
                             <div id="review">
 	                            ${review.m_id }
@@ -320,7 +320,7 @@ h1{
                                 <p class="review_text">${review.content }</p>
                                 <c:forEach items="${review.fileList }" var="photo">
 								<div style="margin-top: 10px; display:inline-block;">
-									<img src="resources/upload/${photo.photo }" "this.src='resources/upload/cat.jpg'" alt=''
+									<img src="resources/upload/${photo.photo }" onerror="this.src='resources/upload/cat.jpg'" alt=''
 										style="width: 60px; height: 60px;">
 								</div>
 							</c:forEach>
