@@ -181,7 +181,7 @@
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container" style="max-width: 1350px;">
+		<div class="container" style="max-width: 1450px;">
 			<div class="row">
 				<div class="col-lg-3">
 					<h2 align="center">MyPage</h2>

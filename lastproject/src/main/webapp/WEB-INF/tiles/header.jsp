@@ -270,7 +270,7 @@
 <body>
 	<header class="header-area">
 		<div id="header" id="home">
-			<div class="container" style="margin-right: 20px;">
+			<div class="container" style="margin-right: 35px;">
 				<div class="row align-items-center justify-content-between d-flex">
 					<div id="logo" style="float: left; margin-left: -400px;">
 						<a href="home" id="logText">BANBANBAN<!-- <img src="resources/upload/logo2.png" alt="" title="" style="width:70px; height:70px;" /> --></a>

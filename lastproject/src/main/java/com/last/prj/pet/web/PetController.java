@@ -150,7 +150,7 @@ public class PetController {
 	  petDAO.mypetInsert(pet);
 	  model.addAttribute("pets", petDAO.petmemberList(m_id));
 	  redirectAttr.addFlashAttribute("petadd","정보를다시확인해주세요.");
-	  return "redirect:memberMypage";
+	  return "redirect:mainMypage";
 	}
 
 	
@@ -235,7 +235,7 @@ public class PetController {
 		redirectAttr.addFlashAttribute("petupdate","정보를다시확인해주세요.");
 		
 		
-		return "redirect:memberMypage";
+		return "redirect:mainMypage";
 	}
 	
 	@RequestMapping("mypetDelete")
@@ -263,7 +263,7 @@ public class PetController {
 		 petDAO.mypetDelete(pet_no);
 		 model.addAttribute("pets", petDAO.petmemberList(m_id));
 		 redirectAttr.addFlashAttribute("petdelete","정보를다시확인해주세요.");
-		 return "redirect:memberMypage";
+		 return "redirect:mainMypage";
 	}
 	
 	
