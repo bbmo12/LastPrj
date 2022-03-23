@@ -23,8 +23,8 @@ margin-top:1.9%;
 }
 
 #my_section {
-	padding: 50px;
-	background: #f9f9fd;
+	margin-top: -70px;
+    padding-bottom: 25px;
 }
 
 .blog_right_sidebar {
@@ -132,8 +132,8 @@ h1{
 </style>
 
 <body>
-<br><br><br><br><br>
-     <!-- Banner Area Starts -->
+<!-- <br><br><br><br><br>
+     Banner Area Starts
     <section class="banner-area">
         <div class="container">
             <div class="row">
@@ -145,7 +145,7 @@ h1{
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
@@ -301,9 +301,6 @@ h1{
 			</div>
 		</div>
 	</section>
-	<script>
-			</script>
-
 </body>
 
 </html>

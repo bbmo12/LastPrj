@@ -900,7 +900,7 @@ function admReviewListBtn() {//qna에 대한 함수 실행
 									$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res[0].rev_no+" onclick='goDetailR(this)' >상세페이지로..</button>");
 									let html = 
 										`<li data-value="701" class="option selected">미처리</li>
-										<li data-value="701" class="option">기각</li>
+										<li data-value="702" class="option">기각</li>
 										<li data-value="703" class="option">승인</li>`;	
 									$(".list").append(html);
 								}
@@ -1177,7 +1177,7 @@ function eventkeyQ() {
 									$(".current").html('');
 									let html = 
 										`<li data-value="701" class="option selected">미처리</li>
-										<li data-value="701" class="option">기각</li>
+										<li data-value="702" class="option">기각</li>
 										<li data-value="703" class="option">승인</li>`;	
 									$(".list").append(html);
 									let htm = `<span class="current">미처리</span>`;
