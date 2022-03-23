@@ -30,6 +30,7 @@ import com.last.prj.report.service.ReportVO;
 @Controller
 public class AdminController {
 
+	
 	@Autowired
 	private PmemberService pMemberDao;
 
