@@ -186,6 +186,16 @@
 			});
 		}
 		
+		function bell(){
+			
+			var bell1 = `
+				 <div class="bellWrapper">
+		          <i class="fas fa-bell my-bell"></i>
+		        </div>
+		       `;
+		    $('.box').append(bell1);
+		    $('#i_bell').remove();
+		}
 		
 		function noticeCheck(){
 			$.ajax({
@@ -194,20 +204,15 @@
 				success: function (result) {
 					console.log(result);
 					
-					if (result != 0) {
-						var bell1 = `
-							 <div class="bellWrapper">
-					          <i class="fas fa-bell my-bell"></i>
-					        </div>
-					       `;
-					    $('.box').append(bell1);
-					    $('#i_bell').remove();
-					    
-					}else if (result == 0){
-						var bell2 = `<i id="i_bell" class="fa-solid fa-bell"></i>`;
-						$('#notificationDropdown').append(bell2);
-					}
+					var bell3 = `<i id="i_bell" class="fa-solid fa-bell"></i>`;
+					$('#notificationDropdown').append(bell3);  
 					
+					if (result != 0) {
+						console.log("no!")
+						setTimeOut(bell, 3000);
+						var bell2 = `<i id="i_bell" class="fa-solid fa-bell"></i>`;
+						$('#notificationDropdown').append(bell2);  
+					}
 				}
 			});
 			

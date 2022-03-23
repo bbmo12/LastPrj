@@ -208,7 +208,7 @@ public class PmemberController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 
-			uploadPath += File.separator + originalFileName;
+			uploadPath += File.separator + saveFileName;
 			File saveFile = new File(uploadPath);
 			try {
 				file.transferTo(saveFile);

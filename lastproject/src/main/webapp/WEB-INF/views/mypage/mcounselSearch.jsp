@@ -120,33 +120,6 @@
  		font-weight: 700;
  		color: black;
 	}
-	.star-rating {
-		display: flex;
-		flex-direction: row-reverse;
-		font-size: 1.5em;
-		justify-content: space-around;
-		padding: 0 .2em;
-		text-align: center;
-		width: 5em;
-	}
-
-	.star-rating input {
-		display: none;
-	}
-
-	.star-rating label {
-		color: #ccc;
-		cursor: pointer;
-	}
-
-	.star-rating :checked~label {
-		color: #f90;
-	}
-
-	.star-rating label:hover,
-	.star-rating label:hover~label {
-		color: #fc0;
-	}
 
 	.card-text {
 		display: inline-block;
@@ -359,8 +332,8 @@
 				<!-- modal 몸통 -->
 				<div class="modal-body">
 				<h3>별점</h3>
-					<div class="star-rating">
-					</div>
+					<div class="star">
+					</div><br>
 					<h3>후기내용</h3>
 					<div id="content"></div>
 
@@ -368,9 +341,10 @@
 				</div>
 				<!-- modal 하단 버튼 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					
 					<button id="sendReserv" name="sendReserv" type="button" class="btn btn-primary"
 						data-dismiss="modal">확인</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				</div>
 			</div>
 		</div>
@@ -398,20 +372,10 @@
 					<div class="modal-body">
 						<div>
 							<h3>별점</h3>
-							<div class="star-rating">
-								<input type="radio" id="5-stars" name="rating" value="5" />
-								<label for="5-stars" class="star">&#9733;</label>
-								<input type="radio" id="4-stars" name="rating"value="4" />
-								<label for="4-stars" class="star">&#9733;</label>
-								<input type="radio"	id="3-stars" name="rating" value="3" />
-								<label for="3-stars"class="star">&#9733;</label>
-								<input type="radio" id="2-stars" name="rating" value="2" />
-								<label for="2-stars" class="star">&#9733;</label> 
-								<input type="radio" id="1-stars" name="rating"	value="1" /> 
-								<label for="1-stars" class="star">&#9733;</label>
-							</div>
+							<div class="star-rating"></div>
+							<input id="star2" name="rating" type="hidden">
 						</div>
-						
+						<br>
 							<h3>후기내용</h3>
 							<div class="form-group">
 							<textarea class="form-control1" id="content" name="content" placeholder="" rows="4"
@@ -436,11 +400,21 @@
 		$('#example').barrating('set', 2);
 	   
 	   }); */
+	   
+	   $(document).ready(function () {
+			$('.star-rating').raty({
+				path: "resources/star",
+				width: 200,
+				click: function (score) {
+					$('#star2').val(score);
+				}
+			});
+		});
 
 		function reviewread(e) {
 			var c_no = e;
 			$("#content").empty();
-			$(".star-rating").empty();
+			$(".star").empty();
 
 			$.ajax({
 				url: 'cnoreview',
@@ -455,7 +429,7 @@
 					var rating = result.rating;
 					console.log(rating);
 
-					$('.star-rating').raty({
+					$('.star').raty({
 						readOnly: true,
 						score: rating,
 						path: "resources/star",
