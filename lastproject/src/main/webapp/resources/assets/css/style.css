@@ -29,35 +29,35 @@ body {
 
 h1 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 45px !important;
 	font-weight: 700
 }
 
 h2 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 36px !important;
 	font-weight: 700
 }
 
 h3 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 18px !important;
 	font-weight: 700;
 }
 
 h4 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 16px !important;
 	font-weight: 400
 }
 
 h5 {
 	color: #777;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	text-transform: capitalize;
 	font-size: 14px !important;
 	font-weight: 400
@@ -66,7 +66,7 @@ h5 {
 h6 {
 	color: #777;
 	font-size: 12px !important;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	text-transform: uppercase;
 	font-weight: 500
 }
@@ -920,7 +920,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .hotline-area span {
 	font-size: 56px;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	font-weight: 900
 }
 
@@ -3284,7 +3284,7 @@ h6 {
 .template-btn {
 	color: #fff;
 	background: linear-gradient(to right, #244cfd, #15e4fd);
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: 400;

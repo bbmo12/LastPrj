@@ -22,6 +22,10 @@ h2{
 	font-weight: 700;
 }
 
+h3{
+	color: white;
+}
+
 	#banner_content{
 		color: white;
 	}
@@ -77,7 +81,7 @@ h2{
 </head>
 <body>
 	<br><br><br><br><br>
-    <section class="banner-area">
+    <%-- <section class="banner-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10" style="margin-left: 50px;">
@@ -93,7 +97,22 @@ h2{
                 </div>
             </div>
         </div>
-    </section>
+    </section> --%>
+    <section class="banner-area other-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>공지사항</h1><br>
+					<h3>우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
+				</div>
+				<sec:authorize access="hasRole('ADMIN')">
+					<div class="boardForm">
+						<a href="boardForm" class="genric-btn info circle btn-lg" id="qna-button">공지사항 작성하기</a>
+					</div>
+				</sec:authorize>
+			</div>
+		</div>
+	</section>
 	<section class="department-area section-padding4">
 		<div class="container">
 			<div class="row">

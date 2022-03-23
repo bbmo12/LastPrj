@@ -35,4 +35,8 @@
 	<delete id="noticeDelete">
 		delete from notice where notice_no = #{notice_no}
 	</delete>
+	
+	<select id="noticeCheckCount" resultType="int">
+		select count(*) from notice where r_check = 0 and n_to = #{m_id}
+	</select>
 </mapper>
