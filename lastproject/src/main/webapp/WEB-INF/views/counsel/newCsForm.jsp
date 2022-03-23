@@ -12,7 +12,8 @@
 	}
 	
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.no_deco {
@@ -176,7 +177,7 @@
 				</div>
 
 				<div class="col-lg-9 posts-list"
-					style="border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px;">
+					style="border: 1px solid #f3f3f3; padding: 50px; border-radius: 5px; height: 1050px; margin-top: 72px;">
 					<div class="col-lg-12 col-md-12 blog_details">
 						<div align="center">
 							<h2>상담 차트 작성</h2>
@@ -225,8 +226,7 @@
 										</c:forEach>
 									</ul>
 								</div>
-								<br class="clear"> <br class="clear"> <br class="clear"> <br class="clear">
-								<br; class="clear">
+								<br class="clear"> 
 									<div style="margin-top: 30px;">
 										<h3>상담 내용</h3>
 										<textarea id="content" name="content" class="form-control"

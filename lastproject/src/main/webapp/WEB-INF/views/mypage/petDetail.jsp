@@ -2,13 +2,15 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+		padding-bottom: 25px;
 	}
 
 	.no_deco {
@@ -66,7 +68,8 @@
 		border-radius: 0.35rem
 	}
 
-	.card-header, i{
+	.card-header,
+	i {
 		background: white;
 		font-size: 1.0rem;
 		font-family: 'NanumBarunGothic';
@@ -112,9 +115,15 @@
 	.swal2-content {
 		display: none;
 	}
+
+	.control-width {
+		width: 130px;
+		display: inline-block;
+	}
 </style>
+
 <body>
-<section class="department-area" style="padding: 30px 0 30px;">
+	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
 			<div class="col-lg-6 offset-lg-3">
 				<div class="section-top text-center">
@@ -140,8 +149,7 @@
 							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="mconfirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보수정하기</a>
 							</div>
 						</aside>
 					</div>
@@ -151,108 +159,94 @@
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
 								<p id="menu_bold">내 활동 내역</p>
-								<li><a href="protocol"
-									class="d-flex justify-content-between no_deco">
+								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
-								</a></li>
-								<li><a href="reservationSelect"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
-								</a></li>
-								<li><a href="myPay"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="myPay" class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
-								</a></li>
-								<li><a href="mycounsel"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
-								</a></li>
-								<li><a href="myreport"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
-								</a></li>
-								<li><a href="myfallow"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
-								</a></li>
+									</a></li>
 								<br>
 								<br>
 								<p id="menu_bold">회원 정보 관리</p>
-								<li><a href="mconfirmPass"
-									class="d-flex justify-content-between no_deco">
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
-								</a></li>
-								<li><a href="logout"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
-								</a></li>
-								<li><a href="mdeleteForm"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
-								</a></li>
+									</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
-				
-				
-				<div class="col-lg-9 posts-list">
-				<div id="formMain" style="width: 800px;">
-				<div class="card">
+				<div class="col-lg-9 posts-list" style="margin-top: 72px;">
+					<div id="formMain" style="width: 800px;">
+						<div class="card">
 							<div class="card-header">
-							<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;${pet.name }의 정보보기
+								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;${pet.name }의 정보보기
 							</div>
 							<div class="card-body card_notice" style="padding:30px">
-							<div class="form-group">
-							<i class="fa-solid fa-user"></i>
-								<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>
-								<input type="text" style="border: none" id="name" name="name" value="${pet.name}" readonly>
-							</div>
-
-							<div class="form-group">
-								<i class="fa-solid fa-address-card"></i>
-								<h3 style="font-weight: bolder;">생년월일&nbsp;:&nbsp;</h3>
-								<input type="text" style="border: none" id="birth" name="birth"
-									value="${pet.birth}" readonly>
-							</div>
-							
-							<div class="form-group">
-								<i class="fa-solid fa-mobile-screen"></i>
-							<h3 style="font-weight: bolder;">품종&nbsp;:&nbsp;</h3>
-								<input type="text" style="border: none" id="c_content"
-									name="c_content" value="${pet.c_content}" readonly>
-							</div>
-							<div class="form-group">
-								<i class="fa-solid fa-star"></i>
-								<h3 style="font-weight: bolder;">몸무게&nbsp;:&nbsp;</h3>
-								<input type="text" style="border: none" id="weight"
-									name="weight" value="${pet.weight}" readonly>
-							</div>
-
-							<div align="right">
-							<div style="display: inline-block;">
-							<form action="mypetUpdateForm" method="post">
-							<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">
-							<button type="submit"  class="btn btn-primary" name="pet_no" style="width: 200px" >반려동물 정보수정</button>
-								</form>
+								<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-user"></i>
+										<h3 style="font-weight: bolder;">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</h3>
+									</div>
+									<input type="text" style="border: none" id="name" name="name" value="${pet.name}"readonly>
 								</div>
-							<div style="display: inline-block;">
-							<form action="mypetDelete" method="post">
-							<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">	
-							<button type="submit" class="btn btn-primary" name="pet_no" style="width: 200px">  반려동물 삭제  </button>
-						</form>
-						</div>
+								<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-address-card"></i>
+										<h3 style="font-weight: bolder;">생년월일</h3>
+									</div>
+									<input type="text" style="border: none" id="birth" name="birth" value="${pet.birth}"readonly>
+								</div>
+								<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-mobile-screen"></i>
+										<h3 style="font-weight: bolder;">품&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종</h3>
+									</div>
+									<input type="text" style="border: none" id="c_content" name="c_content"value="${pet.c_content}" readonly>
+								</div>
+								<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-star"></i>
+										<h3 style="font-weight: bolder;">몸&nbsp;무&nbsp;게</h3>
+									</div>
+									<input type="text" style="border: none" id="weight" name="weight"value="${pet.weight}" readonly>
+								</div>
+								<div align="right">
+									<div style="display: inline-block;">
+										<form action="mypetUpdateForm" method="post">
+											<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">
+											<button type="submit" class="btn btn-primary" name="pet_no"
+												style="width: 200px">반려동물 정보수정</button>
+										</form>
+									</div>
+									<div style="display: inline-block;">
+										<form action="mypetDelete" method="post">
+											<input type="hidden" name="pet_no" id="pet_no" value="${pet.pet_no }">
+											<button type="submit" class="btn btn-primary" name="pet_no"
+												style="width: 200px"> 반려동물 삭제 </button>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				</div>
 			</div>
-			</div>
-			</div>
+		</div>
 	</section>
-
-
-
-
 </body>
+
 </html>
