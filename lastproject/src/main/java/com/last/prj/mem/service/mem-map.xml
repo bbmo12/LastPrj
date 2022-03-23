@@ -120,7 +120,7 @@
 
 	<!-- 일반회원 수 -->
 	<select id="memCount" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM MEMBER WHERE STARTDATE IS NOT NULL
 	</select>
 
 	<!--서비스 가격 입력 -->

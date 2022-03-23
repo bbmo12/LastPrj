@@ -1,162 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib tagdir="/WEB-INF/tags" prefix="my"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+</head>
 
-
-<!-- Chart.js 를 위한 CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
-<!-- Modal을 위한 CDN -->
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+ -->
+<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+	integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
-<!-- 모르겠음 -->
-<script
-	src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.37/dist/web3.min.js"></script>
-<script src="template/js/diaLog.js"></script>
-
-
-<!-- Air datepicker를 위한 CDN -->
 <script
 	src="resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
 <link href="resources/dist/css/datepicker.min.css" rel="stylesheet"
 	type="text/css" media="all">
 <script src="resources/dist/js/datepicker.js"></script>
+<!-- Air datepicker js -->
 <script src="resources/dist/js/i18n/datepicker.ko.js"></script>
-
+<!-- 달력 한글 추가를 위해 커스텀 -->
 
 <!-- <script src="resources/adminJs/adminMemberPageJS.js"></script> -->
 
-</head>
 <style>
-#my_section {
-	margin-top: -70px;
-	padding-bottom: 25px;
+#admDateForm {
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
-.card-footer {
-	background: white;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
-	font-weight: 400;
+#admDateFormP {
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
-.padding {
-	padding: 5rem
-}
-
-.table th {
-	text-align: center;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
-	font-weight: 500 !important;
-	color: black;
-}
-
-.table {
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 1rem;
-	background-color: transparent
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-	background-color: #f9f9fd;
-}
-
-.table td {
-	font-size: 16px;
-	padding: .875rem 0.9375rem
-}
-
-.badge {
-	font-size: 12px;
-	line-height: 1;
-	padding: .375rem .5625rem;
-	font-weight: normal;
-}
-
-.badge-info {
-	background-color: cornflowerblue;
-	border: none;
-}
-
-.badge-pay {
-	background-color: #38a4ff;
-	color: #fff;
-}
-
-.no_deco {
+.single_sidebar_widget .post_category_widget {
 	text-decoration: none !important;
-	font-size: 0.8rem !important;
-	color: black;
+	font-size: 2rem !important;
+}
+
+.codepP {
+	martgin: 30px;
+}
+
+.col-lg-3 {
+	padding: 50px;
+}
+
+.posts-list {
+	margin-top: 1.9%;
+}
+
+#my_section {
+	padding: 50px;
+	background: #f9f9fd;
 }
 
 .blog_right_sidebar {
 	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 	border: 1px solid #e3e6f0;
-	border-radius: 0.35rem;
-	float: none !important;
-	margin: 0 auto !important;
-	background-color: white;
-	width: 250px;
-}
-
-.partner_img {
-	object-fit: cover;
-	object-position: top;
-	border-radius: 50%;
-	width: 180px !important;
-	height: 180px !important;
-	float: none;
-	margin: 0 auto;
-}
-
-#Mainname {
-	font-size: 1.5rem !important;
-	font-family: 'NanumBarunGothic' !important;
-	font-style: normal !important;
-	font-weight: 700 !important;
-	color: gray;
-}
-
-#myinfo {
-	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
-	font-weight: 300;
-}
-
-#menu_bold {
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
-	font-weight: 700;
-	color: black;
-}
-
-.card-body {
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
-	font-weight: 300;
-	color: black;
+	border-radius: 0.35rem
 }
 
 .card {
@@ -172,6 +89,77 @@
 	font-style: normal;
 	font-weight: 400;
 	color: black;
+}
+
+.card-footer {
+	background: white;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
+}
+
+#notice_footer {
+	text-align: center;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
+}
+
+.card_notice {
+	font-size: 0.8rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
+}
+
+.partner_img {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+	width: 180px !important;
+	height: 180px !important;
+	float: none;
+	margin: 0 auto;
+}
+
+.pet_img {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+	width: 100px !important;
+	height: 100px !important;
+	float: none;
+	margin-bottom: 5px;
+}
+
+.widget_title {
+	background: #0062ff !important;
+}
+
+#cardTitle {
+	font-size: 1.25rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 700;
+}
+
+#myinfo {
+	font-size: 0.8rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 300;
+}
+
+#pet_img2 {
+	display: inline-block;
+	text-align: center;
+	margin-right: 15px;
+	font-size: 0.8rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
 }
 
 .que:first-child {
@@ -198,20 +186,23 @@
 .anw::before {
 	display: inline-block;
 }
-
-/* #myChart {
-	display:block; box-sizing: border-box; 
-	width: 500px;
-	height: 250px;
-} */
 </style>
+
 <body>
-	<section class="department-area" style="padding: 30px 0 30px;">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- Banner Area Starts -->
+	<section class="banner-area">
 		<div class="container">
-			<div class="col-lg-6 offset-lg-3">
-				<div class="section-top text-center">
-					<br> <br> <br>
-					<h2></h2>
+			<div class="row">
+
+				<div class="col-lg-10" style="margin-left: 50px;">
+					<br> <br> <br> <br> <br>
+					<h1>관리자 페이지</h1>
+					<h1>관리자님 반갑습니다.</h1>
 				</div>
 			</div>
 		</div>
@@ -220,49 +211,44 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2 align="center">AdminPage</h2>
+					<h5>
+						<a href="adminPage">메인 페이지</a>
+					</h5>
 					<br>
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img"
-								src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"
-								style="width: 210px; height: 167px;"> <br> <br>
-							<h4 id="Mainname">관리자님</h4>
+							<img class="partner_img" src="resources/upload/${member.pfile}"
+								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
+							<br>
+							<h4>관리자님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="confirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;해야할 일
 							</div>
 						</aside>
 					</div>
 					<br>
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list nanumbarungothic">
-								<p id="menu_bold">내 활동 내역</p>
-								<li><a href="adminPage"
-									class="d-flex justify-content-between no_deco" id="menu_bold">관리자
-										메인</a></li>
 								<li><a href="adminChartPage"
-									class="d-flex justify-content-between no_deco">
+									class="d-flex justify-content-between">
 										<p>차트</p>
 								</a></li>
 								<li><a href="adminMemberPage"
-									class="d-flex justify-content-between no_deco">
+									class="d-flex justify-content-between">
 										<p>목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
-									class="d-flex justify-content-between no_deco">
+									class="d-flex justify-content-between">
 										<p>신고 관리</p>
 								</a></li>
 								<li><a href="adminBoardPage"
-									class="d-flex justify-content-between no_deco">
+									class="d-flex justify-content-between">
 										<p>공지사항</p>
 								</a></li>
-								<li><a href="logout"
-									class="d-flex justify-content-between no_deco">
+								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
 								</a></li>
 							</ul>
@@ -320,158 +306,194 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12 col-md-12 blog_details">
-							<br> <br>
+						<div class="col-lg-12 col-md-12 blog_details ">
 							<div class="card">
 								<div class="card-header que" onclick="admMemberListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;일반
-									회원 목록 <input type="hidden" value="one" id="admMemberListInput">
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;일반 회원
+									목록 <input type="hidden" value="one" id="admMemberListInput">
 								</div>
-								<div class="card-body anw admMemberListDiv">
-									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
-											<form id="admDateForm" onsubmit="return false"
-												autocomplete="off" onkeypress="eventkey();">
-												<input type="hidden" name="code">
-												<code>가입일 검색 :</code>
-												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
-													value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-												: <input type="text" id="datepickerA" name="fromDate">&nbsp;&nbsp;
-												to : <input type="text" id="datepickerB" name="toDate"><br>
-												<br>
-												<code>이름,아이디로 검색 :</code>
-												&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
-													<option value="" selected>전 체</option>
-													<option value="name">이름</option>
-													<option value="m_id">아이디</option>
-												</select> <input type="text" id="data" name="data" size="20">&nbsp;
-												<button type="submit" onclick="pagingList();"
-													class="btn btn-default">
-													<i class="fa fa-search"></i>
-												</button>
-												<button type="reset" class="btn btn-default">
-													<i class="fa fa-search-minus" aria-hidden="true"></i>
-												</button>
-											</form>
-											<code>조건 별 검색 :</code>
-											&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codep" id="key"
-												data-code="">전체</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codep" id="petY"
-												data-code="100">펫 보유</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codep" id="petN"
-												data-code="101">펫 미보유</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codep" id="petN"
-												data-code="102">탈퇴한 회원</button>
-											</p>
-											<table class="table table-striped">
-												<thead>
-													<tr style="text-align: center;">
-														<th>이름</th>
-														<th>아이디</th>
-														<th>가입일</th>
-														<th>펫 보유</th>
-													</tr>
-												</thead>
-												<tbody id="myTable" align="center">
+								<div class="card-body anw admMemberListDiv"
+									style="padding: 15px">
+									<form id="admDateForm" onsubmit="return false"
+										autocomplete="off" onkeypress="eventkey();">
+										<input type="hidden" name="code">
+										<code>가입일 검색 :</code>
+										&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
+											value="1">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
+										: <input type="text" id="datepickerA" name="fromDate">&nbsp;&nbsp;
+										to : <input type="text" id="datepickerB" name="toDate"><br>
+										<br>
+										<code>이름,아이디로 검색 :</code>
+										&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
+											<option value="" selected>전 체</option>
+											<option value="name">이름</option>
+											<option value="m_id">아이디</option>
+										</select> <input type="text" id="data" name="data" size="20">&nbsp;
+										<button type="submit" onclick="pagingList();"
+											class="btn btn-default">
+											<i class="fa fa-search"></i>
+										</button>
+										<input type="reset">
+									</form>
+									<code>조건 별 검색 :</code>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codep" id="key"
+										data-code="">전체</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codep" id="petY"
+										data-code="100">펫 보유</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codep" id="petN"
+										data-code="101">펫 미보유</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codep" id="petN"
+										data-code="102">탈퇴한 회원</button>
+									</p>
+									<table class="table table-striped">
+										<thead>
+											<tr style="text-align: center;">
+												<th>이름</th>
+												<th>아이디</th>
+												<th>가입일</th>
+												<th>펫 보유</th>
+											</tr>
+										</thead>
+										<tbody id="myTable" align="center">
 
-												</tbody>
-											</table>
-											<div id="pagination"></div>
+										</tbody>
+									</table>
+									<div id="pagination"></div>
 
-										</div>
-										<div class="card-footer">
-											<span style="color: #0062ff"><i
-												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
-												메시지 보내기</span>
-										</div>
-									</div>
+								</div>
+								<div class="card-footer">
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
+										메시지 보내기</span>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="single-post row">
-						<div class="col-lg-12 col-md-12 blog_details">
-							<br> <br>
+
+						<div class="col-lg-12 col-md-12 blog_details ">
 							<div class="card">
 								<div class="card-header que" onclick="admPmemberListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;파트너
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;파트너
 									회원 목록 <input type="hidden" value="one" id="admPmemberListInput">
 								</div>
-								<div class="card-body anw admPmemberListDiv">
-									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
-											<form id="admDateForm" onsubmit="return false"
-												autocomplete="off" onkeypress="eventkeyP();">
-												<input type="hidden" name="code">
-												<code>가입일 검색 :</code>
-												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
-													value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-												: <input type="text" id="datepickerC" name="fromDate">&nbsp;&nbsp;
-												to : <input type="text" id="datepickerD" name="toDate"><br>
-												<br>
-												<code>이름,아이디로 검색 :</code>
-												&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
-													<option value="" selected>전 체</option>
-													<option value="name">이름</option>
-													<option value="p_id">아이디</option>
-												</select> <input type="text" id="data" name="data" size="20">&nbsp;
-												<button type="submit" onclick="pagingListP();"
-													class="btn btn-default">
-													<i class="fa fa-search"></i>
-												</button>
-												<button type="reset" class="btn btn-default">
-													<i class="fa fa-search-minus" aria-hidden="true"></i>
-												</button>
-											</form>
-											<code>조건 별 검색 :</code>
-											&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP" id="key"
-												data-code="">전체</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP" id="doctor"
-												data-code="100">수의사</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP" id="trainer"
-												data-code="101">훈련사</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP" id="groomer"
-												data-code="103">미용사</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP"
-												id="petsitter" data-code="102">펫시터</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP" id="petN"
-												data-code="104">탈퇴한 회원</button>
-											<table class="table table-striped">
-												<thead>
-													<tr style="text-align: center;">
-														<th>이름</th>
-														<th>아이디</th>
-														<th>가입일</th>
-														<th>파트너 쉽</th>
-														<th>조회</th>
-													</tr>
-												</thead>
-												<tbody id="myTableP" align="center">
 
-												</tbody>
-											</table>
-											<div id="paginationP"></div>
+								<div class="card-body anw admPmemberListDiv"
+									style="padding: 15px">
+									<form id="admDateFormP" onsubmit="return false"
+										autocomplete="off" onkeypress="eventkeyP();">
+										<input type="hidden" name="code">
+										<code>가입일 검색 :</code>
+										&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
+											value="1">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
+										: <input type="text" id="datepickerC" name="fromDate">&nbsp;&nbsp;
+										to : <input type="text" id="datepickerD" name="toDate">
+										<br> <br>
+										<code>이름,아이디로 검색 :</code>
+										&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
+											<option value="" selected>전 체</option>
+											<option value="name">이름</option>
+											<option value="p_id">아이디</option>
+										</select> <input type="text" id="data" name="data" size="20">&nbsp;
+										<button type="submit" onclick="pagingListP();"
+											class="btn btn-default">
+											<i class="fa fa-search"></i>
+										</button>
+										<input type="reset">
+									</form>
+									<code>조건 별 검색 :</code>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codepP" id="key"
+										data-code="">전체</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codepP" id="doctor"
+										data-code="100">수의사</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codepP" id="trainer"
+										data-code="101">훈련사</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codepP" id="groomer"
+										data-code="103">미용사</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codepP" id="petsitter"
+										data-code="102">펫시터</button>
+									<button type="button"
+										class="btn btn-link btn-rounded btn-fw codepP" id="petN"
+										data-code="104">탈퇴한 회원</button>
 
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>이름</th>
+												<th>아이디</th>
+												<th>가입일</th>
+												<th>파트너 쉽</th>
+												<th>조회</th>
+											</tr>
+										</thead>
+										<tbody id="myTableP">
+										</tbody>
+									</table>
+									<div id="paginationP"></div>
+								</div>
+								<div class="card-footer">
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
+										메시지 보내기</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-12 col-md-12 blog_details">
+							<div class="card">
+								<div class="card-header">
+									<i class="fa-solid fa-paw"></i>반려동물
+								</div>
+
+								<div class="card-footer">
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
+										추가</span>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- 파트너 회원 단건 조회 Modal -->
+						<div class="modal fade" id="myModal">
+							<div class="modal-dialog modal-xl">
+								<div class="modal-content">
+
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title">해당 파트너 회원</h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+
+									<!-- Modal body -->
+									<div class="modal-body">
+
+										<div class='mem-body'></div>
+
+										<!-- chart.js -->
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">추로스 chart</h4>
+												<canvas id="myChart" style="height: 50px"></canvas>
+											</div>
 										</div>
-										<div class="card-footer">
-											<span style="color: #0062ff"><i
-												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
-												메시지 보내기</span>
-										</div>
+										<!--end chart.js -->
+
+									</div>
+
+									<!-- Modal footer -->
+									<div class="modal-footer">
+
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
 									</div>
 								</div>
 							</div>
@@ -480,158 +502,7 @@
 				</div>
 			</div>
 		</div>
-
-
 	</section>
-	<!-- 회원 단건 조회 Modal -->
-	<div class="modal fade" id="myModal">
-		<div class="modal-dialog modal-xl modal-dialog-scrollable">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title" id="id"></h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="modal-body">
-
-					<div class="section-top-border">
-						<h3 class="mb-30 title_color memberNAME"></h3>
-						<div class="row">
-							<div class="col-md-5 memberIMG">
-								<!-- 회원사진 불러와야함 -->
-								<img src="resources/assets/images/elements/d.jpg" alt=""
-									class="img-fluid">
-							</div>
-							<div class="col-md-6 mt-sm-20 left-align-p memberINFO">
-								<!-- 회원 정보 출력 -->
-								<ul class="unordered-list">
-									<li>Fta Keys</li>
-									<li>For Women Only Your Computer Usage</li>
-									<li>Facts Why Inkjet Printing Is Very Appealing
-										<ul>
-											<li>Addiction When Gambling Becomes
-												<ul>
-													<li>Protective Preventative Maintenance</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-									<li>Dealing With Technical Support 10 Useful Tips</li>
-									<li>Make Myspace Your Best Designed Space</li>
-									<li>Cleaning And Organizing Your Computer</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-<!-- style="margin-right: -60px; padding-right:50px" -->
-					<div class="section-top-border">
-						<h3 class="mb-30 title_color">차트</h3>
-						<div class="row" >
-							<div class="col-md-6 mt-sm-20 left-align-p">
-								<ul class="unordered-list">
-									<li>Fta Keys</li>
-									<li>For Women Only Your Computer Usage</li>
-									<li>Facts Why Inkjet Printing Is Very Appealing
-									<li>Addiction When Gambling Becomes
-									<li>Protective Preventative Maintenance</li>
-									<li>Dealing With Technical Support 10 Useful Tips</li>
-									<li>Make Myspace Your Best Designed Space</li>
-									<li>Cleaning And Organizing Your Computer</li>
-								</ul>
-							</div>
-							<div class="col-md-5 Modalchart">
-								<canvas id="myChart"></canvas>
-							</div>
-						</div>
-					</div>
-					<div class="section-top-border">
-						<h3 class="mb-30 title_color">Block Quotes</h3>
-						<div class="row">
-							<div class="col-lg-12">
-								<blockquote class="generic-blockquote">“Recently,
-									the US Federal government banned online casinos from operating
-									in America by making it illegal to transfer money to them
-									through any US bank or payment system. As a result of this law,
-									most of the popular online casino networks such as Party Gaming
-									and PlayTech left the United States. Overnight, online casino
-									players found themselves being chased by the Federal
-									government. But, after a fortnight, the online casino industry
-									came up with a solution and new online casinos started taking
-									root. These began to operate under a different business
-									umbrella, and by doing that, rendered the transfer of money to
-									and from them legal. A major part of this was enlisting
-									electronic banking systems that would accept this new
-									clarification and start doing business with me. Listed in this
-									article are the electronic banking”</blockquote>
-							</div>
-						</div>
-					</div>
-					<!-- chart.js -->
-					<div class="card">
-						<div class="card-body myChartBody">
-							<h4 class="card-title">chart</h4>
-
-						</div>
-					</div>
-					<!--end chart.js -->
-
-					<div class='mem-body'></div>
-
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- 모달 2 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">진료작성</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<!-- modal 몸통 -->
-				<div class="modal-body">
-					<div class="form-group">
-						<input type="hidden" id="m_id" name="m_id"> <input
-							type="hidden" id="p_id" name="p_id" value="${p_id }"> <input
-							type="hidden" id="r_no" name="r_no"> <span
-							id="span_d_name" style="width: 250px !important;">&nbsp;진단명
-							: <input type="text" id="d_name" name="d_name">
-						</span><br> <br> <span id="span_symptom"
-							style="width: 250px !important;"> &nbsp; &nbsp; 증 상 : <input
-							type="text" id="symptom" name="symptom">
-						</span><br> <br> <span id="span_result"
-							style="width: 250px !important;"> &nbsp; &nbsp; 처 방 : <input
-							type="text" id="d_result" name="d_result">
-						</span>
-					</div>
-				</div>
-				<!-- modal 하단 버튼 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">취소</button>
-					<button id="sendDiaLog" name="sendReserv" type="button"
-						class="btn btn-primary" data-dismiss="modal">작성완료</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<script>
 		//Count 호출 ajax
 		adminCount();
@@ -672,7 +543,7 @@
 
 		//tooltip 함수
 
-		/* $(function() {
+		$(function() {
 
 			//Tooltip
 			var title_;
@@ -689,7 +560,7 @@
 
 			});
 
-		}); */
+		});
 		//end tooltip 함수
 
 		//datepicker 달력
@@ -824,7 +695,7 @@
 										.append(
 												"<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
 							} else {
-								viewMemberList(result.list);
+								viewPmemberList(result.list);
 								viewPage(result.page);
 							}
 							;
@@ -970,31 +841,21 @@
 		//리스트 만드는 함수
 
 		//==================일반회원 리스트 만드는 함수===================
-		let viewMemberList = function(result) {
+		let viewPmemberList = function(result) {
 			$("#myTable").empty();
 
-			
-			//일반회원의 펫 보유수 체크 해서 같은 회원의 정보가 여러버 나오는 걸 막아야 함 : 미해결
-			/* var petno;
-			var mid;
-			if( result[i].m_id != mid ){
-			petno += i;
-				} else {
-					
-				}; */
-
 			$.each(result, function(i) {
-				
+				console.log(result[i].pet_no)
+
 				if (result[i].startDate != null) {
 
 					$("#myTable").append(
-							"<tr><td>" + result[i].name
-									+ "</td><td>" + result[i].m_id
+							"<tr><td><a onclick='show()'>" + result[i].name
+									+ "</a></td><td>" + result[i].m_id
 									+ "</td><td>" + result[i].startDate
 									+ "</td><td>"
 									+ (result[i].pet_no == null ? '미보유' : '보유')
-									+ "</td><td>"
-									+ "</td><td><button type='button' class='btn btn-primary' style='background-color: cornflowerblue; border: none;' onclick='show()'>조회</button></td></tr>");
+									+ "</td></tr>");
 
 				} else if (result[i].startDate == null) {
 					console.log(result[i].endDate);
@@ -1023,12 +884,11 @@
 					+ "</div></div>"
 					+ "</td><td>" */
 					$("#myTableP").append(
-							"<tr><td>" + result[i].name
-									+ "</td><td>" + result[i].p_id
+							"<tr><td><a onclick='showP()'>" + result[i].name
+									+ "</a></td><td>" + result[i].p_id
 									+ "</td><td>" + result[i].startdate
 									+ "</td><td>" + result[i].f_content
-									+ "</td><td><button type='button' class='btn btn-primary' style='background-color: cornflowerblue; border: none;' onclick='showP()'>조회</button></td></tr>");
-					
+									+ "</td></tr>");
 				} else if (result[i].startdate == null) {
 					console.log(result[i].enddate);
 					$("#myTable").append(
@@ -1043,7 +903,32 @@
 		//==================파트너회원 리스트 만드는 함수=================== END
 
 		//end 리스트 만드는 함수
-		
+
+		//모달에서 상세보기 클릭 시 회원의 마이페이지로 이동
+
+		//==================회원의 마이페이지로 이동===================
+		function goDetail(e) {
+			var p_id = $(e).data('value');
+			console.log("p_id : " + p_id);
+			var url = `pmemberDetail?id=\${p_id}`;
+			console.log("url :" + url);
+			window.open(url);
+
+		};
+		//==================회원의 마이페이지로 이동=================== END
+
+		//==================파트너회원의 마이페이지로 이동===================
+		function goDetailP(e) {
+			var p_id = $(e).data('value');
+			console.log("p_id : " + p_id);
+			var url = `pmemberDetail?id=\${p_id}`;
+			console.log("url :" + url);
+			window.open(url);
+
+		};
+		//==================파트너회원의 마이페이지로 이동=================== END
+
+		//end 모달에서 상세보기 클릭 시 회원의 마이페이지로 이동
 		
 		//회원 한 명 단건조회 (Modal, ajax)
 	
@@ -1051,7 +936,7 @@
 		//==================회원 리스트 단 건 조회 ajax 호출 및 Modal===================
 		function show() {
 				
-				var m_id = $(event.target).closest("tr").children().next().html();
+				var m_id = $(event.target).parent().next().text();
 				console.log(m_id);
 	
 				//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
@@ -1064,9 +949,8 @@
 							success : function(res) {
 								console.log(res.list);
 								$('.mem-body').append(
-										//<img src='resources/upload/"+ res.list.picture +"'></img>"
-												
-										"<ul><li>" + res.list.startdate
+										"<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
+												+ "<li>" + res.list.startdate
 												+ "</li><li>" + res.list.name
 												+ "</li><li>" + res.list.w_address
 												+ "</li><li>" + res.list.w_tel
@@ -1074,7 +958,9 @@
 												+ "</li></ul>");
 								$(".modal-footer")
 										.append(
-												"<button type='button' id='goDetail' data-value="+ res.list.m_id+ " onclick='goDetail(this)' >상세페이지로..</button>");
+												"<button type='button' id='goDetail' data-value="
+														+ res.list.p_id
+														+ " onclick='goDetail(this)' >상세페이지로..</button>");
 								//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
 	
 								//=========================Modal의 Chart 그리기
@@ -1090,11 +976,8 @@
 		
 		//==================파트너회원 리스트 단 건 조회 ajax 호출 및 Modal===================
 		function showP() {
-				var p_id;
-				//p_id = $(event.target).parent().next().text();
-				p_id = $(event.target).closest("tr").children().next().html();
+				var p_id = $(event.target).parent().next().text();
 				console.log(p_id);
-				
 				//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
 				 $.ajax({
 						url : 'admPmemberOne',
@@ -1102,9 +985,8 @@
 						data : {'p_id' : p_id },
 						success : function (res) {					
 						console.log(res.list);
-						
-						//<img src='resources/upload/"+ res.list.picture +"'></img>
-						$('.mem-body').append("<ul><li>" +res.list.startdate 
+						$('.mem-body').append("<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
+												+ "<li>" +res.list.startdate 
 												+"</li><li>"
 												+ res.list.name
 												+ "</li><li>"
@@ -1114,11 +996,10 @@
 												+ "</li><li>"
 												+ res.list.p_info
 								    			+"</li></ul>");
-						$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetailP(this)' >상세페이지로..</button>");
+						$(".modal-footer").append("<button type='button' data-value="+res.list.p_id+" onclick='goDetail(this)' >상세페이지로..</button>");
+						//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
 						
 						//=========================Modal의 Chart 그리기
-						
-						
 						const ctx = document.getElementById('myChart').getContext('2d');
 						const myChart = new Chart(ctx, {
 							type : 'bar',
@@ -1148,40 +1029,10 @@
 					}
 				}); //end Modal에 띄어줄 단건조회 ajax
 				
-				//modalInput();
-				
-				
 				$("#myModal").modal('show'); //Modal Open
 				
 		};
 		//==================파트너회원 리스트 단 건 조회 ajax 호출 및 Modal===================
-			
-			
-		//모달에서 상세보기 클릭 시 회원의 마이페이지로 이동
-
-		//==================회원의 마이페이지로 이동===================
-		function goDetail(e) {
-			var m_id = $(e).data('value');
-			console.log("m_id : " + m_id);
-			var url = `memberDetail?id=\${m_id}`;
-			console.log("url :" + url);
-			window.open(url);
-
-		};
-		//==================회원의 마이페이지로 이동=================== END
-
-		//==================파트너회원의 마이페이지로 이동===================
-		function goDetailP(e) {
-			var p_id = $(e).data('value');
-			console.log("p_id : " + p_id);
-			var url = `pmemberDetail?id=\${p_id}`;
-			console.log("url :" + url);
-			window.open(url);
-
-		};
-		//==================파트너회원의 마이페이지로 이동=================== END
-
-		//end 모달에서 상세보기 클릭 시 회원의 마이페이지로 이동
 
 
 		//end 회원 한 명 단건조회 (Modal, ajax)
@@ -1191,24 +1042,18 @@
 		
 				$('#myModal').on('hidden.bs.modal', function(e) {
 					$(this).find('ul').empty();
-					$(this).find('#goDetail').remove();
-					$('#myChart').remove();
-					$('.Modalchart').append('<canvas id="myChart"></canvas>');
-					
+					$(this).find('a').remove();
 				})
 		
-				/* $('#myModal').on('hidden.bs.modal', function(e) {
+				$('#myModal').on('hidden.bs.modal', function(e) {
 					$(this).find('ul').empty();
 					$(this).find('#goDetail').remove();
-				}) */
+				})
 		//END 모달 내용 초기화		
 		
 		
-		
-		
-		
-		
 	</script>
+
 </body>
 
 </html>

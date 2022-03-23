@@ -272,7 +272,7 @@
 
 	<!-- 파트너 회원 수 -->
 	<select id="pmemCount" resultType="int">
-		SELECT COUNT(*) FROM P_MEMBER
+		SELECT COUNT(*) FROM P_MEMBER WHERE STARTDATE IS NOT NULL
 	</select>
 
 	<select id="ServiceReviewList" resultMap="servieceReview"
