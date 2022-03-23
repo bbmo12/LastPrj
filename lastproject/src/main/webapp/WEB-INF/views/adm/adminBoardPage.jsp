@@ -406,23 +406,7 @@ h1 {
 		$('.bd-example-modal-lg').on('hidden.bs.modal', function(e) {
 			$(this).find('form')[0].reset();
 		})
-		
-		/* function boardDelete(e) {
-			console.log(e);
-			$.ajax({
-				type:'post',
-				url : 'boardDelete',
-				data : {
-					"b_no" : $(e).val()
-				},success:function(){
-					alert('해당 게시글이 삭제 되었습니다.');
-				},error : function() {
-					alert('게시글을 삭제하는 데 실패했습니다.');
-					
-				}
-			})
-		} */
-
+	
 	</script>
 
 </body>
