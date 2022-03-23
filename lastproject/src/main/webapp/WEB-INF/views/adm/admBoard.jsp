@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>  
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
