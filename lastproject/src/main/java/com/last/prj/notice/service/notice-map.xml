@@ -3,7 +3,8 @@
 <mapper namespace="com.last.prj.notice.service.NoticeMapper">
 
 	<insert id="noticeInsert" parameterType="com.last.prj.notice.service.NoticeVO">
-	insert into notice values(notice_seq.nextval, #{n_from}, #{n_to}, #{content}, sysdate, default)
+	insert into notice (notice_no,n_from,n_to,content,w_date,r_check)
+	values(notice_seq.nextval, #{n_from}, #{n_to}, #{content}, sysdate, default)
 	</insert>
 
 	<select id="noticeSelectList" resultType="com.last.prj.notice.service.NoticeVO">

@@ -39,5 +39,15 @@ public class ReservCountServiceImpl implements ReservCountService {
 		return map.reservdateUpdate(vo);
 	}
 
+	@Override
+	public int countUpdate(ReservCountVO vo) {
+		return map.countUpdate(vo);
+	}
+
+	@Override
+	public int countDelete(ReservCountVO vo) {
+		return map.countDelete(vo);
+	}
+
 
 }
