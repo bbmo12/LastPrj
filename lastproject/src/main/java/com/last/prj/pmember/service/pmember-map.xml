@@ -196,14 +196,12 @@
 		parameterType="com.last.prj.pmember.service.PmemberVO"
 		resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
-		FROM
-		( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-		FROM P_MEMBER
-		GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-		HAVING RCOM IS NOT NULL
-		ORDER BY RCOM DESC
-		)
-		WHERE ROWNUM<![CDATA[<=4]]>
+			FROM ( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+					FROM P_MEMBER
+					 GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+					HAVING RCOM IS NOT NULL
+				   ORDER BY RCOM DESC)
+			WHERE ROWNUM<![CDATA[<=4]]>
 	</select>
 
 	<!-- 관리자 -->

@@ -12,7 +12,8 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.card-text {
@@ -59,11 +60,7 @@
 		font-size : 0.8rem !important;
 		color: black;
 	}
-	
-	#my_section {
-		padding: 50px;
-	}
-	
+
 	.blog_right_sidebar{
 		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
 		border: 1px solid #e3e6f0;
@@ -94,36 +91,14 @@
 		
 	}
 	
-	.card-footer{
-		background: white;
-		font-size: 1.0rem;
-		font-style: normal;
-		font-weight: 400;
-	}
-	
 	.widget_title{
 		background: #0062ff !important;
 	}
-	
-	#cardTitle{
-		font-size: 1.25rem;
-		font-style: normal;
-	 	font-weight: 700;
-	}
-	
+
 	#myinfo{
 		font-size: 0.8rem;
 		font-style: normal;
 	 	font-weight: 300;
-	}
-	
-	#pet_img2{
-		display: inline-block;
-		text-align: center;
-		margin-right: 20px;
-		font-size: 0.8rem;
-		font-style: normal;
-	 	font-weight: 400;
 	}
 	
 	.partner_img{
@@ -148,46 +123,11 @@
 	font-style: normal;
  	font-weight: 700;
  	color: black;
-}
-#my_section {
-		padding: 50px;
 	}
 
 	#main-form h3,
 	input {
 		display: inline-block;
-	}
-
-	#addDiv,
-	#addService {
-		margin-left: 36em;
-		margin-top: -5px;
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#addDiv:hover,
-	#addService:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#price-insert,
-	#time-insert{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	
-	#price-insert:hover,
-	#time-insert:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-
-	#select-one {
-		margin-top: -20px;
 	}
 
 	.form-control {
@@ -196,72 +136,12 @@
 		display: inline-block;
 		border-radius: 20px;
 	}
-
-	.service-info {
-		display: inline-grid;
-	}
-
-	.service-info input {
-		width: 100px;
-	}
-
-	#p-info {
-		margin-left: 9em;
-		margin-top: -20px;
-	}
-
-	.delete-button {
-		float: right;
-		margin-top: 25px;
-		margin-right: 100px;
-		width: 62px;
-	}
-
-	#p_info {
-		border: 1px solid rgba(151, 151, 151, 0.3);
-	}
-	#cancel{
-		width: 113px;
-    	height: 42px;
-    	padding: 0 30px;
-    	font-size: .8em;
-    	text-align: center;
-    	font-weight: 500;
-	}
-	#member_post{
-		width: 100px;
-    	margin-left: 51em;
-    	margin-top: -70px;  	
-    	color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#member_post:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#successUpdate{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#successUpdate:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
 	
 	input:focus,
 	textarea:focus{ 
 		border: 3px solid;
 	}
-	
-	#content{
-		height: 45px;
-    	padding: 12px;
-   		width: 275px;
-	}
+
 </style>
 
 <body>

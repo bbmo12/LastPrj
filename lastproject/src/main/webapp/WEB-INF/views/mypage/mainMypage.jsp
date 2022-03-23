@@ -17,9 +17,9 @@
 	color: black;
 }
 
-
 #my_section {
-	padding: 50px;
+	margin-top: -70px;
+    padding-bottom: 25px;
 }
 
 .blog_right_sidebar {
@@ -353,6 +353,11 @@
 			$(this).toggleClass('on').siblings().removeClass('on');
 			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		})//end 아코디언 함수
+	</script>
+	<script>
+	if("${memberupdate}" != "" ){
+		Swal.fire('개인정보가<br>변경되었습니다.');
+	}
 	</script>
 </body>
 

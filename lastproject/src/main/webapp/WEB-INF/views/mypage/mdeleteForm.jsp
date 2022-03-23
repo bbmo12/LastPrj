@@ -8,6 +8,64 @@
 	<title>Insert title here</title>
 </head>
 <style>
+		.no_deco {
+		text-decoration: none !important;
+		font-size : 0.8rem !important;
+		color: black;
+	}
+	#my_section {
+		margin-top: -70px;
+    	padding-bottom: 25px;
+	}
+
+	.blog_right_sidebar{
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+		border: 1px solid #e3e6f0;
+    	border-radius: 0.35rem;
+    	float: none !important; margin: 0 auto !important;
+    	background-color: white;
+    	width: 250px;
+	}
+
+	.partner_img{
+		object-fit: cover;
+		object-position:top;
+		border-radius:50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+
+	.widget_title{
+		background: #0062ff !important;
+	}
+
+
+	#myinfo{
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+ 		font-weight: 300;
+	}
+
+
+	#Mainname{
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic'!important;
+		font-style: normal !important;
+ 		font-weight: 700 !important;
+ 		color:gray;
+	}
+
+	#menu_bold{
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+ 		font-weight: 700;
+ 		color: black;
+	}
 	.swal2-content {
 		display: none;
 	}
@@ -20,11 +78,12 @@
 		margin-left: -3px;
 	}
 
-	#confirm{
-		width: 130px;
+	#confirm1,
+	#confirm2 {
+		width: 145px;
 		height: 60px;
+		margin: 10px;
 		font-size: 30px;
-		margin-top: 10px;
 	}
 
 	#logreg-forms {
@@ -140,10 +199,10 @@
 									<input type="password" id="password" name="password" value=""
 										class="form-control bg-white border-left-0 border-md">
 								</div>
-								<button type="button" id="confirm" class="btn btn-primary"
-									onclick="confirmPass()" style="margin-left: 4em;">탈퇴하기</button>
-								<button type="button" id="confirm" class="btn btn-primary"
-									onclick="location.href='memberMypage'">아니요</button>
+								<button type="button" id="confirm1" class="btn btn-primary"
+									onclick="confirmPass()" style="margin:0 -5px 0 100px;">탈퇴하기</button>
+								<button type="button" id="confirm2" class="btn btn-primary"
+									onclick="location.href='mainMypage'">취소</button>
 							</div>
 						</div>
 					</div>

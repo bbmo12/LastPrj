@@ -10,44 +10,24 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
+	}
+	.card-header{
+		background: white;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 400;
+		color: black;
+		width: 797px;
+		margin: -17px 0 20px -20px;
+		padding-left: 15px;
 	}
 
 	#main-form h3,
 	input {
 		display: inline-block;
-	}
-
-	#addDiv,
-	#addService {
-		margin: -5px 0 0 35em;
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-    	width: 115px;
-	}
-	#addDiv:hover,
-	#addService:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#price-insert,
-	#time-insert{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	
-	#price-insert:hover,
-	#time-insert:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-
-	#select-one {
-		margin-top: -20px;
 	}
 
 	.form-control {
@@ -58,35 +38,12 @@
 	}
 
 
-.form-control1 {
+	.form-control1 {
 		padding: 5px;
 		display: inline-block;
 		border-radius: 20px;
 	}
 
-	.service-info {
-		display: inline-grid;
-	}
-
-	.service-info input {
-		width: 100px;
-	}
-
-	#p-info {
-		margin-left: 5em;
-		margin-top: -20px;
-	}
-
-	.delete-button {
-		float: right;
-		margin: 27px 200px 0 0;
-		width: 62px;
-	}
-
-	#p_info {
-		border: 1px solid rgba(151, 151, 151, 0.3);
-		width: 700px;
-	}
 	#cancel{
 		width: 113px;
     	height: 42px;
@@ -95,19 +52,7 @@
     	text-align: center;
     	font-weight: 500;
 	}
-	#member_post{
-		width: 100px;
-    	margin-left: 53em;
-    	margin-top: -70px;  	
-    	color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#member_post:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
+
 	#successUpdate{
 		color: #fff; 
     	background: #0062ff;
@@ -122,12 +67,6 @@
 	input:focus,
 	textarea:focus{ 
 		border: 3px solid;
-	}
-	
-	#content{
-		height: 45px;
-    	padding: 12px;
-   		width: 285px;
 	}
 	
 	.no_deco {
@@ -186,6 +125,10 @@
 	}
 	i{
 		color: black;
+	}
+	.control-width{
+	    width: 160px;
+    	display: inline-block;
 	}
 	
 	
@@ -351,27 +294,30 @@
 					</div>
 				</div>
 
-				<div class="col-lg-9 posts-list">
+				<div class="col-lg-9 posts-list"  style="margin-top: 72px;">
 				<div id="main-form"  style="width: 800px;">
 					<div class="card">
+					<div class="card-header">
+								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;반려동물 정보수정
+					</div>
 						<form action="mypatadd" method="post" enctype="multipart/form-data">
 							<div class="form-group">
-							<i class="fas fa-user"></i>
-								<h3 style="font-weight: bolder;">이름</h3>
+								<div class="control-width"><i class="fas fa-user"></i>
+								<h3 style="font-weight: bolder;">이름</h3></div>
 								<input type="text" id="name" name="name"  class="form-control" required autofocus>
 						<div id="name_check"></div>
 							</div>
 							<div class="form-group">
-							<i class="fa fa-birthday-cake"></i>
-									<h3 style="font-weight: bolder;">생년월일</h3>
+								<div class="control-width"><i class="fa fa-birthday-cake"></i>
+								<h3 style="font-weight: bolder;">생년월일</h3></div>
 								<input type="text" id="birth" name="birth" class="form-control" required autofocus>
 								<div id="birth_check"></div>
 							</div>
 							<div class="form-group">
-							<i class="fa fa-transgender"></i>
-									<h3 style="font-weight: bolder;">성별</h3>
+									<div class="control-width"><i class="fa fa-transgender"></i>
+									<h3 style="font-weight: bolder;">성별</h3></div>
 								<!-- 1이면 여자, 2이면 남자  -->
-								<label>여자
+								<label style="margin-right: 40px;">여자
 									<input type="radio" id="gender" name="gender" value="1">
 									<span class="checkmark"></span>
 								</label>&emsp;
@@ -380,20 +326,21 @@
 									<span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-							<i class="fa fa-balance-scale"></i>
-								<h3 style="font-weight: bolder;">몸무게</h3>
+								<div class="control-width"><i class="fa fa-balance-scale"></i>
+								<h3 style="font-weight: bolder;">몸무게</h3></div>
 								<input type="text" id="weight" name="weight" class="form-control" required autofocus>
 								<div id="weight_check"></div>
 							</div>
 							<div class="form-group">
-							<i class="fa fa-wikipedia-w"></i>
-								<h3 style="font-weight: bolder;">품종</h3>
+								<div class="control-width"><i class="fa fa-wikipedia-w"></i>
+								<h3 style="font-weight: bolder;">품종</h3></div>
 								<label>개<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span></label>&emsp;
 								<label>고양이<input type="radio" id="code" name="code" value="502"><span class="checkmark"></span></label>&emsp;
 								<label>조류<input type="radio" id="code" name="code" value="503"><span class="checkmark"></span></label>&emsp;
 								<label>파충류<input type="radio" id="code" name="code" value="504"><span class="checkmark"></span></label>&emsp;
 								<label>어류<input type="radio" id="code" name="code" value="505"><span class="checkmark"></span></label>&emsp;
-								<label>토끼<input type="radio" id="code" name="code" value="506"><span class="checkmark"></span></label>&emsp;
+								<br>
+								<label style="margin-left: 165px;">토끼<input type="radio" id="code" name="code" value="506"><span class="checkmark"></span></label>&emsp;
 								<label>돼지<input type="radio" id="code" name="code" value="507"><span class="checkmark"></span></label>&emsp;
 								<label>햄스터<input type="radio" id="code" name="code" value="508"><span class="checkmark"></span></label>&emsp;
 								<label>미어켓<input type="radio" id="code" name="code" value="509"><span class="checkmark"></span></label>&emsp;
@@ -401,14 +348,14 @@
 								<label>거미<input	 type="radio" id="code" name="code" value="511"><span class="checkmark"></span></label>&emsp;
 							</div>
 							<div class="form-group">
-							<i class="fa fa-camera"></i>
-							<h3 style="font-weight: bolder;">반려동물 사진</h3>
+								<div class="control-width"><i class="fa fa-camera"></i>
+							     <h3 style="font-weight: bolder;">반려동물 사진</h3></div>
 								<div class="input-group col-xs-12">
 								<input class="file-upload-browse btn btn-primary"  type="file" id="file" name="file">
 								</div>
 							</div>
 							<i class="fa fa-text-width"></i>
-							<h3 style="font-weight: bolder;">반려동물 설명</h3><br>
+								<div class="control-width"><h3 style="font-weight: bolder;">반려동물 설명</h3></div><br>
 								<textarea class="form-control1" id="n_content" name="n_content"
 									rows="10" cols="90"></textarea>
 							<div align="right">
@@ -418,10 +365,10 @@
 						</form>
 					</div>
 				</div>
-
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
 </body>
 </html>

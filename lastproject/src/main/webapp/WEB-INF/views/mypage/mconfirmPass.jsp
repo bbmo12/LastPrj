@@ -8,14 +8,14 @@
 	<title>Insert title here</title>
 </head>
 <style>
-.no_deco {
-	text-decoration: none !important;
-	font-size : 0.8rem !important;
-	color: black;
-}
+	.no_deco {
+		text-decoration: none !important;
+		font-size : 0.8rem !important;
+		color: black;
+	}
 	#my_section {
-		padding: 50px;
-		background: #f9f9fd;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.blog_right_sidebar{
@@ -26,107 +26,46 @@
     	background-color: white;
     	width: 250px;
 	}
-	.card{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
-		border: 1px solid #e3e6f0;
-    	border-radius: 0.35rem
-	}
-	
-	.card-header{
-	background: white;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
- 	color: black;
-	}
-	
-	.card-footer{
-	background: white;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
-	}
-	
-	#notice_footer{
-	text-align: center;
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
-	}
- 	
-	.card_notice{
-	font-size: 0.8rem;
-	 font-family: 'NanumBarunGothic';
-	 font-style: normal;
- 	font-weight: 400;
-	}
-	
+
 	.partner_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 180px !important;
-	height: 180px !important;
-	float: none;
-	margin: 0 auto;
-}
+		object-fit: cover;
+		object-position:top;
+		border-radius:50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
 
-.pet_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 100px !important;
-	height: 100px !important;
-	float: none;
-	margin-bottom: 10px;
-}
 
-.widget_title{
-	background: #0062ff !important;
-}
+	.widget_title{
+		background: #0062ff !important;
+	}
 
-#cardTitle{
-	font-size: 1.25rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
-}
 
-#myinfo{
-	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 300;
-}
+	#myinfo{
+		font-size: 0.8rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+ 		font-weight: 300;
+	}
 
-#pet_img2{
-	display: inline-block;
-	text-align: center;
-	margin-right: 20px;
-	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 400;
-}
 
-#Mainname{
-	font-size: 1.5rem !important;
-	font-family: 'NanumBarunGothic'!important;
-	font-style: normal !important;
- 	font-weight: 700 !important;
- 	color:gray;
-}
+	#Mainname{
+		font-size: 1.5rem !important;
+		font-family: 'NanumBarunGothic'!important;
+		font-style: normal !important;
+ 		font-weight: 700 !important;
+ 		color:gray;
+	}
 
-#menu_bold{
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
- 	color: black;
-}
+	#menu_bold{
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+ 		font-weight: 700;
+ 		color: black;
+	}
 	.swal2-content {
 		display: none;
 	}

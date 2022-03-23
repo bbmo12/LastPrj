@@ -8,45 +8,14 @@
 	<title>Insert title here</title>
 </head>
 <style>
-#my_section {
-		padding: 50px;
+	#my_section {
+		margin-top: -70px;
+		padding-bottom: 25px;
 	}
 
 	#main-form h3,
 	input {
 		display: inline-block;
-	}
-
-	#addDiv,
-	#addService {
-		margin: -5px 0 0 35em;
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-    	width: 115px;
-	}
-	#addDiv:hover,
-	#addService:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#price-insert,
-	#time-insert{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	
-	#price-insert:hover,
-	#time-insert:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-
-	#select-one {
-		margin-top: -20px;
 	}
 
 	.form-control {
@@ -56,72 +25,32 @@
 		border-radius: 20px;
 	}
 
-	.service-info {
-		display: inline-grid;
+	#successUpdate {
+		color: #fff;
+		background: #0062ff;
+		border: 1px solid transparent;
 	}
 
-	.service-info input {
-		width: 100px;
-	}
-
-	#p-info {
-		margin-left: 5em;
-		margin-top: -20px;
-	}
-
-	.delete-button {
-		float: right;
-		margin: 27px 200px 0 0;
-		width: 62px;
-	}
-
-	#p_info {
-		border: 1px solid rgba(151, 151, 151, 0.3);
-		width: 700px;
-	}
-	#cancel{
-		width: 113px;
-    	height: 42px;
-    	padding: 0 30px;
-    	font-size: .8em;
-    	text-align: center;
-    	font-weight: 500;
-	}
-	#member_post{
-		width: 100px;
-    	margin-left: 53em;
-    	margin-top: -70px;  	
-    	color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#member_post:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#successUpdate{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
 	#successUpdate:hover {
 		color: #0062ff;
 		border: 1px solid #0062ff;
 		background: #fff;
 	}
-	
+
+	#cancel {
+		width: 113px;
+		height: 42px;
+		padding: 0 30px;
+		font-size: .8em;
+		text-align: center;
+		font-weight: 500;
+	}
+
 	input:focus,
-	textarea:focus{ 
+	textarea:focus {
 		border: 3px solid;
 	}
-	
-	#content{
-		height: 45px;
-    	padding: 12px;
-   		width: 285px;
-	}
-	
+
 	.no_deco {
 		text-decoration: none !important;
 		font-size: 0.8rem !important;
@@ -170,17 +99,31 @@
 		font-weight: 700;
 		color: black;
 	}
+
 	.card {
 		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 		border: 1px solid #e3e6f0;
 		border-radius: 0.35rem;
 		padding: 20px;
 	}
+	.card-header{
+		background: white;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 400;
+		color: black;
+		width: 797px;
+		margin: -17px 0 20px -20px;
+		padding-left: 15px;
+	}
+	.control-width {
+		width: 160px;
+		display: inline-block;
+	}
 	i{
 		color: black;
 	}
-	
-
 </style>
 
 <body>
@@ -330,7 +273,7 @@
 				<div class="col-lg-3">
 					<h2 align="center">MyPage</h2>
 					<br>
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" id="main-side">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img" src="/upload/${member.pfile}"
 								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
@@ -338,113 +281,113 @@
 							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="mconfirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보
+									수정하기</a>
 							</div>
 						</aside>
 					</div>
 					<br>
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" id="main-side1">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list">
 								<p id="menu_bold">내 활동 내역</p>
-								<li><a href="protocol"
-									class="d-flex justify-content-between no_deco">
+								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
-								</a></li>
-								<li><a href="reservationSelect"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
-								</a></li>
-								<li><a href="myPay"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="myPay" class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
-								</a></li>
-								<li><a href="mycounsel"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
-								</a></li>
-								<li><a href="myreport"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="myreport" class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
-								</a></li>
-								<li><a href="myfallow"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
-								</a></li>
+									</a></li>
 								<br>
 								<br>
 								<p id="menu_bold">회원 정보 관리</p>
-								<li><a href="mconfirmPass"
-									class="d-flex justify-content-between no_deco">
+								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
-								</a></li>
-								<li><a href="logout"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="logout" class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
-								</a></li>
-								<li><a href="mdeleteForm"
-									class="d-flex justify-content-between no_deco">
+									</a></li>
+								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
-								</a></li>
+									</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list">
-				<div id="main-form"  style="width: 800px;">
-					<div class="card">
+
+				<div class="col-lg-9 posts-list" style="margin-top: 72px;">
+					<form action="memberUpdate" enctype="multipart/form-data" method="post">
+						<div id="main-form" style="width: 800px;">
+							<div class="card">
 							<div class="card-header">
-								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내정보 수정
+								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내정보수정
 							</div>
-						<form action="memberUpdate" enctype="multipart/form-data" method="post">
 								<div class="form-group">
-								<i class="fas fa-user"></i>
-									<label for="name"></label>
-									<h3 style="font-weight: bolder;">이름</h3>
-									<input type="text" id="name" name="name" class="form-control" value="${member.name}">
+									<div class="control-width"><i class="fas fa-user"></i>
+										<h3 style="font-weight: bolder;">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</h3>
+									</div>
+									<input type="text" id="name" name="name" class="form-control" value="${member.name}"required>
 									<div id="name_check"></div>
 								</div>
 								<div class="form-group">
-								<i class="fas fa-id-card"></i>
-									<h3 style="font-weight: bolder;">아이디</h3>
+									<div class="control-width"><i class="fas fa-id-card"></i>
+										<h3 style="font-weight: bolder;">아이디</h3>
+									</div>
 									<input type="email" style="border: none" id="m_id" name="m_id" class="form-control"
 										value="${member.m_id}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa fa-unlock-alt"></i>
-									<h3 style="font-weight: bolder;">비밀번호</h3>
-									<input type="password" id="password" name="password" class="form-control" >
+									<div class="control-width"><i class="fa fa-unlock-alt"></i>
+										<h3 style="font-weight: bolder;">비밀번호</h3>
+									</div>
+									<input type="password" id="password" name="password" class="form-control"
+										placeholder="4~12자의 숫자 , 문자로만 사용 가능합니다." style="width: 350px;">
 									<div id="pw_check"></div>
 								</div>
 								<div class="form-group">
-									<i class="fa fa-unlock-alt"></i>
-									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
-									<input type="password" id="password1" name="password1" class="form-control" >
+									<div class="control-width"><i class="fa fa-unlock-alt"></i>
+										<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
+									</div>
+									<input type="password" id="password1" name="password1" class="form-control" required
+										style="width: 350px;">
 									<div id="pw1_check"></div>
 								</div>
 								<div class="form-group">
-								<i class="fa-solid fa-mobile-screen"></i>
-								<h3 style="font-weight: bolder;">전화번호('-'없이 번호만 입력해주세요)</h3>
-									<input type="text" id="tel" name="tel" value="${member.tel}" class="form-control">
+									<div class="control-width"><i class="fa-solid fa-mobile-screen"></i>
+										<h3 style="font-weight: bolder;">전화번호</h3>
+									</div>
+									<input type="tel" id="tel" name="tel" class="form-control" value="${member.tel}"
+										placeholder="('-'없이 번호만 입력해주세요)" maxlength="13">
 									<div id="tel_check"></div>
 								</div>
-								<div class="form-group" style="margin-bottom: 0px;">
-								<i class="fa fa-file-image-o"></i>
+								<div class="form-group">
+									<i class="far fa-id-badge"></i>
 									<h3 style="font-weight: bolder;">프로필 사진</h3>
+									<div class="input-group col-xs-12">
+										<input class="file-upload-browse btn btn-primary" type="file" id="file"name="file">
 									</div>
-									<div class="form-group">
-										<input class="file-upload-browse btn btn-primary" type="file" id="file"
-											name="file">
-									</div>
-									<div align="right">
-								<button type="submit" onclick="location.href='memberUpdateForm'" id="update-button"
-									class="btn btn-primary">수정 완료</button>
-								<button type="button" id="cancel" class="btn btn-secondary" 
-								onclick="location.href='memberMypage'">취소</button>
-								</div>		</form>
-					</div>
+								</div>
+
+								<div align="right">
+									<button type="submit" id="successUpdate" class="genric-btn info radius">수정완료</button>
+									<button type="button" id="cancel" class="btn btn-secondary btn-lg"
+										onclick="location.href='mainMypage'">취소</button>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
