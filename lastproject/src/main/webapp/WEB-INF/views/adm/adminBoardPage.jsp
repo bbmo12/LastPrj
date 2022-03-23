@@ -87,6 +87,11 @@ h1 {
 	border-radius: 0.35rem
 }
 
+
+
+
+
+
 .card-header {
 	background: white;
 	font-size: 1.0rem;

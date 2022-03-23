@@ -146,7 +146,7 @@ h2{
 							</span>
 						</div>
 					</aside>
-<div></div>
+
 				<!-- 	<select id="search" name="search">
 						<option value="all" selected>전 체</option>
 						<option value="title">제 목</option>
