@@ -25,25 +25,9 @@ public class BoardController {
 
 	
 	
-	//admBoardSearch
-	@RequestMapping("/admBoardSearch")
-	@ResponseBody
-	public List<BoardVO> admBoardSearch(@RequestParam("key")String key, @RequestParam("data")String data) {
-		System.out.println("key : " + key);
-		System.out.println("data : "+data);
-		System.out.println(boardDao.boardSearch(key, data));
-		return boardDao.boardSearch(key, data);
-	}
+	
 
-	// board 게시판 홈페이지 출력 admBoard
-	@RequestMapping("/admBoard")
-	public String boardPage(Model model) {
-		List<BoardVO> list = boardDao.boardSelectList();
-		System.out.println(list);
-		model.addAttribute("boardList", list);
-		return "board/admBoard";
-
-	}
+	
 
 	// board 게시판 리스트
 	@RequestMapping("/boardTables")
@@ -62,35 +46,27 @@ public class BoardController {
 	}
 
 	// 게시글 입력
-	@RequestMapping("/boardInsert")
-	public String boardInsert(BoardVO board, Model model) {
-		// System.out.println(board.getNotice_title());
-		boardDao.boardInsert(board);
-
-		return "redirect:boardTables";
-	}
+	/*
+	 * @RequestMapping("/boardInsert") public String boardInsert(BoardVO board,
+	 * Model model) { // System.out.println(board.getNotice_title());
+	 * boardDao.boardInsert(board);
+	 * 
+	 * return "redirect:boardTables"; }
+	 */
+	
+	
 
 	// 게시글 상세조회 및 수정 화면
-	@RequestMapping("/boardUpdateForm")
-	public String noticeSelect(@RequestParam(value = "b_no") int b_no, Model model) {
+	/*
+	 * @RequestMapping("/boardUpdateForm") public String
+	 * noticeSelect(@RequestParam(value = "b_no") int b_no, Model model) {
+	 * model.addAttribute("boards", boardDao.boardSelect(b_no)); return
+	 * "adm/adminBoardPage"; }
+	 */
 
-		model.addAttribute("boards", boardDao.boardSelect(b_no));
-		return "admin/board/boardUpdateForm";
-	}
+	
 
-	// 게시글 수정 
-	@RequestMapping(value="/boardUpdate")
-	public String boardUpdate(BoardVO board, Model model) {
-		boardDao.boardUpdate(board);
-		return "redirect:boardTables";
-
-	}
-
-	@RequestMapping("/boardDelete")
-	public String boardDelete(@RequestParam("b_no") int b_no, BoardVO board, Model model) {
-		boardDao.boardDelete(b_no);
-		return "redirect:boardTables";
-	}
+	
 	
 
 	// 게시글 순번 업데이트

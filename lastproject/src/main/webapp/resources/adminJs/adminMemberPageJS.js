@@ -6,9 +6,6 @@
 	})//end 아코디언 함수
 	
 	
-
-	
-	
 	//==================================================================================일반회원에 관한 JS
 	//======================enter 키===================
 	function admMemberListBtn() {
@@ -16,11 +13,7 @@
 		input = $("#admMemberListInput").val();
 		
 		if( input === 'one' ){
-			
-			$("#admMemberListInput").val('two'); //버튼 클릭 체크
-			
-			
-			
+			$("#admMemberListInput").val('two'); //버튼 클릭 체크			
 			let htmladmMemberList;
 			htmladmMemberList = `<form id="admDateForm" onsubmit="return false"
 				onkeypress="eventkey();">
@@ -84,10 +77,6 @@
 		
 		}; // 일반회원 목록 버튼 끝
 	
-	
-	
-	
-	
 	function eventkey() {
 		if (event.keyCode == 13) {
 			pagingList();
@@ -97,7 +86,8 @@
 	}//====================end enter 키================
 	
 	//===================리스트 호출 버튼==================
-		$(".codep").on('click', function() {
+		
+		$(document).on('click','.codep',function() {
 			var code = $(this).data('code');
 			console.log(code);
 			$('#admDateForm')[0].code.value = code
@@ -120,17 +110,15 @@
 				success : function(result) {
 
 					if(result.list == ''){
-						alert('데이터가 없습니다!!');
 						$("#myTable").empty();
 						$("#pagination").empty();
 						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
 					}else {
 						viewPmemberList(result.list);
 						viewPage(result.page);
-						
 					};
 				},error : function () {
-					alert('아 노답..');
+					alert('DB에서 데이터를 가져오는 데 실패했습니다. 개발자 호출 해주세요!');
 					
 				}
 			});
@@ -423,6 +411,7 @@
 			
 			
 		//모달 내용 초기화
+		
 		$('#myModal').on('hidden.bs.modal', function(e) {
 			$(this).find('ul').empty();
 			$(this).find('a').remove();
@@ -430,7 +419,8 @@
 		
 			
 		//===================리스트 호출 버튼==================
-		$(".codepP").on('click', function() {
+		
+		$(document).on('click','.codepP',function() {
 			var code = $(this).data('code');
 			$('#admDateFormP')[0].code.value = code
 			$('#admDateFormP')[0].pageNum.value = 1;
@@ -446,13 +436,24 @@
 				url : 'admPlistCode',
 				method : 'post',
 				data :str,
-				//contentType : 'application/json',
 				success : function(result) {
+					if(result.list == ''){
+						$("#myTableP").empty();
+						$("#paginationP").empty();
+						$("#myTableP").append("<tr><td colspan='5' align='center'>데이터가 없습니다.</td></tr>");
+					
+					}else{
+					
 					console.log("리절트리스트는 :"+result.list);
 					console.log("리절트페이지는 : " + result.page);
 					viewPmemberListP(result.list);
 					viewPageP(result.page);
+					}
+					
+				},error : function(error){
+					alert('DB에서 데이터를 가져오는 데 실패했습니다. 개발자 호출 해주세요!');
 				}
+				
 			});
 		}//===========end  리스트 ajax 호출==========
 			
@@ -472,7 +473,7 @@
 			}
 				for ( var i=page.startPage ; i <=  page.endPage; i++){
 					nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
-								href="javascript:goPageP(\${i})" class="page-link">\${i }</a>
+								href="javascript:goPageP(\${i})" class="page-link">\${i}</a>
 								</li>`
 				}
 				
@@ -489,7 +490,7 @@
 			nav += `</ul></nav>`
 			$('#paginationP').html(nav);
 			
-		}// end viewPage
+		}// end viewPageP
 			
 		function goPageP(pa) {
 			console.log("pa 는 :" + pa);
