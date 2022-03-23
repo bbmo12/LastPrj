@@ -185,17 +185,7 @@
 				}
 			});
 		}
-		
-		function bell(){
-			
-			var bell1 = `
-				 <div class="bellWrapper">
-		          <i class="fas fa-bell my-bell"></i>
-		        </div>
-		       `;
-		    $('.box').append(bell1);
-		    $('#i_bell').remove();
-		}
+	
 		
 		function noticeCheck(){
 			$.ajax({
@@ -204,15 +194,31 @@
 				success: function (result) {
 					console.log(result);
 					
-					var bell3 = `<i id="i_bell" class="fa-solid fa-bell"></i>`;
-					$('#notificationDropdown').append(bell3);  
 					
 					if (result != 0) {
 						console.log("no!")
-						setTimeOut(bell, 3000);
-						var bell2 = `<i id="i_bell" class="fa-solid fa-bell"></i>`;
+						setTimeout(function(){
+							
+							var bell1 = `
+								 <div class="bellWrapper">
+						          <i class="fas fa-bell my-bell"></i>
+						        </div>
+						       `;
+						    $('.box').append(bell1);
+							}, 1000);
+						
+						setTimeout(function(){
+							 $('.box').remove();
+								var bell3 = `<i id="i_bell3" class="fa-solid fa-bell"></i>`;
+								$('#notificationDropdown').append(bell3);
+						
+							}, 3000);
+						
+					} else if(result == 0){
+						var bell2 = `<i id="i_bell2" class="fa-solid fa-bell"></i>`;
 						$('#notificationDropdown').append(bell2);  
 					}
+					
 				}
 			});
 			
@@ -332,8 +338,8 @@
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
-										
 										<div class="box" style="width:40px; display:inline-block;"></div>
+										
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">
