@@ -260,7 +260,7 @@
 								<div class="form-group">
 									<i class="fas fa-user"></i>
 									<h3 style="font-weight: bolder;">이름</h3>
-									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" required>
+									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" >
 								</div>
 								<div class="form-group">
 									<i class="fas fa-id-card"></i>
@@ -278,7 +278,7 @@
 									<i class="fa fa-unlock-alt"></i>
 									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
 									<input type="password" id="password1" name="password1"class="form-control" value=""
-										style="width: 350px;" required>
+										style="width: 350px;" >
 								</div>
 								<div class="form-group">	
 									<i class="fa-solid fa-mobile-screen"></i>
@@ -596,7 +596,7 @@
 				updatePage.password.focus();
 				return false;
 			}
-			/* 	
+				
 			var pwdCheck = /^[A-Za-z0-9]{4,12}$/;
 				         
 			if(!pwdCheck.test(updatePage.password.value)){
@@ -608,7 +608,7 @@
 				alert("비밀번호가 일치하지 않습니다."); 
 				updatePage.password1.focus(); 
 				return false; 
-			}  */
+			}  
 			else if (updatePage.tel.value == "" && updatePage.w_tel.value == "") {
 				alert("전화번호를 입력해주세요.");
 				updatePage.tel.focus();
