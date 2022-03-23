@@ -1,6 +1,8 @@
 package com.last.prj.counsel.service;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
