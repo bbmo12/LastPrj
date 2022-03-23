@@ -13,10 +13,11 @@
     <!-- Page Title -->
     <title>BanBanBan</title>
 
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 	
 <style>
+
 .partner_img{
 	object-fit: cover;
 	object-position:top;
@@ -75,7 +76,11 @@ h2{
 }
 
 #qSection {
-	border: 1px solid rgb(220, 220, 220);
+	height:250px;
+	margin-bottom:20px;
+	background-color:white;
+	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+	border: 1px solid #e3e6f0;
 }
 
 .card-text {
@@ -128,7 +133,6 @@ h1{
                     <a href="reservationSetting" class="genric-btn info circle arrow">파트너회원예약설정</a> -->
                     <br>
                     <!-- <a href="reservMember" class="genric-btn info circle arrow" style="text-decoration: none;">지금 예약하기<span class="lnr lnr-arrow-right"></span></a> -->
-                    
                 </div>
             </div>
         </div>
@@ -300,7 +304,8 @@ h1{
                 <div class="col-lg-4 col-sm-6">
                     <div class="single-doctor mb-4 mb-sm-0">
                         <div class="content-area" style="margin-bottom:20px;">
-                            <div class="doctor-text text-center" style="height:250px">
+                            <div class="doctor-text text-center" style="height:250px; box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+	border: 1px solid #e3e6f0;">
                             <div id="profile">
                             	<img class="profile_img" src="resources/upload/${review.picture }" "this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
@@ -358,7 +363,7 @@ h1{
                 <div class="col-lg-4 col-md-6">
                 <div class="single-news mt-5 mt-md-0">
 	                
-					  <div id="qSection" class="card-body" style="height:250px; margin-bottom:20px; background-color:white;">
+					  <div id="qSection" class="card-body">
 					    <span style="color:#4C4C4C; font-size:20px;">
 					    <i class="fa-solid fa-q fa-lg" style="color: dodgerblue; margin-right: 20px;"></i>
 					    ${recent.title }</span>

@@ -9,4 +9,5 @@ public interface NoticeMapper {
 	int noticeUpdate(int notice_no);
 	List<String> noticeCheck();
 	int noticeDelete(String notice_no);
+	int noticeCheckCount(String m_id);
 }

@@ -23,6 +23,7 @@
 		.tagli {
 			float: left;
 			margin-right: 5px;
+			margin-top:5px;
 		}
 		
 		.tagli2{
@@ -142,11 +143,12 @@
 </head>
 
 <body>
+<br><br><br><br><br>
 	<section class="banner-area other-page">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Open Q&A</h1>
+					<h1>Open Q&A</h1><br>
 					<h3>반려동물 전문가와 베테랑 집사들이 반려동물에 관한 모든 궁금증을 해결해드립니다!</h3>
 				</div>
 				<sec:authorize access="hasRole('MEMBER')">

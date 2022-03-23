@@ -48,8 +48,7 @@
 <script src="resources/table/js/datatable-checkbox-init.js"></script>
 <script src="resources/table/js/datatables.min.js"></script>
 <style>
-<
-style>.single_sidebar_widget .post_category_widget {
+.single_sidebar_widget .post_category_widget {
 	text-decoration: none !important;
 	font-size: 2rem !important;
 }

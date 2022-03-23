@@ -42,7 +42,7 @@ public class FfileUtil {
 		//String realPath = request.getSession().getServletContext().getRealPath("resources/upload");
 		// String root = path + "\\" + "upload"; 이거 안씀
 
-		System.out.printf("realPath: %s\n", uploadPath);
+		System.out.printf("uploadPath: %s\n", uploadPath);
 
 		File fileCheck = new File(uploadPath);
 

@@ -70,6 +70,69 @@
 	.sf-arrows .sf-with-ul{
 		padding-right: 0px;
 	}
+	
+	#logText{
+		text-decoration: none;
+		font-family: 'Binggrae-Bold';
+		font-size : 28px;
+		color: #0062ff;
+	}
+	
+	.bellWrapper {
+  font-size: 28px;
+}
+
+.my-bell {
+  transform-origin: top;
+  animation: bell 2s infinite linear;
+}
+
+@keyframes bell{
+  0%, 50%{
+      transform: rotate(0deg);
+   }
+  5%, 15%, 25%, 35%, 45% {
+    transform: rotate(13deg);
+  }
+  10%, 20%, 30%, 40% {
+    transform: rotate(-13deg);
+  }
+}
+
+.circle {
+   width: 100px;
+     height: 80px;
+  position: absolute;
+  border: 2px solid #ff686b;
+  border-radius: 70%;
+  border-color: transparent #ff686b;
+  animation: ring 2s infinite linear both;
+}
+
+.second {
+  animation-delay: .3s;
+}
+
+.third {
+  animation-delay: .7s;
+}
+
+@keyframes ring{
+  0%, 100% {
+    opacity: 0; 
+  }
+  
+  1% {
+    opacity: 1;
+  }
+  
+  50% {
+    width: 250px;
+    height: 250px;
+    opacity: 0;
+  }
+
+	
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
@@ -88,6 +151,7 @@
 					sock.onmessage = onMessage; // toast생성
 				}
 				notice();
+				noticeCheck();
 			}
 		});
 
@@ -116,6 +180,23 @@
 					}
 				}
 			});
+		}
+		
+		
+		function noticeCheck(){
+			$.ajax({
+				url: "noticeCheckCount",
+				type: "post",
+				success: function (result) {
+					console.log(result);
+					
+					if (result == 0) {
+						console.log("없어")
+					}
+					$('#noticeCount').val(result);
+				}
+			});
+			
 		}
 	});
 			/* <h6 class="preview-subject font-weight-normal mb-1">\${result[i].n_from}</h6> */
@@ -178,7 +259,7 @@
 			<div class="container" style="margin-right: 20px;">
 				<div class="row align-items-center justify-content-between d-flex">
 					<div id="logo" style="float: left; margin-left: -400px;">
-						<a href="home"><img src="resources/upload/logo2.png" alt="" title="" style="width:70px; height:70px;" /></a>
+						<a href="home" id="logText">BANBANBAN<!-- <img src="resources/upload/logo2.png" alt="" title="" style="width:70px; height:70px;" /> --></a>
 					</div>
 					<nav id="nav-menu-container">
 						<ul class="nav-menu">
@@ -232,7 +313,18 @@
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
+										<input type="hidden" id="noticeCount">
+										
 										<i class="fa-solid fa-bell"></i>
+										<div class="box" style="width:40px; display:inline-block;">
+									        <div class="bellWrapper">
+									          <i class="fas fa-bell my-bell"></i>
+									        </div>
+									        
+									        <div class="circle first"></div>
+									        <div class="circle second"></div>
+									        <div class="circle third"></div>
+									    </div>
 										<span class="count-symbol bg-danger"></span>
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
