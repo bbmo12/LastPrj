@@ -10,4 +10,5 @@ public class ReservCountVO {
 	private String p_id;
 	private String start_date;
 	private String end_date;
+	private int r_no;
 }

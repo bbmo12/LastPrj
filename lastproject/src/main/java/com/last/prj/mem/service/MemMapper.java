@@ -68,4 +68,7 @@ public interface MemMapper {
 	int countReview1(String m_id);
 	int countReview2(String m_id);
 	int countReservation(String m_id);	
+	
+	//펫케어 가능동물 단건?조회
+	PetcareVO careList(String p_id);
 }

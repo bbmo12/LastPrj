@@ -101,9 +101,11 @@ input:disabled {
 				 <input type="hidden" id = "AutoCode" >
 		   		 
 		   		 <select class="animalNo" onchange="NoSelection(event)">
-		   		 	<option value="" disabled selected  >펫 번호(이름)</option>
+		   		 	<option value="" disabled selected  >펫 이름</option>
 					 <c:forEach items="${petList}" var="pet">
-		   		 			<option value="${pet.pet_no }"> <%-- ${pet.pet_no } --%>${pet.name }</option>
+					 		<c:if test="${pet.code eq careList.code }"> 
+		   		 				<option value="${pet.pet_no }">${pet.name }</option>
+		   		 			</c:if>
 		   		 	   </c:forEach>
 		   		 </select>
 		   		 </form>
@@ -120,7 +122,6 @@ input:disabled {
 </div>
 
 <script type="text/javascript">
-
 
 $(document).ready(function(){
 	
@@ -502,6 +503,7 @@ function reservModal(event){
 	if(reserv_time =='undefined' || tdvalue ==''){
 		toastr.error("예약시간을 선택해주세요");
 		$("#exampleModal").attr("id","noexam");
+		return;
 	}else{
 		$("#noexam").attr("id","exampleModal");
 		$("#dvalue").text('예약일 : ' + tdvalue);

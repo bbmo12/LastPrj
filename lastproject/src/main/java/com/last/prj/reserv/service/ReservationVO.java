@@ -36,6 +36,7 @@ public class ReservationVO {
 	private String total;
 	private String key;
 	private String data;
+	private String rd_date;
 	 
 	
 }
