@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
-h1{
+h1, h3{
 	font-family: 'Binggrae';
 	color: white;
 }
@@ -83,7 +83,7 @@ h2{
                 <div class="col-lg-10" style="margin-left: 50px;">
                 <br><br><br><br><br>
                     <h1>공지사항</h1>
-					<h3 style="margin-top:5%;">우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
+					<h3 style="margin-top:5%;" >우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
                    <sec:authorize access="hasRole('ADMIN')">
 					<div class="boardForm">
 						<a href="boardForm" class="genric-btn info circle btn-lg" id="qna-button">공지사항 작성하기</a>
@@ -99,7 +99,7 @@ h2{
 			<div class="row">
 				<div class="col-lg-6 offset-lg-3">
 					<div class="section-top text-center">
-						<h2>공지사항</h2>
+						<h2 style="margin-bottom : 40px">공지사항</h2>
 						<p>반려동물을 사랑하는 마음은 물론, 반려동물 관련 자격증 또는 전문 지식을 갖춘 분들이 활동하고 있습니다.
 							반려동물과 보호자님 모두의 행복한 동행을 위해 든든한 파트너가 되어드립니다.</p>
 					</div>
@@ -147,12 +147,12 @@ h2{
 						</div>
 					</aside>
 
-					<select id="search" name="search">
+				<!-- 	<select id="search" name="search">
 						<option value="all" selected>전 체</option>
 						<option value="title">제 목</option>
 						<option value="content">내 용</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
-					<button type="button" onclick="searchData()">검 색</button>
+					<button type="button" onclick="searchData()">검 색</button> -->
 
 				</form>
 			</div>

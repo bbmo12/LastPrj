@@ -165,6 +165,12 @@
 		<if test="code != null ">
 			AND R.CODE = #{code}
 		</if>
+		<if test="key != null and key != '' and data != null and data != ''">
+			AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' OR UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'reporter' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data})||'%' </if>
+			<if test="key != null and key != '' and key == 'reported' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
@@ -182,6 +188,12 @@
 		<if test="code != null">
 			AND R.CODE = #{code}
 		</if>
+		<if test="key != null and key != '' and data != null and data != ''">
+			AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' OR UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'reporter' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data})||'%' </if>
+			<if test="key != null and key != '' and key == 'reported' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
@@ -206,9 +218,12 @@
 		<if test="repor != null ">
 			AND R.REPOR = #{repor}
 		</if>
-		<if
-			test="key != null and key != '' and data != null and data != ''">
-			AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
+		<if test="key != null and key != '' and data != null and data != ''">
+			AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' OR UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'reporter' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data})||'%' </if>
+			<if test="key != null and key != '' and key == 'reported' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
@@ -229,14 +244,16 @@
 		<if test="repor != null ">
 			AND R.REPOR = #{repor}
 		</if>
-		<if
-			test="key != null and key != '' and data != null and data != ''">
-			AND UPPER(${key}) LIKE '%'|| UPPER(#{data})||'%'</if>
+		<if test="key != null and key != '' and data != null and data != ''">
+			AND UPPER(R.REPORTER) LIKE '%'|| UPPER(#{data})||'%' OR UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'reporter' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data})||'%' </if>
+			<if test="key != null and key != '' and key == 'reported' and data != null and data != ''">
+			AND UPPER(R.REPORTED) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if
 			test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND R.W_DATE BETWEEN #{fromDate} AND #{toDate}
 		</if>
-
 	</select>
 
 
@@ -272,8 +289,6 @@
 		</choose>
 	</update>
 	
-	
-	
 	<!-- adminReportTotalCount 일반,파트너회원  -->
 	<select id="adminReportedCount" resultType="int">
 		SELECT COUNT(*) FROM(
@@ -292,8 +307,6 @@
 		UNION
 		SELECT P_ID AS ID FROM P_MEMBER WHERE C_REPORT >= 10)
 	</select>
-	
-	
 	
 	<!-- 신고 제재 대상 회원 -->
 	<select id="adminReporList" resultType="com.last.prj.report.service.ReportVO">

@@ -236,7 +236,12 @@
 			AND p.code = #{code}
 		</if>
 		<if test="code != null and code == '104'"> AND P.CODE = 9999</if>
-		<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != ''  and data !='' and data != null "> 
+		AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%' OR  UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != '' and key == 'name' and data !='' and data != null "> 
+		AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != '' and key == 'p_id' and data !='' and data != null "> 
+		AND UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>
@@ -254,7 +259,12 @@
 				AND P.CODE = #{code}
 			</if>
 			<if test="code != null and code == '104'">AND P.CODE = 9999</if>
-			<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != ''  and data !='' and data != null "> 
+			AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%' OR  UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'name' and data !='' and data != null "> 
+			AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'p_id' and data !='' and data != null "> 
+			AND UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 			<if
 				test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 				AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}

@@ -9,10 +9,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet" type="text/css"
-	href="resources/table/css/multicheck.css">
-<link href="resources/table/css/dataTables.bootstrap4.css"
-	rel="stylesheet">
+<link rel="stylesheet" type="text/css"	href="resources/table/css/multicheck.css"> 
+<link href="resources/table/css/dataTables.bootstrap4.css"	rel="stylesheet">
 <link href="resources/table/css/style.min.css" rel="stylesheet">
 
 <!-- Modal -->
@@ -28,28 +26,38 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script src="resources/table/js/jquery.min.js"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="resources/table/js/popper.min.js"></script>
-<script src="resources/table/js/bootstrap.min.js"></script>
-<!-- slimscrollbar scrollbar JavaScript -->
-<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
-<script src="resources/table/js/sparkline.js"></script>
-<!--Wave Effects -->
-<script src="resources/table/js/waves.js"></script>
-<!--Menu sidebar -->
-<script src="resources/table/js/sidebarmenu.js"></script>
-<!--Custom JavaScript -->
-<script src="resources/table/js/custom.min.js"></script>
-<!-- this page js -->
-<script src="resources/table/js/datatable-checkbox-init.js"></script>
-<script src="resources/table/js/datatables.min.js"></script>
+		<script src="resources/table/js/jquery.min.js"></script>
+	<!-- Bootstrap tether Core JavaScript -->
+	<script src="resources/table/js/popper.min.js"></script>
+	<script src="resources/table/js/bootstrap.min.js"></script>
+	<!-- slimscrollbar scrollbar JavaScript -->
+	<script src="resources/table/js/perfect-scrollbar.jquery.min.js"></script>
+	<script src="resources/table/js/sparkline.js"></script>
+	<!--Wave Effects -->
+	<script src="resources/table/js/waves.js"></script>
+	<!--Menu sidebar -->
+	<script src="resources/table/js/sidebarmenu.js"></script>
+	<!--Custom JavaScript -->
+	<script src="resources/table/js/custom.min.js"></script>
+	<!-- this page js -->
+	<script src="resources/table/js/datatable-checkbox-init.js"></script>
+	<script src="resources/table/js/datatables.min.js"></script>
 <style>
-<
-style>.single_sidebar_widget .post_category_widget {
+h1 {
+	color: white;
+}
+
+#banner_content {
+	color: white;
+}
+
+.swal2-content {
+	display: none;
+}
+
+.single_sidebar_widget .post_category_widget {
 	text-decoration: none !important;
 	font-size: 2rem !important;
 }
@@ -63,6 +71,14 @@ style>.single_sidebar_widget .post_category_widget {
 	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 	border: 1px solid #e3e6f0;
 	border-radius: 0.35rem
+}
+
+.col-lg-3 {
+	padding: 50px;
+}
+
+.posts-list {
+	margin-top: 1.9%;
 }
 
 .card {
@@ -153,12 +169,19 @@ style>.single_sidebar_widget .post_category_widget {
 </style>
 
 <body>
-	<section class="department-area" style="padding: 30px 0 30px;">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- Banner Area Starts -->
+	<section class="banner-area">
 		<div class="container">
-			<div class="col-lg-6 offset-lg-3">
-				<div class="section-top text-center">
-					<br> <br> <br>
-					<h2></h2>
+			<div class="row">
+				<div class="col-lg-10" style="margin-left: 50px;">
+					<br> <br> <br> <br> <br>
+					<h1>관리자 페이지</h1>
+					<h1>관리자님 반갑습니다.</h1>
 				</div>
 			</div>
 		</div>
@@ -167,7 +190,9 @@ style>.single_sidebar_widget .post_category_widget {
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2><a href="adminPage">MyPage</a></h2><h5>공지사항 페이지</h5>
+					<h5>
+						<a href="adminPage">메인 페이지</a>
+					</h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -210,11 +235,11 @@ style>.single_sidebar_widget .post_category_widget {
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="margin-left: 40px;">
+					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-12 col-md-12 blog_details">
-									<div class="card">
+									<div class="card" style="margin-top: 1.9%;">
 										<div class="card-header">
 											<i class="fa-solid fa-paw"></i> 공지사항
 										</div>
@@ -226,7 +251,7 @@ style>.single_sidebar_widget .post_category_widget {
 													<thead>
 														<tr>
 															<th>번호</th>
-															<th>제목</th>															
+															<th>제목</th>
 															<th>작성날짜</th>
 															<th>처리</th>
 
@@ -248,10 +273,11 @@ style>.single_sidebar_widget .post_category_widget {
 																		<button type="button" class="btn btn-primary"
 																			data-toggle="modal"
 																			data-target=".bd-example-modal-lg${boards.b_no }">보기</button>
-																		<button name="btnDelete" id="btnDelete"
+																		<button name="btnDelete" id="btnDelete" 
 																			class="btn btn-primary"
-																			onclick="boardDelete('+${boards.b_no }+')">
+																			onclick = "location.href ='boardDelete?b_no=${boards.b_no }'">
 																			삭제</button>
+																		
 																	</td>
 																</tr>
 																<div
@@ -294,10 +320,10 @@ style>.single_sidebar_widget .post_category_widget {
 													</tbody>
 												</table>
 											</div>
-											<div class="card-footer">
+											<div class="card-footer" id="boardInsert">
 												<span style="color: #0062ff"><i
-													class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>공지사항
-													추가</span>
+													class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span
+													>공지사항 추가</span>
 											</div>
 										</div>
 									</div>
@@ -306,24 +332,83 @@ style>.single_sidebar_widget .post_category_widget {
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="modal fade bd-example-modal-lg boardInsertModal" id="boardInsertModal"
+			tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">글쓰기</h4>
+							<p class="card-description">공지사항 새 글</p>
+							<form class="forms-sample" id="frmIN" action="boardInsert"
+								method="post">
+								<div class="form-group">
+									<label for="title">제목</label> <input type="text" name="title"
+										class="form-control" id="title" placeholder="제목.." required>
+								</div>
+								<div class="form-group">
+									<label for="exampleInputEmail3">작성자</label> <input type="text"
+										class="form-control writer" id="writer" value="admin"
+										name="writer" required>
+								</div>
+								<div class="form-group">
+									<label for="content">내용</label>
+									<textarea class="form-control" name="content" id="content"
+										rows="4"></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary" id="insert"
+									name="insert">등록</button>
+								<button class="btn btn-primary">취소</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</section>
 	<script>
+		$('#boardInsert').on('click', function(e) {
+
+			$('#boardInsertModal').modal('show');
+
+		});
+	
+
+		$('#insert').on('click',  function(e) {
+			
+			var str = $('#frmIN').serialize();
+			$.ajax({
+				url : 'boardInsert',
+				method : 'POST',
+				data : str,
+				success : function(res) {
+					toastr.success("공지사항에 새 글이 추가되었습니다.");
+			
+
+				},
+				error : function() {
+					alert("ajax 에러");
+				}
+			})
+		});
+
 		// 게시글 수정
 		$('#zero_config').DataTable();
 		$('.bd-example-modal-lg').on('hidden.bs.modal', function(e) {
 			$(this).find('form')[0].reset();
 		})
-
-		$('.fa-plus').on('click', function(e) {
-
-		})
-
-		/* function boardDelete(this){
+		
+		/* function boardDelete(e) {
+			console.log(e);
 			$.ajax({
 				type:'post',
-				url : 'boardDelete'
-				data:{
-					"b_no" : $(this).val()
+				url : 'boardDelete',
+				data : {
+					"b_no" : $(e).val()
 				},success:function(){
 					alert('해당 게시글이 삭제 되었습니다.');
 				},error : function() {
@@ -331,7 +416,8 @@ style>.single_sidebar_widget .post_category_widget {
 					
 				}
 			})
-		} */// 게시글 삭제
+		} */
+
 	</script>
 
 </body>
