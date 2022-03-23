@@ -17,6 +17,7 @@ h1, h3{
 	color: white;
 }
 
+
 h2{
 	font-family: 'Binggrae';
 	font-weight: 700;
