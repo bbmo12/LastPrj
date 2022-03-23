@@ -154,7 +154,7 @@ h2{
 						<option value="content">내 용</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="button" onclick="searchData()">검 색</button> -->
-
+<div></div>
 				</form>
 			</div>
 		</div>
@@ -217,6 +217,7 @@ h2{
 		$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 	})//end 아코디언 함수
 
+	
 	
 	
 </script>
