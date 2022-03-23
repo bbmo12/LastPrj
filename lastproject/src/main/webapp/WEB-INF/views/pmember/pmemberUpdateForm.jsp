@@ -440,7 +440,7 @@
 					$('#w_tel_check').text('');
 				} else {
 					console.log('false');
-					$('#w_tel_check').text('전문분야 소개 확인부탁드립니다..');
+					$('#w_tel_check').text('숫자만 입력가능합니다.');
 					$('#w_tel_check').css('color', 'red');
 				}
 			});
@@ -868,37 +868,37 @@
 
 		function checkForm() {
 			if (updatePage.name.value == "") {
-				alert("이름을 입력하세요.");
+				Swal.fire("이름을 입력하세요.");
 				updatePage.name.focus();
 				return false;
 			} else if (updatePage.password.value == "") {
-				alert("비밀번호 입력하세요.");
+				Swal.fire("비밀번호 입력하세요.");
 				updatePage.password.focus();
 				return false;
 			}
-	
-		/* 	var pwdCheck = /^[A-Za-z0-9]{4,12}$/; 
+				
+			var pwdCheck = /^[A-Za-z0-9]{4,12}$/;
+				         
 			if(!pwdCheck.test(updatePage.password.value)){
-				alert("4~12자의 숫자 , 문자로만 사용 가능합니다.);
+				Swal.fire("4~12자의 숫자 , 문자로만 사용 가능합니다.");
 				updatePage.password.focus(); 
 				return false; 
 			}
 			if( updatePage.password.value !== updatePage.password1.value ){
-				alert("비밀번호가 일치하지 않습니다."); 
+				Swal.fire("비밀번호가 일치하지 않습니다."); 
 				updatePage.password1.focus(); 
-				return false;   
-			}   */
-
+				return false; 
+			}  
 			else if (updatePage.tel.value == "" && updatePage.w_tel.value == "") {
-				alert("전화번호를 입력해주세요.");
+				Swal.fire("전화번호를 입력해주세요.");
 				updatePage.tel.focus();
 				return false;
 			} else if (updatePage.w_name.value == "") {
-				alert("사업장 이름을 입력주세요.");
+				Swal.fire("사업장 이름을 입력주세요.");
 				updatePage.w_name.focus();
 				return false;
 			} else if (updatePage.w_address.value == "" && updatePage.w_d_address.value == "") {
-				alert("사업장 주소를 입력주세요.");
+				Swal.fire("사업장 주소를 입력주세요.");
 				updatePage.w_address.focus();
 				return false;
 			} else {
