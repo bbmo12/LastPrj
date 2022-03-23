@@ -99,9 +99,9 @@
   }
 }
 
-.circle {
+.circle2 {
    width: 100px;
-     height: 80px;
+  height: 80px;
   position: absolute;
   border: 2px solid #ff686b;
   border-radius: 70%;
@@ -132,7 +132,11 @@
     opacity: 0;
   }
 
-	
+#ii_bell{
+	width:40px;
+	display:inline-block;
+}
+
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
@@ -190,10 +194,22 @@
 				success: function (result) {
 					console.log(result);
 					
-					if (result == 0) {
-						console.log("없어")
+					if (result != 0) {
+						var bell1 = `
+							 <div class="bellWrapper">
+					          <i class="fas fa-bell my-bell"></i>
+					        </div>
+					        <div class="circle2 first"></div>
+					        <div class="circle2 second"></div>
+					        <div class="circle2 third"></div>`;
+					    $('.box').append(bell1);
+					    $('#i_bell').remove();
+					    
+					}else if (result == 0){
+						var bell2 = `<i id="i_bell" class="fa-solid fa-bell"></i>`;
+						$('#notificationDropdown').append(bell2);
 					}
-					$('#noticeCount').val(result);
+					
 				}
 			});
 			
@@ -313,19 +329,8 @@
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
-										<input type="hidden" id="noticeCount">
 										
-										<i class="fa-solid fa-bell"></i>
-										<div class="box" style="width:40px; display:inline-block;">
-									        <div class="bellWrapper">
-									          <i class="fas fa-bell my-bell"></i>
-									        </div>
-									        
-									        <div class="circle first"></div>
-									        <div class="circle second"></div>
-									        <div class="circle third"></div>
-									    </div>
-										<span class="count-symbol bg-danger"></span>
+										<div class="box" style="width:40px; display:inline-block;"></div>
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">
