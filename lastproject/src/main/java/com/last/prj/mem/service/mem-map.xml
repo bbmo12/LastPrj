@@ -145,6 +145,14 @@
 		INSERT INTO PETCARE(care_no, p_id, code)
 		VALUES(#{care_no},#{p_id},#{code})
 	</insert>
+	
+	<!-- 케어가능동물조회 -->
+	
+	<select id="careList" resultType="com.last.prj.mem.service.PetcareVO" parameterType="String">
+		SELECT CODE 
+		FROM PETCARE
+		WHERE P_ID = #{p_id}
+	</select>
 
 
 

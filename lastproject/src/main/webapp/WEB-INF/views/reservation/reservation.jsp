@@ -217,6 +217,7 @@
 												<th>예약번호</th>
 												<th>수의사 이름</th>
 												<th>예약신청일자</th>
+												<th>예약일자</th>
 												<th>예약시간</th>
 												<th>예약내용</th>
 												<th>품종</th>
@@ -351,25 +352,49 @@
 		$("#myTable").empty();
 		
 		$.each(result, function (i) {
+			console.log(result[i].refuse);
+			var choicedTag;
+			if(result[i].refuse == null){
 			
-			var choicedTag = "<tr><td>" +
-			result[i].r_no +
-			"</td><td>" +
-			result[i].name +
-			"</td><td class='card-text'>" +
-			result[i].r_date +
-			"</td><td>" +
-			result[i].time +
-			"</td><td>" +
-			result[i].rcontent +
-			"</td><td>"+
-			result[i].pcontent +
-			"</td><td id='td"+[i]+"'><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
-			+result[i].rccontent +
-			"</td><td>" 
-			if(result[i] != 'null'){
-			result[i].refuse }+
-			"</td>";
+				choicedTag = "<tr><td>" +
+				result[i].r_no +
+				"</td><td>" +
+				result[i].name +
+				"</td><td>" +
+				result[i].rd_date +
+				"</td><td class='card-text'>" +
+				result[i].r_date +
+				"</td><td>" +
+				result[i].time +
+				"</td><td>" +
+				result[i].rcontent +
+				"</td><td>"+
+				result[i].pcontent +
+				"</td><td id='td"+[i]+"'><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
+				+result[i].rccontent +
+				"</td><td>"
+				+' '+"</td>";	
+			}else{
+				choicedTag = "<tr><td>" +
+				result[i].r_no +
+				"</td><td>" +
+				result[i].name +
+				"</td><td>" +
+				result[i].rd_date +
+				"</td><td class='card-text'>" +
+				result[i].r_date +
+				"</td><td>" +
+				result[i].time +
+				"</td><td>" +
+				result[i].rcontent +
+				"</td><td>"+
+				result[i].pcontent +
+				"</td><td id='td"+[i]+"'><input class='in_code' type='hidden' value="+result[i].rccontent+ ">"
+				+result[i].rccontent +
+				"</td><td>" +
+				result[i].refuse +
+				"</td>";
+			}
 			
 			if(result[i].code == 405){
 				if(result[i].r_check == 0){

@@ -28,5 +28,19 @@
 	INSERT INTO RESERVCOUNT (reserv_count,reserv_date,reserv_time,p_id,start_date,end_date)
 	VALUES (#{reserv_count},#{reserv_date},#{reserv_time},#{p_id},#{start_date},#{end_date})
 </insert>
+<!-- 예약번호 업데이트 시킵시다 -->
+<update id="countUpdate">
+	UPDATE RESERVCOUNT
+	SET R_NO = #{r_no}
+	
+</update>
+<!-- 예약승인거절시 해당 체크값 제거 -->
+<delete id="countDelete">
+	DELETE FROM RESERVCOUNT
+	WHERE P_id = #{p_id}
+	AND RESERV_DATE = #{reserv_date}
+	AND RESERV_TIME = #{reserv_time}
+</delete>
+
 
 </mapper>
