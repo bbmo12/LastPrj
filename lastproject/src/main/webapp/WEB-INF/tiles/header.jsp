@@ -199,9 +199,7 @@
 							 <div class="bellWrapper">
 					          <i class="fas fa-bell my-bell"></i>
 					        </div>
-					        <div class="circle2 first"></div>
-					        <div class="circle2 second"></div>
-					        <div class="circle2 third"></div>`;
+					       `;
 					    $('.box').append(bell1);
 					    $('#i_bell').remove();
 					    
