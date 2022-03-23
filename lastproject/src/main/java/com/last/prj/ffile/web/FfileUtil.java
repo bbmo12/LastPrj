@@ -24,6 +24,9 @@ public class FfileUtil {
 
 	@Autowired
 	private FfileService ffileDao;
+	
+	@Autowired
+	private String uploadPath;
 
 	public int multiFileUpload(List<MultipartFile> multiFileList, HttpServletRequest request) {
 		FilemasterVO filemaster = new FilemasterVO();
@@ -33,15 +36,15 @@ public class FfileUtil {
 
 		// path 가져오기
 
-		String webPath = "/resources/upload";
-		// String realPath = sc.getRealPath(webPath);
+		//String webPath = "/resources/upload";
+		// String realPath = sc.getRealPath(webPath); 이거 안씀
 
-		String realPath = request.getSession().getServletContext().getRealPath("resources/upload");
-		// String root = path + "\\" + "upload";
+		//String realPath = request.getSession().getServletContext().getRealPath("resources/upload");
+		// String root = path + "\\" + "upload"; 이거 안씀
 
-		System.out.printf("realPath: %s\n", realPath);
+		System.out.printf("uploadPath: %s\n", uploadPath);
 
-		File fileCheck = new File(realPath);
+		File fileCheck = new File(uploadPath);
 
 		if (!fileCheck.exists())
 			fileCheck.mkdirs();
@@ -72,7 +75,8 @@ public class FfileUtil {
 
 			fileList.add(map);
 
-			File uploadFile = new File(realPath + "\\" + fileList.get(i).get("changeFile"));
+			File uploadFile = new File(uploadPath + "/" + fileList.get(i).get("changeFile"));
+			System.out.println("uploadFile " + uploadFile);
 			try {
 				multiFileList.get(i).transferTo(uploadFile);
 			} catch (Exception e) {
@@ -80,7 +84,7 @@ public class FfileUtil {
 				// 만약 업로드 실패하면 파일 삭제
 				for (int J = 0; J < multiFileList.size(); J++) {
 					if (multiFileList.get(i) != null && multiFileList.get(i).getSize() > 0) {
-						new File(realPath + "\\" + fileList.get(J).get("changeFile")).delete();
+						new File(uploadPath + "/" + fileList.get(J).get("changeFile")).delete();
 					}
 
 				}

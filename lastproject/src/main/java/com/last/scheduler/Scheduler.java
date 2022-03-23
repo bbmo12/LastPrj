@@ -38,6 +38,10 @@ public class Scheduler {
 	@Autowired
 	private NoticeService noticeDao;
 	
+	/*
+	 * @Autowired private ReportService reporDao;
+	 */
+	
 	// 초 분 시 일 월 요일 순서
 	@Scheduled(cron = "0 0 12 * * *" )
 	public void autoUpdate() {
@@ -97,4 +101,24 @@ public class Scheduler {
 			
 			System.out.println("삭제완료!!");
 		}
+		
+		
+		//일정 시간이 지나면 제재 처분 처리 : 제재 처리 테이블에 해당 회원의 시작 일자와 끝날 일자를 불러와서
+		//
+		/*
+		@Scheduled(cron = "0 59 * * * *" )
+		public void adminReporCheck() {
+			List<String> repor = reportDao.
+					
+			for(int i = 0; i < repor.size(); i++) {
+				
+				if( sysdate - reporDate >= 3 ) {
+					
+				}
+			}
+		}
+		*/
+		
+		
+		
 }

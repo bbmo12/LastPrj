@@ -10,12 +10,7 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 	<style type="text/css">
-	
-	.nav-menu a {
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 1.5rem;
-	}
+
 	
 	*{margin: 0;padding: 0;box-sizing: border-box}
 body{background-color: #f7f7f7;}
@@ -182,28 +177,28 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 										<label>훈련사&emsp;<input type="radio" id="code" name="code" value="101"><span class="checkmark"></span></label>							
 									<div class="form-group" style="margin-top: 10px;">
 										<label for="name">이름</label>
-										<input id="name" name="name" type="text" class="form-control" value="박박박" required autofocus>
+										<input id="name" name="name" type="text" class="form-control" value="" required autofocus>
 										<div id="name_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputEmail3">E-Mail 아이디</label>
-										<input id="p_id" name="p_id" type="email" class="form-control" value="parkkk@a.com" required style="width: 450px;">
+										<input id="p_id" name="p_id" type="email" class="form-control" value="" required style="width: 450px;">
 										<button type="button"  class="btn btn-primary mr-2" onclick="isIdCheck()" id="idCheck" value="NO" style="margin: -58px 0 0 29em;">중복체크</button>
 										<div id="id_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">비밀번호</label>
-										<input id="password" name="password" type="password" class="form-control" value="1234" required data-eye>
+										<input id="password" name="password" type="password" class="form-control" value="" required data-eye>
 										<div id="pw_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword4">비밀번호확인</label>
-										<input id="password1" name="password1" type="password"  value="1234" class="form-control" required data-eye>
+										<input id="password1" name="password1" type="password"  value="" class="form-control" required data-eye>
 										<div id="pw1_check"></div>
 									</div>
 									<div class="form-group">
 										<label for="exampleSelectGender">전화번호&nbsp;휴대폰 번호('-'없이 번호만 입력해주세요)</label>
-										<input id="tel" name="tel" type="text" class="form-control" value="01012345678" placeholder="tel">
+										<input id="tel" name="tel" type="text" class="form-control" value="" placeholder="tel">
 										<div id="tel_check"></div>
 									</div>
 									<div class="form-group">
@@ -247,20 +242,12 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
 			<div class="modal-body">
 			    <form action="" id="joinForm">
         <ul class="join_box">
-            <li class="checkBox check01">
-                <ul class="clearfix">
-                    <li>이용약관, 개인정보 수집 및 이용에 동의합니다.</li>
-                    <li class="checkAllBtn">
-                        
-                    </li>
-                </ul>
-            </li>
             <li class="checkBox check02">
                 <ul class="clearfix">
                     <li>이용약관 동의(필수)</li>
                 </ul>
                 <textarea name="" id="">여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+반반반 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 반반반 서비스의 이용과 관련하여 반반반 서비스를 제공하는 반반반 주식회사(이하 ‘반반반’)와 이를 이용하는 반반반 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 반반반 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
    </textarea>
             </li>
             <li class="checkBox check03">
@@ -270,7 +257,7 @@ ul.join_box{border: 1px solid #ddd;background-color: #fff;}
                 </ul>
 
                 <textarea name="" id="">여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
+반반반 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 반반반 서비스의 이용과 관련하여 반반반 서비스를 제공하는 반반반 주식회사(이하 ‘반반반’)와 이를 이용하는 반반반 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 반반반 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
    </textarea>
             </li>
         </ul>

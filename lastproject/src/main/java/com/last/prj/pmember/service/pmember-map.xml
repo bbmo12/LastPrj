@@ -15,8 +15,18 @@
 
 	<select id="getTime" parameterType="String"
 		resultType="com.last.prj.pmember.service.TimeVO">
-		SELECT * FROM O_TIME WHERE P_ID = #{p_id} ORDER BY O_NO
+		SELECT * 
+			FROM O_TIME 
+		  WHERE P_ID = #{p_id} 
+		    ORDER BY(CASE WHEN w_day ='월' THEN 1
+               			  WHEN w_day='화' THEN 2
+                		  WHEN w_day='수' THEN 3
+                		  WHEN w_day='목' THEN 4
+                		  WHEN w_day='금' THEN 5
+                		  WHEN w_day='토' THEN 6
+                                          ELSE 7 END)
 	</select>
+
 	<!-- 상세페이지 첨부파일 따로가져오기 -->
 	<select id="getImage" parameterType="String"
 		resultType="com.last.prj.pmember.service.FfileVO">
@@ -186,14 +196,12 @@
 		parameterType="com.last.prj.pmember.service.PmemberVO"
 		resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
-		FROM
-		( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-		FROM P_MEMBER
-		GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-		HAVING RCOM IS NOT NULL
-		ORDER BY RCOM DESC
-		)
-		WHERE ROWNUM<![CDATA[<=4]]>
+			FROM ( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+					FROM P_MEMBER
+					 GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+					HAVING RCOM IS NOT NULL
+				   ORDER BY RCOM DESC)
+			WHERE ROWNUM<![CDATA[<=4]]>
 	</select>
 
 	<!-- 관리자 -->
@@ -226,7 +234,12 @@
 			AND p.code = #{code}
 		</if>
 		<if test="code != null and code == '104'"> AND P.CODE = 9999</if>
-		<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != ''  and data !='' and data != null "> 
+		AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%' OR  UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != '' and key == 'name' and data !='' and data != null "> 
+		AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+		<if test="key != null and key != '' and key == 'p_id' and data !='' and data != null "> 
+		AND UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 		<if test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 			AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 		</if>
@@ -244,7 +257,12 @@
 				AND P.CODE = #{code}
 			</if>
 			<if test="code != null and code == '104'">AND P.CODE = 9999</if>
-			<if test="key != null and key != '' and data !='' and data != null "> AND UPPER(#{key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != ''  and data !='' and data != null "> 
+			AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%' OR  UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'name' and data !='' and data != null "> 
+			AND UPPER(P.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'p_id' and data !='' and data != null "> 
+			AND UPPER(P.P_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 			<if
 				test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 				AND P.STARTDATE BETWEEN #{fromDate} AND #{toDate}

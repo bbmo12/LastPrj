@@ -170,5 +170,10 @@ public class MemServiceImpl implements MemService {
 		return map.countReservation(m_id);
 	}
 
+	@Override
+	public PetcareVO careList(String p_id) {
+		return map.careList(p_id);
+	}
+
 
 }

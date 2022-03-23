@@ -10,7 +10,8 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.no_deco {
@@ -114,6 +115,10 @@
 	.swal2-content {
 		display: none;
 	}
+	.control-width{
+	    width: 170px;
+    	display: inline-block;
+	}
 
 </style>
 
@@ -192,51 +197,51 @@
 							</div>
 							<div class="card-body card_notice" style="padding:30px">
 								<div class="form-group">
-									<i class="fa-solid fa-user"></i>
-									<h3 style="font-weight: bolder;">이름&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-user"></i>
+									<h3 style="font-weight: bolder;">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</h3></div>
 									<input type="text" style="border: none" id="name" name="name"value="${pmember.name}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-address-card"></i>
-									<h3 style="font-weight: bolder;">아이디&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-address-card"></i>
+									<h3 style="font-weight: bolder;">아이디</h3></div>
 									<input type="email" style="border: none" id="p_id" name="p_id"value="${pmember.p_id}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-mobile-screen"></i>
-									<h3 style="font-weight: bolder;">전화번호&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-mobile-screen"></i>
+									<h3 style="font-weight: bolder;">전화번호&nbsp;&nbsp;</h3></div>
 									<input style="border: none" id="tel" name="tel" value="${pmember.tel}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-building"></i>
-									<h3 style="font-weight: bolder;">사업장 이름&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-building"></i>
+									<h3 style="font-weight: bolder;">사업장 이름&nbsp;&nbsp;</h3></div>
 									<input style="border: none" id="w_name" name="w_name" value="${pmember.w_name}"readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-map-location-dot"></i>
-									<h3 style="font-weight: bolder;">사업장 주소&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-map-location-dot"></i>
+									<h3 style="font-weight: bolder;">사업장 주소&nbsp;&nbsp;</h3></div>
 									<textarea style="border: none; overflow: hidden; margin-bottom: -8px; font-size: 18px;" id="address"
 										name="address" readonly cols="50"rows="1">${pmember.w_address}  ${pmember.w_d_address }</textarea>
 								</div>
 								<div class="form-group">
 									<i class="fa-solid fa-square-phone"></i>
-									<h3 style="font-weight: bolder;">사업장 전화번호&nbsp;:&nbsp;</h3>
+									<h3 style="font-weight: bolder;">사업장 전화번호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
 									<input type="text" style="border: none" id="w_tel" name="w_tel"value="${pmember.w_tel}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-star"></i>
-									<h3 style="font-weight: bolder;">경력&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-star"></i>
+									<h3 style="font-weight: bolder;">경력&nbsp;&nbsp;</h3></div>
 									<input type="text" style="border: none" id="career" name="career"value="${pmember.career}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-award"></i>
-									<h3 style="font-weight: bolder;">전문분야&nbsp;:&nbsp;</h3>
+									<div class="control-width"><i class="fa-solid fa-award"></i>
+									<h3 style="font-weight: bolder;">전문분야&nbsp;&nbsp;</h3></div>
 									<input type="text" style="border: none" id="speciality" name="speciality"value="${pmember.speciality}" readonly>
 								</div>
 								<div class="form-group" style="width: 800px;">
 									<div class="row" id="middle">
 										<div class="col-6" style="padding-left: 10px;">
-											<i class="fa-solid fa-calendar-days"></i>
-											<h3>운영시간</h3><br>
+											<div class="control-width"><i class="fa-solid fa-calendar-days"></i>
+											<h3>운영시간</h3></div><br>
 											<c:forEach items="${time }" var="time">
 												<div class="doctor-text text-center" style="margin-top: -10px;">
 													<h3 style="font-weight: normal">${time.w_day}&nbsp;${time.starttime}
@@ -247,8 +252,8 @@
 											</c:forEach>
 										</div>
 										<div class="col-6">
-											<i class="fa-solid fa-clipboard-list"></i>
-											<h3>서비스정보</h3><br>
+											<div class="control-width"><i class="fa-solid fa-clipboard-list"></i>
+											<h3>서비스정보</h3></div><br>
 											<c:forEach items="${price }" var="price">
 												<div class="doctor-text text-center"style="height: 22px; margin-top: -10px;">
 													<h3 style="font-weight: normal">${price.title}&nbsp;:&nbsp;${price.price}</h3>
@@ -260,21 +265,21 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-street-view"></i>
-									<h3 style="font-weight: bolder;">자기 소개</h3>
+									<div class="control-width"><i class="fa-solid fa-street-view"></i>
+									<h3 style="font-weight: bolder;">자기 소개</h3></div>
 									<textarea style="border: none; overflow: hidden; font-size: 18px;" id="p_info" name="p_info" readonly
-										cols="100" rows="3">${pmember.p_info}</textarea>
+										cols="73" rows="5">${pmember.p_info}</textarea>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-images"></i>
-									<h3 style="font-weight: bolder;">활동사진</h3><br>
+									<div class="control-width"><i class="fa-solid fa-images"></i>
+									<h3 style="font-weight: bolder;">활동사진</h3></div><br>
 									<c:forEach items="${pimage}" var="image">
 										<img src="resources/upload/${image.picture}" style="width: 200px; height:200px;"alt="등록된 사진이 없습니다.">
 									</c:forEach>
 								</div>
 								<div class="form-group">
-									<i class="fa fa-file-image-o"></i>
-									<h3 style="font-weight: bolder;">자격증</h3><br>
+									<div class="control-width"><i class="fa fa-file-image-o"></i>
+									<h3 style="font-weight: bolder;">자격증</h3></div><br>
 									<c:forEach items="${plicense}" var="plicense">
 										<img src="resources/upload/${plicense.picture}"
 											style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">

@@ -16,5 +16,9 @@ public interface ReservCountService {
 	
 	int reservdateUpdate(ReservCountVO vo); //start_date,end_date 업데이트로 값 넣기
 	
+	int countUpdate(ReservCountVO vo); //예약번호 등록합시다
+	
+	int countDelete (ReservCountVO vo); //예약번호와 p_id조회해서 예약체크값 
+	
 	
 }

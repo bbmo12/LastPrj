@@ -10,13 +10,7 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
-<style>
-.nav-menu a {
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 1.5rem;
-	}
-</style>
+
 <body class="my-login-page">
 	<div class="container">
 		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1500px;">
@@ -95,37 +89,37 @@
 								<label>서비스 가능한 동물</label>
 							</div>
 							<label>개
-								<input type="radio" id="code" name="code" value="501"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="501"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>고양이
-								<input type="radio" id="code" name="code" value="502"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="502"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>조류
-								<input type="radio" id="code" name="code" value="503"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="503"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>파충류
-								<input type="radio" id="code" name="code" value="504"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="504"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>어류
-								<input type="radio" id="code" name="code" value="505"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="505"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>토끼
-								<input type="radio" id="code" name="code" value="506"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="506"><span class="checkmark"></span>
 							</label>&emsp;<br>
 							<label>돼지
-								<input type="radio" id="code" name="code" value="507"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="507"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>햄스터
-								<input type="radio" id="code" name="code" value="508"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="508"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>미어켓
-								<input type="radio" id="code" name="code" value="509"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="509"><span class="checkmark"></span>
 							</label>&emsp;
 							<label>여우
-								<input type="radio" id="code" name="code" value="510"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="510"><span class="checkmark"></span>
 								</label>&emsp;
 							<label>거미
-								<input type="radio" id="code" name="code" value="511"><span class="checkmark"></span>
+								<input type="checkbox" id="code" name="code" value="511"><span class="checkmark"></span>
 								</label>&emsp;
 							<h4 class="card-title" style="margin-top: 25px;">경력증명 이미지를 등록해주세요.</h4>
 							<div class="form-group" style="margin-top: -10px;">
@@ -294,6 +288,8 @@
 				}
 			})
 		}
+		
+		
 	</script>
 </body>
 

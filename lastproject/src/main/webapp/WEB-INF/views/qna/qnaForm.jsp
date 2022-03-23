@@ -35,18 +35,26 @@
 			object-fit: cover;
 		}
 
-		/* ul li {
+		 /* ul li {
 			display: inline-block;
 			margin: 0 5px;
 			font-size: 14px;
 			letter-spacing: -.5px;
-		} */
+		}  */
 
  		ul#tag-list li.tag-item {
 			padding: 4px 8px 5px;
 			background-color: #4CD3E3;
 			color: white;
 			border-radius: 30px;
+			
+			margin: 10px 5px 0 0;
+			width: 80px;
+			
+			display: inline-block;
+			font-size: 14px;
+			letter-spacing: -.5px;
+			
 		}
 
 		ul#tag-list li.tag-item:hover {
@@ -143,7 +151,7 @@
 						CKEDITOR.replace('content', ckeditor_config);
 					</script>
 				</div>
-				<div style="margin-top: 30px; width: 872px;" class="content">
+				<div style="margin-top: 30px;" class="mb-3">
 					<h3>태그</h3>
 					<input type="text" id="tag" class="form-control" placeholder="스페이스 키로 태그를 등록하세요" />
 					<ul id="tag-list">

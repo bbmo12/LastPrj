@@ -2,29 +2,66 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
-<link rel="stylesheet"
+
+<!-- <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
+ -->
+<!-- <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
 	integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
 	integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+<script
+	src="resources/assets/js/vendor/jquery.datetimepicker.full.min.js"></script>
+<link href="resources/dist/css/datepicker.min.css" rel="stylesheet"
+	type="text/css" media="all">
+<script src="resources/dist/js/datepicker.js"></script>
+<!-- Air datepicker js -->
+<script src="resources/dist/js/i18n/datepicker.ko.js"></script>
+<!-- 달력 한글 추가를 위해 커스텀 -->
+
+<!-- <script src="resources/adminJs/adminMemberPageJS.js"></script> -->
+
 <style>
+#admDateForm{
+	margin-top : 30px;
+	margin-bottom : 30px;
+}
+
+#admDateFormP{
+	margin-top : 30px;
+	margin-bottom : 30px;
+}
+
 .single_sidebar_widget .post_category_widget {
 	text-decoration: none !important;
 	font-size: 2rem !important;
+}
+.codepP {
+	martgin : 30px;
+}
+
+.col-lg-3 {
+	padding: 50px;
+}
+
+.posts-list {
+	margin-top: 1.9%;
 }
 
 #my_section {
@@ -151,36 +188,20 @@
 </style>
 
 <body>
-<script>
-	adminCount();
-	function adminCount() {
-		$.ajax({
-			url : 'adminCount',
-			method : 'get',
-			success : function(res) {
-				console.log(res.petCount);
-				console.log(res.pmemCount);
-				console.log(res.memCount);
-				$("#admMemberC").append(res.memCount);
-				$("#admPmemberC").append(res.pmemCount);
-				$("#admPetC").append(res.petCount);
-				
-			},error : function(error) {
-				alert('Count를 불러오는 데 오류가 있습니다')
-				return false;
-				
-			}
-			
-		});
-		
-	}
-</script>
-	<section class="department-area" style="padding: 30px 0 30px;">
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!-- Banner Area Starts -->
+	<section class="banner-area">
 		<div class="container">
-			<div class="col-lg-6 offset-lg-3">
-				<div class="section-top text-center">
-					<br> <br> <br>
-					<h2></h2>
+			<div class="row">
+
+				<div class="col-lg-10" style="margin-left: 50px;">
+					<br> <br> <br> <br> <br>
+					<h1>관리자 페이지</h1>
+					<h1>관리자님 반갑습니다.</h1>
 				</div>
 			</div>
 		</div>
@@ -189,7 +210,9 @@
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2><a href="adminPage">MyPage</a></h2><h5>목록 페이지</h5>
+					<h5>
+						<a href="adminPage">메인 페이지</a>
+					</h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -232,7 +255,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="margin-left: 40px;">
+					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
@@ -284,33 +307,33 @@
 						</div>
 						<div class="col-lg-12 col-md-12 blog_details ">
 							<div class="card">
-								<div class="card-header que">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;일반 회원 목록
+								<div class="card-header que" onclick="admMemberListBtn()">
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;일반 회원
+									목록 <input type="hidden" value="one" id="admMemberListInput">
 								</div>
-								<div class="card-body anw">
-									<h4 class="card-title"></h4>
-									<p>
-									<form id="admDateForm" onsubmit="return false"
+								<div class="card-body anw admMemberListDiv"
+									style="padding: 15px">
+									<form id="admDateForm" onsubmit="return false" autocomplete="off"
 										onkeypress="eventkey();">
 										<input type="hidden" name="code">
-										<code>가입일 검색</code>
+										<code>가입일 검색 :</code>
 										&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
-											value="1"> from : <input type="text" id="fromDate"
+											value="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from : <input type="text" id="datepickerA"
 											name="fromDate">&nbsp;&nbsp; to : <input type="text"
-											id="toDate" name="toDate"> <br>
-										<code>이름,아이디로 검색</code>
+											id="datepickerB" name="toDate"><br>
+											<br>
+										<code>이름,아이디로 검색 :</code>
 										&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 											<option value="" selected>전 체</option>
 											<option value="name">이름</option>
 											<option value="m_id">아이디</option>
 										</select> <input type="text" id="data" name="data" size="20">&nbsp;
-										<button type="submit" onclick="pagingList();"
-											class="btn btn-default">
+										<button type="submit" onclick="pagingList();"class="btn btn-default">
 											<i class="fa fa-search"></i>
 										</button>
-										<input type="reset">
+										<input type="reset" >
 									</form>
-									<code>조건 별 검색</code>
+									<code>조건 별 검색 :</code>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button"
 										class="btn btn-link btn-rounded btn-fw codep" id="key"
@@ -339,30 +362,33 @@
 										</tbody>
 									</table>
 									<div id="pagination"></div>
+
 								</div>
 								<div class="card-footer">
-									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게 메시지 보내기</span>
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
+										메시지 보내기</span>
 								</div>
 							</div>
 						</div>
 
 						<div class="col-lg-12 col-md-12 blog_details ">
 							<div class="card">
-								<div class="card-header que">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;파트너 회원 목록
+								<div class="card-header que" onclick="admPmemberListBtn()">
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;파트너
+									회원 목록 <input type="hidden" value="one" id="admPmemberListInput">
 								</div>
-								<div class="card-body anw">
-									<h4 class="card-title"></h4>
-									<p>
-									<form id="admDateFormP" onsubmit="return false"
+
+								<div class="card-body anw admPmemberListDiv" style="padding: 15px">
+									<form id="admDateFormP" onsubmit="return false" autocomplete="off"
 										onkeypress="eventkeyP();">
 										<input type="hidden" name="code">
-										<code>가입일 검색</code>
+										<code>가입일 검색 :</code>
 										&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
-											value="1"> from : <input type="text" id="fromDateP"
-											name="fromDate">&nbsp;&nbsp; to : <input type="text"
-											id="toDateP" name="toDate"> <br>
-										<code>이름,아이디로 검색</code>
+											value="1"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from : <input type="text" id="datepickerC"
+											name="fromDate" >&nbsp;&nbsp; to :
+										<input type="text" id="datepickerD" name="toDate"> 
+										<br><br>
+										<code>이름,아이디로 검색 :</code>
 										&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 											<option value="" selected>전 체</option>
 											<option value="name">이름</option>
@@ -374,7 +400,7 @@
 										</button>
 										<input type="reset">
 									</form>
-									<code>조건 별 검색</code>
+									<code>조건 별 검색 :</code>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<button type="button"
 										class="btn btn-link btn-rounded btn-fw codepP" id="key"
@@ -395,6 +421,7 @@
 										class="btn btn-link btn-rounded btn-fw codepP" id="petN"
 										data-code="104">탈퇴한 회원</button>
 									</p>
+
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -402,20 +429,20 @@
 												<th>아이디</th>
 												<th>가입일</th>
 												<th>파트너 쉽</th>
+												<th>조회</th>
 											</tr>
 										</thead>
 										<tbody id="myTableP">
-
 										</tbody>
 									</table>
 									<div id="paginationP"></div>
 								</div>
 								<div class="card-footer">
-									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게 메시지 보내기</span>
+									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
+										메시지 보내기</span>
 								</div>
 							</div>
 						</div>
-
 
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
@@ -430,7 +457,7 @@
 							</div>
 						</div>
 
-						
+
 						<!-- 파트너 회원 단건 조회 Modal -->
 						<div class="modal fade" id="myModal">
 							<div class="modal-dialog modal-xl">
@@ -464,27 +491,162 @@
 										<button type="button" class="btn btn-secondary"
 											data-dismiss="modal">Close</button>
 									</div>
-
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	<script>
-	
-	// 아코디언 함수
+		//JavaScript 영역의 대부분은 adminMemberPageJS.js 파일에 있습니다 
+		adminCount();
+		function adminCount() {
+		    $.ajax({
+		        url : 'adminCount',
+		        method : 'get',
+		        success : function(res) {
+		            console.log(res.petCount);
+		            console.log(res.pmemCount);
+		            console.log(res.memCount);
+		            $("#admMemberC").append(res.memCount+"명");
+		            $("#admPmemberC").append(res.pmemCount+"명");
+		            $("#admPetC").append(res.petCount+"마리");
+		            
+		        },error : function(error) {
+		            alert('Count를 불러오는 데 오류가 있습니다')
+		            return false;
+		            
+		        }
+		        
+		    });
+		    
+		}
+
+		   $("#datepickerC").datepicker({
+    			language: 'ko'
+   		 }); 
+		   $("#datepickerD").datepicker({
+   			language: 'ko'
+  		 }); 
+		   $("#datepickerA").datepicker({
+	   			language: 'ko'
+	  		 }); 
+		   $("#datepickerB").datepicker({
+	   			language: 'ko'
+	  		 }); 
+		
+		
+		// tooltip 함수
+		$(function() {
+			// title='상세정보를 보시려면 이름을 클릭하세요..'
+
+			//Tooltip
+			var title_;
+			$("tr").hover(function(e) {
+				$('tr').attr('title', '상세정보를 보시려면 이름을 클릭하세요..');
+				title_ = $(this).attr("title");
+				$("bod").append("<div id='ti'></div>");
+				$("#ti").css("width", "100px");
+				$("#ti").text(title_);
+			}, function() { // <a> hover 시 : mouseLeave
+
+				$(this).attr("title", title_); // title 속성 반환
+				$("#ti").remove(); // div#tip 삭제
+
+			});//end Tooltip
+		}); //end // tooltip 함수
+
+		//===============================================테이블==========================================================
+
+		// =================회원 단건 조회 Modal===================
+
+		function show() {
+			var m_id = $(event.target).parent().next().text();
+			console.log(p_id);
+
+			//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
+			$
+					.ajax({
+						url : 'admMemberOne',
+						method : 'post',
+						data : {
+							'p_id' : p_id
+						},
+						success : function(res) {
+							console.log(res.list);
+							$('.mem-body').append(
+									"<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
+											+ "<li>" + res.list.startdate
+											+ "</li><li>" + res.list.name
+											+ "</li><li>" + res.list.w_address
+											+ "</li><li>" + res.list.w_tel
+											+ "</li><li>" + res.list.p_info
+											+ "</li></ul>");
+							$(".modal-footer")
+									.append(
+											"<button type='button' id='goDetail' data-value="
+													+ res.list.p_id
+													+ " onclick='goDetail(this)' >상세페이지로..</button>");
+							//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
+
+							//=========================Modal의 Chart 그리기
+
+						}
+					}); //end Modal에 띄어줄 단건조회 ajax
+
+			$("#myModal").modal('show'); //Modal Open
+
+		}// =================end 회원 단건 조회 Modal=================
+
+		//=============상세보기 페이지 새 창 열어서  :  권한 없어서 못가는 거 같은데
+		function goDetail(e) {
+			var p_id = $(e).data('value');
+			console.log("p_id : " + p_id);
+			var url = `pmemberDetail?id=\${p_id}`;
+			console.log("url :" + url);
+			window.open(url);
+
+		}//=============end window.open()
+
+		//모달 내용 초기화
+		$('#myModal').on('hidden.bs.modal', function(e) {
+			$(this).find('ul').empty();
+			$(this).find('#goDetail').remove();
+		})//END 모달 내용 초기화
+
+		//===============================================테이블========================================================== 끝!
+
+		////=======================파트너 회원 js 영역 시작=====================
+			
+				// 아코디언 함수
 	$(document).on("click", ".que", function() {
 		$(this).next(".anw").stop().slideToggle(300);
 		$(this).toggleClass('on').siblings().removeClass('on');
 		$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 	})//end 아코디언 함수
 	
+	
+	//==================================================================================일반회원에 관한 JS
 	//======================enter 키===================
+	function admMemberListBtn() {
+		var input;
+		input = $("#admMemberListInput").val();
+		
+		if( input === 'one' ){
+			$("#admMemberListInput").val('two'); //버튼 클릭 체크			
+			
+			
+			pagingList(); //회원 목록 ajax 함수 호출
+			
+		
+		} else {
+			$("#admMemberListInput").val('one'); // 버튼 클릭 체크
+		};
+		
+		}; // 일반회원 목록 버튼 끝
+	
 	function eventkey() {
 		if (event.keyCode == 13) {
 			pagingList();
@@ -493,29 +655,9 @@
 		}
 	}//====================end enter 키================
 	
+	//===================리스트 호출 버튼==================
 		
-		$(function() {
-				// title='상세정보를 보시려면 이름을 클릭하세요..'
-				
-				//Tooltip
-				var title_;
-				$("tr").hover(function(e){
-					$('tr').attr( 'title', '상세정보를 보시려면 이름을 클릭하세요..' );
-					title_ = $(this).attr("title");
-					$("bod").append("<div id='ti'></div>");
-					$("#ti").css("width","100px");
-					$("#ti").text(title_);
-				}, function() {													// <a> hover 시 : mouseLeave
-	
-					$(this).attr("title", title_);				// title 속성 반환
-					$("#ti").remove();							// div#tip 삭제
-	
-				});//end Tooltip
-			});
-		
-		 //===============================================테이블==========================================================
-		//===================리스트 호출 버튼==================
-		$(".codep").on('click', function() {
+		$(document).on('click','.codep',function() {
 			var code = $(this).data('code');
 			console.log(code);
 			$('#admDateForm')[0].code.value = code
@@ -538,17 +680,15 @@
 				success : function(result) {
 
 					if(result.list == ''){
-						alert('데이터가 없습니다!!');
 						$("#myTable").empty();
 						$("#pagination").empty();
 						$("#myTable").append("<tr><td colspan='4' align='center'>데이터가 없습니다.</td></tr>");
 					}else {
 						viewPmemberList(result.list);
 						viewPage(result.page);
-						
 					};
 				},error : function () {
-					alert('아 노답..');
+					alert('DB에서 데이터를 가져오는 데 실패했습니다. 개발자 호출 해주세요!');
 					
 				}
 			});
@@ -629,130 +769,39 @@
 			
 		}
 		//=====================  end리스트 만드는 함수 ====================
-
+		 
+	
+	
+	
+	
+	//==================================================================================일반회원에 관한 JS     
+	function admPmemberListBtn() {
+			var input;
+			input = $("#admPmemberListInput").val();
 			
-		// =================회원 단건 조회 Modal===================
-		
-			function show() {
-				var m_id = $(event.target).parent().next().text();
-				console.log(p_id);  
+			if( input === 'one' ){
+				
+				$("#admPmemberListInput").val('two'); //버튼 클릭 체크
+				
+				let htmladmPmemberList;
+				htmladmPmemberList = ``;
+				
+				//$(".admPmemberListDiv").append(htmladmPmemberList);
+				
+				
+				pagingListP(); //회원 목록 ajax 함수 호출
+				
+			} else {
+				
+				$("#admPmemberListInput").val('one'); // 버튼 클릭 체크
+				//$(".admPmemberListDiv").empty(); // 아코디언이 닫히면서  해당 역역 지워버림 
+				
+				
+			}//end if
 			
-			//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
-			 $.ajax({
-				url : 'admMemberOne',
-				method : 'post',
-				data : {'p_id' : p_id },
-				success : function (res) {					
-					console.log(res.list);
-					$('.mem-body').append("<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
-											+ "<li>" +res.list.startdate 
-											+"</li><li>"
-											+ res.list.name
-											+ "</li><li>"
-											+ res.list.w_address
-											+ "</li><li>"
-											+ res.list.w_tel
-											+ "</li><li>"
-											+ res.list.p_info
-							    			+"</li></ul>");
-					$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetail(this)' >상세페이지로..</button>");
-					//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
-					
-					//=========================Modal의 Chart 그리기
-					
-				}
-			}); //end Modal에 띄어줄 단건조회 ajax
-			
-			
-			
-			$("#myModal").modal('show'); //Modal Open
-			
-		}// =================end 회원 단건 조회 Modal=================
-		
-			
-			
-		//=============상세보기 페이지 새 창 열어서  :  권한 없어서 못가는 거 같은데
-		function goDetail(e) {
-			var p_id = $(e).data('value');
-			console.log("p_id : " +p_id);
-			var url = `pmemberDetail?id=\${p_id}`;
-			console.log("url :"+url);
-			window.open(url);
-			
-		}//=============end window.open()
-			
-			
-		//모달 내용 초기화
-		$('#myModal').on('hidden.bs.modal', function(e) {
-			$(this).find('ul').empty();
-			$(this).find('#goDetail').remove();
-		})//END 모달 내용 초기화
-
-		
-		// ==================================날짜 검색 ==============================
-        $("#datepicker").datepicker({
-            dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            showOtherMonths: true,
-            changeYear: true,
-            changeMonth: true,
-            showOn: "both",
-            buttonImage: "",
-            buttonImageOnly: true,
-            buttonText: "선택"
-
-        });
-        $('#datepicker').datepicker('setDate', 'today');
-
-        $(function () {
-            $.datepicker.setDefaults({
-                dateFormat: 'yy-mm-dd',
-                prevText: '이전 달',
-                nextText: '다음 달',
-                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
-                    '12월'
-                ],
-                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                showMonthAfterYear: true,
-                yearSuffix: '년',
-                showOtherMonths: true,
-                changeYear: true,
-                changeMonth: true,
-                showOn: "both",
-                buttonImage: "",
-                buttonImageOnly: false,
-                buttonText: "선택"
-            });
-            $("#fromDate").datepicker();
-            $("#toDate").datepicker();
-
-            /* $('#fromDate').datepicker('setDate', 'today');
-            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전 */
-            
-            
-	    	pagingList();
-        });
-     // ==================================날짜 검색 ============================== 끝!!
-     
-     //===============================================테이블========================================================== 끝!
-     
-     
-     
-     
-     ////=======================파트너 회원 js 영역 시작=====================
-    	 
-    	 //======================enter 키===================
+		}// end admPmemberListBtn()
+	
+		 //======================enter 키===================
 	function eventkeyP() {
 		if (event.keyCode == 13) {
 			pagingListP();
@@ -870,6 +919,7 @@
 			
 			
 		//모달 내용 초기화
+		
 		$('#myModal').on('hidden.bs.modal', function(e) {
 			$(this).find('ul').empty();
 			$(this).find('a').remove();
@@ -877,7 +927,8 @@
 		
 			
 		//===================리스트 호출 버튼==================
-		$(".codepP").on('click', function() {
+		
+		$(document).on('click','.codepP',function() {
 			var code = $(this).data('code');
 			$('#admDateFormP')[0].code.value = code
 			$('#admDateFormP')[0].pageNum.value = 1;
@@ -889,17 +940,29 @@
 		//===========리스트 ajax 호출==========
 		function pagingListP() {
 			var str = $('#admDateFormP').serialize();
+			console.log(str);
 			$.ajax({
 				url : 'admPlistCode',
 				method : 'post',
 				data :str,
-				//contentType : 'application/json',
 				success : function(result) {
+					if(result.list == ''){
+						$("#myTableP").empty();
+						$("#paginationP").empty();
+						$("#myTableP").append("<tr><td colspan='5' align='center'>데이터가 없습니다.</td></tr>");
+					
+					}else{
+					
 					console.log("리절트리스트는 :"+result.list);
 					console.log("리절트페이지는 : " + result.page);
 					viewPmemberListP(result.list);
 					viewPageP(result.page);
+					}
+					
+				},error : function(error){
+					alert('DB에서 데이터를 가져오는 데 실패했습니다. 개발자 호출 해주세요!');
 				}
+				
 			});
 		}//===========end  리스트 ajax 호출==========
 			
@@ -919,7 +982,7 @@
 			}
 				for ( var i=page.startPage ; i <=  page.endPage; i++){
 					nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
-								href="javascript:goPageP(\${i})" class="page-link">\${i }</a>
+								href="javascript:goPageP(\${i})" class="page-link">\${i}</a>
 								</li>`
 				}
 				
@@ -936,71 +999,14 @@
 			nav += `</ul></nav>`
 			$('#paginationP').html(nav);
 			
-		}// end viewPage
+		}// end viewPageP
 			
 		function goPageP(pa) {
 			console.log("pa 는 :" + pa);
 			$('#admDateFormP')[0].pageNum.value = pa;
 			pagingListP();
 		}
-		
-		//======================end 페이징 처리=================
 			
-			// =============날짜 검색 ==============
-        $("#datepicker").datepicker({
-            dateFormat: 'yy-mm-dd',
-            prevText: '이전 달',
-            nextText: '다음 달',
-            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-            showMonthAfterYear: true,
-            yearSuffix: '년',
-            showOtherMonths: true,
-            changeYear: true,
-            changeMonth: true,
-            showOn: "both",
-            buttonImage: "",
-            buttonImageOnly: true,
-            buttonText: "선택"
-
-        });
-        $('#datepicker').datepicker('setDate', 'today');
-
-        $(function () {
-            $.datepicker.setDefaults({
-                dateFormat: 'yy-mm-dd',
-                prevText: '이전 달',
-                nextText: '다음 달',
-                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
-                    '12월'
-                ],
-                dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-                dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                showMonthAfterYear: true,
-                yearSuffix: '년',
-                showOtherMonths: true,
-                changeYear: true,
-                changeMonth: true,
-                showOn: "both",
-                buttonImage: "",
-                buttonImageOnly: false,
-                buttonText: "선택"
-            });
-            $("#fromDateP").datepicker();
-            $("#toDateP").datepicker();
-
-            /* $('#fromDate').datepicker('setDate', 'today');
-            $('#toDate').datepicker('setDate', '+1D'); // -1D:하루전  -1M : 한달전 */
-            
-            
-	    	pagingListP();
-        });// =============end 날짜 검색 ==============
-     
 	</script>
 
 </body>

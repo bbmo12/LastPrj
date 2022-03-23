@@ -14,16 +14,12 @@
 
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.padding {
 		padding: 5rem
-	}
-
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important
 	}
 
 	.card-text {
@@ -214,7 +210,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="width: 1080px;">
+					<div class="single-post row" >
 						<div class="col-lg-12 col-md-12 blog_details">
 							<br><br>
 							<div class="card">
@@ -225,7 +221,7 @@
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="table-wrap" style="width: 900px;">
+										<div class="table-wrap" style="width: 1000px;">
 											<form action="pmemcounsel" name="goform">
 												<input type="hidden" name="pageNum" value="1">
 												<table class="table table-striped">
@@ -243,7 +239,7 @@
 													<tbody style="text-align: center">
 														<c:if test="${ fn:length(pmemcounsel) == 0  }">
 															<tr>
-																<td colspan="5" align="center">조회된 결과가 없습니다.</td>
+																<td colspan="10" align="center">조회된 결과가 없습니다.</td>
 															</tr>
 														</c:if>
 														<c:forEach items="${pmemcounsel }" var="counsel">

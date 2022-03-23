@@ -11,9 +11,6 @@
 	<title>Insert title here</title>
 </head>
 <style>
-	#my_section {
-		padding: 50px;
-	}
 
 	.card-text {
 		display: inline-block;
@@ -73,8 +70,8 @@
 	}
 	
 	#my_section {
-		padding: 50px;
-		background: #f9f9fd;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 	
 	.blog_right_sidebar{
@@ -94,7 +91,6 @@
 	.card-header{
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 400;
 		color: black;
@@ -102,7 +98,6 @@
 	
 	.card-body{
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 300;
 		color: black;
@@ -115,7 +110,6 @@
 	
 	#myinfo{
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 	 	font-weight: 300;
 	}
@@ -132,7 +126,6 @@
 	
 	#Mainname{
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic'!important;
 		font-style: normal !important;
 	 	font-weight: 700 !important;
 	 	color:gray;
@@ -140,7 +133,6 @@
 	
 	#menu_bold{
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
  		font-weight: 700;
  		color: black;
@@ -150,66 +142,80 @@
 <body>
 	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="section-top text-center">
-						<br><br><br>
-						<h2></h2>
-					</div>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br>
+					<br>
+					<br>
+					<h2></h2>
 				</div>
+			</div>
 		</div>
 	</section>
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3" style="padding:0px;">
-				<h2 align="center">MyPage</h2>
-				<br>
-				<div class="blog_right_sidebar">
+				<div class="col-lg-3">
+					<h2 align="center">MyPage</h2>
+					<br>
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img"
-								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
-							<br><br>
+							<img class="partner_img" src="/upload/${member.pfile}"
+								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
+							<br>
 							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
+									href="mconfirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
 					</div>
 					<br>
-					<div class="blog_right_sidebar" >
+					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list nanumbarungothic">
-							<p id="menu_bold">내 활동 내역</p>
-								<li><a href="protocol" class="d-flex justify-content-between no_deco">
+							<ul class="list cat-list">
+								<p id="menu_bold">내 활동 내역</p>
+								<li><a href="protocol"
+									class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
-									</a></li>
-								<li><a href="reservationSelect" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="reservationSelect"
+									class="d-flex justify-content-between no_deco">
 										<p>예약 내역</p>
-									</a></li>
-								<li><a href="myPay" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="myPay"
+									class="d-flex justify-content-between no_deco">
 										<p>결제 내역</p>
-									</a></li>
-								<li><a href="mycounsel" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="mycounsel"
+									class="d-flex justify-content-between no_deco">
 										<p>상담 내역</p>
-									</a></li>
-								<li><a href="myreport" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="myreport"
+									class="d-flex justify-content-between no_deco">
 										<p>신고 내역</p>
-									</a></li>
-								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="myfallow"
+									class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
-									</a></li>
-									<br><br><p id="menu_bold">회원 정보 관리</p>
-								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<br>
+								<br>
+								<p id="menu_bold">회원 정보 관리</p>
+								<li><a href="mconfirmPass"
+									class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
-									</a></li>
-								<li><a href="logout" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="logout"
+									class="d-flex justify-content-between no_deco">
 										<p>로그아웃</p>
-									</a></li>
-								<li><a href="mdeleteForm" class="d-flex justify-content-between no_deco">
+								</a></li>
+								<li><a href="mdeleteForm"
+									class="d-flex justify-content-between no_deco">
 										<p>회원탈퇴</p>
-									</a></li>
+								</a></li>
 							</ul>
 						</aside>
 					</div>

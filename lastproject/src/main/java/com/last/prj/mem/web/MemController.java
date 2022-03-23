@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -127,30 +128,32 @@ public class MemController {
 				
 			}
 		}
+		
 		memDao.memberDelete(m_id); //업데이트 이름, end date 빼고 다 널 시킴
 		redirectAttr.addFlashAttribute("delete","정보를다시확인해주세요.");
-		session.invalidate();
-		return "redirect:home";
+
+		return "redirect:logout";
 	}
 
 	// 일반회원 정보수정
 	@RequestMapping("memberUpdate")
-	public String memberUpdate(MultipartFile file, MemVO member, Model model) {
+	public String memberUpdate(MultipartFile file, RedirectAttributes redirectAttr, MemVO member, Model model) {
 		String originalFileName = file.getOriginalFilename();
 
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
+		File savePath = new File(uploadPath);
 
-		File savePath = new File(realPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
 
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			
+			String newPath = uploadPath + File.separator + originalFileName;
+			File saveFile = new File(newPath);
 
 			try {
 				file.transferTo(saveFile);
@@ -169,7 +172,8 @@ public class MemController {
 		
 		
 		memDao.memberUpdate(member);
-		return "redirect:memberMypage";
+		redirectAttr.addFlashAttribute("memberupdate","정보를다시확인해주세요.");
+		return "redirect:mainMypage";
 	}
 
 	
@@ -367,7 +371,7 @@ public class MemController {
 	      }
 	   }
 	
-	/* 배포시 path변경
+	 //배포시 path변경
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
@@ -381,8 +385,8 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			uploadPath += File.separator + saveFileName;
-			File saveFile = new File(uploadPath);
+			String newPath = uploadPath + File.separator + saveFileName;
+			File saveFile = new File(newPath);
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
@@ -402,8 +406,9 @@ public class MemController {
 		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		return "redirect:home";
 	}
-	*/
 	
+	
+	/*
 	@RequestMapping("/mjoin") // 일반회원 회원가입
 	public String mjoin(@RequestParam("file") MultipartFile file, MemVO member, Model model,RedirectAttributes redirectAttr) {
 		String originalFileName = file.getOriginalFilename();
@@ -445,21 +450,24 @@ public class MemController {
 		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		return "redirect:home";
 	}
+	*/
 	
 	@RequestMapping("/pjoin_1") // 파트너회원 회원가입 1차
 	public String pjoin_1(@RequestParam("file") MultipartFile file, PmemVO pmember, Model model) {
 		String originalFileName = file.getOriginalFilename();
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
-		File savePath = new File(realPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
+		File savePath = new File(uploadPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
+			
+			uploadPath += File.separator + saveFileName;
+			File saveFile = new File(uploadPath);
+			
 			try {
 				file.transferTo(saveFile);
 				pmember.setPicture(originalFileName);
@@ -490,26 +498,45 @@ public class MemController {
 
 	@RequestMapping("/pjoin_3") // 파트너회원 회원가입 3차
 	public String pjoin_3(String p_id, Model model, List<MultipartFile> multiFileList1,
-			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, PetcareVO petcare) {
-		System.out.println("여기 파트너회원가입 3차");
-		System.out.println("p_id3:" + p_id);
-		System.out.println(petcare);
-		System.out.println(time);
-
+			List<MultipartFile> multiFileList2, HttpServletRequest request, TimeVO time, @RequestParam List<Integer> code, RedirectAttributes redirectAttr) {
+		//System.out.println("여기 파트너회원가입 3차");
+		//System.out.println("p_id3:" + p_id);
+		System.out.println("code !!!!!"+code);
+		//System.out.println(time);
+		
+		PetcareVO petcare = new PetcareVO();
+		petcare.setP_id(p_id);
+		for(Integer i : code) {
+			System.out.println(i);
+			petcare.setCode(i);
+			memDao.petcareinsert(petcare);
+		}
+		
+		/*
+		List<String> str = new ArrayList<>();
+		for(Integer integer: code) {
+			str.add(String.valueOf(integer));
+		}
+		
+		String join = String.join(",", str);
+		System.out.println(join);
+		
+		String[] strArr = join.split(",");
+		System.out.println(strArr);
+*/
 		// FfileUtil ffileutil = new FfileUtil(); //나중에 autowired?? 넣어서해보기
 		int p_license = ffileutil.multiFileUpload(multiFileList1, request);
 		System.out.println("p_license = " + p_license);
 		int p_image = ffileutil.multiFileUpload(multiFileList2, request);
 		System.out.println("p_image = " + p_image);
 		pmemDao.pmemberInsert3(p_id, p_license, p_image); // 파일다중업로드
-		memDao.petcareinsert(petcare);
-
+		redirectAttr.addFlashAttribute("insert","회원가입실패");
 		/*
 		 * System.out.println("여기 시간"); for(int i=0; i<time.getTimeListVO().size () ;
 		 * i++) { memDao.otimeinsert(time); }
 		 */
 
-		return "member/joinResult";
+		return "redirect:home";
 	}
 
 	@RequestMapping("addService")

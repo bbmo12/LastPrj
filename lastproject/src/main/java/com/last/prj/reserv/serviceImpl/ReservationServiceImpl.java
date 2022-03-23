@@ -52,7 +52,7 @@ public class ReservationServiceImpl implements ReservationService{
 	}
 
 
-	public int reservPage1(ReservationVO vo) {
+	public Integer reservPage1(ReservationVO vo) {
 		return map.reservPage1(vo);
 	}
 	@Override
@@ -89,7 +89,7 @@ public class ReservationServiceImpl implements ReservationService{
 		return map.readpicture(r_no);
 	}
 	@Override
-	public int reservPage(Criteria cri) {
+	public Integer reservPage(Criteria cri) {
 		// TODO Auto-generated method stub
 		return map.reservPage(cri);
 	}

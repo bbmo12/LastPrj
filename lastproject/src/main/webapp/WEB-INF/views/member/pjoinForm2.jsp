@@ -13,16 +13,9 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/login/my-login.css">
 </head>
-<style>
-.nav-menu a {
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 1.5rem;
-	}
-</style>
 <body class="my-login-page">
 	<script>
-		//자격증번호 정규식
+		//사업자번호 정규식
 		var businessnumberJ = /^\d{3}-\d{2}-\d{5}$/;
 		//모든 공백 체크 정규식
 		var empJ = /\s/g;
@@ -35,11 +28,12 @@
 		// 이메일 검사 정규식
 		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 휴대폰 번호 정규식
-		var phoneJ = /^(\d{2,3}[ ,-]-?\d{2,4}[ ,-]-?\d{4})$/;
+		var phoneJ = /^([0-9]{10,11})$/;
 		var birthJ = false;
 		
 		var w_d_addressJ = /^[a-zA-Z0-9가-힣]*$/;
 		var p_infoJ = /^.{1,300}$/;
+		var w_nameJ = /^.{1,30}$/;
 
 		$(document).ready(function () {
 			/* 아이디 중복체크 */
@@ -85,7 +79,7 @@
 					return false;
 				}
 				
-				// 자기소개 정규식
+				// 경력 정규식
 				if (p_infoJ.test($('#career').val())) {
 					inval_Arr[8] = true;
 				} else {
@@ -232,7 +226,7 @@
 				if (phoneJ.test($(this).val())) {
 					$("#w_tel_check").text('');
 				} else {
-					$('#w_tel_check').text('휴대폰번호를 확인해주세요 ');
+					$('#w_tel_check').text('전화번호를 확인해주세요 ');
 					$('#w_tel_check').css('color', 'red');
 				}
 			});

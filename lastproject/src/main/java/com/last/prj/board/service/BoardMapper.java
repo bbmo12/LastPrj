@@ -17,5 +17,4 @@ public interface BoardMapper {
 	int boardIdUpdate(int b_no);
 	List<BoardVO> boardSearch(@Param("key")String key, @Param("data")String data);
 	
-	//int boardHitUpdate(int b_hit);
 }

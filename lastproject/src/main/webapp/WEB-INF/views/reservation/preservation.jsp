@@ -19,16 +19,12 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.padding {
 		padding: 5rem
-	}
-
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important
 	}
 
 	.table th {
@@ -220,12 +216,12 @@
 							<div class="card">
 								<div class="card-header">
 									<div align="left">
-										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;${pmember.name }님의 에약내역
+										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;${pmember.name }님의 예약내역
 									</div>
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="table-wrap" style="width: 900px;">
+										<div class="table-wrap" style="width: 950px;">
 											<form action="preservationSelect" name="goform" id="goform">
 												<input type="hidden" name="pageNum" value="1">
 												<table class="table table-striped">
@@ -233,6 +229,7 @@
 														<tr style="text-align: center;">
 															<th>예약번호</th>
 															<th>예약신청일자</th>
+															<th>예약일자</th>
 															<th>예약시간</th>
 															<th>예약자 이름</th>
 															<th>품종</th>
@@ -249,8 +246,9 @@
 												<c:forEach items="${preservation }" var="pres">
 													<tr>
 														<td><input class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
+														<td>${pres.rd_date }</td>
 														<td>${pres.r_date}</td>
-														<td>${pres.startdate }&nbsp; ${pres.time }</td>
+														<td><input type="hidden" value="${pres.startdate }"><input type="hidden" value="${pres.time }">${pres.startdate }&nbsp; ${pres.time }</td>
 														<td>${pres.m_id }</td>
 														<td>${pres.pcontent }
 														<td>${pres.rcontent }</td>
@@ -287,7 +285,7 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<input type="hidden" id="m_id" name="m_id">
-						<input type="hidden" id="p_id" name="p_id" value="${sessionScope.pId }">
+						<input type="hidden" id="p_id" name="p_id" value="${p_id }">
 						<input type="hidden" id="r_no" name="r_no">
 						<span id="span_d_name" style="width: 250px !important;">&nbsp;진단명 :
 							<input type="text" id="d_name" name="d_name"></span><br><br>
@@ -363,6 +361,9 @@
 		}
 
 		function no(event) {
+			var date = $(event.target).parent().parent().children().first().next().next().children().first().val();
+			var time = $(event.target).parent().parent().children().first().next().next().children().first().next().val();
+			console.log(time);
 			var rno = $(event.target).parent().parent().children().first().text();
 			var m_id = $(event.target).parent().prev().prev().prev().text();
 			var flag = confirm("해당 예약신청을 거절하시겠습니까?");
@@ -374,7 +375,9 @@
 					method: 'post',
 					data: {
 						'r_no': rno,
-						'refuse': refuse
+						'refuse': refuse,
+						'reserv_date' : date,
+						'reserv_time' : time
 					},
 					success: function (result) {
 						noWebAlert(m_id);
@@ -389,7 +392,8 @@
 		}
 
 		$(".diaLogModal").on('click', function () {
-			var r_no = $(this).parent().prev().prev().prev().prev().prev().prev().text();
+			var r_no = $(this).parent().parent().children().first().text();
+			console.log(r_no);
 			$("#r_no").val(r_no);
 			var m_id = $(this).parent().prev().prev().prev().text();
 			$("#m_id").val(m_id);

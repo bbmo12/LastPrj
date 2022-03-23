@@ -5,44 +5,59 @@
 @import
 	url("https://fonts.googleapis.com/css?family=Ubuntu:400,500,700");
 
+@font-face {
+    font-family: 'Binggrae-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Binggrae-Bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 body {
 	color: #777;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 15px;
 	font-weight: 400
 }
 
 h1 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 45px !important;
 	font-weight: 700
 }
 
 h2 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 36px !important;
 	font-weight: 700
 }
 
 h3 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 18px !important;
 	font-weight: 700;
 }
 
 h4 {
 	color: #222;
-	font-family: "Ubuntu", sans-serif;
+	font-family: 'Binggrae';
 	font-size: 16px !important;
 	font-weight: 400
 }
 
 h5 {
 	color: #777;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	text-transform: capitalize;
 	font-size: 14px !important;
 	font-weight: 400
@@ -51,7 +66,7 @@ h5 {
 h6 {
 	color: #777;
 	font-size: 12px !important;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	text-transform: uppercase;
 	font-weight: 500
 }
@@ -60,6 +75,9 @@ ul {
 	margin: 0;
 	padding: 0;
 	list-style: none
+}
+i{
+	color: black;
 }
 
 a:hover, a:focus {
@@ -460,7 +478,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #header.header-scrolled {
-	background: #f9f9fd;
+	background: white;
 	transition: all 0.5s;
 	top: 0
 }
@@ -594,7 +612,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .department-area {
-	background: #f9f9fd
+	background: #fff;
 }
 
 .department-area .single-slide {
@@ -902,7 +920,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .hotline-area span {
 	font-size: 56px;
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	font-weight: 900
 }
 
@@ -1253,15 +1271,14 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .blog_right_sidebar .search_widget .input-group .form-control {
 	font-size: 14px;
-	line-height: 29px;
-	border: 0px;
-	width: 100%;
-	font-weight: 300;
-	color: #fff;
-	padding-left: 20px;
-	border-radius: 45px;
-	z-index: 0;
-	background:#0062ff;
+    line-height: 29px;
+    width: 100%;
+    font-weight: 300;
+    color: black;
+    padding-left: 20px;
+    border-radius: 45px;
+    z-index: 0;
+    border: 1px #e8e8e8 solid;
 }
 
 .blog_right_sidebar .search_widget .input-group .form-control:focus {
@@ -3267,7 +3284,7 @@ h6 {
 .template-btn {
 	color: #fff;
 	background: linear-gradient(to right, #244cfd, #15e4fd);
-	font-family: "Roboto", sans-serif;
+	font-family: 'Binggrae';
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: 400;

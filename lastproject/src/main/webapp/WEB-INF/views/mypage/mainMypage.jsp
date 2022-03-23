@@ -17,10 +17,9 @@
 	color: black;
 }
 
-
 #my_section {
-	padding: 50px;
-	background: #f9f9fd;
+	margin-top: -70px;
+    padding-bottom: 25px;
 }
 
 .blog_right_sidebar {
@@ -52,7 +51,6 @@
 .card-footer {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 400;
 }
@@ -60,14 +58,12 @@
 #notice_footer {
 	text-align: center;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 400;
 }
 
 .card_notice {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 400;
 }
@@ -98,14 +94,12 @@
 
 #cardTitle {
 	font-size: 1.25rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 700;
 }
 
 #myinfo {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 300;
 }
@@ -115,7 +109,6 @@
 	text-align: center;
 	margin-right: 20px;
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 400;
 }
@@ -130,10 +123,12 @@
 
 #menu_bold {
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
 	font-style: normal;
 	font-weight: 700;
 	color: black;
+}
+.swal2-content {
+		display: none;
 }
 
 .que:first-child {
@@ -183,7 +178,7 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${member.pfile}"
+							<img class="partner_img" src="/upload/${member.pfile}"
 								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
 							<br>
 							<h4 id="Mainname">${member.name }님</h4>
@@ -335,7 +330,7 @@
 									</c:if>
 									<c:forEach items="${pets }" var="pet">
 										<div id="pet_img2">
-											<img class="pet_img" src="resources/upload/${pet.picture }"
+											<img class="pet_img" src="/upload/${pet.picture }"
 												onerror="this.src='resources/upload/cat.jpg'" alt="">
 											<br> <a class="no_deco"
 												href="petDetail?pet_no=${pet.pet_no}">${pet.name }</a>
@@ -361,6 +356,26 @@
 			$(this).toggleClass('on').siblings().removeClass('on');
 			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		})//end 아코디언 함수
+	</script>
+	<script>
+	if("${memberupdate}" != "" ){
+		Swal.fire('개인정보가<br>변경되었습니다.');
+	}
+	</script>
+	<script>
+	if("${petadd}" != "" ){
+		Swal.fire('반려동물이<br>등록되었습니다.');
+	}
+	</script>
+	<script>
+	if("${petupdate}" != "" ){
+		Swal.fire('반려동물정보가<br>수정되었습니다.');
+	}
+	</script>
+	<script>
+	if("${petdelete}" != "" ){
+		Swal.fire('반려동물이<br>삭제되었습니다.');
+	}
 	</script>
 </body>
 

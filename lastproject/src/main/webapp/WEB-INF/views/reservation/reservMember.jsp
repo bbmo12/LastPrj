@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,9 +101,11 @@ input:disabled {
 				 <input type="hidden" id = "AutoCode" >
 		   		 
 		   		 <select class="animalNo" onchange="NoSelection(event)">
-		   		 	<option value="" disabled selected  >펫 번호(이름)</option>
+		   		 	<option value="" disabled selected  >펫 이름</option>
 					 <c:forEach items="${petList}" var="pet">
-		   		 			<option value="${pet.pet_no }"> <%-- ${pet.pet_no } --%>${pet.name }</option>
+					 		<c:if test="${pet.code eq careList.code }"> 
+		   		 				<option value="${pet.pet_no }">${pet.name }</option>
+		   		 			</c:if>
 		   		 	   </c:forEach>
 		   		 </select>
 		   		 </form>
@@ -119,7 +122,6 @@ input:disabled {
 </div>
 
 <script type="text/javascript">
-
 
 $(document).ready(function(){
 	
@@ -283,7 +285,7 @@ $(document).ready(function(){
 			               $tbody =` 
 			                  <tbody>
 			                        <tr>
-			                           <td class="tdvalCheck">`+tdval+ex+`</td>
+			                           	<td class="tdvalCheck">`+tdval+ex+`</td>
 										<td><input  type="radio" name="selectTime" value="09시">09:00~10:00</td>
 										<td><input  type="radio" name="selectTime" value="10시">10:00~11:00</td>
 										<td><input  type="radio" name="selectTime" value="11시">11:00~12:00</td>
@@ -299,75 +301,63 @@ $(document).ready(function(){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
-						                           <td class="tdvalCheck">`+tdval+ex+`</td>
-														<td>
-															<input  type="radio" name="selectTime" value="10시">10:00~11:00
-															<input  type="radio" name="selectTime" value="11시">11:00~12:00
-															<input  type="radio" name="selectTime" value="14시">14:00~15:00
-															<input  type="radio" name="selectTime" value="15시">15:00~16:00
-															<input  type="radio" name="selectTime" value="16시">16:00~17:00
-															<input  type="radio" name="selectTime" value="17시">17:00~18:00
-														</td>
+						                          	<td class="tdvalCheck">`+tdval+ex+`</td>
+													<td><input type="radio" name="selectTime" value="10시">10:00~11:00</td>
+													<td><input type="radio" name="selectTime" value="11시">11:00~12:00</td>
+													<td><input type="radio" name="selectTime" value="14시">14:00~15:00</td>
+													<td><input type="radio" name="selectTime" value="15시">15:00~16:00</td>
+													<td><input type="radio" name="selectTime" value="16시">16:00~17:00</td>
+													<td><input type="radio" name="selectTime" value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 10){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
-						                           <td class="tdvalCheck">`+tdval+ex+`</td>
-														<td>
-																<input  type="radio" name="selectTime" value="11시">11:00~12:00
-																<input  type="radio" name="selectTime" value="14시">14:00~15:00
-																<input  type="radio" name="selectTime" value="15시">15:00~16:00
-																<input  type="radio" name="selectTime" value="16시">16:00~17:00
-																<input  type="radio" name="selectTime" value="17시">17:00~18:00
-														</td>
+						                          	<td class="tdvalCheck">`+tdval+ex+`</td>
+													<td><input type="radio" name="selectTime" value="11시">11:00~12:00</td>
+													<td><input type="radio" name="selectTime" value="14시">14:00~15:00</td>
+													<td><input type="radio" name="selectTime" value="15시">15:00~16:00</td>
+													<td><input type="radio" name="selectTime" value="16시">16:00~17:00</td>
+													<td><input type="radio" name="selectTime" value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 12){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
-						                           <td class="tdvalCheck">`+tdval+ex+`</td>
-														<td>
-																<input  type="radio" name="selectTime" value="14시">14:00~15:00
-																<input  type="radio" name="selectTime" value="15시">15:00~16:00
-																<input  type="radio" name="selectTime" value="16시">16:00~17:00
-																<input  type="radio" name="selectTime" value="17시">17:00~18:00
-														</td>
+						                           	<td class="tdvalCheck">`+tdval+ex+`</td>
+													<td><input  type="radio" name="selectTime" value="14시">14:00~15:00</td>
+													<td><input  type="radio" name="selectTime" value="15시">15:00~16:00</td>
+													<td><input  type="radio" name="selectTime" value="16시">16:00~17:00</td>
+													<td><input  type="radio" name="selectTime" value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 14){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
-						                           <td class="tdvalCheck">`+tdval+ex+`</td>
-														<td>
-																<input  type="radio" name="selectTime"  value="15시">15:00~16:00
-																<input  type="radio" name="selectTime"  value="16시">16:00~17:00
-																<input  type="radio" name="selectTime"  value="17시">17:00~18:00
-														</td>
+					                           		<td class="tdvalCheck">`+tdval+ex+`</td>
+													<td><input  type="radio" name="selectTime"  value="15시">15:00~16:00</td>
+													<td><input  type="radio" name="selectTime"  value="16시">16:00~17:00</td>
+													<td><input  type="radio" name="selectTime"  value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
 								}else if (parseInt(nowTime) <= 15){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
-						                           <td class="tdvalCheck">`+tdval+ex+`</td>
-														<td>
-																<input  type="radio" name="selectTime"  value="16시">16:00~17:00
-																<input  type="radio" name="selectTime"  value="17시">17:00~18:00
-														</td>
+					                           		<td class="tdvalCheck">`+tdval+ex+`</td>
+													<td><input  type="radio" name="selectTime"  value="16시">16:00~17:00</td>
+													<td><input  type="radio" name="selectTime"  value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
 								}else {
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
-						                           <td class="tdvalCheck">`+tdval+ex+`</td>
-														<td>
-															<input  type="radio" name="selectTime"  value="17시">17:00~18:00
-														</td>
+						                           	<td class="tdvalCheck">`+tdval+ex+`</td>
+													<td><input  type="radio" name="selectTime"  value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
 								}
@@ -513,10 +503,15 @@ function reservModal(event){
 	if(reserv_time =='undefined' || tdvalue ==''){
 		toastr.error("예약시간을 선택해주세요");
 		$("#exampleModal").attr("id","noexam");
+		return;
 	}else{
 		$("#noexam").attr("id","exampleModal");
 		$("#dvalue").text('예약일 : ' + tdvalue);
 		$("#tvalue").text('예약시간 : ' + reserv_time);
+	}
+	if("${fn:length(petList)}"=="0"){
+		toastr.error("등록된 반려동물이 없어 예약할수 없습니다.");
+		$("#exampleModal").attr("id","noexam");
 	}
 }
 

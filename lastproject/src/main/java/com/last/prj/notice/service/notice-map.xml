@@ -3,7 +3,8 @@
 <mapper namespace="com.last.prj.notice.service.NoticeMapper">
 
 	<insert id="noticeInsert" parameterType="com.last.prj.notice.service.NoticeVO">
-	insert into notice values(notice_seq.nextval, #{n_from}, #{n_to}, #{content}, sysdate, default)
+	insert into notice (notice_no,n_from,n_to,content,w_date,r_check)
+	values(notice_seq.nextval, #{n_from}, #{n_to}, #{content}, sysdate, default)
 	</insert>
 
 	<select id="noticeSelectList" resultType="com.last.prj.notice.service.NoticeVO">
@@ -35,4 +36,8 @@
 	<delete id="noticeDelete">
 		delete from notice where notice_no = #{notice_no}
 	</delete>
+	
+	<select id="noticeCheckCount" resultType="int">
+		select count(*) from notice where r_check = 0 and n_to = #{m_id}
+	</select>
 </mapper>

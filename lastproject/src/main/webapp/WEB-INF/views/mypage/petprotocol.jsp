@@ -13,22 +13,12 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+		padding-bottom: 25px;
 	}
 
-	.card-text {
-		width: 300px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
 	.padding {
 		padding: 5rem
-	}
-
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important;
 	}
 
 	#sidebar {
@@ -39,27 +29,18 @@
 		border: none;
 
 	}
+
 	.codep {
-		color: #0062ff; 
-    	background: #FFF;
-    	border: 1px solid transparent;
-    	font-size: 16px;	
+		color: #0062ff;
+		background: #FFF;
+		border: 1px solid transparent;
+		font-size: 16px;
 	}
+
 	.codep:hover {
 		color: #0062ff;
-    	border: 1px solid #0062ff;
-    	background: #fff;	
-	}
-
-	#my_section {
-		padding: 50px;
-	}
-
-	.card-text {
-		width: 200px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		border: 1px solid #0062ff;
+		background: #fff;
 	}
 
 	.padding {
@@ -92,151 +73,90 @@
 		padding: .875rem 0.9375rem;
 		text-align: center;
 	}
-	
-	
+
+
 	.no_deco {
 		text-decoration: none !important;
-		font-size : 0.8rem !important;
+		font-size: 0.8rem !important;
 		color: black;
 	}
-	
-	#my_section {
-		padding: 50px;
-		background: #f9f9fd;
-	}
-	
-	.blog_right_sidebar{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+
+	#main-side,
+	#main-side1 {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 		border: 1px solid #e3e6f0;
-	   	border-radius: 0.35rem;
-	   	float: none !important; margin: 0 auto !important;
-	   	background-color: white;
-	   	width: 250px;
+		border-radius: 0.35rem;
+		float: none !important;
+		margin: 0 auto !important;
+		background-color: white;
+		width: 250px;
 	}
-	.card{
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.1)!important;
+
+	.card {
+		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 		border: 1px solid #e3e6f0;
-	   	border-radius: 0.35rem
+		border-radius: 0.35rem
 	}
-	
-	.card-header{
+
+	.card-header {
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 400;
 		color: black;
 	}
-	
-	.card-body{
+
+	.card-body {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
 		font-weight: 300;
 		color: black;
-		
+
 	}
-	
-	.card-footer{
-		background: white;
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 400;
+
+	.card-text {
+		width: 200px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
-	
-	.widget_title{
+
+	.widget_title {
 		background: #0062ff !important;
 	}
-	
-	#cardTitle{
-		font-size: 1.25rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 700;
-	}
-	
-	#myinfo{
+
+	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
 		font-style: normal;
-	 	font-weight: 300;
-	}
-	
-	#pet_img2{
-		display: inline-block;
-		text-align: center;
-		margin-right: 20px;
-		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-	 	font-weight: 400;
-	}
-	
-	.partner_img{
-	object-fit: cover;
-	object-position:top;
-	border-radius:50%;
-	width: 180px !important;
-	height: 180px !important;
-	float: none;
-	margin: 0 auto;
-}
-	
-	#Mainname{
-		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic'!important;
-		font-style: normal !important;
-	 	font-weight: 700 !important;
-	 	color:gray;
-	}
-	
-	#menu_bold{
-	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
-	font-style: normal;
- 	font-weight: 700;
- 	color: black;
-}
-#my_section {
-		padding: 50px;
+		font-weight: 300;
 	}
 
-	#main-form h3,
+	.partner_img {
+		object-fit: cover;
+		object-position: top;
+		border-radius: 50%;
+		width: 180px !important;
+		height: 180px !important;
+		float: none;
+		margin: 0 auto;
+	}
+
+	#Mainname {
+		font-size: 1.5rem !important;
+		font-style: normal !important;
+		font-weight: 700 !important;
+		color: gray;
+	}
+
+	#menu_bold {
+		font-size: 1.0rem;
+		font-style: normal;
+		font-weight: 700;
+		color: black;
+	}
+
 	input {
 		display: inline-block;
-	}
-
-	#addDiv,
-	#addService {
-		margin-left: 36em;
-		margin-top: -5px;
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#addDiv:hover,
-	#addService:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#price-insert,
-	#time-insert{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	
-	#price-insert:hover,
-	#time-insert:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-
-	#select-one {
-		margin-top: -20px;
 	}
 
 	.form-control {
@@ -246,108 +166,50 @@
 		border-radius: 20px;
 	}
 
-	.service-info {
-		display: inline-grid;
-	}
-
-	.service-info input {
-		width: 100px;
-	}
-
-	#p-info {
-		margin-left: 9em;
-		margin-top: -20px;
-	}
-
-	.delete-button {
-		float: right;
-		margin-top: 25px;
-		margin-right: 100px;
-		width: 62px;
-	}
-
-	#p_info {
-		border: 1px solid rgba(151, 151, 151, 0.3);
-	}
-	#cancel{
-		width: 113px;
-    	height: 42px;
-    	padding: 0 30px;
-    	font-size: .8em;
-    	text-align: center;
-    	font-weight: 500;
-	}
-	#member_post{
-		width: 100px;
-    	margin-left: 51em;
-    	margin-top: -70px;  	
-    	color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#member_post:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#successUpdate{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#successUpdate:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	
 	input:focus,
-	textarea:focus{ 
+	textarea:focus {
 		border: 3px solid;
-	}
-	
-	#content{
-		height: 45px;
-    	padding: 12px;
-   		width: 275px;
 	}
 </style>
 
 <body>
 	<section class="department-area" style="padding: 30px 0 30px;">
 		<div class="container">
-				<div class="col-lg-6 offset-lg-3">
-					<div class="section-top text-center">
-						<br><br><br>
-						<h2></h2>
-					</div>
+			<div class="col-lg-6 offset-lg-3">
+				<div class="section-top text-center">
+					<br>
+					<br>
+					<br>
+					<h2></h2>
 				</div>
+			</div>
 		</div>
 	</section>
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
-				<div class="col-lg-3" style="padding:0px;">
-				<h2 align="center">MyPage</h2>
-				<br>
-				<div class="blog_right_sidebar">
+				<div class="col-lg-3">
+					<h2 align="center">MyPage</h2>
+					<br>
+					<div class="blog_right_sidebar" id="main-side">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img"
-								src="resources/upload/${member.pfile}" onerror ="this.src='resources/upload/cat.jpg'" alt="">
-							<br><br>
+							<img class="partner_img" src="/upload/${member.pfile}"
+								onerror="this.src='resources/upload/cat.jpg'" alt=""> <br>
+							<br>
 							<h4 id="Mainname">${member.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-							<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="mconfirmPass">내 정보
+									수정하기</a>
 							</div>
 						</aside>
 					</div>
 					<br>
-					<div class="blog_right_sidebar">
+					<div class="blog_right_sidebar" id="main-side1">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
-							<ul class="list cat-list nanumbarungothic">
-							<p id="menu_bold">내 활동 내역</p>
+							<ul class="list cat-list">
+								<p id="menu_bold">내 활동 내역</p>
 								<li><a href="protocol" class="d-flex justify-content-between no_deco">
 										<p>반려동물 진료기록</p>
 									</a></li>
@@ -366,7 +228,9 @@
 								<li><a href="myfallow" class="d-flex justify-content-between no_deco">
 										<p>팔로우</p>
 									</a></li>
-									<br><br><p id="menu_bold">회원 정보 관리</p>
+								<br>
+								<br>
+								<p id="menu_bold">회원 정보 관리</p>
 								<li><a href="mconfirmPass" class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
 									</a></li>
@@ -380,72 +244,76 @@
 						</aside>
 					</div>
 				</div>
-				
-				
-			<div class="col-lg-9 posts-list">
-			<div class="single-post row">
-					<div class="col-lg-12 col-md-12 blog_details">
-					<br><br>
-					<div class="card">
-					<div class="card-header">
-						<div align="left">
-							<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;반려동물 진료내역
-						</div>
-					</div>
-						<div class="card-body">
-						<div class="row">
-							<div class="col-md-12" style="margin: 20px 0 0 -45px;">
-								<div class="table-wrap">
-									<button type="button" class="codep" style="margin: 0 30px 0 15em;" data-code="">전체</button>
-									<button type="button" class="codep" style="margin-right: 30px;" data-code="100">진료</button>
-									<button type="button" class="codep" style="margin-right: 30px;" data-code="101">훈련</button>
-									<button type="button" class="codep" style="margin-right: 30px;" data-code="102">미용</button>
-									<button type="button" class="codep" style="margin-right: 30px;" data-code="103">돌봄서비스</button>
-									<button type="button" class="codep" style="margin-right: 30px;" id="block_chain">블록체인진료기록</button>
-									<div id='blockChain'></div>
+				<div class="col-lg-9 posts-list">
+					<div class="single-post row">
+						<div class="col-lg-12 col-md-12 blog_details">
+							<br><br>
+							<div class="card">
+								<div class="card-header">
+									<div align="left">
+										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;반려동물 진료내역
 									</div>
-									</div>
-									<div class="table-wrap" style="width: 900px;">
-									<table class="table table-striped">
-										<thead>
-											<tr style="text-align: center;">
-												<th>반려동물 이름</th>
-												<th>파트너회원이름</th>
-												<th>진단명</th>
-												<th>날짜</th>
-											</tr>
-										</thead>
-										<tbody id="myTable" style="text-align: center">
-										</tbody>
-									</table>
-									<div class="blog_right_sidebar" id="sidebar">
-										<form id="admDateForm" onsubmit="return false" onkeypress="eventkey();"
-											onclick="pagingList();">
-											<input type="hidden" name="code">
-											<input type="hidden" name="pageNum" value="1">
-											<aside class="single_sidebar_widget search_widget" style="display: flex;">
-												<select id="key" name="key">
-													<option value="all" selected="selected">전 체</option>
-												</select>
-												<div class="input-group">
-													<input type="text" class="form-control" id="data" name="data">
-													<span class="input-group-btn">
-														<button class="btn btn-default" type="submit">
-															<i class="fa fa-search"></i>
-														</button>
-													</span>
-												</div>
-											</aside>
-										</form>
-									</div>
-									<div id="pagination"></div>
-									<div>
-										<form id="frm" action="" method="post"></form>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-12" style="margin: 20px 0 0 -45px;">
+											<div class="table-wrap">
+												<button type="button" class="codep" style="margin: 0 30px 0 15em;"
+													data-code="">전체</button>
+												<button type="button" class="codep" style="margin-right: 30px;"
+													data-code="100">진료</button>
+												<button type="button" class="codep" style="margin-right: 30px;"
+													data-code="101">훈련</button>
+												<button type="button" class="codep" style="margin-right: 30px;"
+													data-code="102">미용</button>
+												<button type="button" class="codep" style="margin-right: 30px;"
+													data-code="103">돌봄서비스</button>
+												<button type="button" class="codep" style="margin-right: 30px;"
+													id="block_chain">블록체인진료기록</button>
+												<div id='blockChain'></div>
+											</div>
+										</div>
+										<div class="table-wrap" style="width: 950px;margin-top: 20px;">
+											<table class="table table-striped">
+												<thead>
+													<tr style="text-align: center;">
+														<th>반려동물 이름</th>
+														<th>파트너회원이름</th>
+														<th>진단명</th>
+														<th>날짜</th>
+													</tr>
+												</thead>
+												<tbody id="myTable" style="text-align: center">
+												</tbody>
+											</table>
+											<div class="blog_right_sidebar" id="sidebar">
+												<form id="admDateForm" onsubmit="return false" onkeypress="eventkey();"
+													onclick="pagingList();">
+													<input type="hidden" name="code">
+													<input type="hidden" name="pageNum" value="1">
+													<aside class="single_sidebar_widget search_widget" style="display: flex;">
+														<select id="key" name="key">
+															<option value="all" selected="selected">전 체</option>
+														</select>
+														<div class="input-group">
+															<input type="text" class="form-control" id="data"name="data">
+															<span class="input-group-btn">
+																<button class="btn btn-default" type="submit">
+																	<i class="fa fa-search"></i>
+																</button>
+															</span>
+														</div>
+													</aside>
+												</form>
+											</div>
+											<div id="pagination"></div>
+											<div>
+												<form id="frm" action="" method="post"></form>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						</div>
 						</div>
 					</div>
 				</div>
@@ -538,36 +406,6 @@
 						viewPage(result.page);
 					}
 
-				},
-				beforeSend: function () {
-					var width = 0;
-					var height = 0;
-					var left = 0;
-					var top = 0;
-
-					width = 50;
-					height = 50;
-
-
-					top = ($(window).height() - height) / 2 + $(window).scrollTop();
-					left = ($(window).width() - width) / 2 + $(window).scrollLeft();
-
-					if ($("#div_ajax_load_image").length != 0) {
-						$("#div_ajax_load_image").css({
-							"top": top + "px",
-							"left": left + "px"
-						});
-						$("#div_ajax_load_image").show();
-					} else {
-						$('body').append(
-							'<div id="div_ajax_load_image" style="position:absolute; top:' + top +
-							'px; left:' + left + 'px; width:' + width + 'px; height:' + height +
-							'px; z-index:9999; background:#f0f0f0; filter:alpha(opacity=50); opacity:alpha*0.5; margin:auto; padding:0; "><img src="resources/assets/images/Loading.gif" style="width:250px; height:250px;"></div>'
-							);
-					}
-				},
-				complete: function () {
-					$("#div_ajax_load_image").hide();
 				}
 			});
 		} // end paginList()

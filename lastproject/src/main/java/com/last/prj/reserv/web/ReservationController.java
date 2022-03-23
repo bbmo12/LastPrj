@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.last.prj.calendar.service.CalendarService;
 import com.last.prj.calendar.service.CalendarVO;
 import com.last.prj.mem.service.MemService;
+import com.last.prj.mem.service.PetcareVO;
 import com.last.prj.pay.service.PayService;
 import com.last.prj.pay.service.PayVO;
 import com.last.prj.pet.service.PetService;
@@ -112,7 +113,7 @@ public class ReservationController {
 	
 	//일반회원 예약페이지
 	@RequestMapping("/reservMember")
-	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response, Principal principal) throws Exception {
+	public String reservation(@RequestParam("p_id")String p_id, Model model,HttpServletRequest request,CalendarVO co,PetVO po,PmemberVO pmo,HttpServletResponse response, Principal principal,PetcareVO petcare) throws Exception {
 		
 			if(principal != null) {
 				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -124,6 +125,8 @@ public class ReservationController {
 					po.setM_id(m_id);
 					pmo.setP_id(p_id);
 					
+					System.out.println("ddddddddddddddddddddddddddddddd");
+					System.out.println(memDao.careList(p_id));
 					//달력리스트
 					List<CalendarVO> list = CalendarDao.revSetList(co);
 					
@@ -132,8 +135,9 @@ public class ReservationController {
 					
 					//펫 품종코드 중복제거값
 					List <PetVO> petCode = petDAO.petCodeSearch(userDetails.getMember().getM_id());
-				
 					
+					//진료가능동물 값
+					model.addAttribute("careList",memDao.careList(p_id));
 					model.addAttribute("petList",petList);
 					model.addAttribute("petCode",petCode);
 					model.addAttribute("reservset",list);
@@ -216,7 +220,8 @@ public class ReservationController {
 				if(pmapper.preservPage(cri) != null) {
 					PagingVO paging = new PagingVO(cri, pmapper.preservPage(cri));
 					model.addAttribute("page", paging);// 페이징 수
-				}
+				}	
+					model.addAttribute("p_id",p_id);
 					model.addAttribute("pmember",pMemberDao.getPmemberinfo(p_id));	
 					model.addAttribute("preservation", pmapper.preservationPageList(cri));
 					return "reservation/preservation";
@@ -238,13 +243,17 @@ public class ReservationController {
 	  //파트너회원 예약거절 사유 입력(ajax)
 	  @PostMapping("/noupdate")
 	  @ResponseBody 
-	  public List<PreservationVO> noUpdate(@RequestParam("r_no") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request,Principal principal) {
+	  public List<PreservationVO> noUpdate(@RequestParam("r_no") int rno,@RequestParam("refuse") String refuse ,Model model,PreservationVO vo,HttpServletRequest request,Principal principal,ReservCountVO revo) {
 		  if(principal != null) {
 				CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 				if(userDetails.getRole() == "파트너회원") {
 					String p_id = userDetails.getPmember().getP_id();
 					vo.setP_id(p_id);
+					revo.setP_id(p_id);
 					reservationDao.noUpdate(rno,refuse);
+					System.out.println("요기ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ");
+					System.out.println(reservCountDao.countDelete(revo));
+					reservCountDao.countDelete(revo);
 					List<PreservationVO> list = pReservationDao.preservationlist(vo);
 					System.out.println(list);
 					return list;
@@ -286,7 +295,6 @@ public class ReservationController {
 		  String enddate = "임시";
 		  //예약등록
 		  reservationDao.reservInsert(vo);
-		  
 		  
 		  //해당 아이디 코드번호 조회
 		  int p_code = pMemberDao.pMemCode(p_id);

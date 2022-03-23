@@ -45,4 +45,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return map.noticeSelectList2(m_id);
 	}
 
+	@Override
+	public int noticeCheckCount(String m_id) {
+		return map.noticeCheckCount(m_id);
+	}
+
 }

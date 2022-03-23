@@ -13,11 +13,20 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
+<!-- <script src="resources/adminJs/adminChartPageJS.js"></script> -->
 <style>
 .single_sidebar_widget .post_category_widget {
 	text-decoration: none !important;
 	font-size: 2rem !important;
 }
+
+.col-lg-3{
+	padding:50px;
+}
+.posts-list {
+margin-top:1.9%;
+}
+
 
 #my_section {
 	padding: 50px;
@@ -29,6 +38,7 @@
 	border: 1px solid #e3e6f0;
 	border-radius: 0.35rem
 }
+
 
 .card {
 	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
@@ -140,25 +150,39 @@
 .anw::before {
 	display: inline-block;
 }
+h1{
+	color: white;
+}
+
+	#banner_content{
+		color: white;
+	}
+	.swal2-content{
+		display: none;
+	}
+
 </style>
 
 <body>
+<br><br><br><br><br>
+     <!-- Banner Area Starts -->
+    <section class="banner-area">
+        <div class="container">
+            <div class="row">
 
-	<section class="department-area" style="padding: 30px 0 30px;">
-		<div class="container">
-			<div class="col-lg-6 offset-lg-3">
-				<div class="section-top text-center">
-					<br> <br> <br>
-					<h2></h2>
-				</div>
-			</div>
-		</div>
-	</section>
+                <div class="col-lg-10" style="margin-left: 50px;">
+                <br><br><br><br><br>
+                    <h1>관리자 페이지</h1>
+                    <h1>관리자님 반갑습니다.</h1>
+                </div>
+            </div>
+        </div>
+    </section>
 	<section id="my_section">
 		<div class="container" style="max-width: 1350px;">
 			<div class="row">
 				<div class="col-lg-3">
-					<h2><a href="adminPage">MyPage</a></h2><h5>차트 페이지</h5>
+					<h5><a href="adminPage">메인 페이지</a></h5>
 					<br>
 					<div class="blog_right_sidebar" style="width: 250px;">
 						<aside class="single_sidebar_widget author_widget">
@@ -201,7 +225,7 @@
 					</div>
 				</div>
 				<div class="col-lg-9 posts-list">
-					<div class="single-post row" style="margin-left: 40px;">
+					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
@@ -296,175 +320,181 @@
 			</div>
 		</div>
 	</section>
+	
 	<script>
-	
-		/* adminCount();
+		//JavaScript 영역의 대부분은 adminChartPageJS.js 파일에 있습니다
+		
+		adminCount();
+		 
+		//개수 불러오는 함수
 		function adminCount() {
-			$.ajax({
-				url : 'adminCount',
-				method : 'get',
-				success : function(res) {
-					console.log(res.petCount);
-					console.log(res.pmemCount);
-					console.log(res.memCount);
-					$("#admMemberC").append(res.memCount);
-					$("#admPmemberC").append(res.pmemCount);
-					$("#admPetC").append(res.petCount);
-					
-				},error : function(error) {
-					alert('Count를 불러오는 데 오류가 있습니다')
-					return false;
-					
-				}
-				
-			});
-			
-		} */
-	
-	
-	
+		    $.ajax({
+		        url : 'adminCount',
+		        method : 'get',
+		        success : function(res) {
+		            console.log(res.petCount);
+		            console.log(res.pmemCount);
+		            console.log(res.memCount);
+		            $("#admMemberC").append(res.memCount+"명");
+		            $("#admPmemberC").append(res.pmemCount+"명");
+		            $("#admPetC").append(res.petCount+"마리");
+		            
+		        },error : function(error) {
+		            alert('Count를 불러오는 데 오류가 있습니다')
+		            return false;
+		            
+		        }
+		        
+		    });
+		    
+		}
+
 		// 아코디언 함수
 		$(document).on("click", ".que", function() {
-			$(this).next(".anw").stop().slideToggle(300);
-			$(this).toggleClass('on').siblings().removeClass('on');
-			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		    $(this).next(".anw").stop().slideToggle(300);
+		    $(this).toggleClass('on').siblings().removeClass('on');
+		    $(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		})//end 아코디언 함수
 
-		
-		 $(".admPetChartA").on("click",function(e){
-				$(".admPetChart").append("<canvas id='admPetChart'></canvas>");
-				 $("#admPetChart").remove();
-		
-			 function petChart() {// 품 종별 Bar 차트 그리기
-	
-				tt = [];
-				oo = [];
-	
-				var total;
-				ip = [];
-				$.ajax({
-					url : 'amdPetChart',
-					method : 'get',
-					success : function(res) {
-						$.each(res, function(i) {
-							tt.push(res[i].tt);
-							oo.push(res[i].oo);
-							console.log(res[i].oo);
-							ip += ` \${res[i].oo} 마릿 수 : \${res[i].tt}`;
-							
-						});
-						console.log(ip);
-						$("#ip").html(ip);
-						console.log(res[0].ch);
-						$("#a").html("총 마리수 : " + res[0].ch);
-	
-	
-						const txc = document.getElementById('admPetChart').getContext('2d');
-						const admPetChart = new Chart(txc, {
-							type : 'bar',
-							data : {
-								labels : oo,
-								datasets : [ {
-									label : '# of Votes',
-									data : tt,
-									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-											'rgba(255, 159, 64, 0.2)',
-											'rgba(255, 159, 64, 0.2)' ],
-									borderColor : [ 'rgba(255, 99, 132, 1)',
-											'rgba(255, 159, 64, 1)',
-											'rgba(255, 159, 64, 1)' ],
-									borderWidth : 1
-								} ]
-							},
-							options : {
-								scales : {
-									y : {
-										beginAtZero : true
-									}
-								}
-							}
-						});
-					}
-				})
-	
-			} 
-		 petChart();
-	}); 
-		 $(".admPartChartA").on("click",function(e){
-			 
-     		$(".admPartChart").append("<canvas id='admPartChart'></canvas>");
-			$("#admPartChart").remove();
-			function partChart() { //일반 회원 기간 별 차트 그리기
 
-				tt = [];
-				oo = [];
-				aa = [];
-				bb = [];
-				$.ajax({
-					url : 'admMemChart',
-					method : 'get',
-					success : function(res) {
-						console.log(res);
-						console.log(res.memChart[0].tt);
-						console.log(res.memChart[0].oo); 
-						console.log(res.pmemChart[0].aa);
-						console.log(res.pmemChart[0].bb);
-						var pmem = res.pmemChart;
-						var mem = res.memChart;
-						 $.each(pmem,function(i){
-							aa.push(res.pmemChart[i].aa);
-							bb.push(res.pmemChart[i].bb);
-						});
-						 $.each(mem,function(i){
-								tt.push(mem[i].tt);
-								oo.push(mem[i].oo);
-						}); 
-						 
-						 console.log(tt);
-						 console.log(oo);
+		//div admPetChartA 클래스 클릭시 함수
+		$(document).on("click",".admPetChartA" ,function(){
+		    $(".admPetChart").append("<canvas id='admPetChart'></canvas>");
+		     $("#admPetChart").remove();
+		     petChart();
+		 function petChart() {// 품 종별 Bar 차트 그리기
 
-						 const ctx = document.getElementById('admPartChart')
-								.getContext('2d');
-						const admPartChart = new Chart(ctx, {
-							type : 'line',
-							data : {
-								labels : tt,aa,
-								datasets : [ {
-									label : '일반 회원',
-									data : oo,
-									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-											'rgba(255, 159, 64, 0.2)', ],
-									borderColor : [ 'rgba(255, 99, 132, 1)',
-											'rgba(255, 159, 64, 1)' ],
-									borderWidth : 1
-								} ,
-								 {
-									label : '파트너 회원',
-									data : bb,
-									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-											'rgba(255, 159, 64, 0.2)', ],
-									borderColor : [ 'rgba(255, 99, 132, 1)',
-											'rgba(255, 159, 64, 1)' ],
-									borderWidth : 1
-								} ]
-							},
-							options : {
-								scales : {
-									y : {
-										beginAtZero : true
-									}
-								}
-							}
-						}); 
-					} //success
+		    tt = [];
+		    oo = [];
 
-				}) // ajax
+		    var total;
+		    ip = [];
+		    $.ajax({
+		        url : 'amdPetChart',
+		        method : 'get',
+		        success : function(res) {
+		            $.each(res, function(i) {
+		                tt.push(res[i].tt);
+		                oo.push(res[i].oo);
+		                console.log(res[i].oo);
+		                ip += ` \${res[i].oo} 마릿 수 : \${res[i].tt}`;
+		                
+		            });
+		            console.log(ip);
+		            $("#ip").html(ip);
+		            console.log(res[0].ch);
+		            $("#a").html("총 마리수 : " + res[0].ch);
 
-			} //
-			partChart();
+
+		            const txc = document.getElementById('admPetChart').getContext('2d');
+		            const admPetChart = new Chart(txc, {
+		                type : 'bar',
+		                data : {
+		                    labels : oo,
+		                    datasets : [ {
+		                        label : '# of Votes',
+		                        data : tt,
+		                        backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                'rgba(255, 159, 64, 0.2)',
+		                                'rgba(255, 159, 64, 0.2)' ],
+		                        borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                'rgba(255, 159, 64, 1)',
+		                                'rgba(255, 159, 64, 1)' ],
+		                        borderWidth : 1
+		                    } ]
+		                },
+		                options : {
+		                    scales : {
+		                        y : {
+		                            beginAtZero : true
+		                        }
+		                    }
+		                }
+		            });
+		        }
+		    })
+
+		} 
+
 		});
-		
-		
+
+
+		//div admPartChartA 클릭시 차트 그려짐
+		$(document).on("click",".admPartChartA" ,function(){
+		   $(".admPartChart").append("<canvas id='admPartChart'></canvas>");
+		   $("#admPartChart").remove();
+
+		   partChart();
+
+		   function partChart() { //일반 회원 기간 별 차트 그리기
+		        
+		       tt = [];
+		       oo = [];
+		       aa = [];
+		       bb = [];
+		       $.ajax({
+		           url : 'admMemChart',
+		           method : 'get',
+		           success : function(res) {
+		               console.log(res);
+		               console.log(res.memChart[0].tt);
+		               console.log(res.memChart[0].oo); 
+		               console.log(res.pmemChart[0].aa);
+		               console.log(res.pmemChart[0].bb);
+		               var pmem = res.pmemChart;
+		               var mem = res.memChart;
+		                $.each(pmem,function(i){
+		                   aa.push(res.pmemChart[i].aa);
+		                   bb.push(res.pmemChart[i].bb);
+		               });
+		                $.each(mem,function(i){
+		                       tt.push(mem[i].tt);
+		                       oo.push(mem[i].oo);
+		               }); 
+		                
+		                console.log(tt);
+		                console.log(oo);
+
+		                const ctx = document.getElementById('admPartChart')
+		                       .getContext('2d');
+		               const admPartChart = new Chart(ctx, {
+		                   type : 'line',
+		                   data : {
+		                       labels : tt,aa,
+		                       datasets : [ {
+		                           label : '일반 회원',
+		                           data : oo,
+		                           backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                   'rgba(255, 159, 64, 0.2)', ],
+		                           borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                   'rgba(255, 159, 64, 1)' ],
+		                           borderWidth : 1
+		                       } ,
+		                        {
+		                           label : '파트너 회원',
+		                           data : bb,
+		                           backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                   'rgba(255, 159, 64, 0.2)', ],
+		                           borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                   'rgba(255, 159, 64, 1)' ],
+		                           borderWidth : 1
+		                       } ]
+		                   },
+		                   options : {
+		                       scales : {
+		                           y : {
+		                               beginAtZero : true
+		                           }
+		                       }
+		                   }
+		               }); 
+		           } //success
+
+		       }) // ajax
+
+		   } //
+		   
+		});
 	</script>
 
 </body>

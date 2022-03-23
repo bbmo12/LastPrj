@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="my"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +12,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <style>
+h1{
+	font-family: 'Binggrae';
+	color: white;
+}
+
+h2{
+	font-family: 'Binggrae';
+	font-weight: 700;
+}
+
+h3{
+	color: white;
+}
+
+	#banner_content{
+		color: white;
+	}
+	.swal2-content{
+		display: none;
+	}
 * {
 	box-sizing: border-box;
 }
@@ -57,6 +80,39 @@
 </style>
 </head>
 <body>
+	<br><br><br><br><br>
+    <%-- <section class="banner-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10" style="margin-left: 50px;">
+                <br><br><br><br><br>
+                    <h1>공지사항</h1>
+					<h3 style="margin-top:5%;">우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
+                   <sec:authorize access="hasRole('ADMIN')">
+					<div class="boardForm">
+						<a href="boardForm" class="genric-btn info circle btn-lg" id="qna-button">공지사항 작성하기</a>
+					</div>
+				</sec:authorize>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section> --%>
+    <section class="banner-area other-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>공지사항</h1><br>
+					<h3>우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
+				</div>
+				<sec:authorize access="hasRole('ADMIN')">
+					<div class="boardForm">
+						<a href="boardForm" class="genric-btn info circle btn-lg" id="qna-button">공지사항 작성하기</a>
+					</div>
+				</sec:authorize>
+			</div>
+		</div>
+	</section>
 	<section class="department-area section-padding4">
 		<div class="container">
 			<div class="row">
@@ -88,17 +144,38 @@
 			</div>
 
 			<!-- 검색 -->
-			<div>
+			<div class="blog_right_sidebar" id="sidebar">
 				<form id="frm" action="" method="post" onsubmit="return false"
 					onkeypress="eventkey();">
+
+					<aside class="single_sidebar_widget search_widget"
+						style="display: flex;">
+						<select id="search" name="search">
+							<option value="all" selected>전 체</option>
+							<option value="title">제 목</option>
+							<option value="content">내 용</option>
+						</select>
+						<div class="input-group">
+							<input type="text" class="form-control" id="data" name="data">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button"
+									onclick="searchData()">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</aside>
+
 					<select id="search" name="search">
-						<option value="all" selected="selected">전 체</option>
+						<option value="all" selected>전 체</option>
 						<option value="title">제 목</option>
 						<option value="content">내 용</option>
 					</select> <input type="text" id="data" name="data" size="20">&nbsp;
 					<button type="button" onclick="searchData()">검 색</button>
+
 				</form>
 			</div>
+		</div>
 	</section>
 </body>
 <script>
@@ -113,6 +190,11 @@
 
 	//검색 데이터 호출
 	function searchData() {
+		var let = $("#search option:selected").val();
+		var le = $("#data").val();
+		console.log(let);
+		console.log(le);
+		
 		$.ajax({
 			url : "admBoardSearch",
 			type : "post",
