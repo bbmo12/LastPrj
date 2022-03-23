@@ -12,7 +12,8 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.padding {
@@ -155,7 +156,7 @@
 		text-overflow: ellipsis;
 	}
 	.padding {
-	padding: 5rem
+		padding: 5rem
 	}
 
 	.form-control1 {
@@ -261,7 +262,7 @@
 					<div class="card-body">
 						<div class="row">
 						<div>
-							<div class="table-wrap" style="width: 848.958px">
+							<div class="table-wrap" style="width: 930px;">
 									<form action="mycounsel" id="goform" name="goform">
 										<input type="hidden" id="pageNum" name="pageNum" value="1">
 										<table class="table table-striped" >

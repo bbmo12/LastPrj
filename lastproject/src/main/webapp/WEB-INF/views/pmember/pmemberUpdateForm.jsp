@@ -11,7 +11,8 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	#main-form h3,
@@ -178,8 +179,24 @@
 		border-radius: 0.35rem;
 		padding: 20px;
 	}
+	.card-header{
+		background: white;
+		font-size: 1.0rem;
+		font-family: 'NanumBarunGothic';
+		font-style: normal;
+		font-weight: 400;
+		color: black;
+		width: 797px;
+		margin: -17px 0 20px -20px;
+		padding-left: 15px;
+	}
 	i{
 		color: black;
+	}
+	
+	.control-width{
+	    width: 160px;
+    	display: inline-block;
 	}
 	
 	
@@ -252,56 +269,60 @@
 						</aside>
 					</div>
 				</div>
-		
 				<div class="col-lg-9 posts-list">
 						<form action="pmemberUpdate" enctype="multipart/form-data" id="f" name="updatePage" method="post" onsubmit="return checkForm()">
 							<div id="main-form"  style="width: 800px;">
 							<div class="card">
+							<div class="card-header">
+								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내정보수정
+							</div>
 								<div class="form-group">
-									<i class="fas fa-user"></i>
-									<h3 style="font-weight: bolder;">이름</h3>
-									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" required>
+									<div class="control-width"><i class="fas fa-user"></i>
+									<h3 style="font-weight: bolder;">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</h3></div>
+									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" style="width:350px;">
 								</div>
 								<div class="form-group">
-									<i class="fas fa-id-card"></i>
-									<h3 style="font-weight: bolder;">아이디</h3>
+									<div class="control-width"><i class="fas fa-id-card"></i>
+									<h3 style="font-weight: bolder;">아이디</h3></div>
 									<input type="email" style="border: none" id="p_id" name="p_id"
 										class="form-control" value="${pmember.p_id}" readonly>
 								</div>
 								<div class="form-group">
-									<i class="fa fa-unlock-alt"></i>
-									<h3 style="font-weight: bolder;">비밀번호</h3>
+									<div class="control-width"><i class="fa fa-unlock-alt"></i>
+									<h3 style="font-weight: bolder;">비밀번호</h3></div>
 									<input type="password" id="password" name="password" class="form-control" value=""
-										style="width: 350px;" placeholder="영문자+숫자+특수문자 조합으로 8이상입력">
+										style="width: 350px;" placeholder="4~12자의 숫자 , 문자로만 사용 가능합니다.">
 								</div>
 								<div class="form-group">
-									<i class="fa fa-unlock-alt"></i>
-									<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
+									<div class="control-width"><i class="fa fa-unlock-alt"></i>
+									<h3 style="font-weight: bolder;">비밀번호 재확인</h3></div>
 									<input type="password" id="password1" name="password1"class="form-control" value=""
-										style="width: 350px;" required>
+										style="width: 350px;">
 								</div>
 								<div class="form-group">	
-									<i class="fa-solid fa-mobile-screen"></i>
-									<h3 style="font-weight: bolder;">전화번호</h3>
-									<input type="tel" id="tel" name="tel" class="form-control" value="${pmember.tel}" placeholder="숫자만 입력하세요." maxlength="13">
+									<div class="control-width"><i class="fa-solid fa-mobile-screen"></i>
+									<h3 style="font-weight: bolder;">전화번호</h3></div>
+									<input type="tel" id="tel" name="tel" class="form-control" value="${pmember.tel}" 
+									style="width:350px;" placeholder="숫자만 입력하세요." maxlength="13">
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-building"></i>
-									<h3 style="font-weight: bolder;">사업장 이름</h3>
-									<input type="text" id="w_name" name="w_name"class="form-control" value="${pmember.w_name}">
+									<div class="control-width"><i class="fa-solid fa-building"></i>
+									<h3 style="font-weight: bolder;">사업장 이름</h3></div>
+									<input type="text" id="w_name" name="w_name"class="form-control" style="width:350px;" value="${pmember.w_name}">
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-map-location-dot"></i>
-									<h3 style="font-weight: bolder;">사업장 주소</h3>
+									<div class="control-width"><i class="fa-solid fa-map-location-dot"></i>
+									<h3 style="font-weight: bolder;">사업장 주소</h3></div>
 									<input type="text" id="w_address" name="w_address"class="form-control" value="${pmember.w_address}"> 
-									<input type="text" id="w_d_address" name="w_d_address" class="form-control"value="${pmember.w_d_address }">								
+									<input type="text" id="w_d_address" name="w_d_address" class="form-control"
+										style="width:210px;" value="${pmember.w_d_address }">								
 									<button class="btn btn-primary mr-2" type="button" onclick="findAddr()" id="member_post" name="member_post">주소찾기</button>								
 								</div>				
 								<div class="form-group" style="margin-top:-15px;">
 									<i class="fa-solid fa-square-phone"></i>
-									<h3 style="font-weight: bolder;">사업장 전화번호</h3>
+									<h3 style="font-weight: bolder;">사업장 전화번호&nbsp;&nbsp;&nbsp;</h3>
 									<input type="tel" id="w_tel" name="w_tel" class="form-control" value="${pmember.w_tel}" maxlength="13"
-										placeholder="숫자만 입력하세요.">
+										style="width:350px;"placeholder="숫자만 입력하세요.">
 								</div>
 								<div class="form-group">
 									<i class="fa-solid fa-street-view"></i>
@@ -309,14 +330,14 @@
 									<textarea id="p_info" name="p_info" cols="100" rows="3">${pmember.p_info}</textarea>
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-star"></i>
-									<h3 style="font-weight: bolder;">경력</h3>
-									<input type="text" id="career" name="career" class="form-control" value="${pmember.career}">
+									<div class="control-width"><i class="fa-solid fa-star"></i>
+									<h3 style="font-weight: bolder;">경력</h3></div>
+									<input type="text" id="career" name="career" class="form-control" style="width: 350px;" value="${pmember.career}">
 								</div>
 								<div class="form-group">
-									<i class="fa-solid fa-award"></i>
-									<h3 style="font-weight: bolder;">전문분야</h3>
-									<input type="text" id="speciality" name="speciality"class="form-control" value="${pmember.speciality}">
+									<div class="control-width"><i class="fa-solid fa-award"></i>
+									<h3 style="font-weight: bolder;">전문분야</h3></div>
+									<input type="text" id="speciality" name="speciality"class="form-control" style="width: 350px;" value="${pmember.speciality}">
 								</div>
 								<div class="form-group">
 									<i class="fa-solid fa-calendar-days"></i>
@@ -375,6 +396,7 @@
 									</div>
 								</div>
 								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>
+								<p>운영시간을 더 추가 하시러면 시간추가 버튼을 눌러주세요.</p>
 								<div class="form-group" style="margin-bottom: 0px;">
 									<i class="fa-solid fa-clipboard-list"></i>
 									<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3><br>
@@ -596,11 +618,10 @@
 				updatePage.password.focus();
 				return false;
 			}
-			/* 	
-			var pwdCheck = /^[A-Za-z0-9]{4,12}$/;
-				         
+			 	
+		/* 	var pwdCheck = /^[A-Za-z0-9]{4,12}$/; 
 			if(!pwdCheck.test(updatePage.password.value)){
-				alert("비밀번호는 영문자+숫자+특수문자 조합으로 8이상 사용해야 합니다.");
+				alert("4~12자의 숫자 , 문자로만 사용 가능합니다.);
 				updatePage.password.focus(); 
 				return false; 
 			}
@@ -608,7 +629,7 @@
 				alert("비밀번호가 일치하지 않습니다."); 
 				updatePage.password1.focus(); 
 				return false; 
-			}  */
+			}   */
 			else if (updatePage.tel.value == "" && updatePage.w_tel.value == "") {
 				alert("전화번호를 입력해주세요.");
 				updatePage.tel.focus();

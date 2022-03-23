@@ -93,7 +93,8 @@
 		color: black;
 	}
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 	
 </style>

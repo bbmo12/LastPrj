@@ -171,7 +171,7 @@ public class MemController {
 		
 		memDao.memberUpdate(member);
 		redirectAttr.addFlashAttribute("memberupdate","정보를다시확인해주세요.");
-		return "redirect:memberMypage";
+		return "redirect:mainMypage";
 	}
 
 	

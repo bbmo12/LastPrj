@@ -19,16 +19,12 @@
 </head>
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	.padding {
 		padding: 5rem
-	}
-
-	.pl-3,
-	.px-3 {
-		padding-left: 1rem !important
 	}
 
 	.table th {
@@ -220,12 +216,12 @@
 							<div class="card">
 								<div class="card-header">
 									<div align="left">
-										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;${pmember.name }님의 에약내역
+										<i class="fa-solid fa-flag"></i>&nbsp;&nbsp;&nbsp;${pmember.name }님의 예약내역
 									</div>
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="table-wrap" style="width: 900px;">
+										<div class="table-wrap" style="width: 950px;">
 											<form action="preservationSelect" name="goform" id="goform">
 												<input type="hidden" name="pageNum" value="1">
 												<table class="table table-striped">

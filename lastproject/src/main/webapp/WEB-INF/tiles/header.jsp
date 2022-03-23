@@ -219,7 +219,7 @@
 							<sec:authorize access="hasRole('MEMBER')">
 								<li class="menu-has-children"><a href="mainMypage">마이페이지</a>
 									<ul>
-										<li><a href="memberMypage" id="drop">내 프로필</a></li>
+										<li><a href="mainMypage" id="drop">내 프로필</a></li>
 										<li><a href="protocol" id="drop">반려동물 진료기록</a></li>
 										<li><a href="reservationSelect" id="drop">예약 내역</a></li>
 										<li><a href="myPay" id="drop">결제 내역</a></li>
