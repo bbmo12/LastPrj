@@ -74,7 +74,7 @@
 
 	<!-- 상담 상세 조회 -->
 	<select id="csDetail" parameterType="com.last.prj.counsel.service.CounselVO" resultType="com.last.prj.counsel.service.CounselVO">
-		SELECT C_NO, CONTENT, w_date AS w_date, 
+		SELECT C_NO, CONTENT, W_DATE AS w_date, 
 					P_ID, PET_NO, CODE, P_NO, M_ID, SENDER, R_CHECK
 				FROM COUNSEL
 			WHERE P_NO = #{c_no} OR C_NO = #{c_no}

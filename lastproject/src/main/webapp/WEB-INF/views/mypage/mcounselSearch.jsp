@@ -262,7 +262,7 @@
 					<div class="card-body">
 						<div class="row">
 						<div>
-							<div class="table-wrap" style="width: 930px;">
+							<div class="table-wrap" style="width: 1000px;">
 									<form action="mycounsel" id="goform" name="goform">
 										<input type="hidden" id="pageNum" name="pageNum" value="1">
 										<table class="table table-striped" >
