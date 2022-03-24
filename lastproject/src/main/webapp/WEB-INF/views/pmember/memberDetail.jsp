@@ -103,7 +103,7 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<sec:authorize access="hasRole('MEMBER')">
 							<c:choose>
-								<c:when test="${petList ne null}">
+								<c:when test="${fn:length(petList) == 0}">
 									<button class="btn btn-primary" onclick="noPet()">상담하기</button>
 								</c:when>
 								<c:otherwise>								
