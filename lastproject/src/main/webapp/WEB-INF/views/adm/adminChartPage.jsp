@@ -441,7 +441,7 @@ h1{
 		               console.log(res.memChart[0].oo); 
 		               console.log(res.pmemChart[0].aa);
 		               console.log(res.pmemChart[0].bb);
-		               var pmem = res.pmemChart;
+		              /*  var pmem = res.pmemChart;
 		               var mem = res.memChart;
 		                $.each(pmem,function(i){
 		                   aa.push(res.pmemChart[i].aa);
@@ -453,11 +453,11 @@ h1{
 		               }); 
 		                
 		                console.log(tt);
-		                console.log(oo);
+		                console.log(oo); */
 
-		                const ctx = document.getElementById('admPartChart')
+		                const ccc = document.getElementById('admPartChart')
 		                       .getContext('2d');
-		               const admPartChart = new Chart(ctx, {
+		               const admPartChart = new Chart(ccc, {
 		                   type : 'line',
 		                   data : {
 		                       labels : tt,aa,
