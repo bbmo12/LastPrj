@@ -141,8 +141,8 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"style="width: 210px; height: 167px;">
+							<img class="partner_img" src="/upload/${pmember.pfile}"
+								onerror="this.src='resources/upload/pet.jpg'"style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>
@@ -286,14 +286,14 @@
 									<div class="control-width"><i class="fa-solid fa-images"></i>
 									<h3 style="font-weight: bolder;">활동사진</h3></div><br>
 									<c:forEach items="${pimage}" var="image">
-										<img src="resources/upload/${image.picture}" style="width: 200px; height:200px;"alt="등록된 사진이 없습니다.">
+										<img src="/upload/${image.pfile}" style="width: 200px; height:200px;"alt="등록된 사진이 없습니다.">
 									</c:forEach>
 								</div>
 								<div class="form-group">
 									<div class="control-width"><i class="fa fa-file-image-o"></i>
 									<h3 style="font-weight: bolder;">자격증</h3></div><br>
 									<c:forEach items="${plicense}" var="plicense">
-										<img src="resources/upload/${plicense.picture}"
+										<img src="/upload/${plicense.pfile}"
 											style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 									</c:forEach>
 								</div>

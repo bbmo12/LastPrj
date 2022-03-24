@@ -126,7 +126,7 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${mInfo.picture}"
+							<img class="partner_img" src="resources/upload/${mInfo.pfile}"
 								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${mInfo.name }님</h4>
@@ -212,7 +212,7 @@
 										<c:forEach items="${petList }" var="pet">
 											<li>
 												<div class="radioImg">
-													<img class="petSelection" src="resources/qna/${pet.picture }"
+													<img class="petSelection" src="resources/qna/${pet.pfile }"
 														onError="this.src='resources/qna/대체이미지2.png'">
 												</div>
 												<input type="radio" id="pet_no" name="pet_no"value="${pet.pet_no}">&nbsp;${pet.name }

@@ -159,8 +159,8 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'" style="width: 210px; height: 167px;">
+							<img class="partner_img" src="resources/upload/${pmember.pfile}"
+								onerror="this.src='resources/upload/pet.jpg'" style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>

@@ -22,8 +22,6 @@
 		background: #fff;
 		border: 1px solid #0062ff;
 	}
-
-
 </style>
 <body>
 	<section class="department-area section-padding4" style="padding: 130px 0 130px;">
