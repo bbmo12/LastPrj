@@ -32,6 +32,8 @@ public class PetController {
 	@Autowired
 	ServletContext sc;
 	
+	@Autowired
+	private String uploadPath;
 	
 	/*
 	 * @RequestMapping("/petmemberForm") public String petmemberForm(Model
@@ -124,19 +126,20 @@ public class PetController {
 		}		
 		String originalFileName = file.getOriginalFilename();
 
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
 
-		File savePath = new File(realPath);
+		File savePath = new File(uploadPath);
 		if (!savePath.exists())
 			savePath.mkdirs();
 
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);	  
 	  if(!originalFileName.isEmpty()) {
 		  String uuid = UUID.randomUUID().toString();
 		  String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 	  
+		  String newPath = uploadPath + File.separator + saveFileName;
+		  File saveFile = new File(newPath);	 
+		  
 	  try {
 		  file.transferTo(saveFile);
 	    pet.setPicture(originalFileName);
@@ -207,20 +210,21 @@ public class PetController {
 		}	
 		String originalFileName = file.getOriginalFilename();
 
-		String webPath = "/resources/upload";
-		String realPath = sc.getRealPath(webPath);
+		//String webPath = "/resources/upload";
+		//String realPath = sc.getRealPath(webPath);
 
-		File savePath = new File(realPath);
+		File savePath = new File(uploadPath);
+		
 		if (!savePath.exists())
 			savePath.mkdirs();
-
-		realPath += File.separator + originalFileName;
-		File saveFile = new File(realPath);
 
 		if (!originalFileName.isEmpty()) {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 
+			String newPath = uploadPath + File.separator + saveFileName;
+			File saveFile = new File(newPath);
+			
 			try {
 				file.transferTo(saveFile);
 				pet.setPicture(originalFileName);
