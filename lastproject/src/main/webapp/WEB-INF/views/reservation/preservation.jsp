@@ -240,7 +240,7 @@
 													<tbody align="center">
 												<c:if test="${ fn:length(preservation) == 0  }">
                                                     <tr>
-                                                        <td colspan="6" align="center">조회된 결과가 없습니다.</td>
+                                                        <td colspan="8" align="center">조회된 결과가 없습니다.</td>
                                                     </tr>
                                                 </c:if>
 												<c:forEach items="${preservation }" var="pres">
