@@ -49,7 +49,8 @@ public class MemVO {
 	private String total;
 	private Integer code;
 	private String tt;
-	private String oo; 
+	private String oo;
+	
 }
 	
 

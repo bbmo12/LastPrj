@@ -75,7 +75,8 @@ public class FfileUtil {
 
 			fileList.add(map);
 
-			File uploadFile = new File(uploadPath + "\\" + fileList.get(i).get("changeFile"));
+			File uploadFile = new File(uploadPath + "/" + fileList.get(i).get("changeFile"));
+			System.out.println("uploadFile " + uploadFile);
 			try {
 				multiFileList.get(i).transferTo(uploadFile);
 			} catch (Exception e) {
@@ -83,7 +84,7 @@ public class FfileUtil {
 				// 만약 업로드 실패하면 파일 삭제
 				for (int J = 0; J < multiFileList.size(); J++) {
 					if (multiFileList.get(i) != null && multiFileList.get(i).getSize() > 0) {
-						new File(uploadPath + "\\" + fileList.get(J).get("changeFile")).delete();
+						new File(uploadPath + "/" + fileList.get(J).get("changeFile")).delete();
 					}
 
 				}

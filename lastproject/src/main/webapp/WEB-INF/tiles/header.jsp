@@ -99,9 +99,9 @@
   }
 }
 
-.circle {
+.circle2 {
    width: 100px;
-     height: 80px;
+  height: 80px;
   position: absolute;
   border: 2px solid #ff686b;
   border-radius: 70%;
@@ -132,7 +132,11 @@
     opacity: 0;
   }
 
-	
+#ii_bell{
+	width:40px;
+	display:inline-block;
+}
+
 </style>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
@@ -181,7 +185,7 @@
 				}
 			});
 		}
-		
+	
 		
 		function noticeCheck(){
 			$.ajax({
@@ -190,10 +194,31 @@
 				success: function (result) {
 					console.log(result);
 					
-					if (result == 0) {
-						console.log("없어")
+					
+					if (result != 0) {
+						console.log("no!")
+						setTimeout(function(){
+							
+							var bell1 = `
+								 <div class="bellWrapper">
+						          <i class="fas fa-bell my-bell"></i>
+						        </div>
+						       `;
+						    $('.box').append(bell1);
+							}, 1000);
+						
+						setTimeout(function(){
+							 $('.box').remove();
+								var bell3 = `<i id="i_bell3" class="fa-solid fa-bell"></i>`;
+								$('#notificationDropdown').append(bell3);
+						
+							}, 3000);
+						
+					} else if(result == 0){
+						var bell2 = `<i id="i_bell2" class="fa-solid fa-bell"></i>`;
+						$('#notificationDropdown').append(bell2);  
 					}
-					$('#noticeCount').val(result);
+					
 				}
 			});
 			
@@ -256,7 +281,7 @@
 <body>
 	<header class="header-area">
 		<div id="header" id="home">
-			<div class="container" style="margin-right: 20px;">
+			<div class="container" style="margin-right: 35px;">
 				<div class="row align-items-center justify-content-between d-flex">
 					<div id="logo" style="float: left; margin-left: -400px;">
 						<a href="home" id="logText">BANBANBAN<!-- <img src="resources/upload/logo2.png" alt="" title="" style="width:70px; height:70px;" /> --></a>
@@ -313,19 +338,8 @@
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
-										<input type="hidden" id="noticeCount">
+										<div class="box" style="width:40px; display:inline-block;"></div>
 										
-										<i class="fa-solid fa-bell"></i>
-										<div class="box" style="width:40px; display:inline-block;">
-									        <div class="bellWrapper">
-									          <i class="fas fa-bell my-bell"></i>
-									        </div>
-									        
-									        <div class="circle first"></div>
-									        <div class="circle second"></div>
-									        <div class="circle third"></div>
-									    </div>
-										<span class="count-symbol bg-danger"></span>
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">

@@ -10,11 +10,23 @@
 	<select id="pmemCounselList" resultType="com.last.prj.counsel.service.CounselVO">
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
-				FROM (SELECT P.NAME AS p_name, C.M_ID, C.P_ID, C.CONTENT, C.W_DATE AS w_date, C.CODE, C.C_NO, P.PET_NO
-						FROM PET P, MEMBER M, COUNSEL C
-					 WHERE P.PET_NO = C.PET_NO AND P.M_ID = M.M_ID AND C.P_ID= #{p_id} AND C.P_NO = 0 ORDER BY C_NO) A)
-				WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1 AND
-				(#{pageNum})*#{amount}
+					FROM (
+							SELECT P.NAME AS p_name,
+							       C.M_ID,
+							       C.P_ID,
+							       C.CONTENT,
+							       TO_CHAR(C.W_DATE, 'YYYY-MM-DD') AS w_date,
+							       C.CODE,
+							       C.C_NO,
+							       P.PET_NO
+							       FROM COUNSEL C LEFT JOIN PET P
+							       ON C.PET_NO = P.PET_NO
+							       LEFT JOIN MEMBER M
+							       ON P.M_ID = M.M_ID
+							       WHERE C.P_ID= #{p_id} AND C.P_NO = 0 ORDER BY C_NO
+						 ) A)
+							WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
+							AND (#{pageNum})*#{amount}
 	</select>
 
 	<!-- 페이징 -->
@@ -22,26 +34,26 @@
 		SELECT *
 		FROM ( SELECT ROWNUM RN, A.*
 				FROM (
-				SELECT P.NAME AS p_name,
-        SUBSTR(C.CONTENT,0,20) AS content,
-        PM.NAME AS pm_name,
-        C.R_CHECK,
-        C.W_DATE AS w_date,
-        P.pet_no,
-        C.CODE,
-        CO.CONTENT AS co_content, 
-        c.p_id,
-        c.m_id,
-        c.c_no
-        FROM COUNSEL C LEFT JOIN PET P
-        ON C.PET_NO = P.PET_NO
-        LEFT JOIN P_MEMBER PM
-        ON PM.P_ID = C.P_ID
-        LEFT JOIN F_CODE CO
-        ON C.CODE = CO.CODE
-        WHERE C.M_ID = #{m_id} AND c.p_no=0
+					SELECT P.NAME AS p_name,
+					        SUBSTR(C.CONTENT,0,20) AS content,
+					        PM.NAME AS pm_name,
+					        C.R_CHECK,
+					        TO_CHAR(C.W_DATE, 'YYYY-MM-DD') AS w_date,
+					        P.pet_no,
+					        C.CODE,
+					        CO.CONTENT AS co_content, 
+					        c.p_id,
+					        c.m_id,
+					        c.c_no
+					        FROM COUNSEL C LEFT JOIN PET P
+					        ON C.PET_NO = P.PET_NO
+					        LEFT JOIN P_MEMBER PM
+					        ON PM.P_ID = C.P_ID
+					        LEFT JOIN F_CODE CO
+					        ON C.CODE = CO.CODE
+					        WHERE C.M_ID = #{m_id} AND c.p_no=0
 				
-				) A)
+					) A)
 					WHERE RN BETWEEN
 						(#{pageNum}-1)*#{amount}+1
 					AND (#{pageNum})*#{amount}
@@ -74,7 +86,7 @@
 
 	<!-- 상담 상세 조회 -->
 	<select id="csDetail" parameterType="com.last.prj.counsel.service.CounselVO" resultType="com.last.prj.counsel.service.CounselVO">
-		SELECT C_NO, CONTENT, w_date AS w_date, 
+		SELECT C_NO, CONTENT, TO_CHAR(W_DATE, 'YYYY-MM-DD') AS w_date, 
 					P_ID, PET_NO, CODE, P_NO, M_ID, SENDER, R_CHECK
 				FROM COUNSEL
 			WHERE P_NO = #{c_no} OR C_NO = #{c_no}

@@ -298,14 +298,14 @@
 				<div id="main-form"  style="width: 800px;">
 					<div class="card">
 					<div class="card-header">
-								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;반려동물 정보수정
+						<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;반려동물정보
 					</div>
 						<form action="mypatadd" method="post" enctype="multipart/form-data">
 							<div class="form-group">
 								<div class="control-width"><i class="fas fa-user"></i>
 								<h3 style="font-weight: bolder;">이름</h3></div>
 								<input type="text" id="name" name="name"  class="form-control" required autofocus>
-						<div id="name_check"></div>
+								<div id="name_check"></div>
 							</div>
 							<div class="form-group">
 								<div class="control-width"><i class="fa fa-birthday-cake"></i>

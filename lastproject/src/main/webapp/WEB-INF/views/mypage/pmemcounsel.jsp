@@ -221,7 +221,7 @@
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
+										<div class="table-wrap" style="width: 1000px;">
 											<form action="pmemcounsel" name="goform">
 												<input type="hidden" name="pageNum" value="1">
 												<table class="table table-striped">

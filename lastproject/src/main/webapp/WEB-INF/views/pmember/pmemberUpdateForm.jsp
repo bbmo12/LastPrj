@@ -876,7 +876,7 @@
 				updatePage.password.focus();
 				return false;
 			}
-			 	
+	
 		/* 	var pwdCheck = /^[A-Za-z0-9]{4,12}$/; 
 			if(!pwdCheck.test(updatePage.password.value)){
 				alert("4~12자의 숫자 , 문자로만 사용 가능합니다.);
@@ -886,8 +886,9 @@
 			if( updatePage.password.value !== updatePage.password1.value ){
 				alert("비밀번호가 일치하지 않습니다."); 
 				updatePage.password1.focus(); 
-				return false; 
+				return false;   
 			}   */
+
 			else if (updatePage.tel.value == "" && updatePage.w_tel.value == "") {
 				alert("전화번호를 입력해주세요.");
 				updatePage.tel.focus();

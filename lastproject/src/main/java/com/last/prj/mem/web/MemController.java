@@ -152,7 +152,7 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			String newPath = uploadPath + File.separator + originalFileName;
+			String newPath = uploadPath + File.separator + saveFileName;
 			File saveFile = new File(newPath);
 
 			try {
@@ -465,7 +465,7 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			uploadPath += File.separator + originalFileName;
+			uploadPath += File.separator + saveFileName;
 			File saveFile = new File(uploadPath);
 			
 			try {

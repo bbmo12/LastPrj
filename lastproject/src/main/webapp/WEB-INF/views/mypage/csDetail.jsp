@@ -11,7 +11,8 @@
 
 <style>
 	#my_section {
-		padding: 50px;
+		margin-top: -70px;
+    	padding-bottom: 25px;
 	}
 
 	#leftBubble:after {
@@ -66,7 +67,7 @@
 	} */
 
 
-	img {
+	#csimg {
 		width: 80px;
 		height: 80px;
 		object-fit: cover;
@@ -261,7 +262,7 @@
 								<c:if test="${mId ne null }">
 									<h2 style="padding-left: 35px;">
 										<span>
-											<img style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
+											<img id="csimg"style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
 												class="profile" src="resources/upload/${pInfo.picture }"
 												onError="this.src='resources/qna/대체이미지2.png'"></span>
 										<span>${pInfo.name}</span>&nbsp;<span>
@@ -282,7 +283,7 @@
 								</c:if>
 								<c:if test="${pId ne null }">
 									<h2 style="text-align: center; margin-right: 7em;">
-										<span><img
+										<span><img id="csimg"
 												style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
 												class="profile" src="resources/upload/${mInfo.picture }"
 												onError="this.src='resources/qna/대체이미지2.png'"></span> <span>

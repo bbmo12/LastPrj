@@ -249,21 +249,59 @@
 			})
 		}
 		function addFile1() {
-			var input = $('<input>').attr({
+			var filediv1 = $('<div>').attr({
+				'id': 'filediv1'
+			});
+			
+			var input1 = $('<input>').attr({
 				'class': 'file-upload-browse btn btn-primary',
 				'name': 'multiFileList1',
 				'type': 'file'
 			}).css('margin-top', '3px');
-			$('#ffile1').append(input);
+			
+			var btn = $('<button>').attr({
+				'onclick': 'deleteFile(event)',
+				'type': 'button',
+				'class': 'btn btn-primary btn-sm',
+				'id': 'deleteBtn',
+				'style': 'margin-left:5px'
+			}).text('-');
+			
+			filediv1.append(input1);
+			filediv1.append(btn);
+			$('#ffile1').append(filediv1);
 		}
+		
+		
 		function addFile2() {
-			var input = $('<input>').attr({
+			var filediv2 = $('<div>').attr({
+				'id': 'filediv2'
+			});
+			
+			var input2 = $('<input>').attr({
 				'class': 'file-upload-browse btn btn-primary',
 				'name': 'multiFileList2',
 				'type': 'file'
 			}).css('margin-top', '3px');
-			$('#ffile2').append(input);
+			
+			var btn = $('<button>').attr({
+				'onclick': 'deleteFile(event)',
+				'type': 'button',
+				'class': 'btn btn-primary btn-sm',
+				'id': 'deleteBtn',
+				'style': 'margin-left:5px'
+			}).text('-');
+			
+			filediv2.append(input2);
+			filediv2.append(btn);
+			$('#ffile2').append(filediv2);
 		}
+		
+		function deleteFile(event) {
+			var e = event.target.parentElement;
+			e.remove();
+		}
+		
 		function serviceadd() {
 			var input = $('<input>').attr({
 				'name': 'serviceadd',

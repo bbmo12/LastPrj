@@ -39,7 +39,7 @@
 		 <if test="code !=null">AND pm.code = #{code}  </if>
 		 <if test="key == 'all'">AND p.NAME LIKE '%'|| #{data}||'%'</if>
 		  AND P.M_ID
-		 = #{m_id} <![CDATA[
+		 = #{m_id} ORDER BY R.R_NO <![CDATA[
 		 
 		 )A) 
 		WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1	AND (#{vo.pageNum})*#{vo.amount}

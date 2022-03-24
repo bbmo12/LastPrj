@@ -120,7 +120,7 @@
 
 	<!-- 일반회원 수 -->
 	<select id="memCount" resultType="int">
-		SELECT COUNT(*) FROM MEMBER
+		SELECT COUNT(*) FROM MEMBER WHERE STARTDATE IS NOT NULL
 	</select>
 
 	<!--서비스 가격 입력 -->
@@ -220,29 +220,44 @@
 	<select id="admMlistCode" parameterType="com.last.prj.mem.service.MemVO" resultType="com.last.prj.mem.service.MemVO">
 		SELECT B.*
 		FROM ( SELECT A.* , ROWNUM RN
-		FROM (SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)		
-		<if	test="key !=null and key !='' and data !=null and data !='' ">
-			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
-		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
-		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
-		<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
-		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
-			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
-		</if>
+		FROM (SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M LEFT OUTER JOIN PET P 
+	  			ON M.M_ID = P.M_ID 
+	  		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="key != null and key != ''  and data !='' and data != null "> 
+			AND UPPER(M.NAME) LIKE '%'|| UPPER(#{data}) ||'%' OR UPPER(M.M_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'name' and data !='' and data != null "> 
+			AND UPPER(M.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'm_id' and data !='' and data != null "> 
+			AND UPPER(M.M_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>	 
+			<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
+			<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
+			<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+			<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+				AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+			</if>
+		</trim>
 		<![CDATA[ )A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount} ]]>
 	</select>
 	
 	<select id="adMmemCount" parameterType="com.last.prj.mem.service.MemVO" resultType="int">
 		SELECT COUNT(*) FROM (
-		SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M , PET P WHERE M.M_ID = P.M_ID(+)
-		<if	test="key !=null and key !='' and data !=null and data !='' ">
-			 AND UPPER(${key}) LIKE '%'|| UPPER(#{data}) ||'%'</if>
-		<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
-		<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
-		<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
-		<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
-			AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
-		</if>)
+			SELECT M.M_ID, M.NAME, M.STARTDATE,M.ENDDATE, P.PET_NO FROM MEMBER M LEFT OUTER JOIN PET P 
+	  			ON M.M_ID = P.M_ID
+	  		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="key != null and key != ''  and data !='' and data != null "> 
+			AND UPPER(M.NAME) LIKE '%'|| UPPER(#{data}) ||'%' OR UPPER(M.M_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>			
+			<if test="key != null and key != '' and key == 'name' and data !='' and data != null "> 
+			AND UPPER(M.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="key != null and key != '' and key == 'm_id' and data !='' and data != null "> 
+			AND UPPER(M.M_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
+			<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
+			<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
+			<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+			<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
+				AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
+			</if>
+		</trim>
+		)
 	</select>
 	
 	<!--기간 별 차트 그리기  -->
