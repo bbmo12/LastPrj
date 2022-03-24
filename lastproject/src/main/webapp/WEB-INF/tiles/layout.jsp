@@ -80,7 +80,7 @@
 }
 
 @font-face {
- font-family: 'NanumBarunGothic';
+ /* font-family: 'NanumBarunGothic'; */
  font-style: normal;
  font-weight: 400;
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
@@ -88,7 +88,7 @@
 }
 
 @font-face {
- font-family: 'NanumBarunGothic';
+ /* font-family: 'NanumBarunGothic'; */
  font-style: normal;
  font-weight: 700;
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot');
@@ -96,7 +96,7 @@
 }
 
 @font-face {
- font-family: 'NanumBarunGothic';
+ /* font-family: 'NanumBarunGothic'; */
  font-style: normal;
  font-weight: 300;
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot');
@@ -104,7 +104,7 @@
 }
 
 .nanumbarungothic * {
- font-family: 'NanumBarunGothic', sans-serif;
+ /* font-family: 'NanumBarunGothic', sans-serif; */
 }
 
  </style>

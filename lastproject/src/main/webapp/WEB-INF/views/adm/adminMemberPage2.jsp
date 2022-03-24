@@ -85,7 +85,7 @@
 .card-header {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 	color: black;
@@ -94,7 +94,7 @@
 .card-footer {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
@@ -102,14 +102,14 @@
 #notice_footer {
 	text-align: center;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
 
 .card_notice {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
@@ -140,14 +140,14 @@
 
 #cardTitle {
 	font-size: 1.25rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 700;
 }
 
 #myinfo {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 300;
 }
