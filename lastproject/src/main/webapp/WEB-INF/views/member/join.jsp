@@ -12,11 +12,9 @@ body {
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-
 .options {
 	transform: translateY(-35px);
 }
-
 .options {
 	width: 100%;
 	display: flex;
@@ -88,12 +86,10 @@ body {
 			<br> <br> <br>
 		</div>
 		<div class="options">
-
 			<button onclick="mlogin()" class="btn btn-primary btn-block"
 				id="regular" style="width: 200px; margin-top: 4px;">일반회원</button>
 			<button onclick="plogin()" class="btn btn-primary btn-block"
 				id="partner" style="width: 200px;">파트너회원</button>
-
 		</div>
 		<br>
 		<div class="card-body">
@@ -101,7 +97,6 @@ body {
 				style="margin-top: -35px; box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important; border: 1px solid #e3e6f0;">
 				<div class="card-body">
 					<br> <br>
-
 					<div class="form-group" align="center">
 						<h3>반반반에 오신 것을 환영합니다.</h3>
 						<h4>지금 회원 가입 하신 후 반반반의 다양한 서비스를 만나보세요.</h4>
@@ -145,12 +140,10 @@ body {
 				<br> <br> <br>
 			</div>
 			<div class="options">
-
 				<button onclick="mlogin()" class="btn btn-primary btn-block"
 					id="regular" style="width: 200px; margin-top: 4px;">일반회원</button>
 				<button onclick="plogin()" class="btn btn-primary btn-block"
 					id="partner" style="width: 200px;">파트너회원</button>
-
 			</div>
 			<br>
 			<div class="card-body">
@@ -158,7 +151,6 @@ body {
 					style="margin-top: -35px; box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important; border: 1px solid #e3e6f0;">
 					<div class="card-body">
 						<br> <br>
-
 						<div class="form-group" align="center">
 							<h3>반반반에 오신 것을 환영합니다.</h3>
 							<h4>지금 회원 가입 하신 후 반반반의 다양한 서비스를 만나보세요.</h4>

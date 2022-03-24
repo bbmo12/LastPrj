@@ -46,7 +46,7 @@ public interface PmemberMapper {
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);
 	
-
+	public List<PmemberVO> petcare(String p_id);
 
 }
 

@@ -105,6 +105,15 @@
 		ON F.F_PART = RE.F_PART
 		WHERE R.P_ID = #{p_id}
 	</select>
+	
+	
+	<!-- 진료가능동물 조회 -->
+	<select id="petcare" resultType="com.last.prj.pmember.service.PmemberVO" parameterType="String">
+	SELECT C.CONTENT AS C_CONTENT FROM PETCARE P, F_CODE C
+	WHERE P_ID = #{p_id} AND C.CODE = P.CODE
+	</select>
+	
+	
 	<!-- 페이징번호 , 검색 가능 -->
 	<select id="memberPageList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
@@ -217,6 +226,7 @@
 		</if>
 		GROUP BY CODE
 	</select>
+	
 	
 
 

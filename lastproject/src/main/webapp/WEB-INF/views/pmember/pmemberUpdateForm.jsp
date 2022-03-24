@@ -153,7 +153,7 @@
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -161,14 +161,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -182,7 +182,7 @@
 	.card-header{
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 		color: black;
@@ -198,6 +198,66 @@
 	    width: 160px;
     	display: inline-block;
 	}
+	
+	.checkout__input input.checkout__input__add {
+	margin-bottom: 20px;
+}
+
+.checkout__input input::placeholder {
+	color: #b2b2b2;
+}
+
+.checkout__input__checkbox {
+	margin-bottom: 10px;
+}
+
+.checkout__input__checkbox label {
+	position: relative;
+	font-size: 16px;
+	color: #1c1c1c;
+	padding-left: 40px;
+	cursor: pointer;
+}
+
+.checkout__input__checkbox label input {
+	position: absolute;
+	visibility: hidden;
+}
+
+.checkout__input__checkbox label input:checked~.checkmark {
+	background: #7fad39;
+	border-color: #7fad39;
+}
+
+.checkout__input__checkbox label input:checked~.checkmark:after {
+	opacity: 1;
+}
+
+.checkout__input__checkbox label .checkmark {
+	position: absolute;
+	left: 0;
+	top: 4px;
+	height: 16px;
+	width: 14px;
+	border: 1px solid #a6a6a6;
+	content: "";
+	border-radius: 4px;
+}
+
+.checkout__input__checkbox label .checkmark:after {
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	width: 10px;
+	height: 8px;
+	border: solid white;
+	border-width: 3px 3px 0px 0px;
+	-webkit-transform: rotate(127deg);
+	-ms-transform: rotate(127deg);
+	transform: rotate(127deg);
+	content: "";
+	opacity: 0;
+}
 	
 	
 </style>
@@ -597,6 +657,40 @@
 									<input type="text" id="speciality" name="speciality"class="form-control" style="width: 350px;" value="${pmember.speciality}">
 									<div id="speciality_check"></div>
 								</div>
+								
+								
+								<div class="form-group">
+								<h3 style="font-weight: bolder;">서비스 가능한 동물</h3>
+							</div>
+							<div class="checkout__input__checkbox">
+							<label for="code0">개
+								<input type="checkbox" id="code0" name="code" value="501"><span class="checkmark"></span></label>&emsp;
+							<label for="code1">고양이
+								<input type="checkbox" id="code1" name="code" value="502"><span class="checkmark"></span></label>&emsp;
+							<label for="code2">조류
+								<input type="checkbox" id="code2" name="code" value="503"><span class="checkmark"></span></label>&emsp;
+							<label for="code3">파충류
+								<input type="checkbox" id="code3" name="code" value="504"><span class="checkmark"></span></label>&emsp;
+							<label for="code4">어류
+								<input type="checkbox" id="code4" name="code" value="505"><span class="checkmark"></span></label>&emsp;
+							<label for="code5">토끼
+								<input type="checkbox" id="code5" name="code" value="506"><span class="checkmark"></span></label>&emsp;<br>
+							<label for="code6">돼지
+								<input type="checkbox" id="code6" name="code" value="507"><span class="checkmark"></span></label>&emsp;
+							<label for="code7">햄스터
+								<input type="checkbox" id="code7" name="code" value="508"><span class="checkmark"></span></label>&emsp;
+							<label for="code8">미어켓
+								<input type="checkbox" id="code8" name="code" value="509"><span class="checkmark"></span></label>&emsp;
+							<label for="code9">여우
+								<input type="checkbox" id="code9" name="code" value="510"><span class="checkmark"></span></label>&emsp;
+							<label for="code10">거미
+								<input type="checkbox" id="code10" name="code" value="511"><span class="checkmark"></span></label>&emsp;
+								</div>
+								
+								
+								
+								
+								
 								<div class="form-group">
 									<i class="fa-solid fa-calendar-days"></i>
 									<h3 style="font-weight: bolder;">운영시간</h3>

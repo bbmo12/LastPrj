@@ -31,7 +31,7 @@
 	.table th {
 		text-align: center;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 500 !important;
 		color: black;
@@ -94,7 +94,7 @@
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -102,14 +102,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -117,7 +117,7 @@
 
 	.card-body {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 		color: black;
@@ -133,7 +133,7 @@
 	.card-header {
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 		color: black;

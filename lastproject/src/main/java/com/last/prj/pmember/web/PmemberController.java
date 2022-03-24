@@ -151,6 +151,7 @@ public class PmemberController {
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
+		model.addAttribute("pets", pMemberDao.petcare(p_id));
 		model.addAttribute("price", pmemDao.getPrice(p_id));
 		return "pmember/pmemberMypage";
 	}
@@ -189,12 +190,6 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
-		System.out.println("=== file : " + file);
-		System.out.println("=== file1: " + multiFileList1);
-		System.out.println("=== file2: " + multiFileList2);
-		
-		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
-
     	String originalFileName = file.getOriginalFilename();
 		//String webPath = "/resources/upload";
 		//String realPath = sc.getRealPath(webPath);

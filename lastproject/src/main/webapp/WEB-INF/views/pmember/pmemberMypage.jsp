@@ -42,7 +42,7 @@
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -50,14 +50,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -72,7 +72,7 @@
 	.card-header, i{
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 		color: black;
@@ -80,7 +80,7 @@
 
 	.card_notice {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 	}
@@ -237,6 +237,21 @@
 									<h3 style="font-weight: bolder;">전문분야&nbsp;&nbsp;</h3></div>
 									<input type="text" style="border: none" id="speciality" name="speciality"value="${pmember.speciality}" readonly>
 								</div>
+								
+								
+								<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-award"></i>
+									<h3 style="font-weight: bolder;">진료가능한 동물&nbsp;&nbsp;</h3></div>
+									<h3 style="font-weight: normal">
+									<c:forEach items="${pets }" var="pets" >
+													${pets.c_content }&nbsp;
+									</c:forEach>
+								</h3>
+								
+								
+								
+								
+								
 								<div class="form-group" style="width: 800px;">
 									<div class="row" id="middle">
 										<div class="col-6" style="padding-left: 10px;">

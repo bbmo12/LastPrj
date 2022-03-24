@@ -80,7 +80,7 @@
 }
 
 @font-face {
- font-family: 'NanumBarunGothic';
+ /* font-family: 'NanumBarunGothic'; */
  font-style: normal;
  font-weight: 400;
  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
