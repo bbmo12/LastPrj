@@ -224,8 +224,8 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img"
-								src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"> 
+								src=""
+								onerror="this.src='resources/upload/cat.jpg'"> 
 							<br> <br>
 							<h4 id="Mainname">관리자님</h4>
 							<div class="br"></div>
@@ -1240,7 +1240,7 @@
 							success : function(res) {
 								console.log(res.list);
 								$('.mem-body').append(
-										//<img src='resources/upload/"+ res.list.picture +"'></img>"
+										<img src='resources/upload/"+ res.list.pfile +"'></img>"
 												
 										"<ul><li>" + res.list.startdate
 												+ "</li><li>" + res.list.name
@@ -1279,7 +1279,7 @@
 						success : function (res) {					
 						console.log(res.list);
 						
-						//<img src='resources/upload/"+ res.list.picture +"'></img>
+						<img src='resources/upload/"+ res.list.pfile +"'></img>
 						$('.mem-body').append("<ul><li>" +res.list.startdate 
 												+"</li><li>"
 												+ res.list.name
