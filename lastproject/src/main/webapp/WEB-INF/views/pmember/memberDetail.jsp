@@ -60,7 +60,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="author_img rounded-circle" src="/upload/${pmemdetail.pfile }"
-								style="width: 210px; height: 167px;" onerror="this.src='resources/upload/pet.jpg'">
+								style="width: 210px; height: 167px;" onerror="this.src='resources/upload/pet.PNG'">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
 							<h3>${pmemdetail.w_name}</h3>
@@ -68,24 +68,24 @@
 							<sec:authorize access="hasRole('MEMBER')">
 								<c:choose>
 									<c:when test="${follow == 0 }">
-										<img alt="" src="/upload/upfollow.png" id="follow"
+										<img alt="" src="resources/upload/upfollow.png" id="follow"
 											onclick="follow1('${pmemdetail.p_id}')"
 											style="cursor: pointer; width: 60px; height: 60px; margin-right: 20px;">
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="/upload/follow1.png" id="follow"
+										<img alt="" src="resources/upload/follow1.png" id="follow"
 											onclick="follow2('${pmemdetail.p_id}')"
 											style="cursor: pointer; width: 60px; height: 60px; margin-right: 20px;">
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
 									<c:when test="${like == 0 }">
-										<img alt="" src="/upload/nocol.png" id="recommend"
+										<img alt="" src="resources/upload/nocol.png" id="recommend"
 											onclick="likeHit1(`${pmemdetail.p_id}`)"
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:when>									
 									<c:otherwise>
-										<img alt="" src="/upload/rec.png" id="recommend"
+										<img alt="" src="resources/upload/rec.png" id="recommend"
 											onclick="likeHit2(`${pmemdetail.p_id}`)"
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:otherwise>
@@ -93,9 +93,9 @@
 								<input type="hidden" id="likeValue"value="${like }">
 							</sec:authorize>
 							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
-									<img alt="" src="/upload/upfollow.png" id="follow" onclick="noMember()"
+									<img alt="" src="resources/upload/upfollow.png" id="follow" onclick="noMember()"
 										style="cursor:pointer; width: 60px; height: 60px;margin-right: 20px;">
-									<img alt="" src="/upload/nocol.png" id="recommend" onclick="noMember()"
+									<img alt="" src="resources/upload/nocol.png" id="recommend" onclick="noMember()"
 										style="cursor:pointer; width: 60px; height: 60px;">
 							</sec:authorize>		
 							<div class="br"></div>
@@ -166,11 +166,11 @@
 							<div class="container" style="margin-top: 20px; border: solid 1px; border-color: #eee;">
 								<div class="row">
 									<div class="col-6" style="padding: 10px;">
-										<img src="/upload/location.png" style="width: 40px; height: 40px;">
+										<img src="resources/upload/location.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">주 소</h3>
 										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
 										${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</div>
-										<img src="/upload/time.png" style="width: 40px; height: 40px;">
+										<img src="resources/upload/time.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">운영시간</h3><br>
 										<c:forEach items="${time }" var="time">
 											<div class="doctor-text text-center" style="display: inline-block; padding-left:45px; color: black;">
@@ -178,17 +178,17 @@
 											</div>			
 											<div class="doctor-text text-center" style="display: inline-block; color: black;">${time.n_content}</div><br>								
 										</c:forEach>
-										<img src="/upload/career.png" style="width: 40px; height: 40px;">
+										<img src="resources/upload/career.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">대표경력</h3>
 										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
 										${pmemdetail.career }</div>
-										<img src="/upload/career2.png" style="width: 40px; height: 40px;">
+										<img src="resources/upload/career2.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">전문분야</h3>
 										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
 										${pmemdetail.speciality }</div>
 									</div>
 									<div class="col-6" style="padding-top: 10px; margin-left:-35px;">
-										<img src="/upload/price.png" style="width: 40px; height: 40px;">
+										<img src="resources/upload/price.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">서비스정보</h3><br>
 										<c:forEach items="${price }" var="price">
 											<div class="doctor-text text-center" style="display: inline-block; height: 22px; padding-left:45px; color: black;">
@@ -283,7 +283,6 @@
 	</section>
 	
 	<script>
-	console.log("펫"+${petList});
 		//추천버튼
 		function likeHit1(p_id){
 			$.ajax({
