@@ -22,6 +22,17 @@
 		background: #fff;
 		border: 1px solid #0062ff;
 	}
+	.partner_img{
+		object-fit: cover;
+		object-position:top;
+		border-radius:50%;
+		width: 120px !important;
+		height: 120px !important;
+		float: none;
+		margin: 0 auto;
+    	position: relative;
+    	top: 50px;
+	}
 </style>
 <body>
 	<section class="department-area section-padding4" style="padding: 130px 0 130px;">
@@ -40,9 +51,10 @@
 					<div class="department-slider owl-carousel">
 						<c:forEach var="pmember" items="${pmember}">
 							<div class="single-slide">
-								<div class="slide-img">
-									<img src="resources/upload/${pmember.picture }" onerror="this.src='resources/upload/pet.PNG'"
-										style="width: 300px; height: 250px;" class="img-fluid">
+								<div class="slide-img" style="height: 200px;">
+									<div id="best_p_profile">
+                            			<img class="partner_img" src="/upload/${pmember.pfile }" onerror="this.src='resources/upload/pet.PNG'" alt=''>
+                           			</div>									
 									<div class="hover-state">
 										<a href="pmemberDetail?id=${pmember.p_id }"><i class="fa fa-user-o"></i></a>
 									</div>

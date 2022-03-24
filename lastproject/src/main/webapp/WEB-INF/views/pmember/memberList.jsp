@@ -11,8 +11,19 @@
 </head>
 <style>
 	#w_address::placeholder {
-		color: #fff;
+		color: #black;
 		
+	}
+	.partner_img{
+		object-fit: cover;
+		object-position:top;
+		border-radius:50%;
+		width: 120px !important;
+		height: 120px !important;
+		float: none;
+		margin: 0 auto;
+		position: relative;
+   		bottom: 30px;
 	}
 
 </style>
@@ -48,16 +59,18 @@
 				<c:forEach items="${pageList }" var="pmember">
 					<div class="col-lg-3 col-sm-6" style="margin-bottom: 30px;">
 						<div class="single-doctor mb-4 mb-lg-0">
-							<div class="doctor-img">
-								<img src="/upload/${pmember.pfile }" onerror="this.src='resources/upload/pet.PNG'" class="img-fluid"
-									style="width: 300px; height: 200px;">
-							</div>
+							<div class="single-department text-center" style="box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+								border: 1px solid #e3e6f0; height: 270px;">
+							 <div id="best_p_profile" style="margin-top: 78px;">
+                            	<img class="partner_img" src="/upload/${pmember.pfile }" onError="this.src='resources/upload/pet.PNG'" alt=''>
+                            </div>
 							<div class="content-area">
 								<div class="doctor-name text-center">								
 									<a href="pmemberDetail?id=${pmember.p_id}">
 										<h3>${pmember.name }</h3>
 									</a>
 								</div>
+							</div>
 							</div>
 						</div>
 					</div>
