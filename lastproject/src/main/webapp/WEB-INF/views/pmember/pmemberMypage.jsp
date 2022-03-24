@@ -42,7 +42,7 @@
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -50,14 +50,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -72,7 +72,7 @@
 	.card-header, i{
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 		color: black;
@@ -80,7 +80,7 @@
 
 	.card_notice {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 	}
@@ -141,8 +141,8 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"style="width: 210px; height: 167px;">
+							<img class="partner_img" src="/upload/${pmember.pfile}"
+								onerror="this.src='resources/upload/pet.jpg'"style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>
@@ -237,6 +237,18 @@
 									<h3 style="font-weight: bolder;">전문분야&nbsp;&nbsp;</h3></div>
 									<input type="text" style="border: none" id="speciality" name="speciality"value="${pmember.speciality}" readonly>
 								</div>
+								
+									<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-award"></i>
+									<h3 style="font-weight: bolder;">진료가능한 동물&nbsp;&nbsp;</h3></div>
+									<h3 style="font-weight: normal">
+									<c:forEach items="${pets }" var="pets" >
+													${pets.c_content }&nbsp;
+									</c:forEach>
+								</h3>
+								
+								
+								
 								<div class="form-group" style="width: 800px;">
 									<div class="row" id="middle">
 										<div class="col-6" style="padding-left: 10px;">
@@ -274,14 +286,14 @@
 									<div class="control-width"><i class="fa-solid fa-images"></i>
 									<h3 style="font-weight: bolder;">활동사진</h3></div><br>
 									<c:forEach items="${pimage}" var="image">
-										<img src="resources/upload/${image.picture}" style="width: 200px; height:200px;"alt="등록된 사진이 없습니다.">
+										<img src="/upload/${image.pfile}" style="width: 200px; height:200px;"alt="등록된 사진이 없습니다.">
 									</c:forEach>
 								</div>
 								<div class="form-group">
 									<div class="control-width"><i class="fa fa-file-image-o"></i>
 									<h3 style="font-weight: bolder;">자격증</h3></div><br>
 									<c:forEach items="${plicense}" var="plicense">
-										<img src="resources/upload/${plicense.picture}"
+										<img src="/upload/${plicense.pfile}"
 											style="width: 200px; height:200px;" alt="등록된 사진이 없습니다.">
 									</c:forEach>
 								</div>

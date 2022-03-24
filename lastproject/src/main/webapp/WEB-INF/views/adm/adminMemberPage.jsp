@@ -9,8 +9,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>관리자: 목록 및 데쉬보드</title>
 
 
 <!-- Chart.js 를 위한 CDN -->
@@ -51,7 +50,7 @@
 .card-footer {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
@@ -63,7 +62,7 @@
 .table th {
 	text-align: center;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 500 !important;
 	color: black;
@@ -130,7 +129,7 @@
 
 #Mainname {
 	font-size: 1.5rem !important;
-	font-family: 'NanumBarunGothic' !important;
+	/* font-family: 'NanumBarunGothic' !important; */
 	font-style: normal !important;
 	font-weight: 700 !important;
 	color: gray;
@@ -138,14 +137,14 @@
 
 #myinfo {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 300;
 }
 
 #menu_bold {
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 700;
 	color: black;
@@ -153,7 +152,7 @@
 
 .card-body {
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 300;
 	color: black;
@@ -168,7 +167,7 @@
 .card-header {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 	color: black;
@@ -225,14 +224,14 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img"
-								src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"
-								style="width: 210px; height: 167px;"> <br> <br>
+								src=""
+								onerror="this.src='resources/upload/cat.jpg'"> 
+							<br> <br>
 							<h4 id="Mainname">관리자님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
 								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="confirmPass">내 정보 수정하기</a>
+									href="confirmPass">차트,목록 페이지</a>
 							</div>
 						</aside>
 					</div>
@@ -241,17 +240,9 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list nanumbarungothic">
-								<p id="menu_bold">내 활동 내역</p>
-								<li><a href="adminPage"
-									class="d-flex justify-content-between no_deco" id="menu_bold">관리자
-										메인</a></li>
-								<li><a href="adminChartPage"
-									class="d-flex justify-content-between no_deco">
-										<p>차트</p>
-								</a></li>
 								<li><a href="adminMemberPage"
-									class="d-flex justify-content-between no_deco">
-										<p>목록</p>
+									class="d-flex justify-content-between">
+										<p>차트.목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
 									class="d-flex justify-content-between no_deco">
@@ -274,7 +265,7 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
-									<br> <br>
+									<br><br>
 									<div class="card"
 										style="border-left: 0.25rem solid #0062ff !important;">
 										<div class="card-body text-center" style="padding: 20px">
@@ -318,6 +309,63 @@
 										</div>
 									</div>
 								</div>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 blog_details">
+							<br> <br>
+							<div class="card">
+								<div class="card-header que admPetChartA">
+									<i class="fa-solid fa-paw"></i>&nbsp;<i class="fa fa-bar-chart"
+										aria-hidden="true"></i>&nbsp;&nbsp; 반려동물 품종 별 차트
+								</div>
+								<div class="card-body anw" style="padding: 15px">
+									<p class="card-description mainCount" id="petCount">
+									<h4 class="card-title">펫 품종별 비율</h4>
+									<p class="card-description mainCount" id="petCount">
+										<code></code>
+										<br>
+										<code></code>
+									</p>
+									<div class="admPetChart">
+										<canvas id="admPetChart" style="height: 250px"></canvas>
+									</div>
+									<div class="card-footer">
+										<ul class="unordered-list ">
+											<li id="a"></li>
+											<li id="ip"></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12 blog_details">
+							<br> <br>
+							<div class="card">
+								<div class="card-header que admPartChartA">
+									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i
+										class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;일반회원
+									기간 별 가입자 수
+								</div>
+								<div class="card-body card_notice anw" style="padding: 15px">
+									<div class="admPartChart">
+										<h4 class="card-title">일반&파트너 회원 기간 별 가입자 수</h4>
+										<canvas id="admPartChart" style="height: 250px"></canvas>
+									</div>
+									<div id="notice_footer">
+										<ul class="unordered-list">
+											<li>Fta Keys</li>
+											<li>For Women Only Your Computer Usage</li>
+											<li>Facts Why Inkjet Printing Is Very Appealing
+											<li>Addiction When Gambling Becomes
+											<li>Protective Preventative Maintenance</li>
+											<li>Dealing With Technical Support 10 Useful Tips</li>
+											<li>Make Myspace Your Best Designed Space</li>
+											<li>Cleaning And Organizing Your Computer</li>
+										</ul>
+									</div>
+								</div>
+
 							</div>
 						</div>
 						<div class="col-lg-12 col-md-12 blog_details">
@@ -394,8 +442,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="single-post row">
 						<div class="col-lg-12 col-md-12 blog_details">
 							<br> <br>
 							<div class="card">
@@ -479,9 +525,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-
 	</section>
 	<!-- 회원 단건 조회 Modal -->
 	<div class="modal fade" id="myModal">
@@ -527,10 +570,10 @@
 						</div>
 					</div>
 
-<!-- style="margin-right: -60px; padding-right:50px" -->
+					<!-- style="margin-right: -60px; padding-right:50px" -->
 					<div class="section-top-border">
 						<h3 class="mb-30 title_color">차트</h3>
-						<div class="row" >
+						<div class="row">
 							<div class="col-md-6 mt-sm-20 left-align-p">
 								<ul class="unordered-list">
 									<li>Fta Keys</li>
@@ -552,21 +595,9 @@
 						<h3 class="mb-30 title_color">Block Quotes</h3>
 						<div class="row">
 							<div class="col-lg-12">
-								<blockquote class="generic-blockquote">“Recently,
-									the US Federal government banned online casinos from operating
-									in America by making it illegal to transfer money to them
-									through any US bank or payment system. As a result of this law,
-									most of the popular online casino networks such as Party Gaming
-									and PlayTech left the United States. Overnight, online casino
-									players found themselves being chased by the Federal
-									government. But, after a fortnight, the online casino industry
-									came up with a solution and new online casinos started taking
-									root. These began to operate under a different business
-									umbrella, and by doing that, rendered the transfer of money to
-									and from them legal. A major part of this was enlisting
-									electronic banking systems that would accept this new
-									clarification and start doing business with me. Listed in this
-									article are the electronic banking”</blockquote>
+								<blockquote class="generic-blockquote">
+									<!-- 회원의 자기 소개란 -->
+								</blockquote>
 							</div>
 						</div>
 					</div>
@@ -578,9 +609,6 @@
 						</div>
 					</div>
 					<!--end chart.js -->
-
-					<div class='mem-body'></div>
-
 				</div>
 
 				<!-- Modal footer -->
@@ -633,6 +661,154 @@
 		</div>
 	</div>
 	<script>
+		//adminChartPage.jsp 합친 거
+		//div admPetChartA 클래스 클릭시 함수
+		$(document).on("click",".admPetChartA" ,function(){
+		    $(".admPetChart").append("<canvas id='admPetChart'></canvas>");
+		     $("#admPetChart").remove();
+		     petChart();
+		 function petChart() {// 품 종별 Bar 차트 그리기
+
+		    tt = [];
+		    oo = [];
+
+		    var total;
+		    ip = [];
+		    $.ajax({
+		        url : 'amdPetChart',
+		        method : 'get',
+		        success : function(res) {
+		            $.each(res, function(i) {
+		                tt.push(res[i].tt);
+		                oo.push(res[i].oo);
+		                console.log(res[i].oo);
+		                ip += ` \${res[i].oo} 마릿 수 : \${res[i].tt}`;
+		                
+		            });
+		            console.log(ip);
+		            $("#ip").html(ip);
+		            console.log(res[0].ch);
+		            $("#a").html("총 마리수 : " + res[0].ch);
+
+
+		            const txc = document.getElementById('admPetChart').getContext('2d');
+		            const admPetChart = new Chart(txc, {
+		                type : 'bar',
+		                data : {
+		                    labels : oo,
+		                    datasets : [ {
+		                        label : '# of Votes',
+		                        data : tt,
+		                        backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                'rgba(255, 159, 64, 0.2)',
+		                                'rgba(255, 159, 64, 0.2)' ],
+		                        borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                'rgba(255, 159, 64, 1)',
+		                                'rgba(255, 159, 64, 1)' ],
+		                        borderWidth : 1
+		                    } ]
+		                },
+		                options : {
+		                    scales : {
+		                        y : {
+		                            beginAtZero : true
+		                        }
+		                    }
+		                }
+		            });
+		        }
+		    })
+
+		} 
+
+		});
+
+
+		//div admPartChartA 클릭시 차트 그려짐
+		$(document).on("click",".admPartChartA" ,function(){
+		   $(".admPartChart").append("<canvas id='admPartChart'></canvas>");
+		   $("#admPartChart").remove();
+
+		   partChart();
+
+		   function partChart() { //일반 회원 기간 별 차트 그리기
+		        
+		       tt = [];
+		       oo = [];
+		       aa = [];
+		       bb = [];
+		       
+		       $.ajax({
+		           url : 'admMemChart',
+		           method : 'get',
+		           success : function(res) {
+		               console.log(res);
+		               console.log(res.memChart[0].tt);
+		               console.log(res.memChart[0].oo); 
+		               console.log(res.pmemChart[0].aa);
+		               console.log(res.pmemChart[0].bb);
+		                var pmem = res.pmemChart;
+		               var mem = res.memChart;
+		                $.each(pmem,function(i){
+		                   aa.push(res.pmemChart[i].aa);
+		                   bb.push(res.pmemChart[i].bb);
+		               });
+		                $.each(mem,function(i){
+		                       tt.push(mem[i].tt);
+		                       oo.push(mem[i].oo);
+		               }); 
+		                
+		                console.log(tt);
+		                console.log(oo); 
+
+		                const ccc = document.getElementById('admPartChart')
+		                       .getContext('2d');
+		               const admPartChart = new Chart(ccc, {
+		                   type : 'line',
+		                   data : {
+		                       labels : tt,aa,
+		                       datasets : [ {
+		                           label : '일반 회원',
+		                           data : oo,
+		                           backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                   'rgba(255, 159, 64, 0.2)', ],
+		                           borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                   'rgba(255, 159, 64, 1)' ],
+		                           borderWidth : 1
+		                       } ,
+		                        {
+		                           label : '파트너 회원',
+		                           data : bb,
+		                           backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                   'rgba(255, 159, 64, 0.2)', ],
+		                           borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                   'rgba(255, 159, 64, 1)' ],
+		                           borderWidth : 1
+		                       } ]
+		                   },
+		                   options : {
+		                       scales : {
+		                           y : {
+		                               beginAtZero : true
+		                           }
+		                       }
+		                   }
+		               }); 
+		           } //success
+
+		       }) // ajax
+
+		   } //
+		   
+		});
+		
+		
+		
+		
+		//adminChartPage.jsp 합친 거 end
+	
+	
+	
 		//Count 호출 ajax
 		adminCount();
 
@@ -1064,7 +1240,7 @@
 							success : function(res) {
 								console.log(res.list);
 								$('.mem-body').append(
-										//<img src='resources/upload/"+ res.list.picture +"'></img>"
+										<img src='resources/upload/"+ res.list.pfile +"'></img>"
 												
 										"<ul><li>" + res.list.startdate
 												+ "</li><li>" + res.list.name
@@ -1103,7 +1279,7 @@
 						success : function (res) {					
 						console.log(res.list);
 						
-						//<img src='resources/upload/"+ res.list.picture +"'></img>
+						<img src='resources/upload/"+ res.list.pfile +"'></img>
 						$('.mem-body').append("<ul><li>" +res.list.startdate 
 												+"</li><li>"
 												+ res.list.name

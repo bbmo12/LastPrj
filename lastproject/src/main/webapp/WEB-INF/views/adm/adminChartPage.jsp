@@ -49,7 +49,7 @@ margin-top:1.9%;
 .card-header {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 	color: black;
@@ -58,7 +58,7 @@ margin-top:1.9%;
 .card-footer {
 	background: white;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
@@ -66,14 +66,14 @@ margin-top:1.9%;
 #notice_footer {
 	text-align: center;
 	font-size: 1.0rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
 
 .card_notice {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
@@ -104,14 +104,14 @@ margin-top:1.9%;
 
 #cardTitle {
 	font-size: 1.25rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 700;
 }
 
 #myinfo {
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 300;
 }
@@ -121,7 +121,7 @@ margin-top:1.9%;
 	text-align: center;
 	margin-right: 15px;
 	font-size: 0.8rem;
-	font-family: 'NanumBarunGothic';
+	/* font-family: 'NanumBarunGothic'; */
 	font-style: normal;
 	font-weight: 400;
 }
@@ -441,7 +441,7 @@ h1{
 		               console.log(res.memChart[0].oo); 
 		               console.log(res.pmemChart[0].aa);
 		               console.log(res.pmemChart[0].bb);
-		               var pmem = res.pmemChart;
+		              /*  var pmem = res.pmemChart;
 		               var mem = res.memChart;
 		                $.each(pmem,function(i){
 		                   aa.push(res.pmemChart[i].aa);
@@ -453,11 +453,11 @@ h1{
 		               }); 
 		                
 		                console.log(tt);
-		                console.log(oo);
+		                console.log(oo); */
 
-		                const ctx = document.getElementById('admPartChart')
+		                const ccc = document.getElementById('admPartChart')
 		                       .getContext('2d');
-		               const admPartChart = new Chart(ctx, {
+		               const admPartChart = new Chart(ccc, {
 		                   type : 'line',
 		                   data : {
 		                       labels : tt,aa,

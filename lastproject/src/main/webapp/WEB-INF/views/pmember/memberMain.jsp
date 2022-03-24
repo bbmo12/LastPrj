@@ -22,8 +22,6 @@
 		background: #fff;
 		border: 1px solid #0062ff;
 	}
-
-
 </style>
 <body>
 	<section class="department-area section-padding4" style="padding: 130px 0 130px;">
@@ -74,29 +72,28 @@
 			</div>
 		</div>
 	</section>
-	<div style="width: 100%; height: 150px">
-		<h1
-			style="font-weight: 700; letter-spacing: 0.2px; text-align: center; padding-top: 30px; font-size: 50px; line-height: 70px; color: #555555">
+	<div class="container">
+	<div style="height: 150px">
+		<h1 style="font-weight: 700; letter-spacing: 0.2px; text-align: center; padding-top: 30px; font-size: 50px; line-height: 70px; color: #555555">
 			믿을 수 있고<br>안심할 수 있어요
 		</h1>
 		<p style="text-align: center; font-size: 17px; color: #393C47; margin-top: 3px">
 			까다로운 선발·관리 체계와 안전 시스템을 구축하였습니다</p>
 	</div>
-	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 110px">
-		<img src="resources/upload/do.png" style="width: 400px; height: 450px; border-radius: 2px">
-		<div style="margin: 5em 0 0 5em;">
+	<div style="display: flex; margin:110px 0 0 70px;">
+		<img src="resources/upload/do.png" style="width:450px; height: 500px;">
+		<div style="margin: 5em 0 0 6em;">
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				훈련사의<br>체계적 교육!
 			</h1>
-			<h3
-				style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
+			<h3 style="font-weight: 400; margin-top: 38px; font-size: 17px; color: #333333; letter-spacing: -0.1px; line-height: normal">
 				비대면 상담 / 방문 훈련 예약 <br>우리 아이 성향 맞춤 솔루션을 받아보세요!
 			</h3>
 			<a href="pmemberList?code=101"class="btn btn-outline-primary btn-rounded btn-fw">훈련사</a>
 		</div>
 	</div>
-	<div style="display: flex; justify-content: space-between; padding: 50px 400px 0px 550px">
-		<div style="padding-top: 72px">
+	<div style="display: flex; justify-content: space-between; margin: 35px 0 0 150px;">
+		<div style="padding-top: 90px">
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				반려동물의<br>건강 관리!
 			</h1>
@@ -105,11 +102,11 @@
 			</h3>
 			<a href="pmemberList?code=100" class="btn btn-outline-primary btn-rounded btn-fw">수의사</a>
 		</div>
-		<img src="resources/upload/dod.png" style="width: 400px; height: 450px; border-radius: 2px;  margin-right: 10em;">
+		<img src="resources/upload/dod.png" style="width: 450px; height: 500px; margin-right: 7em;">
 	</div>
-	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 50px">
-		<img src="resources/upload/dogg.png" style="width: 400px; height: 450px; border-radius: 2px">
-		<div style="margin:5em 0 0 5em;">
+	<div style="display: flex; margin:40px 0 0 70px;">
+		<img src="resources/upload/dogg.png" style="width: 450px; height: 500px; ">
+		<div style="margin:5em 0 0 6em;">
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				믿고 맡기는<br>전문 펫시터!
 			</h1>
@@ -119,8 +116,8 @@
 			<a href="pmemberList?code=102" class="btn btn-outline-primary btn-rounded btn-fw">펫시터</a>
 		</div>
 	</div>
-	<div style="display: flex; justify-content: space-between; padding: 50px 400px 0px 550px">
-		<div style="padding-top: 72px">
+	<div style="display: flex; justify-content: space-between; margin: 35px 0 0 150px;">
+		<div style="padding-top: 90px">
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				우리아이<br>전담 그루머
 			</h1>
@@ -129,10 +126,9 @@
 			</h3>
 			<a href="pmemberList?code=103"class="btn btn-outline-primary btn-rounded btn-fw">미용사</a>
 		</div>
-		<img src="resources/upload/ddog.png" style="width: 400px; height: 450px; border-radius: 2px; margin-right: 10em;">
+		<img src="resources/upload/ddog.png" style="width: 450px; height: 500px; margin-right: 7em;">
 	</div>
-	<div
-		style="display: flex; align-items: center; flex-direction: column; justify-content: center; height: 500px; background: #FFFFFF">
+	<div style="display: flex; align-items: center; flex-direction: column; justify-content: center; height: 500px; background: #FFFFFF">
 		<div style="display: flex; flex-direction: row; align-items: center; padding-right: 30px; ">
 			<div style="margin-bottom: 20px">
 				<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px; padding-left: 20px; ">
@@ -147,6 +143,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 

@@ -215,7 +215,7 @@ h1{
                             <div class="single-department item-padding text-center" style="box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 	border: 1px solid #e3e6f0;">
                             <div id="best_p_profile">
-                            	<img class="partner_img" src="resources/upload/${best.picture }" onError="this.src='resources/upload/cat.jpg'" alt=''>
+                            	<img class="partner_img" src="/upload/${best.pfile }" onError="this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
                             <br>
                                 <p id="best_name">${best.name }</p>
@@ -307,7 +307,7 @@ h1{
                             <div class="doctor-text text-center" style="height:250px; box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 	border: 1px solid #e3e6f0;">
                             <div id="profile">
-                            	<img class="profile_img" src="resources/upload/${review.picture }" onerror= "this.src='resources/upload/cat.jpg'" alt=''>
+                            	<img class="profile_img" src="/upload/${review.pfile }" onerror= "this.src='resources/upload/cat.jpg'" alt=''>
                             </div>
                             <div id="review">
 	                            ${review.m_id }

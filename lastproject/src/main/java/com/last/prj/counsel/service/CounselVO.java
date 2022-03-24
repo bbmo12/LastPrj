@@ -16,8 +16,8 @@ public class CounselVO {
 	
 	private int c_no;		//상담순번
 	private String content;	//상담내용
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //들어갈때
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss",  timezone = "Asia/Seoul") //나갈때
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
 	private Date w_date;		//작성일자
 	private String p_id;		//파트너회원아이디
 	private String m_id;
