@@ -59,7 +59,7 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${pmemdetail.picture }"
+							<img class="author_img rounded-circle" src="/upload/${pmemdetail.pfile }"
 								style="width: 210px; height: 167px;" onerror="this.src='resources/upload/pet.PNG'">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
@@ -101,14 +101,31 @@
 							<div class="br"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-							<a href="EnterCs?p_id=${pmemdetail.p_id}">
-								<button class="btn btn-primary">상담하기</button></a>
+							<sec:authorize access="hasRole('MEMBER')">
+							<c:choose>
+								<c:when test="${fn:length(petList) == 0}">
+									<button class="btn btn-primary" onclick="noPet()">상담하기</button>
+								</c:when>
+								<c:otherwise>								
+									<a href="EnterCs?p_id=${pmemdetail.p_id}">
+									<button class="btn btn-primary">상담하기</button></a>
+								</c:otherwise>
+							</c:choose>
+							</sec:authorize>
+							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
+								<button class="btn btn-primary" onclick="noMember()">상담하기</button>
+							</sec:authorize>
+							<sec:authorize access="hasRole('MEMBER')">	
 							<c:if test="${pmemdetail.p_role ne 4}">
 								<form action="reservMember" name="reservForm" method="POST">
 									<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
 									<button type="submit" class="btn btn-primary">예약하기</button>
 								</form>
 							</c:if>
+							</sec:authorize>
+							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
+									<button type="submit" class="btn btn-primary" onclick="noMember()">예약하기</button>
+							</sec:authorize>
 						<%-- 	<c:if test="${counsel.m_id qe  }">
 								<button class="btn btn-primary">신고하기</button></a>
 							</c:if> --%>
@@ -131,7 +148,7 @@
 									<c:forEach items="${pimage}" var="image">
 										<div class="col-xl-4 col-lg-3">
 											<div class="categories_post">
-												<img src="resources/upload/${image.picture}"
+												<img src="/upload/${image.pfile}"
 													style="width: 290px; height: 200px;" alt="등록된 사진이 없습니다.">
 											</div>
 										</div>
@@ -139,7 +156,7 @@
 									<c:forEach items="${plicense}" var="plicense">
 										<div class="col-xl-4 col-lg-3">
 											<div class="categories_post">
-												<img src="resources/upload/${plicense.picture}"
+												<img src="/upload/${plicense.pfile}"
 													style="width: 290px; height: 200px;" alt="등록된 사진이 없습니다.">
 											</div>
 										</div>
@@ -195,7 +212,7 @@
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
 											<img class="author_img rounded-circle"
-												src="resources/upload/${counsel.picture }" alt="등록된 사진이 없습니다."
+												src="/upload/${counsel.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'" style="width: 100px;">
 										</div>
 										<div class="desc">
@@ -212,7 +229,7 @@
 								<div class="row" id="servicePhoto">
 									<c:forEach items="${counsel.fileList }" var="photo">
 										<div style="margin-top: 20px;">
-											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
+											<img src="/upload/${photo.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'"
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
@@ -226,7 +243,7 @@
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
 											<img class="author_img rounded-circle"
-												src="resources/upload/${service.picture }" alt="등록된 사진이 없습니다."
+												src="/upload/${service.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'" style="width: 100px;">
 										</div>
 										<div class="desc">
@@ -243,7 +260,7 @@
 								<div class="row" id="servicePhoto">
 									<c:forEach items="${service.fileList }" var="photo">
 										<div style="margin-top: 20px;">
-											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
+											<img src="/upload/${photo.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'"
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
@@ -266,7 +283,6 @@
 	</section>
 	
 	<script>
-
 		//추천버튼
 		function likeHit1(p_id){
 			$.ajax({
@@ -278,7 +294,7 @@
 				success: function (likeCheck) {	
 					Swal.fire('추천되었습니다:)');
 					var imgTag = document.getElementById("recommend");
-			 		imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("src", "/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
 			 		imgTag.setAttribute("onclick", "likeHit2(`${pmemdetail.p_id}`)");			 	
 				},
 				error: function(error){
@@ -307,7 +323,7 @@
 						success: function (likeCheck) {
 							Swal.fire('추천이 취소되었습니다.');
 							var changeImg = document.getElementById("recommend");
-							changeImg.setAttribute("src", "resources/upload/nocol" + ".png");
+							changeImg.setAttribute("src", "/upload/nocol" + ".png");
 							changeImg.setAttribute("onclick", "likeHit1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
@@ -330,7 +346,7 @@
 				success: function (followCheck) {
 					Swal.fire('팔로우');
 					var imgTag = document.getElementById("follow");
-			 		imgTag.setAttribute("src", "resources/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("src", "/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
 			 		imgTag.setAttribute("onclick", "follow2(`${pmemdetail.p_id}`)");	
 				}
 			});
@@ -356,7 +372,7 @@
 						success: function (followCheck) {
 							Swal.fire('팔로우가 취소되었습니다.');
 							var changeImg = document.getElementById("follow");
-							changeImg.setAttribute("src", "resources/upload/upfollow" + ".png");
+							changeImg.setAttribute("src", "/upload/upfollow" + ".png");
 							changeImg.setAttribute("onclick", "follow1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
@@ -369,6 +385,9 @@
 		
 		function noMember() {
 			Swal.fire('일반회원이 아닙니다.');
+		}
+		function noPet() {
+			Swal.fire('반려동물 정보를<br> 등록해주세요.');
 		}
 		//별점
 		$(function () {

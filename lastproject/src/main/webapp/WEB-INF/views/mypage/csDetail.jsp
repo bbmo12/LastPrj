@@ -111,14 +111,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -126,7 +126,7 @@
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -153,7 +153,7 @@
 					<c:if test="${mId ne null }">
 						<div class="blog_right_sidebar">
 							<aside class="single_sidebar_widget author_widget">
-								<img class="partner_img" src="resources/upload/${mInfo.picture}"
+								<img class="partner_img" src="resources/upload/${mInfo.pfile}"
 									onerror="this.src='resources/upload/cat.jpg'" style="width: 210px; height: 167px;">
 								<br><br>
 								<h4 id="Mainname">${mInfo.name }님</h4>
@@ -205,7 +205,7 @@
 					<c:if test="${pId ne null }">
 						<div class="blog_right_sidebar">
 							<aside class="single_sidebar_widget author_widget">
-								<img class="partner_img" src="resources/upload/${pInfo.picture}"
+								<img class="partner_img" src="resources/upload/${pInfo.pfile}"
 									onerror="this.src='resources/upload/pet.PNG'" style="width: 210px; height: 167px;">
 								<br><br>
 								<h4 id="Mainname">${pInfo.name }님</h4>
@@ -263,7 +263,7 @@
 									<h2 style="padding-left: 35px;">
 										<span>
 											<img id="csimg"style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
-												class="profile" src="resources/upload/${pInfo.picture }"
+												class="profile" src="resources/upload/${pInfo.pfile }"
 												onError="this.src='resources/qna/대체이미지2.png'"></span>
 										<span>${pInfo.name}</span>&nbsp;<span>
 											<c:if test="${pInfo.code == 100}">
@@ -285,7 +285,7 @@
 									<h2 style="text-align: center; margin-right: 7em;">
 										<span><img id="csimg"
 												style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
-												class="profile" src="resources/upload/${mInfo.picture }"
+												class="profile" src="resources/upload/${mInfo.pfile }"
 												onError="this.src='resources/qna/대체이미지2.png'"></span> <span>
 											<c:out value="${mInfo.name }" />님과의 1:1 상담입니다.</span>
 									</h2>
@@ -298,7 +298,7 @@
 										<tr>
 											<td rowspan="3">
 												<img style="width: 80px; height: 80px; object-fit: cover; border-radius: 70%; overflow: hidden; border: 2px solid rgb(46, 46, 46); margin-right: 5px;"
-													class="profile" src="resources/upload/${petInfo.picture }"
+													class="profile" src="resources/upload/${petInfo.pfile }"
 													onError="this.src='resources/qna/대체이미지2.png'"></td>
 											<td style="font-weight: bold;">
 												<c:if test="${petInfo.code ==501 }">

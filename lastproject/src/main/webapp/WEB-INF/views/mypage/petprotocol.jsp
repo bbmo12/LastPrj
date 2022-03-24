@@ -50,7 +50,7 @@
 	.table th {
 		text-align: center;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 500 !important;
 		color: black;

@@ -208,7 +208,7 @@ public class AdminController {
 		// 일반 회원 수
 		int memCount = memDao.memCount();
 
-		HashMap<String, Object> map = new HashMap();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		map.put("petCount", petDAO.petCount());
 		map.put("pmemCount", pMemberDao.pmemCount());
@@ -328,8 +328,22 @@ public class AdminController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 
 		map.put("list", pMemberDao.getPmemberinfo(p_id));
+		
+		
 		return map;
 	}
+	
+	// 	일반 회원 단건 조회 Modal
+		@RequestMapping("/admMemberOne")
+		@ResponseBody
+		public HashMap<String, Object> admMemberOne(@RequestParam("m_id") String m_id) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("list", memDao.memberOne(m_id));			
+			
+			return map;
+		}
+	
 
 	// =========end 파트너 회원 조회==============
 

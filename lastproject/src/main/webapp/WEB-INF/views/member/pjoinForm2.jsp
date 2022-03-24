@@ -24,7 +24,7 @@
 		// 비밀번호 정규식
 		var pwJ = /^[A-Za-z0-9]{4,12}$/;
 		// 이름 정규식
-		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,4}$/);
+		var nameJ = /* /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/; */ RegExp(/^[가-힣]{2,14}$/);
 		// 이메일 검사 정규식
 		var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 휴대폰 번호 정규식
@@ -205,7 +205,7 @@
 				if (nameJ.test($(this).val())) {
 					$("#w_name_check").text('');
 				} else {
-					$('#w_name_check').text('한글 2~4자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
+					$('#w_name_check').text('특수기호, 공백 사용 불가');
 					$('#w_name_check').css('color', 'red');
 				}
 			});
@@ -286,7 +286,7 @@
 								<div id="p_info_check"></div>
 							</div>
 							<div class="form-group">
-								<label>대표경력</label>
+								<label>경력</label>
 								<textarea class="form-control" id="career" name="career"
 									placeholder="대표경력" rows="4" cols="130"></textarea>
 								<div id="career_check"></div>

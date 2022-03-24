@@ -85,14 +85,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -100,7 +100,7 @@
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -126,7 +126,7 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${mInfo.picture}"
+							<img class="partner_img" src="resources/upload/${mInfo.pfile}"
 								onerror="this.src='resources/upload/cat.jpg'" style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${mInfo.name }님</h4>
@@ -209,16 +209,10 @@
 								<h4 style="color: gray;">*상담받고자 하는 반려동물을 선택해주세요.</h4>
 								<div class="petSelect">
 									<ul>
-										<li>
-											<div class="radioImg">
-												<img class="petSelection" src="resources/qna/가위표.png">
-											</div> <input type="radio" id="pet_no" name="pet_no" value="" checked="checked">&nbsp;
-											<label>없음/비공개</label>
-										</li>
 										<c:forEach items="${petList }" var="pet">
 											<li>
 												<div class="radioImg">
-													<img class="petSelection" src="resources/qna/${pet.picture }"
+													<img class="petSelection" src="resources/qna/${pet.pfile }"
 														onError="this.src='resources/qna/대체이미지2.png'">
 												</div>
 												<input type="radio" id="pet_no" name="pet_no"value="${pet.pet_no}">&nbsp;${pet.name }

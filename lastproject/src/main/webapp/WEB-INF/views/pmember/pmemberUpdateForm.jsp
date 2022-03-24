@@ -10,196 +10,230 @@
 <title>Insert title here</title>
 </head>
 <style>
-	#my_section {
-		margin-top: -70px;
-    	padding-bottom: 25px;
-	}
+#my_section {
+	margin-top: -70px;
+	padding-bottom: 25px;
+}
 
-	#main-form h3,
-	input {
-		display: inline-block;
-	}
+#main-form h3, input {
+	display: inline-block;
+}
 
-	#addDiv,
-	#addService {
-		margin: -5px 0 0 35em;
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-    	width: 115px;
-	}
-	#addDiv:hover,
-	#addService:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#price-insert,
-	#time-insert{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
+#addDiv, #addService {
+	margin: -5px 0 0 35em;
+	color: #fff;
+	background: #0062ff;
+	border: 1px solid transparent;
+	width: 115px;
+}
+
+#addDiv:hover, #addService:hover {
+	color: #0062ff;
+	border: 1px solid #0062ff;
+	background: #fff;
+}
+
+#price-insert, #time-insert {
+	color: #fff;
+	background: #0062ff;
+	border: 1px solid transparent;
+}
+
+#price-insert:hover, #time-insert:hover {
+	color: #0062ff;
+	border: 1px solid #0062ff;
+	background: #fff;
+}
+
+#select-one {
+	margin-top: -20px;
+}
+
+.form-control {
+	padding: 5px;
+	width: 250px;
+	display: inline-block;
+	border-radius: 20px;
+}
+
+.service-info {
+	display: inline-grid;
+}
+
+.service-info input {
+	width: 100px;
+}
+
+#p-info {
+	margin-left: 5em;
+	margin-top: -20px;
+}
+
+.delete-button {
+	float: right;
+	margin: 27px 200px 0 0;
+	width: 62px;
+}
+
+#p_info {
+	border: 1px solid rgba(151, 151, 151, 0.3);
+	width: 700px;
+}
+
+#cancel {
+	width: 113px;
+	height: 42px;
+	padding: 0 30px;
+	font-size: .8em;
+	text-align: center;
+	font-weight: 500;
+}
+
+#member_post {
+	width: 100px;
+	margin-left: 53em;
+	margin-top: -70px;
+	color: #fff;
+	background: #0062ff;
+	border: 1px solid transparent;
+}
+
+#member_post:hover {
+	color: #0062ff;
+	border: 1px solid #0062ff;
+	background: #fff;
+}
+
+#successUpdate {
+	color: #fff;
+	background: #0062ff;
+	border: 1px solid transparent;
+}
+
+#successUpdate:hover {
+	color: #0062ff;
+	border: 1px solid #0062ff;
+	background: #fff;
+}
+
+input:focus, textarea:focus {
+	border: 3px solid;
+}
+
+#content {
+	height: 45px;
+	padding: 12px;
+	width: 285px;
+}
+
+.no_deco {
+	text-decoration: none !important;
+	font-size: 0.8rem !important;
+	color: black;
+}
+
+.blog_right_sidebar {
+	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+	border: 1px solid #e3e6f0;
+	border-radius: 0.35rem;
+	float: none !important;
+	margin: 0 auto !important;
+	background-color: white;
+	width: 250px;
+}
+
+.partner_img {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+	width: 180px !important;
+	height: 180px !important;
+	float: none;
+	margin: 0 auto;
+}
+
+#Mainname {
+	font-size: 1.5rem !important;
+	/* font-family: 'NanumBarunGothic' !important; */
+	font-style: normal !important;
+	font-weight: 700 !important;
+	color: gray;
+}
+
+#myinfo {
+	font-size: 0.8rem;
+	/* font-family: 'NanumBarunGothic'; */
+	font-style: normal;
+	font-weight: 300;
+}
+
+#menu_bold {
+	font-size: 1.0rem;
+	/* font-family: 'NanumBarunGothic'; */
+	font-style: normal;
+	font-weight: 700;
+	color: black;
+}
+
+.card {
+	box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
+	border: 1px solid #e3e6f0;
+	border-radius: 0.35rem;
+	padding: 20px;
+	margin-top : 30px;
+}
+
+.card-header {
+	background: white;
+	font-size: 1.0rem;
+	font-family: 'NanumBarunGothic';
+	font-style: normal;
+	font-weight: 400;
+	color: black;
+	width: 797px;
+	margin: -17px 0 20px -20px;
+	padding-left: 15px;
+}
+
+i {
+	color: black;
+}
+
+.control-width {
+	width: 160px;
+	display: inline-block;
+}
+
+.que:first-child {
 	
-	#price-insert:hover,
-	#time-insert:hover{
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
+}
 
-	#select-one {
-		margin-top: -20px;
-	}
+.que {
+	position: relative;
+	cursor: pointer;
+}
 
-	.form-control {
-		padding: 5px;
-		width: 250px;
-		display: inline-block;
-		border-radius: 20px;
-	}
+.que::before {
+	display: inline-block;
+}
 
-	.service-info {
-		display: inline-grid;
-	}
+.que.on>span {
+	font-weight: bold;
+  	color: #006633; 
+  	font-size: 14px;
+  	margin-right: 5px;
+  	display: inline-block;
+}
 
-	.service-info input {
-		width: 100px;
-	}
+.anw {
+	display: none;
+	overflow: hidden;
+}
 
-	#p-info {
-		margin-left: 5em;
-		margin-top: -20px;
-	}
+.anw::before {
+	display: inline-block;
+}
 
-	.delete-button {
-		float: right;
-		margin: 27px 200px 0 0;
-		width: 62px;
-	}
-
-	#p_info {
-		border: 1px solid rgba(151, 151, 151, 0.3);
-		width: 700px;
-	}
-	#cancel{
-		width: 113px;
-    	height: 42px;
-    	padding: 0 30px;
-    	font-size: .8em;
-    	text-align: center;
-    	font-weight: 500;
-	}
-	#member_post{
-		width: 100px;
-    	margin-left: 53em;
-    	margin-top: -70px;  	
-    	color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#member_post:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	#successUpdate{
-		color: #fff; 
-    	background: #0062ff;
-    	border: 1px solid transparent;	
-	}
-	#successUpdate:hover {
-		color: #0062ff;
-		border: 1px solid #0062ff;
-		background: #fff;
-	}
-	
-	input:focus,
-	textarea:focus{ 
-		border: 3px solid;
-	}
-	
-	#content{
-		height: 45px;
-    	padding: 12px;
-   		width: 285px;
-	}
-	
-	.no_deco {
-		text-decoration: none !important;
-		font-size: 0.8rem !important;
-		color: black;
-	}
-
-	.blog_right_sidebar {
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
-		border: 1px solid #e3e6f0;
-		border-radius: 0.35rem;
-		float: none !important;
-		margin: 0 auto !important;
-		background-color: white;
-		width: 250px;
-	}
-
-	.partner_img {
-		object-fit: cover;
-		object-position: top;
-		border-radius: 50%;
-		width: 180px !important;
-		height: 180px !important;
-		float: none;
-		margin: 0 auto;
-	}
-
-	#Mainname {
-		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
-		font-style: normal !important;
-		font-weight: 700 !important;
-		color: gray;
-	}
-
-	#myinfo {
-		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 300;
-	}
-
-	#menu_bold {
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 700;
-		color: black;
-	}
-	.card {
-		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
-		border: 1px solid #e3e6f0;
-		border-radius: 0.35rem;
-		padding: 20px;
-	}
-	.card-header{
-		background: white;
-		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
-		font-style: normal;
-		font-weight: 400;
-		color: black;
-		width: 797px;
-		margin: -17px 0 20px -20px;
-		padding-left: 15px;
-	}
-	i{
-		color: black;
-	}
-	
-	.control-width{
-	    width: 160px;
-    	display: inline-block;
-	}
-	
-	
 </style>
 <script>
 		
@@ -226,6 +260,19 @@
 		var w_nameJ = /^.{1,30}$/;
 		
 		$(document).ready(function () {
+			
+			for(i=0 ; i <= ${pets}.length; i++) {
+				console.log(${pets}.length)
+				console.log(${pets})
+				$('input[type="checkbox"][name="code"]').each(function(){
+			if($(this).val() == ${pets}[i]){
+				$(this).prop('checked', true);
+			}
+		})
+			}
+			
+			
+			
 			/* 아이디 중복체크 */
 			$('form').on('submit', function () {
 				var inval_Arr = new Array(11).fill(false);
@@ -446,6 +493,16 @@
 			});
 			
 		});
+		
+		// 아코디언 함수 : 1개씩 펼치기
+
+		$(document).on("click", ".que", function() {
+			$(this).next(".anw").stop().slideToggle(300);
+			$(this).toggleClass('on').siblings().removeClass('on');
+			$(this).next(".anw").siblings(".anw").slideUp(300);
+		});
+
+		//end 아코디언 함수
 	</script>
 
 
@@ -455,7 +512,7 @@
 		<div class="container">
 			<div class="col-lg-6 offset-lg-3">
 				<div class="section-top text-center">
-					<br><br><br>
+					<br> <br> <br>
 					<h2></h2>
 				</div>
 			</div>
@@ -469,260 +526,432 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"style="width: 210px; height: 167px;">
-							<br><br>
+							<img class="partner_img"
+								src="/upload/${pmember.pfile}"
+								onerror="this.src='resources/upload/pet.PNG'"
+								style="width: 210px; height: 167px;"> <br> <br>
 							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco" href="confirmPass">내 정보 수정하기</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
+									href="confirmPass">내 정보 수정하기</a>
 							</div>
 						</aside>
-					</div><br>
+					</div>
+					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list nanumbarungothic">
 								<p id="menu_bold">내 활동 내역</p>
-								<li><a href="reservationSetting" class="d-flex justify-content-between">
+								<li><a href="reservationSetting"
+									class="d-flex justify-content-between">
 										<p>예약일정 설정</p>
-									</a></li>
-								<li><a href="preservationSelect" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="preservationSelect"
+									class="d-flex justify-content-between">
 										<p>예약 내역</p>
-									</a></li>
-								<li><a href="pMemDiaList" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="pMemDiaList"
+									class="d-flex justify-content-between">
 										<p>진료 내역</p>
-									</a></li>
-								<li><a href="pMembenefit" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="pMembenefit"
+									class="d-flex justify-content-between">
 										<p>결제 내역</p>
-									</a></li>
-								<li><a href="pmemcounsel" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="pmemcounsel"
+									class="d-flex justify-content-between">
 										<p>상담 내역</p>
-									</a></li>
-								<li><a href="pmemreport" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="pmemreport"
+									class="d-flex justify-content-between">
 										<p>신고 내역</p>
-									</a></li>
-								<br><br>
+								</a></li>
+								<br>
+								<br>
 								<p id="menu_bold">회원 정보 관리</p>
-								<li><a href="confirmPass" class="d-flex justify-content-between no_deco">
+								<li><a href="confirmPass"
+									class="d-flex justify-content-between no_deco">
 										<p>회원 정보 수정</p>
-									</a></li>
+								</a></li>
 								<li><a href="logout" class="d-flex justify-content-between">
 										<p>로그아웃</p>
-									</a></li>
-								<li><a href="pmdeleteForm" class="d-flex justify-content-between">
+								</a></li>
+								<li><a href="pmdeleteForm"
+									class="d-flex justify-content-between">
 										<p>회원탈퇴</p>
-									</a></li>
+								</a></li>
 							</ul>
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list">
-						<form action="pmemberUpdate" enctype="multipart/form-data" id="f" name="updatePage" method="post" onsubmit="return checkForm()">
-							<div id="main-form"  style="width: 800px;">
+				<div class="col-lg-9 posts-list" style="margin-top: 45px;">
+					<form action="pmemberUpdate" enctype="multipart/form-data" id="f"
+						name="updatePage" method="post" onsubmit="return checkForm()">
+						<div id="main-form" style="width: 800px;">
 							<div class="card">
-							<div class="card-header">
-								<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;내정보수정
-							</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fas fa-user"></i>
-									<h3 style="font-weight: bolder;">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</h3></div>
-									<input type="text" id="name" name="name" class="form-control"value="${pmember.name}" style="width:350px;">
-									<div id="name_check"></div>
+								<div class="card-header">
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;정보수정
 								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fas fa-id-card"></i>
-									<h3 style="font-weight: bolder;">아이디</h3></div>
-									<input type="email" style="border: none" id="p_id" name="p_id"
-										class="form-control" value="${pmember.p_id}" readonly>
-								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fa fa-unlock-alt"></i>
-									<h3 style="font-weight: bolder;">비밀번호</h3></div>
-									<input type="password" id="password" name="password" class="form-control" value=""
-										style="width: 350px;" placeholder="4~12자의 숫자 , 문자로만 사용 가능합니다.">
+								<div class="card-body que " style="padding: 15px">
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fas fa-user"></i>
+											<h3 style="font-weight: bolder;">이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</h3>
+										</div>
+										<input type="text" id="name" name="name" class="form-control"
+											value="${pmember.name}" style="width: 350px;">
+										<div id="name_check"></div>
+									</div>
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fas fa-id-card"></i>
+											<h3 style="font-weight: bolder;">아이디</h3>
+										</div>
+										<input type="email" style="border: none" id="p_id" name="p_id"
+											class="form-control" value="${pmember.p_id}" readonly>
+									</div>
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa fa-unlock-alt"></i>
+											<h3 style="font-weight: bolder;">비밀번호</h3>
+										</div>
+										<input type="password" id="password" name="password"
+											class="form-control" value="" style="width: 350px;"
+											placeholder="4~12자의 숫자 , 문자로만 사용 가능합니다.">
 										<div id="pw_check"></div>
-								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fa fa-unlock-alt"></i>
-									<h3 style="font-weight: bolder;">비밀번호 재확인</h3></div>
-									<input type="password" id="password1" name="password1"class="form-control" value=""
-										style="width: 350px;">
+									</div>
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa fa-unlock-alt"></i>
+											<h3 style="font-weight: bolder;">비밀번호 재확인</h3>
+										</div>
+										<input type="password" id="password1" name="password1"
+											class="form-control" value="" style="width: 350px;">
 										<div id="pw1_check"></div>
+									</div>
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa-solid fa-mobile-screen"></i>
+											<h3 style="font-weight: bolder;">전화번호</h3>
+										</div>
+										<input type="tel" id="tel" name="tel" class="form-control"
+											value="${pmember.tel}" style="width: 350px;"
+											placeholder="숫자만 입력하세요." maxlength="13">
+										<div id="tel_check"></div>
+									</div>
+									<div class="form-group">
+										<i class="fa-solid fa-street-view"></i>
+										<h3 style="font-weight: bolder;">자기소개</h3>
+										<textarea id="p_info" name="p_info" cols="100" rows="3">${pmember.p_info}</textarea>
+										<div id="p_info_check"></div>
+									</div>
 								</div>
-								<div class="form-group">	
-									<div class="control-width"><i class="fa-solid fa-mobile-screen"></i>
-									<h3 style="font-weight: bolder;">전화번호</h3></div>
-									<input type="tel" id="tel" name="tel" class="form-control" value="${pmember.tel}" 
-									style="width:350px;" placeholder="숫자만 입력하세요." maxlength="13">
-									<div id="tel_check"></div>
+							</div>
+							
+							
+							
+							
+							<div class="card">
+								<div class="card-header que">
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;진료가능동물 수정
 								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fa-solid fa-building"></i>
-									<h3 style="font-weight: bolder;">사업장 이름</h3></div>
-									<input type="text" id="w_name" name="w_name"class="form-control" style="width:350px;" value="${pmember.w_name}">
-									<div id="w_name_check"></div>		
+								<div class="card-body anw" style="padding: 15px">
+									<label for="code0">개
+								<input type="checkbox" id="code0" name="code" value="501"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code1">고양이
+								<input type="checkbox" id="code1" name="code" value="502"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code2">조류
+								<input type="checkbox" id="code2" name="code" value="503"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code3">파충류
+								<input type="checkbox" id="code3" name="code" value="504"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code4">어류
+								<input type="checkbox" id="code4" name="code" value="505"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code5">토끼
+								<input type="checkbox" id="code5" name="code" value="506"><span class="checkmark"></span>
+							</label>&emsp;<br>
+							<label for="code6">돼지
+								<input type="checkbox" id="code6" name="code" value="507"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code7">햄스터
+								<input type="checkbox" id="code7" name="code" value="508"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code8">미어켓
+								<input type="checkbox" id="code8" name="code" value="509"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code9">여우
+								<input type="checkbox" id="code9" name="code" value="510"><span class="checkmark"></span>
+								</label>&emsp;
+							<label for="code10">거미
+								<input type="checkbox" id="code10" name="code" value="511"><span class="checkmark"></span>
+								</label>&emsp;
 								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fa-solid fa-map-location-dot"></i>
-									<h3 style="font-weight: bolder;">사업장 주소</h3></div>
-									<input type="text" id="w_address" name="w_address"class="form-control" value="${pmember.w_address}"> 
-									<input type="text" id="w_d_address" name="w_d_address" class="form-control"
-										style="width:210px;" value="${pmember.w_d_address }">	
-										<div id="w_d_address_check"></div>							
-									<button class="btn btn-primary mr-2" type="button" onclick="findAddr()" id="member_post" name="member_post">주소찾기</button>								
-								</div>				
-								<div class="form-group" style="margin-top:-15px;">
-									<i class="fa-solid fa-square-phone"></i>
-									<h3 style="font-weight: bolder;">사업장 전화번호&nbsp;&nbsp;&nbsp;</h3>
-									<input type="tel" id="w_tel" name="w_tel" class="form-control" value="${pmember.w_tel}" maxlength="13"
-										style="width:350px;"placeholder="숫자만 입력하세요.">
+							</div>
+							
+							
+							
+							
+							
+							
+							<div class="card">
+								<div class="card-header que">
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;사업장 정보 수정
+								</div>
+								<div class="card-body anw" style="padding: 15px">
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa-solid fa-building"></i>
+											<h3 style="font-weight: bolder;">사업장 이름</h3>
+										</div>
+										<input type="text" id="w_name" name="w_name"
+											class="form-control" style="width: 350px;"
+											value="${pmember.w_name}">
+										<div id="w_name_check"></div>
+									</div>
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa-solid fa-map-location-dot"></i>
+											<h3 style="font-weight: bolder;">사업장 주소</h3>
+										</div>
+										<input type="text" id="w_address" name="w_address"
+											class="form-control" value="${pmember.w_address}"> <input
+											type="text" id="w_d_address" name="w_d_address"
+											class="form-control" style="width: 210px;"
+											value="${pmember.w_d_address }">
+										<div id="w_d_address_check"></div>
+										<button class="btn btn-primary mr-2" type="button"
+											onclick="findAddr()" id="member_post" name="member_post">주소찾기</button>
+									</div>
+									<div class="form-group" style="margin-top: -15px;">
+										<i class="fa-solid fa-square-phone"></i>
+										<h3 style="font-weight: bolder;">사업장
+											전화번호&nbsp;&nbsp;&nbsp;</h3>
+										<input type="tel" id="w_tel" name="w_tel" class="form-control"
+											value="${pmember.w_tel}" maxlength="13" style="width: 350px;"
+											placeholder="숫자만 입력하세요.">
 										<div id="w_tel_check"></div>
-								</div>
-								<div class="form-group">
-									<i class="fa-solid fa-street-view"></i>
-									<h3 style="font-weight: bolder;">자기소개</h3>
-									<textarea id="p_info" name="p_info" cols="100" rows="3">${pmember.p_info}</textarea>
-									<div id="p_info_check"></div>
-								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fa-solid fa-star"></i>
-									<h3 style="font-weight: bolder;">경력</h3></div>
-									<input type="text" id="career" name="career" class="form-control" style="width: 350px;" value="${pmember.career}">
-									<div id="career_check"></div>
-								</div>
-								<div class="form-group">
-									<div class="control-width"><i class="fa-solid fa-award"></i>
-									<h3 style="font-weight: bolder;">전문분야</h3></div>
-									<input type="text" id="speciality" name="speciality"class="form-control" style="width: 350px;" value="${pmember.speciality}">
-									<div id="speciality_check"></div>
-								</div>
-								<div class="form-group">
-									<i class="fa-solid fa-calendar-days"></i>
-									<h3 style="font-weight: bolder;">운영시간</h3>
-								</div>
-								<div id="select-one">
-									<div class="form-group" id="form-time">
-										<c:forEach items="${time }" var="timeList" varStatus="status">
-											<div>
-												<input type="hidden" name="timeVOList[${status.index}].o_no"value="${timeList.o_no}" id=${ status.index}> 
-												<select id="selectday" name="timeVOList[${status.index}].w_day">
-													<option value='월'<c:if test="${timeList.w_day == '월' }">selected</c:if>>월</option>
-													<option value='화'<c:if test="${timeList.w_day == '화' }">selected</c:if>>화</option>
-													<option value='수'<c:if test="${timeList.w_day == '수' }">selected</c:if>>수</option>
-													<option value='목'<c:if test="${timeList.w_day == '목' }">selected</c:if>>목</option>
-													<option value='금'<c:if test="${timeList.w_day == '금' }">selected</c:if>>금</option>
-													<option value='토'<c:if test="${timeList.w_day == '토' }">selected</c:if>>토</option>
-													<option value='일'<c:if test="${timeList.w_day == '일' }">selected</c:if>>일</option>
-												</select> 
-												<select id="selectStart"name="timeVOList[${status.index}].starttime">
-													<option value='9:00'<c:if test="${timeList.starttime == '9:00' }">selected</c:if>>9:00</option>
-													<option value='9:30'<c:if test="${timeList.starttime == '9:30' }">selected</c:if>>9:30</option>
-													<option value='10:00'<c:if test="${timeList.starttime == '10:00' }">selected</c:if>>10:00</option>
-													<option value='10:30'<c:if test="${timeList.starttime == '10:30' }">selected</c:if>>10:30</option>
-													<option value='11:00'<c:if test="${timeList.starttime == '11:00' }">selected</c:if>>11:00</option>
-													<option value='11:30'<c:if test="${timeList.starttime == '11:30' }">selected</c:if>>11:30</option>
-													<option value='12:00'<c:if test="${timeList.starttime == '12:00' }">selected</c:if>>12:00</option>
-													<option value='12:30'<c:if test="${timeList.starttime == '12:30' }">selected</c:if>>12:30</option>
-												</select> 
-												<select id="selectEnd"name="timeVOList[${status.index}].endtime">
-													<option value='13:00'<c:if test="${timeList.endtime == '13:00' }">selected</c:if>>13:00</option>
-													<option value='13:30'<c:if test="${timeList.endtime == '13:30' }">selected</c:if>>13:30</option>
-													<option value='14:00'<c:if test="${timeList.endtime == '14:00' }">selected</c:if>>14:00</option>
-													<option value='14:30'<c:if test="${timeList.endtime == '14:30' }">selected</c:if>>14:30</option>
-													<option value='15:00'<c:if test="${timeList.endtime == '15:00' }">selected</c:if>>15:00</option>
-													<option value='15:30'<c:if test="${timeList.endtime == '15:30' }">selected</c:if>>15:30</option>
-													<option value='16:00'<c:if test="${timeList.endtime == '16:00' }">selected</c:if>>16:00</option>
-													<option value='16:30'<c:if test="${timeList.endtime == '16:30' }">selected</c:if>>16:30</option>
-													<option value='17:00'<c:if test="${timeList.endtime == '17:00' }">selected</c:if>>17:00</option>
-													<option value='17:30'<c:if test="${timeList.endtime == '17:30' }">selected</c:if>>17:30</option>
-													<option value='18:00'<c:if test="${timeList.endtime == '18:00' }">selected</c:if>>18:00</option>
-													<option value='18:30'<c:if test="${timeList.endtime == '18:30' }">selected</c:if>>18:30</option>
-													<option value='19:00'<c:if test="${timeList.endtime == '19:00' }">selected</c:if>>19:00</option>
-													<option value='19:30'<c:if test="${timeList.endtime == '19:30' }">selected</c:if>>19:30</option>
-													<option value='20:00'<c:if test="${timeList.endtime == '20:00' }">selected</c:if>>20:00</option>
-													<option value='20:30'<c:if test="${timeList.endtime == '20:30' }">selected</c:if>>20:30</option>
-													<option value='21:00'<c:if test="${timeList.endtime == '21:00' }">selected</c:if>>21:00</option>
-												</select> 
-												<input type="text" id="n_content" name="timeVOList[${status.index}].n_content" class="form-control" value="${timeList.n_content}">
-												<div style="display: inline-block; width:62px;">
-													<button class="genric-btn info-border circle" id="time-insert" type="button"onclick="deleteTime('${timeList.o_no}')">X</button>
-												</div><br> 
-												<input type="hidden"name="timeVOList[${status.index}].p_id" value="${pmember.p_id}">
-											</div>
-										</c:forEach>
 									</div>
-								</div>
-								<button type="button" class="genric-btn info radius" id="addDiv" onclick="plusTime()">시간추가</button><br>
-								<p>운영시간을 더 추가 하시러면 시간추가 버튼을 눌러주세요.</p>
-								<div class="form-group" style="margin-bottom: 0px;">
-									<i class="fa-solid fa-clipboard-list"></i>
-									<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3><br>
-								</div>
-								<div id="plus-div">  
-									<div id="add-div">
-										<c:forEach items="${price }" var="price" varStatus="status">
-											<div class="form-group" id="service-main" style="margin-bottom: 10px;">
-												<input type="hidden"name="priceVOList[${status.index }].price_no"value="${price.price_no}" id="service${ status.index}">
-												<div class="service-info">
-													<label for="name">서비스명</label> 
-													<input id="title" name="priceVOList[${status.index }].title" type="text" class="form-control" value="${price.title}">
-												</div>
-												<div class="service-info">
-													<label>금 액</label> 
-													<input type="text" class="form-control"id="price" name="priceVOList[${status.index }].price" value="${price.price}">
-												</div>
-												<div style="display: inline-grid;">
-													<label>서비스안내</label>
-													<textarea class="form-control" id="content" name="priceVOList[${status.index }].content" rows="2"cols="50">${price.content }</textarea>
-												</div>
-												<div class="delete-button">
-													<button class="genric-btn info-border circle" id="price-insert" type="button" onclick="deleteService('${price.price_no}')">X</button>
-												</div><br> 
-												<input type="hidden"name="priceVOList[${status.index }].p_id" value="${pmember.p_id}">
-											</div>
-										</c:forEach>
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa-solid fa-star"></i>
+											<h3 style="font-weight: bolder;">경력</h3>
+										</div>
+										<input type="text" id="career" name="career"
+											class="form-control" style="width: 350px;"
+											value="${pmember.career}">
+										<div id="career_check"></div>
 									</div>
-								</div>
-								<button type="button" class="genric-btn info radius"id="addService" onclick="plusService()" style="width: 126px;">서비스추가</button>
-								<p id="p-info">서비스를 더 추가 하시러면 서비스 추가 버튼을 눌러주세요.</p>
-								<div class="form-group">
-									<i class="far fa-id-badge"></i>
-									<h3 style="font-weight: bolder;">프로필 사진</h3>
-									<div class="input-group col-xs-12">
-										<input class="file-upload-browse btn btn-primary" type="file"id="file" name="file">
+									<div class="form-group">
+										<div class="control-width">
+											<i class="fa-solid fa-award"></i>
+											<h3 style="font-weight: bolder;">전문분야</h3>
+										</div>
+										<input type="text" id="speciality" name="speciality"
+											class="form-control" style="width: 350px;"
+											value="${pmember.speciality}">
+										<div id="speciality_check"></div>
 									</div>
-								</div>
-								<div class="form-group" style="margin-bottom: 0px;">
-									<i class="fa fa-file-image-o"></i>
-									<h3 style="font-weight: bolder;">자격증</h3>
-								</div>	
-								<div class="form-group">
-									<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList1" multiple="multiple">
-									<button type="button" class="btn btn-primary btn-sm" onclick="addFile1()">+</button>
-									<div id="ffile1"></div>
-								</div>
-								<div class="form-group" style="margin-bottom: 0px;">
-									<i class="fa-solid fa-images"></i>
-									<h3 style="font-weight: bolder;">활동사진</h3>
-								</div>	
-								<div class="form-group">
-									<input class="file-upload-browse btn btn-primary" type="file" name="multiFileList2" multiple="multiple">
-									<button type="button" class="btn btn-primary btn-sm"onclick="addFile2()">+</button>
-									<div id="ffile2"></div>
-								</div>
-								<div align="right"> 
-								<button type="submit" id="successUpdate"class="genric-btn info radius">수정완료</button>
-								<button type="button" id="cancel" class="btn btn-secondary btn-lg" 
-								onclick="location.href='pmemberMyPage'">취소</button>
 								</div>
 							</div>
+							<div class="card">
+								<div class="card-header que">
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;운영시간, 서비스 추가 및 파일 수정	
+								</div>
+								<div class="card-body anw" style="padding: 15px">
+									<div class="form-group">
+										<i class="fa-solid fa-calendar-days"></i>
+										<h3 style="font-weight: bolder;">운영시간</h3>
+									</div>
+									<div id="select-one">
+										<div class="form-group" id="form-time">
+											<c:forEach items="${time }" var="timeList" varStatus="status">
+												<div>
+													<input type="hidden"
+														name="timeVOList[${status.index}].o_no"
+														value="${timeList.o_no}" id=${ status.index}> <select
+														id="selectday" name="timeVOList[${status.index}].w_day">
+														<option value='월'
+															<c:if test="${timeList.w_day == '월' }">selected</c:if>>월</option>
+														<option value='화'
+															<c:if test="${timeList.w_day == '화' }">selected</c:if>>화</option>
+														<option value='수'
+															<c:if test="${timeList.w_day == '수' }">selected</c:if>>수</option>
+														<option value='목'
+															<c:if test="${timeList.w_day == '목' }">selected</c:if>>목</option>
+														<option value='금'
+															<c:if test="${timeList.w_day == '금' }">selected</c:if>>금</option>
+														<option value='토'
+															<c:if test="${timeList.w_day == '토' }">selected</c:if>>토</option>
+														<option value='일'
+															<c:if test="${timeList.w_day == '일' }">selected</c:if>>일</option>
+													</select> <select id="selectStart"
+														name="timeVOList[${status.index}].starttime">
+														<option value='9:00'
+															<c:if test="${timeList.starttime == '9:00' }">selected</c:if>>9:00</option>
+														<option value='9:30'
+															<c:if test="${timeList.starttime == '9:30' }">selected</c:if>>9:30</option>
+														<option value='10:00'
+															<c:if test="${timeList.starttime == '10:00' }">selected</c:if>>10:00</option>
+														<option value='10:30'
+															<c:if test="${timeList.starttime == '10:30' }">selected</c:if>>10:30</option>
+														<option value='11:00'
+															<c:if test="${timeList.starttime == '11:00' }">selected</c:if>>11:00</option>
+														<option value='11:30'
+															<c:if test="${timeList.starttime == '11:30' }">selected</c:if>>11:30</option>
+														<option value='12:00'
+															<c:if test="${timeList.starttime == '12:00' }">selected</c:if>>12:00</option>
+														<option value='12:30'
+															<c:if test="${timeList.starttime == '12:30' }">selected</c:if>>12:30</option>
+													</select> <select id="selectEnd"
+														name="timeVOList[${status.index}].endtime">
+														<option value='13:00'
+															<c:if test="${timeList.endtime == '13:00' }">selected</c:if>>13:00</option>
+														<option value='13:30'
+															<c:if test="${timeList.endtime == '13:30' }">selected</c:if>>13:30</option>
+														<option value='14:00'
+															<c:if test="${timeList.endtime == '14:00' }">selected</c:if>>14:00</option>
+														<option value='14:30'
+															<c:if test="${timeList.endtime == '14:30' }">selected</c:if>>14:30</option>
+														<option value='15:00'
+															<c:if test="${timeList.endtime == '15:00' }">selected</c:if>>15:00</option>
+														<option value='15:30'
+															<c:if test="${timeList.endtime == '15:30' }">selected</c:if>>15:30</option>
+														<option value='16:00'
+															<c:if test="${timeList.endtime == '16:00' }">selected</c:if>>16:00</option>
+														<option value='16:30'
+															<c:if test="${timeList.endtime == '16:30' }">selected</c:if>>16:30</option>
+														<option value='17:00'
+															<c:if test="${timeList.endtime == '17:00' }">selected</c:if>>17:00</option>
+														<option value='17:30'
+															<c:if test="${timeList.endtime == '17:30' }">selected</c:if>>17:30</option>
+														<option value='18:00'
+															<c:if test="${timeList.endtime == '18:00' }">selected</c:if>>18:00</option>
+														<option value='18:30'
+															<c:if test="${timeList.endtime == '18:30' }">selected</c:if>>18:30</option>
+														<option value='19:00'
+															<c:if test="${timeList.endtime == '19:00' }">selected</c:if>>19:00</option>
+														<option value='19:30'
+															<c:if test="${timeList.endtime == '19:30' }">selected</c:if>>19:30</option>
+														<option value='20:00'
+															<c:if test="${timeList.endtime == '20:00' }">selected</c:if>>20:00</option>
+														<option value='20:30'
+															<c:if test="${timeList.endtime == '20:30' }">selected</c:if>>20:30</option>
+														<option value='21:00'
+															<c:if test="${timeList.endtime == '21:00' }">selected</c:if>>21:00</option>
+													</select> <input type="text" id="n_content"
+														name="timeVOList[${status.index}].n_content"
+														class="form-control" value="${timeList.n_content}">
+													<div style="display: inline-block; width: 62px;">
+														<button class="genric-btn info-border circle"
+															id="time-insert" type="button"
+															onclick="deleteTime('${timeList.o_no}')">X</button>
+													</div>
+													<br> <input type="hidden"
+														name="timeVOList[${status.index}].p_id"
+														value="${pmember.p_id}">
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+									<button type="button" class="genric-btn info radius"
+										id="addDiv" onclick="plusTime()">시간추가</button>
+									<br>
+									<p>운영시간을 더 추가 하시러면 시간추가 버튼을 눌러주세요.</p>
+									<div class="form-group" style="margin-bottom: 0px;">
+										<i class="fa-solid fa-clipboard-list"></i>
+										<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3>
+										<br>
+									</div>
+									<div id="plus-div">
+										<div id="add-div">
+											<c:forEach items="${price }" var="price" varStatus="status">
+												<div class="form-group" id="service-main"
+													style="margin-bottom: 10px;">
+													<input type="hidden"
+														name="priceVOList[${status.index }].price_no"
+														value="${price.price_no}" id="service${ status.index}">
+													<div class="service-info">
+														<label for="name">서비스명</label> <input id="title"
+															name="priceVOList[${status.index }].title" type="text"
+															class="form-control" value="${price.title}">
+													</div>
+													<div class="service-info">
+														<label>금 액</label> <input type="text" class="form-control"
+															id="price" name="priceVOList[${status.index }].price"
+															value="${price.price}">
+													</div>
+													<div style="display: inline-grid;">
+														<label>서비스안내</label>
+														<textarea class="form-control" id="content"
+															name="priceVOList[${status.index }].content" rows="2"
+															cols="50">${price.content }</textarea>
+													</div>
+													<div class="delete-button">
+														<button class="genric-btn info-border circle"
+															id="price-insert" type="button"
+															onclick="deleteService('${price.price_no}')">X</button>
+													</div>
+													<br> <input type="hidden"
+														name="priceVOList[${status.index }].p_id"
+														value="${pmember.p_id}">
+												</div>
+											</c:forEach>
+										</div>
+									</div>
+									<button type="button" class="genric-btn info radius"
+										id="addService" onclick="plusService()" style="width: 126px;">서비스추가</button>
+									<p id="p-info">서비스를 더 추가 하시러면 서비스 추가 버튼을 눌러주세요.</p>
+									<div class="form-group">
+										<i class="far fa-id-badge"></i>
+										<h3 style="font-weight: bolder;">프로필 사진</h3>
+										<div class="input-group col-xs-12">
+											<input class="file-upload-browse btn btn-primary" type="file"
+												id="file" name="file">
+										</div>
+									</div>
+									<div class="form-group" style="margin-bottom: 0px;">
+										<i class="fa fa-file-image-o"></i>
+										<h3 style="font-weight: bolder;">자격증</h3>
+									</div>
+									<div class="form-group">
+										<input class="file-upload-browse btn btn-primary" type="file"
+											name="multiFileList1" multiple="multiple">
+										<button type="button" class="btn btn-primary btn-sm"
+											onclick="addFile1()">+</button>
+										<div id="ffile1"></div>
+									</div>
+									<div class="form-group" style="margin-bottom: 0px;">
+										<i class="fa-solid fa-images"></i>
+										<h3 style="font-weight: bolder;">활동사진</h3>
+									</div>
+									<div class="form-group">
+										<input class="file-upload-browse btn btn-primary" type="file"
+											name="multiFileList2" multiple="multiple">
+										<button type="button" class="btn btn-primary btn-sm"
+											onclick="addFile2()">+</button>
+										<div id="ffile2"></div>
+									</div>
+								</div>
 							</div>
-						</form>
-					</div>
+							<div align="right">
+								<button type="submit" id="successUpdate"
+									class="genric-btn info radius">수정완료</button>
+								<button type="button" id="cancel"
+									class="btn btn-secondary btn-lg"
+									onclick="location.href='pmemberMyPage'">취소</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
 	<script>	
 
@@ -935,7 +1164,8 @@
 			}).open();
 		}
 	</script>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 
 </html>

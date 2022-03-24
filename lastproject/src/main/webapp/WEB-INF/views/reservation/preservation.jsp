@@ -30,7 +30,7 @@
 	.table th {
 		text-align: center;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 500 !important;
 		color: black;	
@@ -97,7 +97,7 @@
 
 	#Mainname {
 		font-size: 1.5rem !important;
-		font-family: 'NanumBarunGothic' !important;
+		/* font-family: 'NanumBarunGothic' !important; */
 		font-style: normal !important;
 		font-weight: 700 !important;
 		color: gray;
@@ -105,14 +105,14 @@
 
 	#myinfo {
 		font-size: 0.8rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 	}
 
 	#menu_bold {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 700;
 		color: black;
@@ -120,7 +120,7 @@
 
 	.card-body {
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 300;
 		color: black;
@@ -136,7 +136,7 @@
 	.card-header {
 		background: white;
 		font-size: 1.0rem;
-		font-family: 'NanumBarunGothic';
+		/* font-family: 'NanumBarunGothic'; */
 		font-style: normal;
 		font-weight: 400;
 		color: black;
@@ -154,14 +154,14 @@
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container" style="max-width: 1350px;">
+		<div class="container" style="max-width: 1450px;">
 			<div class="row">
 				<div class="col-lg-3">
 					<h2 align="center">MyPage</h2>
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img" src="resources/upload/${pmember.picture}"
+							<img class="partner_img" src="/upload/${pmember.pfile}"
 								onerror="this.src='resources/upload/pet.PNG'" style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${pmember.name }님</h4>
@@ -221,7 +221,7 @@
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
+										<div class="table-wrap" style="width: 1000px;">
 											<form action="preservationSelect" name="goform" id="goform">
 												<input type="hidden" name="pageNum" value="1">
 												<table class="table table-striped">
@@ -240,7 +240,7 @@
 													<tbody align="center">
 												<c:if test="${ fn:length(preservation) == 0  }">
                                                     <tr>
-                                                        <td colspan="6" align="center">조회된 결과가 없습니다.</td>
+                                                        <td colspan="8" align="center">조회된 결과가 없습니다.</td>
                                                     </tr>
                                                 </c:if>
 												<c:forEach items="${preservation }" var="pres">
@@ -252,9 +252,7 @@
 														<td>${pres.m_id }</td>
 														<td>${pres.pcontent }
 														<td>${pres.rcontent }</td>
-														<td>
-															<input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }
-														</td>
+														<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -282,17 +280,17 @@
 					</button>
 				</div>
 				<!-- modal 몸통 -->
-				<div class="modal-body">
+				<div class="modal-body" style="color: black;">
 					<div class="form-group">
 						<input type="hidden" id="m_id" name="m_id">
 						<input type="hidden" id="p_id" name="p_id" value="${p_id }">
 						<input type="hidden" id="r_no" name="r_no">
 						<span id="span_d_name" style="width: 250px !important;">&nbsp;진단명 :
-							<input type="text" id="d_name" name="d_name"></span><br><br>
+							<input type="text" id="d_name" name="d_name" style="border: 1px solid;"></span><br><br>
 						<span id="span_symptom" style="width: 250px !important;"> &nbsp; &nbsp; 증 상 :
-							<input type="text" id="symptom" name="symptom"></span><br><br>
+							<input type="text" id="symptom" name="symptom" style="border: 1px solid;"></span><br><br>
 						<span id="span_result" style="width: 250px !important;"> &nbsp; &nbsp; 처 방 :
-							<input type="text" id="d_result" name="d_result"></span>
+							<input type="text" id="d_result" name="d_result" style="border: 1px solid;"></span>
 					</div>
 				</div>
 				<!-- modal 하단 버튼 -->
@@ -317,8 +315,15 @@
 			} else if (val[i].innerText == '결제완료') {
 				val[i].classList.add("diaLog");
 				$(".diaLog").empty();
-				var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
-						  						data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
+				
+				var reservDate = $(val[i]).parent().children().first().next().next().next().text();
+				console.log("현재시간",today.format('YYYY-MM-DD HH시'),"받아온값",reservDate);
+				if(reservDate <= today.format('YYYY-MM-DD HH시') ){
+					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
+													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
+				}else{
+					$(".diaLog").append(`<label class="badge badge-success">예약완료</label>`);
+				}
 			} else if (val[i].innerText == '승인거절'){
 				val[i].classList.add("fail");
 				$(".fail").empty();

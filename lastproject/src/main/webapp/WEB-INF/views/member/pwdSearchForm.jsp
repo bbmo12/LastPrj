@@ -19,6 +19,7 @@
                   <img src="resources/login/logo.jpg" alt="logo">
                </div>
                
+               
                <div class="card fat" style="margin-top: -35px;">
                   <div class="card-body">
                      <h4 class="card-title">비밀번호 찾기</h4>

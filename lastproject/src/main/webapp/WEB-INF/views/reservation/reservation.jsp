@@ -261,9 +261,9 @@
 												<button type="button" class="codep" style="margin-right: 50px;"
 													data-code="101">훈련</button>
 												<button type="button" class="codep" style="margin-right: 50px;"
-													data-code="102">미용</button>
+													data-code="102">돌봄서비스</button>
 												<button type="button" class="codep" style="margin-right: 50px;"
-													data-code="103">돌봄서비스</button>
+													data-code="103">미용</button>
 											</div>
 										</div>
 										<div class="table-wrap" style="width: 950px;margin-top: 20px;">
@@ -536,7 +536,7 @@
 					if (result.fileList.length != '') {
 						for (var i = 0; i < result.fileList.length; i++) {
 
-							var imgsrc = 'resources/upload/' + result.fileList[i].picture;
+							var imgsrc = '/upload/' + result.fileList[i].pfile;
 							console.log("여기는 imgsrc", imgsrc)
 							var img = $('<img>').attr({
 								'src': imgsrc,
@@ -616,10 +616,11 @@
 						// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
 						buyer_postcode: '123-456',
 					}, function (rsp) {
+						var msg;
 						if (rsp.success) {
-							var msg = '결제가 완료되었습니다.';
+							msg = '결제가 완료되었습니다.';
 							msg += '결제 금액 : ' + rsp.paid_amount;
-							location.onload();
+							
 							// success.submit();
 							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 						} else {
@@ -627,8 +628,10 @@
 							msg += '에러내용 : ' + rsp.error_msg;
 						}
 						alert(msg);
+						
 					});
 					payUpdate();
+					location.reload();
 				}
 			});
 			//결제 완료 후 결제 내역 등록
@@ -757,7 +760,7 @@
 				</li>`
 			}
 			for (var i = page.startPage; i <= page.endPage; i++) {
-				nav += `<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a
+				nav += `<li class="page-item ${page.pageNum eq num ? 'active' : '' }"><a class="btn btn-primary" 
 								href="javascript:goPage(\${i})" class="page-link">\${i }</a>
 								</li>`
 			}
@@ -786,7 +789,7 @@
 
 
 		// ==============================블록체인 ===============================================
-		$("#block_chain").on('click', function (event) {
+		/* $("#block_chain").on('click', function (event) {
 			$(".table").empty();
 			$("#blockChain").empty();
 			$("#blockChain").append(`예약번호 입력 :  <select class="reservNo" onchange="reservNo(event)" size="1">
@@ -794,7 +797,7 @@
 													 	<c:forEach items="${reservation }" var="res">
 													 		<option value="${res.r_no}">${res.r_no}</option>
 													 	</c:forEach>`);
-			/* <input type ="text" id ="r_no">  <button type='button' onclick="myFunction()">조회</button>`); */
+			 <input type ="text" id ="r_no">  <button type='button' onclick="myFunction()">조회</button>`); 
 		});
 
 		function myFunction() {
@@ -858,7 +861,7 @@
 									</tbody>`);
 					}
 				})
-		}
+		} */
 	</script>
 </body>
 
