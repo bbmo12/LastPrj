@@ -190,12 +190,6 @@ public class PmemberController {
 				p_id = userDetails.getPmember().getP_id();
 			}
 		}
-		System.out.println("=== file : " + file);
-		System.out.println("=== file1: " + multiFileList1);
-		System.out.println("=== file2: " + multiFileList2);
-		
-		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
-
     	String originalFileName = file.getOriginalFilename();
 		//String webPath = "/resources/upload";
 		//String realPath = sc.getRealPath(webPath);
