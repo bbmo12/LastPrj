@@ -185,4 +185,9 @@ public class PmemberServiceImpl implements PmemberService{
 	public List<PmemberVO> admPmemChart() {
 		return map.admPmemChart();
 	}
+
+	@Override
+	public List<PmemberVO> petcare(String p_id) {
+		return map.petcare(p_id);
+	}
 }

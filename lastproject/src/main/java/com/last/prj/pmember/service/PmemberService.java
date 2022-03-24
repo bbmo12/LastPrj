@@ -48,4 +48,6 @@ public interface PmemberService {
 	
 	public List<ReviewVO> ServiceReviewRecent();
 	
+	public List<PmemberVO> petcare(String p_id);
+	
 }
