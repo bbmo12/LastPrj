@@ -33,7 +33,7 @@
 					</div>
 					<div class="options">
 						<button onclick="mlogin()" class="btn btn-primary btn-block" id="regular"
-							style="width: 200px; margin-top: 8px;">일반회원</button>
+							style="width: 200px; margin-top: 5px;">일반회원</button>
 						<button onclick="plogin()" class="btn btn-primary btn-block" id="partner" 
 							style="width: 200px;">파트너회원</button>
 					</div>
@@ -53,11 +53,6 @@
 									<h5>회원가입은 간단한 정보입력만으로 가입이 가능합니다. 서비스 이용시 실명인증등 필요로 하지 않습니다 </h5>
 									
 									</div>	
-										
-									
-										
-																	
-								
 							</div>
 						</div>
 					</div>
