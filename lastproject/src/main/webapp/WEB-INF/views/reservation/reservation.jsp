@@ -536,7 +536,7 @@
 					if (result.fileList.length != '') {
 						for (var i = 0; i < result.fileList.length; i++) {
 
-							var imgsrc = 'resources/upload/' + result.fileList[i].picture;
+							var imgsrc = '/upload/' + result.fileList[i].pfile;
 							console.log("여기는 imgsrc", imgsrc)
 							var img = $('<img>').attr({
 								'src': imgsrc,

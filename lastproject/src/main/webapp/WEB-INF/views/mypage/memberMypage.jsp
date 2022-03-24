@@ -253,7 +253,7 @@
 							<div class="col-lg-3 col-sm-6" style="margin-left: 40px;">
 								<div class="single-doctor mb-3 mb-lg-0">
 									<div class="doctor-img">
-										<img src="resources/upload/${pet.picture }" class="img-fluid"
+										<img src="upload/${pet.pfile }" class="img-fluid"
 											onerror="this.src='resources/upload/cat.jpg'" alt=""
 											style="width: 195px; height: 200px;">
 									</div>

@@ -43,7 +43,7 @@
 						<c:forEach var="pmember" items="${pmember}">
 							<div class="single-slide">
 								<div class="slide-img">
-									<img src="resources/upload/${pmember.picture }" onerror="this.src='resources/upload/pet.PNG'"
+									<img src="/upload/${pmember.pfile }" onerror="this.src='resources/upload/pet.PNG'"
 										style="width: 300px; height: 250px;" class="img-fluid">
 									<div class="hover-state">
 										<a href="pmemberDetail?id=${pmember.p_id }"><i class="fa fa-user-o"></i></a>
@@ -83,7 +83,7 @@
 			까다로운 선발·관리 체계와 안전 시스템을 구축하였습니다</p>
 	</div>
 	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 110px">
-		<img src="resources/upload/do.png" style="width: 400px; height: 450px; border-radius: 2px">
+		<img src="/upload/do.png" style="width: 400px; height: 450px; border-radius: 2px">
 		<div style="margin: 5em 0 0 5em;">
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				훈련사의<br>체계적 교육!
@@ -105,10 +105,10 @@
 			</h3>
 			<a href="pmemberList?code=100" class="btn btn-outline-primary btn-rounded btn-fw">수의사</a>
 		</div>
-		<img src="resources/upload/dod.png" style="width: 400px; height: 450px; border-radius: 2px;  margin-right: 10em;">
+		<img src="/upload/dod.png" style="width: 400px; height: 450px; border-radius: 2px;  margin-right: 10em;">
 	</div>
 	<div style="display: flex; padding: 0px 300px 0px 500px; margin-top: 50px">
-		<img src="resources/upload/dogg.png" style="width: 400px; height: 450px; border-radius: 2px">
+		<img src="/upload/dogg.png" style="width: 400px; height: 450px; border-radius: 2px">
 		<div style="margin:5em 0 0 5em;">
 			<h1 style="font-size: 47px; color: #333333; font-weight: 600; line-height: 67px">
 				믿고 맡기는<br>전문 펫시터!
@@ -129,7 +129,7 @@
 			</h3>
 			<a href="pmemberList?code=103"class="btn btn-outline-primary btn-rounded btn-fw">미용사</a>
 		</div>
-		<img src="resources/upload/ddog.png" style="width: 400px; height: 450px; border-radius: 2px; margin-right: 10em;">
+		<img src="/upload/ddog.png" style="width: 400px; height: 450px; border-radius: 2px; margin-right: 10em;">
 	</div>
 	<div
 		style="display: flex; align-items: center; flex-direction: column; justify-content: center; height: 500px; background: #FFFFFF">

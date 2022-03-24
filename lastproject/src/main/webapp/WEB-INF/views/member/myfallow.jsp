@@ -198,7 +198,7 @@
 											<div class="col-lg-3 col-sm-6">
 												<div class="single-doctor mb-3 mb-lg-0">
 													<div class="doctor-img">
-														<img src="resources/upload/${follow.picture }" alt=""
+														<img src="resources/upload/${follow.pfile }" alt=""
 															class="img-fluid" onerror="this.src='resources/upload/cat.jpg'"
 															style="width: 195px; height: 200px;">
 													</div>

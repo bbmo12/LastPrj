@@ -59,8 +59,8 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="resources/upload/${pmemdetail.picture }"
-								style="width: 210px; height: 167px;" onerror="this.src='resources/upload/pet.PNG'">
+							<img class="author_img rounded-circle" src="/upload/${pmemdetail.pfile }"
+								style="width: 210px; height: 167px;" onerror="this.src='resources/upload/pet.jpg'">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
 							<h3>${pmemdetail.w_name}</h3>
@@ -68,24 +68,24 @@
 							<sec:authorize access="hasRole('MEMBER')">
 								<c:choose>
 									<c:when test="${follow == 0 }">
-										<img alt="" src="resources/upload/upfollow.png" id="follow"
+										<img alt="" src="/upload/upfollow.png" id="follow"
 											onclick="follow1('${pmemdetail.p_id}')"
 											style="cursor: pointer; width: 60px; height: 60px; margin-right: 20px;">
 									</c:when>
 									<c:otherwise>
-										<img alt="" src="resources/upload/follow1.png" id="follow"
+										<img alt="" src="/upload/follow1.png" id="follow"
 											onclick="follow2('${pmemdetail.p_id}')"
 											style="cursor: pointer; width: 60px; height: 60px; margin-right: 20px;">
 									</c:otherwise>
 								</c:choose>
 								<c:choose>
 									<c:when test="${like == 0 }">
-										<img alt="" src="resources/upload/nocol.png" id="recommend"
+										<img alt="" src="/upload/nocol.png" id="recommend"
 											onclick="likeHit1(`${pmemdetail.p_id}`)"
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:when>									
 									<c:otherwise>
-										<img alt="" src="resources/upload/rec.png" id="recommend"
+										<img alt="" src="/upload/rec.png" id="recommend"
 											onclick="likeHit2(`${pmemdetail.p_id}`)"
 											style="cursor: pointer; width: 60px; height: 60px;">
 									</c:otherwise>
@@ -93,9 +93,9 @@
 								<input type="hidden" id="likeValue"value="${like }">
 							</sec:authorize>
 							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
-									<img alt="" src="resources/upload/upfollow.png" id="follow" onclick="noMember()"
+									<img alt="" src="/upload/upfollow.png" id="follow" onclick="noMember()"
 										style="cursor:pointer; width: 60px; height: 60px;margin-right: 20px;">
-									<img alt="" src="resources/upload/nocol.png" id="recommend" onclick="noMember()"
+									<img alt="" src="/upload/nocol.png" id="recommend" onclick="noMember()"
 										style="cursor:pointer; width: 60px; height: 60px;">
 							</sec:authorize>		
 							<div class="br"></div>
@@ -131,7 +131,7 @@
 									<c:forEach items="${pimage}" var="image">
 										<div class="col-xl-4 col-lg-3">
 											<div class="categories_post">
-												<img src="resources/upload/${image.picture}"
+												<img src="/upload/${image.pfile}"
 													style="width: 290px; height: 200px;" alt="등록된 사진이 없습니다.">
 											</div>
 										</div>
@@ -139,7 +139,7 @@
 									<c:forEach items="${plicense}" var="plicense">
 										<div class="col-xl-4 col-lg-3">
 											<div class="categories_post">
-												<img src="resources/upload/${plicense.picture}"
+												<img src="/upload/${plicense.pfile}"
 													style="width: 290px; height: 200px;" alt="등록된 사진이 없습니다.">
 											</div>
 										</div>
@@ -149,11 +149,11 @@
 							<div class="container" style="margin-top: 20px; border: solid 1px; border-color: #eee;">
 								<div class="row">
 									<div class="col-6" style="padding: 10px;">
-										<img src="resources/upload/location.png" style="width: 40px; height: 40px;">
+										<img src="/upload/location.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">주 소</h3>
 										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
 										${pmemdetail.w_address}&nbsp;${pmemdetail.w_d_address }</div>
-										<img src="resources/upload/time.png" style="width: 40px; height: 40px;">
+										<img src="/upload/time.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">운영시간</h3><br>
 										<c:forEach items="${time }" var="time">
 											<div class="doctor-text text-center" style="display: inline-block; padding-left:45px; color: black;">
@@ -161,17 +161,17 @@
 											</div>			
 											<div class="doctor-text text-center" style="display: inline-block; color: black;">${time.n_content}</div><br>								
 										</c:forEach>
-										<img src="resources/upload/career.png" style="width: 40px; height: 40px;">
+										<img src="/upload/career.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">대표경력</h3>
 										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
 										${pmemdetail.career }</div>
-										<img src="resources/upload/career2.png" style="width: 40px; height: 40px;">
+										<img src="/upload/career2.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">전문분야</h3>
 										<div class="doctor-text text-center" style="display: flex; margin-left: 45px; color: black;">
 										${pmemdetail.speciality }</div>
 									</div>
 									<div class="col-6" style="padding-top: 10px; margin-left:-35px;">
-										<img src="resources/upload/price.png" style="width: 40px; height: 40px;">
+										<img src="/upload/price.png" style="width: 40px; height: 40px;">
 										<h3 style="display: inline-block;">서비스정보</h3><br>
 										<c:forEach items="${price }" var="price">
 											<div class="doctor-text text-center" style="display: inline-block; height: 22px; padding-left:45px; color: black;">
@@ -195,7 +195,7 @@
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
 											<img class="author_img rounded-circle"
-												src="resources/upload/${counsel.picture }" alt="등록된 사진이 없습니다."
+												src="/upload/${counsel.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'" style="width: 100px;">
 										</div>
 										<div class="desc">
@@ -212,7 +212,7 @@
 								<div class="row" id="servicePhoto">
 									<c:forEach items="${counsel.fileList }" var="photo">
 										<div style="margin-top: 20px;">
-											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
+											<img src="/upload/${photo.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'"
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
@@ -226,7 +226,7 @@
 									<div class="user justify-content-between d-flex">
 										<div class="thumb">
 											<img class="author_img rounded-circle"
-												src="resources/upload/${service.picture }" alt="등록된 사진이 없습니다."
+												src="/upload/${service.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'" style="width: 100px;">
 										</div>
 										<div class="desc">
@@ -243,7 +243,7 @@
 								<div class="row" id="servicePhoto">
 									<c:forEach items="${service.fileList }" var="photo">
 										<div style="margin-top: 20px;">
-											<img src="resources/upload/${photo.photo }" alt="등록된 사진이 없습니다."
+											<img src="/upload/${photo.pfile }" alt="등록된 사진이 없습니다."
 												onError="this.style.display='none'"
 												style="width: 250px; height: 250px; position: relative; right: -3em;">
 										</div>
@@ -278,7 +278,7 @@
 				success: function (likeCheck) {	
 					Swal.fire('추천되었습니다:)');
 					var imgTag = document.getElementById("recommend");
-			 		imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("src", "/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
 			 		imgTag.setAttribute("onclick", "likeHit2(`${pmemdetail.p_id}`)");			 	
 				},
 				error: function(error){
@@ -307,7 +307,7 @@
 						success: function (likeCheck) {
 							Swal.fire('추천이 취소되었습니다.');
 							var changeImg = document.getElementById("recommend");
-							changeImg.setAttribute("src", "resources/upload/nocol" + ".png");
+							changeImg.setAttribute("src", "/upload/nocol" + ".png");
 							changeImg.setAttribute("onclick", "likeHit1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
@@ -330,7 +330,7 @@
 				success: function (followCheck) {
 					Swal.fire('팔로우');
 					var imgTag = document.getElementById("follow");
-			 		imgTag.setAttribute("src", "resources/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("src", "/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
 			 		imgTag.setAttribute("onclick", "follow2(`${pmemdetail.p_id}`)");	
 				}
 			});
@@ -356,7 +356,7 @@
 						success: function (followCheck) {
 							Swal.fire('팔로우가 취소되었습니다.');
 							var changeImg = document.getElementById("follow");
-							changeImg.setAttribute("src", "resources/upload/upfollow" + ".png");
+							changeImg.setAttribute("src", "/upload/upfollow" + ".png");
 							changeImg.setAttribute("onclick", "follow1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
