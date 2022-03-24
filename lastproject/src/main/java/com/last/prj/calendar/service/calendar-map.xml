@@ -51,8 +51,11 @@
 		WHERE <![CDATA[C_END <= TO_CHAR(SYSDATE,'YYYY-MM-DD')]]>
 	</update>
 	
-	
-	
+	<update id="calendarUpdate">
+		UPDATE CALENDAR
+		SET C_START = TO_CHAR(TO_DATE(C_START,'YYYY-MM-DD')+1,'YYYY-MM-DD')
+		WHERE C_START <![CDATA[<]]> TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</update>
 	
 	<delete id="revSetDelete" parameterType="com.last.prj.calendar.service.CalendarVO">
 		DELETE FROM CALENDAR
