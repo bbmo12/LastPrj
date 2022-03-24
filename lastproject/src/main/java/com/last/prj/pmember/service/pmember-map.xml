@@ -30,51 +30,43 @@
 	<!-- 상세페이지 첨부파일 따로가져오기 -->
 	<select id="getImage" parameterType="String"
 		resultType="com.last.prj.pmember.service.FfileVO">
-		SELECT F.PICTURE
+		SELECT F.PICTURE, F.PFILE
 		FROM F_FILE F, P_MEMBER P
 		WHERE P.P_IMAGE = F.F_PART AND P_ID = #{p_id}
 	</select>
 	<select id="getLicense" parameterType="String"
 		resultType="com.last.prj.pmember.service.FfileVO">
-		SELECT F.PICTURE
+		SELECT F.PICTURE, F.PFILE
 		FROM F_FILE F, P_MEMBER P
 		WHERE P.P_LICENSE = F.F_PART AND P_ID = #{p_id}
 	</select>
 
 	<!-- 상담리뷰 -->
-	<resultMap type="com.last.prj.pmember.service.ReviewVO"
-		id="counselReview">
+	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="counselReview">
 		<result column="content" property="content" />
 		<result column="rating" property="rating" />
 		<result column="m_id" property="m_id" />
 		<result column="picture" property="picture" />
 		<collection property="fileList" resultMap="FfileVO" />
 	</resultMap>
-	<resultMap type="com.last.prj.pmember.service.FfileVO"
-		id="FfileVO">
+	<resultMap type="com.last.prj.pmember.service.FfileVO" id="FfileVO">
 		<result column="photo" property="photo" />
 	</resultMap>
-	<select id="getCounselReview" parameterType="String"
-		resultMap="counselReview"
+	<select id="getCounselReview" parameterType="String" resultMap="counselReview"
 		resultType="com.last.prj.pmember.service.ReviewVO">
-		SELECT RE.CONTENT,
-		RE.RATING,
-		M.M_ID,
-		M.PICTURE,
-		F.PICTURE AS PHOTO
-		FROM REVIEW RE LEFT JOIN COUNSEL C
-		ON RE.C_NO = C.C_NO
-		LEFT JOIN PET P
-		ON C.PET_NO = P.PET_NO
-		LEFT JOIN MEMBER M
-		ON P.M_ID = M.M_ID
-		LEFT JOIN F_FILE F
-		ON F.F_PART = RE.F_PART
-		WHERE C.P_ID = #{p_id}
+		SELECT RE.CONTENT, RE.RATING, M.M_ID, M.PFILE, F.PFILE AS PHOTO
+				FROM REVIEW RE LEFT JOIN COUNSEL C
+					ON RE.C_NO = C.C_NO
+				  LEFT JOIN PET P
+		            ON C.PET_NO = P.PET_NO
+		          LEFT JOIN MEMBER M
+					ON P.M_ID = M.M_ID
+			      LEFT JOIN F_FILE F
+					ON F.F_PART = RE.F_PART
+				WHERE C.P_ID = #{p_id}
 	</select>
 
-	<resultMap type="com.last.prj.pmember.service.ReviewVO"
-		id="servieceReview">
+	<resultMap type="com.last.prj.pmember.service.ReviewVO" id="servieceReview">
 		<result column="rev_no" property="rev_no" />
 		<result column="content" property="content" />
 		<result column="rating" property="rating" />
@@ -82,34 +74,29 @@
 		<result column="picture" property="picture" />
 		<collection property="fileList" resultMap="ffileVO" />
 	</resultMap>
-	<resultMap type="com.last.prj.pmember.service.FfileVO"
-		id="ffileVO">
+	<resultMap type="com.last.prj.pmember.service.FfileVO" id="ffileVO">
 		<result column="photo" property="photo" />
 	</resultMap>
 	<!-- 서비스리뷰 -->
 	<select id="getServiceReview" parameterType="String"
 		resultMap="servieceReview"
 		resultType="com.last.prj.pmember.service.ReviewVO">
-		SELECT RE.CONTENT,
-		RE.RATING,
-		M.M_ID,
-		M.PICTURE,
-		F.PICTURE AS PHOTO
-		FROM REVIEW RE LEFT JOIN RESERVATION R
-		ON RE.R_NO = R.R_NO
-		LEFT JOIN PET P
-		ON R.PET_NO = P.PET_NO
-		LEFT JOIN MEMBER M
-		ON P.M_ID = M.M_ID
-		LEFT JOIN F_FILE F
-		ON F.F_PART = RE.F_PART
-		WHERE R.P_ID = #{p_id}
+		SELECT RE.CONTENT, RE.RATING, M.M_ID, M.PICTURE, F.PICTURE AS PHOTO
+				FROM REVIEW RE LEFT JOIN RESERVATION R
+					ON RE.R_NO = R.R_NO
+		          LEFT JOIN PET P
+		  			ON R.PET_NO = P.PET_NO
+		          LEFT JOIN MEMBER M
+					ON P.M_ID = M.M_ID
+		          LEFT JOIN F_FILE F
+					ON F.F_PART = RE.F_PART
+				WHERE R.P_ID = #{p_id}
 	</select>
 	<!-- 페이징번호 , 검색 가능 -->
 	<select id="memberPageList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
 				FROM ( SELECT ROWNUM RN, A.*
-					   FROM (SELECT P_ID, NAME, PICTURE, CODE
+					   FROM (SELECT P_ID, NAME, PFILE, CODE
 							 FROM P_MEMBER
 		        WHERE CODE = #{code}
 		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>) A)
@@ -192,13 +179,12 @@
 	</select>
 
 	<!-- 추천베스트 순위 -->
-	<select id="bestLike"
-		parameterType="com.last.prj.pmember.service.PmemberVO"
+	<select id="bestLike" parameterType="com.last.prj.pmember.service.PmemberVO"
 		resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
-			FROM ( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+			FROM ( SELECT RCOM,P_ID,NAME,PFILE,N_CONTENT,CODE
 					FROM P_MEMBER
-					 GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
+					 GROUP BY RCOM,P_ID,NAME,PFILE,N_CONTENT,CODE
 					HAVING RCOM IS NOT NULL
 				   ORDER BY RCOM DESC)
 			WHERE ROWNUM<![CDATA[<=4]]>
@@ -277,56 +263,41 @@
 
 	<select id="ServiceReviewList" resultMap="servieceReview"
 		resultType="com.last.prj.pmember.service.ReviewVO">
-		SELECT RE.REV_NO,
-		RE.CONTENT,
-		RE.RATING,
-		M.M_ID,
-		M.PICTURE,
-		F.PICTURE AS PHOTO
-		FROM REVIEW RE LEFT JOIN RESERVATION R
-		ON RE.R_NO = R.R_NO
-		LEFT JOIN PET P
-		ON R.PET_NO = P.PET_NO
-		LEFT JOIN MEMBER M
-		ON P.M_ID = M.M_ID
-		LEFT JOIN F_FILE F
-		ON F.F_PART = RE.F_PART
-		ORDER BY RE.REV_NO DESC
+		SELECT RE.REV_NO, RE.CONTENT, RE.RATING, M.M_ID, M.PFILE, F.PFILE AS PHOTO
+				FROM REVIEW RE LEFT JOIN RESERVATION R
+					ON RE.R_NO = R.R_NO
+				  LEFT JOIN PET P
+					ON R.PET_NO = P.PET_NO
+		          LEFT JOIN MEMBER M
+					ON P.M_ID = M.M_ID
+		          LEFT JOIN F_FILE F
+					ON F.F_PART = RE.F_PART
+				ORDER BY RE.REV_NO DESC
 	</select>
 	
 	<select id="ServiceReviewRecent" resultMap="servieceReview"
 		resultType="com.last.prj.pmember.service.ReviewVO">
 		SELECT *
-		FROM
-		(SELECT RE.REV_NO,
-		RE.CONTENT,
-		RE.RATING,
-		M.M_ID,
-		M.PICTURE,
-		F.PICTURE AS PHOTO
-		FROM REVIEW RE LEFT JOIN RESERVATION R
-		ON RE.R_NO = R.R_NO
-		LEFT JOIN PET P
-		ON R.PET_NO = P.PET_NO
-		LEFT JOIN MEMBER M
-		ON P.M_ID = M.M_ID
-		LEFT JOIN F_FILE F
-		ON F.F_PART = RE.F_PART
-		ORDER BY RE.REV_NO DESC
-		)
-<![CDATA[WHERE ROWNUM <= 6]]>
+			FROM (SELECT RE.REV_NO, RE.CONTENT, RE.RATING, M.M_ID, M.PFILE, F.PFILE AS PHOTO
+					FROM REVIEW RE LEFT JOIN RESERVATION R
+		               ON RE.R_NO = R.R_NO
+					 LEFT JOIN PET P
+						ON R.PET_NO = P.PET_NO
+		             LEFT JOIN MEMBER M
+						ON P.M_ID = M.M_ID
+		             LEFT JOIN F_FILE F
+						ON F.F_PART = RE.F_PART
+				  ORDER BY RE.REV_NO DESC)
+		<![CDATA[WHERE ROWNUM <= 6]]>
 	</select>
 
-	<select id="bestLikeList"
-		resultType="com.last.prj.pmember.service.PmemberVO">
+	<select id="bestLikeList" resultType="com.last.prj.pmember.service.PmemberVO">
 		SELECT *
-		FROM
-		( SELECT RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-		FROM P_MEMBER
-		GROUP BY RCOM,P_ID,NAME,PICTURE,N_CONTENT,CODE
-		HAVING RCOM IS NOT NULL
-		ORDER BY RCOM DESC
-		)
+		   	FROM ( SELECT RCOM,P_ID,NAME,PFILE,N_CONTENT,CODE
+					 FROM P_MEMBER
+				  	GROUP BY RCOM,P_ID,NAME,PFILE,N_CONTENT,CODE
+				  HAVING RCOM IS NOT NULL
+					ORDER BY RCOM DESC)
 		WHERE ROWNUM<![CDATA[<=4]]>
 	</select>
 
