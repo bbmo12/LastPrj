@@ -50,6 +50,10 @@ public class PmemberVO {
 	private Criteria cri;
 	private String total;
 
+	//진료가능한 동물 조회
+		private String c_content;
+
+	
 	//관리자
 	private String f_content; //서비스 구분 코드 내용
 	private String fromDate;

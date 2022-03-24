@@ -150,6 +150,7 @@ public class PmemberController {
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("pets", pMemberDao.petcare(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		model.addAttribute("price", pmemDao.getPrice(p_id));
 		return "pmember/pmemberMypage";

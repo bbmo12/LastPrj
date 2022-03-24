@@ -406,5 +406,10 @@
 				</if>)
 		
 		</select>
-
+	
+		<!-- 진료가능동물 조회 -->
+	<select id="petcare" resultType="com.last.prj.pmember.service.PmemberVO" parameterType="String">
+	SELECT C.CONTENT AS C_CONTENT FROM PETCARE P, F_CODE C
+	WHERE P_ID = #{p_id} AND C.CODE = P.CODE
+	</select>
 </mapper>
