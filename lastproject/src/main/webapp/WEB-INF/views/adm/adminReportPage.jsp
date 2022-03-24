@@ -226,17 +226,16 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">My menu</h4>
 							<ul class="list cat-list nanumbarungothic">
-								<li><a href="adminChartPage"
+								<li><a href="adminPage"
+									class="d-flex justify-content-between no_deco" id="menu_bold">관리자
+										메인</a></li>
+								<!-- <li><a href="adminChartPage"
 									class="d-flex justify-content-between">
 										<p>차트</p>
-								</a></li>
+								</a></li> -->
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between">
-										<p>목록</p>
-								</a></li>
-								<li><a href="adminReportPage"
-									class="d-flex justify-content-between">
-										<p>신고 관리</p>
+										<p>차트.목록</p>
 								</a></li>
 								<li><a href="adminBoardPage"
 									class="d-flex justify-content-between">

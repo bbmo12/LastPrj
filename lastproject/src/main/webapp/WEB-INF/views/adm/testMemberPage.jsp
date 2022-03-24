@@ -20,7 +20,9 @@ $(document).ready(function modalInput() {
 	$(".memberIMG").append('<img src="assets/images/elements/d.jpg" alt="" class="img-fluid">');
 	
 	//
-	$(".memberNAME").append();
+	
+	let blockquoteHtml = $;
+	$(".generic-blockquote").append(blockquoteHtml);
 	$(".memberNAME").append();
 	
 	
