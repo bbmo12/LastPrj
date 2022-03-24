@@ -294,7 +294,7 @@
 				success: function (likeCheck) {	
 					Swal.fire('추천되었습니다:)');
 					var imgTag = document.getElementById("recommend");
-			 		imgTag.setAttribute("src", "/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("src", "resources/upload/rec" + ".png"); //id값이 photo인 이미지태그 선택 후,
 			 		imgTag.setAttribute("onclick", "likeHit2(`${pmemdetail.p_id}`)");			 	
 				},
 				error: function(error){
@@ -323,7 +323,7 @@
 						success: function (likeCheck) {
 							Swal.fire('추천이 취소되었습니다.');
 							var changeImg = document.getElementById("recommend");
-							changeImg.setAttribute("src", "/upload/nocol" + ".png");
+							changeImg.setAttribute("src", "resources/upload/nocol" + ".png");
 							changeImg.setAttribute("onclick", "likeHit1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
@@ -346,7 +346,7 @@
 				success: function (followCheck) {
 					Swal.fire('팔로우');
 					var imgTag = document.getElementById("follow");
-			 		imgTag.setAttribute("src", "/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
+			 		imgTag.setAttribute("src", "resources/upload/follow1" + ".png"); //id값이 photo인 이미지태그 선택 후,
 			 		imgTag.setAttribute("onclick", "follow2(`${pmemdetail.p_id}`)");	
 				}
 			});
@@ -372,7 +372,7 @@
 						success: function (followCheck) {
 							Swal.fire('팔로우가 취소되었습니다.');
 							var changeImg = document.getElementById("follow");
-							changeImg.setAttribute("src", "/upload/upfollow" + ".png");
+							changeImg.setAttribute("src", "resources/upload/upfollow" + ".png");
 							changeImg.setAttribute("onclick", "follow1(`${pmemdetail.p_id}`)");
 						},
 						error: function(error){
