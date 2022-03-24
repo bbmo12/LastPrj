@@ -352,7 +352,7 @@ $(document).ready(function(){
 													<td><input  type="radio" name="selectTime"  value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
-								}else {
+								}else if (parseInt(nowTime) <= 16){
 									$tbody = ` 
 						                  <tbody>
 						                        <tr>
@@ -360,6 +360,8 @@ $(document).ready(function(){
 													<td><input  type="radio" name="selectTime"  value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
+								}else {
+									
 								}
 							}
 						$(".table").append($tbody);

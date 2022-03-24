@@ -252,9 +252,7 @@
 														<td>${pres.m_id }</td>
 														<td>${pres.pcontent }
 														<td>${pres.rcontent }</td>
-														<td>
-															<input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }
-														</td>
+														<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -317,8 +315,15 @@
 			} else if (val[i].innerText == '결제완료') {
 				val[i].classList.add("diaLog");
 				$(".diaLog").empty();
-				var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
-						  						data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
+				
+				var reservDate = $(val[i]).parent().children().first().next().next().next().text();
+				console.log("현재시간",today.format('YYYY-MM-DD HH시'),"받아온값",reservDate);
+				if(reservDate <= today.format('YYYY-MM-DD HH시') ){
+					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
+							  						data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
+				}else{
+					$(".diaLog").append(`<label class="badge badge-success">예약완료</label>`);
+				}
 			} else if (val[i].innerText == '승인거절'){
 				val[i].classList.add("fail");
 				$(".fail").empty();

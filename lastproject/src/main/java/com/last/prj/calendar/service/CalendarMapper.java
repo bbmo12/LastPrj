@@ -23,4 +23,7 @@ public interface CalendarMapper {
 	
 	//현재날짜 비교해서 업데이트
 	void yyyy(@Param("title") String title,@Param("bgColor") String bgColor);
+	
+	void calendarUpdate(); //예약등록일자가 현재일자보다 낮으면 자동 삭제업뎃
+	
 }
