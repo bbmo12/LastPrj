@@ -47,6 +47,9 @@ public interface PmemberMapper {
 	public PmemberVO PmemberOne(String p_id);
 	
 	public List<PmemberVO> petcare(String p_id);
+	public List<PmemberVO> petcareupdateForom(String p_id); //수정폼에 진료가능 동물 출력
+	
+	public int deletepetcare(String p_id); //진료가능동물 삭제
 
 }
 

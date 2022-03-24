@@ -30,7 +30,9 @@ import com.last.prj.fallow.service.FollowVO;
 import com.last.prj.ffile.web.FfileUtil;
 import com.last.prj.likehit.service.LikehitService;
 import com.last.prj.likehit.service.LikehitVO;
+import com.last.prj.mem.service.MemService;
 import com.last.prj.mem.service.MemVO;
+import com.last.prj.mem.service.PetcareVO;
 import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PriceVO;
 import com.last.prj.pmember.service.Criteria;
@@ -69,6 +71,8 @@ public class PmemberController {
 	private FfileUtil ffileutil;
 	@Autowired
 	private String uploadPath;
+	@Autowired
+	private MemService memDao;
 
 	@RequestMapping("/pmemberList")
 	public String pmemberList(@RequestParam("code") int code, Model model, Criteria cri) {
@@ -151,6 +155,7 @@ public class PmemberController {
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
 		model.addAttribute("pets", pMemberDao.petcare(p_id));
+		System.out.println("여기에 펫츠 출력:" + pMemberDao.petcare(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		model.addAttribute("price", pmemDao.getPrice(p_id));
 		return "pmember/pmemberMypage";
@@ -169,6 +174,7 @@ public class PmemberController {
 		model.addAttribute("pmember", pMemberDao.getPmemberinfo(p_id)); //pmember
 		model.addAttribute("time", pMemberDao.getTime(p_id));//otime
 		model.addAttribute("pimage", pMemberDao.getImage(p_id));
+		model.addAttribute("pets",pMemberDao.petcareupdateForom(p_id));
 		model.addAttribute("plicense", pMemberDao.getLicense(p_id));
 		model.addAttribute("price", pmemDao.getPrice(p_id));
 		return "pmember/pmemberUpdateForm";
@@ -178,7 +184,7 @@ public class PmemberController {
 	@PostMapping("pmemberUpdate")
 
     public String pmemberUpdate(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttr , PmemberVO pmember,TimeVO time, PriceVO price,
-    		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request) {
+    		Model model, Principal principal, List<MultipartFile> multiFileList1,  List<MultipartFile> multiFileList2, HttpServletRequest request,  @RequestParam List<Integer> code) {
 
 		multiFileList1 = FfileUtil.getMultiFileList(multiFileList1);
 		multiFileList2 = FfileUtil.getMultiFileList(multiFileList2);
@@ -194,7 +200,7 @@ public class PmemberController {
 		System.out.println("=== file1: " + multiFileList1);
 		System.out.println("=== file2: " + multiFileList2);
 		
-		System.out.println("으아아아악@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+time.toString());
+
 
     	String originalFileName = file.getOriginalFilename();
 		//String webPath = "/resources/upload";
@@ -239,6 +245,16 @@ public class PmemberController {
 		
 		pMemberDao.pmemberUpdate(pmember);
 		pMemberDao.deleteTimeId(time);//시간삭제
+		pMemberDao.deletepetcare(p_id);//진료가능동물삭제
+		
+		//진료가능 동물 추가
+		PetcareVO petcare = new PetcareVO();
+		petcare.setP_id(p_id);
+		for(Integer i : code) {
+			System.out.println(i);
+			petcare.setCode(i);
+			memDao.petcareinsert(petcare);
+		}
 		
 		//시간 추가
 		for(int i=0; i < time.getTimeVOList().size(); i++) {
