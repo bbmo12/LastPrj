@@ -209,6 +209,7 @@ public class MemController {
 	}
 	
 	
+	
 	// 내정보 수정페이지로 이동
 	@RequestMapping("/memberUpdateForm")
 	public String memberUpdateFrom(Model model, Principal principal) {
@@ -385,8 +386,11 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			String newPath = uploadPath + File.separator + saveFileName;
-			File saveFile = new File(newPath);
+			
+			  String newPath = uploadPath + File.separator + saveFileName;
+			   File saveFile = new File(newPath);
+			
+			
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
