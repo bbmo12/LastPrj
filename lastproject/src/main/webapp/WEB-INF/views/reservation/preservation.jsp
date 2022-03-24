@@ -154,7 +154,7 @@
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container" style="max-width: 1350px;">
+		<div class="container" style="max-width: 1450px;">
 			<div class="row">
 				<div class="col-lg-3">
 					<h2 align="center">MyPage</h2>
@@ -221,7 +221,7 @@
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
+										<div class="table-wrap" style="width: 1000px;">
 											<form action="preservationSelect" name="goform" id="goform">
 												<input type="hidden" name="pageNum" value="1">
 												<table class="table table-striped">
@@ -282,17 +282,17 @@
 					</button>
 				</div>
 				<!-- modal 몸통 -->
-				<div class="modal-body">
+				<div class="modal-body" style="color: black;">
 					<div class="form-group">
 						<input type="hidden" id="m_id" name="m_id">
 						<input type="hidden" id="p_id" name="p_id" value="${p_id }">
 						<input type="hidden" id="r_no" name="r_no">
 						<span id="span_d_name" style="width: 250px !important;">&nbsp;진단명 :
-							<input type="text" id="d_name" name="d_name"></span><br><br>
+							<input type="text" id="d_name" name="d_name" style="border: 1px solid;"></span><br><br>
 						<span id="span_symptom" style="width: 250px !important;"> &nbsp; &nbsp; 증 상 :
-							<input type="text" id="symptom" name="symptom"></span><br><br>
+							<input type="text" id="symptom" name="symptom" style="border: 1px solid;"></span><br><br>
 						<span id="span_result" style="width: 250px !important;"> &nbsp; &nbsp; 처 방 :
-							<input type="text" id="d_result" name="d_result"></span>
+							<input type="text" id="d_result" name="d_result" style="border: 1px solid;"></span>
 					</div>
 				</div>
 				<!-- modal 하단 버튼 -->
@@ -317,7 +317,7 @@
 			} else if (val[i].innerText == '결제완료') {
 				val[i].classList.add("diaLog");
 				$(".diaLog").empty();
-				var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
+				var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="badge badge-info diaLogModal"
 						  						data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 			} else if (val[i].innerText == '승인거절'){
 				val[i].classList.add("fail");

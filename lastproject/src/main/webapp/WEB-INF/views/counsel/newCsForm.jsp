@@ -209,12 +209,6 @@
 								<h4 style="color: gray;">*상담받고자 하는 반려동물을 선택해주세요.</h4>
 								<div class="petSelect">
 									<ul>
-										<li>
-											<div class="radioImg">
-												<img class="petSelection" src="resources/qna/가위표.png">
-											</div> <input type="radio" id="pet_no" name="pet_no" value="" checked="checked">&nbsp;
-											<label>없음/비공개</label>
-										</li>
 										<c:forEach items="${petList }" var="pet">
 											<li>
 												<div class="radioImg">

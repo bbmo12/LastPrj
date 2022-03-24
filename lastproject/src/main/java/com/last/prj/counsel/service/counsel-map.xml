@@ -90,7 +90,7 @@
 					P_ID, PET_NO, CODE, P_NO, M_ID, SENDER, R_CHECK
 				FROM COUNSEL
 			WHERE P_NO = #{c_no} OR C_NO = #{c_no}
-		ORDER BY W_DATE ASC
+		ORDER BY C_NO ASC
 	</select>
 
 	<!-- 새로운 상담 등록 -->
