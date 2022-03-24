@@ -101,14 +101,31 @@
 							<div class="br"></div>
 						</aside>
 						<aside class="single_sidebar_widget post_category_widget">
-							<a href="EnterCs?p_id=${pmemdetail.p_id}">
-								<button class="btn btn-primary">상담하기</button></a>
+							<sec:authorize access="hasRole('MEMBER')">
+							<c:choose>
+								<c:when test="${petList ne null}">
+									<button class="btn btn-primary" onclick="noPet()">상담하기</button>
+								</c:when>
+								<c:otherwise>								
+									<a href="EnterCs?p_id=${pmemdetail.p_id}">
+									<button class="btn btn-primary">상담하기</button></a>
+								</c:otherwise>
+							</c:choose>
+							</sec:authorize>
+							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
+								<button class="btn btn-primary" onclick="noMember()">상담하기</button>
+							</sec:authorize>
+							<sec:authorize access="hasRole('MEMBER')">	
 							<c:if test="${pmemdetail.p_role ne 4}">
 								<form action="reservMember" name="reservForm" method="POST">
 									<input type="hidden" id="p_id" name="p_id" value="${pmemdetail.p_id}">
 									<button type="submit" class="btn btn-primary">예약하기</button>
 								</form>
 							</c:if>
+							</sec:authorize>
+							<sec:authorize access="hasRole('PARTNER') OR isAnonymous()">	
+									<button type="submit" class="btn btn-primary" onclick="noMember()">예약하기</button>
+							</sec:authorize>
 						<%-- 	<c:if test="${counsel.m_id qe  }">
 								<button class="btn btn-primary">신고하기</button></a>
 							</c:if> --%>
@@ -266,7 +283,7 @@
 	</section>
 	
 	<script>
-
+	console.log("펫"+${petList});
 		//추천버튼
 		function likeHit1(p_id){
 			$.ajax({
@@ -369,6 +386,9 @@
 		
 		function noMember() {
 			Swal.fire('일반회원이 아닙니다.');
+		}
+		function noPet() {
+			Swal.fire('반려동물 정보를<br> 등록해주세요.');
 		}
 		//별점
 		$(function () {

@@ -35,6 +35,7 @@ import com.last.prj.mem.service.MemVO;
 import com.last.prj.mem.service.PetcareVO;
 import com.last.prj.mem.service.PmemService;
 import com.last.prj.mem.service.PriceVO;
+import com.last.prj.pet.service.PetService;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberMapper;
@@ -66,6 +67,8 @@ public class PmemberController {
 	@Autowired
 	private FollowService followDao;
 	@Autowired
+	private PetService petDAO;
+	@Autowired
 	private ServletContext sc;
 	@Autowired
 	private FfileUtil ffileutil;
@@ -95,6 +98,7 @@ public class PmemberController {
 				hit.setP_id(p_id);
 				hit.setM_id(m_id);
 				model.addAttribute("like",likehitDao.likeCheck(hit));
+				model.addAttribute("petList", petDAO.petmemberList(m_id));
 				follow.setM_id(m_id);
 				follow.setP_id(p_id);
 				model.addAttribute("follow",followDao.followCheck(follow));
