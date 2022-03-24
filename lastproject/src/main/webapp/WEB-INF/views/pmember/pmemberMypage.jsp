@@ -237,6 +237,18 @@
 									<h3 style="font-weight: bolder;">전문분야&nbsp;&nbsp;</h3></div>
 									<input type="text" style="border: none" id="speciality" name="speciality"value="${pmember.speciality}" readonly>
 								</div>
+								
+									<div class="form-group">
+									<div class="control-width"><i class="fa-solid fa-award"></i>
+									<h3 style="font-weight: bolder;">진료가능한 동물&nbsp;&nbsp;</h3></div>
+									<h3 style="font-weight: normal">
+									<c:forEach items="${pets }" var="pets" >
+													${pets.c_content }&nbsp;
+									</c:forEach>
+								</h3>
+								
+								
+								
 								<div class="form-group" style="width: 800px;">
 									<div class="row" id="middle">
 										<div class="col-6" style="padding-left: 10px;">

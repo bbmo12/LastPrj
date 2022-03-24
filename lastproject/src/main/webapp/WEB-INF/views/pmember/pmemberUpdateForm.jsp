@@ -260,6 +260,19 @@ i {
 		var w_nameJ = /^.{1,30}$/;
 		
 		$(document).ready(function () {
+			
+			for(i=0 ; i <= ${pets}.length; i++) {
+				console.log(${pets}.length)
+				console.log(${pets})
+				$('input[type="checkbox"][name="code"]').each(function(){
+			if($(this).val() == ${pets}[i]){
+				$(this).prop('checked', true);
+			}
+		})
+			}
+			
+			
+			
 			/* 아이디 중복체크 */
 			$('form').on('submit', function () {
 				var inval_Arr = new Array(11).fill(false);
@@ -636,6 +649,56 @@ i {
 									</div>
 								</div>
 							</div>
+							
+							
+							
+							
+							<div class="card">
+								<div class="card-header que">
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;진료가능동물 수정
+								</div>
+								<div class="card-body anw" style="padding: 15px">
+									<label for="code0">개
+								<input type="checkbox" id="code0" name="code" value="501"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code1">고양이
+								<input type="checkbox" id="code1" name="code" value="502"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code2">조류
+								<input type="checkbox" id="code2" name="code" value="503"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code3">파충류
+								<input type="checkbox" id="code3" name="code" value="504"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code4">어류
+								<input type="checkbox" id="code4" name="code" value="505"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code5">토끼
+								<input type="checkbox" id="code5" name="code" value="506"><span class="checkmark"></span>
+							</label>&emsp;<br>
+							<label for="code6">돼지
+								<input type="checkbox" id="code6" name="code" value="507"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code7">햄스터
+								<input type="checkbox" id="code7" name="code" value="508"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code8">미어켓
+								<input type="checkbox" id="code8" name="code" value="509"><span class="checkmark"></span>
+							</label>&emsp;
+							<label for="code9">여우
+								<input type="checkbox" id="code9" name="code" value="510"><span class="checkmark"></span>
+								</label>&emsp;
+							<label for="code10">거미
+								<input type="checkbox" id="code10" name="code" value="511"><span class="checkmark"></span>
+								</label>&emsp;
+								</div>
+							</div>
+							
+							
+							
+							
+							
+							
 							<div class="card">
 								<div class="card-header que">
 									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;사업장 정보 수정

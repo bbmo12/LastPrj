@@ -205,7 +205,7 @@
 				if (nameJ.test($(this).val())) {
 					$("#w_name_check").text('');
 				} else {
-					$('#w_name_check').text('한글 2~4자 이내로 입력하세요. (특수기호, 공백 사용 불가)');
+					$('#w_name_check').text('특수기호, 공백 사용 불가');
 					$('#w_name_check').css('color', 'red');
 				}
 			});
@@ -286,7 +286,7 @@
 								<div id="p_info_check"></div>
 							</div>
 							<div class="form-group">
-								<label>대표경력</label>
+								<label>경력</label>
 								<textarea class="form-control" id="career" name="career"
 									placeholder="대표경력" rows="4" cols="130"></textarea>
 								<div id="career_check"></div>
