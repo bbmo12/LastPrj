@@ -406,7 +406,7 @@
 					result[i].r_date +
 					"</td><td>" +
 					result[i].time +
-					"</td><td>" +
+					"</td><td class='card-text'>" +
 					result[i].rcontent +
 					"</td><td>" +
 					result[i].pcontent +

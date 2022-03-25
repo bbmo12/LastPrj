@@ -52,7 +52,7 @@
 <script>
 var result = '${resultMsg2}';
 if(result === 'result2'){
-	alert("아이디를 확인해주세요.");
+	swal("존재하지 않는 아이디입니다.", "아이디를 확인해주세요.", "warning");
 }
 </script>
 </body>

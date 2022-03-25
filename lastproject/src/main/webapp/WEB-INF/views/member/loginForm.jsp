@@ -94,7 +94,7 @@
 	
 	var result = '${resultMsg1}';
 	if(result === 'result1'){
-		alert("임시 비밀번호가 발급되었습니다. 메일을 확인해주세요.");
+		swal("임시 비밀번호 발급", "메일을 확인해주세요.", "success");
 	}
 		/* function login() {
 			$.ajax({
