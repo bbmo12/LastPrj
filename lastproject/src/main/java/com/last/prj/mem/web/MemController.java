@@ -630,6 +630,8 @@ public class MemController {
 	public String getKakaoAuthUrl(HttpServletRequest request)  throws Exception {
 		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=47ef13464842c3a22235787a9d64e6fc"
 				+ "&redirect_uri=http://3.229.152.163:8080/dologin" + "&response_type=code";
+		/*+ "&redirect_uri=http://3.229.152.163:8080/dologin" + "&response_type=code";*/
+		
 		return reqUrl;
 	}
 
@@ -705,8 +707,11 @@ public class MemController {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=47ef13464842c3a22235787a9d64e6fc"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http:/3.229.152.163:8080/dologin"); // 본인이 설정해 놓은 경로
-			sb.append("&code=" + authorize_code);
+			sb.append("&redirect_uri=http://3.229.152.163:8080/dologin"); // 본인이 설정해 놓은 경로
+			/*
+			 * sb.append("&redirect_uri=http://3.229.152.163:8080/dologin"); // 본인이 설정해 놓은
+			 * 경로
+			 */			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();
 
