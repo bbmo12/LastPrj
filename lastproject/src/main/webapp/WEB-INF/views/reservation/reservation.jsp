@@ -128,7 +128,8 @@
 	}
 
 	.card-text {
-		width: 200px;
+		display: inline-block;
+		width: 150px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
