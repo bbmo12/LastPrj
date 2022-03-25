@@ -47,7 +47,7 @@ public class MemVO {
 	private PagingVO vo;
 	private Criteria cri;
 	private String total;
-	//private Integer code;
+	private Integer codem;
 	private String tt;
 	private String oo;
 	
