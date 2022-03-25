@@ -272,7 +272,7 @@
 												<thead>
 													<tr style="text-align: center;">
 														<th>예약번호</th>
-														<th>수의사 이름</th>
+														<th>이름</th>
 														<th>예약신청일자</th>
 														<th>예약시간</th>
 														<th>예약내용</th>
@@ -414,7 +414,7 @@
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
 					result[i].rccontent +
-					"</td><td class='card-text'>"
+					"</td><td>"
 				if (result[i] != 'null') {
 					result[i].refuse
 				} +

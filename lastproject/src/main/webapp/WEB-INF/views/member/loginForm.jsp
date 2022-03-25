@@ -19,6 +19,11 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
+	
+	.swal2-content{
+		display: none;
+	}
+	
 </style>
 
 <body class="my-login-page">
@@ -94,7 +99,7 @@
 	
 	var result = '${resultMsg1}';
 	if(result === 'result1'){
-		swal("임시 비밀번호 발급", "메일을 확인해주세요.", "success");
+		Swal.fire("임시 비밀번호 발급", "메일을 확인해주세요.", "success");
 	}
 		/* function login() {
 			$.ajax({
