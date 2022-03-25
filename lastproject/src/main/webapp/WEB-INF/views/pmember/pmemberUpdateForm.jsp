@@ -70,7 +70,7 @@
 	}
 
 	#p-info {
-		margin-left: 8em;
+		margin-left: 5em;
 		margin-top: -20px;
 	}
 
@@ -237,6 +237,11 @@
 	.anw::before {
 		display: inline-block;
 	}
+	.list{
+		overflow-y: scroll !important;
+   		white-space: nowrap;
+    	height: 400px;
+	}
 </style>
 <script>
 	//모든 공백 체크 정규식
@@ -262,25 +267,15 @@
 
 	$(document).ready(function () {
 
-		for (i = 0; i <= $ {
-				pets
-			}.length; i++) {
-			console.log($ {
-				pets
-			}.length)
-			console.log($ {
-				pets
-			})
-			$('input[type="checkbox"][name="code"]').each(function () {
-				if ($(this).val() == $ {
-						pets
-					} [i]) {
-					$(this).prop('checked', true);
-				}
-			})
-		}
-
-
+		for(i=0 ; i <= ${pets}.length; i++) {
+			console.log(${pets}.length)
+			console.log(${pets})
+			$('input[type="checkbox"][name="code"]').each(function(){
+		if($(this).val() == ${pets}[i]){
+			$(this).prop('checked', true);
+			}
+		})
+	}
 
 		/* 아이디 중복체크 */
 		$('form').on('submit', function () {
@@ -772,7 +767,8 @@
 														<option value='12:00' <c:if test="${timeList.starttime == '12:00' }">selected</c:if>>12:00</option>
 														<option value='12:30' <c:if test="${timeList.starttime == '12:30' }">selected</c:if>>12:30</option>
 													</select> 
-													<select id="selectEnd" name="timeVOList[${status.index}].endtime">
+													<select id="selectEnd" name="timeVOList[${status.index}].endtime" >
+														<option value='12:30' <c:if test="${timeList.endtime == '12:30' }">selected</c:if>>12:30</option>
 														<option value='13:00' <c:if test="${timeList.endtime == '13:00' }">selected</c:if>>13:00</option>
 														<option value='13:30' <c:if test="${timeList.endtime == '13:30' }">selected</c:if>>13:30</option>
 														<option value='14:00' <c:if	test="${timeList.endtime == '14:00' }">selected</c:if>>14:00</option>
@@ -803,7 +799,7 @@
 									</div>
 									<button type="button" class="genric-btn info radius" id="addDiv"onclick="plusTime()">시간추가</button>
 									<br>
-									<p style="margin: -20px 0 0 9em;">운영시간을 더 추가 하시러면 시간추가 버튼을 눌러주세요.</p>
+									<p style="margin: -20px 0 0 6em;">운영시간을 더 추가 하시러면 시간추가 버튼을 눌러주세요.</p>
 									<div class="form-group" style="margin-bottom: 0px;">
 										<i class="fa-solid fa-clipboard-list"></i>
 										<h3 style="font-weight: bolder;" id="add-service">서비스정보</h3>
@@ -937,9 +933,7 @@
 			countService++;
 			var select = document.getElementById('plus-div');
 			var div = document.getElementById('add-div');
-			var eleCount = $ {
-				fn: length(price)
-			};
+			var eleCount = ${fn:length(price)};
 			var formValue = Number(document.getElementById("service" + (eleCount - 1)).value);
 			var tagData = $(`<div class="form-group" style="margin-bottom: 10px;">
 					<input type="hidden" name="priceVOList[\${eleCount+countService}].price_no" value="\${formValue+countService}" id="service\${eleCount+countService}">
@@ -968,9 +962,7 @@
 			count++;
 			var select = document.getElementById('select-one');
 			var form = document.getElementById('form-time');
-			var eleCount = $ {
-				fn: length(time)
-			}; //form.childElementCount; // /* div갯수 구하기 */
+			var eleCount = ${fn:length(time)}; //form.childElementCount; // /* div갯수 구하기 */
 			var formValue = Number(document.getElementById(eleCount - 1).value);
 			var tagData =
 				$(`		<div>
@@ -989,16 +981,18 @@
 						<option value='' selected>오픈시간</option>
 						<option value='9:00'>9:00</option>
 						<option value='9:30'>9:30</option>
+						<option value='10:00'>10:00</option>
 						<option value='10:30'>10:30</option>
 						<option value='11:00'>11:00</option>
 						<option value='12:00'>12:00</option>
 						<option value='12:30'>12:30</option>				
 					</select>																					
-					<select class="selectday\${eleCount+count}" name="timeVOList[\${eleCount+count}].endtime">
+					<select class="selectday\${eleCount+count}" name="timeVOList[\${eleCount+count}].endtime" >
 						<option value='' selected>마감시간</option>
+						<option value='12:30'>12:30</option>
 						<option value='13:00'>13:00</option>
 						<option value='13:30'>13:30</option>
-						<option value='14:00'>14:00</option>
+						<option value='14:00'>14:00</option> 
 						<option value='14:30'>14:30</option>
 						<option value='15:00'>15:00</option>
 						<option value='15:30'>15:30</option>

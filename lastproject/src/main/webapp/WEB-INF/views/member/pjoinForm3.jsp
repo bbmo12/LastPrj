@@ -10,7 +10,13 @@
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
-
+<style>
+.list{
+		overflow-y: scroll !important;
+   		white-space: nowrap;
+    	height: 400px;
+	}
+</style>
 <body class="my-login-page">
 	<div class="container">
 		<div class="row justify-content-md-center" style="margin-top: 7em; height: 1500px;">
@@ -37,13 +43,15 @@
 								<option value='' selected>오픈시간</option>
 								<option value='9:00'>9:00</option>
 								<option value='9:30'>9:30</option>
+								<option value='10:00'>10:00</option>
 								<option value='10:30'>10:30</option>
 								<option value='11:00'>11:00</option>
 								<option value='12:00'>12:00</option>
 								<option value='12:30'>12:30</option>
 							</select>
-							<select id="endtime" name="endtime">
+							<select id="endtime" name="endtime" >
 								<option value='' selected>마감시간</option>
+								<option value='12:30'>12:30</option>
 								<option value='13:00'>13:00</option>
 								<option value='13:30'>13:30</option>
 								<option value='14:00'>14:00</option>
