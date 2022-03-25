@@ -397,7 +397,8 @@
 			$("#myTable").empty();
 
 			$.each(result, function (i) {
-
+				console.log(result[i].refuse)
+				if(result[i].refuse != null ){
 				var choicedTag = "<tr><td>" +
 					result[i].r_no +
 					"</td><td>" +
@@ -413,11 +414,29 @@
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
 					result[i].rccontent +
-					"</td><td>"
-				if (result[i] != 'null') {
-					result[i].refuse
-				} +
-				"</td>";
+					"</td><td>" +
+					result[i].refuse +
+					"</td>";
+				}else if (result[i].refuse == null){
+					var choicedTag = "<tr><td>" +
+					result[i].r_no +
+					"</td><td>" +
+					result[i].name +
+					"</td><td class='card-text'>" +
+					result[i].r_date +
+					"</td><td>" +
+					result[i].time +
+					"</td><td>" +
+					result[i].rcontent +
+					"</td><td>" +
+					result[i].pcontent +
+					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
+					.rccontent + ">" +
+					result[i].rccontent +
+					"</td><td>" +
+					''+
+					"</td>";
+				}
 
 				if (result[i].code == 405) {
 					if (result[i].r_check == 0) {
@@ -431,7 +450,6 @@
 					choicedTag += '<td><button class="btn btn-primary" disabled>리뷰 작성</button></td></tr>';
 				}
 				$("#myTable").append(choicedTag);
-				console.log($("#td" + i).text());
 				if ($("#td" + i).text() == '진료완료') {
 
 				} else if ($("#td" + i).text() == '승인거절') {
