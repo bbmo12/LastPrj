@@ -229,7 +229,6 @@
 														<tr style="text-align: center;">
 															<th>예약번호</th>
 															<th>예약신청일자</th>
-															<th>예약일자</th>
 															<th>예약시간</th>
 															<th>예약자 이름</th>
 															<th>품종</th>
@@ -247,7 +246,7 @@
 													<tr>
 														<td><input class="rno" type="hidden" value="${pres.r_no }">${pres.r_no }</td>
 														<td>${pres.rd_date }</td>
-														<td>${pres.r_date}</td>
+														
 														<td><input type="hidden" value="${pres.startdate }"><input type="hidden" value="${pres.time }">${pres.startdate }&nbsp; ${pres.time }</td>
 														<td>${pres.m_id }</td>
 														<td>${pres.pcontent }
@@ -317,7 +316,7 @@
 				$(".diaLog").empty();
 				
 				var reservDate = $(val[i]).parent().children().first().next().next().next().text();
-				var reservVal = $(val[i]).parent().children().first().next().next().next().text().slice(8,10)+$(val[i]).parent().children().first().next().next().next().text().slice(12,14);
+				var reservVal = $(val[i]).parent().children().first().next().next().text().slice(8,10)+$(val[i]).parent().children().first().next().next().next().text().slice(12,14);
 				console.log("현재시간",parseInt(today.format('DDHH')),"받아온값",reservVal);
 				if(parseInt(reservVal) <= parseInt(today.format('DDHH')) ){
 					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
@@ -429,7 +428,7 @@
 						console.log(account);
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				         .send({from: account, gas:3000000})
-				         .then(function(result){console.log("블록체인 체크 : " + result);})
+				         .then(function(result){console.log(location.reload());})
 					}
 				}); 
 		});
