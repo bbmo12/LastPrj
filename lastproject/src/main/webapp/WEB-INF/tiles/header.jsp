@@ -354,7 +354,21 @@
 							</sec:authorize>
 							<sec:authorize access="hasRole('ADMIN')">
 							<li><a href="adminPage">관리자</a></li>
-							<li><a href="logout">로그아웃</a></li>
+							<li class="nav-item dropdown">
+									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
+										<div class="box" style="width:15px; display:inline-block;"></div>
+										
+									</a>
+									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+										aria-labelledby="notificationDropdown">
+										<h6 class="notification">알림</h6>
+										<div class="dropdown-divider"></div>
+										<div id="noticeli"></div>										
+									<div>
+										<a href="mainMypage" id="seeall">See all notifications</a>
+									</div>
+									</div>
+								</li>
 							</sec:authorize>
 						</ul>
 					</nav>
