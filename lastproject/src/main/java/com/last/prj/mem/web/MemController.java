@@ -209,6 +209,7 @@ public class MemController {
 	}
 	
 	
+	
 	// 내정보 수정페이지로 이동
 	@RequestMapping("/memberUpdateForm")
 	public String memberUpdateFrom(Model model, Principal principal) {
@@ -385,8 +386,11 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			String newPath = uploadPath + File.separator + saveFileName;
-			File saveFile = new File(newPath);
+			
+			  String newPath = uploadPath + File.separator + saveFileName;
+			   File saveFile = new File(newPath);
+			
+			
 			try {
 				file.transferTo(saveFile);
 				member.setPicture(originalFileName);
@@ -465,8 +469,8 @@ public class MemController {
 			String uuid = UUID.randomUUID().toString();
 			String saveFileName = uuid + originalFileName.substring(originalFileName.lastIndexOf("."));
 			
-			uploadPath += File.separator + saveFileName;
-			File saveFile = new File(uploadPath);
+			String newPath = uploadPath + File.separator + saveFileName;
+			File saveFile = new File(newPath);
 			
 			try {
 				file.transferTo(saveFile);
@@ -581,8 +585,11 @@ public class MemController {
 	@RequestMapping("/geturi.do")
 	@ResponseBody
 	public String getKakaoAuthUrl(HttpServletRequest request)  throws Exception {
-		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=4d9bf8440961990c01be57d9bd5e6fba"
-				+ "&redirect_uri=https://localhost/prj" + "&response_type=code";
+
+		String reqUrl = "https://kauth.kakao.com/oauth/authorize" + "?client_id=47ef13464842c3a22235787a9d64e6fc"
+				+ "&redirect_uri=http://3.229.152.163:8080/dologin" + "&response_type=code";
+		/*+ "&redirect_uri=http://3.229.152.163:8080/dologin" + "&response_type=code";*/
+		
 		return reqUrl;
 	}
 
@@ -657,9 +664,14 @@ public class MemController {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=4d9bf8440961990c01be57d9bd5e6fba"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost/prj/dologin"); // 본인이 설정해 놓은 경로
-			sb.append("&code=" + authorize_code);
+
+			sb.append("&client_id=47ef13464842c3a22235787a9d64e6fc"); // 본인이 발급받은 key
+			sb.append("&redirect_uri=http://3.229.152.163:8080/dologin"); // 본인이 설정해 놓은 경로
+			/*
+			 * sb.append("&redirect_uri=http://3.229.152.163:8080/dologin"); // 본인이 설정해 놓은
+			 * 경로
+			 */			sb.append("&code=" + authorize_code);
+
 			bw.write(sb.toString());
 			bw.flush();
 

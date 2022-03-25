@@ -142,7 +142,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img" src="/upload/${pmember.pfile}"
-								onerror="this.src='resources/upload/pet.jpg'"style="width: 210px; height: 167px;">
+								onerror="this.src='resources/upload/pet.PNG'"style="width: 210px; height: 167px;">
 							<br><br>
 							<h4 id="Mainname">${pmember.name }님</h4>
 							<div class="br"></div>
@@ -230,12 +230,12 @@
 								<div class="form-group">
 									<div class="control-width"><i class="fa-solid fa-star"></i>
 									<h3 style="font-weight: bolder;">경력&nbsp;&nbsp;</h3></div>
-									<input type="text" style="border: none" id="career" name="career"value="${pmember.career}" readonly>
+									<input type="text" style="border: none; width: 450px;" id="career" name="career"value="${pmember.career}" readonly>
 								</div>
 								<div class="form-group">
 									<div class="control-width"><i class="fa-solid fa-award"></i>
 									<h3 style="font-weight: bolder;">전문분야&nbsp;&nbsp;</h3></div>
-									<input type="text" style="border: none" id="speciality" name="speciality"value="${pmember.speciality}" readonly>
+									<input type="text" style="border: none;width: 450px;" id="speciality" name="speciality"value="${pmember.speciality}" readonly>
 								</div>
 								
 									<div class="form-group">
