@@ -215,6 +215,10 @@ $(document).ready(function(){
 			data : {"p_id" : p_id},
 			dataType : "JSON",
 			success : function(result){
+				if(result.length== 0){
+					alert("해당 예약일정이 없습니다.");
+					history.back();
+				}
 				for(var i =0;i<result.length;i++){
 					
 				var id = result[i].id;
