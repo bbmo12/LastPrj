@@ -98,8 +98,8 @@
 				FROM ( SELECT ROWNUM RN, A.*
 					   FROM (SELECT P_ID, NAME, PFILE, CODE
 							 FROM P_MEMBER
-		        WHERE CODE = #{code} ORDER BY NAME
-		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>) A)
+		        WHERE CODE = #{code} 
+		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if> ORDER BY NAME ) A)
 			WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
 		AND (#{pageNum})*#{amount}
 	</select>
@@ -107,8 +107,9 @@
 	<select id="memberPage" resultType="int">
 		SELECT COUNT(*) AS total
 			FROM P_MEMBER
-		WHERE CODE = #{code} ORDER BY NAME
+		WHERE CODE = #{code} 
 		<if test="w_address != null and w_address != ''">AND W_ADDRESS LIKE '%'||#{w_address}||'%'</if>
+		ORDER BY NAME
 	</select>
 
 	<!-- 파트너정보수정 -->
