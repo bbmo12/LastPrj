@@ -317,8 +317,9 @@
 				$(".diaLog").empty();
 				
 				var reservDate = $(val[i]).parent().children().first().next().next().next().text();
-				console.log("현재시간",today.format('YYYY-MM-DD HH시'),"받아온값",reservDate);
-				if(reservDate <= today.format('YYYY-MM-DD HH시') ){
+				var reservVal = $(val[i]).parent().children().first().next().next().next().text().slice(8,10)+$(val[i]).parent().children().first().next().next().next().text().slice(12,14);
+				console.log("현재시간",parseInt(today.format('DDHH')),"받아온값",reservVal);
+				if(parseInt(reservVal) <= parseInt(today.format('DDHH')) ){
 					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 				}else{
