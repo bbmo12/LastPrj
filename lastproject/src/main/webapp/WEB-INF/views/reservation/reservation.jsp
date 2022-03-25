@@ -128,7 +128,8 @@
 	}
 
 	.card-text {
-		width: 200px;
+		display: inline-block;
+		width: 150px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -413,7 +414,7 @@
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
 					result[i].rccontent +
-					"</td><td>"
+					"</td><td class='card-text'>"
 				if (result[i] != 'null') {
 					result[i].refuse
 				} +
