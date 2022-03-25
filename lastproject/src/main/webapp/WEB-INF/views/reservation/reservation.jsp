@@ -128,7 +128,8 @@
 	}
 
 	.card-text {
-		width: 200px;
+		display: inline-block;
+		width: 150px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -271,7 +272,7 @@
 												<thead>
 													<tr style="text-align: center;">
 														<th>예약번호</th>
-														<th>수의사 이름</th>
+														<th>이름</th>
 														<th>예약신청일자</th>
 														<th>예약시간</th>
 														<th>예약내용</th>
@@ -397,8 +398,28 @@
 			$("#myTable").empty();
 
 			$.each(result, function (i) {
-
+				console.log(result[i].refuse)
+				if(result[i].refuse != null ){
 				var choicedTag = "<tr><td>" +
+					result[i].r_no +
+					"</td><td>" +
+					result[i].name +
+					"</td><td class='card-text'>" +
+					result[i].r_date +
+					"</td><td>" +
+					result[i].time +
+					"</td><td class='card-text'>" +
+					result[i].rcontent +
+					"</td><td>" +
+					result[i].pcontent +
+					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
+					.rccontent + ">" +
+					result[i].rccontent +
+					"</td><td>" +
+					result[i].refuse +
+					"</td>";
+				}else if (result[i].refuse == null){
+					var choicedTag = "<tr><td>" +
 					result[i].r_no +
 					"</td><td>" +
 					result[i].name +
@@ -413,11 +434,10 @@
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
 					result[i].rccontent +
-					"</td><td>"
-				if (result[i] != 'null') {
-					result[i].refuse
-				} +
-				"</td>";
+					"</td><td>" +
+					''+
+					"</td>";
+				}
 
 				if (result[i].code == 405) {
 					if (result[i].r_check == 0) {
@@ -431,7 +451,6 @@
 					choicedTag += '<td><button class="btn btn-primary" disabled>리뷰 작성</button></td></tr>';
 				}
 				$("#myTable").append(choicedTag);
-				console.log($("#td" + i).text());
 				if ($("#td" + i).text() == '진료완료') {
 
 				} else if ($("#td" + i).text() == '승인거절') {
@@ -620,18 +639,19 @@
 						if (rsp.success) {
 							msg = '결제가 완료되었습니다.';
 							msg += '결제 금액 : ' + rsp.paid_amount;
-							
+							alert(msg);
+							payUpdate();
+							location.reload();
 							// success.submit();
 							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 						} else {
 							var msg = '결제에 실패하였습니다.';
 							msg += '에러내용 : ' + rsp.error_msg;
 						}
-						alert(msg);
+						
 						
 					});
-					payUpdate();
-					location.reload();
+					
 				}
 			});
 			//결제 완료 후 결제 내역 등록

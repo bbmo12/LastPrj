@@ -103,9 +103,11 @@ input:disabled {
 		   		 <select class="animalNo" onchange="NoSelection(event)">
 		   		 	<option value="" disabled selected  >펫 이름</option>
 					 <c:forEach items="${petList}" var="pet">
-					 		<c:if test="${pet.code eq careList.code }"> 
-		   		 				<option value="${pet.pet_no }">${pet.name }</option>
-		   		 			</c:if>
+					 	<c:forEach items="${careList }" var="careList" >
+						 		<c:if test="${pet.code eq careList.code }"> 
+			   		 				<option value="${pet.pet_no }">${pet.name }</option>
+			   		 			</c:if>
+		   		 			</c:forEach>
 		   		 	   </c:forEach>
 		   		 </select>
 		   		 </form>
@@ -213,6 +215,10 @@ $(document).ready(function(){
 			data : {"p_id" : p_id},
 			dataType : "JSON",
 			success : function(result){
+				if(result.length== 0){
+					alert("해당 예약일정이 없습니다.");
+					history.back();
+				}
 				for(var i =0;i<result.length;i++){
 					
 				var id = result[i].id;
@@ -461,7 +467,9 @@ $("#sendReserv").on('click',function(){
 	var r_content = $("#r_content").val();
 	//모달창 품종코드
 	var animalType = $(".animalType option:selected").val();
-	
+	if(r_content == '' || animalType == ''){
+		toastr.error('예약내용과 펫 이름을 지정해주세요.');
+	}
 	//파트너회원아이디값
 	var p_id = "${pmember.p_id}";
 	//펫번호
@@ -487,9 +495,7 @@ $("#sendReserv").on('click',function(){
 			$("#reservbutton").empty();
 			
 		},
-		error : function(){
-			alert("ajax 에러");
-		}
+		
 	})
 })
 $('#exampleModal').on('hidden.bs.modal', function(e) {

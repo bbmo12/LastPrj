@@ -17,6 +17,10 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
+	
+	.swal2-content{
+		display: none;
+	}
 </style>
 <body class="my-login-page">
    <section class="h-100" id="main">
@@ -60,7 +64,7 @@
 <script>
 var result = '${resultMsg2}';
 if(result === 'result2'){
-	alert("아이디를 확인해주세요.");
+	Swal.fire("존재하지 않는<br>아이디입니다.", "아이디를 확인해주세요.", "warning");
 }
 </script>
 </body>

@@ -19,6 +19,11 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
+	
+	.swal2-content{
+		display: none;
+	}
+	
 </style>
 
 <body class="my-login-page">
@@ -94,7 +99,7 @@
 	
 	var result = '${resultMsg1}';
 	if(result === 'result1'){
-		alert("임시 비밀번호가 발급되었습니다. 메일을 확인해주세요.");
+		Swal.fire("임시 비밀번호 발급", "메일을 확인해주세요.", "success");
 	}
 		/* function login() {
 			$.ajax({
@@ -109,8 +114,26 @@
 		} */
 	</script>
 	<script>
+			//Kakao.init('47ef13464842c3a22235787a9d64e6fc');
 		//카카오로그인
 		function kakaoLogin() {
+			/* console.log(Kakao.isInitialized());
+			Kakao.Auth.login({
+				success : function(result){
+					Kakao.API.request({
+						url : '/v2/user/me',
+						success : function(result){
+							console.log(result.kakao_account.email)
+						},
+						fail : function(error){
+							console.log(error)
+						},
+					})
+				},
+				fail : function(error){
+					console.log(error);
+				}
+			}) */
 			$.ajax({
 				url: 'geturi.do',
 				type: 'get',
@@ -127,6 +150,7 @@
 					url: '/v1/user/unlink',
 					success: function (response) {
 						console.log(response)
+					
 					},
 					fail: function (error) {
 						console.log(error)

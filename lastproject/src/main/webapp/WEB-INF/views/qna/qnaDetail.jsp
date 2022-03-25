@@ -190,7 +190,7 @@
 									<td rowspan="2">
 										<i class="fa-solid fa-q fa-5x"
 											style="color: dodgerblue; margin-right: 20px;"></i>
-									<td style="width: 470px; font-size: 28px; color: black;">${qnaDetail.title }</td>
+									<td style="width: 470px; font-size: 24px; color: black;">${qnaDetail.title }</td>
 									<!-- 글 정보 -->
 									<td rowspan="2">
 										<ul id="postInfo" class="blog_meta list">

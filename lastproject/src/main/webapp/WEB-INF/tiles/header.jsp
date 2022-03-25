@@ -338,7 +338,7 @@
 								</li>
 								<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
-										<div class="box" style="width:40px; display:inline-block;"></div>
+										<div class="box" style="width:15px; display:inline-block;"></div>
 										
 									</a>
 									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
