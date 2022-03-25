@@ -127,6 +127,7 @@ public class ReservationController {
 					
 					System.out.println("ddddddddddddddddddddddddddddddd");
 					System.out.println(memDao.careList(p_id));
+					List<PetcareVO> careList = memDao.careList(p_id);
 					//달력리스트
 					List<CalendarVO> list = CalendarDao.revSetList(co);
 					
@@ -137,7 +138,7 @@ public class ReservationController {
 					List <PetVO> petCode = petDAO.petCodeSearch(userDetails.getMember().getM_id());
 					
 					//진료가능동물 값
-					model.addAttribute("careList",memDao.careList(p_id));
+					model.addAttribute("careList",careList);
 					model.addAttribute("petList",petList);
 					model.addAttribute("petCode",petCode);
 					model.addAttribute("reservset",list);

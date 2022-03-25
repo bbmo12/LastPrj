@@ -109,8 +109,26 @@
 		} */
 	</script>
 	<script>
+			//Kakao.init('47ef13464842c3a22235787a9d64e6fc');
 		//카카오로그인
 		function kakaoLogin() {
+			/* console.log(Kakao.isInitialized());
+			Kakao.Auth.login({
+				success : function(result){
+					Kakao.API.request({
+						url : '/v2/user/me',
+						success : function(result){
+							console.log(result.kakao_account.email)
+						},
+						fail : function(error){
+							console.log(error)
+						},
+					})
+				},
+				fail : function(error){
+					console.log(error);
+				}
+			}) */
 			$.ajax({
 				url: 'geturi.do',
 				type: 'get',
@@ -127,6 +145,7 @@
 					url: '/v1/user/unlink',
 					success: function (response) {
 						console.log(response)
+					
 					},
 					fail: function (error) {
 						console.log(error)

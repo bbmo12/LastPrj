@@ -103,9 +103,11 @@ input:disabled {
 		   		 <select class="animalNo" onchange="NoSelection(event)">
 		   		 	<option value="" disabled selected  >펫 이름</option>
 					 <c:forEach items="${petList}" var="pet">
-					 		<c:if test="${pet.code eq careList.code }"> 
-		   		 				<option value="${pet.pet_no }">${pet.name }</option>
-		   		 			</c:if>
+					 	<c:forEach items="${careList }" var="careList" >
+						 		<c:if test="${pet.code eq careList.code }"> 
+			   		 				<option value="${pet.pet_no }">${pet.name }</option>
+			   		 			</c:if>
+		   		 			</c:forEach>
 		   		 	   </c:forEach>
 		   		 </select>
 		   		 </form>
