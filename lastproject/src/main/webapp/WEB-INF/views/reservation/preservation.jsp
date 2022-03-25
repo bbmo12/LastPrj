@@ -316,9 +316,16 @@
 				$(".diaLog").empty();
 				
 				var reservDate = $(val[i]).parent().children().first().next().next().next().text();
-				var reservVal = $(val[i]).parent().children().first().next().next().text().slice(8,10)+$(val[i]).parent().children().first().next().next().next().text().slice(12,14);
-				console.log("현재시간",parseInt(today.format('DDHH')),"받아온값",reservVal);
-				if(parseInt(reservVal) <= parseInt(today.format('DDHH')) ){
+				var reservsplit = $(val[i]).parent().children().first().next().next().text().split('-');
+				var reservVal1 = reservsplit[0];
+				var reservVal2 = reservsplit[1];
+				var reservVal3 = reservsplit[2];
+				reservVal3 = reservVal3.slice(4,6);
+				var totalVal = reservVal1+reservVal2+reservVal3;
+				console.log(totalVal);
+				
+				
+				if(parseInt(totalVal) <= parseInt(today.format('MMDDHH')) ){
 					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 				}else{
