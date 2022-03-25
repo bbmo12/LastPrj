@@ -467,7 +467,9 @@ $("#sendReserv").on('click',function(){
 	var r_content = $("#r_content").val();
 	//모달창 품종코드
 	var animalType = $(".animalType option:selected").val();
-	
+	if(r_content == '' || animalType == ''){
+		toastr.error('예약내용과 펫 이름을 지정해주세요.');
+	}
 	//파트너회원아이디값
 	var p_id = "${pmember.p_id}";
 	//펫번호
@@ -493,9 +495,7 @@ $("#sendReserv").on('click',function(){
 			$("#reservbutton").empty();
 			
 		},
-		error : function(){
-			alert("ajax 에러");
-		}
+		
 	})
 })
 $('#exampleModal').on('hidden.bs.modal', function(e) {
