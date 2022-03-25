@@ -670,7 +670,9 @@ public class MemController {
 			/*
 			 * sb.append("&redirect_uri=http://3.229.152.163:8080/dologin"); // 본인이 설정해 놓은
 			 * 경로
-			 */			sb.append("&code=" + authorize_code);
+
+			 */
+			sb.append("&code=" + authorize_code);
 
 			bw.write(sb.toString());
 			bw.flush();
