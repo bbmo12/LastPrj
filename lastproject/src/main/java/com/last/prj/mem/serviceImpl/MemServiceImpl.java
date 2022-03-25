@@ -171,7 +171,7 @@ public class MemServiceImpl implements MemService {
 	}
 
 	@Override
-	public PetcareVO careList(String p_id) {
+	public List<PetcareVO> careList(String p_id) {
 		return map.careList(p_id);
 	}
 

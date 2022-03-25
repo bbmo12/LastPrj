@@ -55,14 +55,14 @@ public class CalendarController {
 					System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 					System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
 					vo.setP_id(p_id);
-					CalendarDao.revSetInsert(vo); //등록
+					 CalendarDao.revSetInsert(vo); //등록
 					return vo;
 				}
 		 }
 		return null;
 	}
 	
-	//파트너회원 예약설정 삭제
+	//파트너회원 예약설정 삭제`
 	@PostMapping("revsetdelete")
 	@ResponseBody
 	public String revSetDelete(@RequestParam("p_id")String p_id,CalendarVO vo,ReservCountVO rco) {

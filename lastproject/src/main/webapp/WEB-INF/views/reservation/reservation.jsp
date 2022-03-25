@@ -620,18 +620,19 @@
 						if (rsp.success) {
 							msg = '결제가 완료되었습니다.';
 							msg += '결제 금액 : ' + rsp.paid_amount;
-							
+							alert(msg);
+							payUpdate();
+							location.reload();
 							// success.submit();
 							// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 						} else {
 							var msg = '결제에 실패하였습니다.';
 							msg += '에러내용 : ' + rsp.error_msg;
 						}
-						alert(msg);
+						
 						
 					});
-					payUpdate();
-					location.reload();
+					
 				}
 			});
 			//결제 완료 후 결제 내역 등록

@@ -83,7 +83,6 @@ body {
 		var loginForm =`
 			<div class="brand" align="center">
 			<img src="resources/login/logo.jpg" alt="logo">
-			
 			<h2 align="center">일반회원 회원가입</h2>
 			<br> <br> <br>
 		</div>
