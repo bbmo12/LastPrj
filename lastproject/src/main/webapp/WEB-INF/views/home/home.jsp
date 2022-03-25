@@ -365,7 +365,7 @@ h1{
 	                
 					  <div id="qSection" class="card-body">
 					    <span style="color:#4C4C4C; font-size:20px;">
-					    <i class="fa-solid fa-q fa-lg" style="color: dodgerblue; margin-right: 20px;"></i>
+					    <i class="fa-solid fa-q fa-lg" style="color: dodgerblue; margin-right: 20px;"></i></span><span>
 					    ${recent.title }</span>
 					    <hr>
 					    <p class="card-text">${recent.content}</p>
