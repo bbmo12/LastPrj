@@ -49,7 +49,7 @@
 			border-radius: 30px;
 			
 			margin: 10px 5px 0 0;
-			width: 80px;
+			
 			
 			display: inline-block;
 			font-size: 14px;
