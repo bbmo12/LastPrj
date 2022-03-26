@@ -365,10 +365,9 @@
 				var reservVal3 = reservsplit[2];
 				reservVal3 = reservVal3.slice(4,6);
 				var totalVal = reservVal1+reservVal2+reservVal3;
-				console.log(totalVal);
+				console.log("받은값",totalVal,"    현재시간",today.format('YYMMDDHH'));
 				
-				
-				if(parseInt(totalVal) <= parseInt(today.format('MMDDHH')) ){
+				if(parseInt(totalVal) <= parseInt(today.format('YYMMDDHH')) ){
 					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 				}else{
@@ -385,7 +384,7 @@
 			} else if (val[i].innerText == '결제가능'){
 				val[i].classList.add("warn");
 				$(".warn").empty();
-				var check = $(".warn").append(`<label class="badge badge-warning">결제가능</label>`);
+				var check = $(".warn").append(`<label class="badge badge-warning">결제대기</label>`);
 			}
 			
 		}

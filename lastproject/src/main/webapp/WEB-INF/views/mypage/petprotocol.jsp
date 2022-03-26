@@ -270,7 +270,7 @@
 													data-code="103">돌봄서비스</button>
 												<button type="button" class="codep" style="margin-right: 30px;"
 													id="block_chain">블록체인진료기록</button>
-												<div id='blockChain'></div>
+												<div id='blockChain' style="margin-left : 5px"></div>
 											</div>
 										</div>
 										<div class="table-wrap" style="width: 950px;margin-top: 20px;">
