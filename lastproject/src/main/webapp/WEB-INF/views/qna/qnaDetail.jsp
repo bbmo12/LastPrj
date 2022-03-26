@@ -624,10 +624,6 @@
 					alert('신고 접수가 완료되었습니다.');
 					
 					diaWebAlert(reported); // 신고 알람 보내기
-					
-					
-					
-					
 					location.reload();
 				},
 				error: function () {
@@ -640,9 +636,7 @@
 		
 		//신고접수 알람 보내기 : 게시글
 		function diaWebAlert(id) {
-
          var content = "작성하신 게시글이 신고되었습니다";
-         var id = 'admin';
          // 전송한 정보를 db에 저장   
          $.ajax({
             type: 'post',
@@ -725,10 +719,6 @@
          }) // end신고했다고 알람 보내기
 		}
 		
-		
-		
-		
-
 		/*질문 삭제 ajax*/
 		function qDelete(no) {
 			console.log(no);
@@ -742,6 +732,7 @@
 				}
 			}
 		}
+		
 
 		/*답변글 신고 시 글 번호, 글쓴이 넘김*/
 		function transferQno(no, writer) {
