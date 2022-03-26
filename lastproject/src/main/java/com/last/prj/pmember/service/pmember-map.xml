@@ -339,14 +339,21 @@
 	</delete>
 	
 		<!--기간 별 차트 그리기  -->
-		<select id="admPmemChart" resultType="com.last.prj.pmember.service.PmemberVO">
-			SELECT 
-			    TO_CHAR(STARTDATE, 'YYYY-MM')AS AA,
-			    COUNT(*)AS BB
+		<select id="admPmemChart" parameterType="String" resultType="com.last.prj.pmember.service.PmemberVO">
+			SELECT TO_CHAR(B.DT,'YYYY-MM') AS AA, NVL(SUM(A.CNT),0) BB
+			FROM ( SELECT TO_CHAR(STARTDATE,'YYYY-MM-DD')AS STARTDATE, COUNT(*)CNT
 			FROM P_MEMBER
-			WHERE STARTDATE IS NOT NULL
-			GROUP BY 
-			TO_CHAR(STARTDATE, 'YYYY-MM')
+			WHERE STARTDATE BETWEEN TO_DATE(#{fromDate},'YYYY-MM-DD')AND TO_DATE(#{toDate},'YYYY-MM-DD')
+			GROUP BY STARTDATE)A,
+			
+			(SELECT TO_DATE(#{fromDate},'YYYY-MM-DD') + LEVEL - 1 AS DT
+			FROM DUAL
+			<![CDATA[
+			CONNECT BY LEVEL <= (TO_DATE(#{toDate},'YYYY-MM-DD') - TO_DATE(#{fromDate},'YYYY-MM-DD') + 1))B]]>
+			
+			WHERE B.DT = A.STARTDATE(+)
+			GROUP BY TO_CHAR(B.DT, 'YYYY-MM')
+			ORDER BY TO_CHAR(B.DT, 'YYYY-MM')
 		</select>
 	
 		<select id="pMemCode" resultType="int" parameterType="String" >

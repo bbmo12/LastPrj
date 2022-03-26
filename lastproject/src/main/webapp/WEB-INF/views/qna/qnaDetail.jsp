@@ -607,6 +607,9 @@
 	<script>
 		/*질문글 신고 모달*/
 		$('#sendReport').click(function () {
+			var reported = $('#reported').val();
+			console.log (reported);
+			
 			$.ajax({
 				method: "POST",
 				url: "newQnaReport",
@@ -619,6 +622,12 @@
 				},
 				success: function () {
 					alert('신고 접수가 완료되었습니다.');
+					
+					diaWebAlert(reported); // 신고 알람 보내기
+					
+					
+					
+					
 					location.reload();
 				},
 				error: function () {
@@ -626,6 +635,99 @@
 				}
 			})
 		})
+		
+		
+		
+		//신고접수 알람 보내기 : 게시글
+		function diaWebAlert(id) {
+
+         var content = "작성하신 게시글이 신고되었습니다";
+         var id = 'admin';
+         // 전송한 정보를 db에 저장   
+         $.ajax({
+            type: 'post',
+            url: 'noticeInsert',
+            dataType: 'text',
+            data: {
+               "n_to": id,
+               "content": content
+            },
+            success: function () { // db전송 성공시 실시간 알림 전송
+               // 소켓에 전달되는 메시지
+               // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+               socket.send(id + "," + content);
+               alert("해당 작성자에게 신고 접수 알람이 전송되었습니다.");
+               //location.reload();
+            },
+            error: function (error) {
+               console.log(error);
+               alert("실패");
+            }
+         }) // end신고했다고 알람 보내기
+		}
+		
+		// 신고접수 알람 보내기 : 게시글 답변
+		function diaWebAlertAdm(id) {
+		
+         var content = "작성하신 게시글 답변이 신고되었습니다";
+         var id = 'admin';
+         
+         // 전송한 정보를 db에 저장   
+         $.ajax({
+            type: 'post',
+            url: 'noticeInsert',
+            dataType: 'text',
+            data: {
+               "n_to": id,
+               "content": content
+            },
+            success: function () { // db전송 성공시 실시간 알림 전송
+               // 소켓에 전달되는 메시지
+               // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+               socket.send(id + "," + content);
+               alert("전송되었습니다.");
+               //location.reload();
+            },
+            error: function (error) {
+               console.log(error);
+               alert("실패");
+            }
+         }) // end신고했다고 알람 보내기
+		}
+		
+         
+		//관리자에게 신고접수 알람 보내기
+		function diaWebAlertAdm(id) {
+		
+         var content = "작성하신 게시글 답변이 신고되었습니다";
+         var id = 'admin';
+         
+         // 전송한 정보를 db에 저장   
+         $.ajax({
+            type: 'post',
+            url: 'noticeInsert',
+            dataType: 'text',
+            data: {
+               "n_to": id,
+               "content": content
+            },
+            success: function () { // db전송 성공시 실시간 알림 전송
+               // 소켓에 전달되는 메시지
+               // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+               socket.send(id + "," + content);
+               alert("전송되었습니다.");
+               //location.reload();
+            },
+            error: function (error) {
+               console.log(error);
+               alert("실패");
+            }
+         }) // end신고했다고 알람 보내기
+		}
+		
+		
+		
+		
 
 		/*질문 삭제 ajax*/
 		function qDelete(no) {
@@ -661,6 +763,7 @@
 				},
 				success: function () {
 					alert('신고 접수가 완료되었습니다.');
+					diaWebAlert(reported); // 신고 알람 보내기
 					location.reload();
 				},
 				error: function () {

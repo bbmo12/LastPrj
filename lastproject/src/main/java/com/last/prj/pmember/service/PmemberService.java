@@ -40,7 +40,7 @@ public interface PmemberService {
 	public List<PmemberVO> admgoChart();
 	public int admPmemReportCount();
 	public List<PmemberVO> admPmemReporList(PmemberVO vo);
-	public List<PmemberVO> admPmemChart();
+	public List<PmemberVO> admPmemChart(@Param("fromDate")String fromDate, @Param("toDate")String toDate);
 	
 	//id로 정보 조회
 	public PmemberVO PmemberOne(String p_id);

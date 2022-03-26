@@ -189,7 +189,7 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-9 posts-list">
+				<div class="col-lg-9 posts-list" style="padding-top: 70px;">
 					<div id="formMain" style="width: 800px;">
 						<div class="card">
 							<div class="card-header">

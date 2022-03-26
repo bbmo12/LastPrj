@@ -102,7 +102,7 @@
 					<h3 style="margin-top:5%;">우리 사이트에 관한 모든 궁금증을 해결해드립니다!</h3>
 					<sec:authorize access="hasRole('ADMIN')">
 						<div class="boardForm">
-							<a href="boardForm" class="genric-btn info circle btn-lg" id="qna-button">공지사항 작성하기</a>
+							<a href="adminBoardPage" class="genric-btn info circle btn-lg" id="qna-button">공지사항 관리하기</a>
 						</div>
 					</sec:authorize>
 					<br>

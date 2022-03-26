@@ -55,7 +55,7 @@ public interface MemMapper {
 	
 	public List<MemVO> admMlistCode(MemVO vo);
 	public int adMmemCount(MemVO vo); 
-	List<MemVO> admMemChart();
+	List<MemVO> admMemChart(@Param("fromDate")String fromDate, @Param("toDate")String toDate);
 	
 	public List<MemVO> admMemReporCode(MemVO vo);
 	public int admMemReportCount(); 

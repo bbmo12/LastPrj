@@ -182,8 +182,8 @@ public class PmemberServiceImpl implements PmemberService{
 	}
 
 	@Override
-	public List<PmemberVO> admPmemChart() {
-		return map.admPmemChart();
+	public List<PmemberVO> admPmemChart(String fromDate, String toDate) {
+		return map.admPmemChart(fromDate,toDate);
 	}
 
 	@Override

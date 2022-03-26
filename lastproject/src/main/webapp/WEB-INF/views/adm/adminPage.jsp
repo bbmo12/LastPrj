@@ -226,13 +226,11 @@
 						<aside class="single_sidebar_widget author_widget">
 							<img class="partner_img"
 								src="resources/upload/${pmember.picture}"
-								onerror="this.src='resources/upload/pet.PNG'"> 
-							<br> <br>
+								onerror="this.src='resources/upload/pet.PNG'"> <br> <br>
 							<h4 id="Mainname">관리자님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="confirmPass">관리자 메인 페이지</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;메인 페이지
 							</div>
 						</aside>
 					</div>
@@ -266,7 +264,8 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
-									<br><br>
+									<br>
+									<br>
 									<div class="card"
 										style="border-left: 0.25rem solid #0062ff !important;">
 										<div class="card-body text-center" style="padding: 20px">
@@ -336,17 +335,16 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
-	
+
 	<script>
-	
-	// 아코디언 함수
-	$(document).on("click", ".que", function() {
-		$(this).next(".anw").stop().slideToggle(300);
-		$(this).toggleClass('on').siblings().removeClass('on');
-		$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
-	})//end 아코디언 함수
-		
+		// 아코디언 함수
+		$(document).on("click", ".que", function() {
+			$(this).next(".anw").stop().slideToggle(300);
+			$(this).toggleClass('on').siblings().removeClass('on');
+			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		})//end 아코디언 함수
 	</script>
 </body>
 

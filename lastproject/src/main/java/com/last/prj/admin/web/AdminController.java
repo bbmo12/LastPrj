@@ -269,10 +269,11 @@ public class AdminController {
 
 	@RequestMapping("/admMemChart")
 	@ResponseBody
-	public HashMap<String, Object> admMemChart() {
-		HashMap<String, Object> map = new HashMap();
-		map.put("memChart", memDao.admMemChart());
-		map.put("pmemChart", pMemberDao.admPmemChart());
+	public HashMap<String, Object> admMemChart(@RequestParam("fromDate")String fromDate, @RequestParam("toDate")String toDate) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memChart", memDao.admMemChart(fromDate,toDate));
+		map.put("pmemChart", pMemberDao.admPmemChart(fromDate,toDate));
 		return map;
 	}
 
