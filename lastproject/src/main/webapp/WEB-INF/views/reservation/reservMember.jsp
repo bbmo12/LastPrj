@@ -366,8 +366,14 @@ $(document).ready(function(){
 													<td><input  type="radio" name="selectTime"  value="17시">17:00~18:00</td>
 												</tr>
 										</tbody> `;
-								}else {
-									
+								}else if(parseInt(nowTime) <= 17 || parseInt(nowTime) <= 18 || parseInt(nowTime) <= 19 || parseInt(nowTime) <= 20 || parseInt(nowTime) <= 21 ||parseInt(nowTime) <= 22 || parseInt(nowTime) <= 23) {
+									$tbody = ` 
+						                  <tbody>
+						                        <tr>
+						                           	<td class="tdvalCheck">`+tdval+ex+`</td>
+						                           	<td>예약가능한 시간대가 없습니다.</td>
+												</tr>
+										</tbody> `;
 								}
 							}
 						$(".table").append($tbody);
@@ -522,6 +528,8 @@ function reservModal(event){
 		$("#exampleModal").attr("id","noexam");
 	}
 }
+
+
 
  </script>
 </body>

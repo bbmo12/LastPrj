@@ -43,7 +43,7 @@ public class Scheduler {
 	 */
 	
 	// 초 분 시 일 월 요일 순서
-	@Scheduled(cron = "0 0 12 * * *" )
+	@Scheduled(cron = "0 * * * * *" )
 	public void autoUpdate() {
 		
 		memDao.memdelete();
