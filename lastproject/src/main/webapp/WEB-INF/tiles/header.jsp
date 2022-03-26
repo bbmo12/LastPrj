@@ -41,48 +41,47 @@
 	color: black;
 }
 
-#notice_content {
-	text-decoration: none;
-	font-family: 'Binggrae';
-	font-weight: 300;
-	font-size: 15px;
-}
-
-#noticeCheck {
-	font-size: 20px;
-}
-
-#seeall {
-	font-family: 'Binggrae';
-	font-size: 15px;
-	border: none;
-	background: none;
-	color: gray;
-	margin-left: 25px;
-}
-
-#notice_btn {
-	font-family: 'Binggrae';
-	margin-left: 120px;
-	font-size: 10px;
-	border: none;
-	background: none;
-	color: gray;
-}
-
-.sf-arrows .sf-with-ul {
-	padding-right: 0px;
-}
-
-#logText {
-	text-decoration: none;
-	font-family: 'Binggrae-Bold';
-	font-size: 28px;
-	color: #0062ff;
-}
-
-.bellWrapper {
-	font-size: 28px;
+	#notice_content {
+		text-decoration: none;
+		font-family: 'Binggrae';
+		font-weight: 300;
+		font-size: 15px;
+	}
+	
+	#noticeCheck{
+		font-size:20px;
+	}
+	
+	#seeall{
+		font-family: 'Binggrae';
+		font-size:15px;
+		border: none;
+		background: none;
+		color: gray;
+		margin-left: 25px;
+	}
+	
+	#notice_btn{
+		font-family: 'Binggrae';
+		margin-left: 150px;
+		font-size:10px;
+		border: none;
+		background: none;
+		color: gray;
+	}
+	.sf-arrows .sf-with-ul{
+		padding-right: 0px;
+	}
+	
+	#logText{
+		text-decoration: none;
+		font-family: 'Binggrae-Bold';
+		font-size : 28px;
+		color: #0062ff;
+	}
+	
+	.bellWrapper {
+  font-size: 28px;
 }
 
 .my-bell {
@@ -212,21 +211,26 @@ opacity
 				success: function (result) {
 					console.log(result);
 					for (var i = 0; i < result.length; i++) {
-						var alarm = `<a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<div class="preview-icon bg-success">
-										<i class="mdi mdi-calendar"></i>										
-									</div>
-								</div>
-								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-								
-									<span>\${result[i].name}<button id="notice_btn"
-									onclick="javascript:noticeCheck(\${result[i].notice_no}); deleteAlerm(event);">X</button></span>
-									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
-								</div>
-							</a>
-						<div id="notice_divider" class="dropdown-divider"></div>`;
-						$('#noticeli').append(alarm);
+					
+					var icon1 = '<i class="fa-solid fa-exclamation" style="color:white;"></i>';
+					var div2 = $('<div class="preview-icon bg-success">').append(icon1);
+					var div1 = $('<div class="preview-thumbnail">').append(div2);
+					var btn1 = '<button id="notice_btn" onclick="javascript:noticeCheck('+result[i].notice_no+'); deleteAlerm(event);">X</button>';
+					if(result[i].m_name != null){
+						var span1 = $('<span>'+result[i].m_name+'</span>').append(btn1);
+					}else{
+						var span1 = $('<span>'+result[i].name+'</span>').append(btn1);	
+					}
+			
+					var p1 = '<p class="text-gray ellipsis mb-0">'+result[i].content+'</p>';
+
+					var div3 = $('<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">').append(span1, p1);
+					var div4 = '<div id="notice_divider" class="dropdown-divider"></div>';
+					
+					var a1 = $('<a class="dropdown-item preview-item">').append(div1, div3, div4);
+					var no_divider = $('<div id="notice_divider" class="dropdown-divider">');
+					
+					$('#noticeli').append(a1, no_divider);
 					}
 				}
 			});

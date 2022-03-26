@@ -623,7 +623,8 @@
 				success: function () {
 					alert('신고 접수가 완료되었습니다.');
 					
-					diaWebAlert(reported); // 신고 알람 보내기
+					diaWebAlert(); // 신고 알람 보내기
+					
 					location.reload();
 				},
 				error: function () {
@@ -635,8 +636,10 @@
 		
 		
 		//신고접수 알람 보내기 : 게시글
-		function diaWebAlert(id) {
-         var content = "작성하신 게시글이 신고되었습니다";
+		function diaWebAlert() {
+
+         var content = "Q&A 게시글 신고가 들어왔습니다.";
+         var id = 'admin@admin.com';
          // 전송한 정보를 db에 저장   
          $.ajax({
             type: 'post',
@@ -650,7 +653,7 @@
                // 소켓에 전달되는 메시지
                // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
                socket.send(id + "," + content);
-               alert("해당 작성자에게 신고 접수 알람이 전송되었습니다.");
+               alert("신고 접수 알람이 전송되었습니다.");
                //location.reload();
             },
             error: function (error) {
@@ -754,7 +757,7 @@
 				},
 				success: function () {
 					alert('신고 접수가 완료되었습니다.');
-					diaWebAlert(reported); // 신고 알람 보내기
+					diaWebAlert(); // 신고 알람 보내기
 					location.reload();
 				},
 				error: function () {

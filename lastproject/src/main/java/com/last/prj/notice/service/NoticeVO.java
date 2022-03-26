@@ -20,4 +20,5 @@ public class NoticeVO {
 	private int r_check;
 	private String name;
 	private String notice_code;
+	private String m_name;
 }
