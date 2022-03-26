@@ -228,8 +228,7 @@
 							<h4 id="Mainname">관리자님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
-								<i class="fa-solid fa-pen"></i>&nbsp;<a class="no_deco"
-									href="confirmPass">차트,목록 페이지</a>
+								<i class="fa-solid fa-pen"></i>&nbsp;차트,목록 페이지
 							</div>
 						</aside>
 					</div>
@@ -270,25 +269,11 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i>
-													<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
+													<i class="fa fa-users fa-stack-1x fa-inverse"
+													aria-hidden="true"></i>
 												</span><span id="cardTitle">일반회원 가입자 수</span>
 											</div>
 											<h3 id="admMemberC"></h3>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-4 col-md-4">
-									<br> <br>
-									<div class="card"
-										style="border-left: 0.25rem solid #36b9cc !important;">
-										<div class="card-body text-center" style="padding: 20px;">
-											<div style="margin-right: 20px;">
-												<span class="fa-stack fa-lg" style="margin-right: 10px;">
-													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
-													<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">펫 마릿수</span>
-											</div>
-											<h3 id="admPetC"></h3>
 										</div>
 									</div>
 								</div>
@@ -300,10 +285,26 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
-													<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
+													<i class="fa fa-users fa-stack-1x fa-inverse"
+													aria-hidden="true"></i>
 												</span><span id="cardTitle">파트너 가입자 수</span>
 											</div>
 											<h3 id="admPmemberC"></h3>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4">
+									<br> <br>
+									<div class="card"
+										style="border-left: 0.25rem solid #36b9cc !important;">
+										<div class="card-body text-center" style="padding: 20px;">
+											<div style="margin-right: 20px;">
+												<span class="fa-stack fa-lg" style="margin-right: 10px;">
+													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
+													<i class="fa-solid fa-paw fa-stack-1x fa-inverse"></i>
+												</span><span id="cardTitle">펫 마릿수</span>
+											</div>
+											<h3 id="admPetC"></h3>
 										</div>
 									</div>
 								</div>
@@ -343,14 +344,14 @@
 								<div class="card-header que admPartChartA"
 									onclick="admPartChartABtn()">
 									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i
-										class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;일반회원
+										class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;회원
 									기간 별 가입자 수 <input type="hidden" value="one"
 										id="admPartChartAInput">
 								</div>
 								<div class="card-body card_notice anw admPartChartADiv"
 									style="padding: 15px;">
 									<form id="adminPartChartForm" onsubmit="return false"
-										autocomplete="off" style="padding-left: 45%; padding-top: 5%;">
+										autocomplete="off" style="padding-left: 25%; padding-top: 5%;">
 										<input type="text" id="datepickerE" name="fromDateC"
 											value="2021-01-01">&nbsp;<i class="fa fa-calendar-o"
 											aria-hidden="true"></i>&nbsp;&nbsp; ~ <input type="text"
@@ -361,13 +362,13 @@
 											<i class="fa fa-search"></i>
 										</button>
 									</form>
-									<br>
-									<br>
+									<br> <br>
 									<div class="admPartChart">
 										<canvas id="admPartChart" style="height: 250px;"></canvas>
 									</div>
 									<div id="notice_footer" class="unorder"
-										style="padding-left: 55%; padding-top: 5%;padding-bottom: 3%;"></div>
+										style="padding-top: 5%; padding-bottom: 3%;"></div>
+
 								</div>
 
 							</div>
@@ -387,9 +388,8 @@
 												<input type="hidden" name="codem">
 												<code>가입일 검색</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
-													value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="text" id="datepickerA" name="fromDate">&nbsp;<i
+													value="1"> <input style="margin-left: 50px;"
+													type="text" id="datepickerA" name="fromDate">&nbsp;<i
 													class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
 												~ <input type="text" id="datepickerB" name="toDate">&nbsp;<i
 													class="fa fa-calendar-o" aria-hidden="true"></i> <br>
@@ -424,8 +424,8 @@
 											<button type="button"
 												class="btn btn-link btn-rounded btn-fw codep" id="petN"
 												data-code="102">탈퇴한 회원</button>
-											</p>
-											<table class="table table-striped">
+											<br>
+											<table class="table table-striped" style="margin-top: 5%;">
 												<thead>
 													<tr style="text-align: center;">
 														<th>이름</th>
@@ -439,13 +439,7 @@
 												</tbody>
 											</table>
 											<div id="pagination"></div>
-
 										</div>
-										<!-- <div class="card-footer">
-											<span style="color: #0062ff"><i
-												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
-												메시지 보내기</span>
-										</div> -->
 									</div>
 								</div>
 							</div>
@@ -465,9 +459,8 @@
 												<input type="hidden" name="code">
 												<code>가입일 검색</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
-													value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<input type="text" id="datepickerC" name="fromDate">&nbsp;&nbsp;<i
+													value="1"> <input style="margin-left: 50px;"
+													type="text" id="datepickerC" name="fromDate">&nbsp;&nbsp;<i
 													class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
 												<input type="text" id="datepickerD" name="toDate"><i
 													class="fa fa-calendar-o" aria-hidden="true"></i> <br>
@@ -487,6 +480,7 @@
 												</button>
 												<br> <br>
 											</form>
+
 											<code>조건 별 검색 </code>
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button"
@@ -504,10 +498,13 @@
 											<button type="button"
 												class="btn btn-link btn-rounded btn-fw codepP"
 												id="petsitter" data-code="102">펫시터</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepP" id="petN"
-												data-code="104">탈퇴한 회원</button>
-											<table class="table table-striped">
+											<div style="margin-left: 120px;">
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepP" id="petN"
+													data-code="104">탈퇴한 회원</button>
+											</div>
+											<br>
+											<table class="table table-striped" style="margin-top: 5%;">
 												<thead>
 													<tr style="text-align: center;">
 														<th>이름</th>
@@ -524,11 +521,6 @@
 											<div id="paginationP"></div>
 
 										</div>
-										<div class="card-footer">
-											<span style="color: #0062ff"><i
-												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
-												메시지 보내기</span>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -540,7 +532,7 @@
 	</section>
 	<!-- 회원 단건 조회 Modal -->
 	<div class="modal fade" id="myModal">
-		<div class="modal-dialog modal-xl modal-dialog-scrollable">
+		<div class="modal-dialog modal-l modal-dialog-scrollable">
 			<div class="modal-content">
 
 				<!-- Modal Header -->
@@ -548,127 +540,17 @@
 					<h4 class="modal-title" id="id"></h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
-
 				<!-- Modal body -->
 				<div class="modal-body">
-
-					<div class="section-top-border">
-						<h3 class="mb-30 title_color memberNAME"></h3>
-						<div class="row">
-							<div class="col-md-5 memberIMG">
-								<!-- 회원사진 불러와야함 -->
-								<img src="resources/assets/images/elements/d.jpg" alt=""
-									class="img-fluid">
-							</div>
-							<div class="col-md-6 mt-sm-20 left-align-p memberINFO">
-								<!-- 회원 정보 출력 -->
-								<ul class="unordered-list">
-									<li>Fta Keys</li>
-									<li>For Women Only Your Computer Usage</li>
-									<li>Facts Why Inkjet Printing Is Very Appealing
-										<ul>
-											<li>Addiction When Gambling Becomes
-												<ul>
-													<li>Protective Preventative Maintenance</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-									<li>Dealing With Technical Support 10 Useful Tips</li>
-									<li>Make Myspace Your Best Designed Space</li>
-									<li>Cleaning And Organizing Your Computer</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-					<!-- style="margin-right: -60px; padding-right:50px" -->
-					<div class="section-top-border">
-						<h3 class="mb-30 title_color">차트</h3>
-						<div class="row">
-							<div class="col-md-6 mt-sm-20 left-align-p">
-								<ul class="unordered-list">
-									<li>Fta Keys</li>
-									<li>For Women Only Your Computer Usage</li>
-									<li>Facts Why Inkjet Printing Is Very Appealing
-									<li>Addiction When Gambling Becomes
-									<li>Protective Preventative Maintenance</li>
-									<li>Dealing With Technical Support 10 Useful Tips</li>
-									<li>Make Myspace Your Best Designed Space</li>
-									<li>Cleaning And Organizing Your Computer</li>
-								</ul>
-							</div>
-							<div class="col-md-5 Modalchart">
-								<canvas id="myChart"></canvas>
-							</div>
-						</div>
-					</div>
-					<div class="section-top-border">
-						<h3 class="mb-30 title_color">Block Quotes</h3>
-						<div class="row">
-							<div class="col-lg-12">
-								<blockquote class="generic-blockquote">
-									<!-- 회원의 자기 소개란 -->
-								</blockquote>
-							</div>
-						</div>
-					</div>
-					<!-- chart.js -->
-					<div class="card">
-						<div class="card-body myChartBody">
-							<h4 class="card-title">chart</h4>
-
-						</div>
-					</div>
-					<!--end chart.js -->
-				</div>
-
-				<!-- Modal footer -->
-				<div class="modal-footer">
-
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
+					<div id="membody"></div>
+					<canvas id="myChart"></canvas>
 				</div>
 			</div>
-		</div>
-	</div>
 
-	<!-- 모달 2 -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">진료작성</h3>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<!-- modal 몸통 -->
-				<div class="modal-body">
-					<div class="form-group">
-						<input type="hidden" id="m_id" name="m_id"> <input
-							type="hidden" id="p_id" name="p_id" value="${p_id }"> <input
-							type="hidden" id="r_no" name="r_no"> <span
-							id="span_d_name" style="width: 250px !important;">&nbsp;진단명
-							: <input type="text" id="d_name" name="d_name">
-						</span><br> <br> <span id="span_symptom"
-							style="width: 250px !important;"> &nbsp; &nbsp; 증 상 : <input
-							type="text" id="symptom" name="symptom">
-						</span><br> <br> <span id="span_result"
-							style="width: 250px !important;"> &nbsp; &nbsp; 처 방 : <input
-							type="text" id="d_result" name="d_result">
-						</span>
-					</div>
-				</div>
-				<!-- modal 하단 버튼 -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">취소</button>
-					<button id="sendDiaLog" name="sendReserv" type="button"
-						class="btn btn-primary" data-dismiss="modal">작성완료</button>
-				</div>
+			<!-- Modal footer -->
+			<div class="modal-footer">
+
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
@@ -689,6 +571,9 @@
 		    tt = [];
 		    oo = [];
 
+		    
+		    
+		    
 		    var total;
 		    ip = [];
 		    $.ajax({
@@ -699,7 +584,7 @@
 		                tt.push(res[i].tt);
 		                oo.push(res[i].oo);
 		                console.log(res[i].oo);
-		                ip += ` \${res[i].oo} 마릿 수 : \${res[i].tt}`;
+		                ip += ` <b>"\${res[i].oo}"</b>는 <i><b>"\${res[i].tt}"</b></i> 마리`;
 		                
 		            });
 		            console.log(ip);
@@ -830,15 +715,7 @@
 		                	console.log(oo[m]);
 		                	sumM += parseInt(oo[m]);
 		                } 
-		                
-		                
-		                
 		                console.log(sumP, sumM);
-		                
-		                
-		                
-		                
-	
 
 		               const ccc = document.getElementById('admPartChart').getContext('2d');
 		               const admPartChart = new Chart(ccc, {
@@ -1376,8 +1253,7 @@
 						success : function (res) {					
 						console.log(res.list);
 						
-						$('.mem-body').append("<ul><li><img src='resources/upload/"+ res.list.pfile +"'></img>"
-												+ "</li><li>" 
+						$('.mem-body').append("<ul><li>"
 												+res.list.startdate 
 												+"</li><li>"
 												+ res.list.name

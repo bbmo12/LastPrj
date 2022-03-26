@@ -3,142 +3,188 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<!-- Required Meta Tags -->
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta charset="UTF-8">
+<!-- Required Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-	<!-- Page Title -->
-	<title>BanBanBan</title>
+<!-- Page Title -->
+<title>BanBanBan</title>
 </head>
-<script src="https://kit.fontawesome.com/397860a4e3.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/397860a4e3.js"
+	crossorigin="anonymous"></script>
 <style>
-	#drop{
-		font-family: 'Binggrae';
-		font-size : 0.9rem !important;
-	}
+#drop {
+	font-family: 'Binggrae';
+	font-size: 0.9rem !important;
+}
 
-	.nav-menu a {
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 28px;
-	}
+.nav-menu a {
+	text-decoration: none;
+	font-family: 'Binggrae-Bold';
+	font-size: 28px;
+}
 
-	.notification {
-		font-family: 'Binggrae';
-		text-align: center;
-		font-weight: bolder;
-		padding: 10px;
-		font-size: 15px !important;
-		color: black;
-	}
+.notification {
+	font-family: 'Binggrae';
+	text-align: center;
+	font-weight: bolder;
+	padding: 10px;
+	font-size: 15px !important;
+	color: black;
+}
 
-	#notice_content {
-		text-decoration: none;
-		font-family: 'Binggrae';
-		font-weight: 300;
-		font-size: 15px;
-	}
-	
-	#noticeCheck{
-		font-size:20px;
-	}
-	
-	#seeall{
-		font-family: 'Binggrae';
-		font-size:15px;
-		border: none;
-		background: none;
-		color: gray;
-		margin-left: 25px;
-	}
-	
-	#notice_btn{
-		font-family: 'Binggrae';
-		margin-left: 120px;
-		font-size:10px;
-		border: none;
-		background: none;
-		color: gray;
-	}
-	.sf-arrows .sf-with-ul{
-		padding-right: 0px;
-	}
-	
-	#logText{
-		text-decoration: none;
-		font-family: 'Binggrae-Bold';
-		font-size : 28px;
-		color: #0062ff;
-	}
-	
-	.bellWrapper {
-  font-size: 28px;
+#notice_content {
+	text-decoration: none;
+	font-family: 'Binggrae';
+	font-weight: 300;
+	font-size: 15px;
+}
+
+#noticeCheck {
+	font-size: 20px;
+}
+
+#seeall {
+	font-family: 'Binggrae';
+	font-size: 15px;
+	border: none;
+	background: none;
+	color: gray;
+	margin-left: 25px;
+}
+
+#notice_btn {
+	font-family: 'Binggrae';
+	margin-left: 120px;
+	font-size: 10px;
+	border: none;
+	background: none;
+	color: gray;
+}
+
+.sf-arrows .sf-with-ul {
+	padding-right: 0px;
+}
+
+#logText {
+	text-decoration: none;
+	font-family: 'Binggrae-Bold';
+	font-size: 28px;
+	color: #0062ff;
+}
+
+.bellWrapper {
+	font-size: 28px;
 }
 
 .my-bell {
-  transform-origin: top;
-  animation: bell 2s infinite linear;
+	transform-origin: top;
+	animation: bell 2s infinite linear;
 }
 
-@keyframes bell{
-  0%, 50%{
-      transform: rotate(0deg);
-   }
-  5%, 15%, 25%, 35%, 45% {
-    transform: rotate(13deg);
-  }
-  10%, 20%, 30%, 40% {
-    transform: rotate(-13deg);
-  }
+@
+keyframes bell { 0%, 50%{
+	transform: rotate(0deg);
 }
 
+5
+%
+,
+15
+%
+,
+25
+%
+,
+35
+%
+,
+45
+%
+{
+transform
+:
+rotate(
+13deg
+);
+}
+10
+%
+,
+20
+%
+,
+30
+%
+,
+40
+%
+{
+transform
+:
+rotate(
+-13deg
+);
+}
+}
 .circle2 {
-   width: 100px;
-  height: 80px;
-  position: absolute;
-  border: 2px solid #ff686b;
-  border-radius: 70%;
-  border-color: transparent #ff686b;
-  animation: ring 2s infinite linear both;
+	width: 100px;
+	height: 80px;
+	position: absolute;
+	border: 2px solid #ff686b;
+	border-radius: 70%;
+	border-color: transparent #ff686b;
+	animation: ring 2s infinite linear both;
 }
 
 .second {
-  animation-delay: .3s;
+	animation-delay: .3s;
 }
 
 .third {
-  animation-delay: .7s;
+	animation-delay: .7s;
 }
 
-@keyframes ring{
-  0%, 100% {
-    opacity: 0; 
-  }
-  
-  1% {
-    opacity: 1;
-  }
-  
-  50% {
-    width: 250px;
-    height: 250px;
-    opacity: 0;
-  }
-
-#ii_bell{
-	width:40px;
-	display:inline-block;
+@
+keyframes ring { 0%, 100% {
+	opacity: 0;
 }
 
+1
+%
+{
+opacity
+:
+1;
+}
+50
+%
+{
+width
+:
+250px;
+height
+:
+250px;
+opacity
+:
+0;
+}
+#ii_bell {
+	width: 40px;
+	display: inline-block;
+}
 </style>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 <script>
 	var socket = null;
 	$(document).ready(function () {
@@ -288,7 +334,7 @@
 					</div>
 					<nav id="nav-menu-container">
 						<ul class="nav-menu">
-							<li><a href="admBoard">공지사항</a></li>							
+							<li><a href="admBoard">공지사항</a></li>
 							<li><a href="qnaMain">Open Q&A</a></li>
 							<li class="menu-has-children"><a href="pmemberBest">파트너회원</a>
 								<ul>
@@ -296,8 +342,7 @@
 									<li><a href="pmemberList?code=101" id="drop">훈련사</a></li>
 									<li><a href="pmemberList?code=102" id="drop">펫시터</a></li>
 									<li><a href="pmemberList?code=103" id="drop">미 용</a></li>
-								</ul>
-							</li>
+								</ul></li>
 							<!-- 권한이 없는 익명 사용자이면 보여준다. -->
 							<sec:authorize access="isAnonymous()">
 								<li class="menu-has-children"><a href="loginForm">로그인</a></li>
@@ -305,7 +350,7 @@
 							</sec:authorize>
 							<!-- 파트너회원 로그인 -->
 							<!-- 권한이 PARTNER인 사람만 -->
-							<sec:authorize access="hasRole('PARTNER')">							
+							<sec:authorize access="hasRole('PARTNER')">
 								<li class="menu-has-children"><a href="pmemberMyPage">마이페이지</a>
 									<ul>
 										<li><a href="pmemberMyPage" id="drop">내 프로필</a></li>
@@ -317,9 +362,8 @@
 										<li><a href="pmemreport" id="drop">신고 내역</a></li>
 										<li><a href="pmdeleteForm" id="drop">회원탈퇴</a></li>
 										<li><a href="logout" id="drop">로그아웃</a></li>
-									</ul>
-								</li>
-							</sec:authorize>					
+									</ul></li>
+							</sec:authorize>
 							<!-- 일반회원 로그인  -->
 							<!-- 권한이 MEMBER인 사람만 -->
 							<sec:authorize access="hasRole('MEMBER')">
@@ -334,46 +378,32 @@
 										<li><a href="myfallow" id="drop">팔로우</a></li>
 										<li><a href="logout" id="drop">로그아웃</a></li>
 										<li><a href="mdeleteForm" id="drop">회원탈퇴</a></li>
-									</ul>
-								</li>
-								<li class="nav-item dropdown">
-									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
-										<div class="box" style="width:15px; display:inline-block;"></div>
-										
-									</a>
-									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+									</ul></li>
+								<li class="nav-item dropdown"><a
+									class="nav-link count-indicator dropdown-toggle"
+									id="notificationDropdown" href="#" data-toggle="dropdown">
+										<div class="box" style="width: 15px; display: inline-block;"></div>
+
+								</a>
+									<div
+										class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
 										aria-labelledby="notificationDropdown">
 										<h6 class="notification">알림</h6>
 										<div class="dropdown-divider"></div>
-										<div id="noticeli"></div>										
-									<div>
-										<a href="mainMypage" id="seeall">See all notifications</a>
-									</div>
-									</div>
-								</li>
+										<div id="noticeli"></div>
+										<div>
+											<a href="mainMypage" id="seeall">See all notifications</a>
+										</div>
+									</div></li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ADMIN')">
-							<li><a href="adminPage">관리자</a></li>
-							<li class="nav-item dropdown">
-									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
-										<div class="box" style="width:15px; display:inline-block;"></div>
-										
-									</a>
-									<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-										aria-labelledby="notificationDropdown">
-										<h6 class="notification">알림</h6>
-										<div class="dropdown-divider"></div>
-										<div id="noticeli"></div>										
-									<div>
-										<a href="mainMypage" id="seeall">See all notifications</a>
-									</div>
-									</div>
-								</li>
+								<li><a href="adminMemberPage">관리자</a></li>
 							</sec:authorize>
 						</ul>
 					</nav>
 				</div>
-			</div> <!-- #nav-menu-container -->
+			</div>
+			<!-- #nav-menu-container -->
 		</div>
 	</header>
 	<!-- Header Area End -->

@@ -45,6 +45,7 @@ public class AdminController {
 	@Autowired
 	private BoardService boardDao;
 
+	
 	// 신고 제재 처리 중인 회원
 
 	// 신고 제재 중인 회원
