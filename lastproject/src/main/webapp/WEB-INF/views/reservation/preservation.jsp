@@ -364,11 +364,14 @@
 				var reservVal2 = reservsplit[1];
 				var reservVal3 = reservsplit[2].slice(0,2);
 				var reservVal4 = reservsplit[2].slice(4,6);
-				console.log (reservVal4);
-				var totalVal = reservVal1+reservVal2+reservVal3+reservVal4;
-				console.log("받은값",totalVal,"현재시간",today.format('YYYYMMDDHH'));
+				var totalVal = reservVal1+reservVal2+reservVal3/* +reservVal4 */;
+				var a =parseInt(totalVal);
+				console.log("예약시간",a);
+				var b = parseInt(today.format('YYYYMMDD'));
+				console.log("현재시간",b);
+				//console.log("받은값",parseInt(totalVal),"현재시간",parseInt(today.format('YYYYMMDD')));
 				
-				if(parseInt(totalVal) <= parseInt(today.format('YYMMDDHH')) ){
+				if(a<=b) {
 					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 				}else{
