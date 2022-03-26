@@ -130,7 +130,8 @@
 	}
 
 	.card-text {
-		width: 200px;
+		display: inline-block;
+		width: 150px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -273,7 +274,7 @@
 												<thead>
 													<tr style="text-align: center;">
 														<th>예약번호</th>
-														<th>수의사 이름</th>
+														<th>이름</th>
 														<th>예약신청일자</th>
 														<th>예약시간</th>
 														<th>예약내용</th>

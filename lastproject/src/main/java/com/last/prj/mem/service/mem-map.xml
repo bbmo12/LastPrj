@@ -229,9 +229,9 @@
 			AND UPPER(M.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 			<if test="key != null and key != '' and key == 'm_id' and data !='' and data != null "> 
 			AND UPPER(M.M_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>	 
-			<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
-			<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
-			<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+			<if test="codem != ''  and codem == '100'">AND P.PET_NO IS NOT NULL </if>
+			<if test="codem != ''  and codem == '101'">AND P.PET_NO IS NULL </if>
+			<if test="codem != ''  and codem == '102'">AND M.STARTDATE IS NULL </if>
 			<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 				AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 			</if>
@@ -250,9 +250,9 @@
 			AND UPPER(M.NAME) LIKE '%'|| UPPER(#{data}) ||'%'</if>
 			<if test="key != null and key != '' and key == 'm_id' and data !='' and data != null "> 
 			AND UPPER(M.M_ID) LIKE '%'|| UPPER(#{data}) ||'%'</if>
-			<if test="code != ''  and code == '100'">AND P.PET_NO IS NOT NULL </if>
-			<if test="code != ''  and code == '101'">AND P.PET_NO IS NULL </if>
-			<if test="code != ''  and code == '102'">AND M.STARTDATE IS NULL </if>
+			<if test="codem != ''  and codem == '100'">AND P.PET_NO IS NOT NULL </if>
+			<if test="codem != ''  and codem == '101'">AND P.PET_NO IS NULL </if>
+			<if test="codem != ''  and codem == '102'">AND M.STARTDATE IS NULL </if>
 			<if	test="fromDate != null and fromDate != '' and toDate != null and toDate !='' ">
 				AND M.STARTDATE BETWEEN #{fromDate} AND #{toDate}
 			</if>

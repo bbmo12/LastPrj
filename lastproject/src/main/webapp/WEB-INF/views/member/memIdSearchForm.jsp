@@ -10,7 +10,14 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
-
+<style>
+	body{
+	
+		background-image: url("${pageContext.request.contextPath}/resources/upload/back2.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+</style>
 <body class="my-login-page">
    <section class="h-100" id="main">
       <div class="container h-100">

@@ -10,6 +10,18 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" type="text/css" href="resources/login/my-login.css">
 </head>
+<style>
+	body{
+	
+		background-image: url("${pageContext.request.contextPath}/resources/upload/back2.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	
+	.swal2-content{
+		display: none;
+	}
+</style>
 <body class="my-login-page">
    <section class="h-100" id="main">
       <div class="container h-100">
@@ -52,7 +64,7 @@
 <script>
 var result = '${resultMsg2}';
 if(result === 'result2'){
-	alert("아이디를 확인해주세요.");
+	Swal.fire("존재하지 않는<br>아이디입니다.", "아이디를 확인해주세요.", "warning");
 }
 </script>
 </body>
