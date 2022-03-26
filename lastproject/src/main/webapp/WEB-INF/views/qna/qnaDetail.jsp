@@ -625,9 +625,6 @@
 					
 					diaWebAlert(); // 신고 알람 보내기
 					
-					
-					
-					
 					location.reload();
 				},
 				error: function () {
@@ -725,10 +722,6 @@
          }) // end신고했다고 알람 보내기
 		}
 		
-		
-		
-		
-
 		/*질문 삭제 ajax*/
 		function qDelete(no) {
 			console.log(no);
@@ -742,6 +735,7 @@
 				}
 			}
 		}
+		
 
 		/*답변글 신고 시 글 번호, 글쓴이 넘김*/
 		function transferQno(no, writer) {

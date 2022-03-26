@@ -237,7 +237,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Admin menu</h4>
-							<ul class="list cat-list nanumbarungothic">
+							<ul class="cat-list nanumbarungothic">
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between no_deco">
 										<p>차트.목록</p>
@@ -270,7 +270,7 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i>
-													<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
+													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
 												</span><span id="cardTitle">총 신고 건수</span>
 											</div>
 											<h3 id="adminReportTotalCount"></h3>
@@ -285,7 +285,7 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
-													<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
+													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
 												</span><span id="cardTitle">신고 제재 대상 회원</span>
 											</div>
 											<h3 id="adminReporCount"></h3>
@@ -300,7 +300,7 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
-													<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
+													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
 												</span><span id="cardTitle">신고 제재 중인 회원</span>
 											</div>
 											<h3 id="adminReportedCount"></h3>
@@ -313,8 +313,8 @@
 							<br> <br>
 							<div class="card">
 								<div class="card-header que admPetChartA">
-									<i class="fa-solid fa-paw"></i>&nbsp;<i class="fa fa-bar-chart"
-										aria-hidden="true"></i>&nbsp;&nbsp; 신고 제재 중인 회원
+									<i class="fa-solid fa-bell"></i>&nbsp; <i class="fa fa-users"
+										aria-hidden="true"></i> &nbsp; 신고 제재 중인 회원
 								</div>
 								<div class="card-body anw" style="padding: 15px">
 									<div class="card-body anw" style="padding: 15px"></div>
@@ -330,13 +330,12 @@
 							<br> <br>
 							<div class="card">
 								<div class="card-header que" onclick="admReporListBtn()">
-									<i class="fa-solid fa-paw"></i>&nbsp;<i class="fa fa-bar-chart"
+									<i class="fa-solid fa-bell"></i>&nbsp; <i class="fa fa-users"
 										aria-hidden="true"></i>&nbsp;&nbsp; 신고 제재 대상 회원 <input
 										type="hidden" value="one" id="admRepoorListInput">
 								</div>
 								<div class="card-body anw admRepoorListDiv"
-									style="padding: 15px">
-								</div>
+									style="padding: 15px"></div>
 							</div>
 						</div>
 
@@ -346,8 +345,8 @@
 							<br> <br>
 							<div class="card">
 								<div class="card-header que" onclick="admQnAListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i
-										class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;QnA에
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;<i
+										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;QnA에
 									대한 신고 목록 <input type="hidden" value="one" id="admQnAListInput">
 								</div>
 								<div class="card-body card_notice anw admQnAListDiv"
@@ -355,15 +354,18 @@
 									<form id="admDateFormQ" onsubmit="return false"
 										onkeypress="eventkeyQ();" autocomplete="off">
 										<input type="hidden" name="code">
-										<code>가입일 검색 :</code>
-										<input type="hidden" name="repor">
-										&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" name="pageNum"
-											value="1">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-										: <input type="text" id="datepickerA" name="fromDate">&nbsp;&nbsp;
-										TO : <input type="text" id="datepickerB" name="toDate">
-										&nbsp;&nbsp; <br> <br>
-										<code>이름,아이디로 검색 :</code>
+										<div>
+											<code>가입일 검색 </code>
+											<input type="hidden" name="repor">
+											<input 
+												type="hidden" name="pageNum" value="1"> <input style="margin-left:7.5%;"
+												type="text" id="datepickerA" name="fromDate">&nbsp;<i
+												class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
+											~ <input type="text" id="datepickerB" name="toDate">
+											<i class="fa fa-calendar-o" aria-hidden="true"></i>
+										</div>
+										&nbsp;&nbsp; <br>
+										<code>이름,아이디로 검색 </code>
 										&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 											<option value="" selected>전 체</option>
 											<option value="reporter">신고자</option>
@@ -376,36 +378,41 @@
 										<input type="reset">
 									</form>
 									<br>
-									<code>조건 별 검색 :</code>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="">전체</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="601"
-										data-repor="">불법 광고 및 홍보</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="602"
-										data-repor="">음란물/선정성 콘텐츠</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="603"
-										data-repor="">욕설,비속어,모욕</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="604"
-										data-repor="">사생활 침해</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="605"
-										data-repor="">게시물 도배</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="701">미처리</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="702">기각처리</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="703">승인처리</button>
-									<table class="table table-striped">
+									<div id="button">
+										<code>조건 별 검색 </code>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="">전체</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="601" data-repor="">불법 광고 및 홍보</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="603" data-repor="">욕설,비속어,모욕</button>
+									</div>
+									<div id="button2" style="padding-left: 150px;">
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="604" data-repor="">사생활 침해</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="605" data-repor="">게시물 도배</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="701">미처리</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="702">기각처리</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="703">승인처리</button>
+									</div>
+
+									<table class="table table-striped" style="margin-top: 50px;">
 										<thead>
 											<tr>
 												<th>신고자</th>
@@ -414,7 +421,7 @@
 												<th>처리 밑 조회</th>
 											</tr>
 										</thead>
-										<tbody id="myTableQ">
+										<tbody id="myTableQ" align="center">
 
 										</tbody>
 									</table>
@@ -429,7 +436,8 @@
 							<br> <br>
 							<div class="card">
 								<div class="card-header que" onclick="admReviewListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;후기에
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;<i
+										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;후기에
 									대한 신고 목록 <input type="hidden" value="one"
 										id="admReviewListInput">
 								</div>
@@ -439,14 +447,18 @@
 											<form id="admDateFormR" onsubmit="return false"
 												autocomplete="off" onkeypress="eventkeyR();">
 												<input type="hidden" name="code">
-												<code>가입일 검색 :</code>
-												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="repor">
-												<input type="hidden" name="pageNum" value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-												: <input type="text" id="datepickerC" name="fromDateR">&nbsp;&nbsp;
-												to : <input type="text" id="datepickerD" name="toDate">
-												<br> <br>
-												<code>이름,아이디로 검색 :</code>
+												<div>
+													<code>가입일 검색 </code>
+													<input type="hidden" name="repor"> <input
+														type="hidden" name="pageNum" value="1"> 
+														<input style="margin-left:7.5%;"
+														type="text" id="datepickerC" name="fromDate">&nbsp;<i
+														class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
+													~ <input type="text" id="datepickerD" name="toDate">
+													<i class="fa fa-calendar-o" aria-hidden="true"></i>
+												</div>
+												&nbsp;&nbsp; <br>
+												<code>이름,아이디로 검색 </code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 													<option value="" selected>전 체</option>
 													<option value="reporter">신고자</option>
@@ -458,37 +470,42 @@
 												</button>
 												<input type="reset">
 											</form>
-											<code>조건 별 검색 :</code>
-											&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="">전체</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="601" data-repor="">불법 광고 및 홍보</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="603" data-repor="">욕설,비속어,모욕</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="604" data-repor="">사생활 침해</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="605" data-repor="">게시물 도배</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="701">미처리</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="702">기각처리</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="703">승인처리</button>
-											</p>
-											<table class="table table-striped">
+											<br>
+											<div>
+												<code>조건 별 검색</code>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="">전체</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="601" data-repor="">불법 광고 및 홍보</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="603" data-repor="">욕설,비속어,모욕</button>
+											</div>
+											<div style="padding-left: 150px;">
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="604" data-repor="">사생활 침해</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="605" data-repor="">게시물 도배</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="701">미처리</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="702">기각처리</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="703">승인처리</button>
+											</div>
+
+											<table class="table table-striped" style="margin-top: 50px;">
 												<thead>
 													<tr>
 														<th>신고자</th>
@@ -497,7 +514,7 @@
 														<th>처리 밑 조회</th>
 													</tr>
 												</thead>
-												<tbody id="myTableR">
+												<tbody id="myTableR" align="center">
 
 												</tbody>
 											</table>
@@ -509,44 +526,6 @@
 												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
 												메시지 보내기</span>
 										</div> -->
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="col-lg-12 col-md-12 blog_details" style="padding-top:20px;">
-							<br> <br>
-							<div class="card">
-								<div class="card-header que" onclick="admPmemberListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;파트너
-									회원 목록 <input type="hidden" value="one" id="admPmemberListInput">
-								</div>
-								<div class="card-body anw admPmemberListDiv">
-									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
-											<table class="table table-striped">
-												<thead>
-													<tr style="text-align: center;">
-														<th>이름</th>
-														<th>아이디</th>
-														<th>가입일</th>
-														<th>파트너 쉽</th>
-														<th>조회</th>
-													</tr>
-												</thead>
-												<tbody id="myTableP" align="center">
-
-												</tbody>
-											</table>
-											<div id="paginationP"></div>
-
-										</div>
-										<div class="card-footer">
-											<span style="color: #0062ff"><i
-												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
-												메시지 보내기</span>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -574,7 +553,6 @@
 						</ul>
 
 						<!-- 신고 처리 Form 태그 -->
-
 						<form id="form" style="display: none;">
 							<div class="form-group">
 								<label for="amdReportOption">처리유형</label> <select class="repor"
@@ -583,14 +561,11 @@
 									<option value="702">기각</option>
 									<option value="703">승인</option>
 								</select>
-
-								<!-- <div class="nice-select repor" tabindex=""
-								
-							</div> -->
-								<div class="form-group">
-									<label for="message-text" class="col-form-label">처리사유</label>
-									<textarea class="state" id="state" name="state"></textarea>
-								</div>
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="col-form-label">처리사유</label>
+								<textarea class="state" id="state" name="state"></textarea>
+							</div>
 						</form>
 						<div class="modal-footer">
 							<button type="button" id="admReportUpdate" name="admReportUpdate"
