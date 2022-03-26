@@ -628,7 +628,7 @@ public class MemController {
 			 * System.out.println(memDao.memberOne(userInfo.get("email").toString()));
 			 */
 			
-			return "redirect:home"; // 본인 원하는 경로 설정
+			return "home/home"; // 본인 원하는 경로 설정
 			
 			
 			
@@ -641,7 +641,7 @@ public class MemController {
 			member.setPassword("1234");
 			/* member.setPassword(password); */
 			memDao.memberInsert(member);
-			return "redirect:home"; // 본인 원하는 경로 설정
+			return "home/home"; // 본인 원하는 경로 설정
 		}
 	}
 
@@ -670,7 +670,9 @@ public class MemController {
 			/*
 			 * sb.append("&redirect_uri=http://3.229.152.163:8080/dologin"); // 본인이 설정해 놓은
 			 * 경로
-			 */			sb.append("&code=" + authorize_code);
+
+			 */
+			sb.append("&code=" + authorize_code);
 
 			bw.write(sb.toString());
 			bw.flush();

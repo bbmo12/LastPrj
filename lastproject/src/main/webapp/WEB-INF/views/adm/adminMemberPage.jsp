@@ -356,12 +356,6 @@
 										<ul class="unordered-list">
 											<li>Fta Keys</li>
 											<li>For Women Only Your Computer Usage</li>
-											<li>Facts Why Inkjet Printing Is Very Appealing
-											<li>Addiction When Gambling Becomes
-											<li>Protective Preventative Maintenance</li>
-											<li>Dealing With Technical Support 10 Useful Tips</li>
-											<li>Make Myspace Your Best Designed Space</li>
-											<li>Cleaning And Organizing Your Computer</li>
 										</ul>
 									</div>
 								</div>
@@ -380,7 +374,7 @@
 										<div class="table-wrap" style="width: 950px;">
 											<form id="admDateForm" onsubmit="return false"
 												autocomplete="off" onkeypress="eventkey();">
-												<input type="hidden" name="code">
+												<input type="hidden" name="codem">
 												<code>가입일 검색 :</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
 													value="1">
@@ -433,11 +427,11 @@
 											<div id="pagination"></div>
 
 										</div>
-										<div class="card-footer">
+										<!-- <div class="card-footer">
 											<span style="color: #0062ff"><i
 												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
 												메시지 보내기</span>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -452,7 +446,7 @@
 								<div class="card-body anw admPmemberListDiv">
 									<div class="row">
 										<div class="table-wrap" style="width: 950px;">
-											<form id="admDateForm" onsubmit="return false"
+											<form id="admDateFormP" onsubmit="return false"
 												autocomplete="off" onkeypress="eventkeyP();">
 												<input type="hidden" name="code">
 												<code>가입일 검색 :</code>
@@ -759,6 +753,7 @@
 		               }); 
 		                
 		                console.log(tt);
+		                console.log(aa);
 		                console.log(oo); 
 
 		                const ccc = document.getElementById('admPartChart')
@@ -934,9 +929,9 @@
 
 		//===============일반 회원 조건 검색==========================
 		$(document).on('click', '.codep', function() {
-			var code = $(this).data('code');
-			console.log(code);
-			$('#admDateForm')[0].code.value = code
+			var codem = $(this).data('code');
+			console.log(codem);
+			$('#admDateForm')[0].codem.value = codem
 			$('#admDateForm')[0].pageNum.value = 1;
 			pagingList();
 
@@ -1085,7 +1080,7 @@
 			
 		}//==================파트너 회원 목록 페이징 처리=================== END
 
-		
+	
 		//==================일반회원 페이징 처리===================
 		function viewPage(page) {
 			console.log("page는 :"+page);
@@ -1240,9 +1235,9 @@
 							success : function(res) {
 								console.log(res.list);
 								$('.mem-body').append(
-										<img src='resources/upload/"+ res.list.pfile +"'></img>"
-												
-										"<ul><li>" + res.list.startdate
+										"<ul><li><img src='resources/upload/"+ res.list.pfile +"'></img>"
+												+ "</li><li>"
+												+ res.list.startdate
 												+ "</li><li>" + res.list.name
 												+ "</li><li>" + res.list.w_address
 												+ "</li><li>" + res.list.w_tel
@@ -1279,8 +1274,9 @@
 						success : function (res) {					
 						console.log(res.list);
 						
-						<img src='resources/upload/"+ res.list.pfile +"'></img>
-						$('.mem-body').append("<ul><li>" +res.list.startdate 
+						$('.mem-body').append("<ul><li><img src='resources/upload/"+ res.list.pfile +"'></img>"
+												+ "</li><li>" 
+												+res.list.startdate 
 												+"</li><li>"
 												+ res.list.name
 												+ "</li><li>"

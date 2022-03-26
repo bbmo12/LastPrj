@@ -306,9 +306,9 @@
 									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;신고 제재 중인 회원
 								</div>
 								<div class="card-body anw" style="padding: 15px"></div>
-								<div id="notice_footer">
+								<!-- <div id="notice_footer">
 									<p>수신일로부터 7일이 지난 알림은 자동 삭제됩니다.</p>
-								</div>
+								</div> -->
 							</div>
 						</div>
 						<!-- 신고 제재 처리 중인 회원 끝~~!~!~! -->
@@ -318,23 +318,23 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header que " onclick="admReporListBtn()">
-									<i class="fa-solid fa-paw"></i> 신고 제재 대상 회원 <input
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp; 신고 제재 대상 회원 <input
 										type="hidden" value="one" id="admRepoorListInput">
 								</div>
 								<div class="card-body anw admRepoorListDiv"
 									style="padding: 15px"></div>
 
-								<div class="card-footer">
+							<!-- 	<div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
 										추가</span>
-								</div>
+								</div> -->
 							</div>
 						</div>
 
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card" id="qnaBtn">
 								<div class="card-header que" onclick="admQnAListBtn()">
-									<i class="fa-solid fa-paw"></i> QnA에 대한 신고 목록 <input
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;QnA에 대한 신고 목록 <input
 										type="hidden" value="one" id="admQnAListInput">
 								</div>
 								<div class="card-body anw admQnAListDiv" style="padding: 15px">
@@ -403,17 +403,17 @@
 									</table>
 									<div id="paginationQ"></div>
 								</div>
-								<div class="card-footer">
+								<!-- <div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
 										추가</span>
-								</div>
+								</div> -->
 							</div>
 						</div>
 
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header que" onclick="admReviewListBtn()">
-									<i class="fa-solid fa-paw"></i> Review에 대한 신고 목록 <input
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;Review에 대한 신고 목록 <input
 										type="hidden" value="one" id="admReviewListInput">
 								</div>
 								<div class="card-body anw admReviewListDiv"
@@ -480,17 +480,17 @@
 									</table>
 									<div id="paginationR"></div>
 								</div>
-								<div class="card-footer">
+								<!-- <div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
 										추가</span>
-								</div>
+								</div> -->
 							</div>
 						</div>
 
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="card">
 								<div class="card-header que">
-									<i class="fa-solid fa-paw"></i> 파트너회원에 대한 신고 목록
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;파트너회원에 대한 신고 목록
 								</div>
 								<div class="card-body anw" style="padding: 15px">
 									<c:if test="${ fn:length(pets) == 0  }">
@@ -504,10 +504,10 @@
 										</div>
 									</c:forEach>
 								</div>
-								<div class="card-footer">
+								<!-- <div class="card-footer">
 									<span style="color: #0062ff"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>반려동물
 										추가</span>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -652,11 +652,11 @@ function admReviewListBtn() {//qna에 대한 함수 실행
 		
 		if( input === 'one' ){
 			$("#admReviewListInput").val('two');
-			pagingListR()
+			pagingListR();
 			
 			
 		} else  {
-			$("#admQnAListInput").val('one');
+			$("#admReviewListInput").val('one');
 		};
 	};
 	
@@ -1403,6 +1403,7 @@ function eventkeyQ() {
 							success : function (res) {
 									
 								if(res.list == ''){
+									alert('해당 데이터가 없습니다.');									
 									$("#adminReporListTbody").append("<tr><td colspan='7' align='center'>조회된 결과가 없습니다.</td></tr>");
 								
 								} else {	
