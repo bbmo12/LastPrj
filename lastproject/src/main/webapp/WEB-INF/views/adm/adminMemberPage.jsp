@@ -216,17 +216,15 @@
 		</div>
 	</section>
 	<section id="my_section">
-		<div class="container" style="max-width: 1350px;">
+		<div class="container" style="max-width: 1350px; margin-bottom: 60px;">
 			<div class="row">
 				<div class="col-lg-3">
 					<h2 align="center">AdminPage</h2>
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="partner_img"
-								src=""
-								onerror="this.src='resources/upload/cat.jpg'"> 
-							<br> <br>
+							<img class="partner_img" src=""
+								onerror="this.src='resources/upload/cat.jpg'"> <br> <br>
 							<h4 id="Mainname">관리자님</h4>
 							<div class="br"></div>
 							<div id="myinfo">
@@ -238,10 +236,10 @@
 					<br>
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
-							<h4 class="widget_title">My menu</h4>
+							<h4 class="widget_title">Admin menu</h4>
 							<ul class="list cat-list nanumbarungothic">
 								<li><a href="adminMemberPage"
-									class="d-flex justify-content-between">
+									class="d-flex justify-content-between no_deco">
 										<p>차트.목록</p>
 								</a></li>
 								<li><a href="adminReportPage"
@@ -265,7 +263,7 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
-									<br><br>
+									<br> <br>
 									<div class="card"
 										style="border-left: 0.25rem solid #0062ff !important;">
 										<div class="card-body text-center" style="padding: 20px">
@@ -342,22 +340,34 @@
 						<div class="col-lg-12 col-md-12 blog_details">
 							<br> <br>
 							<div class="card">
-								<div class="card-header que admPartChartA">
+								<div class="card-header que admPartChartA"
+									onclick="admPartChartABtn()">
 									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i
 										class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;일반회원
-									기간 별 가입자 수
+									기간 별 가입자 수 <input type="hidden" value="one"
+										id="admPartChartAInput">
 								</div>
-								<div class="card-body card_notice anw" style="padding: 15px">
+								<div class="card-body card_notice anw admPartChartADiv"
+									style="padding: 15px;">
+									<form id="adminPartChartForm" onsubmit="return false"
+										autocomplete="off" style="padding-left: 45%; padding-top: 5%;">
+										<input type="text" id="datepickerE" name="fromDateC"
+											value="2021-01-01">&nbsp;<i class="fa fa-calendar-o"
+											aria-hidden="true"></i>&nbsp;&nbsp; ~ <input type="text"
+											id="datepickerF" name="toDateC" value="2022-04-30">&nbsp;<i
+											class="fa fa-calendar-o" aria-hidden="true"></i> &nbsp;&nbsp;
+										<button type="submit" onclick="partChart();"
+											class="btn btn-default">
+											<i class="fa fa-search"></i>
+										</button>
+									</form>
+									<br>
+									<br>
 									<div class="admPartChart">
-										<h4 class="card-title">일반&파트너 회원 기간 별 가입자 수</h4>
-										<canvas id="admPartChart" style="height: 250px"></canvas>
+										<canvas id="admPartChart" style="height: 250px;"></canvas>
 									</div>
-									<div id="notice_footer">
-										<ul class="unordered-list">
-											<li>Fta Keys</li>
-											<li>For Women Only Your Computer Usage</li>
-										</ul>
-									</div>
+									<div id="notice_footer" class="unorder"
+										style="padding-left: 55%; padding-top: 5%;padding-bottom: 3%;"></div>
 								</div>
 
 							</div>
@@ -373,16 +383,18 @@
 									<div class="row">
 										<div class="table-wrap" style="width: 950px;">
 											<form id="admDateForm" onsubmit="return false"
-												autocomplete="off" onkeypress="eventkey();">
+												autocomplete="off" onkeypress="eventkey();" style="">
 												<input type="hidden" name="codem">
-												<code>가입일 검색 :</code>
+												<code>가입일 검색</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
 													value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-												: <input type="text" id="datepickerA" name="fromDate">&nbsp;&nbsp;
-												to : <input type="text" id="datepickerB" name="toDate"><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="text" id="datepickerA" name="fromDate">&nbsp;<i
+													class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
+												~ <input type="text" id="datepickerB" name="toDate">&nbsp;<i
+													class="fa fa-calendar-o" aria-hidden="true"></i> <br>
 												<br>
-												<code>이름,아이디로 검색 :</code>
+												<code>이름,아이디로 검색</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 													<option value="" selected>전 체</option>
 													<option value="name">이름</option>
@@ -392,11 +404,13 @@
 													class="btn btn-default">
 													<i class="fa fa-search"></i>
 												</button>
+
 												<button type="reset" class="btn btn-default">
 													<i class="fa fa-search-minus" aria-hidden="true"></i>
 												</button>
+												<br> <br>
 											</form>
-											<code>조건 별 검색 :</code>
+											<code>조건 별 검색</code>
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button"
 												class="btn btn-link btn-rounded btn-fw codep" id="key"
@@ -449,14 +463,16 @@
 											<form id="admDateFormP" onsubmit="return false"
 												autocomplete="off" onkeypress="eventkeyP();">
 												<input type="hidden" name="code">
-												<code>가입일 검색 :</code>
+												<code>가입일 검색</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="pageNum"
 													value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-												: <input type="text" id="datepickerC" name="fromDate">&nbsp;&nbsp;
-												to : <input type="text" id="datepickerD" name="toDate"><br>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="text" id="datepickerC" name="fromDate">&nbsp;&nbsp;<i
+													class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
+												<input type="text" id="datepickerD" name="toDate"><i
+													class="fa fa-calendar-o" aria-hidden="true"></i> <br>
 												<br>
-												<code>이름,아이디로 검색 :</code>
+												<code>이름,아이디로 검색</code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 													<option value="" selected>전 체</option>
 													<option value="name">이름</option>
@@ -469,8 +485,9 @@
 												<button type="reset" class="btn btn-default">
 													<i class="fa fa-search-minus" aria-hidden="true"></i>
 												</button>
+												<br> <br>
 											</form>
-											<code>조건 별 검색 :</code>
+											<code>조건 별 검색 </code>
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<button type="button"
 												class="btn btn-link btn-rounded btn-fw codepP" id="key"
@@ -519,6 +536,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
 	<!-- 회원 단건 조회 Modal -->
 	<div class="modal fade" id="myModal">
@@ -655,6 +673,11 @@
 		</div>
 	</div>
 	<script>
+	
+		
+		
+	
+	
 		//adminChartPage.jsp 합친 거
 		//div admPetChartA 클래스 클릭시 함수
 		$(document).on("click",".admPetChartA" ,function(){
@@ -716,48 +739,108 @@
 		} 
 
 		});
+		
+		//회원 기간 별 가입 자 수 차트  아코디언 클릭
+		function admPartChartABtn() {
+			var input;
+			input = $("#admPartChartAInput").val();
+	
+			if (input === 'one') { // 버튼 첫 번쨰 클릭
+				$("#admPartChartAInput").val('two'); //버튼 클릭 체크	
+				
+				
+			
+	
+				partChart();
+	
+			} else {// 버튼 두 번쨰 클릭
+				   $("#admPartChartAInput").val('one'); // 버튼 클릭 체크
+				   $("#admPartChart").remove();
+				   $(".admPartChart").append("<canvas id='admPartChart'></canvas>");
+				   $("input[name=fromDateC]").val('');
+				   $("input[name=toDateC]").val('');
+				   $("input[name=fromDateC]").val("2021-01-01");
+				   $("input[name=toDateC]").val("2022-04-30");
+				   $("#Member").empty();
+				   $("#Pmember").empty();
+				   $(".unorder").empty();
+	
+			};//end if
+	
+		};
+		//end 회원 기간 별 가입 자 수 차트  아코디언 클릭
+										
 
-
-		//div admPartChartA 클릭시 차트 그려짐
-		$(document).on("click",".admPartChartA" ,function(){
-		   $(".admPartChart").append("<canvas id='admPartChart'></canvas>");
-		   $("#admPartChart").remove();
-
-		   partChart();
-
-		   function partChart() { //일반 회원 기간 별 차트 그리기
-		        
+		
+		 function partChart() { //일반 회원 기간 별 차트 그리기
+			 $(".admPartChart").append("<canvas id='admPartChart'></canvas>");
+			   $("#admPartChart").remove();
+			   $("#Member").empty();
+			   $("#Pmember").empty();
+			   $(".unorder").empty();
+			   
+			    var fromDate = $("input[name=fromDateC]").val();
+		   		var toDate = $("input[name=toDateC]").val();
+		   		
+			   console.log(fromDate);
+			   console.log(toDate);
 		       tt = [];
 		       oo = [];
 		       aa = [];
 		       bb = [];
+		       pp = [];
 		       
 		       $.ajax({
 		           url : 'admMemChart',
 		           method : 'get',
+		           data : {"fromDate" : fromDate, "toDate" : toDate},
 		           success : function(res) {
 		               console.log(res);
 		               console.log(res.memChart[0].tt);
 		               console.log(res.memChart[0].oo); 
 		               console.log(res.pmemChart[0].aa);
 		               console.log(res.pmemChart[0].bb);
-		                var pmem = res.pmemChart;
+		               var pmem = res.pmemChart;
 		               var mem = res.memChart;
+		               
 		                $.each(pmem,function(i){
-		                   aa.push(res.pmemChart[i].aa);
-		                   bb.push(res.pmemChart[i].bb);
+		                   aa.push(pmem[i].aa);
+		                   bb.push(pmem[i].bb);
 		               });
 		                $.each(mem,function(i){
 		                       tt.push(mem[i].tt);
 		                       oo.push(mem[i].oo);
 		               }); 
 		                
-		                console.log(tt);
-		                console.log(aa);
-		                console.log(oo); 
+		                /* console.log(bb);
+		                const sumP = bb.reduce((acc,curr)=> acc + curr);
+		                console.log(sumP);
+		                const sumM = oo.reduce((acc,curr)=> acc + curr);
+		                console.log(sumM);
+		                 */
+		                 
+		                 var sumP = 0;
+		                 var sumM = 0;
+		               
+		                for(let p in bb){
+		                	console.log(parseInt(bb[p]));
+		                	sumP += parseInt(bb[p]);
+		                };
+		                for(let m in oo){
+		                	console.log(oo[m]);
+		                	sumM += parseInt(oo[m]);
+		                } 
+		                
+		                
+		                
+		                console.log(sumP, sumM);
+		                
+		                
+		                
+		                
+	
 
-		                const ccc = document.getElementById('admPartChart')
-		                       .getContext('2d');
+		               const ccc = document.getElementById('admPartChart').getContext('2d');
 		               const admPartChart = new Chart(ccc, {
 		                   type : 'line',
 		                   data : {
@@ -788,14 +871,22 @@
 		                           }
 		                       }
 		                   }
-		               }); 
+		               });
+		               //차트가 그려진 다음에 텍스트 출력
+		                Memberhtml = `\${fromDate} ~ \${toDate}의 <b>"일반회원 가입자 수"</b>는 : <i><b>"\${sumP}"</b></i> 명 `;
+		                Pemberhtml = `\${fromDate} ~ \${toDate}의 <b>"파트너회원 가입자 수"</b>는 : <i><b>"\${sumM}"</b></i> 명 `;
+		                
+		                let htmlUnorder = `<ul class="unordered-list"><li id="Member"></li><li id="Pmember"></li></ul>`;
+	
+						$(".unorder").append(htmlUnorder);
+		                
+		                $("#Member").append(Memberhtml);
+						$("#Pmember").append(Pemberhtml);
 		           } //success
 
 		       }) // ajax
 
 		   } //
-		   
-		});
 		
 		
 		
@@ -877,6 +968,17 @@
 		$("#datepickerD").datepicker({
 			language : 'ko'
 		});
+		$("#datepickerE").datepicker({
+			
+			language : 'ko'
+		});
+		$("#datepickerF").datepicker({
+			
+			language : 'ko'
+		});
+		
+	/* 	$("#datepickerE").datepicker('setDate','today');
+		$("#datepickerF").datepicker('setDate','+1M'); */
 
 		//end datepicker
 

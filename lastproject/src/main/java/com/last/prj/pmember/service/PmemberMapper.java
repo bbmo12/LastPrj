@@ -35,7 +35,7 @@ public interface PmemberMapper {
 	public int admPlistCodeCount(PmemberVO vo);
 	public List<PmemberVO> admPlistChart(PmemberVO vo);
 	public List<PmemberVO> admgoChart();
-	public List<PmemberVO> admPmemChart();
+	public List<PmemberVO> admPmemChart(@Param("fromDate")String fromDate, @Param("toDate")String toDate);
 
 	
 	public List<ReviewVO> ServiceReviewRecent();

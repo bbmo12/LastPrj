@@ -125,8 +125,8 @@ public class MemServiceImpl implements MemService {
 
 	@Override
 
-	public List<MemVO> admMemChart() {
-		return map.admMemChart();
+	public List<MemVO> admMemChart(String fromDate, String toDate) {
+		return map.admMemChart(fromDate, toDate);
 	}
 
 	@Override
