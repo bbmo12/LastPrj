@@ -106,6 +106,7 @@
 		width: 250px;
 	}
 	.card {
+		width : 1200px;
 		box-shadow: 0 .15rem 1.75rem 0 rgba(58, 59, 69, .1) !important;
 		border: 1px solid #e3e6f0;
 		border-radius: 0.35rem
@@ -120,6 +121,7 @@
 	}
 
 	.card-body {
+		width : 1200px;
 		font-size: 1.0rem;
 		font-style: normal;
 		font-weight: 300;
@@ -277,7 +279,6 @@
 														<th>예약내용</th>
 														<th>품종</th>
 														<th>예약여부</th>
-														<th>취소사유</th>
 														<th>후기</th>
 													</tr>
 												</thead>
@@ -345,6 +346,48 @@
 			</div>
 		</div>
 	</div>
+	<!-- 거절사유Modal -->
+	<div class="modal fade" id="refuseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">거절사유</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body 2">
+					<div class="refuse_div">
+						<span  style ="color: black !important;"id="refuse_why"></span>
+					</div>
+						<button style = "float: right"type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 예약내용Modal -->
+	<div class="modal fade" id="rcontentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">예약내용</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body 3">
+					<div class="rcontent_div">
+						<span style ="color: black !important;" id="rcontent_why"></span>
+					</div>
+						<button style = "float: right"type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- 리뷰작성 모달창 -->
 	<!-- Modal -->
@@ -392,30 +435,29 @@
 
 
 	<script>
+		
 		let viewPmemberList = function (result) {
 
 			$("#myTable").empty();
 
 			$.each(result, function (i) {
-				console.log(result[i].refuse)
+				console.log(result[i].rd_date)
 				if(result[i].refuse != null ){
 				var choicedTag = "<tr><td>" +
 					result[i].r_no +
 					"</td><td>" +
 					result[i].name +
 					"</td><td class='card-text'>" +
-					result[i].r_date +
+					result[i].rd_date +
 					"</td><td>" +
-					result[i].time +
-					"</td><td>" +
-					result[i].rcontent +
-					"</td><td>" +
+					result[i].r_date +" "+result[i].time +
+					"</td><td><input type='hidden' value=" +result[i].rcontent +">" +
+					"<button type='button' class ='btn btn-secondary' data-toggle='modal' data-target='#rcontentModal' onclick='contentBtn(event)' )'>내용보기</button>" +
+					"</td><td><input type='hidden' value=" +result[i].refuse +">"+
 					result[i].pcontent +
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
 					result[i].rccontent +
-					"</td><td>" +
-					result[i].refuse +
 					"</td>";
 				}else if (result[i].refuse == null){
 					var choicedTag = "<tr><td>" +
@@ -423,18 +465,16 @@
 					"</td><td>" +
 					result[i].name +
 					"</td><td class='card-text'>" +
-					result[i].r_date +
+					result[i].rd_date +
 					"</td><td>" +
-					result[i].time +
-					"</td><td>" +
-					result[i].rcontent +
+					result[i].r_date +" "+result[i].time +
+					"</td><td><input type='hidden' value=" +result[i].rcontent +">" +
+					"<button type='button' class ='btn btn-secondary' data-toggle='modal' data-target='#rcontentModal' onclick='contentBtn(event)' )'>내용보기</button>" +
 					"</td><td>" +
 					result[i].pcontent +
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
 					result[i].rccontent +
-					"</td><td>" +
-					''+
 					"</td>";
 				}
 
@@ -469,7 +509,7 @@
 				} else if (val[i].innerText == '승인거절') {
 					val[i].classList.add("refuse");
 					$(".refuse").empty();
-					var check = $(".refuse").append(`<span class="badge badge-danger">승인거절</span>`);
+					var check = $(".refuse").append(`<button type="button" class="refuse badge badge-danger" data-toggle='modal' data-target='#refuseModal' onclick='refuse(event)'>승인거절</button>`);
 				} else if (val[i].innerText == '결제완료') {
 					val[i].classList.add("complete");
 					$(".complete").empty();
@@ -803,84 +843,19 @@
 			$('#admDateForm')[0].pageNum.value = pa;
 			pagingList();
 		}
-		pagingList();
-		// ===========================end 조건 별 검색 + 페이징 처리==============================
-
-
-		// ==============================블록체인 ===============================================
-		/* $("#block_chain").on('click', function (event) {
-			$(".table").empty();
-			$("#blockChain").empty();
-			$("#blockChain").append(`예약번호 입력 :  <select class="reservNo" onchange="reservNo(event)" size="1">
-													<option value="" disabled selected>예약번호</option>
-													 	<c:forEach items="${reservation }" var="res">
-													 		<option value="${res.r_no}">${res.r_no}</option>
-													 	</c:forEach>`);
-			 <input type ="text" id ="r_no">  <button type='button' onclick="myFunction()">조회</button>`); 
-		});
-
-		function myFunction() {
-			var r_no = $("#r_no").val();
-			diaLog.methods.diaLogSearch(r_no)
-				.call()
-				.then(function (result) {})
+		function refuse(event){
+			$("#refuse_why").empty();
+			var refuseVal = $(event.target).parent().prev().children().first().val();
+			$("#refuse_why").append("거절사유 : "+refuseVal);
 		}
-
-		function reservNo(event) {
-			var r_no = $(".reservNo option:selected").val();
-			diaLog.methods.diaLogSearch(r_no)
-				.call()
-				.then(function (result) {
-
-					if (result.d_name == '') {
-						$(".table").empty();
-						$(".table").append(`
-		        	  				<thead>
-										<tr>
-											<th>예약번호</th>
-											<th>수의사 이름</th>
-											<th>예약신청일자</th>
-											<th>예약시간</th>
-											<th>예약내용</th>
-											<th>품종</th>
-											<th>예약여부</th>
-											<th>취소사유</th>
-											<th>후기</th>
-										</tr>
-									</thead>
-									<tbody id="myTable">
-										<tr>
-											<td colspan ="5" align="center">해당 블록체인이 없습니다</td>
-										</tr>
-									</tbody>`);
-					} else {
-						$(".table").empty();
-						$(".table").append(`
-		        	  				<thead>
-										<tr>
-											<th>예약번호</th>
-											<th>수의사 이름</th>
-											<th>예약신청일자</th>
-											<th>예약시간</th>
-											<th>예약내용</th>
-											<th>품종</th>
-											<th>예약여부</th>
-											<th>취소사유</th>
-											<th>후기</th>
-										</tr>
-									</thead>
-									<tbody id="myTable">
-										<tr>
-											<td>` + result.d_name + `</td>
-											<td>` + result.result + `</td>
-											<td>` + result.symptom + `</td>
-											<td>` + result.w_date + `</td>
-											<td>` + result.m_id + `</td>
-										</tr>
-									</tbody>`);
-					}
-				})
-		} */
+		
+		function contentBtn(event){
+			$("#rcontent_why").empty();
+			var rcontentVal = $(event.target).prev().val();
+			$("#rcontent_why").append("예약내용 : " + rcontentVal);
+		}
+		pagingList();
+		
 	</script>
 </body>
 
