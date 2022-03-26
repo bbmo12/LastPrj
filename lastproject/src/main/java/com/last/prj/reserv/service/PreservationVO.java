@@ -15,4 +15,5 @@ public class PreservationVO {
 	private String rccontent;
 	private String p_id;
 	private String rd_date;
+	private String refuse;
 }

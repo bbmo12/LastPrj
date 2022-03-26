@@ -451,9 +451,9 @@
 					result[i].rd_date +
 					"</td><td>" +
 					result[i].r_date +" "+result[i].time +
-					"</td><td><input type='hidden' value=" +result[i].rcontent +">" +
+					"</td><td><input type='hidden' value='" +result[i].rcontent +"'>" +
 					"<button type='button' class ='btn btn-secondary' data-toggle='modal' data-target='#rcontentModal' onclick='contentBtn(event)' )'>내용보기</button>" +
-					"</td><td><input type='hidden' value=" +result[i].refuse +">"+
+					"</td><td><input type='hidden' value='" +result[i].refuse +"'>"+
 					result[i].pcontent +
 					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
 					.rccontent + ">" +
@@ -468,12 +468,12 @@
 					result[i].rd_date +
 					"</td><td>" +
 					result[i].r_date +" "+result[i].time +
-					"</td><td><input type='hidden' value=" +result[i].rcontent +">" +
+					"</td><td><input type='hidden' value='" +result[i].rcontent +"'>" +
 					"<button type='button' class ='btn btn-secondary' data-toggle='modal' data-target='#rcontentModal' onclick='contentBtn(event)' )'>내용보기</button>" +
 					"</td><td>" +
 					result[i].pcontent +
-					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value=" + result[i]
-					.rccontent + ">" +
+					"</td><td id='td" + [i] + "'><input class='in_code' type='hidden' value='" + result[i]
+					.rccontent + "'>" +
 					result[i].rccontent +
 					"</td>";
 				}
@@ -846,12 +846,14 @@
 		function refuse(event){
 			$("#refuse_why").empty();
 			var refuseVal = $(event.target).parent().prev().children().first().val();
+			console.log(refuseVal);
 			$("#refuse_why").append("거절사유 : "+refuseVal);
 		}
 		
 		function contentBtn(event){
 			$("#rcontent_why").empty();
 			var rcontentVal = $(event.target).prev().val();
+			console.log(rcontentVal);
 			$("#rcontent_why").append("예약내용 : " + rcontentVal);
 		}
 		pagingList();
