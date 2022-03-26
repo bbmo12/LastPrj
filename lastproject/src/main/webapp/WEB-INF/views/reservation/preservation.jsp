@@ -362,10 +362,11 @@
 				var reservsplit = $(val[i]).parent().children().first().next().next().text().split('-');
 				var reservVal1 = reservsplit[0];
 				var reservVal2 = reservsplit[1];
-				var reservVal3 = reservsplit[2];
-				reservVal3 = reservVal3.slice(4,6);
-				var totalVal = reservVal1+reservVal2+reservVal3;
-				console.log("받은값",totalVal,"    현재시간",today.format('YYMMDDHH'));
+				var reservVal3 = reservsplit[2].slice(0,2);
+				var reservVal4 = reservsplit[2].slice(4,6);
+				console.log (reservVal4);
+				var totalVal = reservVal1+reservVal2+reservVal3+reservVal4;
+				console.log("받은값",totalVal,"현재시간",today.format('YYYYMMDDHH'));
 				
 				if(parseInt(totalVal) <= parseInt(today.format('YYMMDDHH')) ){
 					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
