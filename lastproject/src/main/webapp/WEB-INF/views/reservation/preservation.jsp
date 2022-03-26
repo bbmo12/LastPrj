@@ -232,7 +232,7 @@
 															<th>예약시간</th>
 															<th>예약자 이름</th>
 															<th>품종</th>
-															<th>증상</th>
+															<th>예약내용</th>
 															<th>승인여부</th>
 														</tr>
 													</thead>
@@ -249,8 +249,8 @@
 														
 														<td><input type="hidden" value="${pres.startdate }"><input type="hidden" value="${pres.time }">${pres.startdate }&nbsp; ${pres.time }</td>
 														<td>${pres.m_id }</td>
-														<td>${pres.pcontent }
-														<td>${pres.rcontent }</td>
+														<td><input type="hidden" value="${pres.refuse }"> ${pres.pcontent }
+														<td><input type="hidden" value="${pres.rcontent }"><button type='button' class ='btn btn-secondary' data-toggle='modal' data-target='#rcontentModal'  onclick='contentBtn(event)'>내용보기</button></td>
 														<td><input class="in_code" type="hidden" value="${pres.rccontent }">${pres.rccontent }</td>
 													</tr>
 												</c:forEach>
@@ -301,6 +301,49 @@
 			</div>
 		</div>
 	</div>
+	<!-- 거절사유Modal -->
+	<div class="modal fade" id="refuseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">거절사유</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body 2">
+					<div class="refuse_div">
+						<span  style ="color: black !important;"id="refuse_why"></span>
+					</div>
+						<button style = "float: right"type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 예약내용Modal -->
+	<div class="modal fade" id="rcontentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">예약내용</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<!-- modal 몸통 -->
+				<div class="modal-body 3">
+					<div class="rcontent_div">
+						<span style ="color: black !important;" id="rcontent_why"></span>
+					</div>
+						<button style = "float: right"type="button" class="btn btn-secondary" data-dismiss="modal">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<script>
 		const today = moment();
 		console.log("Today's date is" + today.format('YYYY-MM-DD'));
@@ -334,7 +377,7 @@
 			} else if (val[i].innerText == '승인거절'){
 				val[i].classList.add("fail");
 				$(".fail").empty();
-				var check = $(".fail").append(`<label class="badge badge-danger">승인거절</label>`);
+				var check = $(".fail").append(`<button type="button" class="refuse badge badge-danger" data-toggle='modal' data-target='#refuseModal' onclick='refuse(event)'>승인거절</button>`);
 			} else if (val[i].innerText == '진료완료'){
 				val[i].classList.add("succes");
 				$(".succes").empty();
@@ -522,6 +565,18 @@
 		function go_page(p) {
 			goform.pageNum.value = p;
 			goform.submit();
+		}
+		function refuse(event){
+			$("#refuse_why").empty();
+			var refuseVal = $(event.target).parent().prev().prev().children().first().val();
+			console.log(refuseVal);
+			$("#refuse_why").append("거절사유 : "+refuseVal);
+		}
+		function contentBtn(event){
+			$("#rcontent_why").empty();
+			var rcontentVal = $(event.target).prev().val();
+			console.log(rcontentVal);
+			$("#rcontent_why").append("예약내용 : " + rcontentVal);
 		}
 	</script>
 </body>
