@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -356,13 +357,13 @@
 										<input type="hidden" name="code">
 										<div>
 											<code>가입일 검색 </code>
-											<input type="hidden" name="repor">
-											<input 
-												type="hidden" name="pageNum" value="1"> <input style="margin-left:7.5%;"
-												type="text" id="datepickerA" name="fromDate">&nbsp;<i
-												class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
-											~ <input type="text" id="datepickerB" name="toDate">
-											<i class="fa fa-calendar-o" aria-hidden="true"></i>
+											<input type="hidden" name="repor"> <input
+												type="hidden" name="pageNum" value="1"> <input
+												style="margin-left: 7.5%;" type="text" id="datepickerA"
+												name="fromDate">&nbsp;<i class="fa fa-calendar-o"
+												aria-hidden="true"></i>&nbsp;&nbsp; ~ <input type="text"
+												id="datepickerB" name="toDate"> <i
+												class="fa fa-calendar-o" aria-hidden="true"></i>
 										</div>
 										&nbsp;&nbsp; <br>
 										<code>이름,아이디로 검색 </code>
@@ -375,7 +376,9 @@
 											class="btn btn-default">
 											<i class="fa fa-search"></i>
 										</button>
-										<input type="reset">
+										<button type="reset" class="btn btn-default">
+											<i class="fa fa-search-minus" aria-hidden="true"></i>
+										</button>
 									</form>
 									<br>
 									<div id="button">
@@ -450,12 +453,12 @@
 												<div>
 													<code>가입일 검색 </code>
 													<input type="hidden" name="repor"> <input
-														type="hidden" name="pageNum" value="1"> 
-														<input style="margin-left:7.5%;"
-														type="text" id="datepickerC" name="fromDate">&nbsp;<i
-														class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;&nbsp;
-													~ <input type="text" id="datepickerD" name="toDate">
-													<i class="fa fa-calendar-o" aria-hidden="true"></i>
+														type="hidden" name="pageNum" value="1"> <input
+														style="margin-left: 7.5%;" type="text" id="datepickerC"
+														name="fromDate">&nbsp;<i class="fa fa-calendar-o"
+														aria-hidden="true"></i>&nbsp;&nbsp; ~ <input type="text"
+														id="datepickerD" name="toDate"> <i
+														class="fa fa-calendar-o" aria-hidden="true"></i>
 												</div>
 												&nbsp;&nbsp; <br>
 												<code>이름,아이디로 검색 </code>
@@ -468,7 +471,9 @@
 													class="btn btn-default">
 													<i class="fa fa-search"></i>
 												</button>
-												<input type="reset">
+												<button type="reset" class="btn btn-default">
+													<i class="fa fa-search-minus" aria-hidden="true"></i>
+												</button>
 											</form>
 											<br>
 											<div>
@@ -537,7 +542,7 @@
 		<!-- QNA  Modal 창 -->
 		<div class="modal fade" id="myModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="margin-top: 200px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">신고내역</h5>
@@ -674,101 +679,7 @@ function admReviewListBtn() {//qna에 대한 함수 실행
 	};
 };
 
-	
-	let viewadminReporList = function(list) {
-		console.log(list);
-		$("#adminReporListTbody").empty();
-		/* <th>아이디</th>
-		<th>이름</th>
-		<th>회원유형</th>
-		<th>신고건수</th>
-		<th>가입날짜</th>
-		<th>보기</th>
-		<th>제재</th> */
-		$.each(list,function(i){ //반복문 돌려
-			
-			
-			$("#adminReporListTbody").append("<tr><td id='id'>"+list[i].id+"</td><td>"
-											+list[i].name+"</td><td>"+(list[i].role == 1 ? '일반회원' : '파트너회원')+"</td><td>"+list[i].c_report+"</td><td>"+list[i].startdate+	"</td><td>"
-											+ "<td><button type='button' style='background-color: #38a4ff; border: none;' class='btn btn-primary' data-toggle='modal' onclick='adminReporOne()' data-target='#reviewWriteModal'>처리</button>"
-											+ "</td></tr>");
-			
-		}) //end each
-		
-	} //end 
-	
-	
-	//해당 회원의 역대 신고 목록 출력 모달
-	 function adminReporOne() {
-		var id = $(event.target).parent().parent().children("#id").text();
-		console.log(id); 
-		
-		$.ajax({
-			url : 'adminReporOne',
-			method : 'get',
-			data : {'id' : id},
-			success : function(res) {
-				alert(' adminReporOne 성공');
-				consol.log(res.list);
-				consol.log(res.page);
-				
-			}
-		})
-		
-		
-	}; //end 해당 회원의 역대 신고 목록 출력 모달
-		
-	// ajax 호출 함수===============
-		
-		
-		
 
-	
-	
-	
-	/* // =================회원 단건 조회 Modal===================
-	
-	function show() {
-		var m_id = $(event.target).parent().next().text();
-		console.log(p_id);  
-	
-	//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
-	 $.ajax({
-		url : 'admMemberOne',
-		method : 'post',
-		data : {'p_id' : p_id },
-		success : function (res) {					
-			console.log(res.list);
-			$('.mem-body').append("<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
-									+ "<li>" +res.list.startdate 
-									+"</li><li>"
-									+ res.list.name
-									+ "</li><li>"
-									+ res.list.w_address
-									+ "</li><li>"
-									+ res.list.w_tel
-									+ "</li><li>"
-									+ res.list.p_info
-					    			+"</li></ul>");
-			$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetail(this)' >상세페이지로..</button>");
-			//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
-			
-			//=========================Modal의 Chart 그리기
-			
-		}
-	}); //end Modal에 띄어줄 단건조회 ajax */
-	
-
-
-
-
-
-
-
-	
-
-	
- 	
  	
 	//======================enter 키===================
 	function eventkeyR() {
@@ -1074,7 +985,7 @@ function eventkeyQ() {
 							if (result[i].repor === 701) {
 								$("#myTableQ")
 										.append(
-												"<tr><td>"
+												"<tr><td>" 
 														+ result[i].reporter
 														+ "</td><td>"
 														+ result[i].w_date
@@ -1147,9 +1058,9 @@ function eventkeyQ() {
 										"<li>신고유형 : " + res[0].f_content
 												+ "</li><li>신고날짜 : "
 												+ res[0].w_date
-												+ "</li><li>신고자 : "
+												+ "</li><li>신고 한 사람 : "
 												+ res[0].reporter
-												+ "</li><li>신고당한 : "
+												+ "</li><li>신고 당한 사람 : "
 												+ res[0].reported
 												+ "</li><li>신고사유 : "
 												+ res[0].content
@@ -1161,6 +1072,8 @@ function eventkeyQ() {
 												+ (res[0].state == 'null' ? '없음' : res[0].state )
 												+ "</li>");
 								
+								
+								
 								$(".modal-footer").append("<button class='btn btn-link' type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
 								
@@ -1171,14 +1084,26 @@ function eventkeyQ() {
 								$("form")
 										.append(
 												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+								
+								$("form")
+									.append(
+											"<input type='hidden' id='q_no' value ="+res[0].q_no+">");
+								$("form")
+								.append(
+										"<input type='hidden' id='reported' value ="+res[0].reported+">");
+								$("form")
+								.append(
+										"<input type='hidden' id='reporter' value ="+res[0].reporter+">");
+								
+								
 
 								$("#repo").append(
 										"<li>신고유형 : " + res[0].f_content
 												+ "</li><li>신고날짜 : "
 												+ res[0].w_date
-												+ "</li><li>신고자 : "
+												+ "</li><li>신고 한 사람 : "
 												+ res[0].reporter
-												+ "</li><li>신고당한 : "
+												+ "</li><li>신고 당한 사람 : "
 												+ res[0].reported
 												+ "</li><li>신고사유 : "
 												+ res[0].content
@@ -1233,14 +1158,12 @@ function eventkeyQ() {
 
 	//===========신고처리 : admReportUpdate==========
 	$("#admReportUpdate").on("click", function(e) {
-		var str = $('#form').serialize();
-		console.log("str의 값"+str);
-		var rep_no = $("#rep_no").val();
-		console.log("rep_no : "+rep_no);
-		var state = $("#state").val();
-		console.log("state : "+state);
-		var repor = $("#repor").val();
-		console.log("repor : "+repor);
+	
+		var q_no = $("#q_no").val();
+		console.log("q_no :" + q_no);
+		var reported = $("#reported").val();
+		var reporter = $("#reporter").val();
+		
 		
 			$.ajax({
 				url : 'admReportUpdate',
@@ -1248,11 +1171,15 @@ function eventkeyQ() {
 				data : {
 					"rep_no" : $("#rep_no").val(),
 					"state" : $("#state").val(),
-					"repor" : $("#repor").val()
+					"repor" : $("#repor").val(),
+					"q_no" : $("#q_no").val()
 				},
 				success : function(result) {
 					alert("신고 처리가 성공적으로 완료되었습니다");
+					alert('해당 게시글이 삭제 처리 되었습니다');
 					console.log(result);
+					diaWebAlertFrom(reported);
+					diaWebAlertTo(reporter);
 					location.reload();
 				},
 				error : function(err) {
@@ -1263,6 +1190,62 @@ function eventkeyQ() {
 		
 	})
 	//===========신고처리 : admReportUpdate========== 끝!
+	
+	function diaWebAlertFrom(reported) {
+
+		
+         var content = "작성하신 글이 신고처리 되어 삭제처리 되었습니다.";
+         // 전송한 정보를 db에 저장   
+         $.ajax({
+            type: 'post',
+            url: 'noticeInsert',
+            dataType: 'text',
+            data: {
+               "n_to": reported,
+               "content": content
+            },
+            success: function () { // db전송 성공시 실시간 알림 전송
+               // 소켓에 전달되는 메시지
+               // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+               socket.send(reported + "," + content);
+               alert("전송되었습니다.");
+            },
+            error: function (error) {
+               console.log(error);
+               alert("실패");
+       }
+         })
+	}
+            
+            function diaWebAlertTo(reporter) {
+        		
+                var content = "신고하신 글이 삭제처리 되었습니다.";
+                 // 전송한 정보를 db에 저장   
+                 $.ajax({
+                    type: 'post',
+                    url: 'noticeInsert',
+                    dataType: 'text',
+                    data: {
+                       "n_to": reporter,
+                       "content": content
+                    },
+                    success: function () { // db전송 성공시 실시간 알림 전송
+                       // 소켓에 전달되는 메시지
+                       // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
+                       socket.send(reporter + "," + content);
+                       alert("전송되었습니다.");
+                    },
+                    error: function (error) {
+                       console.log(error);
+                       alert("실패");
+               }
+                 })
+            }
+	
+	
+
+		
+	
 		
 		
 	//===================리스트 호출 버튼==================
@@ -1479,6 +1462,177 @@ function eventkeyQ() {
 		$('.admReporListPaging').html(nav);
 		
 	} //end viewpagingadminReporList
+	
+	
+	let viewadminReporList = function(list) {
+		console.log(list);
+		$("#adminReporListTbody").empty();
+		/* <th>아이디</th>
+		<th>이름</th>
+		<th>회원유형</th>
+		<th>신고건수</th>
+		<th>가입날짜</th>
+		<th>보기</th>
+		<th>제재</th> */
+		$.each(list,function(i){ //반복문 돌려
+			
+			var id = $("#id").val();
+			console.log(id);
+			if( id == list[i].id){
+				return false;
+			} else {
+				
+			
+			$("#adminReporListTbody").append("<tr><td id='id'>"
+											+list[i].id+"</td><td>"
+											+list[i].name+"</td><td>"
+											+(list[i].role == 1 ? '일반회원' : '파트너회원')+"</td><td>"
+											+"<div class='progress'>"
+											+"<div class='progress-bar bg-success' role='progressbar' style='width:"
+											+list[i].c_report
+											+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
+											+ "</div></div>"
+											+"</td><td>"
+											+list[i].startdate+	"</td><td>"
+											+ "<td><button type='button' style='background-color: #38a4ff; border: none;' class='btn btn-primary' data-toggle='modal' onclick='adminReporOne()' data-target='#reviewWriteModal'>조회</button>"
+											+ "</td></tr>");
+			}
+			
+		}) //end each
+		
+	} //end 
+	
+	
+	//해당 회원의 역대 신고 목록 출력 모달
+	 function adminReporOne() {
+		var id = $(event.target).parent().parent().children("#id").text();
+		console.log(id); 
+		
+		/* $.ajax({
+			url : 'adminReporOne',
+			method : 'get',
+			data : {'id' : id},
+			success : function(res) {
+				alert(' adminReporOne 성공');
+				consol.log(res.list);
+				consol.log(res.page);
+				
+			}
+		}) */
+		
+		
+	}; //end 해당 회원의 역대 신고 목록 출력 모달
+		
+	// ajax 호출 함수===============
+	
+	/* 
+function admReporListBtn() {
+		
+		var input;
+		input = $("#admRepoorListInput").val();
+		 
+		
+		if( input === 'one' ){
+			$("#admRepoorListInput").val('two');
+			
+			//실행시킬 함수 ===============
+			let htmladmReporList;
+	 		htmladmReporList = `
+			<table class="table table-striped adminReporListTable">
+			<thead>
+				<tr style="text-align: center;">
+					<th>아이디</th>
+					<th>이름</th>
+					<th>회원유형</th>
+					<th>신고건수</th>
+					<th>가입날짜</th>
+					<th>보기</th>
+					<th>제재</th>
+				</tr>
+			</thead>
+			<tbody style="text-align: center" id="adminReporListTbody">
+
+			</tbody>
+		</table>
+		<div id="pagination" class="admReporListPaging"></div>
+	`; 
+	$(".admRepoorListDiv").append(htmladmReporList);
+		
+				$.ajax({
+						url:'adminReporList',
+						method: 'get',
+						success : function (res) {
+								
+							if(res.list == ''){
+								alert('해당 데이터가 없습니다.');									
+								$("#adminReporListTbody").append("<tr><td colspan='7' align='center'>조회된 결과가 없습니다.</td></tr>");
+							
+							} else {	
+							
+									console.log(res.list);
+									console.log(res.page);
+									
+									viewadminReporList(res.list);
+									viewpagingadminReporList(res.page);
+										
+								}// end if
+							
+						},// end success
+						error : function(error) {
+								alert('해당 회원의 목록을 불러오는 데 오류가 있습니다. 개발자에게 연락하십시오!');
+							
+						}//end error
+					}) //end ajax
+		
+			
+		} else  {
+			$("#admRepoorListInput").val('one');
+			$(".admRepoorListDiv").empty();
+		};
+	};// 신고 제재 대상 버튼~===================
+	
+	// ajax 호출 함수===============
+		function viewpagingadminReporList(page) {
+		console.log("얘로 페이지를 만든다!",page);
+		
+		var nav =  `<nav class="blog-pagination justify-content-center d-flex">
+		<ul class="pagination">`
+		if(page.prev) {
+			nav += `<li class="page-item">
+			<a href="javascript:goPage(\${page.startPage-1})" class="page-link"
+				aria-label="Previous">
+				<span aria-hidden="true">
+					<span class="fa fa-angle-left"></span>
+				</span></a>
+			</li>`
+		}
+			for ( var i=page.startPage ; i <=  page.endPage; i++){
+				nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
+							href="javascript:goPage(\${i})" class="page-link">\${i }</a>
+							</li>`
+			}
+			
+		if(page.next){
+			nav += `<li class="page-item"><a href="javascript:goPage(\${page.endPage+1})"
+				class="page-link" aria-label="Next">
+			<span aria-hidden="true">
+				<span class="fa fa-angle-right"></span>
+			</span></a>
+	</li>`
+	
+		}
+			
+		nav += `</ul></nav>`
+		$('.admReporListPaging').html(nav);
+		
+	} //end viewpagingadminReporList */
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	</script>

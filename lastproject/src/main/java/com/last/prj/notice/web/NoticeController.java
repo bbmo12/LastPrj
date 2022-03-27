@@ -51,7 +51,12 @@ public class NoticeController {
 			//System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
 			//System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
 			id = userDetails.getPmember().getP_id();
+		} else {
+			id = "admin@admin.com";
 		}
+				
+				
+		
 		
 		notice.setN_from(id);
 		noticeDao.noticeInsert(notice);
