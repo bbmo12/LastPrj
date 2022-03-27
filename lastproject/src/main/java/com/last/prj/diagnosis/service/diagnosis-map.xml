@@ -9,7 +9,7 @@
 	<select id="pMemDiaList" resultType="com.last.prj.diagnosis.service.DiagnosisVO">		
 		SELECT *
 				FROM ( SELECT ROWNUM RN, A.*
-					   FROM (SELECT P.M_ID,P.NAME AS PET_NAME,D.D_NAME,D.W_DATE
+					   FROM (SELECT R.R_NO AS R_NO,P.M_ID,P.NAME AS PET_NAME,D.D_NAME,D.W_DATE,D.SYMPTOM,D.RESULT
 							 FROM DIAGNOSIS D,PET P,RESERVATION R
 		       WHERE D.R_NO=R.R_NO AND P.PET_NO =R.PET_NO AND R.P_ID = #{p_id}) A)
 			WHERE RN BETWEEN (#{pageNum}-1)*#{amount}+1
