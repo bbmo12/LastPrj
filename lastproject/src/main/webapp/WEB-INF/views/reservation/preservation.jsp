@@ -346,8 +346,10 @@
 	
 	<script>
 		const today = moment();
-		console.log("Today's date is" + today.format('YYYY-MM-DD'));
+		var length =  "${fn:length(preservation)}";
+		console.log(length);
 		var val = $(".in_code").parent();
+		
 		for (var i = 0; i < val.length; i++) {
 			if (val[i].innerText == '승인대기') {
 				val[i].classList.add("code");
@@ -355,27 +357,24 @@
 				var check = $(".code").append(`<button type="button"  class="badge badge-success" onclick="ok(event)">승인</button> 
 						       				   <button type="button" class="badge badge-danger" onclick="no(event)">거절</button>`);
 			} else if (val[i].innerText == '결제완료') {
-				val[i].classList.add("diaLog");
-				$(".diaLog").empty();
-				
+				val[i].classList.add("diaLog"+i);
+				$(".diaLog"+i).empty();
 				var reservDate = $(val[i]).parent().children().first().next().next().next().text();
 				var reservsplit = $(val[i]).parent().children().first().next().next().text().split('-');
 				var reservVal1 = reservsplit[0];
 				var reservVal2 = reservsplit[1];
 				var reservVal3 = reservsplit[2].slice(0,2);
 				var reservVal4 = reservsplit[2].slice(4,6);
-				var totalVal = reservVal1+reservVal2+reservVal3/* +reservVal4 */;
-				var a =parseInt(totalVal);
-				console.log("예약시간",a);
-				var b = parseInt(today.format('YYYYMMDD'));
-				console.log("현재시간",b);
-				//console.log("받은값",parseInt(totalVal),"현재시간",parseInt(today.format('YYYYMMDD')));
+				console.log(reservVal4);
+				var totalVal = reservVal1+reservVal2+reservVal3+reservVal4;
+				var reservTime = parseInt(totalVal);
+				var nowTime = parseInt(today.format('YYYYMMDDHH'));
 				
-				if(a<=b) {
-					var check = $(".diaLog").append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
+				if(reservTime<=nowTime) {
+					$(".diaLog"+i).append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
 				}else{
-					$(".diaLog").append(`<label class="badge badge-success">예약완료</label>`);
+					$(".diaLog"+i).append(`<label class="badge badge-success">예약완료</label>`);
 				}
 			} else if (val[i].innerText == '승인거절'){
 				val[i].classList.add("fail");

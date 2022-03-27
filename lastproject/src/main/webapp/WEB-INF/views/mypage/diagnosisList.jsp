@@ -225,10 +225,13 @@
 												<table class="table table-striped">
 													<thead>
 														<tr style="text-align: center;">
+															<th>예약번호</th>
 															<th>회원이름</th>
 															<th>반려동물 이름</th>
 															<th>진단명</th>
-															<th>날짜</th>
+															<th>증상</th>
+															<th>처방</th>
+															<th>진료일자</th>
 														</tr>
 													</thead>
 													<tbody style="text-align: center">
@@ -239,9 +242,12 @@
 														</c:if>
 														<c:forEach items="${pMemDiaList}" var="list">
 															<tr>
+																<td>${list.r_no }</td>
 																<td>${list.m_id }</td>
 																<td>${list.pet_name }</td>
 																<td>${list.d_name } </td>
+																<td>${list.symptom }</td>
+																<td>${list.result }</td>
 																<td>${list.w_date }</td>
 															</tr>
 														</c:forEach>
