@@ -175,5 +175,10 @@ public class MemServiceImpl implements MemService {
 		return map.careList(p_id);
 	}
 
+	@Override
+	public int adminDeleteM(String id) {
+		return map.adminDeleteM(id);
+	}
+
 
 }

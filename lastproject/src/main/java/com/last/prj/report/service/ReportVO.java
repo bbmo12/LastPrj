@@ -54,6 +54,9 @@ public class ReportVO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date startdate;
 	private int	c_report;			//신고당한횟수
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	private Date wr_date;
 	
 
 }

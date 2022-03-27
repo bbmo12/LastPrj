@@ -302,7 +302,7 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
 													<i class="fa-solid fa-paw fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">펫 마릿수</span>
+												</span><span id="cardTitle">등록된 펫 수</span>
 											</div>
 											<h3 id="admPetC"></h3>
 										</div>
@@ -531,29 +531,45 @@
 		</div>
 	</section>
 	<!-- 회원 단건 조회 Modal -->
-	<div class="modal fade" id="myModal">
-		<div class="modal-dialog modal-l modal-dialog-scrollable">
-			<div class="modal-content">
+	
+	<!-- 파트너 회원 단건 조회 Modal -->
+						<div class="modal fade" id="myModal">
+							<div class="modal-dialog modal-xl">
+								<div class="modal-content">
 
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title" id="id"></h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<!-- Modal body -->
-				<div class="modal-body">
-					<div id="membody"></div>
-					<canvas id="myChart"></canvas>
-				</div>
-			</div>
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title">해당 파트너 회원</h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
 
-			<!-- Modal footer -->
-			<div class="modal-footer">
+									<!-- Modal body -->
+									<div class="modal-body">
 
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
+										<div class='mem-body'></div>
+
+										<!-- chart.js -->
+										<div class="card">
+											<div class="card-body myModalP">
+												<h4 class="card-title">회원정보 chart</h4>
+												<canvas id="myChart" style="height: 50px"></canvas>
+											</div>
+										</div>
+										<!--end chart.js -->
+
+									</div>
+
+									<!-- Modal footer -->
+									<div class="modal-footer">
+
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+	
+	
 	<script>
 	
 		
@@ -1144,7 +1160,7 @@
 									+ "</td><td>"
 									+ (result[i].pet_no == null ? '미보유' : '보유')
 									+ "</td><td>"
-									+ "</td><td><button type='button' class='btn btn-primary' style='background-color: cornflowerblue; border: none;' onclick='show()'>조회</button></td></tr>");
+									+ "</td><td><button type='button' class='btn btn-primary' style='background-color:data-value="+result[i].m_id+" cornflowerblue; border: none;' onclick='show()'>조회</button></td></tr>");
 
 				} else if (result[i].startDate == null) {
 					console.log(result[i].endDate);
@@ -1177,7 +1193,7 @@
 									+ "</td><td>" + result[i].p_id
 									+ "</td><td>" + result[i].startdate
 									+ "</td><td>" + result[i].f_content
-									+ "</td><td><button type='button' class='btn btn-primary' style='background-color: cornflowerblue; border: none;' onclick='showP()'>조회</button></td></tr>");
+									+ "</td><td><button type='button' class='btn btn-primary' style='background-color: data-value="+result[i].p_id+" cornflowerblue; border: none;' onclick='showP()'>조회</button></td></tr>");
 					
 				} else if (result[i].startdate == null) {
 					console.log(result[i].enddate);
@@ -1253,18 +1269,18 @@
 						success : function (res) {					
 						console.log(res.list);
 						
-						$('.mem-body').append("<ul><li>"
+						$('.mem-body').append("<ul class='list-star'><li> 가입일 : "
 												+res.list.startdate 
-												+"</li><li>"
+												+"</li><li>이름 : "
 												+ res.list.name
-												+ "</li><li>"
+												+ "</li><li>주소 : "
 												+ res.list.w_address
-												+ "</li><li>"
+												+ "</li><li>전화번호 : "
 												+ res.list.w_tel
-												+ "</li><li>"
+												+ "</li><li>자기소개 : "
 												+ res.list.p_info
 								    			+"</li></ul>");
-						$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetailP(this)' >상세페이지로..</button>");
+						//$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetailP(this)' >상세페이지로..</button>");
 						
 						//=========================Modal의 Chart 그리기
 						
@@ -1273,15 +1289,15 @@
 						const myChart = new Chart(ctx, {
 							type : 'bar',
 							data : {
-								labels : [ '신고 당한 수', '추천 수','서비스 제공 수','총매출','팔로워 수' ],
+								labels : [ '신고 당한 수', '추천 수','팔로워 수' ],
 								datasets : [ {
 									label : '# of Votes',
-									data : [ res.list.c_report, '8', '1' ],
-									backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-											'rgba(255, 159, 64, 0.2)',
+									data : [ '2', '8', '4' ],
+									backgroundColor : [ 'rgba(355, 99, 132, 0.2)',
+											'rgba(155, 159, 64, 0.2)',
 											'rgba(255, 159, 64, 0.2)' ],
-									borderColor : [ 'rgba(255, 99, 132, 1)',
-											'rgba(255, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
+									borderColor : [ 'rgba(355, 99, 132, 1)',
+											'rgba(155, 159, 64, 1)', 'rgba(255, 159, 64, 1)' ],
 									borderWidth : 1
 								} ]
 							},
@@ -1310,8 +1326,10 @@
 		//모달에서 상세보기 클릭 시 회원의 마이페이지로 이동
 
 		//==================회원의 마이페이지로 이동===================
-		function goDetail(e) {
-			var m_id = $(e).data('value');
+		function goDetail() {
+			//var m_id = $(e).data('value');
+			 var m_id = $(event.target).closest("tr").children().next().html();
+			
 			console.log("m_id : " + m_id);
 			var url = `memberDetail?id=\${m_id}`;
 			console.log("url :" + url);
@@ -1321,8 +1339,9 @@
 		//==================회원의 마이페이지로 이동=================== END
 
 		//==================파트너회원의 마이페이지로 이동===================
-		function goDetailP(e) {
-			var p_id = $(e).data('value');
+		function goDetailP() {
+			var p_id;
+			p_id = $(event.target).closest("tr").children().next().html();
 			console.log("p_id : " + p_id);
 			var url = `pmemberDetail?id=\${p_id}`;
 			console.log("url :" + url);
@@ -1342,8 +1361,14 @@
 				$('#myModal').on('hidden.bs.modal', function(e) {
 					$(this).find('ul').empty();
 					$(this).find('#goDetail').remove();
-					$('#myChart').remove();
-					$('.Modalchart').append('<canvas id="myChart"></canvas>');
+					//$('#myChart').remove();
+					
+					$('.myModalP').empty();
+					
+					
+					let htmlPP = `<h4 class="card-title">회원정보 chart</h4>
+						<canvas id="myChart" style="height: 50px"></canvas>`;
+					$('.myModalP').append(htmlPP);
 					
 				})
 		
