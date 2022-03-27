@@ -200,4 +200,9 @@ public class PmemberServiceImpl implements PmemberService{
 	public int deletepetcare(String p_id) {
 		return map.deletepetcare(p_id);
 	}
+
+	@Override
+	public int adminDeleteP(String id) {
+		return map.adminDeleteP(id);
+	}
 }

@@ -536,5 +536,43 @@ public class AdminController {
 		map.put("page", page);
 		return map;
 	}
+	
+	
+	@RequestMapping("/adminReporOne")
+	@ResponseBody
+	public  HashMap<String, Object> adminReporOne(ReportVO vo, Criteria cri){
+		
+		System.out.println("VO가 뭔데 대체" + vo);
+		int total = reportDao.adminReporOneListCount(vo);
+		System.out.println("total은~" + total);
+		PagingVO page = new PagingVO(cri, total);
+		page.setAmount(9);
+		// n개씩 출력
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		vo.setVo(page);
+
+		map.put("list", reportDao.adminReporOneList(vo));
+		map.put("page", page);
+		
+		return map;
+	}
+	
+	@RequestMapping("/adminDeleteMember")
+	@ResponseBody
+	public String adminDeleteMember(@RequestParam("id") String id, ReportVO vo) {
+		vo = reportDao.adminDeletResearch(id);
+		int r = vo.getRole();
+		
+		if( r == 1) {
+			pMemberDao.adminDeleteP(id);
+			
+		}else {
+			memDao.adminDeleteM(id);
+		}
+		
+		
+		return "ok";
+	}
+	
 
 }

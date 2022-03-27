@@ -71,4 +71,6 @@ public interface MemMapper {
 	
 	//펫케어 가능동물 단건?조회
 	List<PetcareVO> careList(String p_id);
+	
+	public int adminDeleteM(String id);
 }

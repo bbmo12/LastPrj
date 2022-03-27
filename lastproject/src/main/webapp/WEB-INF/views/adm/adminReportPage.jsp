@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -43,6 +43,15 @@
 
 </head>
 <style>
+.modal-content {
+	overflow-y: initial !important
+}
+
+.modal-body {
+	height: 250px;
+	overflow-y: auto;
+}
+
 #my_section {
 	margin-top: -70px;
 	padding-bottom: 25px;
@@ -302,7 +311,7 @@
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
 													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">신고 제재 중인 회원</span>
+												</span><span id="cardTitle">미처리 건수</span>
 											</div>
 											<h3 id="adminReportedCount"></h3>
 										</div>
@@ -310,21 +319,20 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12 col-md-12 blog_details">
+						<!-- <div class="col-lg-12 col-md-12 blog_details">
 							<br> <br>
 							<div class="card">
-								<div class="card-header que admPetChartA">
+								<div class="card-header que admPetChartA"
+									onclick="admReportedMember()">
 									<i class="fa-solid fa-bell"></i>&nbsp; <i class="fa fa-users"
 										aria-hidden="true"></i> &nbsp; 신고 제재 중인 회원
 								</div>
-								<div class="card-body anw" style="padding: 15px">
+								<div class="card-body anw admReportedMemberDiv">
 									<div class="card-body anw" style="padding: 15px"></div>
 								</div>
 
 							</div>
-						</div>
-
-
+						</div> -->
 
 
 						<div class="col-lg-12 col-md-12 blog_details">
@@ -332,7 +340,7 @@
 							<div class="card">
 								<div class="card-header que" onclick="admReporListBtn()">
 									<i class="fa-solid fa-bell"></i>&nbsp; <i class="fa fa-users"
-										aria-hidden="true"></i>&nbsp;&nbsp; 신고 제재 대상 회원 <input
+										aria-hidden="true"></i>&nbsp;&nbsp; 신고 고위험 회원 목록 <input
 										type="hidden" value="one" id="admRepoorListInput">
 								</div>
 								<div class="card-body anw admRepoorListDiv"
@@ -560,16 +568,19 @@
 						<!-- 신고 처리 Form 태그 -->
 						<form id="form" style="display: none;">
 							<div class="form-group">
-								<label for="amdReportOption">처리유형</label> <select class="repor"
-									id="repor" name="repor">
-									<option value="701" selected>미처리</option>
-									<option value="702">기각</option>
-									<option value="703">승인</option>
-								</select>
+								<label for="amdReportOption">처리유형</label>
+								<div>
+									<select class="repor" id="repor" name="repor">
+										<option value="701" selected>미처리</option>
+										<option value="702">기각</option>
+										<option value="703">승인</option>
+									</select>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="message-text" class="col-form-label">처리사유</label>
-								<textarea class="state" id="state" name="state"></textarea>
+								<textarea class="state" id="state" name="state" rows="4"
+									cols="60" placeholder="처리사유를 작성해주세요"></textarea>
 							</div>
 						</form>
 						<div class="modal-footer">
@@ -580,54 +591,32 @@
 				</div>
 			</div>
 		</div>
-		<!--end Modal 창 -->
-		<!-- 제재 대상 회원의 역대 신고 내역 보기 모달창 -->
-		<!-- Modal -->
-		<div class="modal fade" id="reviewWriteModal" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
+
+		/
+		<!-- QNA  Modal 창 -->
+		<div class="modal fade" id="exampleModalLong" tabindex="-1"
+			aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document" style="margin-top: 150px;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+						<h5 class="modal-title" id="exampleModalLabel">신고내역목록</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="counselReviewInsert" method="post"
-						enctype="multipart/form-data">
-						<!-- modal 몸통 -->
-						<div class="modal-body">
+					<div class="modal-body" style="height: 600px;">
 
-							<div align="center">
-								<h3 align="center">후기를 남겨주세요!</h3>
-								<div class="star-rating">
-									<input type="radio" id="5-stars" name="rating" value="5" /> <label
-										for="5-stars" class="star">&#9733;</label> <input type="radio"
-										id="4-stars" name="rating" value="4" /> <label for="4-stars"
-										class="star">&#9733;</label> <input type="radio" id="3-stars"
-										name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
-									<input type="radio" id="2-stars" name="rating" value="2" /> <label
-										for="2-stars" class="star">&#9733;</label> <input type="radio"
-										id="1-stars" name="rating" value="1" /> <label for="1-stars"
-										class="star">&#9733;</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword4">후기내용</label>
-								<textarea class="form-control" id="content" name="content"
-									placeholder="후기내용" rows="4" cols="80"></textarea>
-							</div>
-						</div>
-						<!-- modal 하단 버튼 -->
-						<div class="modal-footer">
-							<input type="hidden" id="insert_c_no" name="c_no" value="">
-							<button type="submit">작성</button>
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">취소</button>
+						<ul id="repolist" class="list-star">
+							<!-- 신고 내역 -->
+						</ul>
 
+						<div class="modal-footer qqq">
+							<button type="button" id="admReportUpdateMember"
+								name="admReportUpdateMember" style="display: none;"
+								class="btn btn-primary" onclick="admReportUpdateMember();">제재</button>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -847,42 +836,15 @@ function admReviewListBtn() {//qna에 대한 함수 실행
 		$(this).find('#goDetail').remove(); 
 		
 
+	})
+	
+	 $('#admReporUpdateMemberModal').on('hidden.bs.modal', function(e) {
+		$(this).find('ul').empty();
+
 	}) 
-	//END 모달 내용 초기화
+	//END 모달 내용 
 
-	//신고처리 : admReportUpdate
-	/*  $("#admReportUpdate").on("click", function(e) {
-		var str = $('#form').serialize();
-		console.log("str의 값"+str);
-		var rep_no = $("#rep_no").val();
-		console.log("rep_no : "+rep_no);
-		var state = $("#state").val();
-		console.log("state : "+state);
-		var repor = $("#repor").val();
-		console.log("repor : "+repor);
-
-		var flag = confirm("신고처리 하시겠습니까?");
-		if (flag == true) {
-			$.ajax({
-				url : 'admReportUpdate',
-				method : 'post',
-				data : {
-					"rep_no" : rep_no,
-					"state" : state,
-					"repor" : repor
-				},
-				success : function(result) {
-					alert("신고 처리가 성공적으로 완료되었습니다");
-					console.log(result);
-					location.reload();
-				},
-				error : function(err) {
-					alert("신고 처리가 실패했습니다. 개발자 호출!");
-
-				}
-			}) //end Ajax
-		}//end If
-	}) *///end 신고 처리 
+	
 		
 		
 	//===================리스트 호출 버튼==================
@@ -1056,8 +1018,10 @@ function eventkeyQ() {
 								//$("form").append("<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
 								$("#repo").append(
 										"<li>신고유형 : " + res[0].f_content
-												+ "</li><li>신고날짜 : "
+												+ "</li><li>신고일 : "
 												+ res[0].w_date
+												+ "</li><li>신고처리일 : "
+												+ res[0].wr_date
 												+ "</li><li>신고 한 사람 : "
 												+ res[0].reporter
 												+ "</li><li>신고 당한 사람 : "
@@ -1069,7 +1033,7 @@ function eventkeyQ() {
 												+ "</li><li>신고처리 상태 : "
 												+ (res[0].repor == 702 ? '기각처리' : '승인처리')
 												+ "</li><li>해당처리 사유 : "
-												+ (res[0].state == 'null' ? '없음' : res[0].state )
+												+ (res[0].state == null ? '없음' : res[0].state )
 												+ "</li>");
 								
 								
@@ -1164,7 +1128,6 @@ function eventkeyQ() {
 		var reported = $("#reported").val();
 		var reporter = $("#reporter").val();
 		
-		
 			$.ajax({
 				url : 'admReportUpdate',
 				method : 'post',
@@ -1178,8 +1141,8 @@ function eventkeyQ() {
 					alert("신고 처리가 성공적으로 완료되었습니다");
 					alert('해당 게시글이 삭제 처리 되었습니다');
 					console.log(result);
-					diaWebAlertFrom(reported);
-					diaWebAlertTo(reporter);
+					//diaWebAlertFrom(reported);
+					//diaWebAlertTo(reporter);
 					location.reload();
 				},
 				error : function(err) {
@@ -1191,56 +1154,6 @@ function eventkeyQ() {
 	})
 	//===========신고처리 : admReportUpdate========== 끝!
 	
-	function diaWebAlertFrom(reported) {
-
-		
-         var content = "작성하신 글이 신고처리 되어 삭제처리 되었습니다.";
-         // 전송한 정보를 db에 저장   
-         $.ajax({
-            type: 'post',
-            url: 'noticeInsert',
-            dataType: 'text',
-            data: {
-               "n_to": reported,
-               "content": content
-            },
-            success: function () { // db전송 성공시 실시간 알림 전송
-               // 소켓에 전달되는 메시지
-               // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
-               socket.send(reported + "," + content);
-               alert("전송되었습니다.");
-            },
-            error: function (error) {
-               console.log(error);
-               alert("실패");
-       }
-         })
-	}
-            
-            function diaWebAlertTo(reporter) {
-        		
-                var content = "신고하신 글이 삭제처리 되었습니다.";
-                 // 전송한 정보를 db에 저장   
-                 $.ajax({
-                    type: 'post',
-                    url: 'noticeInsert',
-                    dataType: 'text',
-                    data: {
-                       "n_to": reporter,
-                       "content": content
-                    },
-                    success: function () { // db전송 성공시 실시간 알림 전송
-                       // 소켓에 전달되는 메시지
-                       // 위에 기술한 EchoHandler에서 ,(comma)를 이용하여 분리시킨다.
-                       socket.send(reporter + "," + content);
-                       alert("전송되었습니다.");
-                    },
-                    error: function (error) {
-                       console.log(error);
-                       alert("실패");
-               }
-                 })
-            }
 	
 	
 
@@ -1374,6 +1287,7 @@ function eventkeyQ() {
 			//실행시킬 함수 ===============
 			let htmladmReporList;
 	 		htmladmReporList = `
+	 		<p style="padding-left:30px; padding-top:20px; padding-bottom:20px;">신고건수가 10건 이상인 회원만 출력됩니다</p>
 			<table class="table table-striped adminReporListTable">
 			<thead>
 				<tr style="text-align: center;">
@@ -1382,8 +1296,7 @@ function eventkeyQ() {
 					<th>회원유형</th>
 					<th>신고건수</th>
 					<th>가입날짜</th>
-					<th>보기</th>
-					<th>제재</th>
+					<th>조회</th>
 				</tr>
 			</thead>
 			<tbody style="text-align: center" id="adminReporListTbody">
@@ -1467,13 +1380,6 @@ function eventkeyQ() {
 	let viewadminReporList = function(list) {
 		console.log(list);
 		$("#adminReporListTbody").empty();
-		/* <th>아이디</th>
-		<th>이름</th>
-		<th>회원유형</th>
-		<th>신고건수</th>
-		<th>가입날짜</th>
-		<th>보기</th>
-		<th>제재</th> */
 		$.each(list,function(i){ //반복문 돌려
 			
 			var id = $("#id").val();
@@ -1486,148 +1392,88 @@ function eventkeyQ() {
 			$("#adminReporListTbody").append("<tr><td id='id'>"
 											+list[i].id+"</td><td>"
 											+list[i].name+"</td><td>"
-											+(list[i].role == 1 ? '일반회원' : '파트너회원')+"</td><td>"
-											+"<div class='progress'>"
-											+"<div class='progress-bar bg-success' role='progressbar' style='width:"
-											+list[i].c_report
-											+ "%' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100'>"
-											+ "</div></div>"
-											+"</td><td>"
-											+list[i].startdate+	"</td><td>"
-											+ "<td><button type='button' style='background-color: #38a4ff; border: none;' class='btn btn-primary' data-toggle='modal' onclick='adminReporOne()' data-target='#reviewWriteModal'>조회</button>"
+											+(list[i].role == 1 ? '일반회원' : '파트너회원')
+											+ "</td><td>"
+											+ list[i].c_report
+											+"건</td><td>"
+											+list[i].startdate+	"</td>"
+											+ "<td align='center'><button type='button' style='background-color: #38a4ff; border: none;' class='btn btn-primary' data-toggle='modal' onclick='adminReporOne()' data-target='#exampleModalLong'>조회</button>"
 											+ "</td></tr>");
+			//</td><td align='center'><button type='button'  border: none;' class='btn btn-danger btn-icon-text' onclick='adminReporGo()' >제재</button>
 			}
 			
 		}) //end each
 		
 	} //end 
 	
-	
+	//admReportUpdateMember();
 	//해당 회원의 역대 신고 목록 출력 모달
 	 function adminReporOne() {
 		var id = $(event.target).parent().parent().children("#id").text();
 		console.log(id); 
 		
-		/* $.ajax({
+		 $.ajax({
 			url : 'adminReporOne',
 			method : 'get',
 			data : {'id' : id},
 			success : function(res) {
-				alert(' adminReporOne 성공');
-				consol.log(res.list);
-				consol.log(res.page);
+				console.log(res.list);
+				console.log(res.page);
+				
+				$.each(res.list, function (i) {
+					
+				
+				$("#repolist").append(
+								"<li>신고일 : " + res.list[i].w_date
+								+ "</li><li>신고처리일 : "
+								+  res.list[i].wr_date
+								+ "</li></li>"
+								+ "<li>신고유형 : "
+								+ res.list[i].f_content
+								+ "</li><li>신고 글 유형 : "
+								+ (res.list[i].q_no == null ?   '후기' : 'QnA')
+								+"<li><label>처리사유</label></li>"
+								+ "<div><textarea readonly rows='4' cols='60'>"
+								+ ( res.list[i].state == null ?  '없습니다.' : res.list[i].state )
+								+"</textarea></div>");
+				
+			
+				})
+				
+			}// success
+		}) 
+		
+		
+	}; 
+	
+	
+	//end 해당 회원의 역대 신고 목록 출력 모달
+		
+	// ajax 호출 함수===============
+	
+	
+	function adminReporGo() {
+		var id = $(event.target).closest("tr").children().html();
+		console.log(id);
+		
+		
+		$.ajax({
+			url : 'adminDeleteMember',
+			method : '',
+			data : {'id': id},
+			success : function (re) {
+				console.log(re);
+				alert('해당 회원이 제재 처리되었습니다.');
+				//loaction.reload();
 				
 			}
-		}) */
+		})
 		
 		
-	}; //end 해당 회원의 역대 신고 목록 출력 모달
-		
-	// ajax 호출 함수===============
-	
-	/* 
-function admReporListBtn() {
-		
-		var input;
-		input = $("#admRepoorListInput").val();
-		 
-		
-		if( input === 'one' ){
-			$("#admRepoorListInput").val('two');
-			
-			//실행시킬 함수 ===============
-			let htmladmReporList;
-	 		htmladmReporList = `
-			<table class="table table-striped adminReporListTable">
-			<thead>
-				<tr style="text-align: center;">
-					<th>아이디</th>
-					<th>이름</th>
-					<th>회원유형</th>
-					<th>신고건수</th>
-					<th>가입날짜</th>
-					<th>보기</th>
-					<th>제재</th>
-				</tr>
-			</thead>
-			<tbody style="text-align: center" id="adminReporListTbody">
+	}
 
-			</tbody>
-		</table>
-		<div id="pagination" class="admReporListPaging"></div>
-	`; 
-	$(".admRepoorListDiv").append(htmladmReporList);
-		
-				$.ajax({
-						url:'adminReporList',
-						method: 'get',
-						success : function (res) {
-								
-							if(res.list == ''){
-								alert('해당 데이터가 없습니다.');									
-								$("#adminReporListTbody").append("<tr><td colspan='7' align='center'>조회된 결과가 없습니다.</td></tr>");
-							
-							} else {	
-							
-									console.log(res.list);
-									console.log(res.page);
-									
-									viewadminReporList(res.list);
-									viewpagingadminReporList(res.page);
-										
-								}// end if
-							
-						},// end success
-						error : function(error) {
-								alert('해당 회원의 목록을 불러오는 데 오류가 있습니다. 개발자에게 연락하십시오!');
-							
-						}//end error
-					}) //end ajax
-		
-			
-		} else  {
-			$("#admRepoorListInput").val('one');
-			$(".admRepoorListDiv").empty();
-		};
-	};// 신고 제재 대상 버튼~===================
-	
-	// ajax 호출 함수===============
-		function viewpagingadminReporList(page) {
-		console.log("얘로 페이지를 만든다!",page);
-		
-		var nav =  `<nav class="blog-pagination justify-content-center d-flex">
-		<ul class="pagination">`
-		if(page.prev) {
-			nav += `<li class="page-item">
-			<a href="javascript:goPage(\${page.startPage-1})" class="page-link"
-				aria-label="Previous">
-				<span aria-hidden="true">
-					<span class="fa fa-angle-left"></span>
-				</span></a>
-			</li>`
-		}
-			for ( var i=page.startPage ; i <=  page.endPage; i++){
-				nav += `<li class="page-item \${page.pageNum == i ? 'active' : '' }"><a
-							href="javascript:goPage(\${i})" class="page-link">\${i }</a>
-							</li>`
-			}
-			
-		if(page.next){
-			nav += `<li class="page-item"><a href="javascript:goPage(\${page.endPage+1})"
-				class="page-link" aria-label="Next">
-			<span aria-hidden="true">
-				<span class="fa fa-angle-right"></span>
-			</span></a>
-	</li>`
-	
-		}
-			
-		nav += `</ul></nav>`
-		$('.admReporListPaging').html(nav);
-		
-	} //end viewpagingadminReporList */
-	
-	
+	//매일 오전 00시
+	//function deleteMember() {}
 	
 	
 	
