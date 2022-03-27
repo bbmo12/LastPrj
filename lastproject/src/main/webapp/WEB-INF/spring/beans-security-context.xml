@@ -14,7 +14,7 @@
     <intercept-url method="POST" pattern="/logout" access="isAuthenticated()" />
     <intercept-url method="GET" pattern="/home" access="permitAll()" />
     <intercept-url method="GET" pattern="/qnaMain" access="permitAll()" />
-    <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+    <intercept-url pattern="/adm/**" access="hasRole('ADMIN')" />
     <!-- <intercept-url pattern="/**" access="isAuthenticated()" /> -->
     
      <form-login
@@ -24,7 +24,7 @@
       username-parameter="id"
       password-parameter="password"/> 
     <logout logout-url="/logout" logout-success-url="/home"/>
-    <access-denied-handler error-page="/testPage"/>
+    <access-denied-handler error-page="/accessDenied"/>
     <csrf disabled="true"/>
   </http>
 
