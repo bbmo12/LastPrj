@@ -270,7 +270,7 @@
 													data-code="103">돌봄서비스</button>
 												<button type="button" class="codep" style="margin-right: 30px;"
 													id="block_chain">블록체인진료기록</button>
-												<div id='blockChain' style="margin-left : 5px"></div>
+												<div id='blockChain' style="margin-left : 5px;margin-top : 10px ;text-align: center;"></div>
 											</div>
 										</div>
 										<div class="table-wrap" style="width: 950px;margin-top: 20px;">
@@ -458,12 +458,11 @@
 		$("#block_chain").on('click', function (event) {
 			$(".table").empty();
 			$("#blockChain").empty();
-			$("#blockChain").append(`예약번호 입력 :  <select class="reservNo" onchange="reservNo(event)" size="1">
+			$("#blockChain").append(`예약번호 :  <select class="reservNo" onchange="reservNo(event)" size="1">
 													<option value="" disabled selected>예약번호</option>
 													 	<c:forEach items="${reservation }" var="res">
 													 		<option value="${res.r_no}">${res.r_no}</option>
 													 	</c:forEach>`);
-			/* <input type ="text" id ="r_no">  <button type='button' onclick="myFunction()">조회</button>`); */
 		});
 
 		function myFunction() {

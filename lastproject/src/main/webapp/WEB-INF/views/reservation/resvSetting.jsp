@@ -15,7 +15,10 @@
 <script src="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.min.js"></script>
 <script src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
+
 <style>
 #calendar > div > div.tui-full-calendar-floating-layer.tui-view-13 > div > div.tui-full-calendar-popup-container > div:nth-child(3) > div{
 	display: none;
@@ -45,7 +48,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	
+	const today1 = moment();
 	let today = new Date();
 	var day = today.toLocaleDateString().substr(5,6).split('.');
 	var month = parseInt(day[0]); 
@@ -188,37 +191,42 @@ $(document).ready(function(){
   //var start = formatDate(schedule.start._date);
   var start = new Date(schedule.start._date.getTime() - (schedule.start._date.getTimezoneOffset() * 60000)).toISOString().slice(0,10)
   var strStart = start.slice(0,10);
-  console.log(start);
-  var flag = confirm("등록하시겠습니까?");
-  var bgColor = "#00CCFF";
-  if(flag == true){
-	$.ajax({
-		url : "revsetinsert",
-		method : "POST",
-		data : {"title": '예약가능',
-			    "c_start": start,
-			    "c_end": end,
-			    "category":'allday',
-			    "bgColor" : bgColor},
-		success : function(res){
-			console.log(res);
-			calendar.createSchedules([
-				{
-					id: res.id,
-				    title: res.title,
-				    start: res.c_start,
-				    end: res.c_end,
-				    category: res.category,
-				    bgColor : bgColor
-				}
-			]);
-			alert('등록이 완료되었습니다.');
-		}
-	})
+  console.log("수타뚜",start.split('-'));
+  var reservDate = start.split('-')[0]+start.split('-')[1]+start.split('-')[2]
+  console.log("합하면?",reservDate);
+  if(parseInt(today1.format('YYYYMMDD'))<= parseInt(reservDate)){
+	  var flag = confirm("등록하시겠습니까?");
+	  var bgColor = "#00CCFF";
+	  if(flag == true){
+		$.ajax({
+			url : "revsetinsert",
+			method : "POST",
+			data : {"title": '예약가능',
+				    "c_start": start,
+				    "c_end": end,
+				    "category":'allday',
+				    "bgColor" : bgColor},
+			success : function(res){
+				console.log(res);
+				calendar.createSchedules([
+					{
+						id: res.id,
+					    title: res.title,
+					    start: res.c_start,
+					    end: res.c_end,
+					    category: res.category,
+					    bgColor : bgColor
+					}
+				]);
+				toastr.success('등록이 완료되었습니다.');
+			}
+		})
+	  }else{
+		  toastr.error("취소되었습니다.");
+	  }
   }else{
-	  alert("취소되었습니다.");
+	  toastr.error("등록할수 없습니다.")
   }
-  
 });
  //일정 수정이벤트
  calendar.on('beforeUpdateSchedule', function(event) {
