@@ -358,7 +358,7 @@
 								</li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ADMIN')">
-							<li><a href="adminPage">관리자</a></li>
+							<li><a href="adminMemberPage">관리자</a></li>
 							<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
 										<div class="box" style="width:15px; display:inline-block;"></div>
@@ -370,7 +370,7 @@
 										<div class="dropdown-divider"></div>
 										<div id="noticeli"></div>										
 									<div>
-										<a href="mainMypage" id="seeall">See all notifications</a>
+										<a href="adminReportPage" id="seeall">See all notifications</a>
 									</div>
 									</div>
 								</li>

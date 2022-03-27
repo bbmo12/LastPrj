@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,6 +45,9 @@ public class AdminController {
 
 	@Autowired
 	private BoardService boardDao;
+	
+	@Autowired
+	private QnaService qnaDAO;
 
 	
 	// 신고 제재 처리 중인 회원
@@ -437,7 +441,7 @@ public class AdminController {
 	// 신고 처리 == 여기서 신고처리 테이블로 인서트 시켜줘야
 	@RequestMapping(value = "/admReportUpdate")
 	@ResponseBody
-	public String admReportUpdate(@RequestParam("rep_no") int rep_no, @RequestParam("state") String state,
+	public String admReportUpdate(@RequestParam("rep_no") int rep_no, @RequestParam("state") String state,@RequestParam("q_no") int q_no,
 			@RequestParam("repor") int repor, ReportVO vo) {
 		System.out.println("repor의 값" + repor);
 		System.out.println("rep_no의 값" + rep_no);
@@ -448,7 +452,7 @@ public class AdminController {
 
 		if (repor == 701) { // 신고 미처리
 
-			return "admin/board/adminReport";
+			return "adm/adminReportPage";
 
 		} else if (repor == 702) { // 신고기각처리
 
@@ -456,15 +460,18 @@ public class AdminController {
 			// 관련 회원에게 메시지 보내기
 
 		} else if (repor == 703) { // 신고 승인 처리
-
+			
+			qnaDAO.qDeleteOne(q_no);
 			reportDao.admReportUpdate(rep_no, repor, state); // 신고 처리 update
 			reportDao.admReSearchUpdate(vo); // 신고카운트 업데이트
 
 		}
 
-		return "admin/board/adminReport";
+		return "adm/adminReportPage";
 
 	}
+	
+
 
 	// 신고 날짜 검색 : admReportDate
 	@RequestMapping(value = "/admReportDate")
