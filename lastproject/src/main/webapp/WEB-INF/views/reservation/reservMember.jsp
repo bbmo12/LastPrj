@@ -41,6 +41,21 @@ input:disabled {
 .disabled-radio{
 	text-decoration: line-through;
 }
+
+#menu{
+	margin-left: 80px;
+	font-family: 'Binggrae';
+}
+
+#calendar{
+	margin-left: 80px;
+	font-family: 'Binggrae';
+}
+
+#tableDiv{
+	font-family: 'Binggrae';
+}
+
 </style>
 <body>
 <br><br><br><br><br><br>
@@ -65,13 +80,13 @@ input:disabled {
 	<table class="table" style="width : 95%;">
 		<thead>
              <tr>
-                <th style="width: 100px;">예약가능일자</th>
-                <th colspan="10" style= "width: 670px;" align="left">예약시간</th>
+                <th style="width: 100px; font-family: 'Binggrae';">예약가능일자</th>
+                <th colspan="10" style= "width: 670px; font-family: 'Binggrae';" align="left">예약시간</th>
              </tr>
         </thead>
         <tbody>
         	<tr>
-        		<td colspan="2" align="center"><h3 style="font-weight: bold; ">예약하실 날짜를 선택해주세요</h3></td>
+        		<td colspan="2" align="center"><h3 style="font-weight: bold;">예약하실 날짜를 선택해주세요</h3></td>
         	</tr>
         </tbody>
 	</table>
@@ -86,14 +101,14 @@ input:disabled {
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 class="modal-title" id="exampleModalLabel">예약하기</h3>
+				<h3 class="modal-title" id="exampleModalLabel" style="font-family: 'Binggrae';">예약하기</h3>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<!-- modal 몸통 -->
-			<div class="modal-body">
+			<div class="modal-body" style="font-family: 'Binggrae';">
 				<form>
 				 <span id="dvalue"><input type ="hidden" id="date_value" ></span> <br>
 				 <span id="tvalue"><input type ="hidden" id="time_value"></span> <br>
