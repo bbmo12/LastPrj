@@ -236,7 +236,7 @@
 															<th>승인여부</th>
 														</tr>
 													</thead>
-													<tbody align="center">
+													<tbody id="tbody" align="center">
 												<c:if test="${ fn:length(preservation) == 0  }">
                                                     <tr>
                                                         <td colspan="8" align="center">조회된 결과가 없습니다.</td>
@@ -349,7 +349,8 @@
 		var length =  "${fn:length(preservation)}";
 		console.log(length);
 		var val = $(".in_code").parent();
-		
+		codeOrganize();
+	function codeOrganize(){
 		for (var i = 0; i < val.length; i++) {
 			if (val[i].innerText == '승인대기') {
 				val[i].classList.add("code");
@@ -391,7 +392,7 @@
 			}
 			
 		}
-
+	}
 		function ok(event) {
 			var rno = $(event.target).parent().parent().children().first().text();
 			var m_id = $(event.target).parent().prev().prev().prev().text();
@@ -475,12 +476,14 @@
 							'symptom' : symptom,
 							'result' : result },
 					success : function(res){
+						
 						alert("작성완료");
 						diaWebAlert(m_id);   		//예약번호,진단명,진단결과,증상,작성일자,회원아이디,파트너회원아이디
 						console.log(account);
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				         .send({from: account, gas:3000000})
-				         .then(function(result){console.log(location.reload());})
+				         .then(function(result){})
+				         location.reload();
 					}
 				}); 
 		});

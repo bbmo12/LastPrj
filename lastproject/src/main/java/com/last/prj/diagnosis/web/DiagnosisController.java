@@ -20,6 +20,8 @@ import com.last.prj.diagnosis.service.DiagnosisVO;
 import com.last.prj.pmember.service.Criteria;
 import com.last.prj.pmember.service.PagingVO;
 import com.last.prj.pmember.service.PmemberService;
+import com.last.prj.reserv.service.PreservationVO;
+import com.last.prj.reserv.service.PreservationlistService;
 import com.last.prj.reserv.service.ReservationService;
 import com.last.prj.security.CustomUser;
 import com.last.prj.service.service.ServiceService;
@@ -33,6 +35,9 @@ public class DiagnosisController {
 	ReservationService reservationDao;
 	
 	@Autowired
+	PreservationlistService pReservationDao;
+	
+	@Autowired
 	ServiceService serviceDao;
 	
 	@Autowired
@@ -42,12 +47,13 @@ public class DiagnosisController {
 	
 	@PostMapping("diaInsert")
 	@ResponseBody
-	public int diaInsert(@RequestParam("r_no")int r_no , DiagnosisVO vo) {
+	public List<PreservationVO> diaInsert(@RequestParam("r_no")int r_no , DiagnosisVO vo,PreservationVO prvo) {
 		System.out.println(vo);
 		diaDao.diagnosisInsert(vo);
 		reservationDao.diaCodeUpdate(r_no);
 		serviceDao.ServiceUpdate(r_no);
-		return 1;
+		List<PreservationVO> list =  pReservationDao.preservationlist(prvo);
+		return list;
 	}
 	
 	@RequestMapping("pMemDiaList")
