@@ -483,7 +483,7 @@
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				         .send({from: account, gas:3000000})
 				         .then(function(result){})
-				         location.reload();
+				         
 					}
 				}); 
 		});
