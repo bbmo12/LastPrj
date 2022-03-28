@@ -56,8 +56,12 @@ public class PmemberVO {
 	
 	//관리자
 	private String f_content; //서비스 구분 코드 내용
-	private String fromDate;
-	private String toDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	private Date fromDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd") //들어갈때
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",  timezone = "GMT+9") //나갈때
+	private Date toDate;
 	private int to;
 	private int ch;
 	private String data;
