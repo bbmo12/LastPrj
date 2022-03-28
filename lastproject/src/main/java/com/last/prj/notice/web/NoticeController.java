@@ -37,8 +37,27 @@ public class NoticeController {
 	public String noticeInsert(NoticeVO notice, HttpServletRequest request) {
 		//HttpSession session = request.getSession();
 		//String id = (String) session.getAttribute("pId");
+		
+		String id = "";
 		CustomUser userDetails = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String id = userDetails.getPmember().getP_id();
+		
+		if(userDetails.getRole() == "일반회원") {
+			//System.out.println("====유저디테일 mid : " + userDetails.getMember().getM_id());
+			//System.out.println("====유저디테일 mname : " + userDetails.getMember().getName());
+			id = userDetails.getMember().getM_id();
+			
+			
+		}else if(userDetails.getRole() == "파트너회원") {
+			//System.out.println("====유저디테일 pid : " + userDetails.getPmember().getP_id());
+			//System.out.println("====유저디테일 pname : " + userDetails.getPmember().getName());
+			id = userDetails.getPmember().getP_id();
+		} else {
+			id = "admin@admin.com";
+		}
+				
+				
+		
+		
 		notice.setN_from(id);
 		noticeDao.noticeInsert(notice);
 		return "test/testPage";

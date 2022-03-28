@@ -60,4 +60,9 @@ public interface ReportMapper {
 		public List<ReportVO> adminReporList(ReportVO vo);
 		//신고 제재 대상 회원 리스트 출력 건수 조회
 		public int adminReporListCount(ReportVO vo);
+		
+		public List<ReportVO> adminReporOneList(ReportVO vo);
+		public int adminReporOneListCount(ReportVO vo);
+		
+		public ReportVO adminDeletResearch(String id);
 }

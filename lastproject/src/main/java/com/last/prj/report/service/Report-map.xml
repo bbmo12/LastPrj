@@ -80,7 +80,7 @@
 	<!-- 신고 처리 -->
 	<update id="admReportUpdate">
 		UPDATE REPORT
-		SET STATE = #{state}, REPOR = #{repor}
+		SET STATE = #{state}, REPOR = #{repor}, WR_DATE = SYSDATE
 		WHERE REP_NO = #{rep_no}
 	</update>
 
@@ -291,10 +291,7 @@
 	
 	<!-- adminReportTotalCount 일반,파트너회원  -->
 	<select id="adminReportedCount" resultType="int">
-		SELECT COUNT(*) FROM(
-		SELECT M_ID AS ID FROM MEMBER WHERE M_ROLE = 0
-		UNION
-		SELECT P_ID AS ID FROM P_MEMBER WHERE P_ROLE = 0)
+		SELECT COUNT(*) FROM REPORT WHERE REPOR = 703
 	</select>
 	
 	<select id="adminReportTotalCount" resultType="int">
@@ -311,15 +308,14 @@
 	<!-- 신고 제재 대상 회원 -->
 	<select id="adminReporList" resultType="com.last.prj.report.service.ReportVO">
 	SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (
-	SELECT M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, R.REP_NO, M.NAME, M.STARTDATE
-		FROM MEMBER M , REPORT R
-		WHERE M.M_ROLE = 1 AND M.M_ID = R.REPORTED  AND M.C_REPORT >= 10 
+	SELECT   M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, M.NAME, M.STARTDATE
+		FROM MEMBER M 
+		WHERE M.M_ROLE = 1 AND m.c_report >= 10
 		UNION
-		SELECT P.P_ID AS ID, P.P_ROLE AS ROLE,
-		P.C_REPORT, R.REP_NO , P.NAME , P.STARTDATE
-		FROM P_MEMBER P , REPORT R
-		WHERE P.P_ROLE = 2 AND 
-		P.P_ID = R.REPORTED AND P.C_REPORT >= 10
+		SELECT  P.P_ID AS ID, P.P_ROLE AS ROLE,
+		P.C_REPORT , P.NAME , P.STARTDATE
+		FROM P_MEMBER P
+		WHERE P.P_ROLE = 2 AND p.c_report >= 10
 		<![CDATA[ 
         ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
         ]]>
@@ -327,15 +323,62 @@
 	<!-- 신고 제재 중인 회원 -->
 	<select id="adminReporListCount" resultType="int">
 		SELECT COUNT(*) FROM(
-		SELECT M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, R.REP_NO, M.NAME, M.STARTDATE
-		FROM MEMBER M , REPORT R
-		WHERE M.M_ROLE = 1 AND M.M_ID = R.REPORTED AND M.C_REPORT >= 10
+		SELECT   M.M_ID AS ID, M.M_ROLE AS ROLE, M.C_REPORT, M.NAME, M.STARTDATE
+		FROM MEMBER M 
+		WHERE M.M_ROLE = 1 AND m.c_report >= 10
+		UNION
+		SELECT  P.P_ID AS ID, P.P_ROLE AS ROLE,
+		P.C_REPORT , P.NAME , P.STARTDATE
+		FROM P_MEMBER P
+		WHERE P.P_ROLE = 2 AND p.c_report >= 10)
+	</select>
+	
+	<select id="adminReporOneList" parameterType="com.last.prj.report.service.ReportVO" resultType="com.last.prj.report.service.ReportVO">
+		SELECT B.* FROM ( SELECT A.* , ROWNUM RN FROM (
+		 SELECT    M.M_ROLE AS ROLE,R.W_DATE, R.WR_DATE ,R.Q_NO, f.content as f_content , r.state
+		FROM MEMBER M , Report r , f_code f
+		WHERE M.M_ROLE = 1 AND R.REPORTED = m.m_id AND f.code = r.code AND R.REPOR = 703
+		<if test="id != '' and id != null">
+		AND R.REPORTED = #{id}
+		</if>
+		UNION ALL
+		SELECT   P.P_ROLE AS ROLE ,R.W_DATE, R.WR_DATE,R.Q_NO, f.content as f_content, r.state
+		FROM P_MEMBER P, Report r, f_code f
+		WHERE P.P_ROLE = 2 AND R.REPORTED = p.p_id AND f.code = r.code AND R.REPOR = 703
+		<if test="id != '' and id != null">
+		AND R.REPORTED = #{id}
+		</if>
+		<![CDATA[ 
+        ) A)B WHERE RN BETWEEN (#{vo.pageNum}-1)*#{vo.amount}+1 AND (#{vo.pageNum})*#{vo.amount}
+        ]]>
+		
+	</select>
+	<select id="adminReporOneListCount" parameterType="com.last.prj.report.service.ReportVO" resultType="int">
+	SELECT COUNT(*) FROM(
+		 SELECT    M.M_ROLE AS ROLE,R.W_DATE, R.WR_DATE ,R.Q_NO, f.content as f_content , r.state
+		FROM MEMBER M , Report r , f_code f
+		WHERE M.M_ROLE = 1 AND R.REPORTED = m.m_id AND f.code = r.code AND R.REPOR = 703
+		<if test="id != '' and id != null">
+		AND R.REPORTED = #{id}
+		</if>
+		UNION ALL
+		SELECT   P.P_ROLE AS ROLE ,R.W_DATE, R.WR_DATE,R.Q_NO, f.content as f_content, r.state
+		FROM P_MEMBER P, Report r, f_code f
+		WHERE P.P_ROLE = 2 AND R.REPORTED = p.p_id AND f.code = r.code AND R.REPOR = 703
+		<if test="id != '' and id != null">
+		AND R.REPORTED = #{id}
+		</if>)
+	</select>
+	
+	<select id="adminDeletResearch" parameterType="com.last.prj.report.service.ReportVO" resultType="com.last.prj.report.service.ReportVO">
+		SELECT M.M_ID AS ID, M.M_ROLE AS ROLE
+		FROM MEMBER M 
+		WHERE M.M_ROLE = 1 AND m.m_id = #{id}
 		UNION
 		SELECT P.P_ID AS ID, P.P_ROLE AS ROLE,
-		P.C_REPORT, R.REP_NO , P.NAME , P.STARTDATE
-		FROM P_MEMBER P , REPORT R
-		WHERE P.P_ROLE = 2 AND
-		P.P_ID = R.REPORTED AND P.C_REPORT >= 10)
+		FROM P_MEMBER P 
+		WHERE P.P_ROLE = 2 AND p.p_id = #{id}
 	</select>
+	
 	
 </mapper>

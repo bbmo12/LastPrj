@@ -127,7 +127,7 @@ h1{
                 <br><br><br><br><br>
                     <h1>반려동물을 위한</h1>
                     <h1>모든 것</h1>
-                    <p id="banner_content">&nbsp;OOO이 함께합니다</p>
+                    <p id="banner_content">&nbsp;BANBANBAN이 함께합니다</p>
                     <!-- <a href="reservationSelect" class="genric-btn info circle arrow">일반회원예약조회</a>
                     <a href="preservationSelect" class="genric-btn info circle arrow">파트너회원예약조회</a>
                     <a href="reservationSetting" class="genric-btn info circle arrow">파트너회원예약설정</a> -->

@@ -405,5 +405,10 @@
 		WHERE P_ID = #{p_id}
 	
 	</delete>
+	<update id="adminDeleteP" parameterType="String">
+		UPDATE P_MEMBER 
+		SET P_ROLE = 0
+		WHERE P_ID = #{id}
+	</update>
 	
 </mapper>

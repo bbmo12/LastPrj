@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib tagdir="/WEB-INF/tags" prefix="my"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -42,6 +43,15 @@
 
 </head>
 <style>
+.modal-content {
+	overflow-y: initial !important
+}
+
+.modal-body {
+	height: 250px;
+	overflow-y: auto;
+}
+
 #my_section {
 	margin-top: -70px;
 	padding-bottom: 25px;
@@ -237,7 +247,7 @@
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Admin menu</h4>
-							<ul class="list cat-list nanumbarungothic">
+							<ul class="cat-list nanumbarungothic">
 								<li><a href="adminMemberPage"
 									class="d-flex justify-content-between no_deco">
 										<p>차트.목록</p>
@@ -270,7 +280,7 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #0062ff"></i>
-													<i class="fa fa-calendar-check fa-stack-1x fa-inverse"></i>
+													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
 												</span><span id="cardTitle">총 신고 건수</span>
 											</div>
 											<h3 id="adminReportTotalCount"></h3>
@@ -285,7 +295,7 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #36b9cc"></i>
-													<i class="fa fa-comments fa-stack-1x fa-inverse"></i>
+													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
 												</span><span id="cardTitle">신고 제재 대상 회원</span>
 											</div>
 											<h3 id="adminReporCount"></h3>
@@ -300,8 +310,8 @@
 											<div style="margin-right: 20px;">
 												<span class="fa-stack fa-lg" style="margin-right: 10px;">
 													<i class="fa fa-circle fa-stack-2x" style="color: #f6c23e"></i>
-													<i class="fa fa-feather-pointed fa-stack-1x fa-inverse"></i>
-												</span><span id="cardTitle">신고 제재 중인 회원</span>
+													<i class="fa-solid fa-bell fa-stack-1x fa-inverse"></i>
+												</span><span id="cardTitle">미처리 건수</span>
 											</div>
 											<h3 id="adminReportedCount"></h3>
 										</div>
@@ -309,34 +319,32 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-12 col-md-12 blog_details">
+						<!-- <div class="col-lg-12 col-md-12 blog_details">
 							<br> <br>
 							<div class="card">
-								<div class="card-header que admPetChartA">
-									<i class="fa-solid fa-paw"></i>&nbsp;<i class="fa fa-bar-chart"
-										aria-hidden="true"></i>&nbsp;&nbsp; 신고 제재 중인 회원
+								<div class="card-header que admPetChartA"
+									onclick="admReportedMember()">
+									<i class="fa-solid fa-bell"></i>&nbsp; <i class="fa fa-users"
+										aria-hidden="true"></i> &nbsp; 신고 제재 중인 회원
 								</div>
-								<div class="card-body anw" style="padding: 15px">
+								<div class="card-body anw admReportedMemberDiv">
 									<div class="card-body anw" style="padding: 15px"></div>
 								</div>
 
 							</div>
-						</div>
-
-
+						</div> -->
 
 
 						<div class="col-lg-12 col-md-12 blog_details">
 							<br> <br>
 							<div class="card">
 								<div class="card-header que" onclick="admReporListBtn()">
-									<i class="fa-solid fa-paw"></i>&nbsp;<i class="fa fa-bar-chart"
-										aria-hidden="true"></i>&nbsp;&nbsp; 신고 제재 대상 회원 <input
+									<i class="fa-solid fa-bell"></i>&nbsp; <i class="fa fa-users"
+										aria-hidden="true"></i>&nbsp;&nbsp; 신고 고위험 회원 목록 <input
 										type="hidden" value="one" id="admRepoorListInput">
 								</div>
 								<div class="card-body anw admRepoorListDiv"
-									style="padding: 15px">
-								</div>
+									style="padding: 15px"></div>
 							</div>
 						</div>
 
@@ -346,8 +354,8 @@
 							<br> <br>
 							<div class="card">
 								<div class="card-header que" onclick="admQnAListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;<i
-										class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;QnA에
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;<i
+										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;QnA에
 									대한 신고 목록 <input type="hidden" value="one" id="admQnAListInput">
 								</div>
 								<div class="card-body card_notice anw admQnAListDiv"
@@ -355,15 +363,18 @@
 									<form id="admDateFormQ" onsubmit="return false"
 										onkeypress="eventkeyQ();" autocomplete="off">
 										<input type="hidden" name="code">
-										<code>가입일 검색 :</code>
-										<input type="hidden" name="repor">
-										&nbsp;&nbsp;&nbsp;&nbsp;<input type="hidden" name="pageNum"
-											value="1">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-										: <input type="text" id="datepickerA" name="fromDate">&nbsp;&nbsp;
-										TO : <input type="text" id="datepickerB" name="toDate">
-										&nbsp;&nbsp; <br> <br>
-										<code>이름,아이디로 검색 :</code>
+										<div>
+											<code>가입일 검색 </code>
+											<input type="hidden" name="repor"> <input
+												type="hidden" name="pageNum" value="1"> <input
+												style="margin-left: 7.5%;" type="text" id="datepickerA"
+												name="fromDate">&nbsp;<i class="fa fa-calendar-o"
+												aria-hidden="true"></i>&nbsp;&nbsp; ~ <input type="text"
+												id="datepickerB" name="toDate"> <i
+												class="fa fa-calendar-o" aria-hidden="true"></i>
+										</div>
+										&nbsp;&nbsp; <br>
+										<code>이름,아이디로 검색 </code>
 										&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 											<option value="" selected>전 체</option>
 											<option value="reporter">신고자</option>
@@ -373,39 +384,46 @@
 											class="btn btn-default">
 											<i class="fa fa-search"></i>
 										</button>
-										<input type="reset">
+										<button type="reset" class="btn btn-default">
+											<i class="fa fa-search-minus" aria-hidden="true"></i>
+										</button>
 									</form>
 									<br>
-									<code>조건 별 검색 :</code>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="">전체</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="601"
-										data-repor="">불법 광고 및 홍보</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="602"
-										data-repor="">음란물/선정성 콘텐츠</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="603"
-										data-repor="">욕설,비속어,모욕</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="604"
-										data-repor="">사생활 침해</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code="605"
-										data-repor="">게시물 도배</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="701">미처리</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="702">기각처리</button>
-									<button type="button"
-										class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
-										data-repor="703">승인처리</button>
-									<table class="table table-striped">
+									<div id="button">
+										<code>조건 별 검색 </code>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="">전체</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="601" data-repor="">불법 광고 및 홍보</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="603" data-repor="">욕설,비속어,모욕</button>
+									</div>
+									<div id="button2" style="padding-left: 150px;">
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="604" data-repor="">사생활 침해</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ"
+											data-code="605" data-repor="">게시물 도배</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="701">미처리</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="702">기각처리</button>
+										<button type="button"
+											class="btn btn-link btn-rounded btn-fw codepQ" data-code=""
+											data-repor="703">승인처리</button>
+									</div>
+
+									<table class="table table-striped" style="margin-top: 50px;">
 										<thead>
 											<tr>
 												<th>신고자</th>
@@ -414,7 +432,7 @@
 												<th>처리 밑 조회</th>
 											</tr>
 										</thead>
-										<tbody id="myTableQ">
+										<tbody id="myTableQ" align="center">
 
 										</tbody>
 									</table>
@@ -429,7 +447,8 @@
 							<br> <br>
 							<div class="card">
 								<div class="card-header que" onclick="admReviewListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;후기에
+									<i class="fa-solid fa-bell"></i>&nbsp;&nbsp;<i
+										class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;후기에
 									대한 신고 목록 <input type="hidden" value="one"
 										id="admReviewListInput">
 								</div>
@@ -439,14 +458,18 @@
 											<form id="admDateFormR" onsubmit="return false"
 												autocomplete="off" onkeypress="eventkeyR();">
 												<input type="hidden" name="code">
-												<code>가입일 검색 :</code>
-												&nbsp;&nbsp;&nbsp;&nbsp; <input type="hidden" name="repor">
-												<input type="hidden" name="pageNum" value="1">
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from
-												: <input type="text" id="datepickerC" name="fromDateR">&nbsp;&nbsp;
-												to : <input type="text" id="datepickerD" name="toDate">
-												<br> <br>
-												<code>이름,아이디로 검색 :</code>
+												<div>
+													<code>가입일 검색 </code>
+													<input type="hidden" name="repor"> <input
+														type="hidden" name="pageNum" value="1"> <input
+														style="margin-left: 7.5%;" type="text" id="datepickerC"
+														name="fromDate">&nbsp;<i class="fa fa-calendar-o"
+														aria-hidden="true"></i>&nbsp;&nbsp; ~ <input type="text"
+														id="datepickerD" name="toDate"> <i
+														class="fa fa-calendar-o" aria-hidden="true"></i>
+												</div>
+												&nbsp;&nbsp; <br>
+												<code>이름,아이디로 검색 </code>
 												&nbsp;&nbsp;&nbsp;&nbsp; <select id="key" name="key">
 													<option value="" selected>전 체</option>
 													<option value="reporter">신고자</option>
@@ -456,39 +479,46 @@
 													class="btn btn-default">
 													<i class="fa fa-search"></i>
 												</button>
-												<input type="reset">
+												<button type="reset" class="btn btn-default">
+													<i class="fa fa-search-minus" aria-hidden="true"></i>
+												</button>
 											</form>
-											<code>조건 별 검색 :</code>
-											&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="">전체</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="601" data-repor="">불법 광고 및 홍보</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="603" data-repor="">욕설,비속어,모욕</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="604" data-repor="">사생활 침해</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR"
-												data-code="605" data-repor="">게시물 도배</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="701">미처리</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="702">기각처리</button>
-											<button type="button"
-												class="btn btn-link btn-rounded btn-fw codepR" data-code=""
-												data-repor="703">승인처리</button>
-											</p>
-											<table class="table table-striped">
+											<br>
+											<div>
+												<code>조건 별 검색</code>
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="">전체</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="601" data-repor="">불법 광고 및 홍보</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="602" data-repor="">음란물/선정성 콘텐츠</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="603" data-repor="">욕설,비속어,모욕</button>
+											</div>
+											<div style="padding-left: 150px;">
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="604" data-repor="">사생활 침해</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR"
+													data-code="605" data-repor="">게시물 도배</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="701">미처리</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="702">기각처리</button>
+												<button type="button"
+													class="btn btn-link btn-rounded btn-fw codepR" data-code=""
+													data-repor="703">승인처리</button>
+											</div>
+
+											<table class="table table-striped" style="margin-top: 50px;">
 												<thead>
 													<tr>
 														<th>신고자</th>
@@ -497,7 +527,7 @@
 														<th>처리 밑 조회</th>
 													</tr>
 												</thead>
-												<tbody id="myTableR">
+												<tbody id="myTableR" align="center">
 
 												</tbody>
 											</table>
@@ -513,44 +543,6 @@
 								</div>
 							</div>
 						</div>
-
-
-						<div class="col-lg-12 col-md-12 blog_details" style="padding-top:20px;">
-							<br> <br>
-							<div class="card">
-								<div class="card-header que" onclick="admPmemberListBtn()">
-									<i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;파트너
-									회원 목록 <input type="hidden" value="one" id="admPmemberListInput">
-								</div>
-								<div class="card-body anw admPmemberListDiv">
-									<div class="row">
-										<div class="table-wrap" style="width: 950px;">
-											<table class="table table-striped">
-												<thead>
-													<tr style="text-align: center;">
-														<th>이름</th>
-														<th>아이디</th>
-														<th>가입일</th>
-														<th>파트너 쉽</th>
-														<th>조회</th>
-													</tr>
-												</thead>
-												<tbody id="myTableP" align="center">
-
-												</tbody>
-											</table>
-											<div id="paginationP"></div>
-
-										</div>
-										<div class="card-footer">
-											<span style="color: #0062ff"><i
-												class="fa-solid fa-plus"></i>&nbsp;&nbsp;</span><span>회원에게
-												메시지 보내기</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -558,7 +550,7 @@
 		<!-- QNA  Modal 창 -->
 		<div class="modal fade" id="myModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="margin-top: 200px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">신고내역</h5>
@@ -574,23 +566,22 @@
 						</ul>
 
 						<!-- 신고 처리 Form 태그 -->
-
 						<form id="form" style="display: none;">
 							<div class="form-group">
-								<label for="amdReportOption">처리유형</label> <select class="repor"
-									id="repor" name="repor">
-									<option value="701" selected>미처리</option>
-									<option value="702">기각</option>
-									<option value="703">승인</option>
-								</select>
-
-								<!-- <div class="nice-select repor" tabindex=""
-								
-							</div> -->
-								<div class="form-group">
-									<label for="message-text" class="col-form-label">처리사유</label>
-									<textarea class="state" id="state" name="state"></textarea>
+								<label for="amdReportOption">처리유형</label>
+								<div>
+									<select class="repor" id="repor" name="repor">
+										<option value="701" selected>미처리</option>
+										<option value="702">기각</option>
+										<option value="703">승인</option>
+									</select>
 								</div>
+							</div>
+							<div class="form-group">
+								<label for="message-text" class="col-form-label">처리사유</label>
+								<textarea class="state" id="state" name="state" rows="4"
+									cols="60" placeholder="처리사유를 작성해주세요"></textarea>
+							</div>
 						</form>
 						<div class="modal-footer">
 							<button type="button" id="admReportUpdate" name="admReportUpdate"
@@ -600,54 +591,32 @@
 				</div>
 			</div>
 		</div>
-		<!--end Modal 창 -->
-		<!-- 제재 대상 회원의 역대 신고 내역 보기 모달창 -->
-		<!-- Modal -->
-		<div class="modal fade" id="reviewWriteModal" tabindex="-1"
-			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
+
+		/
+		<!-- QNA  Modal 창 -->
+		<div class="modal fade" id="exampleModalLong" tabindex="-1"
+			aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document" style="margin-top: 150px;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h3 class="modal-title" id="exampleModalLabel">후기작성</h3>
+						<h5 class="modal-title" id="exampleModalLabel">신고내역목록</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="counselReviewInsert" method="post"
-						enctype="multipart/form-data">
-						<!-- modal 몸통 -->
-						<div class="modal-body">
+					<div class="modal-body" style="height: 600px;">
 
-							<div align="center">
-								<h3 align="center">후기를 남겨주세요!</h3>
-								<div class="star-rating">
-									<input type="radio" id="5-stars" name="rating" value="5" /> <label
-										for="5-stars" class="star">&#9733;</label> <input type="radio"
-										id="4-stars" name="rating" value="4" /> <label for="4-stars"
-										class="star">&#9733;</label> <input type="radio" id="3-stars"
-										name="rating" value="3" /> <label for="3-stars" class="star">&#9733;</label>
-									<input type="radio" id="2-stars" name="rating" value="2" /> <label
-										for="2-stars" class="star">&#9733;</label> <input type="radio"
-										id="1-stars" name="rating" value="1" /> <label for="1-stars"
-										class="star">&#9733;</label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword4">후기내용</label>
-								<textarea class="form-control" id="content" name="content"
-									placeholder="후기내용" rows="4" cols="80"></textarea>
-							</div>
-						</div>
-						<!-- modal 하단 버튼 -->
-						<div class="modal-footer">
-							<input type="hidden" id="insert_c_no" name="c_no" value="">
-							<button type="submit">작성</button>
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">취소</button>
+						<ul id="repolist" class="list-star">
+							<!-- 신고 내역 -->
+						</ul>
 
+						<div class="modal-footer qqq">
+							<button type="button" id="admReportUpdateMember"
+								name="admReportUpdateMember" style="display: none;"
+								class="btn btn-primary" onclick="admReportUpdateMember();">제재</button>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -699,101 +668,7 @@ function admReviewListBtn() {//qna에 대한 함수 실행
 	};
 };
 
-	
-	let viewadminReporList = function(list) {
-		console.log(list);
-		$("#adminReporListTbody").empty();
-		/* <th>아이디</th>
-		<th>이름</th>
-		<th>회원유형</th>
-		<th>신고건수</th>
-		<th>가입날짜</th>
-		<th>보기</th>
-		<th>제재</th> */
-		$.each(list,function(i){ //반복문 돌려
-			
-			
-			$("#adminReporListTbody").append("<tr><td id='id'>"+list[i].id+"</td><td>"
-											+list[i].name+"</td><td>"+(list[i].role == 1 ? '일반회원' : '파트너회원')+"</td><td>"+list[i].c_report+"</td><td>"+list[i].startdate+	"</td><td>"
-											+ "<td><button type='button' style='background-color: #38a4ff; border: none;' class='btn btn-primary' data-toggle='modal' onclick='adminReporOne()' data-target='#reviewWriteModal'>처리</button>"
-											+ "</td></tr>");
-			
-		}) //end each
-		
-	} //end 
-	
-	
-	//해당 회원의 역대 신고 목록 출력 모달
-	 function adminReporOne() {
-		var id = $(event.target).parent().parent().children("#id").text();
-		console.log(id); 
-		
-		$.ajax({
-			url : 'adminReporOne',
-			method : 'get',
-			data : {'id' : id},
-			success : function(res) {
-				alert(' adminReporOne 성공');
-				consol.log(res.list);
-				consol.log(res.page);
-				
-			}
-		})
-		
-		
-	}; //end 해당 회원의 역대 신고 목록 출력 모달
-		
-	// ajax 호출 함수===============
-		
-		
-		
 
-	
-	
-	
-	/* // =================회원 단건 조회 Modal===================
-	
-	function show() {
-		var m_id = $(event.target).parent().next().text();
-		console.log(p_id);  
-	
-	//Modal에 띄어줄 단건조회 ajax : 파트너 회원 : 모든 정보 : 사진 까지 
-	 $.ajax({
-		url : 'admMemberOne',
-		method : 'post',
-		data : {'p_id' : p_id },
-		success : function (res) {					
-			console.log(res.list);
-			$('.mem-body').append("<ul><img src='resources/upload/"+ res.list.picture +"'></img>"
-									+ "<li>" +res.list.startdate 
-									+"</li><li>"
-									+ res.list.name
-									+ "</li><li>"
-									+ res.list.w_address
-									+ "</li><li>"
-									+ res.list.w_tel
-									+ "</li><li>"
-									+ res.list.p_info
-					    			+"</li></ul>");
-			$(".modal-footer").append("<button type='button' id='goDetail' data-value="+res.list.p_id+" onclick='goDetail(this)' >상세페이지로..</button>");
-			//$(".modal-footer").append("<a href='pmemberDetail?id="+res.list.p_id+"'>회원의 상세페이지로 이동</a>");
-			
-			//=========================Modal의 Chart 그리기
-			
-		}
-	}); //end Modal에 띄어줄 단건조회 ajax */
-	
-
-
-
-
-
-
-
-	
-
-	
- 	
  	
 	//======================enter 키===================
 	function eventkeyR() {
@@ -961,42 +836,15 @@ function admReviewListBtn() {//qna에 대한 함수 실행
 		$(this).find('#goDetail').remove(); 
 		
 
+	})
+	
+	 $('#admReporUpdateMemberModal').on('hidden.bs.modal', function(e) {
+		$(this).find('ul').empty();
+
 	}) 
-	//END 모달 내용 초기화
+	//END 모달 내용 
 
-	//신고처리 : admReportUpdate
-	/*  $("#admReportUpdate").on("click", function(e) {
-		var str = $('#form').serialize();
-		console.log("str의 값"+str);
-		var rep_no = $("#rep_no").val();
-		console.log("rep_no : "+rep_no);
-		var state = $("#state").val();
-		console.log("state : "+state);
-		var repor = $("#repor").val();
-		console.log("repor : "+repor);
-
-		var flag = confirm("신고처리 하시겠습니까?");
-		if (flag == true) {
-			$.ajax({
-				url : 'admReportUpdate',
-				method : 'post',
-				data : {
-					"rep_no" : rep_no,
-					"state" : state,
-					"repor" : repor
-				},
-				success : function(result) {
-					alert("신고 처리가 성공적으로 완료되었습니다");
-					console.log(result);
-					location.reload();
-				},
-				error : function(err) {
-					alert("신고 처리가 실패했습니다. 개발자 호출!");
-
-				}
-			}) //end Ajax
-		}//end If
-	}) *///end 신고 처리 
+	
 		
 		
 	//===================리스트 호출 버튼==================
@@ -1099,7 +947,7 @@ function eventkeyQ() {
 							if (result[i].repor === 701) {
 								$("#myTableQ")
 										.append(
-												"<tr><td>"
+												"<tr><td>" 
 														+ result[i].reporter
 														+ "</td><td>"
 														+ result[i].w_date
@@ -1170,11 +1018,13 @@ function eventkeyQ() {
 								//$("form").append("<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
 								$("#repo").append(
 										"<li>신고유형 : " + res[0].f_content
-												+ "</li><li>신고날짜 : "
+												+ "</li><li>신고일 : "
 												+ res[0].w_date
-												+ "</li><li>신고자 : "
+												+ "</li><li>신고처리일 : "
+												+ res[0].wr_date
+												+ "</li><li>신고 한 사람 : "
 												+ res[0].reporter
-												+ "</li><li>신고당한 : "
+												+ "</li><li>신고 당한 사람 : "
 												+ res[0].reported
 												+ "</li><li>신고사유 : "
 												+ res[0].content
@@ -1183,8 +1033,10 @@ function eventkeyQ() {
 												+ "</li><li>신고처리 상태 : "
 												+ (res[0].repor == 702 ? '기각처리' : '승인처리')
 												+ "</li><li>해당처리 사유 : "
-												+ (res[0].state == 'null' ? '없음' : res[0].state )
+												+ (res[0].state == null ? '없음' : res[0].state )
 												+ "</li>");
+								
+								
 								
 								$(".modal-footer").append("<button class='btn btn-link' type='button' id='goDetail' data-value="+res[0].q_no+" onclick='goDetail(this)' >상세페이지로..</button>");
 
@@ -1196,14 +1048,26 @@ function eventkeyQ() {
 								$("form")
 										.append(
 												"<input type='hidden' id='rep_no' value ="+res[0].rep_no+">");
+								
+								$("form")
+									.append(
+											"<input type='hidden' id='q_no' value ="+res[0].q_no+">");
+								$("form")
+								.append(
+										"<input type='hidden' id='reported' value ="+res[0].reported+">");
+								$("form")
+								.append(
+										"<input type='hidden' id='reporter' value ="+res[0].reporter+">");
+								
+								
 
 								$("#repo").append(
 										"<li>신고유형 : " + res[0].f_content
 												+ "</li><li>신고날짜 : "
 												+ res[0].w_date
-												+ "</li><li>신고자 : "
+												+ "</li><li>신고 한 사람 : "
 												+ res[0].reporter
-												+ "</li><li>신고당한 : "
+												+ "</li><li>신고 당한 사람 : "
 												+ res[0].reported
 												+ "</li><li>신고사유 : "
 												+ res[0].content
@@ -1258,14 +1122,11 @@ function eventkeyQ() {
 
 	//===========신고처리 : admReportUpdate==========
 	$("#admReportUpdate").on("click", function(e) {
-		var str = $('#form').serialize();
-		console.log("str의 값"+str);
-		var rep_no = $("#rep_no").val();
-		console.log("rep_no : "+rep_no);
-		var state = $("#state").val();
-		console.log("state : "+state);
-		var repor = $("#repor").val();
-		console.log("repor : "+repor);
+	
+		var q_no = $("#q_no").val();
+		console.log("q_no :" + q_no);
+		var reported = $("#reported").val();
+		var reporter = $("#reporter").val();
 		
 			$.ajax({
 				url : 'admReportUpdate',
@@ -1273,11 +1134,15 @@ function eventkeyQ() {
 				data : {
 					"rep_no" : $("#rep_no").val(),
 					"state" : $("#state").val(),
-					"repor" : $("#repor").val()
+					"repor" : $("#repor").val(),
+					"q_no" : $("#q_no").val()
 				},
 				success : function(result) {
 					alert("신고 처리가 성공적으로 완료되었습니다");
+					alert('해당 게시글이 삭제 처리 되었습니다');
 					console.log(result);
+					//diaWebAlertFrom(reported);
+					//diaWebAlertTo(reporter);
 					location.reload();
 				},
 				error : function(err) {
@@ -1288,6 +1153,12 @@ function eventkeyQ() {
 		
 	})
 	//===========신고처리 : admReportUpdate========== 끝!
+	
+	
+	
+
+		
+	
 		
 		
 	//===================리스트 호출 버튼==================
@@ -1416,6 +1287,7 @@ function eventkeyQ() {
 			//실행시킬 함수 ===============
 			let htmladmReporList;
 	 		htmladmReporList = `
+	 		<p style="padding-left:30px; padding-top:20px; padding-bottom:20px;">신고건수가 10건 이상인 회원만 출력됩니다</p>
 			<table class="table table-striped adminReporListTable">
 			<thead>
 				<tr style="text-align: center;">
@@ -1424,8 +1296,7 @@ function eventkeyQ() {
 					<th>회원유형</th>
 					<th>신고건수</th>
 					<th>가입날짜</th>
-					<th>보기</th>
-					<th>제재</th>
+					<th>조회</th>
 				</tr>
 			</thead>
 			<tbody style="text-align: center" id="adminReporListTbody">
@@ -1504,6 +1375,110 @@ function eventkeyQ() {
 		$('.admReporListPaging').html(nav);
 		
 	} //end viewpagingadminReporList
+	
+	
+	let viewadminReporList = function(list) {
+		console.log(list);
+		$("#adminReporListTbody").empty();
+		$.each(list,function(i){ //반복문 돌려
+			
+			var id = $("#id").val();
+			console.log(id);
+			if( id == list[i].id){
+				return false;
+			} else {
+				
+			
+			$("#adminReporListTbody").append("<tr><td id='id'>"
+											+list[i].id+"</td><td>"
+											+list[i].name+"</td><td>"
+											+(list[i].role == 1 ? '일반회원' : '파트너회원')
+											+ "</td><td>"
+											+ list[i].c_report
+											+"건</td><td>"
+											+list[i].startdate+	"</td>"
+											+ "<td align='center'><button type='button' style='background-color: #38a4ff; border: none;' class='btn btn-primary' data-toggle='modal' onclick='adminReporOne()' data-target='#exampleModalLong'>조회</button>"
+											+ "</td></tr>");
+			//</td><td align='center'><button type='button'  border: none;' class='btn btn-danger btn-icon-text' onclick='adminReporGo()' >제재</button>
+			}
+			
+		}) //end each
+		
+	} //end 
+	
+	//admReportUpdateMember();
+	//해당 회원의 역대 신고 목록 출력 모달
+	 function adminReporOne() {
+		var id = $(event.target).parent().parent().children("#id").text();
+		console.log(id); 
+		
+		 $.ajax({
+			url : 'adminReporOne',
+			method : 'get',
+			data : {'id' : id},
+			success : function(res) {
+				console.log(res.list);
+				console.log(res.page);
+				
+				$.each(res.list, function (i) {
+					
+				
+				$("#repolist").append(
+								"<li>신고일 : " + res.list[i].w_date
+								+ "</li><li>신고처리일 : "
+								+  res.list[i].wr_date
+								+ "</li></li>"
+								+ "<li>신고유형 : "
+								+ res.list[i].f_content
+								+ "</li><li>신고 글 유형 : "
+								+ (res.list[i].q_no == null ?   '후기' : 'QnA')
+								+"<li><label>처리사유</label></li>"
+								+ "<div><textarea readonly rows='4' cols='60'>"
+								+ ( res.list[i].state == null ?  '없습니다.' : res.list[i].state )
+								+"</textarea></div>");
+				
+			
+				})
+				
+			}// success
+		}) 
+		
+		
+	}; 
+	
+	
+	//end 해당 회원의 역대 신고 목록 출력 모달
+		
+	// ajax 호출 함수===============
+	
+	
+	function adminReporGo() {
+		var id = $(event.target).closest("tr").children().html();
+		console.log(id);
+		
+		
+		$.ajax({
+			url : 'adminDeleteMember',
+			method : '',
+			data : {'id': id},
+			success : function (re) {
+				console.log(re);
+				alert('해당 회원이 제재 처리되었습니다.');
+				//loaction.reload();
+				
+			}
+		})
+		
+		
+	}
+
+	//매일 오전 00시
+	//function deleteMember() {}
+	
+	
+	
+	
+	
 	
 	
 	</script>

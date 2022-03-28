@@ -371,6 +371,7 @@
 				var reservTime = parseInt(totalVal);
 				var nowTime = parseInt(today.format('YYYYMMDDHH'));
 				
+
 				//if(reservTime<=nowTime) {
 					$(".diaLog"+i).append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
@@ -483,6 +484,7 @@
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				         .send({from: account, gas:3000000})
 				         .then(function(result){})
+
 					}
 				}); 
 		});

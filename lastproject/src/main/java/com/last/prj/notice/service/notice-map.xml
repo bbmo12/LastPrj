@@ -9,18 +9,20 @@
 
 	<select id="noticeSelectList" resultType="com.last.prj.notice.service.NoticeVO">
 	select * from
-	(select n.notice_no, n.content, n.w_date, p.name
+	(select n.notice_no, n.content, n.w_date, p.name, m.name as m_name
 	from notice n
-	join p_member p on n.n_from = p.p_id
+	left join p_member p on n.n_from = p.p_id
+	left join member m on n.n_from = m.m_id
 	where n_to = #{m_id} and r_check = 0
 	order by notice_no desc)
 	<![CDATA[WHERE ROWNUM <= 4]]>
 	</select>
 	
 	<select id="noticeSelectList2" resultType="com.last.prj.notice.service.NoticeVO">
-	select n.notice_no, n.content, n.w_date, p.name
+	select n.notice_no, n.content, n.w_date, p.name, m.name as m_name
 		from notice n
-		join p_member p on n.n_from = p.p_id
+		left join p_member p on n.n_from = p.p_id
+		left join member m on n.n_from = m.m_id
 			where n_to = #{m_id}
 				order by notice_no desc
 	</select>

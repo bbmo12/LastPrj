@@ -61,7 +61,7 @@
 	
 	#notice_btn{
 		font-family: 'Binggrae';
-		margin-left: 120px;
+		margin-left: 150px;
 		font-size:10px;
 		border: none;
 		background: none;
@@ -142,7 +142,7 @@
 <script>
 	var socket = null;
 	$(document).ready(function () {
-		$.ajax({
+		$.ajax({ 
 			url: "getId",
 			type: "post",
 			success: function (result) {
@@ -166,21 +166,26 @@
 				success: function (result) {
 					console.log(result);
 					for (var i = 0; i < result.length; i++) {
-						var alarm = `<a class="dropdown-item preview-item">
-								<div class="preview-thumbnail">
-									<div class="preview-icon bg-success">
-										<i class="mdi mdi-calendar"></i>										
-									</div>
-								</div>
-								<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-								
-									<span>\${result[i].name}<button id="notice_btn"
-									onclick="javascript:noticeCheck(\${result[i].notice_no}); deleteAlerm(event);">X</button></span>
-									<p class="text-gray ellipsis mb-0">\${result[i].content}</p>
-								</div>
-							</a>
-						<div id="notice_divider" class="dropdown-divider"></div>`;
-						$('#noticeli').append(alarm);
+					
+					var icon1 = '<i class="fa-solid fa-exclamation" style="color:white;"></i>';
+					var div2 = $('<div class="preview-icon bg-success">').append(icon1);
+					var div1 = $('<div class="preview-thumbnail">').append(div2);
+					var btn1 = '<button id="notice_btn" onclick="javascript:noticeCheck('+result[i].notice_no+'); deleteAlerm(event);">X</button>';
+					if(result[i].m_name != null){
+						var span1 = $('<span>'+result[i].m_name+'</span>').append(btn1);
+					}else{
+						var span1 = $('<span>'+result[i].name+'</span>').append(btn1);	
+					}
+			
+					var p1 = '<p class="text-gray ellipsis mb-0">'+result[i].content+'</p>';
+
+					var div3 = $('<div id="notice_content" class="preview-item-content d-flex align-items-start flex-column justify-content-center">').append(span1, p1);
+					var div4 = '<div id="notice_divider" class="dropdown-divider"></div>';
+					
+					var a1 = $('<a class="dropdown-item preview-item">').append(div1, div3, div4);
+					var no_divider = $('<div id="notice_divider" class="dropdown-divider">');
+					
+					$('#noticeli').append(a1, no_divider);
 					}
 				}
 			});
@@ -353,7 +358,7 @@
 								</li>
 							</sec:authorize>
 							<sec:authorize access="hasRole('ADMIN')">
-							<li><a href="adminPage">관리자</a></li>
+							<li><a href="adminMemberPage">관리자</a></li>
 							<li class="nav-item dropdown">
 									<a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown"href="#" data-toggle="dropdown">
 										<div class="box" style="width:15px; display:inline-block;"></div>
@@ -365,7 +370,7 @@
 										<div class="dropdown-divider"></div>
 										<div id="noticeli"></div>										
 									<div>
-										<a href="mainMypage" id="seeall">See all notifications</a>
+										<a href="adminReportPage" id="seeall">See all notifications</a>
 									</div>
 									</div>
 								</li>

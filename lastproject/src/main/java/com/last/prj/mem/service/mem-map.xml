@@ -73,6 +73,13 @@
 		</set>
 		where m_id = #{m_id}
 	</update>
+	
+	<update id="adminDeleteM" parameterType="String">
+		UPDATE MEMBER 
+		SET M_ROLE = 0
+		WHERE M_ID = #{id}
+	</update>
+
 
 
 	<delete id="memdelete">
@@ -359,4 +366,5 @@
 		on r.pet_no = p.pet_no
 		where p.m_id = #{m_id}
 	</select>
+	
 </mapper>

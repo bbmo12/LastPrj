@@ -147,4 +147,9 @@ public class HomeController {
 		return "mypage/mainMypage";
 	}
 	
+	@RequestMapping("/accessDenied")
+	public String accessDenied() {
+		
+		return "test/accessDenied";
+	}
 }
