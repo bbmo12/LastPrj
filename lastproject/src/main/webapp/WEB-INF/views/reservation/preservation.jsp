@@ -371,12 +371,13 @@
 				var reservTime = parseInt(totalVal);
 				var nowTime = parseInt(today.format('YYYYMMDDHH'));
 				
-				if(reservTime>=nowTime) {
+
+				//if(reservTime<=nowTime) {
 					$(".diaLog"+i).append(`<button id="diaLogModal" type="button" class="btn btn-secondary diaLogModal"
 													data-toggle="modal" data-target="#exampleModal">진료기록작성</button>`);
-				}else{
-					$(".diaLog"+i).append(`<label class="badge badge-success">예약완료</label>`);
-				}
+				//}else{
+				//	$(".diaLog"+i).append(`<label class="badge badge-success">예약완료</label>`);
+				//}
 			} else if (val[i].innerText == '승인거절'){
 				val[i].classList.add("fail");
 				$(".fail").empty();
@@ -483,7 +484,7 @@
 				         diaLog.methods.diagnosis(dia_r_no,d_name,result,symptom,w_date,m_id,p_id)
 				         .send({from: account, gas:3000000})
 				         .then(function(result){})
-				         
+
 					}
 				}); 
 		});
