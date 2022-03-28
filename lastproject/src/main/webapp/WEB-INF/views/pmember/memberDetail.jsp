@@ -28,6 +28,15 @@
 		margin-bottom: 10px;
 	}
 	
+	.partner_img {
+	object-fit: cover;
+	object-position: top;
+	border-radius: 50%;
+	width: 180px !important;
+	height: 180px !important;
+	float: none;
+	margin: 0 auto;
+}
 </style>
 
 <body>
@@ -59,7 +68,7 @@
 				<div class="col-lg-3">
 					<div class="blog_right_sidebar">
 						<aside class="single_sidebar_widget author_widget">
-							<img class="author_img rounded-circle" src="/upload/${pmemdetail.pfile }"
+							<img class="partner_img" src="/upload/${pmemdetail.pfile }"
 								style="width: 210px; height: 167px;" onerror="this.src='resources/upload/pet.PNG'">
 							<div class="br"></div>
 							<h2>${pmemdetail.name}</h2>
